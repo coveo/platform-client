@@ -1,0 +1,19 @@
+{
+  "name": "@coveord/platform-client",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coveo/platform-client.git"
+  },
+  "author": "Coveo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/coveo/platform-client/issues"
+  },
+  "homepage": "https://github.com/coveo/platform-client#readme"
+}
