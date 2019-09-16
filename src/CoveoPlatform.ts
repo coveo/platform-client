@@ -61,3 +61,5 @@ export default class CoveoPlatform extends CoveoPlatformResources {
         return this.API.post('/oauth/check_token', {token: this.options.accessTokenRetreiver()});
     }
 }
+
+// squash n merge tests with conventional commit msg
