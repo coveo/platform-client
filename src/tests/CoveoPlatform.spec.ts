@@ -42,27 +42,7 @@ describe('CoveoPlatform', () => {
     describe('resources', () => {
         test('should be possible to access the platform resources', async () => {
             const platform = new CoveoPlatform(options);
-            expect(platform.activities).toBeDefined();
             expect(platform.catalog).toBeDefined();
-            expect(platform.crawlingModule).toBeDefined();
-            expect(platform.criticalUpdates).toBeDefined();
-            expect(platform.fields).toBeDefined();
-            expect(platform.indexes).toBeDefined();
-            expect(platform.license).toBeDefined();
-            expect(platform.limits).toBeDefined();
-            expect(platform.organizations).toBeDefined();
-            expect(platform.securityCache).toBeDefined();
-            expect(platform.securityProviders).toBeDefined();
-            expect(platform.snapshots).toBeDefined();
-            expect(platform.usageAnalytics.administration).toBeDefined();
-            expect(platform.usageAnalytics.dimensions).toBeDefined();
-            expect(platform.usageAnalytics.exports).toBeDefined();
-            expect(platform.usageAnalytics.filters).toBeDefined();
-            expect(platform.usageAnalytics.groups).toBeDefined();
-            expect(platform.usageAnalytics.metrics).toBeDefined();
-            expect(platform.usageAnalytics.reports).toBeDefined();
-            expect(platform.usageAnalytics.statistics).toBeDefined();
-            expect(platform.usageAnalytics.users).toBeDefined();
         });
     });
 });
