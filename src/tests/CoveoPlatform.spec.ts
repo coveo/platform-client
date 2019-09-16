@@ -3,7 +3,7 @@ import CoveoPlatform, {CoveoPlatformOptions} from '../CoveoPlatform';
 describe('CoveoPlatform', () => {
     const tokenRetriever = jest.fn(() => 'my-token');
     const options: CoveoPlatformOptions = {
-        accessTokenRetreiver: tokenRetriever,
+        accessTokenRetriever: tokenRetriever,
         organizationId: 'some-org',
     };
 

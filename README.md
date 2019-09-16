@@ -1,6 +1,6 @@
 # Coveo Cloud services' official `.js` client
 
-The main goal of this package is to provide an easy to configure and straightforward way of querying any API fronted by the Coveo Cloud's services using javascript.
+The main goal of this package is to provide an easy to configure and straightforward way of querying Coveo Cloud APIs using JavaScript.
 
 ## Getting started
 
@@ -37,7 +37,7 @@ const platform = new CoveoPlatform({
     accessTokenRetreiver: () => 'your-coveo-platform-access-token-or-api-key',
 });
 
-// listing the organization's catalogs
+// List the organization catalogs
 platform.catalog.list({page: 0, pageSize: 10}).then((res) => {
     console.log(JSON.stringify(res));
 });
@@ -49,9 +49,9 @@ The whole project is built using Typescript and exposes every type needed so tha
 
 ### Configuration Options
 
-| Option                 | Required | Default Value                        | Description                                                                                                                                                              |
-| ---------------------- | -------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `accessTokenRetreiver` | yes      | undefined                            | A function that provides the access token or API key. Will be executed before making every call to ensure token freshness.                                               |
-| `organizationId`       | yes      | undefined                            | The organization id for which the platform-client will make the calls.                                                                                                   |
-| `environment`          | optional | `'production'`                       | The environment targetted by the calls. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; it will automatically target the associated hosts. |
-| `host`                 | optional | `'https://platform.cloud.coveo.com'` | The host targetted by the calls. Usefull to target local hosts when developping.                                                                                         |
+| Option                 | Required | Default Value                        | Description                                                                                                                                      |
+| ---------------------- | -------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `accessTokenRetriever` | yes      | undefined                            | A function that provides the access token or API key. Executed before every call to ensure token freshness.                                      |
+| `organizationId`       | yes      | undefined                            | The unique identifier of the target organization.                                                                                                |
+| `environment`          | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
+| `host`                 | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
