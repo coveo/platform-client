@@ -1,19 +1,53 @@
 {
-  "name": "@coveord/platform-client",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/coveo/platform-client.git"
-  },
-  "author": "Coveo",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/coveo/platform-client/issues"
-  },
-  "homepage": "https://github.com/coveo/platform-client#readme"
+    "name": "@coveord/platform-client",
+    "version": "0.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "types": "dist/definitions/CoveoPlatform.d.ts",
+    "scripts": {
+        "start": "webpack --watch",
+        "build": "webpack",
+        "test": "jest",
+        "test:changed": "jest --watch",
+        "test:watch": "jest --watchAll"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.0.18",
+        "husky": "^3.0.5",
+        "jest": "^24.9.0",
+        "jest-fetch-mock": "^2.1.2",
+        "lint-staged": "^9.2.5",
+        "prettier": "^1.18.2",
+        "ts-jest": "^24.0.2",
+        "ts-loader": "^6.0.4",
+        "tsjs": "^1.0.1",
+        "tslint": "^5.19.0",
+        "typescript": "^3.6.2",
+        "webpack": "^4.39.3",
+        "webpack-cli": "^3.3.7"
+    },
+    "prettier": "tsjs/prettier-config",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{ts,tsx}": [
+            "prettier --write",
+            "tslint -c ./tslint.json -p ./tsconfig.json --fix",
+            "git add"
+        ],
+        "**/*.{js,jsx,json,md,yml}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/coveo/platform-client.git"
+    },
+    "author": "Coveo",
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/coveo/platform-client#readme"
 }

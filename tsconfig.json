@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "declaration": true,
+        "target": "ES5",
+        "declarationDir": "dist/definitions",
+        "lib": ["es6", "dom"],
+        "moduleResolution": "node",
+        "outDir": "dist"
+    }
+}
