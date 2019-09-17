@@ -1,4 +1,4 @@
-# Coveo Cloud services' official `.js` client
+# Official Coveo Cloud APIs JavaScript Client
 
 The main goal of this package is to provide an easy to configure and straightforward way of querying Coveo Cloud APIs using JavaScript.
 
@@ -45,7 +45,7 @@ platform.catalog.list({page: 0, pageSize: 10}).then((res) => {
 
 ## Documentation
 
-The whole project is built using Typescript and exposes every type needed so that you typically won't need to refer to any documentation here. API discovery throught code is a very nifty feature so we strongly recommand using this package in a Typescript environment. For that specific reason, the decision has been made not to document any option, resource or action except the main configuration options. For in-depth explanations about each and every API exposed by this package, please consult our [official documentation portal](https://docs.coveo.com/en/151/cloud-v2-developers/coveo-cloud-v2-for-developers).
+This project is built using TypeScript and automatically generates relevant type declarations. Most IDEs with TypeScript integration will display those type declarations as autocompletions, so that you typically will not need to refer to external documentation. Hence, the decision has been made not to document any option, resource, or action, except for the main configuration options. For in-depth documentation on the APIs exposed by this package, please consult our [official documentation portal](https://docs.coveo.com/en/151/cloud-v2-developers/coveo-cloud-v2-for-developers).
 
 ### Configuration Options
 
