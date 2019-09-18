@@ -3,7 +3,7 @@ import {CoveoPlatformResources, Resources} from './resources/Resources';
 
 export interface CoveoPlatformOptions {
     organizationId: string;
-    accessTokenRetreiver: () => string;
+    accessTokenRetriever: () => string;
     environment?: string;
     host?: string;
 }
@@ -45,7 +45,7 @@ export default class CoveoPlatform extends CoveoPlatformResources {
             throw new Error(`CoveoPlatform's host is undefined.`);
         }
 
-        this.API = new API(host, this.options.organizationId, this.options.accessTokenRetreiver);
+        this.API = new API(host, this.options.organizationId, this.options.accessTokenRetriever);
         Resources.registerAll(this, this.API);
     }
 
@@ -58,6 +58,6 @@ export default class CoveoPlatform extends CoveoPlatformResources {
     }
 
     private async checkToken() {
-        return this.API.post('/oauth/check_token', {token: this.options.accessTokenRetreiver()});
+        return this.API.post('/oauth/check_token', {token: this.options.accessTokenRetriever()});
     }
 }

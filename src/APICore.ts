@@ -41,7 +41,7 @@ export default class API {
         return await this.request<T>(url, args);
     }
 
-    async delete<T>(url: string, args: RequestInit = {method: 'delete'}): Promise<IRestResponse<T>> {
+    async delete<T = void>(url: string, args: RequestInit = {method: 'delete'}): Promise<IRestResponse<T>> {
         return await this.request<T>(url, args);
     }
 
