@@ -47,7 +47,7 @@
             "tslint -c ./tslint.json -p ./tsconfig.json --fix",
             "git add"
         ],
-        "**/*.{js,jsx,json,md,yml}": [
+        "**/*.{js,jsx,json}": [
             "prettier --write",
             "git add"
         ]
