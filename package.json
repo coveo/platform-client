@@ -1,6 +1,6 @@
 {
     "name": "@coveord/platform-client",
-    "version": "0.0.0",
+    "version": "0.0.0-development",
     "description": "",
     "main": "dist/index.js",
     "types": "dist/definitions/CoveoPlatform.d.ts",
@@ -9,16 +9,22 @@
         "build": "webpack --mode production",
         "test": "jest",
         "test:changed": "jest --watch",
-        "test:watch": "jest --watchAll"
+        "test:watch": "jest --watchAll",
+        "release": "semantic-release"
     },
     "devDependencies": {
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
+        "@commitlint/travis-cli": "^8.2.0",
         "@types/jest": "^24.0.18",
         "clean-webpack-plugin": "^3.0.0",
+        "cz-conventional-changelog": "^3.0.2",
         "husky": "^3.0.5",
         "jest": "^24.9.0",
         "jest-fetch-mock": "^2.1.2",
         "lint-staged": "^9.2.5",
         "prettier": "^1.18.2",
+        "semantic-release": "^15.13.24",
         "ts-jest": "^24.0.2",
         "ts-loader": "^6.0.4",
         "tsjs": "^1.0.1",
@@ -30,7 +36,9 @@
     "prettier": "tsjs/prettier-config",
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
         }
     },
     "lint-staged": {
@@ -39,19 +47,24 @@
             "tslint -c ./tslint.json -p ./tsconfig.json --fix",
             "git add"
         ],
-        "**/*.{js,jsx,json,md,yml}": [
+        "**/*.{js,jsx,json}": [
             "prettier --write",
             "git add"
         ]
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/coveo/platform-client.git"
+        "url": "https://github.com/coveo/platform-client.git"
     },
     "author": "Coveo",
     "license": "Apache-2.0",
     "homepage": "https://github.com/coveo/platform-client#readme",
     "files": [
         "/dist"
-    ]
+    ],
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
