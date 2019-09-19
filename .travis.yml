@@ -5,13 +5,15 @@ node_js:
 
 jobs:
     include:
-        - state: verify
-          script: commitlint-travis
         - stage: test
+          script: commitlint-travis
           script: npm test
-        - state: release
+
+        - stage: release
           script: npm run build
+          on:
+            branch: master
           deploy:
-              provider: script
               skip_cleanup: true
+              provider: script
               script: npm run release
