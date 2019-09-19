@@ -1,3 +1,17 @@
 language: node_js
+
 node_js:
     - lts/*
+
+jobs:
+    include:
+        - state: verify
+          script: commitlint-travis
+        - stage: test
+          script: npm test
+        - state: release
+          script: npm run build
+          deploy:
+              provider: script
+              skip_cleanup: true
+              script: npm run release
