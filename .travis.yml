@@ -1,19 +1,23 @@
 language: node_js
 
 node_js:
-    - lts/*
+  - lts/*
+
+stages:
+  - analyse commits
+  - test
+  - name: release
+    if: branch = master
 
 jobs:
-    include:
-        - stage: test
-          script: commitlint-travis
-          script: npm test
-
-        - stage: release
-          script: npm run build
-          on:
-            branch: master
-          deploy:
-              skip_cleanup: true
-              provider: script
-              script: npm run release
+  include:
+    - stage: analyse commits
+      script: commitlint-travis
+    - stage: test
+      script: npm test
+    - stage: release
+      script: npm run build
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: npm run release
