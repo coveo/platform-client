@@ -1,8 +1,8 @@
 import {IRestResponse} from './handlers/HandlerConstants';
 import {Handlers} from './handlers/Handlers';
 
-const removeEmptyEntries = (obj) =>
-    Object.keys(obj).reduce((memo, key) => {
+function removeEmptyEntries(obj) {
+    return Object.keys(obj).reduce((memo, key) => {
         const val = obj[key];
         if (val && typeof val === 'object') {
             memo[key] = removeEmptyEntries(obj);
@@ -11,18 +11,19 @@ const removeEmptyEntries = (obj) =>
         }
         return memo;
     }, {});
+}
+
+function convertToQueryString(parameters: any) {
+    return parameters ? `?${new URLSearchParams(Object.entries(removeEmptyEntries(parameters))).toString()}` : '';
+}
 
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
     constructor(private host: string, private orgId: string, private accessTokenRetriever: () => string) {}
 
-    static toQueryString(parameters: any) {
-        return parameters ? `?${new URLSearchParams(Object.entries(removeEmptyEntries(parameters))).toString()}` : '';
-    }
-
     async get<T>(url: string, queryParams?: any, args: RequestInit = {method: 'get'}): Promise<IRestResponse<T>> {
-        return await this.request<T>(url + API.toQueryString(queryParams), args);
+        return await this.request<T>(url + convertToQueryString(queryParams), args);
     }
 
     async post<T>(
