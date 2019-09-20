@@ -10,7 +10,7 @@ export class CoveoPlatformResources {
 
 const registerAll = (platform: CoveoPlatform, api: API) => {
     resourcesMap.forEach(({key, resource}) => {
-        CoveoPlatform.prototype[key] = new resource(api);
+        platform[key] = new resource(api);
     });
 };
 

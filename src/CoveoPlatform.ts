@@ -8,28 +8,25 @@ export interface CoveoPlatformOptions {
     host?: string;
 }
 
-const Environments = {
-    local: 'local',
-    dev: 'development',
-    staging: 'staging',
-    prod: 'production',
-    hipaa: 'hipaa',
-};
-
-const Hosts = {
-    [Environments.dev]: 'https://platformdev.cloud.coveo.com',
-    [Environments.staging]: 'https://platformqa.cloud.coveo.com',
-    [Environments.prod]: 'https://platform.cloud.coveo.com',
-    [Environments.hipaa]: 'https://platformhipaa.cloud.coveo.com',
-};
-
 export default class CoveoPlatform extends CoveoPlatformResources {
+    static Environments = {
+        dev: 'development',
+        staging: 'staging',
+        prod: 'production',
+        hipaa: 'hipaa',
+    };
+    static Hosts = {
+        [CoveoPlatform.Environments.dev]: 'https://platformdev.cloud.coveo.com',
+        [CoveoPlatform.Environments.staging]: 'https://platformqa.cloud.coveo.com',
+        [CoveoPlatform.Environments.prod]: 'https://platform.cloud.coveo.com',
+        [CoveoPlatform.Environments.hipaa]: 'https://platformhipaa.cloud.coveo.com',
+    };
     static defaultOptions: Partial<CoveoPlatformOptions> = {
-        environment: Environments.prod,
+        environment: CoveoPlatform.Environments.prod,
     };
 
     private options: CoveoPlatformOptions;
-    private tokenInfo: any; // define a better type
+    private tokenInfo: Record<string, any>; // define a better type
     private readonly API: API;
 
     constructor(options: CoveoPlatformOptions) {
@@ -40,7 +37,7 @@ export default class CoveoPlatform extends CoveoPlatformResources {
             ...options,
         };
 
-        const host = this.options.host || Hosts[this.options.environment];
+        const host = this.options.host || CoveoPlatform.Hosts[this.options.environment];
         if (!host) {
             throw new Error(`CoveoPlatform's host is undefined.`);
         }
