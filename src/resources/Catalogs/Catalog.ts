@@ -1,6 +1,6 @@
 import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
-import {CatalogModel, CatalogsListOptions} from './Interfaces';
+import {CatalogModel, CatalogsListOptions, NewCatalogModel} from './Interfaces';
 
 export default class Catalog {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
@@ -11,7 +11,7 @@ export default class Catalog {
         return this.api.get<PageModel<CatalogModel>>(Catalog.baseUrl, options);
     }
 
-    create(catalog: CatalogModel) {
+    create(catalog: NewCatalogModel) {
         return this.api.post<CatalogModel>(Catalog.baseUrl, catalog);
     }
 

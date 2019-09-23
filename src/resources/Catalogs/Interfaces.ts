@@ -4,13 +4,15 @@ export interface CatalogsListOptions {
 }
 
 export interface CatalogModel {
+    id: string;
+    name: string;
+    product: ProductHierarchyModel;
     availability?: AvailabilityHierarchyModel;
     description?: string;
-    id?: string;
-    name?: string;
-    product?: ProductHierarchyModel;
     variant?: VariantHierarchyModel;
 }
+
+export type NewCatalogModel = Omit<CatalogModel, 'id'>;
 
 export interface VariantHierarchyModel {
     fields: string[];
@@ -19,8 +21,8 @@ export interface VariantHierarchyModel {
 }
 
 export interface ProductHierarchyModel {
-    idField?: string;
-    objectType?: string;
+    idField: string;
+    objectType: string;
 }
 
 export interface AvailabilityHierarchyModel {
