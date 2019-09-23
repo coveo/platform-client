@@ -1,5 +1,6 @@
-import {IRestResponse} from './handlers/HandlerConstants';
-import {Handlers, IRestResponseHandler} from './handlers/Handlers';
+import {APIConfiguration} from './ConfigurationInterfaces';
+import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
+import handleResponse, {defaultResponseHandlers} from './handlers/ResponseHandlers';
 
 function removeEmptyEntries(obj) {
     return Object.keys(obj).reduce((memo, key) => {
@@ -17,19 +18,12 @@ function convertToQueryString(parameters: any) {
     return parameters ? `?${new URLSearchParams(Object.entries(removeEmptyEntries(parameters))).toString()}` : '';
 }
 
-export interface APIConfiguration {
-    organizationId: string;
-    accessTokenRetriever: () => string;
-    host?: string;
-    responseHandlers?: IRestResponseHandler[];
-}
-
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
     constructor(private config: APIConfiguration) {}
 
-    async get<T>(url: string, queryParams?: any, args: RequestInit = {method: 'get'}): Promise<IRestResponse<T>> {
+    async get<T>(url: string, queryParams?: any, args: RequestInit = {method: 'get'}): Promise<T> {
         return await this.request<T>(url + convertToQueryString(queryParams), args);
     }
 
@@ -37,37 +31,28 @@ export default class API {
         url: string,
         body: any,
         args: RequestInit = {method: 'post', body: JSON.stringify(body)}
-    ): Promise<IRestResponse<T>> {
+    ): Promise<T> {
         return await this.request<T>(url, args);
     }
 
-    async put<T>(
-        url: string,
-        body: any,
-        args: RequestInit = {method: 'put', body: JSON.stringify(body)}
-    ): Promise<IRestResponse<T>> {
+    async put<T>(url: string, body: any, args: RequestInit = {method: 'put', body: JSON.stringify(body)}): Promise<T> {
         return await this.request<T>(url, args);
     }
 
-    async delete<T = void>(url: string, args: RequestInit = {method: 'delete'}): Promise<IRestResponse<T>> {
+    async delete<T = void>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
         return await this.request<T>(url, args);
     }
 
-    private handleResponse<T>(response: Response) {
-        const responseHandler = this.handlers.filter((handler) => handler.canProcess(response))[0];
-        return responseHandler.process<T>(response);
-    }
-
-    private get handlers(): IRestResponseHandler[] {
+    private get handlers(): ResponseHandler[] {
         const customHandlers = this.config.responseHandlers || [];
-        return [...customHandlers, ...Handlers];
+        return customHandlers.length ? customHandlers : defaultResponseHandlers;
     }
 
     private getUrlFromRoute(route: string): string {
         return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.config.organizationId);
     }
 
-    private async request<T>(route: string, args: RequestInit): Promise<IRestResponse<T>> {
+    private async request<T>(route: string, args: RequestInit): Promise<T> {
         const init: RequestInit = {
             ...args,
             headers: {
@@ -78,6 +63,6 @@ export default class API {
         };
 
         const response = await fetch(this.getUrlFromRoute(route), init);
-        return this.handleResponse<T>(response);
+        return handleResponse<T>(response, this.handlers);
     }
 }

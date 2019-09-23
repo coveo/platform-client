@@ -1,15 +1,15 @@
 import API from '../../APICore';
-import CoveoPlatform from '../../CoveoPlatform';
+import PlatformClient from '../../PlatformClient';
 import Catalog from '../Catalogs/Catalog';
 import {Resources} from '../Resources';
 
 describe('Resources', () => {
     describe('registerAll', () => {
-        let platform: CoveoPlatform;
+        let platform: PlatformClient;
         let api: API;
 
         beforeEach(() => {
-            platform = {} as CoveoPlatform;
+            platform = {} as PlatformClient;
             api = {} as API;
         });
 

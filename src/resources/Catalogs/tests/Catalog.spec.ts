@@ -1,6 +1,6 @@
 import API from '../../../APICore';
 import Catalog from '../Catalog';
-import {CatalogModel, CatalogsListOptions, NewCatalogModel} from '../Interfaces';
+import {CatalogModel, CatalogsListOptions, NewCatalogModel} from '../CatalogInterfaces';
 
 jest.mock('../../../APICore');
 

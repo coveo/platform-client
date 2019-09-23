@@ -1,11 +1,9 @@
-import API, {APIConfiguration} from './APICore';
-import {CoveoPlatformResources, Resources} from './resources/Resources';
+import API from './APICore';
+import {APIConfiguration, PlatformClientOptions} from './ConfigurationInterfaces';
+import {ResponseHandlers} from './handlers/ResponseHandlers';
+import {PlatformResources, Resources} from './resources/Resources';
 
-export interface CoveoPlatformOptions extends APIConfiguration {
-    environment?: string;
-}
-
-export default class CoveoPlatform extends CoveoPlatformResources {
+export class PlatformClient extends PlatformResources {
     static Environments = {
         dev: 'development',
         staging: 'staging',
@@ -13,25 +11,26 @@ export default class CoveoPlatform extends CoveoPlatformResources {
         hipaa: 'hipaa',
     };
     static Hosts = {
-        [CoveoPlatform.Environments.dev]: 'https://platformdev.cloud.coveo.com',
-        [CoveoPlatform.Environments.staging]: 'https://platformqa.cloud.coveo.com',
-        [CoveoPlatform.Environments.prod]: 'https://platform.cloud.coveo.com',
-        [CoveoPlatform.Environments.hipaa]: 'https://platformhipaa.cloud.coveo.com',
+        [PlatformClient.Environments.dev]: 'https://platformdev.cloud.coveo.com',
+        [PlatformClient.Environments.staging]: 'https://platformqa.cloud.coveo.com',
+        [PlatformClient.Environments.prod]: 'https://platform.cloud.coveo.com',
+        [PlatformClient.Environments.hipaa]: 'https://platformhipaa.cloud.coveo.com',
     };
-    static defaultOptions: Partial<CoveoPlatformOptions> = {
-        environment: CoveoPlatform.Environments.prod,
+    static Handlers = ResponseHandlers;
+    static defaultOptions: Partial<PlatformClientOptions> = {
+        environment: PlatformClient.Environments.prod,
         responseHandlers: [],
     };
 
-    private options: CoveoPlatformOptions;
+    private options: PlatformClientOptions;
     private tokenInfo: Record<string, any>; // define a better type
     private readonly API: API;
 
-    constructor(options: CoveoPlatformOptions) {
+    constructor(options: PlatformClientOptions) {
         super();
 
         this.options = {
-            ...CoveoPlatform.defaultOptions,
+            ...PlatformClient.defaultOptions,
             ...options,
         };
 
@@ -60,10 +59,12 @@ export default class CoveoPlatform extends CoveoPlatformResources {
     }
 
     private get host(): string {
-        return this.options.host || CoveoPlatform.Hosts[this.options.environment];
+        return this.options.host || PlatformClient.Hosts[this.options.environment];
     }
 
     private async checkToken() {
         return this.API.post('/oauth/check_token', {token: this.options.accessTokenRetriever()});
     }
 }
+
+export default PlatformClient;

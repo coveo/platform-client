@@ -3,11 +3,11 @@
     "version": "0.0.0-development",
     "description": "",
     "main": "dist/index.js",
-    "types": "dist/definitions/CoveoPlatform.d.ts",
+    "types": "dist/definitions/PlatformClient.d.ts",
     "scripts": {
         "start": "webpack --mode development --watch",
         "build": "webpack --mode production",
-        "test": "jest",
+        "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
         "release": "semantic-release"
