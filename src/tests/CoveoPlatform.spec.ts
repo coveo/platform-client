@@ -1,6 +1,6 @@
 import API from '../APICore';
 import CoveoPlatform, {CoveoPlatformOptions} from '../CoveoPlatform';
-import Catalog from '../resources/Catalogs/Catalog';
+import {Resources} from '../resources/Resources';
 
 jest.mock('../APICore');
 
@@ -20,7 +20,7 @@ describe('CoveoPlatform', () => {
         APIMock.mockClear();
     });
 
-    test('it throws an error when the host is undefined', () => {
+    it('should throw an error when the host is undefined', () => {
         expect(() => {
             new CoveoPlatform({...baseOptions, environment: 'unknown-environment'});
         }).toThrow();
@@ -65,16 +65,15 @@ describe('CoveoPlatform', () => {
         expect(APIMock).toHaveBeenCalledWith(expect.anything(), expect.anything(), tokenRetriever);
     });
 
-    describe('resources', () => {
-        test('the catalog resource should be defined', () => {
-            const platform = new CoveoPlatform(baseOptions);
-            expect(platform.catalog).toBeDefined();
-            expect(platform.catalog).toBeInstanceOf(Catalog);
-        });
+    it('should register all the resources on the platform instance', () => {
+        const registerAllSpy = spyOn(Resources, 'registerAll');
+        new CoveoPlatform(baseOptions);
+
+        expect(registerAllSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('initialize', () => {
-        test('should check if the retrieved token is valid', async () => {
+        it('should check if the retrieved token is valid', async () => {
             const platform = new CoveoPlatform(baseOptions);
             const APIMockInstance = APIMock.mock.instances[0];
 
@@ -87,7 +86,7 @@ describe('CoveoPlatform', () => {
             );
         });
 
-        test('should throw an error if the check token call fails', async () => {
+        it('should throw an error if the check token call fails', async () => {
             const platform = new CoveoPlatform(baseOptions);
             const APIPostMock: jest.Mock<ReturnType<typeof API.prototype.post>> = APIMock.mock.instances[0].post as any;
             APIPostMock.mockRejectedValue(new Error('invalid token'));

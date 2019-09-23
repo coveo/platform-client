@@ -1,41 +1,6 @@
 import API from '../../APICore';
-
-export interface CatalogsListOptions {
-    page?: number;
-    pageSize?: number;
-}
-
-interface PageModel<T> {
-    items: T[];
-    totalEntries: number;
-    totalPages: number;
-}
-
-interface CatalogModel {
-    availability?: AvailabilityHierarchyModel;
-    description?: string;
-    id?: string;
-    name?: string;
-    product?: ProductHierarchyModel;
-    variant?: VariantHierarchyModel;
-}
-
-interface VariantHierarchyModel {
-    fields: string[];
-    idField: string;
-    objectType: string;
-}
-
-interface ProductHierarchyModel {
-    idField?: string;
-    objectType?: string;
-}
-
-interface AvailabilityHierarchyModel {
-    availableSkusField: string;
-    fields: string[];
-    objectType: string;
-}
+import {PageModel} from '../BaseInterfaces';
+import {CatalogModel, CatalogsListOptions, NewCatalogModel} from './Interfaces';
 
 export default class Catalog {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
@@ -46,7 +11,7 @@ export default class Catalog {
         return this.api.get<PageModel<CatalogModel>>(Catalog.baseUrl, options);
     }
 
-    create(catalog: CatalogModel) {
+    create(catalog: NewCatalogModel) {
         return this.api.post<CatalogModel>(Catalog.baseUrl, catalog);
     }
 
@@ -58,7 +23,7 @@ export default class Catalog {
         return this.api.get<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`);
     }
 
-    update(catalogId: string, catalog: CatalogModel) {
-        return this.api.put<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`, catalog);
+    update(catalog: CatalogModel) {
+        return this.api.put<CatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
     }
 }
