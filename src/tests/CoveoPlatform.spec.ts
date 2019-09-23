@@ -7,16 +7,13 @@ jest.mock('../APICore');
 const APIMock: jest.Mock<API> = API as any;
 
 describe('CoveoPlatform', () => {
-    const tokenRetriever = jest.fn(() => 'my-token');
-
     const baseOptions: CoveoPlatformOptions = {
-        accessTokenRetriever: tokenRetriever,
+        accessTokenRetriever: jest.fn(() => 'my-token'),
         organizationId: 'some-org',
     };
 
     beforeEach(() => {
-        global.fetch.resetMocks();
-        tokenRetriever.mockClear();
+        jest.clearAllMocks();
         APIMock.mockClear();
     });
 
@@ -34,35 +31,47 @@ describe('CoveoPlatform', () => {
     test('the API uses the production host if no environment option is provided', () => {
         new CoveoPlatform(baseOptions);
         expect(APIMock).toHaveBeenCalledWith(
-            CoveoPlatform.Hosts[CoveoPlatform.Environments.prod],
-            expect.anything(),
-            expect.anything()
+            expect.objectContaining({
+                host: CoveoPlatform.Hosts[CoveoPlatform.Environments.prod],
+            })
         );
     });
 
     test('the API uses the host associated with the environment specified in the options', () => {
         new CoveoPlatform({...baseOptions, environment: CoveoPlatform.Environments.dev});
         expect(APIMock).toHaveBeenCalledWith(
-            CoveoPlatform.Hosts[CoveoPlatform.Environments.dev],
-            expect.anything(),
-            expect.anything()
+            expect.objectContaining({
+                host: CoveoPlatform.Hosts[CoveoPlatform.Environments.dev],
+            })
         );
     });
 
     test('the API uses the custom host specified in the options if any', () => {
         const myCustomHost = 'localhost:9999/my-api-running-locally';
         new CoveoPlatform({...baseOptions, host: myCustomHost});
-        expect(APIMock).toHaveBeenCalledWith(myCustomHost, expect.anything(), expect.anything());
+        expect(APIMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                host: myCustomHost,
+            })
+        );
     });
 
     test('the API uses the organization id specified in the options', () => {
         new CoveoPlatform(baseOptions);
-        expect(APIMock).toHaveBeenCalledWith(expect.anything(), baseOptions.organizationId, expect.anything());
+        expect(APIMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                organizationId: baseOptions.organizationId,
+            })
+        );
     });
 
     test('the API uses the accessTokenRetriever function specified in the options', () => {
         new CoveoPlatform(baseOptions);
-        expect(APIMock).toHaveBeenCalledWith(expect.anything(), expect.anything(), tokenRetriever);
+        expect(APIMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                accessTokenRetriever: baseOptions.accessTokenRetriever,
+            })
+        );
     });
 
     it('should register all the resources on the platform instance', () => {

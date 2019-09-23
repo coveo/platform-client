@@ -1,22 +1,22 @@
-import API from '../APICore';
+import API, {APIConfiguration} from '../APICore';
+import {IRestResponseHandler} from '../handlers/Handlers';
 import {UnauthorizedResponseError} from '../handlers/UnauthorizedResponseHandler';
 
 describe('APICore', () => {
-    const testOptions = {
+    const testConfig: APIConfiguration = {
         host: 'https://some.url/',
-        org: 'some-org-id',
-        token: 'my-token',
+        organizationId: 'some-org-id',
+        accessTokenRetriever: jest.fn(() => 'my-token'),
     };
     const testData = {
         route: 'rest/resource',
         response: {nuggets: 12345},
         body: {q: 'how many nuggets'},
     };
-    const getTestToken = jest.fn(() => testOptions.token);
-    const api = new API(testOptions.host, testOptions.org, getTestToken);
+    const api = new API(testConfig);
 
     beforeEach(() => {
-        global.fetch.resetMocks();
+        jest.clearAllMocks();
     });
 
     describe('get', () => {
@@ -27,7 +27,7 @@ describe('APICore', () => {
             expect(fetchMock).toHaveBeenCalledTimes(1);
             const [url, options] = fetchMock.mock.calls[0];
 
-            expect(url).toBe(`${testOptions.host}${testData.route}`);
+            expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('get');
             expect(response).toEqual(testData.response);
         });
@@ -37,7 +37,7 @@ describe('APICore', () => {
             await api.get(testData.route, {a: 'b', c: 'd'});
             const [url] = fetchMock.mock.calls[0];
 
-            expect(url).toBe(`${testOptions.host}${testData.route}?a=b&c=d`);
+            expect(url).toBe(`${testConfig.host}${testData.route}?a=b&c=d`);
         });
 
         test('failed request', async () => {
@@ -60,7 +60,7 @@ describe('APICore', () => {
             expect(fetchMock).toHaveBeenCalledTimes(1);
             const [url, options] = fetchMock.mock.calls[0];
 
-            expect(url).toBe(`${testOptions.host}${testData.route}`);
+            expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('post');
             expect(options.body).toBe(JSON.stringify(testData.body));
             expect(response).toEqual(testData.response);
@@ -75,7 +75,7 @@ describe('APICore', () => {
             expect(fetchMock).toHaveBeenCalledTimes(1);
             const [url, options] = fetchMock.mock.calls[0];
 
-            expect(url).toBe(`${testOptions.host}${testData.route}`);
+            expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('put');
             expect(options.body).toBe(JSON.stringify(testData.body));
             expect(response).toEqual(testData.response);
@@ -90,9 +90,21 @@ describe('APICore', () => {
             expect(fetchMock).toHaveBeenCalledTimes(1);
             const [url, options] = fetchMock.mock.calls[0];
 
-            expect(url).toBe(`${testOptions.host}${testData.route}`);
+            expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('delete');
             expect(response).toEqual(testData.response);
         });
+    });
+
+    it('should give priority to custom response handlers when specified', async () => {
+        global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+        const CustomResponseHandler: IRestResponseHandler = {
+            canProcess: (response: Response): boolean => response.ok,
+            process: jest.fn(),
+        };
+        const apiWithCustomResponseHandler = new API({...testConfig, responseHandlers: [CustomResponseHandler]});
+        await apiWithCustomResponseHandler.get('some/resource');
+
+        expect(CustomResponseHandler.process).toHaveBeenCalledTimes(1);
     });
 });

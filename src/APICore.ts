@@ -1,5 +1,5 @@
 import {IRestResponse} from './handlers/HandlerConstants';
-import {Handlers} from './handlers/Handlers';
+import {Handlers, IRestResponseHandler} from './handlers/Handlers';
 
 function removeEmptyEntries(obj) {
     return Object.keys(obj).reduce((memo, key) => {
@@ -17,10 +17,17 @@ function convertToQueryString(parameters: any) {
     return parameters ? `?${new URLSearchParams(Object.entries(removeEmptyEntries(parameters))).toString()}` : '';
 }
 
+export interface APIConfiguration {
+    organizationId: string;
+    accessTokenRetriever: () => string;
+    host?: string;
+    responseHandlers?: IRestResponseHandler[];
+}
+
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
-    constructor(private host: string, private orgId: string, private accessTokenRetriever: () => string) {}
+    constructor(private config: APIConfiguration) {}
 
     async get<T>(url: string, queryParams?: any, args: RequestInit = {method: 'get'}): Promise<IRestResponse<T>> {
         return await this.request<T>(url + convertToQueryString(queryParams), args);
@@ -47,22 +54,30 @@ export default class API {
     }
 
     private handleResponse<T>(response: Response) {
-        const canProcess = Handlers.filter((handler) => handler.canProcess(response));
-        return canProcess[0].process<T>(response);
+        const responseHandler = this.handlers.filter((handler) => handler.canProcess(response))[0];
+        return responseHandler.process<T>(response);
     }
 
-    private async request<T>(urlWithOrg: string, args: RequestInit): Promise<IRestResponse<T>> {
+    private get handlers(): IRestResponseHandler[] {
+        const customHandlers = this.config.responseHandlers || [];
+        return [...customHandlers, ...Handlers];
+    }
+
+    private getUrlFromRoute(route: string): string {
+        return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.config.organizationId);
+    }
+
+    private async request<T>(route: string, args: RequestInit): Promise<IRestResponse<T>> {
         const init: RequestInit = {
             ...args,
             headers: {
                 'Content-Type': 'application/json',
-                authorization: `Bearer ${this.accessTokenRetriever()}`,
+                authorization: `Bearer ${this.config.accessTokenRetriever()}`,
                 ...(args.headers || {}),
             },
         };
-        const url = `${this.host}${urlWithOrg}`.replace(API.orgPlaceholder, this.orgId);
 
-        const response = await fetch(url, init);
-        return this.handleResponse(response);
+        const response = await fetch(this.getUrlFromRoute(route), init);
+        return this.handleResponse<T>(response);
     }
 }

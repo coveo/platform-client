@@ -61,3 +61,30 @@ This project is built using TypeScript and automatically generates relevant type
 | `organizationId`       | yes      | undefined                            | The unique identifier of the target organization.                                                                                                |
 | `environment`          | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`                 | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
+| `responseHandlers`     | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
+
+### Error handling
+
+Each request made by the `platform-client`, once resolved or rejected, gets processed by one (and only one) of the response handlers. Some very basic response handlers are used by default, but you can override their behavior by specifying your own in the `responseHandlers` [configuration option](#configuration-option). The order in which they are specified defines their priority. Meaning that the first handler of the array that can process the response is used to do so.
+
+A response handler is defined as such:
+
+```ts
+interface IRestResponseHandler {
+    canProcess(response: Response): boolean; // whether the handler should be used to process the response
+    process<T>(response: Response): Promise<IRestResponse<T>>; // defines how the handler processes the response
+}
+```
+
+Example
+
+```ts
+const MySuccessResponseHandler: IRestResponseHandler = {
+    canProcess: (response: Response): boolean => response.ok;
+    process: async <T>(response: Response): Promise<IRestResponse<T>> => {
+        const data = await response.json();
+        console.log(data);
+        return data;
+    };
+}
+```
