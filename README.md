@@ -70,18 +70,18 @@ Each request made by the `platform-client`, once resolved or rejected, gets proc
 A response handler is defined as such:
 
 ```ts
-interface IRestResponseHandler {
+interface ResponseHandler {
     canProcess(response: Response): boolean; // whether the handler should be used to process the response
-    process<T>(response: Response): Promise<IRestResponse<T>>; // defines how the handler processes the response
+    process<T>(response: Response): Promise<T>; // defines how the handler processes the response
 }
 ```
 
 Example
 
 ```ts
-const MySuccessResponseHandler: IRestResponseHandler = {
+const MySuccessResponseHandler: ResponseHandler = {
     canProcess: (response: Response): boolean => response.ok;
-    process: async <T>(response: Response): Promise<IRestResponse<T>> => {
+    process: async <T>(response: Response): Promise<T> => {
         const data = await response.json();
         console.log(data);
         return data;

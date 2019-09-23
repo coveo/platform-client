@@ -6,13 +6,13 @@ module.exports = (env, argv) => {
     const production = argv.mode === 'production';
 
     return {
-        entry: './src/CoveoPlatform.ts',
+        entry: './src/PlatformClient.ts',
         devtool: production ? 'source-map' : 'inline-source-map',
         output: {
             filename: 'index.js',
             chunkFilename: '[name].bundle.js',
             path: path.resolve(__dirname, 'dist'),
-            library: 'CoveoPlatform',
+            library: 'PlatformClient',
             libraryTarget: 'umd',
         },
         module: {

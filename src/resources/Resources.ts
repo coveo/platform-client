@@ -1,14 +1,14 @@
 import API from '../APICore';
-import CoveoPlatform from '../CoveoPlatform';
+import PlatformClient from '../PlatformClient';
 import Catalog from './Catalogs/Catalog';
 
 const resourcesMap = [{key: 'catalog', resource: Catalog}];
 
-export class CoveoPlatformResources {
+export class PlatformResources {
     catalog: Catalog;
 }
 
-const registerAll = (platform: CoveoPlatform, api: API) => {
+const registerAll = (platform: PlatformClient, api: API) => {
     resourcesMap.forEach(({key, resource}) => {
         platform[key] = new resource(api);
     });

@@ -1,6 +1,6 @@
 import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
-import {CatalogModel, CatalogsListOptions, NewCatalogModel} from './Interfaces';
+import {CatalogModel, CatalogsListOptions, NewCatalogModel} from './CatalogInterfaces';
 
 export default class Catalog {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;

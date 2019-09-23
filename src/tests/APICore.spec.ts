@@ -1,6 +1,6 @@
-import API, {APIConfiguration} from '../APICore';
-import {IRestResponseHandler} from '../handlers/Handlers';
-import {UnauthorizedResponseError} from '../handlers/UnauthorizedResponseHandler';
+import API from '../APICore';
+import {APIConfiguration} from '../ConfigurationInterfaces';
+import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces';
 
 describe('APICore', () => {
     const testConfig: APIConfiguration = {
@@ -41,13 +41,13 @@ describe('APICore', () => {
         });
 
         test('failed request', async () => {
-            const error = new UnauthorizedResponseError();
-            global.fetch.mockReject(() => new Promise((resolve) => resolve({status: 403})));
+            const error = new Error('the request has failed');
+            global.fetch.mockRejectedValue(error);
 
             try {
                 await api.get(testData.route);
             } catch (e) {
-                expect(e).toStrictEqual(error);
+                expect(e).toEqual(error);
             }
         });
     });
@@ -98,7 +98,7 @@ describe('APICore', () => {
 
     it('should give priority to custom response handlers when specified', async () => {
         global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-        const CustomResponseHandler: IRestResponseHandler = {
+        const CustomResponseHandler: ResponseHandler = {
             canProcess: (response: Response): boolean => response.ok,
             process: jest.fn(),
         };
