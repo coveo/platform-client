@@ -1,11 +1,8 @@
-import API from './APICore';
+import API, {APIConfiguration} from './APICore';
 import {CoveoPlatformResources, Resources} from './resources/Resources';
 
-export interface CoveoPlatformOptions {
-    organizationId: string;
-    accessTokenRetriever: () => string;
+export interface CoveoPlatformOptions extends APIConfiguration {
     environment?: string;
-    host?: string;
 }
 
 export default class CoveoPlatform extends CoveoPlatformResources {
@@ -23,6 +20,7 @@ export default class CoveoPlatform extends CoveoPlatformResources {
     };
     static defaultOptions: Partial<CoveoPlatformOptions> = {
         environment: CoveoPlatform.Environments.prod,
+        responseHandlers: [],
     };
 
     private options: CoveoPlatformOptions;
@@ -37,12 +35,11 @@ export default class CoveoPlatform extends CoveoPlatformResources {
             ...options,
         };
 
-        const host = this.options.host || CoveoPlatform.Hosts[this.options.environment];
-        if (!host) {
+        if (!this.host) {
             throw new Error(`CoveoPlatform's host is undefined.`);
         }
 
-        this.API = new API(host, this.options.organizationId, this.options.accessTokenRetriever);
+        this.API = new API(this.apiConfiguration);
         Resources.registerAll(this, this.API);
     }
 
@@ -52,6 +49,18 @@ export default class CoveoPlatform extends CoveoPlatformResources {
         } catch (err) {
             throw new Error(err.message);
         }
+    }
+
+    private get apiConfiguration(): APIConfiguration {
+        const {environment, ...apiConfig} = this.options;
+        return {
+            ...apiConfig,
+            host: this.host,
+        };
+    }
+
+    private get host(): string {
+        return this.options.host || CoveoPlatform.Hosts[this.options.environment];
     }
 
     private async checkToken() {
