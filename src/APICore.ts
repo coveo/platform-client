@@ -30,12 +30,20 @@ export default class API {
     async post<T>(
         url: string,
         body: any,
-        args: RequestInit = {method: 'post', body: JSON.stringify(body)}
+        args: RequestInit = {method: 'post', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
     ): Promise<T> {
         return await this.request<T>(url, args);
     }
 
-    async put<T>(url: string, body: any, args: RequestInit = {method: 'put', body: JSON.stringify(body)}): Promise<T> {
+    async postForm<T>(url: string, form: FormData, args: RequestInit = {method: 'post', body: form}): Promise<T> {
+        return await this.request<T>(url, args);
+    }
+
+    async put<T>(
+        url: string,
+        body: any,
+        args: RequestInit = {method: 'put', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
+    ): Promise<T> {
         return await this.request<T>(url, args);
     }
 
@@ -56,8 +64,8 @@ export default class API {
         const init: RequestInit = {
             ...args,
             headers: {
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${this.config.accessTokenRetriever()}`,
+                Authorization: `Bearer ${this.config.accessTokenRetriever()}`,
+                Accept: 'application/json',
                 ...(args.headers || {}),
             },
         };
