@@ -82,23 +82,31 @@ describe('PlatformClient', () => {
     });
 
     describe('initialize', () => {
+        const mockedFormData = {
+            set: jest.fn(),
+        };
+
+        beforeEach(() => {
+            (global as any).FormData = jest.fn(() => mockedFormData);
+        });
+
         it('should check if the retrieved token is valid', async () => {
             const platform = new PlatformClient(baseOptions);
             const APIMockInstance = APIMock.mock.instances[0];
 
             await platform.initialize();
 
-            expect(APIMockInstance.post).toHaveBeenCalledTimes(1);
-            expect(APIMockInstance.post).toHaveBeenCalledWith(
-                '/oauth/check_token',
-                expect.objectContaining({token: baseOptions.accessTokenRetriever()})
-            );
+            expect(APIMockInstance.postForm).toHaveBeenCalledTimes(1);
+            expect(APIMockInstance.postForm).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
+            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.set).toHaveBeenCalledWith('token', baseOptions.accessTokenRetriever());
         });
 
         it('should throw an error if the check token call fails', async () => {
             const platform = new PlatformClient(baseOptions);
-            const APIPostMock: jest.Mock<ReturnType<typeof API.prototype.post>> = APIMock.mock.instances[0].post as any;
-            APIPostMock.mockRejectedValue(new Error('invalid token'));
+            const APIPostFormMock: jest.Mock<ReturnType<typeof API.prototype.postForm>> = APIMock.mock.instances[0]
+                .postForm as any;
+            APIPostFormMock.mockRejectedValue(new Error('invalid token'));
 
             try {
                 await platform.initialize();

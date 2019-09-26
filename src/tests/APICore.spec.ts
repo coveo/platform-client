@@ -63,6 +63,24 @@ describe('APICore', () => {
             expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('post');
             expect(options.body).toBe(JSON.stringify(testData.body));
+            expect(options.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
+            expect(response).toEqual(testData.response);
+        });
+    });
+
+    describe('postForm', () => {
+        test('simple request', async () => {
+            const formMock: jest.Mocked<FormData> = jest.fn() as any;
+            const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+            const response = await api.postForm(testData.route, formMock);
+
+            expect(fetchMock).toHaveBeenCalledTimes(1);
+            const [url, options] = fetchMock.mock.calls[0];
+
+            expect(url).toBe(`${testConfig.host}${testData.route}`);
+            expect(options.method).toBe('post');
+            expect(options.body).toBe(formMock);
+            expect(options.headers).not.toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
             expect(response).toEqual(testData.response);
         });
     });
@@ -78,6 +96,7 @@ describe('APICore', () => {
             expect(url).toBe(`${testConfig.host}${testData.route}`);
             expect(options.method).toBe('put');
             expect(options.body).toBe(JSON.stringify(testData.body));
+            expect(options.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
             expect(response).toEqual(testData.response);
         });
     });

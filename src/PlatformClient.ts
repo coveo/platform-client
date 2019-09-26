@@ -63,7 +63,9 @@ export class PlatformClient extends PlatformResources {
     }
 
     private async checkToken() {
-        return this.API.post('/oauth/check_token', {token: this.options.accessTokenRetriever()});
+        const formData = new FormData();
+        formData.set('token', this.options.accessTokenRetriever());
+        return this.API.postForm<any>('/oauth/check_token', formData);
     }
 }
 
