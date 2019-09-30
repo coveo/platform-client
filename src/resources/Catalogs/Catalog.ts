@@ -1,17 +1,16 @@
 import API from '../../APICore';
-import {PageModel} from '../BaseInterfaces';
-import {CatalogModel, CatalogsListOptions, NewCatalogModel} from './CatalogInterfaces';
+import {New, PageModel} from '../BaseInterfaces';
+import Resource from '../Resource';
+import {CatalogModel, CatalogsListOptions} from './CatalogInterfaces';
 
-export default class Catalog {
+export default class Catalog extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
 
-    constructor(private api: API) {}
-
     list(options?: CatalogsListOptions) {
-        return this.api.get<PageModel<CatalogModel>>(Catalog.baseUrl, options);
+        return this.api.get<PageModel<CatalogModel>>(this.buildPath(Catalog.baseUrl, options));
     }
 
-    create(catalog: NewCatalogModel) {
+    create(catalog: New<CatalogModel>) {
         return this.api.post<CatalogModel>(Catalog.baseUrl, catalog);
     }
 

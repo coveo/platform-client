@@ -1,7 +1,7 @@
 import API from '../APICore';
 import {PlatformClientOptions} from '../ConfigurationInterfaces';
 import PlatformClient from '../PlatformClient';
-import {Resources} from '../resources/Resources';
+import PlatformResources from '../resources/PlatformResources';
 
 jest.mock('../APICore');
 
@@ -75,7 +75,7 @@ describe('PlatformClient', () => {
     });
 
     it('should register all the resources on the platform instance', () => {
-        const registerAllSpy = spyOn(Resources, 'registerAll');
+        const registerAllSpy = spyOn(PlatformResources.prototype, 'registerAll');
         new PlatformClient(baseOptions);
 
         expect(registerAllSpy).toHaveBeenCalledTimes(1);

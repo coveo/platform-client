@@ -12,8 +12,6 @@ export interface CatalogModel {
     variant?: VariantHierarchyModel;
 }
 
-export type NewCatalogModel = Omit<CatalogModel, 'id'>;
-
 export interface VariantHierarchyModel {
     fields: string[];
     idField: string;
