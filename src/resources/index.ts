@@ -1,3 +1,4 @@
 export * from './BaseInterfaces';
-export * from './Catalogs';
 export * from './PlatformResources';
+export * from './Catalogs';
+export * from './Groups';
