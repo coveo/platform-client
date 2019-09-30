@@ -23,8 +23,8 @@ export default class API {
 
     constructor(private config: APIConfiguration) {}
 
-    async get<T>(url: string, queryParams?: any, args: RequestInit = {method: 'get'}): Promise<T> {
-        return await this.request<T>(url + convertToQueryString(queryParams), args);
+    async get<T>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
+        return await this.request<T>(url, args);
     }
 
     async post<T>(

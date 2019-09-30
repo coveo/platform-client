@@ -1,6 +1,7 @@
 import API from '../../../APICore';
+import {New} from '../../BaseInterfaces';
 import Catalog from '../Catalog';
-import {CatalogModel, CatalogsListOptions, NewCatalogModel} from '../CatalogInterfaces';
+import {CatalogModel} from '../CatalogInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -17,19 +18,15 @@ describe('Catalog', () => {
 
     describe('list', () => {
         it('should make a GET call to the catalogs base url', () => {
-            const options: CatalogsListOptions = {
-                page: 2,
-                pageSize: 10,
-            };
-            catalog.list(options);
+            catalog.list({page: 2, pageSize: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(Catalog.baseUrl, options);
+            expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}?page=2&pageSize=10`);
         });
     });
 
     describe('create', () => {
         it('should make a POST call to the catalogs base url', () => {
-            const catalogModel: NewCatalogModel = {
+            const catalogModel: New<CatalogModel> = {
                 name: 'New catalog',
                 product: {
                     idField: '@uri',

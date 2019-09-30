@@ -32,14 +32,6 @@ describe('APICore', () => {
             expect(response).toEqual(testData.response);
         });
 
-        test('request with params', async () => {
-            const fetchMock = global.fetch.mockResponseOnce('{}');
-            await api.get(testData.route, {a: 'b', c: 'd'});
-            const [url] = fetchMock.mock.calls[0];
-
-            expect(url).toBe(`${testConfig.host}${testData.route}?a=b&c=d`);
-        });
-
         test('failed request', async () => {
             const error = new Error('the request has failed');
             global.fetch.mockRejectedValue(error);

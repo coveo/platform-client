@@ -1,7 +1,7 @@
 import API from './APICore';
 import {APIConfiguration, PlatformClientOptions} from './ConfigurationInterfaces';
 import {ResponseHandlers} from './handlers/ResponseHandlers';
-import {PlatformResources, Resources} from './resources/Resources';
+import PlatformResources from './resources/PlatformResources';
 
 export class PlatformClient extends PlatformResources {
     static Environments = {
@@ -24,7 +24,6 @@ export class PlatformClient extends PlatformResources {
 
     private options: PlatformClientOptions;
     private tokenInfo: Record<string, any>; // define a better type
-    private readonly API: API;
 
     constructor(options: PlatformClientOptions) {
         super();
@@ -39,7 +38,7 @@ export class PlatformClient extends PlatformResources {
         }
 
         this.API = new API(this.apiConfiguration);
-        Resources.registerAll(this, this.API);
+        this.registerAll();
     }
 
     async initialize() {
