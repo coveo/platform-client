@@ -4,6 +4,14 @@
     "description": "",
     "main": "dist/index.js",
     "types": "dist/definitions/PlatformClient.d.ts",
+    "keywords": [
+        "coveo",
+        "api",
+        "client",
+        "platform",
+        "front-end",
+        "web"
+    ],
     "scripts": {
         "start": "webpack --mode development --watch",
         "build": "webpack --mode production",
