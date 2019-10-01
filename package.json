@@ -3,7 +3,7 @@
     "version": "0.0.0-development",
     "description": "",
     "main": "dist/index.js",
-    "types": "dist/definitions/PlatformClient.d.ts",
+    "types": "dist/definitions/Entry.d.ts",
     "keywords": [
         "coveo",
         "api",
