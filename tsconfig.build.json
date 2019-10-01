@@ -1,4 +1,4 @@
 {
     "extends": "./tsconfig",
-    "include": ["src/PlatformClient.ts"]
+    "include": ["src/Entry.ts"]
 }
