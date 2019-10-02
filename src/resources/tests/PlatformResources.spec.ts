@@ -1,5 +1,6 @@
 import Catalog from '../Catalogs/Catalog';
 import Group from '../Groups/Groups';
+import Organization from '../Organizations/Organization';
 import PlatformResources from '../PlatformResources';
 
 describe('PlatformResources', () => {
@@ -18,6 +19,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.group).toBeDefined();
             expect(platformResources.group).toBeInstanceOf(Group);
+        });
+
+        it('should register the organization resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.organization).toBeDefined();
+            expect(platformResources.organization).toBeInstanceOf(Organization);
         });
     });
 });

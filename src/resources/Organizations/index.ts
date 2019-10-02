@@ -1,2 +1,2 @@
-export * from './Organizations';
-export * from './OrganizationsInterfaces';
+export * from './Organization';
+export * from './OrganizationInterfaces';

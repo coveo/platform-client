@@ -1,65 +1,65 @@
 import API from '../../../APICore';
-import Organizations from '../Organizations';
+import Organization from '../Organization';
 
 jest.mock('../../../APICore');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('Organizations', () => {
-    let organizations: Organizations;
+describe('Organization', () => {
+    let organization: Organization;
     const api = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        organizations = new Organizations(api);
+        organization = new Organization(api);
     });
 
     describe('list', () => {
-        it('should make a GET call to the Groups base url', () => {
-            organizations.list();
+        it('should make a GET call to the Organization base url', () => {
+            organization.list();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(Organizations.baseUrl);
+            expect(api.get).toHaveBeenCalledWith(Organization.baseUrl);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the Groups base url', () => {
+        it('should make a POST call to the Organization base url with the parameters', () => {
             const name = 'OrgName';
 
-            organizations.create({name});
+            organization.create({name});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Organizations.baseUrl}?name=${name}`, {});
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}?name=${name}`, {});
         });
     });
 
     describe('delete', () => {
         it('should make a DELETE call to the specific Organization url', () => {
-            const groupToDeleteId = 'Organizations-to-be-deleted';
-            organizations.delete(groupToDeleteId);
+            const organizationToDeleteId = 'Organization-to-be-deleted';
+            organization.delete(organizationToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${Organizations.baseUrl}/${groupToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationToDeleteId}`);
         });
     });
 
     describe('get', () => {
         it('should make a GET call to the specific Organization url', () => {
-            const groupToGetId = 'Organizations-to-be-fetched';
-            organizations.get(groupToGetId);
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.get(organizationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Organizations.baseUrl}/${groupToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationToGetId}`);
         });
     });
 
     describe('update', () => {
         it('should make a PUT call to the specific Organization url', () => {
             const organizationModel = {
-                id: 'organizations-to-update-id',
+                id: 'organization-to-update-id',
                 displayName: 'new name',
             };
 
-            organizations.update(organizationModel);
+            organization.update(organizationModel);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Organizations.baseUrl}/${organizationModel.id}`, organizationModel);
+            expect(api.put).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationModel.id}`, organizationModel);
         });
     });
 });
