@@ -1,11 +1,13 @@
 import API from '../APICore';
 import Catalog from './Catalogs/Catalog';
 import Group from './Groups/Groups';
+import Organizations from './Organizations/Organizations';
 import Resource from './Resource';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'catalog', resource: Catalog},
     {key: 'group', resource: Group},
+    {key: 'organizations', resource: Organizations},
 ];
 
 class PlatformResources {
@@ -13,6 +15,7 @@ class PlatformResources {
 
     catalog: Catalog;
     group: Group;
+    organizations: Organizations;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
