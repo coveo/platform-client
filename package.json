@@ -18,7 +18,9 @@
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
-        "release": "semantic-release"
+        "release": "semantic-release",
+        "snyk-protect": "snyk protect",
+        "prepare": "npm run snyk-protect"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
@@ -34,6 +36,7 @@
         "lint-staged": "^9.2.5",
         "prettier": "^1.18.2",
         "semantic-release": "^15.13.24",
+        "snyk": "^1.231.0",
         "ts-jest": "^24.0.2",
         "ts-loader": "^6.0.4",
         "tsjs": "^1.0.1",
@@ -75,5 +78,6 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
-    }
+    },
+    "snyk": true
 }

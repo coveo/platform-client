@@ -1,0 +1,50 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - semantic-release > @semantic-release/npm > npm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/github > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libcipm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libcipm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmpublish > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
+    - semantic-release > @semantic-release/npm > npm > libnpm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-07T06:21:37.571Z'
