@@ -31,9 +31,9 @@ export interface OrganizationModel {
 }
 
 export interface ListOrganizationOptions {
-    additionalFields?: string[];
+    additionalFields?: string | string[];
     filter?: string;
-    order?: 'ASC' | 'DESC';
+    order?: string;
     page?: number;
     perPage?: number;
     sortBy?: string;
