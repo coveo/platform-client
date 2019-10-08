@@ -11,7 +11,7 @@ export default class Group extends Resource {
     }
 
     create(group: New<GroupModel, 'resourceId'>, options?: CreateGroupOptions) {
-        return this.api.post<GroupModel>(this.buildPath(Group.baseUrl, options), group);
+        return this.api.post<{id: string}>(this.buildPath(Group.baseUrl, options), group);
     }
 
     delete(groupId: string) {
@@ -23,6 +23,6 @@ export default class Group extends Resource {
     }
 
     update(group: GroupModel, options?: UpdateGroupOptions) {
-        return this.api.put<GroupModel>(this.buildPath(`${Group.baseUrl}/${group.id}`, options), group);
+        return this.api.put(this.buildPath(`${Group.baseUrl}/${group.id}`, options), group);
     }
 }
