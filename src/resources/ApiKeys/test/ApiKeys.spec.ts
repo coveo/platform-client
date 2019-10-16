@@ -28,9 +28,7 @@ describe('ApiKey', () => {
         it('should make a POST call to the ApiKeys base url', () => {
             const apiKeyModel: New<ApiKeyModel> = {
                 organizationId: 'a-smol-org',
-                enabled: true,
                 value: '',
-                privileges: [],
             };
 
             apiKey.create(apiKeyModel);
@@ -54,9 +52,7 @@ describe('ApiKey', () => {
             const apiKeyModel: ApiKeyModel = {
                 organizationId: 'a-smol-org',
                 id: 'a-specific-id',
-                enabled: true,
                 value: '',
-                privileges: [],
             };
 
             apiKey.update(apiKeyModel);
@@ -79,8 +75,6 @@ describe('ApiKey', () => {
         const apiKeyModel: ApiKeyModel = {
             id: 'ApiKey-to-be-toggled',
             organizationId: 'a-smol-org',
-            value: 'walue',
-            privileges: [],
             enabled: null,
         };
 

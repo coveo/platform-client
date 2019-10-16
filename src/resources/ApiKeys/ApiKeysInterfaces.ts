@@ -1,54 +1,18 @@
 export interface ApiKeyModel {
-    organizationId: string;
-    id: string;
-    enabled: boolean;
-    value: string;
+    organizationId?: string;
+    id?: string;
+    enabled?: boolean;
+    value?: string;
     displayName?: string;
     description?: string;
-    createdBy?: UserModel;
+    createdBy?: {};
     createdDate?: string;
     allowedIps?: string[];
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
     deniedIps?: string[];
     groupsThatCanEdit?: IdAndDisplayNameModel[];
-    privileges: PrivilegeModel[];
+    privileges?: PrivilegeModel[];
     resourceId?: string;
-}
-
-export interface UserModel {
-    additionalInformation?: {};
-    country?: string[];
-    credentialsExpired?: boolean;
-    displayName?: string;
-    email: string;
-    emailAliases?: string[];
-    emailConfirmed?: boolean;
-    enabled: boolean;
-    expired?: boolean;
-    firstName?: string;
-    lastLogin: number;
-    lastName?: string;
-    locked: boolean;
-    name?: string;
-    provider?: Provider;
-    providerUserId?: string;
-    providerUsername?: string;
-    realms?: UserRealmModel[];
-    samlIdentityProviderId?: string;
-    socialUser?: boolean;
-    username?: string;
-}
-
-export interface UserRealmModel {
-    member?: boolean;
-    realm?: RealmModel;
-}
-
-export interface RealmModel {
-    displayName: string;
-    id: string;
-    provider: Provider;
-    samlIdentityProviderId?: string;
 }
 
 export enum Provider {
@@ -69,7 +33,7 @@ export interface IdAndDisplayNameModel {
 export interface PrivilegeModel {
     owner: string;
     targetDomain: string;
-    targetId?: string;
+    targetId: string;
     type?: string;
 }
 
