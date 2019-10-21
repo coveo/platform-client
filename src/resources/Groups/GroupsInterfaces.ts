@@ -1,3 +1,5 @@
+import {AuthProvider, IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+
 export interface GroupModel {
     id: string;
     displayName: string;
@@ -9,11 +11,6 @@ export interface GroupModel {
     resourceId?: string;
     groupsThatCanEdit?: IdAndDisplayNameModel[];
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
-}
-
-export interface IdAndDisplayNameModel {
-    id: string;
-    displayName?: string;
 }
 
 export interface InviteByEmail {
@@ -60,27 +57,11 @@ export interface MemberModel {
     providerUsername?: string;
 }
 
-export interface PrivilegeModel {
-    owner: string;
-    targetDomain: string;
-    targetId?: string;
-    type?: string;
-}
-
 export interface RealmModel {
     id: string;
     provider: AuthProvider;
     displayName: string;
     samlIdentityProviderId?: string;
-}
-
-export enum AuthProvider {
-    SALESFORCE = 'SALESFORCE',
-    SALESFORCE_SANDBOX = 'SALESFORCE_SANDBOX',
-    GOOGLE = 'GOOGLE',
-    OFFICE365 = 'OFFICE365',
-    SAML = 'SAML',
-    EMAIL = 'EMAIL',
 }
 
 export interface CreateGroupOptions {
