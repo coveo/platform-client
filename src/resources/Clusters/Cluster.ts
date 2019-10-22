@@ -6,7 +6,7 @@ export default class Cluster extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/clusters`;
 
     list() {
-        return this.api.get<ClusterStatusModel[]>(Cluster.baseUrl);
+        return this.api.get<ClusterModel[]>(Cluster.baseUrl);
     }
 
     listAgents(id: string) {
