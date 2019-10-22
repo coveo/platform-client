@@ -1,6 +1,7 @@
 import API from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
 import Catalog from './Catalogs/Catalog';
+import Cluster from './Clusters/Cluster';
 import Group from './Groups/Groups';
 import Organization from './Organizations/Organization';
 import Resource from './Resource';
@@ -8,6 +9,7 @@ import SecurityCache from './SecurityCache/SecurityCache';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'catalog', resource: Catalog},
+    {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
     {key: 'organization', resource: Organization},
     {key: 'securityCache', resource: SecurityCache},
@@ -18,6 +20,7 @@ class PlatformResources {
     protected API: API;
 
     catalog: Catalog;
+    cluster: Cluster;
     group: Group;
     organization: Organization;
     apiKey: ApiKey;
