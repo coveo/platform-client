@@ -1,5 +1,6 @@
 export * from './BaseInterfaces';
 export * from './PlatformResources';
+export * from './AWS';
 export * from './Catalogs';
 export * from './Clusters';
 export * from './Groups';

@@ -1,5 +1,6 @@
 import API from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
+import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
 import Group from './Groups/Groups';
@@ -8,6 +9,7 @@ import Resource from './Resource';
 import SecurityCache from './SecurityCache/SecurityCache';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
+    {key: 'aws', resource: AWS},
     {key: 'catalog', resource: Catalog},
     {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
@@ -19,6 +21,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
 class PlatformResources {
     protected API: API;
 
+    aws: AWS;
     catalog: Catalog;
     cluster: Cluster;
     group: Group;
