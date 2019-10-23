@@ -1,9 +1,11 @@
+import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import Group from '../Groups/Groups';
 import Organization from '../Organizations/Organization';
 import PlatformResources from '../PlatformResources';
+import SecurityCache from '../SecurityCache/SecurityCache';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -45,6 +47,22 @@ describe('PlatformResources', () => {
 
             expect(platformResources.organization).toBeDefined();
             expect(platformResources.organization).toBeInstanceOf(Organization);
+        });
+
+        it('should register the securityCache resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.securityCache).toBeDefined();
+            expect(platformResources.securityCache).toBeInstanceOf(SecurityCache);
+        });
+
+        it('should register the api keys ressource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.apiKey).toBeDefined();
+            expect(platformResources.apiKey).toBeInstanceOf(ApiKey);
         });
     });
 });
