@@ -27,6 +27,7 @@ class PlatformResources {
     group: Group;
     organization: Organization;
     apiKey: ApiKey;
+    securityCache: SecurityCache;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
