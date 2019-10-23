@@ -1,6 +1,7 @@
 import API from '../../APICore';
+import {PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CreateCoveoIndexModel, IndexAttributes, IndexStatisticsModel, PageModel} from './IndexesInterface';
+import {CreateCoveoIndexModel, IndexAttributes, IndexBackupsItems, IndexStatisticsModel} from './IndexesInterface';
 
 export default class Indexes extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
@@ -28,7 +29,7 @@ export default class Indexes extends Resource {
     }
 
     getBackups() {
-        return this.api.get<PageModel>(`${Indexes.indexBackupUrl}`);
+        return this.api.get<PageModel<IndexBackupsItems>>(`${Indexes.indexBackupUrl}`);
     }
 
     forceCommit(indexId: string) {

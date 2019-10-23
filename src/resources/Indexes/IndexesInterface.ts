@@ -83,12 +83,6 @@ export interface IndexVersionsModel {
     securityCacheVersion: string;
 }
 
-export interface PageModel {
-    items: IndexBackupsItems[];
-    totalEntries: number;
-    totalPages: number;
-}
-
 export interface IndexBackupsItems {
     backupId: string;
     creationDate: number;
