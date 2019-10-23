@@ -91,18 +91,14 @@ export interface ClusterModel {
     clusterTopology: ClusterTopologyModel;
 }
 
-export interface ClusterAgentModel {
-    id: string;
-    name: string;
-    description: string;
-    platform: string;
-    version: string;
-    status: ClusterNodeStatusModel;
-}
-
 export interface ClusterNodeStatusModel {
     message: string;
     severity: string;
     status: string;
     timestamp: string;
+}
+
+export interface ClusterNodeUpgradeDataModel {
+    componentName: string;
+    version: string;
 }
