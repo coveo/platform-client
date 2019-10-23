@@ -17,7 +17,7 @@ export interface IndexSourceStatistics {
     sourceId: number;
 }
 
-export interface IndexStatusStats {
+export interface IndexStatisticsModel {
     diskSpaceUsed: number;
     documentCount: number;
     documentsTotalSize: number;
@@ -40,7 +40,7 @@ export interface IndexStatus {
     internalStatus: string;
     online: boolean;
     readOnlyStatus: string;
-    stats: IndexStatusStats;
+    stats: IndexStatisticsModel;
 }
 
 export interface IndexAttributes {
@@ -61,13 +61,13 @@ export interface IndexAttributes {
 export interface CreateCoveoIndexModel {
     copyFromId?: string;
     logicalIndexId?: string;
-    machineSpec?: IndexMachineSpecModel;
+    machineSpec?: MachineSpecModel;
     online?: boolean;
     region?: string;
     versions?: IndexVersionsModel;
 }
 
-export interface IndexMachineSpecModel {
+export interface MachineSpecModel {
     architecture: string;
     storageSpec: IndexStorageSpecModel;
 }
@@ -75,11 +75,24 @@ export interface IndexMachineSpecModel {
 export interface IndexStorageSpecModel {
     numberOfIops: number;
     sizeInGibibytes: number;
-    sizeInGigabytes: number;
     storageType: string;
 }
 
 export interface IndexVersionsModel {
     indexerVersion: string;
     securityCacheVersion: string;
+}
+
+export interface PageModel {
+    items: IndexBackupsItems[];
+    totalEntries: number;
+    totalPages: number;
+}
+
+export interface IndexBackupsItems {
+    backupId: string;
+    creationDate: number;
+    indexId: string;
+    logicalIndex: string;
+    organizationId: string;
 }
