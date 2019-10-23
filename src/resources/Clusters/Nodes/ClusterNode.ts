@@ -15,15 +15,15 @@ export default class ClusterNode extends Resource {
     }
 
     start(clusterId: string, id: string) {
-        return this.api.post<{}>(`${ClusterNode.getBaseUrl(clusterId)}/${id}/start`);
+        return this.api.post(`${ClusterNode.getBaseUrl(clusterId)}/${id}/start`);
     }
 
     stop(clusterId: string, id: string) {
-        return this.api.post<{}>(`${ClusterNode.getBaseUrl(clusterId)}/${id}/stop`);
+        return this.api.post(`${ClusterNode.getBaseUrl(clusterId)}/${id}/stop`);
     }
 
     dump(clusterId: string, id: string) {
-        return this.api.post<{}>(`${ClusterNode.getBaseUrl(clusterId)}/${id}/dumps`);
+        return this.api.post(`${ClusterNode.getBaseUrl(clusterId)}/${id}/dumps`);
     }
 
     upgrade(clusterId: string, id: string, data: ClusterNodeUpgradeDataModel) {
