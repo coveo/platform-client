@@ -41,7 +41,7 @@ describe('clusterNode', () => {
             clusterNode.start(clusterId, nodeId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/start`, {});
+            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/start`);
         });
     });
 
@@ -51,7 +51,7 @@ describe('clusterNode', () => {
             clusterNode.stop(clusterId, nodeId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/stop`, {});
+            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/stop`);
         });
     });
 
@@ -61,7 +61,7 @@ describe('clusterNode', () => {
             clusterNode.dump(clusterId, nodeId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/dumps`, {});
+            expect(api.post).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/dumps`);
         });
     });
 

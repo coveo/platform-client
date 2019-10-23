@@ -13,7 +13,7 @@ export default class API {
 
     async post<T = {}>(
         url: string,
-        body: any,
+        body: any = {},
         args: RequestInit = {method: 'post', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
     ): Promise<T> {
         return await this.request<T>(url, args);

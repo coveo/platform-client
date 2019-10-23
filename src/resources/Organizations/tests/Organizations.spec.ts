@@ -28,7 +28,7 @@ describe('Organization', () => {
 
             organization.create({name});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}?name=${name}`, {});
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}?name=${name}`);
         });
     });
 

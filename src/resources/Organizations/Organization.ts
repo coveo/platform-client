@@ -10,7 +10,7 @@ export default class Organization extends Resource {
     }
 
     create(options: CreateOrganizationOptions) {
-        return this.api.post<OrganizationModel>(this.buildPath(Organization.baseUrl, options), {});
+        return this.api.post<OrganizationModel>(this.buildPath(Organization.baseUrl, options));
     }
 
     delete(organizationId: string) {
