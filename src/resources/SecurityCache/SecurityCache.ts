@@ -11,7 +11,7 @@ import {
 } from './SecurityCacheInterfaces';
 
 export default class SecurityCache extends Ressource {
-    static baseUrl = `/rest/organizations/${API.orgPlaceholder}`;
+    static baseUrl = `rest/organizations/${API.orgPlaceholder}`;
     static cacheUrl = `/${SecurityCache.baseUrl}/securitycache`;
     static providersUrl = `/${SecurityCache.baseUrl}/securityproviders`;
 
@@ -37,6 +37,10 @@ export default class SecurityCache extends Ressource {
 
     refreshCache() {
         return this.api.post(`${SecurityCache.cacheUrl}/refresh`);
+    }
+
+    refreshProvider(providerId: string) {
+        return this.api.post(`${SecurityCache.cacheUrl}/${providerId}/refresh`);
     }
 
     listProviders() {
