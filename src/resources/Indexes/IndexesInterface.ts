@@ -92,11 +92,12 @@ export interface IndexBackupsItems {
 }
 
 export interface IndexBackups {
-    backupId: string;
-    from: number;
-    indexId: string;
-    order: string;
-    page: number;
-    perPage: number;
-    sortBy: string;
+    backupId?: string;
+    from?: number;
+    indexId?: string;
+    order?: string;
+    page?: number;
+    perPage?: number;
+    sortBy?: string;
+    to?: number;
 }

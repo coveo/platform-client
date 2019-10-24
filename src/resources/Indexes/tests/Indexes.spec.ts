@@ -78,9 +78,22 @@ describe('Cluster', () => {
 
     describe('get all backups', () => {
         it('should make a GETBACKUPS call', () => {
-            indexes.getBackups();
+            const options = {
+                backupId: 'backupId',
+                from: 0,
+                indexId: 'indexId',
+                order: 'asc',
+                page: 100,
+                perPage: 10,
+                sortBy: 'name',
+                to: 20,
+            };
+
+            indexes.getBackups(options);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Indexes.indexBackupUrl}`);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Indexes.indexBackupUrl}?backupId=backupId&from=0&indexId=indexId&order=asc&page=100&perPage=10&sortBy=name&to=20`
+            );
         });
     });
 
@@ -99,7 +112,7 @@ describe('Cluster', () => {
             const indexId = 'ABC123';
             indexes.readOnly(indexId, isReadOnly);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/readonly`, {isReadOnly});
+            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/readonly?isReadOnly=true`, {});
         });
     });
 
@@ -128,7 +141,7 @@ describe('Cluster', () => {
             const indexId = 'ABC123';
             indexes.isOnline(indexId, isOnline);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/online`, {isOnline});
+            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/online?isOnline=true`, {});
         });
     });
 
@@ -138,7 +151,7 @@ describe('Cluster', () => {
             const indexId = 'ABC123';
             indexes.restore(indexId, backupId);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/restore`, {backupId});
+            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/restore?backupId=backUpID`, {});
         });
     });
 });

@@ -34,7 +34,7 @@ export default class Indexes extends Resource {
         return this.api.post<{id: string}>(`${Indexes.baseUrl}/${indexId}/backup`, {});
     }
 
-    getBackups(options: IndexBackups) {
+    getBackups(options?: IndexBackups) {
         return this.api.get<PageModel<IndexBackupsItems>>(this.buildPath(`${Indexes.indexBackupUrl}`, options));
     }
 
