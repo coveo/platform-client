@@ -35,6 +35,6 @@ export default class Cluster extends Resource {
     }
 
     synchronize(id: string) {
-        return this.api.post<{}>(`${Cluster.baseUrl}/${id}/synchronize`, {});
+        return this.api.post(`${Cluster.baseUrl}/${id}/synchronize`);
     }
 }

@@ -54,7 +54,7 @@ describe('securityCache', () => {
         it('should make a POST call to the securityCache refreshCache url', () => {
             securityCache.refreshCache();
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh`, {});
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh`);
         });
     });
 

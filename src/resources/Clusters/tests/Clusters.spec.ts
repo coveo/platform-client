@@ -53,7 +53,7 @@ describe('Cluster', () => {
             const clusterToSync = 'cluster-to-sync';
             cluster.synchronize(clusterToSync);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Cluster.baseUrl}/${clusterToSync}/synchronize`, {});
+            expect(api.post).toHaveBeenCalledWith(`${Cluster.baseUrl}/${clusterToSync}/synchronize`);
         });
     });
 });
