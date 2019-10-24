@@ -36,7 +36,7 @@ export default class SecurityCache extends Ressource {
     }
 
     refreshCache() {
-        return this.api.post(`${SecurityCache.cacheUrl}/refresh`, {});
+        return this.api.post(`${SecurityCache.cacheUrl}/refresh`);
     }
 
     listProviders() {
