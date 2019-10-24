@@ -4,7 +4,7 @@ import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
 import Group from './Groups/Groups';
-import Indexes from './Indexes/Indexes';
+import Index from './Indexes/Indexes';
 import Organization from './Organizations/Organization';
 import Resource from './Resource';
 import SecurityCache from './SecurityCache/SecurityCache';
@@ -15,7 +15,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
     {key: 'organization', resource: Organization},
-    {key: 'indexes', resource: Indexes},
+    {key: 'indexes', resource: Index},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'apiKey', resource: ApiKey},
 ];
@@ -28,7 +28,7 @@ class PlatformResources {
     cluster: Cluster;
     group: Group;
     organization: Organization;
-    indexes: Indexes;
+    index: Index;
     apiKey: ApiKey;
     securityCache: SecurityCache;
 

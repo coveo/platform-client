@@ -90,3 +90,13 @@ export interface IndexBackupsItems {
     logicalIndex: string;
     organizationId: string;
 }
+
+export interface IndexBackups {
+    backupId: string;
+    from: number;
+    indexId: string;
+    order: string;
+    page: number;
+    perPage: number;
+    sortBy: string;
+}

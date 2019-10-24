@@ -1,7 +1,13 @@
 import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CreateCoveoIndexModel, IndexAttributes, IndexBackupsItems, IndexStatisticsModel} from './IndexesInterface';
+import {
+    CreateCoveoIndexModel,
+    IndexAttributes,
+    IndexBackups,
+    IndexBackupsItems,
+    IndexStatisticsModel,
+} from './IndexesInterface';
 
 export default class Indexes extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
@@ -28,8 +34,8 @@ export default class Indexes extends Resource {
         return this.api.post<{id: string}>(`${Indexes.baseUrl}/${indexId}/backup`, {});
     }
 
-    getBackups() {
-        return this.api.get<PageModel<IndexBackupsItems>>(`${Indexes.indexBackupUrl}`);
+    getBackups(options: IndexBackups) {
+        return this.api.get<PageModel<IndexBackupsItems>>(this.buildPath(`${Indexes.indexBackupUrl}`, options));
     }
 
     forceCommit(indexId: string) {
@@ -37,7 +43,7 @@ export default class Indexes extends Resource {
     }
 
     readOnly(indexId: string, isReadOnly: boolean) {
-        return this.api.put(`${Indexes.baseUrl}/${indexId}/readonly`, {isReadOnly});
+        return this.api.put(this.buildPath(`${Indexes.baseUrl}/${indexId}/readonly`, {isReadOnly}), {});
     }
 
     resize(indexId: string, sizeInGibibytes: number) {
@@ -49,10 +55,10 @@ export default class Indexes extends Resource {
     }
 
     isOnline(indexId: string, isOnline: boolean) {
-        return this.api.put(`${Indexes.baseUrl}/${indexId}/online`, {isOnline});
+        return this.api.put(this.buildPath(`${Indexes.baseUrl}/${indexId}/online`, {isOnline}), {});
     }
 
     restore(indexId: string, backupId: string) {
-        return this.api.post(`${Indexes.baseUrl}/${indexId}/restore`, {backupId});
+        return this.api.post(this.buildPath(`${Indexes.baseUrl}/${indexId}/restore`, {backupId}), {});
     }
 }
