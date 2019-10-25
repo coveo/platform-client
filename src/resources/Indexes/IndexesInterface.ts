@@ -91,7 +91,7 @@ export interface IndexBackupsItems {
     organizationId: string;
 }
 
-export interface IndexBackups {
+export interface IndexBackupsOptions {
     backupId?: string;
     from?: number;
     indexId?: string;

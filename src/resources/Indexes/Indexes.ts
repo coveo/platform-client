@@ -4,8 +4,8 @@ import Resource from '../Resource';
 import {
     CreateCoveoIndexModel,
     IndexAttributes,
-    IndexBackups,
     IndexBackupsItems,
+    IndexBackupsOptions,
     IndexStatisticsModel,
 } from './IndexesInterface';
 
@@ -34,7 +34,7 @@ export default class Indexes extends Resource {
         return this.api.post<{id: string}>(`${Indexes.baseUrl}/${indexId}/backup`, {});
     }
 
-    getBackups(options?: IndexBackups) {
+    getBackups(options?: IndexBackupsOptions) {
         return this.api.get<PageModel<IndexBackupsItems>>(this.buildPath(`${Indexes.indexBackupUrl}`, options));
     }
 
