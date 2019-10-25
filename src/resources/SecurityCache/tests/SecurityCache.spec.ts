@@ -56,6 +56,12 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh`);
         });
+
+        it('should make a POST call to the security Provider refresh url', () => {
+            securityCache.refreshProvider('PROVIDER_ID');
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/PROVIDER_ID/refresh`);
+        });
     });
 
     describe('status', () => {
