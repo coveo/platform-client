@@ -57,7 +57,7 @@ describe('PlatformResources', () => {
             expect(platformResources.securityCache).toBeInstanceOf(SecurityCache);
         });
 
-        it('should register the api keys ressource on the platform instance', () => {
+        it('should register the apiKey resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
