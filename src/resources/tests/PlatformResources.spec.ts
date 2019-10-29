@@ -66,7 +66,7 @@ describe('PlatformResources', () => {
             expect(platformResources.apiKey).toBeInstanceOf(ApiKey);
         });
 
-        it('should register the mlModels resource on the platform instance', () => {
+        it('should register the mlModel resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
