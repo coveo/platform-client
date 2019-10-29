@@ -3,6 +3,7 @@ import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import Group from '../Groups/Groups';
+import MLModels from '../MLModels/MLModels';
 import Organization from '../Organizations/Organization';
 import PlatformResources from '../PlatformResources';
 import SecurityCache from '../SecurityCache/SecurityCache';
@@ -63,6 +64,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.apiKey).toBeDefined();
             expect(platformResources.apiKey).toBeInstanceOf(ApiKey);
+        });
+
+        it('should register the mlModels resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.mlModel).toBeDefined();
+            expect(platformResources.mlModel).toBeInstanceOf(MLModels);
         });
     });
 });
