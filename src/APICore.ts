@@ -7,6 +7,10 @@ export default class API {
 
     constructor(private config: APIConfiguration) {}
 
+    get organizationId() {
+        return this.config.organizationId;
+    }
+
     async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
         return await this.request<T>(url, args);
     }

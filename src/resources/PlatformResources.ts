@@ -16,7 +16,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
     {key: 'organization', resource: Organization},
-    {key: 'indexes', resource: Index},
+    {key: 'index', resource: Index},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'apiKey', resource: ApiKey},
     {key: 'mlModel', resource: MLModels},
