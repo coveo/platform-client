@@ -43,5 +43,13 @@ export interface MLModel extends MLModelInfo {
 }
 
 export interface ModelErrorDescription {
-    present?: boolean;
+    customer_errors?: CustomerError[];
+}
+
+export interface CustomerError {
+    description?: string;
+    errorCode?: string;
+    errorType?: string;
+    precision?: string;
+    troubleshoot?: string;
 }
