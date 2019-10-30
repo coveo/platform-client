@@ -1,6 +1,7 @@
-import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {IdAndDisplayNameModel} from '../../BaseInterfaces';
+import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
-export interface MLModel extends MLModelInfo, MLModelCreated {
+export interface MLModel extends MLModelInfo {
     orgId: string;
     id: string;
     engineId: string;
@@ -43,33 +44,4 @@ export interface MLModel extends MLModelInfo, MLModelCreated {
 
 export interface ModelErrorDescription {
     present?: boolean;
-}
-
-export interface MLModelInfo {
-    id: string;
-    info?: {};
-}
-
-export interface CreateMLModelOptions {
-    engineId: string;
-    modelName: string;
-    modelDisplayName?: string;
-    exportPeriod: string;
-    intervalTime: number;
-    intervalUnit: 'DAY' | 'WEEK' | 'MONTH';
-    exportOffset?: string;
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
-    commandLineParameters?: string[];
-    commonFilter?: string;
-    customEventFilter?: string;
-    searchEventFilter?: string;
-    viewEventFilter?: string;
-    versionMatcher?: string;
-}
-
-export interface MLModelCreated {
-    endTime?: number;
-    startTime?: number;
-    resourceId?: string;
 }

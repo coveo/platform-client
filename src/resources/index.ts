@@ -9,4 +9,4 @@ export * from './Indexes';
 export * from './License';
 export * from './Organizations';
 export * from './ApiKeys';
-export * from './MLModels';
+export * from './MachineLearning';

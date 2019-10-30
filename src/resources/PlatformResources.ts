@@ -5,7 +5,7 @@ import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
-import MLModels from './MLModels/MLModels';
+import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Resource from './Resource';
 import SecurityCache from './SecurityCache/SecurityCache';
@@ -19,7 +19,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'index', resource: Index},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'apiKey', resource: ApiKey},
-    {key: 'mlModel', resource: MLModels},
+    {key: 'ml', resource: MachineLearning},
 ];
 
 class PlatformResources {
@@ -32,7 +32,7 @@ class PlatformResources {
     organization: Organization;
     index: Index;
     apiKey: ApiKey;
-    mlModel: MLModels;
+    ml: MachineLearning;
     securityCache: SecurityCache;
 
     registerAll() {
