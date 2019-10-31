@@ -4,6 +4,7 @@ import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import Group from '../Groups/Groups';
 import Organization from '../Organizations/Organization';
+import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
 import SecurityCache from '../SecurityCache/SecurityCache';
 
@@ -63,6 +64,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.apiKey).toBeDefined();
             expect(platformResources.apiKey).toBeInstanceOf(ApiKey);
+        });
+
+        it('should register the pipelines resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.pipelines).toBeDefined();
+            expect(platformResources.pipelines).toBeInstanceOf(Pipelines);
         });
     });
 });
