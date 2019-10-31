@@ -22,7 +22,7 @@ describe('ModelInformation', () => {
 
             modelInfo.get(engineId, modelName);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${ModelInformation.baseUrl}/${engineId}/models/${modelName}/details`);
+            expect(api.get).toHaveBeenCalledWith(`${ModelInformation.getBaseUrl(engineId, modelName)}/details`);
         });
     });
 
@@ -33,7 +33,7 @@ describe('ModelInformation', () => {
 
             modelInfo.delete(engineId, modelName);
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${ModelInformation.baseUrl}/${engineId}/models/${modelName}`);
+            expect(api.delete).toHaveBeenCalledWith(ModelInformation.getBaseUrl(engineId, modelName));
         });
     });
 
@@ -51,10 +51,7 @@ describe('ModelInformation', () => {
 
             modelInfo.update(engineId, modelName, modelInformation);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(
-                `${ModelInformation.baseUrl}/${engineId}/models/${modelName}`,
-                modelInformation
-            );
+            expect(api.put).toHaveBeenCalledWith(ModelInformation.getBaseUrl(engineId, modelName), modelInformation);
         });
     });
 });
