@@ -1,4 +1,3 @@
-import API from '../../../APICore';
 import Resource from '../../Resource';
 import Pipelines from '../Pipelines';
 import {
@@ -18,40 +17,50 @@ export default class MLAssociations extends Resource {
     }
 
     associate(pipelineId: string, options: CreateAssociation) {
-        return this.api.post(`${MLAssociations.getBaseUrl(pipelineId)}?organizationId=${API.orgPlaceholder}`, options);
+        return this.api.post(
+            this.buildPath(MLAssociations.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
+            options
+        );
     }
 
     getAssociation(pipelineId: string, associationId: string) {
         return this.api.get<MLAssociationModel>(
-            `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}?organizationId=${API.orgPlaceholder}`
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
+                organizationId: this.api.organizationId,
+            })
         );
     }
 
     disassociate(pipelineId: string, modelId: string, associationId: string) {
         return this.api.delete(
-            `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}?organizationId=${API.orgPlaceholder}`
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}`, {
+                organizationId: this.api.organizationId,
+            })
         );
     }
 
     updateAssociation(pipelineId: string, associationId: string, options?: EditAssociation) {
         return this.api.put(
-            `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}?organizationId=${API.orgPlaceholder}`,
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
+                organizationId: this.api.organizationId,
+            }),
             options
         );
     }
 
     updatePosition(pipelineId: string, associationId: string, position: number) {
         return this.api.put(
-            `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/position?position=${position}&organizationId=${
-                API.orgPlaceholder
-            }`,
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/position`, {
+                position,
+                organizationId: this.api.organizationId,
+            }),
             {}
         );
     }
 
     getAssociatedPipelines() {
         return this.api.get<AssociatedPipelinesData[]>(
-            `${Pipelines.baseUrl}/ml/model/associations?organizationId=${API.orgPlaceholder}`
+            this.buildPath(`${Pipelines.baseUrl}/ml/model/associations`, {organizationId: this.api.organizationId})
         );
     }
 }

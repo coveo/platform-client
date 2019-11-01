@@ -75,12 +75,12 @@ describe('PlatformResources', () => {
             expect(platformResources.ml).toBeInstanceOf(MachineLearning);
         });
 
-        it('should register the pipelines resource on the platform instance', () => {
+        it('should register the pipeline resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.pipelines).toBeDefined();
-            expect(platformResources.pipelines).toBeInstanceOf(Pipelines);
+            expect(platformResources.pipeline).toBeDefined();
+            expect(platformResources.pipeline).toBeInstanceOf(Pipelines);
         });
     });
 });

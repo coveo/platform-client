@@ -12,7 +12,7 @@ export interface MLAssociationModel {
     cacheMaximumAge: string;
     condition?: string;
     conditionDefinition?: string;
-    customQueryParameters?: JValue;
+    customQueryParameters?: {};
     enableWordCompletion?: boolean;
     exclusive?: boolean;
     intelligentTermDetection?: boolean;
@@ -22,8 +22,6 @@ export interface MLAssociationModel {
     modelDisplayName?: string;
     rankingModifier?: number;
 }
-
-export interface JValue {}
 
 export interface ListAssociationsParams {
     perPage?: number;
@@ -37,7 +35,7 @@ export interface CreateAssociation extends EditAssociation {
 export interface EditAssociation {
     cacheMaximumAge?: string;
     condition?: string;
-    customQueryParameters?: JValue;
+    customQueryParameters?: {};
     description?: string;
     enableWordCompletion?: boolean;
     exclusive?: boolean;

@@ -18,9 +18,7 @@ describe('Pipelines', () => {
         it('should make a GET call to the specific Pipelines url', () => {
             pipelines.getBackendVersion();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${Pipelines.baseUrl}/ml/version?organizationId=${API.orgPlaceholder}`
-            );
+            expect(api.get).toHaveBeenCalledWith(`${Pipelines.baseUrl}/ml/version`);
         });
     });
 });

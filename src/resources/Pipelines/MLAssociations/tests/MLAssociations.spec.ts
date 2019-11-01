@@ -28,16 +28,11 @@ describe('MLAssociations', () => {
     describe('associate', () => {
         it('should make a POST call to the specific MLAssociations url', () => {
             const pipelineId = '-_-';
-            const options = {
-                modelId: 'mini-model',
-            };
+            const options = {modelId: '0_0'};
 
             associations.associate(pipelineId, options);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(pipelineId)}?organizationId=${API.orgPlaceholder}`,
-                options
-            );
+            expect(api.post).toHaveBeenCalledWith(`${MLAssociations.getBaseUrl(pipelineId)}`, options);
         });
     });
 
@@ -48,9 +43,7 @@ describe('MLAssociations', () => {
 
             associations.getAssociation(pipelineId, associationId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}?organizationId=${API.orgPlaceholder}`
-            );
+            expect(api.get).toHaveBeenCalledWith(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`);
         });
     });
 
@@ -63,9 +56,7 @@ describe('MLAssociations', () => {
             associations.disassociate(pipelineId, modelId, associationId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}?organizationId=${
-                    API.orgPlaceholder
-                }`
+                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}`
             );
         });
     });
@@ -74,16 +65,11 @@ describe('MLAssociations', () => {
         it('should make a PUT call to the specific MLAssociations url', () => {
             const pipelineId = '999';
             const associationId = '111';
-            const options = {
-                exclusive: true,
-            };
+            const options = {exclusive: true};
 
             associations.updateAssociation(pipelineId, associationId, options);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}?organizationId=${API.orgPlaceholder}`,
-                options
-            );
+            expect(api.put).toHaveBeenCalledWith(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, options);
         });
     });
 
@@ -96,9 +82,7 @@ describe('MLAssociations', () => {
             associations.updatePosition(pipelineId, associationId, position);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(
-                    pipelineId
-                )}/${associationId}/position?position=${position}&organizationId=${API.orgPlaceholder}`,
+                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/position?position=${position}`,
                 {}
             );
         });
@@ -108,9 +92,7 @@ describe('MLAssociations', () => {
         it('should make a GET call to the specific MLAssociations url', () => {
             associations.getAssociatedPipelines();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${Pipelines.baseUrl}/ml/model/associations?organizationId=${API.orgPlaceholder}`
-            );
+            expect(api.get).toHaveBeenCalledWith(`${Pipelines.baseUrl}/ml/model/associations`);
         });
     });
 });

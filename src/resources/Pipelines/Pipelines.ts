@@ -16,7 +16,7 @@ export default class Pipelines extends Resource {
 
     getBackendVersion() {
         return this.api.get<PipelineBackendVersion>(
-            `${Pipelines.baseUrl}/ml/version?organizationId=${API.orgPlaceholder}`
+            this.buildPath(`${Pipelines.baseUrl}/ml/version`, {organizationId: this.api.organizationId})
         );
     }
 }

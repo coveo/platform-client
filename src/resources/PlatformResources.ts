@@ -21,7 +21,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'securityCache', resource: SecurityCache},
     {key: 'apiKey', resource: ApiKey},
     {key: 'ml', resource: MachineLearning},
-    {key: 'pipelines', resource: Pipelines},
+    {key: 'pipeline', resource: Pipelines},
 ];
 
 class PlatformResources {
@@ -36,7 +36,7 @@ class PlatformResources {
     apiKey: ApiKey;
     ml: MachineLearning;
     securityCache: SecurityCache;
-    pipelines: Pipelines;
+    pipeline: Pipelines;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
