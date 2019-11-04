@@ -1,4 +1,5 @@
 import {IdAndDisplayNameModel} from '../../BaseInterfaces';
+import {AssociatedPipelineModel} from '../../Pipelines';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
 export interface MLModel extends MLModelInfo {
@@ -40,6 +41,7 @@ export interface MLModel extends MLModelInfo {
     customEventFilter?: string;
     searchEventFilter?: string;
     viewEventFilter?: string;
+    associatedPipelines?: AssociatedPipelineModel[];
 }
 
 export interface ModelErrorDescription {
