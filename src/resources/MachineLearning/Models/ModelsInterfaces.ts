@@ -1,7 +1,8 @@
 import {IdAndDisplayNameModel} from '../../BaseInterfaces';
+import {AssociatedPipelineModel} from '../../Pipelines';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
-export interface MLModel extends MLModelInfo {
+export interface MLModel extends MLModelInfo, ModelAttributes {
     orgId: string;
     id: string;
     engineId: string;
@@ -52,4 +53,10 @@ export interface CustomerError {
     errorType?: string;
     precision?: string;
     troubleshoot?: string;
+}
+
+export interface ModelAttributes {
+    associatedPipelines?: AssociatedPipelineModel[];
+    parsedExportOffset?: string;
+    parsedExportPeriod?: string;
 }
