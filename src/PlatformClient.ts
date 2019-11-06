@@ -1,5 +1,6 @@
 import API from './APICore';
 import {APIConfiguration, PlatformClientOptions} from './ConfigurationInterfaces';
+import {HostUndefinedError} from './Errors';
 import {ResponseHandlers} from './handlers/ResponseHandlers';
 import PlatformResources from './resources/PlatformResources';
 
@@ -34,7 +35,7 @@ export class PlatformClient extends PlatformResources {
         };
 
         if (!this.host) {
-            throw new Error(`CoveoPlatform's host is undefined.`);
+            throw new HostUndefinedError();
         }
 
         this.API = new API(this.apiConfiguration);
