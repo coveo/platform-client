@@ -5,14 +5,27 @@ import handleResponse, {defaultResponseHandlers} from './handlers/ResponseHandle
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
-    constructor(private config: APIConfiguration) {}
+    private getRequestsController: AbortController;
+
+    constructor(private config: APIConfiguration) {
+        this.getRequestsController = new AbortController();
+    }
 
     get organizationId() {
         return this.config.organizationId;
     }
 
     async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
-        return await this.request<T>(url, args);
+        args.signal = args.signal || this.getRequestsController.signal;
+        try {
+            return await this.request<T>(url, args);
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                return; // We don't want to resolve or reject the promise
+            } else {
+                throw error;
+            }
+        }
     }
 
     async post<T = {}>(
@@ -37,6 +50,11 @@ export default class API {
 
     async delete<T = {}>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
         return await this.request<T>(url, args);
+    }
+
+    abortGetRequests(): void {
+        this.getRequestsController.abort();
+        this.getRequestsController = new AbortController();
     }
 
     private get handlers(): ResponseHandler[] {

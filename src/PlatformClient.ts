@@ -50,6 +50,10 @@ export class PlatformClient extends PlatformResources {
         }
     }
 
+    abortPendingGetRequests() {
+        this.API.abortGetRequests();
+    }
+
     private get apiConfiguration(): APIConfiguration {
         const {environment, ...apiConfig} = this.options;
         return {
