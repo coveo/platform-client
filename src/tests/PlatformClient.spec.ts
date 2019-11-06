@@ -117,4 +117,15 @@ describe('PlatformClient', () => {
             expect.assertions(1);
         });
     });
+
+    it('should abort get requests on the API instance', () => {
+        const platform = new PlatformClient(baseOptions);
+        const abortGetRequestsSpy = APIMock.mock.instances[0].abortGetRequests as jest.Mock<
+            ReturnType<typeof API.prototype.abortGetRequests>
+        >;
+
+        platform.abortPendingGetRequests();
+
+        expect(abortGetRequestsSpy).toHaveBeenCalledTimes(1);
+    });
 });
