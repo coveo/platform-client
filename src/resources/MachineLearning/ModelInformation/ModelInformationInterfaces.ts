@@ -145,18 +145,18 @@ export interface ModelInformationPR {
         version: string;
     };
 
-    itemBasedNamesAndNumOfRecordedItems: object;
-    itemBasedNamesWithCandidateItems: object;
-    numOfEventsPerEventType: object;
-    userBasedCandidates: object;
-    userBasedNumOfItems: object;
-    userBasedNumOfUsers: object;
+    itemBasedNamesAndNumOfRecordedItems: any;
+    itemBasedNamesWithCandidateItems: any;
+    numOfEventsPerEventType: any;
+    userBasedCandidates: any;
+    userBasedNumOfItems: any;
+    userBasedNumOfUsers: any;
 
     contentIDKeys: string[];
     parentIDKeys: [];
 
-    modelBuildingStats?: object;
-    languages?: object;
+    modelBuildingStats?: any;
+    languages?: any;
 }
 
 export interface ModelInformationQS {
