@@ -7,7 +7,7 @@ export interface ApiKeyModel {
     value?: string;
     displayName?: string;
     description?: string;
-    createdBy?: any;
+    createdBy?: object;
     createdDate?: number;
     allowedIps?: string[];
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];

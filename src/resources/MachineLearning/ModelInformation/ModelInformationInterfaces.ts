@@ -1,5 +1,3 @@
-import {KeyValue} from '../../BaseInterfaces';
-
 export interface MLModelInfo {
     id: string;
     info?: ModelInformationART | ModelInformationDNE | ModelInformationER | ModelInformationPR | ModelInformationQS;
@@ -21,8 +19,8 @@ export interface ModelInformationART {
         segmentedVisitsCount: number;
     };
     totalQueries: number;
-    wordSelectionModels: KeyValue<KeyValue<number>>;
-    candidateExamples: KeyValue<string[]>;
+    wordSelectionModels: Record<string, Record<string, number>>;
+    candidateExamples: Record<string, string[]>;
     languages: {
         [languageKey: string]: {
             contextKeysToDocuments: any;
@@ -46,7 +44,7 @@ export interface ModelInformationART {
         userContextMultBins: number[];
         subqueryMultBins: number[];
         subqueryLenThr: number;
-        clicksDecayParams: KeyValue<number>;
+        clicksDecayParams: Record<string, number>;
     };
     featureSelectLog: FeatureSelectLog;
     [key: string]: any;
@@ -90,9 +88,9 @@ export interface ModelInformationDNE {
 }
 
 export interface ModelInformationER {
-    indicatorsModifier: KeyValue<number>;
+    indicatorsModifier: Record<string, number>;
     deprecatedUrlToFieldValueSize: number;
-    candidateExamples: KeyValue<string[]>;
+    candidateExamples: Record<string, string[]>;
     primaryIdToValue: number;
     eventGroups: string[];
     primaryEventType: string;
@@ -131,9 +129,9 @@ export interface ModelInformationER {
         [key: string]: number;
     };
     'Possible recommendations: ': number;
-    eventGroupsFields: KeyValue<string[]>;
+    eventGroupsFields: Record<string, string[]>;
     primaryEventName: string;
-    'Recommendations per language: ': KeyValue<number>;
+    'Recommendations per language: ': Record<string, number>;
     [key: string]: any;
 }
 
@@ -147,18 +145,18 @@ export interface ModelInformationPR {
         version: string;
     };
 
-    itemBasedNamesAndNumOfRecordedItems: any;
-    itemBasedNamesWithCandidateItems: any;
-    numOfEventsPerEventType: any;
-    userBasedCandidates: any;
-    userBasedNumOfItems: any;
-    userBasedNumOfUsers: any;
+    itemBasedNamesAndNumOfRecordedItems: object;
+    itemBasedNamesWithCandidateItems: object;
+    numOfEventsPerEventType: object;
+    userBasedCandidates: object;
+    userBasedNumOfItems: object;
+    userBasedNumOfUsers: object;
 
     contentIDKeys: string[];
     parentIDKeys: [];
 
-    modelBuildingStats?: any;
-    languages?: any;
+    modelBuildingStats?: object;
+    languages?: object;
 }
 
 export interface ModelInformationQS {
@@ -166,11 +164,11 @@ export interface ModelInformationQS {
     lastQueriesPerUser: number;
     userContextPrefix: string;
     knownPartialsWithSuggestions: number;
-    candidateExamples: KeyValue<string[]>;
+    candidateExamples: Record<string, string[]>;
     languages: string[];
-    minClickCountByLang: KeyValue<number>;
+    minClickCountByLang: Record<string, number>;
     userClusterMap: number;
-    candidatesPerLanguages: KeyValue<number>;
+    candidatesPerLanguages: Record<string, number>;
     filterFields: string[];
     params: {
         version: string;
@@ -200,8 +198,8 @@ export interface ModelInformationQS {
     ratioCandWithContextBoost: number;
     userContextFields: string[];
     maxQueryLength: number;
-    candidatesPerFilters: KeyValue<number>;
-    topCooccurrencesExamples: KeyValue<string[]>;
-    stopwords: KeyValue<number>;
+    candidatesPerFilters: Record<string, number>;
+    topCooccurrencesExamples: Record<string, string[]>;
+    stopwords: Record<string, number>;
     [key: string]: any;
 }
