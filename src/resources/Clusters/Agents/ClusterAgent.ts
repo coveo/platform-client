@@ -12,6 +12,6 @@ export default class ClusterAgent extends Resource {
     }
 
     upgrade(clusterId: string, id: string, data: ClusterNodeUpgradeDataModel) {
-        return this.api.put<ClusterNodeUpgradeModel[]>(`${ClusterAgent.getBaseUrl(clusterId)}/${id}/upgrades`, data);
+        return this.api.put<ClusterNodeUpgradeModel[]>(`${ClusterAgent.getBaseUrl(clusterId)}/${id}/upgrade`, data);
     }
 }

@@ -32,7 +32,7 @@ describe('clusterAgent', () => {
             clusterAgent.upgrade(clusterId, agentId, data);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${ClusterAgent.getBaseUrl(clusterId)}/${agentId}/upgrades`, data);
+            expect(api.put).toHaveBeenCalledWith(`${ClusterAgent.getBaseUrl(clusterId)}/${agentId}/upgrade`, data);
         });
     });
 });

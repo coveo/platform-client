@@ -72,7 +72,7 @@ describe('clusterNode', () => {
             clusterNode.upgrade(clusterId, nodeId, data);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/upgrades`, data);
+            expect(api.put).toHaveBeenCalledWith(`${ClusterNode.getBaseUrl(clusterId)}/${nodeId}/upgrade`, data);
         });
     });
 });
