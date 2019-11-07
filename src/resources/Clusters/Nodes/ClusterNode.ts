@@ -27,6 +27,6 @@ export default class ClusterNode extends Resource {
     }
 
     upgrade(clusterId: string, id: string, data: ClusterNodeUpgradeDataModel) {
-        return this.api.put<ClusterNodeUpgradeModel[]>(`${ClusterNode.getBaseUrl(clusterId)}/${id}/upgrades`, data);
+        return this.api.put<ClusterNodeUpgradeModel[]>(`${ClusterNode.getBaseUrl(clusterId)}/${id}/upgrade`, data);
     }
 }
