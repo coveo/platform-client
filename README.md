@@ -49,6 +49,14 @@ platform.catalog.list({page: 0, pageSize: 10}).then((res) => {
 });
 ```
 
+### Compatibility
+
+The `platform-client` package is built on top of the `fetch` API and some related features such as the `AbortController` which are not entirely supported by all JavaScript runtime environments. Consequently, we recommend including the following list of polyfills to your project before using it in production.
+
+* [Polyfill for `fetch`](https://github.com/github/fetch)
+* [Polyfill for `AbortController`](https://github.com/mo/abortcontroller-polyfill)
+
+
 ## Documentation
 
 This project is built using TypeScript and automatically generates relevant type declarations. Most IDEs with TypeScript integration will display those type declarations as autocompletions, so that you typically will not need to refer to external documentation. Hence, the decision has been made not to document any option, resource, or action, except for the main configuration options. For in-depth documentation on the APIs exposed by this package, please consult our [official documentation portal](https://docs.coveo.com/en/151/cloud-v2-developers/coveo-cloud-v2-for-developers).
