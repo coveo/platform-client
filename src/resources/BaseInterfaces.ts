@@ -26,3 +26,5 @@ export interface PrivilegeModel {
     targetId: string;
     type?: string;
 }
+
+export type KeyValue<T> = {[key: string]: T};
