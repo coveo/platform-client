@@ -154,4 +154,32 @@ describe('Cluster', () => {
             expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/restore?backupId=backUpID`, {});
         });
     });
+
+    describe('getJason', () => {
+        it('should make a GETJSON call for specified index', () => {
+            const indexId = 'ABC123';
+            indexes.getJson(indexId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/configuration`);
+        });
+    });
+
+    describe('editJason', () => {
+        it('should make a EDITJSON call for specified index', () => {
+            const indexId = 'ABC123';
+            const indexConfig: any = {};
+            indexes.editJson(indexId, indexConfig);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/${indexId}/configuration`, indexConfig);
+        });
+    });
+
+    describe('editJasonAll', () => {
+        it('should make a EDITJSONALL call for specified index', () => {
+            const indexConfig: any = {};
+            indexes.editJsonAll(indexConfig);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Indexes.baseUrl}/raw`, indexConfig);
+        });
+    });
 });

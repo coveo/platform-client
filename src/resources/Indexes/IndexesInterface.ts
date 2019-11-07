@@ -41,6 +41,8 @@ export interface IndexStatus {
     online: boolean;
     readOnlyStatus: string;
     stats: IndexStatisticsModel;
+    syncStatus?: IndexSyncStatusAttributes;
+    backupStatus?: IndexSyncStatusAttributes;
 }
 
 export interface IndexAttributes {
@@ -100,4 +102,114 @@ export interface IndexBackupsOptions {
     perPage?: number;
     sortBy?: string;
     to?: number;
+}
+
+export interface IndexSyncStatusAttributes {
+    currentFileName: string;
+    currentFileNumber: number;
+    totalNumberOfFiles: number;
+    transferredSize: number;
+    totalSize: number;
+}
+
+export interface IndexPhysicalIndexModel {
+    applyStemmingOnExactPhraseTerms: boolean;
+    description: string;
+    enableRealtimeIndexing: boolean;
+    groupByMaxToCache: number;
+    languagesSettings: string;
+    name: string;
+    normalizerUnicodeSetExclusion: string;
+    performanceCacheMemory: number;
+    realtimeIndexingDocumentsThreshold: number;
+    realtimeIndexingStartThreshold: number;
+    uniqueTermsPerDocument: number;
+    wildcardsNumberOfLeadingChars: number;
+    wildcardsNumberOfTerms: number;
+}
+
+export interface IndexHighlightTagModel {
+    end: string;
+    id: number;
+    start: string;
+}
+
+export interface IndexQueryHighlighterModel {
+    highlightTags: IndexHighlightTagModel[];
+    ignoreAccents: boolean;
+    ignoredFields: string;
+    useStemming: boolean;
+}
+
+export interface IndexRankingModel {
+    adjacencyMult: number;
+    conceptMult: number;
+    customDocumentWeightMult: number;
+    docDateMult: number;
+    formattedMult: number;
+    languageMult: number;
+    linkRankMult: number;
+    numberOfResultsToRefine: number;
+    qualityMult: number;
+    rankingHeuristic: string;
+    rankingHeuristicUseIndexSize: boolean;
+    sourceReputationMult: number;
+    summaryMult: number;
+    tFIDFMult: number;
+    termCasingMult: number;
+    termCorrelationMult: number;
+    titleMult: number;
+    uRIMult: number;
+}
+
+export interface IndexSystemModel {
+    documentDuplicateFactor: number;
+    documentLimitWarning: number;
+    documentsChunkToDefragment: number;
+    documentsFragmentationTarget: number;
+    enableInternalLiveTagging: boolean;
+    enableLiveTagging: boolean;
+    enableQueryMetrics: boolean;
+    enableSearchDebugArgument: boolean;
+    enableServiceIndexMetrics: boolean;
+    enableTransactionsIndexMetrics: boolean;
+    enableWordCorrectorLexicon: boolean;
+    freeSpaceBeforeRebalancingBTree: number;
+    freeSpaceBeforeRebalancingBTreeDuringCleanup: number;
+    indexingBlockerMode: string;
+    limitSystemFileCacheSize: boolean;
+    maxBTreeFlushPendingMemoryMB: number;
+    maxChunksCleanupPerTransactionPeakPeriod: number;
+    maxChunksCleanupTimePerTransactionPeakPeriod: number;
+    maxDocIDRecyclingTimePerTransactionPeakPeriod: number;
+    maxMMFFlushPendingMemoryMB: number;
+    maxRecycledTermIDCleanupTimePeakPeriod: number;
+    maxRecycledTermIDCleanupTimePercentPeakPeriod: number;
+    maxSystemFileCacheSize: number;
+    maxTermDefragmentationTimePeakPeriod: number;
+    maxTermDefragmentationTimePercentPeakPeriod: number;
+    maxWriterBTreeShrinkTimePeakPeriod: number;
+    maximumResults: number;
+    maximumTermsPerQuery: number;
+    minDocIDCountForRecycling: number;
+    minTermIDCountForRecycling: number;
+    minimumDiskSpace: number;
+    numberOfBatchQueryThreads: number;
+    numberOfQueryThreads: number;
+    performanceCacheMemory: number;
+    performanceMinimumCacheMemory: number;
+    recyclingThresholdMultiplierInIndexingMode: number;
+    securityEntityResolverRefreshDelayInSeconds: number;
+    streamCompressionMethod: string;
+    systemFileCacheTrimInterval: number;
+    termsChunksToDefragmentPerTransactionPeakPeriod: number;
+    transactionMaxDocumentsSize: number;
+    transactionUpdateFrequency: number;
+}
+
+export interface RawIndexConfig {
+    physicalIndex: IndexPhysicalIndexModel;
+    queryHighlighter: IndexQueryHighlighterModel;
+    ranking: IndexRankingModel;
+    system: IndexSystemModel;
 }
