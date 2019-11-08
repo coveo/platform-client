@@ -7,6 +7,7 @@ import {
     IndexBackupsItems,
     IndexBackupsOptions,
     IndexStatisticsModel,
+    RawIndexConfig,
 } from './IndexesInterface';
 
 export default class Indexes extends Resource {
@@ -60,5 +61,17 @@ export default class Indexes extends Resource {
 
     restore(indexId: string, backupId: string) {
         return this.api.post(this.buildPath(`${Indexes.baseUrl}/${indexId}/restore`, {backupId}), {});
+    }
+
+    getJson(indexId: string) {
+        return this.api.get<RawIndexConfig>(`${Indexes.baseUrl}/${indexId}/configuration`);
+    }
+
+    editJson(indexId: string, indexConfig: RawIndexConfig) {
+        return this.api.put(`${Indexes.baseUrl}/${indexId}/configuration`, indexConfig);
+    }
+
+    editJsonAll(indexConfig: RawIndexConfig) {
+        return this.api.put(`${Indexes.baseUrl}/raw`, indexConfig);
     }
 }
