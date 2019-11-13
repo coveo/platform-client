@@ -9,6 +9,7 @@ export interface CatalogModel {
     product: ProductHierarchyModel;
     availability?: AvailabilityHierarchyModel;
     description?: string;
+    scope?: string;
     variant?: VariantHierarchyModel;
 }
 
