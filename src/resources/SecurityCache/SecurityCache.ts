@@ -44,10 +44,10 @@ export default class SecurityCache extends Ressource {
     }
 
     listProviders() {
-        return this.api.get<SecurityProviderModelWithStatus>(SecurityCache.providersUrl);
+        return this.api.get<SecurityProviderModelWithStatus[]>(SecurityCache.providersUrl);
     }
 
     providerSchedules() {
-        return this.api.get<ScheduleModel>(`${SecurityCache.providersUrl}/schedules`);
+        return this.api.get<ScheduleModel[]>(`${SecurityCache.providersUrl}/schedules`);
     }
 }
