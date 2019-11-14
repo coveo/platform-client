@@ -2,7 +2,10 @@ import {APIConfiguration} from './ConfigurationInterfaces';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers} from './handlers/ResponseHandlers';
 
-export default class API {
+type APIPrototype = typeof API.prototype;
+export type IAPI = {[P in keyof APIPrototype]: APIPrototype[P]};
+
+export default class API implements IAPI {
     static orgPlaceholder = '{organizationName}';
 
     private getRequestsController: AbortController;
