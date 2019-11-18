@@ -9,7 +9,7 @@ export interface CatalogModel {
     product: ProductHierarchyModel;
     availability?: AvailabilityHierarchyModel;
     description?: string;
-    scope?: string;
+    scope?: ScopeModel;
     variant?: VariantHierarchyModel;
 }
 
@@ -28,4 +28,8 @@ export interface AvailabilityHierarchyModel {
     availableSkusField: string;
     fields: string[];
     objectType: string;
+}
+
+export interface ScopeModel {
+    query: string;
 }
