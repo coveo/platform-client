@@ -11,3 +11,4 @@ export * from './Organizations';
 export * from './ApiKeys';
 export * from './MachineLearning';
 export * from './Pipelines';
+export * from './Sources';

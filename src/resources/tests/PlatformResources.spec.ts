@@ -8,6 +8,7 @@ import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
 import SecurityCache from '../SecurityCache/SecurityCache';
+import Sources from '../Sources/Sources';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -81,6 +82,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.pipeline).toBeDefined();
             expect(platformResources.pipeline).toBeInstanceOf(Pipelines);
+        });
+
+        it('should register the source resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.source).toBeDefined();
+            expect(platformResources.source).toBeInstanceOf(Sources);
         });
     });
 });
