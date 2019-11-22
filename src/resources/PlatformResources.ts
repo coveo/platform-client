@@ -10,6 +10,7 @@ import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
 import Resource from './Resource';
 import SecurityCache from './SecurityCache/SecurityCache';
+import Sources from './Sources/Sources';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
@@ -22,6 +23,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
     {key: 'ml', resource: MachineLearning},
     {key: 'pipeline', resource: Pipelines},
+    {key: 'source', resource: Sources},
 ];
 
 class PlatformResources {
@@ -37,6 +39,7 @@ class PlatformResources {
     ml: MachineLearning;
     securityCache: SecurityCache;
     pipeline: Pipelines;
+    source: Sources;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
