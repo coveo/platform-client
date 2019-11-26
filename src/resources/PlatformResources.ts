@@ -3,6 +3,7 @@ import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
+import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
@@ -17,6 +18,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'catalog', resource: Catalog},
     {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
+    {key: 'globalGroup', resource: GlobalGroup},
     {key: 'organization', resource: Organization},
     {key: 'index', resource: Index},
     {key: 'securityCache', resource: SecurityCache},
@@ -33,6 +35,7 @@ class PlatformResources {
     catalog: Catalog;
     cluster: Cluster;
     group: Group;
+    globalGroup: GlobalGroup;
     organization: Organization;
     index: Index;
     apiKey: ApiKey;
