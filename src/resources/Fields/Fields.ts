@@ -1,4 +1,5 @@
 import API from '../../APICore';
+import {PageModel} from '../BaseInterfaces';
 import Indexes from '../Indexes/Indexes';
 import Resource from '../Resource';
 import {FieldModel, ListFieldsParams} from './FieldsInterfaces';
@@ -14,8 +15,10 @@ export default class Field extends Resource {
         return this.api.post(`${Field.baseUrl}/batch/create`, fields);
     }
 
-    deleteFields(fields: string[]) {
-        return this.api.delete(this.buildPath(`${Field.baseUrl}/batch/delete`, fields));
+    deleteFields(fieldIds: string[]) {
+        const params = fieldIds.filter(Boolean).toString();
+
+        return this.api.delete(`${Field.baseUrl}/batch/delete?fields=${new URLSearchParams(params)}`);
     }
 
     updateFields(fields: FieldModel[]) {
@@ -38,7 +41,7 @@ export default class Field extends Resource {
         return this.api.put(`${Field.baseUrl}/${fieldId}`, options);
     }
 
-    list(params: ListFieldsParams) {
-        return this.api.get<FieldModel[]>(this.buildPath(`${Indexes.baseUrl}/page/fields`, params));
+    list(params?: ListFieldsParams) {
+        return this.api.get<PageModel<FieldModel>>(this.buildPath(`${Indexes.baseUrl}/page/fields`, params));
     }
 }
