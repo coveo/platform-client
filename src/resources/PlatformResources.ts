@@ -3,6 +3,7 @@ import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
+import Field from './Fields/Fields';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
@@ -24,6 +25,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ml', resource: MachineLearning},
     {key: 'pipeline', resource: Pipelines},
     {key: 'source', resource: Sources},
+    {key: 'field', resource: Field},
 ];
 
 class PlatformResources {
@@ -40,6 +42,7 @@ class PlatformResources {
     securityCache: SecurityCache;
     pipeline: Pipelines;
     source: Sources;
+    field: Field;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

@@ -2,6 +2,7 @@ import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
+import Field from '../Fields/Fields';
 import Group from '../Groups/Groups';
 import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
@@ -90,6 +91,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.source).toBeDefined();
             expect(platformResources.source).toBeInstanceOf(Sources);
+        });
+
+        it('should register the field resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.field).toBeDefined();
+            expect(platformResources.field).toBeInstanceOf(Field);
         });
     });
 });
