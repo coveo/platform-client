@@ -3,6 +3,7 @@ import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import Field from '../Fields/Fields';
+import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
 import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
@@ -43,6 +44,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.group).toBeDefined();
             expect(platformResources.group).toBeInstanceOf(Group);
+        });
+
+        it('should register the globalGroup resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.globalGroup).toBeDefined();
+            expect(platformResources.globalGroup).toBeInstanceOf(GlobalGroup);
         });
 
         it('should register the organization resource on the platform instance', () => {
