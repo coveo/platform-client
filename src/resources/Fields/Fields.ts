@@ -16,9 +16,7 @@ export default class Field extends Resource {
     }
 
     deleteFields(fieldIds: string[]) {
-        const params = fieldIds.filter(Boolean).toString();
-
-        return this.api.delete(`${Field.baseUrl}/batch/delete?fields=${new URLSearchParams(params)}`);
+        return this.api.delete(this.buildPath(`${Field.baseUrl}/batch/delete`, {fields: fieldIds}));
     }
 
     updateFields(fields: FieldModel[]) {

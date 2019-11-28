@@ -44,7 +44,7 @@ describe('Field', () => {
             field.deleteFields(fieldIds);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${Field.baseUrl}/batch/delete?fields=${new URLSearchParams(params)}`
+                `${Field.baseUrl}/batch/delete?${new URLSearchParams(Object.entries({fields: params})).toString()}`
             );
         });
     });
