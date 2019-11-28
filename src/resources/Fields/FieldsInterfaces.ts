@@ -27,6 +27,7 @@ export enum FieldTypes {
     DOUBLE = 'DOUBLE',
     DATE = 'DATE',
     STRING = 'STRING',
+    All = 'ALL',
 }
 
 export interface ListFieldsParams {
