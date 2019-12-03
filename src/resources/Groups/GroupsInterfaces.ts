@@ -1,5 +1,6 @@
 import {IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
 import {AuthProvider} from '../Enums';
+import {MemberModel} from './Members/GroupMemberInterfaces';
 import {RealmModel} from './Realms/GroupRealmInterfaces';
 
 export interface GroupModel {
@@ -48,16 +49,6 @@ export interface InviteByProvider {
 }
 
 export type InviteModel = InviteByEmail | InviteByUsername | InviteByProvider;
-
-export interface MemberModel {
-    id: string;
-    username: string;
-    email?: string;
-    displayName?: string;
-    lastLogin?: number;
-    provider?: AuthProvider;
-    providerUsername?: string;
-}
 
 export interface CreateGroupOptions {
     canEditItself?: boolean;
