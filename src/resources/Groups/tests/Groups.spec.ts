@@ -2,6 +2,7 @@ import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Group from '../Groups';
 import {GroupModel} from '../GroupsInterfaces';
+import GroupRealm from '../Realms/GroupRealm';
 
 jest.mock('../../../APICore');
 
@@ -65,5 +66,10 @@ describe('Group', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Group.baseUrl}/${groupModel.id}`, groupModel);
         });
+    });
+
+    it('should register the realm resource', () => {
+        expect(group.realm).toBeDefined();
+        expect(group.realm).toBeInstanceOf(GroupRealm);
     });
 });
