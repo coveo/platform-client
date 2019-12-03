@@ -2,9 +2,18 @@ import API from '../../APICore';
 import {New} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {CreateGroupOptions, GroupModel, UpdateGroupOptions} from './GroupsInterfaces';
+import GroupRealm from './Realms/GroupRealm';
 
 export default class Group extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/groups`;
+
+    realm: GroupRealm;
+
+    constructor(protected api: API) {
+        super(api);
+
+        this.realm = new GroupRealm(api);
+    }
 
     list() {
         return this.api.get<GroupModel[]>(Group.baseUrl);
