@@ -1,7 +1,7 @@
 import {IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
-import {AuthProvider} from '../Enums';
-import {MemberModel} from './Members/GroupMemberInterfaces';
-import {RealmModel} from './Realms/GroupRealmInterfaces';
+import {InviteModel} from './Invites';
+import {MemberModel} from './Members';
+import {RealmModel} from './Realms';
 
 export interface GroupModel {
     id: string;
@@ -15,40 +15,6 @@ export interface GroupModel {
     groupsThatCanEdit?: IdAndDisplayNameModel[];
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
 }
-
-export interface InviteByEmail {
-    id: string;
-    email: string;
-    username?: string;
-    providerUsername?: string;
-    displayName?: string;
-    expirationDate?: number;
-    invitedDate?: number;
-    provider?: AuthProvider;
-}
-export interface InviteByUsername {
-    id: string;
-    username: string;
-    email?: string;
-    providerUsername?: string;
-    displayName?: string;
-    expirationDate?: number;
-    invitedDate?: number;
-    provider?: AuthProvider;
-}
-
-export interface InviteByProvider {
-    id: string;
-    provider: AuthProvider;
-    providerUsername: string;
-    username?: string;
-    email?: string;
-    displayName?: string;
-    expirationDate?: number;
-    invitedDate?: number;
-}
-
-export type InviteModel = InviteByEmail | InviteByUsername | InviteByProvider;
 
 export interface CreateGroupOptions {
     canEditItself?: boolean;
