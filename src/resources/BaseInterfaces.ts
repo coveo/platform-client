@@ -26,3 +26,16 @@ export interface PrivilegeModel {
     targetId: string;
     type?: string;
 }
+
+export enum SortingOrder {
+    ASC = 'ASC',
+    DESC = 'DESC',
+}
+
+export enum FieldTypes {
+    LONG = 'LONG',
+    LONG_64 = 'LONG_64',
+    DOUBLE = 'DOUBLE',
+    DATE = 'DATE',
+    STRING = 'STRING',
+}

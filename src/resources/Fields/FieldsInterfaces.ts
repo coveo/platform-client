@@ -1,3 +1,5 @@
+import {FieldTypes, SortingOrder} from '../BaseInterfaces';
+
 export interface FieldModel {
     dateFormat?: string;
     description?: string;
@@ -21,17 +23,9 @@ export interface FieldModel {
     useCacheForSort?: boolean;
 }
 
-export enum FieldTypes {
-    LONG = 'LONG',
-    LONG_64 = 'LONG_64',
-    DOUBLE = 'DOUBLE',
-    DATE = 'DATE',
-    STRING = 'STRING',
-}
-
 export interface ListFieldsParams {
     filter?: string;
-    order?: 'ASC' | 'DESC';
+    order?: SortingOrder;
     origin?: 'ALL' | 'USER' | 'SYSTEM';
     page?: number;
     perPage?: number;
