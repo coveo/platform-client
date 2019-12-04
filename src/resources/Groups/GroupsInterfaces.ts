@@ -1,4 +1,5 @@
 import {AuthProvider, IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+import {RealmModel} from './Realms/GroupRealmInterfaces';
 
 export interface GroupModel {
     id: string;
@@ -55,13 +56,6 @@ export interface MemberModel {
     lastLogin?: number;
     provider?: AuthProvider;
     providerUsername?: string;
-}
-
-export interface RealmModel {
-    id: string;
-    provider: AuthProvider;
-    displayName: string;
-    samlIdentityProviderId?: string;
 }
 
 export interface CreateGroupOptions {
