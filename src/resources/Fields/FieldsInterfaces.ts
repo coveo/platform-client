@@ -1,4 +1,4 @@
-import {FieldTypes, SortingOrder} from '../BaseInterfaces';
+import {FieldTypes} from '../Enums';
 
 export interface FieldModel {
     dateFormat?: string;
