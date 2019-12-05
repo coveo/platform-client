@@ -1,9 +1,9 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
+import {ActivityOperation} from '../Enums';
 import Resource from '../Resource';
 import {ScheduleModel} from '../SecurityCache';
 import {
-    ActivityOperation,
     CreateSourceOptions,
     LightSourceModel,
     ListSourcesParams,
@@ -14,15 +14,11 @@ import {
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
 
-    list(params?: ListSourcesParams) {
-        return this.api.get<SourceModel[]>(this.buildPath(Sources.baseUrl, params));
-    }
-
     create(source: New<SourceModel, 'resourceId'>, options?: CreateSourceOptions) {
         return this.api.post<{id: string}>(this.buildPath(Sources.baseUrl, options), source);
     }
 
-    listWithPageInfo(params?: ListSourcesParams) {
+    list(params?: ListSourcesParams) {
         return this.api.get<PageModel<SourceModel>>(this.buildPath(`${Sources.baseUrl}/pages`, params));
     }
 

@@ -1,4 +1,36 @@
-import {FieldTypes, IdAndDisplayNameModel, SortingOrder} from '../BaseInterfaces';
+import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {
+    ActivityOperation,
+    AuthenticationActionMethod,
+    AuthenticationInputType,
+    DocumentPermissionState,
+    ExcerptSource,
+    ExtensionSettingAction,
+    ExtensionSettingActionOnError,
+    ExtensionSettingConverter,
+    FieldTypes,
+    FilterHostType,
+    FilterLastOperationResultType,
+    FilterLastOperationType,
+    FilterStatusType,
+    MappingModelKind,
+    OperationType,
+    PatternType,
+    PermissionIdentityType,
+    SecurityProviderReferenceType,
+    SecurityProviderType,
+    SinglePermissionIdentityType,
+    SinglePermissionResult,
+    SinglePermissionState,
+    SortingOrder,
+    SortingType,
+    SourceExtensionActionOnError,
+    SourceSecurityOption,
+    SourceStatusType,
+    SourceType,
+    SourceVisibility,
+    UrlFilterType,
+} from '../Enums';
 
 export interface SourceModel {
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
@@ -49,18 +81,18 @@ export interface MappingModel {
     fieldName?: string;
     fieldTypeHint?: FieldTypes;
     id?: string;
-    kind?: 'COMMON' | 'MAPPING';
+    kind?: MappingModelKind;
     type?: string;
 }
 
 export interface DocumentPermissionModel {
     lastUpdatedDate?: number;
     permissionLevels?: PermissionLevelModel[];
-    state?: 'UNKNOWN' | 'VALID' | 'PENDING' | 'INCOMPLETE' | 'IN_ERROR' | 'WARNING';
+    state?: DocumentPermissionState;
 }
 
 export interface SourceExtensionModel {
-    actionOnError?: 'REJECT_DOCUMENT' | 'SKIP_EXTENSION';
+    actionOnError?: SourceExtensionActionOnError;
     condition?: string;
     extensionId?: string;
     itemType?: string;
@@ -70,7 +102,7 @@ export interface SourceExtensionModel {
 
 export interface UrlFilter {
     filter?: string;
-    filterType?: 'WILDCARD' | 'REGEX';
+    filterType?: UrlFilterType;
     includeFilter?: boolean;
 }
 
@@ -115,94 +147,12 @@ export interface SinglePermissionModel {
     additionalInfo?: any;
     allowed?: boolean;
     identity?: string;
-    identityType?: 'USER' | 'GROUP' | 'VIRTUAL_GROUP' | 'UNKNOWN';
+    identityType?: SinglePermissionIdentityType;
     lastUpdateDate?: number;
     lastUpdateErrorDetail?: string;
-    lastUpdateResult?:
-        | 'NONE'
-        | 'SUCCESS'
-        | 'ACCESS_DENIED'
-        | 'TIMED_OUT'
-        | 'ENTITY_IS_INVALID'
-        | 'ENTITY_IS_UNAVAILABLE'
-        | 'SECURITY_PROVIDER_IS_UNAVAILABLE'
-        | 'SECURITY_PROVIDER_IS_UNREACHABLE'
-        | 'SECURITY_PROVIDER_IS_NOT_READY'
-        | 'UNEXPECTED_ERROR';
+    lastUpdateResult?: SinglePermissionResult;
     securityProvider?: string;
-    state?: 'UNKNOWN' | 'UP_TO_DATE' | 'NOT_UPDATED' | 'OUT_OF_DATE' | 'IN_ERROR' | 'DISABLED';
-}
-
-export enum OperationType {
-    REBUILD = 'REBUILD',
-    FULL_REFRESH = 'FULL_REFRESH',
-    INCREMENTAL_REFRESH = 'INCREMENTAL_REFRESH',
-    SECURITY_PROVIDER_REFRESH = 'SECURITY_PROVIDER_REFRESH',
-    SECURITY_PROVIDER_REFRESH_ENTITIES_IN_ERROR = 'SECURITY_PROVIDER_REFRESH_ENTITIES_IN_ERROR',
-    SECURITY_PROVIDER_REFRESH_ENTITIES_NOT_UPDATED = 'SECURITY_PROVIDER_REFRESH_ENTITIES_NOT_UPDATED',
-    SECURITY_CACHE_REFRESH = 'SECURITY_CACHE_REFRESH',
-    SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR = 'SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR',
-}
-
-export enum SourceStatusType {
-    CREATING = 'CREATING',
-    DISABLED = 'DISABLED',
-    REFRESHING = 'REFRESHING',
-    PAUSED = 'PAUSED',
-    PAUSED_ON_ERROR = 'PAUSED_ON_ERROR',
-    IDLE = 'IDLE',
-    ERROR = 'ERROR',
-    PUSH_READY = 'PUSH_READY',
-}
-
-export enum SourceType {
-    AMAZONS3 = 'AMAZONS3',
-    BOX = 'BOX',
-    BOX_ENTERPRISE = 'BOX_ENTERPRISE',
-    BOX_ENTERPRISE2 = 'BOX_ENTERPRISE2',
-    CONFLUENCE = 'CONFLUENCE',
-    CONFLUENCE2 = 'CONFLUENCE2',
-    CONFLUENCE2_HOSTED = 'CONFLUENCE2_HOSTED',
-    CUSTOM = 'CUSTOM',
-    DATABASE = 'DATABASE',
-    DROPBOX = 'DROPBOX',
-    DROPBOX_FOR_BUSINESS = 'DROPBOX_FOR_BUSINESS',
-    EXCHANGE = 'EXCHANGE',
-    EXCHANGE_ENTERPRISE = 'EXCHANGE_ENTERPRISE',
-    FILE = 'FILE',
-    GMAIL = 'GMAIL',
-    GMAIL_DOMAIN_WIDE = 'GMAIL_DOMAIN_WIDE',
-    GMAIL_SINGLE_USER = 'GMAIL_SINGLE_USER',
-    GENERIC = 'GENERIC_REST',
-    GOOGLE_DRIVE_DOMAIN_WIDE = 'GOOGLE_DRIVE_DOMAIN_WIDE',
-    GOOGLE_DRIVE_SINGLE_USER = 'GOOGLE_DRIVE_SINGLE_USER',
-    JIRA2 = 'JIRA2',
-    JIRA2_HOSTED = 'JIRA2_HOSTED',
-    JIVE = 'JIVE',
-    JIVE_HOSTED = 'JIVE_HOSTED',
-    LITHIUM = 'LITHIUM',
-    MICROSOFT = 'MICROSOFT_DYNAMICS',
-    ONEDRIVE = 'ONEDRIVE_FOR_BUSINESS',
-    OPENTEXT = 'OPENTEXT_CONTENT_SERVER',
-    PUSH = 'PUSH',
-    RSS = 'RSS',
-    SALESFORCE = 'SALESFORCE',
-    SERVICENOW = 'SERVICENOW',
-    SHAREPOINT = 'SHAREPOINT',
-    SHAREPOINT_ONLINE = 'SHAREPOINT_ONLINE',
-    SHAREPOINT_ONLINE2 = 'SHAREPOINT_ONLINE2',
-    SITECORE = 'SITECORE',
-    SITEMAP = 'SITEMAP',
-    TWITTER2 = 'TWITTER2',
-    WEB2 = 'WEB2',
-    YOUTUBE = 'YOUTUBE',
-    ZENDESK = 'ZENDESK',
-}
-
-export enum SourceVisibility {
-    PRIVATE = 'PRIVATE',
-    SECURED = 'SECURED',
-    SHARED = 'SHARED',
+    state?: SinglePermissionState;
 }
 
 export interface ListSourcesParams {
@@ -216,83 +166,6 @@ export interface ListSourcesParams {
     sortingOrder?: SortingOrder;
     sortingType?: SortingType;
     writeAccessOnly?: boolean;
-}
-
-export enum FilterHostType {
-    CLOUD = 'CLOUD',
-    CRAWLING_MODULE = 'CRAWLING_MODULE',
-    PUSH = 'PUSH',
-}
-
-export enum FilterLastOperationResultType {
-    SUCCESS = 'SUCCESS',
-    ERROR = 'ERROR',
-    ABORT = 'ABORT',
-}
-
-export enum FilterLastOperationType {
-    INCREMENTAL_REFRESH = 'INCREMENTAL_REFRESH',
-    FULL_REFRESH = 'FULL_REFRESH',
-    REBUILD = 'REBUILD',
-}
-
-export enum FilterStatusType {
-    CREATING = 'CREATING',
-    REFRESHING = 'REFRESHING',
-    PAUSED = 'PAUSED',
-    PAUSED_ON_ERROR = 'PAUSED_ON_ERROR',
-    IDLE = 'IDLE',
-    ERROR = 'ERROR',
-}
-
-export enum SortingType {
-    TYPE = 'TYPE',
-    NAME = 'NAME',
-    STATUS = 'STATUS',
-    CONTENT = 'CONTENT',
-}
-
-export enum ActivityOperation {
-    COMMIT = 'COMMIT',
-    CREATE = 'CREATE',
-    DELETE = 'DELETE',
-    DISABLE = 'DISABLE',
-    DUPLICATE = 'DUPLICATE',
-    ENABLE = 'ENABLE',
-    ENABLE_DISABLED_ENTITIES = 'ENABLE_DISABLED_ENTITIES',
-    UPDATE = 'UPDATE',
-    START = 'START',
-    STOP = 'STOP',
-    PAUSE = 'PAUSE',
-    PAUSE_ON_ERROR = 'PAUSE_ON_ERROR',
-    RESUME = 'RESUME',
-    SYNCHRONIZE = 'SYNCHRONIZE',
-    BACKUP = 'BACKUP',
-    REFRESH = 'REFRESH',
-    REFRESH_ENTITIES_IN_ERROR = 'REFRESH_ENTITIES_IN_ERROR',
-    REFRESH_ENTITIES_NOT_UPDATED = 'REFRESH_ENTITIES_NOT_UPDATED',
-    REFRESH_ENTITY = 'REFRESH_ENTITY',
-    RESIZE = 'RESIZE',
-    RESTORE = 'RESTORE',
-    IMPORT = 'IMPORT',
-    EXPORT = 'EXPORT',
-    CONFIG_CHANGE = 'CONFIG_CHANGE',
-    CONFIG_CREATE = 'CONFIG_CREATE',
-    CHANGE_READ_ONLY = 'CHANGE_READ_ONLY',
-    CHANGE_ONLINE = 'CHANGE_ONLINE',
-    TEST = 'TEST',
-    UPGRADE = 'UPGRADE',
-    SCHEDULE_CREATE = 'SCHEDULE_CREATE',
-    SCHEDULE_CHANGE = 'SCHEDULE_CHANGE',
-    SCHEDULE_DELETE = 'SCHEDULE_DELETE',
-    ORG_PROVISIONING_CHECK = 'ORG_PROVISIONING_CHECK',
-    REBUILD = 'REBUILD',
-    FULL_REFRESH = 'FULL_REFRESH',
-    INCREMENTAL_REFRESH = 'INCREMENTAL_REFRESH',
-    IDLE = 'IDLE',
-    REFRESH_CANCEL = 'REFRESH_CANCEL',
-    LIMIT_REACHED = 'LIMIT_REACHED',
-    SEARCH_CERTIFICATE_UPDATE = 'SEARCH_CERTIFICATE_UPDATE',
 }
 
 export interface CreateSourceOptions {
@@ -339,7 +212,7 @@ export interface ExtendedConfig {
     permissions?: PermissionLevel[];
     securityProviders?: Record<string, SecurityProvider>;
     sourceInformation?: SourceInformation;
-    sourceSecurityOption?: 'Retrieve' | 'Specified' | 'Merge';
+    sourceSecurityOption?: SourceSecurityOption;
     startingAddresses?: string[];
     userIdentities?: Record<string, UserIdentityModel>;
 }
@@ -364,11 +237,11 @@ export interface SecurityProviderModel {
 export interface AddressPattern {
     allowed?: boolean;
     expression?: string;
-    patternType?: 'Wildcard' | 'RegEx';
+    patternType?: PatternType;
 }
 
 export interface FormAuthentication {
-    actionMethod?: 'Post' | 'Get';
+    actionMethod?: AuthenticationActionMethod;
     actionURL?: string;
     formURL?: string;
     inputs?: FormAuthenticationInput[];
@@ -378,7 +251,7 @@ export interface FormAuthentication {
 
 export interface FormAuthenticationInput {
     name?: string;
-    type?: 'Text' | 'Password' | 'Checkbox' | 'Radio' | 'Submit' | 'Reset' | 'File' | 'Hidden' | 'Image' | 'Button';
+    type?: AuthenticationInputType;
     value?: string;
 }
 
@@ -428,11 +301,6 @@ export interface DocumentProcessorConfig {
     xmlrecordDefinitions?: XMLRecordDefinition[];
 }
 
-export enum ExcerptSource {
-    Document = 'Document',
-    Summary = 'Summary',
-}
-
 export interface DocumentProcessor {
     parameters?: DocumentProcessorParameters;
     type?: string;
@@ -462,26 +330,10 @@ export interface ExtensionSettingByExtension {
 }
 
 export interface ExtensionSetting {
-    action?: 'Retrieve' | 'Reference' | 'Ignore';
-    actionOnError?: 'Reference' | 'Ignore';
+    action?: ExtensionSettingAction;
+    actionOnError?: ExtensionSettingActionOnError;
     convertDirectlyToHtml?: boolean;
-    converter?:
-        | 'Detect'
-        | 'Skip'
-        | 'Html'
-        | 'IFilter'
-        | 'Wordperfect'
-        | 'Rtf'
-        | 'Excel'
-        | 'Word'
-        | 'Pdf'
-        | 'Powerpoint'
-        | 'PlainText'
-        | 'Zip'
-        | 'Xml'
-        | 'Msg'
-        | 'Mime'
-        | 'Image';
+    converter?: ExtensionSettingConverter;
     customConverter?: DocumentProcessor;
     excerptSource?: ExcerptSource;
     fileTypeValue?: string;
@@ -544,7 +396,7 @@ export interface PermissionSet {
 export interface Permission {
     additionalInfo?: any;
     identity?: string;
-    identityType?: 'Unknown' | 'User' | 'Group' | 'VirtualGroup';
+    identityType?: PermissionIdentityType;
     securityProvider?: string;
 }
 
@@ -556,7 +408,7 @@ export interface SecurityProvider {
 export interface SecurityProviderReferenceModel {
     attributes?: any;
     id?: string;
-    type?: 'SOURCE' | 'SECURITY_PROVIDER';
+    type?: SecurityProviderReferenceType;
 }
 
 export interface UserIdentityModel {
@@ -570,30 +422,6 @@ export interface CascadingSecurityProvider {
     name?: string;
     type?: SecurityProviderType;
     typeName?: string;
-}
-
-export enum SecurityProviderType {
-    ACTIVE_DIRECTORY = 'ACTIVE_DIRECTORY',
-    BOX = 'BOX',
-    CLAIMS = 'CLAIMS',
-    CLAIMS_TO_EMAIL = 'CLAIMS_TO_EMAIL',
-    CONFLUENCE = 'CONFLUENCE',
-    CONFLUENCE2 = 'CONFLUENCE2',
-    CUSTOM = 'CUSTOM',
-    DROPBOX_FOR_BUSINESS = 'DROPBOX_FOR_BUSINESS',
-    EMAIL = 'EMAIL',
-    EXPANDED = 'EXPANDED',
-    GOOGLE_DRIVE_DOMAIN_WIDE = 'GOOGLE_DRIVE_DOMAIN_WIDE',
-    JIRA2 = 'JIRA2',
-    JIVE = 'JIVE',
-    MICROSOFT_DYNAMICS = 'MICROSOFT_DYNAMICS',
-    OFFICE365 = 'OFFICE365',
-    OPENTEXT_CONTENT_SERVER = 'OPENTEXT_CONTENT_SERVER',
-    SALESFORCE = 'SALESFORCE',
-    SHAREPOINT = 'SHAREPOINT',
-    SHAREPOINT_ONLINE = 'SHAREPOINT_ONLINE',
-    SITECORE = 'SITECORE',
-    ZENDESK = 'ZENDESK',
 }
 
 export interface LightSourceModel {

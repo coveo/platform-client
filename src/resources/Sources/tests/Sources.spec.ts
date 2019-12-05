@@ -1,8 +1,9 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
+import {ActivityOperation} from '../../Enums';
 import {ScheduleModel} from '../../SecurityCache';
 import Sources from '../Sources';
-import {ActivityOperation, RawSourceConfig, SourceModel} from '../SourcesInterfaces';
+import {RawSourceConfig, SourceModel} from '../SourcesInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -17,14 +18,6 @@ describe('Sources', () => {
         source = new Sources(api);
     });
 
-    describe('list', () => {
-        it('should make a GET call to the Sources base url', () => {
-            source.list();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(Sources.baseUrl);
-        });
-    });
-
     describe('create', () => {
         it('should make a POST call to the Sources base url', () => {
             const sourceModel: New<SourceModel> = {};
@@ -35,9 +28,9 @@ describe('Sources', () => {
         });
     });
 
-    describe('listWithPageInfo', () => {
+    describe('list', () => {
         it('should make a GET call to the specific Sources url', () => {
-            source.listWithPageInfo();
+            source.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/pages`);
         });
