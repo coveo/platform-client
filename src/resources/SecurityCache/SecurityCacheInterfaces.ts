@@ -1,3 +1,5 @@
+import {ScheduleType, SecurityCacheStateOptions} from '../Enums';
+
 export interface ScheduleModel {
     enabled: boolean;
     frequency?: ScheduleFrequency;
@@ -135,21 +137,4 @@ export interface SecurityCacheListOptions {
 export interface SecurityCacheMemberInfoModel {
     key: string;
     value: string;
-}
-
-export enum SecurityCacheStateOptions {
-    Unknown = 'UNKNOWN',
-    UpToDate = 'UP_TO_DATE',
-    NotUpdated = 'NOT_UPDATED',
-    OutOfDate = 'OUT_OF_DATE',
-    InError = 'IN_ERROR',
-    Disabled = 'DISABLED',
-}
-
-export enum ScheduleType {
-    Minutely = 'MINUTELY',
-    Hourly = 'HOURLY',
-    Daily = 'DAILY',
-    Weekly = 'WEEKLY',
-    Monthly = 'MONTHLY',
 }
