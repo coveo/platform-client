@@ -14,11 +14,19 @@ describe('Pipelines', () => {
         pipelines = new Pipelines(api);
     });
 
+    describe('listBasicInfo', () => {
+        it('should make a GET call to the specific Pipelines url', () => {
+            pipelines.listBasicInfo();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Pipelines.getBaseUrl()}`);
+        });
+    });
+
     describe('getBackendVersion', () => {
         it('should make a GET call to the specific Pipelines url', () => {
             pipelines.getBackendVersion();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Pipelines.baseUrl}/ml/version`);
+            expect(api.get).toHaveBeenCalledWith(`${Pipelines.getBaseUrl(2)}/ml/version`);
         });
     });
 });
