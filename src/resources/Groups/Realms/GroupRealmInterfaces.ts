@@ -1,4 +1,4 @@
-import {AuthProvider} from '../../BaseInterfaces';
+import {AuthProvider} from '../../Enums';
 
 export interface RealmModel {
     id: string;

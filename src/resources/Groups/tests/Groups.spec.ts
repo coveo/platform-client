@@ -2,6 +2,8 @@ import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Group from '../Groups';
 import {GroupModel} from '../GroupsInterfaces';
+import GroupInvite from '../Invites/GroupInvite';
+import GroupMember from '../Members/GroupMember';
 import GroupRealm from '../Realms/GroupRealm';
 
 jest.mock('../../../APICore');
@@ -71,5 +73,15 @@ describe('Group', () => {
     it('should register the realm resource', () => {
         expect(group.realm).toBeDefined();
         expect(group.realm).toBeInstanceOf(GroupRealm);
+    });
+
+    it('should register the member resource', () => {
+        expect(group.member).toBeDefined();
+        expect(group.member).toBeInstanceOf(GroupMember);
+    });
+
+    it('should register the invite resource', () => {
+        expect(group.invite).toBeDefined();
+        expect(group.invite).toBeInstanceOf(GroupInvite);
     });
 });

@@ -1,5 +1,5 @@
 import API from '../../../../APICore';
-import {AuthProvider} from '../../../BaseInterfaces';
+import {AuthProvider} from '../../../Enums';
 import GroupRealm from '../GroupRealm';
 import {RealmModel} from '../GroupRealmInterfaces';
 
