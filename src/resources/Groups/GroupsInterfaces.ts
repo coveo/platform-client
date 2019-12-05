@@ -1,4 +1,5 @@
-import {AuthProvider, IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+import {IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+import {AuthProvider} from '../Enums';
 import {RealmModel} from './Realms/GroupRealmInterfaces';
 
 export interface GroupModel {

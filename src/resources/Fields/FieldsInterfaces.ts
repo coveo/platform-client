@@ -1,3 +1,5 @@
+import {FieldTypes} from '../Enums';
+
 export interface FieldModel {
     dateFormat?: string;
     description?: string;
@@ -19,14 +21,6 @@ export interface FieldModel {
     useCacheForNestedQuery?: boolean;
     useCacheForNumericQuery?: boolean;
     useCacheForSort?: boolean;
-}
-
-export enum FieldTypes {
-    LONG = 'LONG',
-    LONG_64 = 'LONG_64',
-    DOUBLE = 'DOUBLE',
-    DATE = 'DATE',
-    STRING = 'STRING',
 }
 
 export interface ListFieldsParams {
