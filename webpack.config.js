@@ -6,7 +6,7 @@ module.exports = (env, argv) => {
     const production = argv.mode === 'production';
 
     return {
-        entry: './src/PlatformClient.ts',
+        entry: './src/Entry.ts',
         devtool: production ? 'source-map' : 'inline-source-map',
         output: {
             filename: 'index.js',
