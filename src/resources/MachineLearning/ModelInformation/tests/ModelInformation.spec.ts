@@ -1,4 +1,5 @@
 import API from '../../../../APICore';
+import {IntervalUnit} from '../../../Enums';
 import {RegistrationModel} from '../../MachineLearningInterfaces';
 import ModelInformation from '../ModelInformation';
 
@@ -46,7 +47,7 @@ describe('ModelInformation', () => {
                 modelName: 'mini model',
                 exportPeriod: 'XYZ',
                 intervalTime: 999,
-                intervalUnit: 'WEEK',
+                intervalUnit: IntervalUnit.WEEK,
             };
 
             modelInfo.update(engineId, modelName, modelInformation);

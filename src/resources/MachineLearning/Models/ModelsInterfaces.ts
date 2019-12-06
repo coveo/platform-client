@@ -1,4 +1,5 @@
 import {IdAndDisplayNameModel} from '../../BaseInterfaces';
+import {IntervalUnit, ModelStatus} from '../../Enums';
 import {AssociatedPipelineModel} from '../../Pipelines';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
@@ -19,23 +20,10 @@ export interface MLModel extends MLModelInfo, ModelAttributes {
     modelErrorDescription?: ModelErrorDescription;
     previousModelUpdateTime?: number;
     intervalTime: number;
-    intervalUnit: 'DAY' | 'WEEK' | 'MONTH';
+    intervalUnit: IntervalUnit;
     exportPeriod: string;
     exportOffset?: string;
-    status:
-        | 'DELETED'
-        | 'SCHEDULING'
-        | 'SCHEDULED'
-        | 'ERROR'
-        | 'PENDING'
-        | 'REGISTERED'
-        | 'PAUSED'
-        | 'REGISTERING'
-        | 'IN_PROGRESS'
-        | 'ERROR_DELETING'
-        | 'ONLINE'
-        | 'OFFLINE'
-        | 'IN_CREATION';
+    status: ModelStatus;
     commandLineParameters?: string[];
     commonFilter?: string;
     customEventFilter?: string;

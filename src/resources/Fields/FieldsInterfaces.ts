@@ -1,4 +1,4 @@
-import {FieldTypes} from '../Enums';
+import {FieldOrigin, FieldTypes, SortingOrder} from '../Enums';
 
 export interface FieldModel {
     dateFormat?: string;
@@ -25,8 +25,8 @@ export interface FieldModel {
 
 export interface ListFieldsParams {
     filter?: string;
-    order?: 'ASC' | 'DESC';
-    origin?: 'ALL' | 'USER' | 'SYSTEM';
+    order?: SortingOrder;
+    origin?: FieldOrigin;
     page?: number;
     perPage?: number;
     sortBy?: string;

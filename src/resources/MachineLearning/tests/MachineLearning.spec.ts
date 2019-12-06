@@ -1,4 +1,5 @@
 import API from '../../../APICore';
+import {IntervalUnit} from '../../Enums';
 import MachineLearning from '../MachineLearning';
 import {RegistrationModel} from '../MachineLearningInterfaces';
 
@@ -22,7 +23,7 @@ describe('MachineLearning', () => {
                 modelName: 'super model',
                 exportPeriod: 'ABC',
                 intervalTime: 666,
-                intervalUnit: 'DAY',
+                intervalUnit: IntervalUnit.DAY,
             };
 
             ml.register(registration);

@@ -1,4 +1,5 @@
 import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {IntervalUnit} from '../Enums';
 import {MLModel} from './Models/ModelsInterfaces';
 
 export interface RegistrationModel {
@@ -7,7 +8,7 @@ export interface RegistrationModel {
     modelDisplayName?: string;
     exportPeriod: string;
     intervalTime: number;
-    intervalUnit: 'DAY' | 'WEEK' | 'MONTH';
+    intervalUnit: IntervalUnit;
     exportOffset?: string;
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
     groupsThatCanEdit?: IdAndDisplayNameModel[];
