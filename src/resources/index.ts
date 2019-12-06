@@ -1,4 +1,5 @@
 export * from './BaseInterfaces';
+export * from './Enums';
 export * from './PlatformResources';
 export * from './AWS';
 export * from './Catalogs';

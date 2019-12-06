@@ -12,7 +12,7 @@ export default class API {
     }
 
     get organizationId() {
-        return this.config.organizationId;
+        return this.config.organizationIdRetriever?.() || this.config.organizationId;
     }
 
     async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
@@ -63,7 +63,7 @@ export default class API {
     }
 
     private getUrlFromRoute(route: string): string {
-        return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.config.organizationId);
+        return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
     private async request<T>(route: string, args: RequestInit): Promise<T> {
