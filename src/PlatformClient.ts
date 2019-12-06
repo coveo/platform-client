@@ -1,5 +1,3 @@
-import './resources/Enums';
-
 import API from './APICore';
 import {APIConfiguration, PlatformClientOptions} from './ConfigurationInterfaces';
 import {HostUndefinedError} from './Errors';
