@@ -23,7 +23,7 @@ describe('MachineLearning', () => {
                 modelName: 'super model',
                 exportPeriod: 'ABC',
                 intervalTime: 666,
-                intervalUnit: 'DAY' as IntervalUnit,
+                intervalUnit: IntervalUnit.DAY,
             };
 
             ml.register(registration);

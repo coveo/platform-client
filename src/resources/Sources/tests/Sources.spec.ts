@@ -191,7 +191,7 @@ describe('Sources', () => {
     describe('setPushRefreshStatus', () => {
         it('should make a POST call to the specific Sources url', () => {
             const sourceId = '🐶';
-            const activityOperation = 'REBUILD' as ActivityOperation;
+            const activityOperation = ActivityOperation.REBUILD;
 
             source.setPushRefreshStatus(sourceId, activityOperation);
             expect(api.post).toHaveBeenCalledTimes(1);

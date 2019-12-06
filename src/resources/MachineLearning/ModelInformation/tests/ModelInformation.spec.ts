@@ -47,7 +47,7 @@ describe('ModelInformation', () => {
                 modelName: 'mini model',
                 exportPeriod: 'XYZ',
                 intervalTime: 999,
-                intervalUnit: 'WEEK' as IntervalUnit,
+                intervalUnit: IntervalUnit.WEEK,
             };
 
             modelInfo.update(engineId, modelName, modelInformation);
