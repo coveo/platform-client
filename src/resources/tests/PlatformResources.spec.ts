@@ -9,6 +9,7 @@ import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
+import Saml from '../Saml/Saml';
 import SecurityCache from '../SecurityCache/SecurityCache';
 import Sources from '../Sources/Sources';
 
@@ -108,6 +109,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.field).toBeDefined();
             expect(platformResources.field).toBeInstanceOf(Field);
+        });
+
+        it('should register the saml resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.saml).toBeDefined();
+            expect(platformResources.saml).toBeInstanceOf(Saml);
         });
     });
 });
