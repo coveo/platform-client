@@ -15,3 +15,4 @@ export * from './MachineLearning';
 export * from './Pipelines';
 export * from './Sources';
 export * from './Fields';
+export * from './Saml';
