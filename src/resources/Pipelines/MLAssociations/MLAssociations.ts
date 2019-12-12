@@ -13,7 +13,9 @@ export default class MLAssociations extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/ml/model/associations`;
 
     list(pipelineId: string, options?: ListAssociationsParams) {
-        return this.api.get<AssociationsListModel>(this.buildPath(MLAssociations.getBaseUrl(pipelineId), options));
+        return this.api.get<AssociationsListModel>(
+            this.buildPath(MLAssociations.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options})
+        );
     }
 
     associate(pipelineId: string, options: CreateAssociation) {
