@@ -1,9 +1,9 @@
 import {IAPI} from '../APICore';
 
 export interface IAPIHooks {
-    beforeAnyRequest?: (url: string, args: RequestInit) => void;
-    afterAnySuccess?: <T>(url: string, args: RequestInit, response: T) => T;
-    afterAnyException?: (url: string, args: RequestInit, exception: Error) => boolean;
+    beforeRequest?: (url: string, args: RequestInit) => void;
+    afterSuccess?: <T>(url: string, args: RequestInit, response: T) => T;
+    afterException?: (url: string, args: RequestInit, exception: Error) => boolean;
 }
 
 export class APIWithHooks<TAPI extends IAPI = IAPI> implements IAPI {
@@ -46,14 +46,14 @@ export class APIWithHooks<TAPI extends IAPI = IAPI> implements IAPI {
     }
 
     private async wrapInGenericHandler<T>(url: string, args: RequestInit, request: () => Promise<T>) {
-        this.hooks.beforeAnyRequest?.(url, args);
+        this.hooks.beforeRequest?.(url, args);
 
         try {
             const response = await request();
-            this.hooks.afterAnySuccess?.<T>(url, args, response);
+            this.hooks.afterSuccess?.<T>(url, args, response);
             return response;
         } catch (exception) {
-            if (!this.hooks.afterAnyException?.(url, args, exception)) {
+            if (!this.hooks.afterException?.(url, args, exception)) {
                 throw exception;
             }
         }

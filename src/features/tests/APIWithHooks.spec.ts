@@ -30,13 +30,13 @@ describe('APIWithHooks', () => {
         api = mockApi();
     });
 
-    describe('with beforeAnyRequest hook', () => {
+    describe('with beforeRequest hook', () => {
         const beforeMock = jest.fn();
         let apiWithHooks: APIWithHooks;
 
         beforeEach(() => {
             apiWithHooks = new APIWithHooks(api, {
-                beforeAnyRequest: beforeMock,
+                beforeRequest: beforeMock,
             });
         });
 
@@ -76,13 +76,13 @@ describe('APIWithHooks', () => {
         });
     });
 
-    describe('with afterAnySuccess hook', () => {
+    describe('with afterSuccess hook', () => {
         const afterMock = jest.fn();
         let apiWithHooks: APIWithHooks;
 
         beforeEach(() => {
             apiWithHooks = new APIWithHooks(api, {
-                afterAnySuccess: afterMock,
+                afterSuccess: afterMock,
             });
         });
 
@@ -130,7 +130,7 @@ describe('APIWithHooks', () => {
         });
     });
 
-    describe('with afterAnyException hook', () => {
+    describe('with afterException hook', () => {
         // Exception is handled
         const afterExceptionMock = jest.fn().mockReturnValue(true);
         const someError = 'ohno';
@@ -138,7 +138,7 @@ describe('APIWithHooks', () => {
 
         beforeEach(() => {
             apiWithHooks = new APIWithHooks(api, {
-                afterAnyException: afterExceptionMock,
+                afterException: afterExceptionMock,
             });
         });
 
@@ -227,20 +227,20 @@ describe('APIWithHooks', () => {
 
         beforeEach(() => {
             apiWithHooks = new APIWithHooks(api, {
-                beforeAnyRequest: beforeMock,
-                afterAnySuccess: afterMock,
-                afterAnyException: afterExceptionMock,
+                beforeRequest: beforeMock,
+                afterSuccess: afterMock,
+                afterException: afterExceptionMock,
             });
         });
 
-        it('should only call beforeAnyRequest and afterAnySuccess on get success', async () => {
+        it('should only call beforeRequest and afterSuccess on get success', async () => {
             await apiWithHooks.get(urls.get, someGenericArgs);
 
             assertInvocationInOrder(beforeMock, api.get as jest.Mock, afterMock);
             expect(afterExceptionMock).not.toHaveBeenCalled();
         });
 
-        it('should call only beforeAnyRequest and afterAnyException on get error', async () => {
+        it('should call only beforeRequest and afterException on get error', async () => {
             api.get.mockRejectedValue(someError);
 
             await apiWithHooks.get(urls.get, someGenericArgs);

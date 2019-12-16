@@ -47,11 +47,11 @@ export class PlatformClient extends PlatformResources {
     }
 
     withFeatures(...features: IAPIFeature[]): this {
-        const newInstance = Object.create(this) as this;
-        return newInstance.constructor({
+        const type = this.constructor as typeof PlatformClient;
+        return new type({
             ...this.options,
             apiFeatures: [...(this.options.apiFeatures || []), ...features],
-        } as PlatformClientOptions);
+        } as PlatformClientOptions) as this;
     }
 
     async initialize() {

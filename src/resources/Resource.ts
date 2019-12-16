@@ -8,8 +8,8 @@ class Resource {
 
     withFeatures(...features: IAPIFeature[]): this {
         const apiWithAllFeatures = features.reduce((acc, current) => current(acc), this.api);
-        const newInstance = Object.create(this) as this;
-        return newInstance.constructor(apiWithAllFeatures);
+        const type = this.constructor as typeof Resource;
+        return new type(apiWithAllFeatures) as this;
     }
 
     protected buildPath(route: string, parameters: object): string {
