@@ -1,9 +1,10 @@
-import {PageModel} from '../BaseInterfaces';
+import API from '../../APICore';
+import {PageModel, PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {CreateOrganizationOptions, ListOrganizationOptions, OrganizationModel} from './OrganizationInterfaces';
 
 export default class Organization extends Resource {
-    static baseUrl = '/rest/organizations/';
+    static baseUrl = '/rest/organizations';
 
     list(options?: ListOrganizationOptions) {
         return this.api.get<PageModel<OrganizationModel>>(this.buildPath(Organization.baseUrl, options));
@@ -23,5 +24,17 @@ export default class Organization extends Resource {
 
     update(organization: Partial<OrganizationModel>) {
         return this.api.put<OrganizationModel>(`${Organization.baseUrl}/${organization.id}`, organization);
+    }
+
+    listPrivileges() {
+        return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges`);
+    }
+
+    listMyPrivileges() {
+        return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/me`);
+    }
+
+    listApiKeysPrivileges() {
+        return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/apikeys`);
     }
 }
