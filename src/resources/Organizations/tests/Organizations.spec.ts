@@ -62,4 +62,28 @@ describe('Organization', () => {
             expect(api.put).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationModel.id}`, organizationModel);
         });
     });
+
+    describe('listPrivileges', () => {
+        it('should make a GET call /rest/organizations/{organizationName}/privileges', () => {
+            organization.listPrivileges();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/privileges');
+        });
+    });
+
+    describe('listMyPrivileges', () => {
+        it('should make a GET call /rest/organizations/{organizationName}/privileges/me', () => {
+            organization.listMyPrivileges();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/privileges/me');
+        });
+    });
+
+    describe('listApiKeysPrivileges', () => {
+        it('should make a GET call /rest/organizations/{organizationName}/privileges/apikeys', () => {
+            organization.listApiKeysPrivileges();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/privileges/apikeys');
+        });
+    });
 });
