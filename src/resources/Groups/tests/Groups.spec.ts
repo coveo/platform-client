@@ -70,6 +70,17 @@ describe('Group', () => {
         });
     });
 
+    describe('listExclusivePrivileges', () => {
+        it('should make a GET call to the /groups/{groupId}/privileges/exclusive/me', () => {
+            group.listExclusivePrivileges('💎');
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/organizations/{organizationName}/groups/💎/privileges/exclusive/me'
+            );
+        });
+    });
+
     it('should register the realm resource', () => {
         expect(group.realm).toBeDefined();
         expect(group.realm).toBeInstanceOf(GroupRealm);

@@ -1,5 +1,5 @@
 import API from '../../APICore';
-import {New} from '../BaseInterfaces';
+import {New, PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {CreateGroupOptions, GroupModel, UpdateGroupOptions} from './GroupsInterfaces';
 import GroupInvite from './Invites/GroupInvite';
@@ -39,5 +39,9 @@ export default class Group extends Resource {
 
     update(group: GroupModel, options?: UpdateGroupOptions) {
         return this.api.put(this.buildPath(`${Group.baseUrl}/${group.id}`, options), group);
+    }
+
+    listExclusivePrivileges(groupId: string) {
+        return this.api.get<PrivilegeModel[]>(`${Group.baseUrl}/${groupId}/privileges/exclusive/me`);
     }
 }
