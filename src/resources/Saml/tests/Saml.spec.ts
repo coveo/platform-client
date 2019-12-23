@@ -33,31 +33,31 @@ describe('Saml', () => {
     });
 
     describe('getProvider', () => {
-        it('should make a GET call to "/saml/identityProvider"', () => {
+        it('should make a GET call to "/saml/identityprovider"', () => {
             saml.getProvider();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityProvider');
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityprovider');
         });
     });
 
     describe('listRealms', () => {
-        it('should make a GET call to "/saml/identityProvider/realms"', () => {
+        it('should make a GET call to "/saml/identityprovider/realms"', () => {
             saml.listRealms();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityProvider/realms');
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityprovider/realms');
         });
     });
 
     describe('deleteProvdier', () => {
-        it('should make a DELETE call to "/saml/identityProvider"', () => {
+        it('should make a DELETE call to "/saml/identityprovider"', () => {
             saml.deleteProvider();
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityProvider');
+            expect(api.delete).toHaveBeenCalledWith('/rest/organizations/{organizationName}/saml/identityprovider');
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to "/saml/identityProvider"', () => {
+        it('should make a POST call to "/saml/identityprovider"', () => {
             const provider: New<SamlIdentityProviderModel> = {
                 displayName: 'My SAML SSO',
                 entityId: 'whatever',
@@ -69,14 +69,14 @@ describe('Saml', () => {
             saml.create(provider);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                '/rest/organizations/{organizationName}/saml/identityProvider',
+                '/rest/organizations/{organizationName}/saml/identityprovider',
                 provider
             );
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to "/saml/identityProvider"', () => {
+        it('should make a PUT call to "/saml/identityprovider"', () => {
             const provider: SamlIdentityProviderModel = {
                 id: '123-abc',
                 displayName: 'My SAML SSO',
@@ -89,7 +89,7 @@ describe('Saml', () => {
             saml.update(provider);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                '/rest/organizations/{organizationName}/saml/identityProvider',
+                '/rest/organizations/{organizationName}/saml/identityprovider',
                 provider
             );
         });

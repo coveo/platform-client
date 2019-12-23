@@ -16,22 +16,22 @@ export default class Saml extends Resource {
     }
 
     deleteProvider() {
-        return this.api.delete(`${Saml.baseUrl}/identityProvider`);
+        return this.api.delete(`${Saml.baseUrl}/identityprovider`);
     }
 
     getProvider() {
-        return this.api.get<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityProvider`);
+        return this.api.get<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityprovider`);
     }
 
     create(identityProvider: New<SamlIdentityProviderModel>) {
-        return this.api.post<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityProvider`, identityProvider);
+        return this.api.post<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityprovider`, identityProvider);
     }
 
     update(identityProvider: SamlIdentityProviderModel) {
-        return this.api.put<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityProvider`, identityProvider);
+        return this.api.put<SamlIdentityProviderModel>(`${Saml.baseUrl}/identityprovider`, identityProvider);
     }
 
     listRealms() {
-        return this.api.get<RealmModel[]>(`${Saml.baseUrl}/identityProvider/realms`);
+        return this.api.get<RealmModel[]>(`${Saml.baseUrl}/identityprovider/realms`);
     }
 }
