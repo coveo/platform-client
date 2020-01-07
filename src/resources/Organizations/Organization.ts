@@ -1,7 +1,13 @@
 import API from '../../APICore';
 import {PageModel, PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CreateOrganizationOptions, ListOrganizationOptions, OrganizationModel} from './OrganizationInterfaces';
+import {
+    CreateOrganizationOptions,
+    GetOrganizationOptions,
+    ListOrganizationOptions,
+    OrganizationModel,
+    OrganizationsStatusModel,
+} from './OrganizationInterfaces';
 
 export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
@@ -18,12 +24,16 @@ export default class Organization extends Resource {
         return this.api.delete(`${Organization.baseUrl}/${organizationId}`);
     }
 
-    get(organizationId: string) {
-        return this.api.get<OrganizationModel>(`${Organization.baseUrl}/${organizationId}`);
+    get(organizationId: string, options?: GetOrganizationOptions) {
+        return this.api.get<OrganizationModel>(this.buildPath(`${Organization.baseUrl}/${organizationId}`, options));
     }
 
     update(organization: Partial<OrganizationModel>) {
         return this.api.put<OrganizationModel>(`${Organization.baseUrl}/${organization.id}`, organization);
+    }
+
+    status(organizationId: string = API.orgPlaceholder) {
+        return this.api.get<OrganizationsStatusModel>(`${Organization.baseUrl}/${organizationId}/status`);
     }
 
     listPrivileges() {

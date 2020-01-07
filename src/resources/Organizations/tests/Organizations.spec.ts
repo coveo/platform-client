@@ -48,6 +48,28 @@ describe('Organization', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationToGetId}`);
         });
+
+        it('should make a GET call with the specified options', () => {
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.get(organizationToGetId, {
+                additionalFields: 'status',
+            });
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status`
+            );
+        });
+
+        it('should make a GET call with the multiple additional fields', () => {
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.get(organizationToGetId, {
+                additionalFields: ['status', 'license'],
+            });
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status%2Clicense`
+            );
+        });
     });
 
     describe('update', () => {
@@ -60,6 +82,21 @@ describe('Organization', () => {
             organization.update(organizationModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationModel.id}`, organizationModel);
+        });
+    });
+
+    describe('status', () => {
+        it('should make a GET call to the specific Organization status url', () => {
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.status(organizationToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationToGetId}/status`);
+        });
+
+        it('should make a GET call to /rest/organizations/{organizationName}/status if the orgId is not specified', () => {
+            organization.status();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/status`);
         });
     });
 
