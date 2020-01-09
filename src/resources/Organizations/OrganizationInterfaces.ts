@@ -20,18 +20,24 @@ export interface OrganizationModel {
     id: string;
     displayName: string;
     createdDate: number;
-    license: LicenseModel;
-    organizationStatusModel: OrganizationsStatusModel;
     publicContentOnly: boolean;
     type: string;
     owner: {
         email: string;
     };
     readOnly: boolean;
+    license?: LicenseModel;
+    organizationStatusModel?: OrganizationsStatusModel;
+}
+
+export type AdditionalOrganizationField = 'status' | 'license' | string;
+
+export interface GetOrganizationOptions {
+    additionalFields?: AdditionalOrganizationField | AdditionalOrganizationField[];
 }
 
 export interface ListOrganizationOptions {
-    additionalFields?: string | string[];
+    additionalFields?: AdditionalOrganizationField | AdditionalOrganizationField[];
     filter?: string;
     order?: string;
     page?: number;
