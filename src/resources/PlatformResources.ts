@@ -1,4 +1,4 @@
-import API from '../APICore';
+import {IAPI} from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
@@ -33,7 +33,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
 ];
 
 class PlatformResources {
-    protected API: API;
+    protected API: IAPI;
 
     aws: AWS;
     catalog: Catalog;

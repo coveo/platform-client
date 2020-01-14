@@ -1,6 +1,7 @@
-import API from './APICore';
+import API, {IAPI} from './APICore';
 import {APIConfiguration, PlatformClientOptions} from './ConfigurationInterfaces';
 import {HostUndefinedError} from './Errors';
+import {IAPIFeature} from './features/APIFeature';
 import {ResponseHandlers} from './handlers/ResponseHandlers';
 import PlatformResources from './resources/PlatformResources';
 
@@ -38,8 +39,19 @@ export class PlatformClient extends PlatformResources {
             throw new HostUndefinedError();
         }
 
-        this.API = new API(this.apiConfiguration);
+        const api: IAPI = new API(this.apiConfiguration);
+        this.API = this.options.apiFeatures
+            ? this.options.apiFeatures.reduce((current, feature) => feature(current), api)
+            : api;
         this.registerAll();
+    }
+
+    withFeatures(...features: IAPIFeature[]): this {
+        const type = this.constructor as typeof PlatformClient;
+        return new type({
+            ...this.options,
+            apiFeatures: [...(this.options.apiFeatures || []), ...features],
+        } as PlatformClientOptions) as this;
     }
 
     async initialize() {
