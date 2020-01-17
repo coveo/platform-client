@@ -4,6 +4,7 @@ import Resource from '../../Resource';
 import {
     AdvancedRegistrationConfigFile,
     AdvancedRegistrationConfigFileCreationResponse,
+    ModelConfigurationUpdateArgs,
 } from './ModelConfigurationInterfaces';
 
 export default class ModelConfiguration extends Resource {
@@ -16,15 +17,12 @@ export default class ModelConfiguration extends Resource {
         );
     }
 
-    update(
-        modelId: string,
-        modelConfigFileType: ModelConfigFileType,
-        modelConfigFileContents: string,
-        languageCode?: string
-    ) {
+    update(modelId: string, modelConfigFileType: ModelConfigFileType, args: ModelConfigurationUpdateArgs) {
         return this.api.put<AdvancedRegistrationConfigFileCreationResponse>(
-            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode}),
-            modelConfigFileContents
+            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {
+                languageCode: args.languageCode,
+            }),
+            args.modelConfigFileContents
         );
     }
 }

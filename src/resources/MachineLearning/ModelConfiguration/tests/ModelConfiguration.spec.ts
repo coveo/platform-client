@@ -32,7 +32,7 @@ describe('ModelConfiguration', () => {
             const modelConfigFileType = ModelConfigFileType.FACET_ID_MAPPING;
             const modelConfigFileContents = '🦴🦴🦴';
 
-            modelConfig.update(modelId, modelConfigFileType, modelConfigFileContents);
+            modelConfig.update(modelId, modelConfigFileType, {modelConfigFileContents});
             expect(api.put).toBeCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ModelConfiguration.getBaseUrl(modelId, modelConfigFileType),

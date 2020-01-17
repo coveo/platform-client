@@ -13,3 +13,8 @@ export interface AdvancedRegistrationConfigFileCreationResponse {
     filePath?: Record<string, string>;
     modelId?: RegistrationId;
 }
+
+export interface ModelConfigurationUpdateArgs {
+    modelConfigFileContents: string;
+    languageCode?: string;
+}
