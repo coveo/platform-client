@@ -17,12 +17,14 @@ export default class ModelConfiguration extends Resource {
         );
     }
 
-    update(modelId: string, modelConfigFileType: ModelConfigFileType, args: ModelConfigurationUpdateArgs) {
+    update(
+        modelId: string,
+        modelConfigFileType: ModelConfigFileType,
+        {modelConfigFileContents, languageCode}: ModelConfigurationUpdateArgs
+    ) {
         return this.api.put<AdvancedRegistrationConfigFileCreationResponse>(
-            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {
-                languageCode: args.languageCode,
-            }),
-            args.modelConfigFileContents
+            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode}),
+            modelConfigFileContents
         );
     }
 }
