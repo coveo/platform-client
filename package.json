@@ -18,7 +18,8 @@
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
-        "release": "semantic-release"
+        "release": "semantic-release",
+        "commit-cli": "git-cz"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
@@ -46,8 +47,7 @@
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged",
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
     "lint-staged": {
