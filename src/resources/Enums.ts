@@ -375,3 +375,27 @@ export enum ModelConfigFileType {
     FACET_ID_MAPPING = 'FACET_ID_MAPPING',
     DEFAULT_QUERIES = 'DEFAULT_QUERIES',
 }
+
+export enum ProductType {
+    INTERNAL = 'INTERNAL',
+    SALES = 'SALES',
+    ALLIANCE = 'ALLIANCE',
+    SANDBOX = 'SANDBOX',
+    STANDARD = 'STANDARD',
+    TRIAL = 'TRIAL',
+}
+
+export enum ProductEdition {
+    ENTERPRISE = 'ENTERPRISE',
+    FREE = 'FREE',
+    PRO = 'PRO',
+}
+
+export enum ProductName {
+    COVEO_CLOUD = 'COVEO_CLOUD',
+    DYNAMICS = 'DYNAMICS',
+    SALESFORCE = 'SALESFORCE',
+    SERVICENOW = 'SERVICENOW',
+    SITECORE = 'SITECORE',
+    USAGE_ANALYTICS = 'USAGE_ANALYTICS',
+}
