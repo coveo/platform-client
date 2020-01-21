@@ -3,6 +3,10 @@ language: node_js
 node_js:
   - lts/*
 
+branches:
+    only:
+        - master
+
 stages:
   - analyse commits
   - test
