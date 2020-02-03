@@ -24,7 +24,8 @@ export default class ModelConfiguration extends Resource {
     ) {
         return this.api.put<AdvancedRegistrationConfigFileCreationResponse>(
             this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode}),
-            modelConfigFileContents
+            modelConfigFileContents,
+            {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'text/plain'}}
         );
     }
 }
