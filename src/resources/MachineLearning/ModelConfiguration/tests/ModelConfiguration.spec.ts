@@ -36,7 +36,8 @@ describe('ModelConfiguration', () => {
             expect(api.put).toBeCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ModelConfiguration.getBaseUrl(modelId, modelConfigFileType),
-                modelConfigFileContents
+                modelConfigFileContents,
+                {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'text/plain'}}
             );
         });
     });
