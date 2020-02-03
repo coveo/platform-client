@@ -14,6 +14,7 @@ import Resource from './Resource';
 import Saml from './Saml/Saml';
 import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
+import User from './Users/User';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
@@ -30,6 +31,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'source', resource: Sources},
     {key: 'field', resource: Field},
     {key: 'saml', resource: Saml},
+    {key: 'user', resource: User},
 ];
 
 class PlatformResources {
@@ -49,6 +51,7 @@ class PlatformResources {
     source: Sources;
     field: Field;
     saml: Saml;
+    user: User;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

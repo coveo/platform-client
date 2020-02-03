@@ -12,6 +12,7 @@ import PlatformResources from '../PlatformResources';
 import Saml from '../Saml/Saml';
 import SecurityCache from '../SecurityCache/SecurityCache';
 import Sources from '../Sources/Sources';
+import User from '../Users/User';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -117,6 +118,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.saml).toBeDefined();
             expect(platformResources.saml).toBeInstanceOf(Saml);
+        });
+
+        it('should register the user resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.user).toBeDefined();
+            expect(platformResources.user).toBeInstanceOf(User);
         });
     });
 });
