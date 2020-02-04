@@ -1,6 +1,7 @@
 import {APIConfiguration} from './ConfigurationInterfaces';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers} from './handlers/ResponseHandlers';
+import {UserModel} from './resources/Users';
 
 type APIPrototype = typeof API.prototype;
 export type IAPI = {[P in keyof APIPrototype]: APIPrototype[P]};
@@ -9,6 +10,7 @@ export default class API implements IAPI {
     static orgPlaceholder = '{organizationName}';
 
     private getRequestsController: AbortController;
+    private tokenInfo: Record<string, any>;
 
     constructor(private config: APIConfiguration) {
         this.getRequestsController = new AbortController();
@@ -58,6 +60,16 @@ export default class API implements IAPI {
     abortGetRequests(): void {
         this.getRequestsController.abort();
         this.getRequestsController = new AbortController();
+    }
+
+    async checkToken() {
+        const formData = new FormData();
+        formData.set('token', this.config.accessTokenRetriever());
+        this.tokenInfo = await this.postForm<any>('/oauth/check_token', formData);
+    }
+
+    get currentUser(): UserModel {
+        return this.tokenInfo?.authentication;
     }
 
     private get handlers(): ResponseHandler[] {

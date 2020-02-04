@@ -25,7 +25,6 @@ export class PlatformClient extends PlatformResources {
     };
 
     private options: PlatformClientOptions;
-    private tokenInfo: Record<string, any>; // define a better type
 
     constructor(options: PlatformClientOptions) {
         super();
@@ -55,11 +54,7 @@ export class PlatformClient extends PlatformResources {
     }
 
     async initialize() {
-        try {
-            this.tokenInfo = await this.checkToken();
-        } catch (err) {
-            throw new Error(err.message);
-        }
+        return this.API.checkToken();
     }
 
     abortPendingGetRequests() {
@@ -76,12 +71,6 @@ export class PlatformClient extends PlatformResources {
 
     private get host(): string {
         return this.options.host || PlatformClient.Hosts[this.options.environment];
-    }
-
-    private async checkToken() {
-        const formData = new FormData();
-        formData.set('token', this.options.accessTokenRetriever());
-        return this.API.postForm<any>('/oauth/check_token', formData);
     }
 }
 

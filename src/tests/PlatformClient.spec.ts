@@ -82,43 +82,6 @@ describe('PlatformClient', () => {
         expect(registerAllSpy).toHaveBeenCalledTimes(1);
     });
 
-    describe('initialize', () => {
-        const mockedFormData = {
-            set: jest.fn(),
-        };
-
-        beforeEach(() => {
-            (global as any).FormData = jest.fn(() => mockedFormData);
-        });
-
-        it('should check if the retrieved token is valid', async () => {
-            const platform = new PlatformClient(baseOptions);
-            const APIMockInstance = APIMock.mock.instances[0];
-
-            await platform.initialize();
-
-            expect(APIMockInstance.postForm).toHaveBeenCalledTimes(1);
-            expect(APIMockInstance.postForm).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
-            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.set).toHaveBeenCalledWith('token', baseOptions.accessTokenRetriever());
-        });
-
-        it('should throw an error if the check token call fails', async () => {
-            const platform = new PlatformClient(baseOptions);
-            const APIPostFormMock: jest.Mock<ReturnType<typeof API.prototype.postForm>> = APIMock.mock.instances[0]
-                .postForm as any;
-            APIPostFormMock.mockRejectedValue(new Error('invalid token'));
-
-            try {
-                await platform.initialize();
-            } catch (err) {
-                expect(err.message).toBe('invalid token');
-            }
-
-            expect.assertions(1);
-        });
-    });
-
     it('should abort get requests on the API instance', () => {
         const platform = new PlatformClient(baseOptions);
         const abortGetRequestsSpy = APIMock.mock.instances[0].abortGetRequests as jest.Mock<
@@ -128,6 +91,15 @@ describe('PlatformClient', () => {
         platform.abortPendingGetRequests();
 
         expect(abortGetRequestsSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should check the validity of the access token when initializing the platform client', () => {
+        const checkTokenSpy = jest.spyOn(API.prototype, 'checkToken');
+        const platform = new PlatformClient(baseOptions);
+
+        platform.initialize();
+
+        expect(checkTokenSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('withFeatures', () => {

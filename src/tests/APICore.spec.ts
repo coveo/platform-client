@@ -43,6 +43,8 @@ describe('APICore', () => {
                     await api.get(testData.route);
                 } catch (e) {
                     expect(e).toEqual(error);
+                } finally {
+                    expect.assertions(1);
                 }
             });
 
@@ -213,6 +215,51 @@ describe('APICore', () => {
             const api = new API({...testConfig, organizationIdRetriever: () => 'another-org-id'});
             expect(api.organizationId).not.toBe(testConfig.organizationId);
             expect(api.organizationId).toBe('another-org-id');
+        });
+    });
+
+    describe('checkToken', () => {
+        const mockedFormData = {
+            set: jest.fn(),
+        };
+
+        beforeEach(() => {
+            (global as any).FormData = jest.fn(() => mockedFormData);
+        });
+
+        it('should check if the retrieved token is valid', async () => {
+            const postFormSpy = jest.spyOn(API.prototype, 'postForm').mockResolvedValue(Promise.resolve());
+            const api = new API(testConfig);
+
+            await api.checkToken();
+
+            expect(postFormSpy).toHaveBeenCalledTimes(1);
+            expect(postFormSpy).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
+            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.set).toHaveBeenCalledWith('token', testConfig.accessTokenRetriever());
+        });
+
+        it('should throw an error if the check token call fails', async () => {
+            jest.spyOn(API.prototype, 'postForm').mockRejectedValue(new Error('invalid token'));
+            const api = new API(testConfig);
+
+            try {
+                await api.checkToken();
+            } catch (err) {
+                expect(err.message).toBe('invalid token');
+            } finally {
+                expect.assertions(1);
+            }
+        });
+
+        it('should store the token info returned by the promise', async () => {
+            const tokenInfo = {authentication: '💎', b: '🐟'};
+            jest.spyOn(API.prototype, 'postForm').mockResolvedValue(Promise.resolve(tokenInfo));
+
+            const api = new API(testConfig);
+
+            await api.checkToken();
+            expect(api.currentUser).toBe('💎');
         });
     });
 });
