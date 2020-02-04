@@ -1,4 +1,5 @@
 import {IAPI} from '../../APICore';
+import {UserModel} from '../../resources/Users';
 import {APIWithHooks} from '../APIWithHooks';
 
 jest.mock('../../APICore');
@@ -11,6 +12,8 @@ const mockApi = (): jest.Mocked<IAPI> => ({
     delete: jest.fn().mockImplementation(() => Promise.resolve({})),
     put: jest.fn().mockImplementation(() => Promise.resolve({})),
     abortGetRequests: jest.fn(),
+    checkToken: jest.fn().mockImplementation(() => Promise.resolve()),
+    currentUser: {} as UserModel,
 });
 
 describe('APIWithHooks', () => {

@@ -1,4 +1,5 @@
 import {IAPI} from '../APICore';
+import {UserModel} from '../resources/Users';
 
 export interface IAPIHooks {
     beforeRequest?: (url: string, args: RequestInit) => void;
@@ -43,6 +44,14 @@ export class APIWithHooks<TAPI extends IAPI = IAPI> implements IAPI {
 
     abortGetRequests(): void {
         this.api.abortGetRequests();
+    }
+
+    async checkToken() {
+        return this.api.checkToken();
+    }
+
+    get currentUser(): UserModel {
+        return this.api.currentUser;
     }
 
     private async wrapInGenericHandler<T>(url: string, args: RequestInit, request: () => Promise<T>) {

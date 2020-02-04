@@ -24,21 +24,38 @@ describe('User', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Organization url', () => {
-            const userModel = {
-                additionalInformation: {},
-                username: '🥕',
-                displayName: 'carrot',
-            } as UserModel;
+        const currentUser: UserModel = {
+            additionalInformation: {},
+            username: '🥕',
+        } as UserModel;
 
-            user.update('🥕', userModel);
+        beforeEach(() => {
+            Object.defineProperty(api, 'currentUser', {
+                get: jest.fn(() => currentUser),
+            });
+        });
+
+        it('should make a PUT call to the specific user url and extend existing current user attributes', () => {
+            const userModel: Partial<UserModel> = {
+                additionalInformation: {happy: true},
+                displayName: 'carrot',
+            };
+
+            user.update(userModel);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith('/rest/users/🥕', userModel);
+            expect(api.put).toHaveBeenCalledWith(
+                '/rest/users/🥕',
+                expect.objectContaining({
+                    additionalInformation: {happy: true},
+                    displayName: 'carrot',
+                    username: '🥕',
+                })
+            );
         });
     });
 
     describe('listRealms', () => {
-        it('should make a GET call /rest/organizations/{organizationName}/privileges', () => {
+        it('should make a GET call /rest/users/{username}/realms', () => {
             user.listRealms('🍪');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/users/🍪/realms');
