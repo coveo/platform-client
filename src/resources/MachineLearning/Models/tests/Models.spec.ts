@@ -31,10 +31,20 @@ describe('Models', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Models url', () => {
+        it('should make a GET call to the specific Model', () => {
             const modelId = 'O. O';
 
             models.get(modelId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Models.baseUrl}/${modelId}`);
+        });
+    });
+
+    describe('getDetails', () => {
+        it("should make a GET call to the specific Model's Details", () => {
+            const modelId = 'O. O';
+
+            models.getDetails(modelId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Models.baseUrl}/${modelId}/details`);
         });
