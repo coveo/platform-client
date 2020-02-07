@@ -14,8 +14,12 @@ export default class Models extends Resource {
         return this.api.get<MLModel[]>(`${Models.baseUrl}/details`);
     }
 
-    get(modelId: string) {
+    getDetails(modelId: string) {
         return this.api.get<MLModelInfo>(`${Models.baseUrl}/${modelId}/details`);
+    }
+
+    get(modelId: string) {
+        return this.api.get<MLModelInfo>(`${Models.baseUrl}/${modelId}`);
     }
 
     delete(modelId: string) {
