@@ -399,3 +399,8 @@ export enum ProductName {
     SITECORE = 'SITECORE',
     USAGE_ANALYTICS = 'USAGE_ANALYTICS',
 }
+
+export enum LanguageCode {
+    English = 'en',
+    French = 'fr',
+}
