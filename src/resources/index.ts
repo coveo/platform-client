@@ -12,6 +12,7 @@ export * from './License';
 export * from './Organizations';
 export * from './ApiKeys';
 export * from './MachineLearning';
+export * from './UsageAnalytics';
 export * from './Pipelines';
 export * from './Sources';
 export * from './Fields';

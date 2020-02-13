@@ -404,3 +404,9 @@ export enum LanguageCode {
     English = 'en',
     French = 'fr',
 }
+
+export enum TableauProjectName {
+    Homepage = 'homepage',
+    Dashboards = 'dashboards',
+    Components = 'components',
+}

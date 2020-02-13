@@ -12,6 +12,7 @@ import PlatformResources from '../PlatformResources';
 import Saml from '../Saml/Saml';
 import SecurityCache from '../SecurityCache/SecurityCache';
 import Sources from '../Sources/Sources';
+import UsageAnalytics from '../UsageAnalytics/UsageAnalytics';
 import User from '../Users/User';
 
 describe('PlatformResources', () => {
@@ -86,6 +87,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.ml).toBeDefined();
             expect(platformResources.ml).toBeInstanceOf(MachineLearning);
+        });
+
+        it('should register the ua resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.ua).toBeDefined();
+            expect(platformResources.ua).toBeInstanceOf(UsageAnalytics);
         });
 
         it('should register the pipeline resource on the platform instance', () => {

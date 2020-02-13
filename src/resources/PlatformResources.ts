@@ -14,6 +14,7 @@ import Resource from './Resource';
 import Saml from './Saml/Saml';
 import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
+import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
@@ -27,6 +28,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'securityCache', resource: SecurityCache},
     {key: 'apiKey', resource: ApiKey},
     {key: 'ml', resource: MachineLearning},
+    {key: 'ua', resource: UsageAnalytics},
     {key: 'pipeline', resource: Pipelines},
     {key: 'source', resource: Sources},
     {key: 'field', resource: Field},
@@ -46,6 +48,7 @@ class PlatformResources {
     index: Index;
     apiKey: ApiKey;
     ml: MachineLearning;
+    ua: UsageAnalytics;
     securityCache: SecurityCache;
     pipeline: Pipelines;
     source: Sources;
