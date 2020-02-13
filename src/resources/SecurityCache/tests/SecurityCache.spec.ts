@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import SecurityCache from '../SecurityCache';
+import {DetailedSecurityCacheMemberModel} from '../SecurityCacheInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -61,6 +62,23 @@ describe('securityCache', () => {
             securityCache.refreshProvider('PROVIDER_ID');
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/PROVIDER_ID/refresh`);
+        });
+
+        it('should make a POST call to the security Identity refresh url', () => {
+            const identityModel: DetailedSecurityCacheMemberModel = {
+                infos: [
+                    {
+                        key: '🗝',
+                        value: '💰',
+                    },
+                ],
+                name: '📜',
+                provider: '📥',
+                type: '⚥',
+            };
+            securityCache.refreshIdentity(identityModel);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh/entity`, identityModel);
         });
     });
 
