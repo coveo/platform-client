@@ -10,6 +10,7 @@ import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
 import Saml from '../Saml/Saml';
+import Search from '../Search/Search';
 import SecurityCache from '../SecurityCache/SecurityCache';
 import Sources from '../Sources/Sources';
 import User from '../Users/User';
@@ -126,6 +127,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.user).toBeDefined();
             expect(platformResources.user).toBeInstanceOf(User);
+        });
+
+        it('should register the search resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.search).toBeDefined();
+            expect(platformResources.search).toBeInstanceOf(Search);
         });
     });
 });

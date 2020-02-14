@@ -216,6 +216,13 @@ export enum SecurityProviderType {
     ZENDESK = 'ZENDESK',
 }
 
+export enum RestUserIdType {
+    User = 'User',
+    Group = 'Group',
+    VirtualGroup = 'VirtualGroup',
+    Unknown = 'Unknown',
+}
+
 export enum ExcerptSource {
     Document = 'Document',
     Summary = 'Summary',
