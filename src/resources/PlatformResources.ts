@@ -12,6 +12,7 @@ import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
 import Resource from './Resource';
 import Saml from './Saml/Saml';
+import Search from './Search/Search';
 import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
 import User from './Users/User';
@@ -32,6 +33,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'field', resource: Field},
     {key: 'saml', resource: Saml},
     {key: 'user', resource: User},
+    {key: 'search', resource: Search},
 ];
 
 class PlatformResources {
@@ -51,6 +53,7 @@ class PlatformResources {
     source: Sources;
     field: Field;
     saml: Saml;
+    search: Search;
     user: User;
 
     registerAll() {
