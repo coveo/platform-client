@@ -1,3 +1,5 @@
+import {LanguageCode} from '../../Enums';
+
 export interface AdvancedRegistrationConfigFile {
     fileContents?: string;
     lastModified?: string;
@@ -16,5 +18,5 @@ export interface AdvancedRegistrationConfigFileCreationResponse {
 
 export interface ModelConfigurationUpdateArgs {
     modelConfigFileContents: string;
-    languageCode?: string;
+    languageCode?: LanguageCode;
 }

@@ -1,5 +1,5 @@
 import API from '../../../APICore';
-import {ModelConfigFileType} from '../../Enums';
+import {LanguageCode, ModelConfigFileType} from '../../Enums';
 import Resource from '../../Resource';
 import {
     AdvancedRegistrationConfigFile,
@@ -11,7 +11,7 @@ export default class ModelConfiguration extends Resource {
     static getBaseUrl = (modelId: string, modelConfigFileType: ModelConfigFileType) =>
         `/rest/organizations/${API.orgPlaceholder}/machinelearning/models/${modelId}/configs/${modelConfigFileType}`;
 
-    get(modelId: string, modelConfigFileType: ModelConfigFileType, languageCode?: string) {
+    get(modelId: string, modelConfigFileType: ModelConfigFileType, languageCode?: LanguageCode) {
         return this.api.get<AdvancedRegistrationConfigFile>(
             this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode})
         );
