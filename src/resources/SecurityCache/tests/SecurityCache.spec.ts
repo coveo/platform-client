@@ -64,21 +64,21 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/PROVIDER_ID/refresh`);
         });
 
-        it('should make a POST call to the security Identity refresh url', () => {
-            const identityModel: DetailedSecurityCacheMemberModel = {
-                infos: [
-                    {
-                        key: '🗝',
-                        value: '💰',
-                    },
-                ],
-                name: '📜',
-                provider: '📥',
-                type: '⚥',
+        it('should make a POST call to the security Provider refresh url', () => {
+            const memberModel = {
+                infos: [{key: 'optional key', value: 'optional value'}],
+                lastUpdateDate: 1234,
+                lastUpdateErrorDetail: 'the swagger also tells that I am optional',
+                lastUpdateResult: 'why am I also optional',
+                name: 'the swagger says that I am optional but I doubt I really am',
+                provider: 'hey im optional too',
+                state: 'I am in an optional state',
+                type: 'and I am optional type',
             };
-            securityCache.refreshIdentity(identityModel);
+
+            securityCache.refreshEntity(memberModel);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh/entity`, identityModel);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh/entity`, memberModel);
         });
     });
 
