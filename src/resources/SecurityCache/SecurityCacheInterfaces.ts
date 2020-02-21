@@ -1,4 +1,5 @@
 import {ScheduleType, SecurityCacheStateOptions} from '../Enums';
+import {ParameterModel, UserIdentityModel} from '../Sources';
 
 export interface ScheduleModel {
     enabled: boolean;
@@ -112,17 +113,6 @@ export interface SecurityProviderReferenceModelAttributes {
     sourceType?: string;
 }
 
-export interface ParameterModel {
-    sensitive?: boolean;
-    value?: string;
-}
-
-export interface UserIdentityModel {
-    name: string;
-    password: string;
-    username?: string;
-}
-
 export interface SecurityCacheListOptions {
     from?: string;
     organisationId?: string;
@@ -137,4 +127,9 @@ export interface SecurityCacheListOptions {
 export interface SecurityCacheMemberInfoModel {
     key: string;
     value: string;
+}
+
+export interface SecurityProvider {
+    name?: string;
+    typeName?: string;
 }

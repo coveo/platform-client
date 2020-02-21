@@ -31,6 +31,11 @@ import {
     SourceVisibility,
     UrlFilterType,
 } from '../Enums';
+import {
+    CascadingSecurityProvider,
+    SecurityProvider,
+    SecurityProviderReferenceModel,
+} from '../SecurityCache/SecurityCacheInterfaces';
 
 export interface SourceModel {
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
@@ -400,28 +405,10 @@ export interface Permission {
     securityProvider?: string;
 }
 
-export interface SecurityProvider {
-    name?: string;
-    typeName?: string;
-}
-
-export interface SecurityProviderReferenceModel {
-    attributes?: any;
-    id?: string;
-    type?: SecurityProviderReferenceType;
-}
-
 export interface UserIdentityModel {
     name?: string;
     password?: string;
     userName?: string;
-}
-
-export interface CascadingSecurityProvider {
-    id?: string;
-    name?: string;
-    type?: SecurityProviderType;
-    typeName?: string;
 }
 
 export interface LightSourceModel {
