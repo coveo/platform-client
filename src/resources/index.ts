@@ -16,3 +16,4 @@ export * from './Pipelines';
 export * from './Saml';
 export * from './Search';
 export * from './Sources';
+export * from './SecurityCache';
