@@ -124,14 +124,14 @@ export interface UserIdentityModel {
 }
 
 export interface SecurityCacheListOptions {
-    from?: number;
+    from?: string;
     organisationId?: string;
     page?: number;
     perPage?: number;
     securityProviderId?: string;
     states?: SecurityCacheStateOptions;
-    to?: number;
-    usePageModel?: string;
+    to?: string;
+    usePageModel?: boolean;
 }
 
 export interface SecurityCacheMemberInfoModel {
