@@ -1,4 +1,4 @@
-import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {GranularResource} from '../BaseInterfaces';
 import {
     ActivityOperation,
     AuthenticationActionMethod,
@@ -17,7 +17,6 @@ import {
     OperationType,
     PatternType,
     PermissionIdentityType,
-    SecurityProviderReferenceType,
     SecurityProviderType,
     SinglePermissionIdentityType,
     SinglePermissionResult,
@@ -37,12 +36,10 @@ import {
     SecurityProviderReferenceModel,
 } from '../SecurityCache/SecurityCacheInterfaces';
 
-export interface SourceModel {
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
+export interface SourceModel extends GranularResource {
     configurationError?: ConfigurationError;
     crawlingModuleId?: string;
     customParameters?: any;
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     id?: string;
     information?: SourceInformation;
     logicalIndex?: string;
@@ -178,15 +175,13 @@ export interface CreateSourceOptions {
     updateSecurityProviders?: boolean;
 }
 
-export interface RawSourceConfig {
+export interface RawSourceConfig extends GranularResource {
     additionalComments?: string;
     additionalInfos?: any;
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
     configuration?: ExtendedConfig;
     crawlerInstanceType?: string;
     crawlingModuleId?: string;
     fromRaw?: boolean;
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     id?: string;
     logicalIndex?: string;
     mappings?: MappingModel[];

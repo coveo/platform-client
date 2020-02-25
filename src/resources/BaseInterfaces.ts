@@ -17,3 +17,8 @@ export interface PrivilegeModel {
     targetId: string;
     type?: string;
 }
+
+export interface GranularResource {
+    groupsThatCanEdit?: IdAndDisplayNameModel[];
+    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
+}

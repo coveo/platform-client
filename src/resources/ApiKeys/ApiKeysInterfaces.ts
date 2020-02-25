@@ -1,6 +1,6 @@
-import {IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+import {GranularResource, PrivilegeModel} from '../BaseInterfaces';
 
-export interface ApiKeyModel {
+export interface ApiKeyModel extends GranularResource {
     organizationId?: string;
     id?: string;
     enabled?: boolean;
@@ -10,9 +10,7 @@ export interface ApiKeyModel {
     createdBy?: any;
     createdDate?: number;
     allowedIps?: string[];
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
     deniedIps?: string[];
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     privileges?: PrivilegeModel[];
     resourceId?: string;
 }

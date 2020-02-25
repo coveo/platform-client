@@ -1,9 +1,9 @@
-import {IdAndDisplayNameModel} from '../../BaseInterfaces';
+import {GranularResource} from '../../BaseInterfaces';
 import {IntervalUnit, ModelStatus} from '../../Enums';
 import {AssociatedPipelineModel} from '../../Pipelines';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
-export interface MLModel extends MLModelInfo, ModelAttributes {
+export interface MLModel extends MLModelInfo, ModelAttributes, GranularResource {
     orgId: string;
     id: string;
     engineId: string;
@@ -15,8 +15,6 @@ export interface MLModel extends MLModelInfo, ModelAttributes {
     engineVersion?: string;
     platformVersion?: 1 | 2;
     versionMatcher?: string;
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     modelErrorDescription?: ModelErrorDescription;
     previousModelUpdateTime?: number;
     intervalTime: number;

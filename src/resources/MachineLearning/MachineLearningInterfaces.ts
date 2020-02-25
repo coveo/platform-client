@@ -1,8 +1,8 @@
-import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {GranularResource} from '../BaseInterfaces';
 import {IntervalUnit} from '../Enums';
 import {MLModel} from './Models/ModelsInterfaces';
 
-export interface RegistrationModel {
+export interface RegistrationModel extends GranularResource {
     engineId: string;
     modelName: string;
     modelDisplayName?: string;
@@ -10,8 +10,6 @@ export interface RegistrationModel {
     intervalTime: number;
     intervalUnit: IntervalUnit;
     exportOffset?: string;
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     commandLineParameters?: string[];
     commonFilter?: string;
     customEventFilter?: string;
