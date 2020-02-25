@@ -1,9 +1,9 @@
-import {IdAndDisplayNameModel, PrivilegeModel} from '../BaseInterfaces';
+import {GranularResource, PrivilegeModel} from '../BaseInterfaces';
 import {InviteModel} from './Invites';
 import {MemberModel} from './Members';
 import {RealmModel} from './Realms';
 
-export interface GroupModel {
+export interface GroupModel extends GranularResource {
     id: string;
     displayName: string;
     invites?: InviteModel[];
@@ -12,8 +12,6 @@ export interface GroupModel {
     realms?: RealmModel[];
     deletable?: boolean;
     resourceId?: string;
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
-    apiKeysThatCanEdit?: IdAndDisplayNameModel[];
 }
 
 export interface CreateGroupOptions {
