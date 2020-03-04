@@ -9,17 +9,20 @@ import {
     PipelineModel,
     UpdatePipelineModel,
 } from './PipelinesInterfaces';
+import Statements from './Statements/Statements';
 
 export default class Pipelines extends Resource {
     static searchUrlVersion2 = '/rest/search/v2/admin/pipelines';
     static searchUrlVersion1 = '/rest/search/v1/admin/pipelines';
 
     associations: MLAssociations;
+    statements: Statements;
 
     constructor(protected api: API) {
         super(api);
 
         this.associations = new MLAssociations(api);
+        this.statements = new Statements(api);
     }
 
     getMLVersion() {

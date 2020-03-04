@@ -83,4 +83,14 @@ describe('Pipelines', () => {
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines', newPipeline);
         });
     });
+
+    describe('nested resources', () => {
+        it('should front associations', () => {
+            expect(pipelines.associations).toBeDefined();
+        });
+
+        it('should front statements', () => {
+            expect(pipelines.statements).toBeDefined();
+        });
+    });
 });

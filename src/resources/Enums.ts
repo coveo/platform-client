@@ -591,3 +591,17 @@ export enum LanguageCode {
     ZA = 'za',
     ZH = 'zh',
 }
+
+export enum StatementsFeature {
+    Filter = 'filter',
+    Trigger = 'trigger',
+    Ranking = 'ranking',
+    Stop = 'stop',
+    Thesaurus = 'thesaurus',
+    Top = 'top',
+    TopClicks = 'topClicks',
+    QuerySuggest = 'querySuggest',
+    RankingWeight = 'rankingweight',
+    Recommendation = 'recommendation',
+    QueryParamOverride = 'queryParamOverride',
+}
