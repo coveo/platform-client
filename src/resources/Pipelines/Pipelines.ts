@@ -1,5 +1,4 @@
 import API from '../../APICore';
-import {PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import MLAssociations from './MLAssociations/MLAssociations';
 import {
@@ -51,7 +50,7 @@ export default class Pipelines extends Resource {
     }
 
     update(pipeline: UpdatePipelineModel) {
-        return this.api.put<PrivilegeModel>(
+        return this.api.put<PipelineModel>(
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipeline.id}`, {
                 organizationId: this.api.organizationId,
             }),
