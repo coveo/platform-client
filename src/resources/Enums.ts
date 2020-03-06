@@ -605,3 +605,13 @@ export enum StatementsFeature {
     Recommendation = 'recommendation',
     QueryParamOverride = 'queryParamOverride',
 }
+
+export enum ResultRankingsKind {
+    featuredResults = 'featured_result',
+    rankingExpression = 'ranking_expression',
+}
+
+export enum ResultRankingLocalizedContentLocale {
+    auto = 'auto',
+    specific = 'specific',
+}
