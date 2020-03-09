@@ -128,4 +128,29 @@ describe('Statements', () => {
             expect(api.delete).toHaveBeenCalledWith(Statements.getStatementUrl(pipelineId, statementId));
         });
     });
+
+    describe('import', () => {
+        const mockedFormData = {
+            set: jest.fn(),
+        };
+
+        beforeEach(() => {
+            (global as any).FormData = jest.fn(() => mockedFormData);
+            (global as any).File = jest.fn(() => ({}));
+        });
+
+        it('should post the file content inside a form multi part data', async () => {
+            const myCSVFile = new File(['egg'], 'egg.txt', {type: 'text/csv'});
+
+            statements.importCSV('🥚', myCSVFile, {feature: StatementsFeature.Stop});
+
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                '/rest/search/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
+                mockedFormData
+            );
+            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.set).toHaveBeenCalledWith('file', myCSVFile);
+        });
+    });
 });
