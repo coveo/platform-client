@@ -11,6 +11,7 @@ import {
 
 export default class Statements extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v1/admin/pipelines/${pipelineId}/statements`;
+    static getLegacyUrl = (pipelineId: string) => `/rest/search/admin/pipelines/${pipelineId}/statements`;
     static getStatementUrl = (pipelineId: string, statementId: string) =>
         `${Statements.getBaseUrl(pipelineId)}/${statementId}`;
 
@@ -26,6 +27,19 @@ export default class Statements extends Resource {
                 organizationId: this.api.organizationId,
                 ...options,
             })
+        );
+    }
+
+    importCSV(pipelineId: string, csvFile: File, options?: ExportStatementParams) {
+        const formData = new FormData();
+        formData.set('file', csvFile);
+        return this.api.postForm(
+            this.buildPath(`${Statements.getLegacyUrl(pipelineId)}/import`, {
+                mode: 'overwrite',
+                organizationId: this.api.organizationId,
+                ...options,
+            }),
+            formData
         );
     }
 
