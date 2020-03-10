@@ -43,6 +43,7 @@ export interface SecurityProviderModelWithStatus {
     name: string;
     nodeRequired?: boolean;
     nodeTypeName?: string;
+    onPremisesEnabled?: boolean;
     organizationId?: string;
     parameters?: ParameterModel;
     referencedBy?: SecurityProviderReferenceModel[];
