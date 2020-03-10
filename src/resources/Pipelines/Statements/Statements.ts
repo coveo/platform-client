@@ -36,6 +36,15 @@ export default class Statements extends Resource {
         );
     }
 
+    update(pipelineId: string, statementId: string, model: CreateStatementModel) {
+        return this.api.put<StatementModel>(
+            this.buildPath(Statements.getStatementUrl(pipelineId, statementId), {
+                organizationId: this.api.organizationId,
+            }),
+            model
+        );
+    }
+
     copy(pipelineId: string, model: CopyStatementModel) {
         return this.api.post<StatementModelList>(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/copy`, {organizationId: this.api.organizationId}),
