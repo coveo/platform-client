@@ -61,6 +61,23 @@ describe('Statements', () => {
         });
     });
 
+    describe('update', () => {
+        it('should make a PUT call to the specific Statement url', () => {
+            const pipelineId = '🏹';
+            const statementId = '🎯';
+
+            const model: CreateStatementModel = {
+                feature: StatementsFeature.Thesaurus,
+                definition: 'alias ⚾️, 🥎',
+                position: 2,
+            };
+
+            statements.update(pipelineId, statementId, model);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Statements.getStatementUrl(pipelineId, statementId)}`, model);
+        });
+    });
+
     describe('copy', () => {
         it('should make a POST call to the specific Statements url', () => {
             const pipelineId = '🏀';
