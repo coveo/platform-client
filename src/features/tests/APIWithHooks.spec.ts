@@ -1,3 +1,5 @@
+import Blob from 'node-blob';
+
 import {IAPI} from '../../APICore';
 import {UserModel} from '../../resources/Users';
 import {APIWithHooks} from '../APIWithHooks';
@@ -7,6 +9,7 @@ jest.mock('../../APICore');
 const mockApi = (): jest.Mocked<IAPI> => ({
     organizationId: '🐟',
     get: jest.fn().mockImplementation(() => Promise.resolve({})),
+    getFile: jest.fn().mockImplementation(() => Promise.resolve(new Blob(['test test'], {type: 'text/plain'}))),
     post: jest.fn().mockImplementation(() => Promise.resolve({})),
     postForm: jest.fn().mockImplementation(() => Promise.resolve({})),
     delete: jest.fn().mockImplementation(() => Promise.resolve({})),
@@ -20,6 +23,7 @@ describe('APIWithHooks', () => {
     let api: jest.Mocked<IAPI>;
     const urls = {
         get: 'get',
+        getFile: 'getFile',
         post: 'post',
         postForm: 'postForm',
         delete: 'delete',
@@ -48,6 +52,13 @@ describe('APIWithHooks', () => {
 
             assertInvocationWasBefore(beforeMock, api.get as jest.Mock);
             expect(api.get).toHaveBeenCalledWith(urls.get, someGenericArgs);
+        });
+
+        it('should trigger the hook on a get', async () => {
+            await apiWithHooks.getFile(urls.getFile, someGenericArgs);
+
+            assertInvocationWasBefore(beforeMock, api.getFile as jest.Mock);
+            expect(api.getFile).toHaveBeenCalledWith(urls.getFile, someGenericArgs);
         });
 
         it('should trigger the hook on a post', async () => {
@@ -94,6 +105,13 @@ describe('APIWithHooks', () => {
 
             assertInvocationWasBefore(api.get as jest.Mock, afterMock);
             expect(api.get).toHaveBeenCalledWith(urls.get, someGenericArgs);
+        });
+
+        it('should trigger the hook on a getFile', async () => {
+            await apiWithHooks.getFile(urls.getFile, someGenericArgs);
+
+            assertInvocationWasBefore(api.getFile as jest.Mock, afterMock);
+            expect(api.getFile).toHaveBeenCalledWith(urls.getFile, someGenericArgs);
         });
 
         it('should trigger the hook on a post', async () => {
@@ -152,6 +170,15 @@ describe('APIWithHooks', () => {
 
             assertInvocationWasBefore(api.get as jest.Mock, afterExceptionMock);
             expect(afterExceptionMock).toHaveBeenCalledWith(urls.get, someGenericArgs, someError);
+        });
+
+        it('should trigger the hook on a get exception', async () => {
+            api.getFile.mockRejectedValue(someError);
+
+            await apiWithHooks.getFile(urls.getFile, someGenericArgs);
+
+            assertInvocationWasBefore(api.getFile as jest.Mock, afterExceptionMock);
+            expect(afterExceptionMock).toHaveBeenCalledWith(urls.getFile, someGenericArgs, someError);
         });
 
         it('should not trigger the hook on a get success', async () => {
