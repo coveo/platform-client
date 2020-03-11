@@ -10,6 +10,11 @@ const success: ResponseHandler = {
     process: async <T>(response: Response): Promise<T> => await response.json(),
 };
 
+const successBlob: ResponseHandler = {
+    canProcess: (response: Response): boolean => response.ok,
+    process: async <T>(response: Response): Promise<T> => await (response.blob() as any),
+};
+
 const error: ResponseHandler = {
     canProcess: () => true,
     process: async <T>(response: Response): Promise<T> => {
@@ -18,7 +23,7 @@ const error: ResponseHandler = {
 };
 
 export const defaultResponseHandlers = [noContent, success, error];
-export const ResponseHandlers = {noContent, success, error};
+export const ResponseHandlers = {noContent, success, successBlob, error};
 
 export default function<T>(response: Response, handlers = defaultResponseHandlers) {
     return handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);

@@ -18,6 +18,10 @@ export class APIWithHooks<TAPI extends IAPI = IAPI> implements IAPI {
         return this.wrapInGenericHandler(url, args, () => this.api.get<T>(url, args));
     }
 
+    async getFile(url: string, args: RequestInit = {method: 'get'}): Promise<Blob> {
+        return this.wrapInGenericHandler(url, args, () => this.api.getFile(url, args));
+    }
+
     async post<T = {}>(
         url: string,
         body: any = {},

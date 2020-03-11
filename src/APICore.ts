@@ -1,6 +1,6 @@
 import {APIConfiguration} from './ConfigurationInterfaces';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
-import handleResponse, {defaultResponseHandlers} from './handlers/ResponseHandlers';
+import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
 import {UserModel} from './resources/Users';
 
 type APIPrototype = typeof API.prototype;
@@ -24,6 +24,19 @@ export default class API implements IAPI {
         args.signal = args.signal || this.getRequestsController.signal;
         try {
             return await this.request<T>(url, args);
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                return; // We don't want to resolve or reject the promise
+            } else {
+                throw error;
+            }
+        }
+    }
+
+    async getFile(url: string, args: RequestInit = {method: 'get'}): Promise<Blob> {
+        args.signal = args.signal || this.getRequestsController.signal;
+        try {
+            return await this.requestFile(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
                 return; // We don't want to resolve or reject the promise
@@ -93,5 +106,21 @@ export default class API implements IAPI {
 
         const response = await fetch(this.getUrlFromRoute(route), init);
         return handleResponse<T>(response, this.handlers);
+    }
+
+    private async requestFile(route: string, args: RequestInit): Promise<Blob> {
+        const init: RequestInit = {
+            ...args,
+            headers: {
+                Authorization: `Bearer ${this.config.accessTokenRetriever()}`,
+                ...(args.headers || {}),
+            },
+        };
+        const response = await fetch(this.getUrlFromRoute(route), init);
+        return handleResponse<Blob>(response, [
+            ResponseHandlers.noContent,
+            ResponseHandlers.successBlob,
+            ResponseHandlers.error,
+        ]);
     }
 }

@@ -1,4 +1,4 @@
-import handleResponse from '../ResponseHandlers';
+import handleResponse, {ResponseHandlers} from '../ResponseHandlers';
 
 describe('ResponseHandlers', () => {
     it('should return a promise resolved with an empty object when the response status code is 204', async () => {
@@ -14,8 +14,8 @@ describe('ResponseHandlers', () => {
         const ret1 = await handleResponse(okResponse);
         expect(ret1).toEqual(data);
 
-        const stilOkResponse = new Response(JSON.stringify(data), {status: 299});
-        const ret2 = await handleResponse(stilOkResponse);
+        const stillOkResponse = new Response(JSON.stringify(data), {status: 299});
+        const ret2 = await handleResponse(stillOkResponse);
         expect(ret2).toEqual(data);
     });
 
@@ -30,5 +30,14 @@ describe('ResponseHandlers', () => {
         }
 
         expect.assertions(1);
+    });
+
+    it('should return a promise resolved with the response body as blob when using the successBlob handler and the status is between 200 and 299', async () => {
+        const data = {someData: 'thank you!'};
+        const expectedBlob = await new Response(JSON.stringify(data)).blob();
+
+        const okResponse = new Response(JSON.stringify(data), {status: 200});
+        const ret1 = await handleResponse(okResponse, [ResponseHandlers.successBlob]);
+        expect(ret1).toEqual(expectedBlob);
     });
 });

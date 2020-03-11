@@ -56,6 +56,41 @@ describe('APICore', () => {
             });
         });
 
+        describe('getFile', () => {
+            it('should do a GET request to the specified url and resolve with a blob', async () => {
+                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                const expectedResponse = await new Response(JSON.stringify(testData.response)).blob();
+                const response = await api.getFile(testData.route);
+
+                expect(fetchMock).toHaveBeenCalledTimes(1);
+                const [url, options] = fetchMock.mock.calls[0];
+
+                expect(url).toBe(`${testConfig.host}${testData.route}`);
+                expect(options.method).toBe('get');
+                expect(response).toEqual(expectedResponse);
+            });
+
+            it('should make the promise fail on a failed request', async () => {
+                const error = new Error('the request has failed');
+                global.fetch.mockRejectedValue(error);
+
+                try {
+                    await api.getFile(testData.route);
+                } catch (e) {
+                    expect(e).toEqual(error);
+                } finally {
+                    expect.assertions(1);
+                }
+            });
+
+            it('should bind GET requests to an abort signal', () => {
+                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                api.getFile(testData.route);
+                expect(global.fetch.mock.calls[0][1].signal).toBeDefined();
+                expect(global.fetch.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
+            });
+        });
+
         describe('post', () => {
             it('should do a simple POST request', async () => {
                 const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
