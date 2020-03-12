@@ -132,6 +132,7 @@ export interface ModelInformationER {
     eventGroupsFields: Record<string, string[]>;
     primaryEventName: string;
     'Recommendations per language: ': Record<string, number>;
+    featureSelectLog: FeatureSelectLog;
     [key: string]: any;
 }
 
@@ -201,5 +202,6 @@ export interface ModelInformationQS {
     candidatesPerFilters: Record<string, number>;
     topCooccurrencesExamples: Record<string, string[]>;
     stopwords: Record<string, number>;
+    featureSelectLog: FeatureSelectLog;
     [key: string]: any;
 }
