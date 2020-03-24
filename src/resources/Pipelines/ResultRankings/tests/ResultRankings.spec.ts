@@ -1,4 +1,5 @@
 import API from '../../../../APICore';
+import {ResultRankingLocales, ResultRankingMatchOperators, ResultRankingPredicateKind} from '../../../Enums';
 import ResultRankings from '../ResultRankings';
 import {ResultRanking} from '../ResultRankingsInterfaces';
 
@@ -13,16 +14,17 @@ describe('Result Rankings', () => {
     const resultRanking: ResultRanking = {
         name: 'contains',
         defaultMatchOperator: {
-            is: {},
+            kind: ResultRankingMatchOperators.is,
         },
         predicates: [
             {
+                kind: ResultRankingPredicateKind.basicExpressionAndLocalePredicate,
                 basicQueryExpression: 'a',
                 matchOperator: {
-                    contains: {},
+                    kind: ResultRankingMatchOperators.contains,
                 },
                 locale: {
-                    all: {},
+                    kind: ResultRankingLocales.all,
                 },
             },
         ],
