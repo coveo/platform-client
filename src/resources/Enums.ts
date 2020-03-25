@@ -611,6 +611,23 @@ export enum ResultRankingsKind {
     rankingExpression = 'ranking_expression',
 }
 
+export enum ResultRankingLocales {
+    all = 'all',
+    unspecified = 'unspecified',
+    specific = 'specific',
+}
+
+export enum ResultRankingMatchOperators {
+    is = 'is',
+    contains = 'contains',
+    matches = 'matches',
+}
+
+export enum ResultRankingPredicateKind {
+    basicExpressionAndLocalePredicate = 'basicExpressionAndLocalePredicate',
+    qplPredicate = 'qplPredicate',
+}
+
 export enum ResultRankingLocalizedContentLocale {
     auto = 'auto',
     specific = 'specific',

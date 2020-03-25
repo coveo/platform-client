@@ -1,4 +1,4 @@
-import {ResultRankingsKind} from '../../Enums';
+import {ResultRankingLocales, ResultRankingMatchOperators, ResultRankingsKind} from '../../Enums';
 import {ListStatementSortBy} from '../Statements';
 
 export interface ResultRanking {
@@ -22,21 +22,20 @@ export interface ResultRanking {
 }
 
 export interface ResultRankingMatchOperator {
-    is?: ResultRankingEmptyUnionCase;
-    contains?: ResultRankingEmptyUnionCase;
-    matches?: ResultRankingEmptyUnionCase;
+    kind: string | ResultRankingMatchOperators;
 }
 
 export interface ResultRankingPredicate {
+    kind: string;
     basicQueryExpression?: string;
     matchOperator: ResultRankingMatchOperator;
     locale?: ResultRankingPredicateLocale;
+    code?: string;
 }
 
 export interface ResultRankingPredicateLocale {
-    all?: ResultRankingEmptyUnionCase;
-    unspecified?: ResultRankingEmptyUnionCase;
-    specific?: ResultRankingLocaleSpecific;
+    kind?: string | ResultRankingLocales;
+    code?: string;
 }
 
 export interface ResultRankingTargetUniqueId {
@@ -71,12 +70,6 @@ export interface ResultRankingTargetQueryExpression {
 }
 
 export interface ResultRankingQplCodePredicate {
-    code: string;
-}
-
-export interface ResultRankingEmptyUnionCase {}
-
-export interface ResultRankingLocaleSpecific {
     code: string;
 }
 
