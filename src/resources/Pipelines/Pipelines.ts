@@ -8,6 +8,7 @@ import {
     PipelineModel,
     UpdatePipelineModel,
 } from './PipelinesInterfaces';
+import ResultRankings from './ResultRankings/ResultRankings';
 import Statements from './Statements/Statements';
 
 export default class Pipelines extends Resource {
@@ -16,12 +17,14 @@ export default class Pipelines extends Resource {
 
     associations: MLAssociations;
     statements: Statements;
+    resultRanking: ResultRankings;
 
     constructor(protected api: API) {
         super(api);
 
         this.associations = new MLAssociations(api);
         this.statements = new Statements(api);
+        this.resultRanking = new ResultRankings(api);
     }
 
     getMLVersion() {
