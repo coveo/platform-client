@@ -10,7 +10,7 @@ describe('Search', () => {
     let search: Search;
     const api = new APIMock() as jest.Mocked<API>;
 
-    beforeAll(() => {
+    beforeEach(() => {
         jest.clearAllMocks();
         search = new Search(api);
     });
@@ -56,6 +56,15 @@ describe('Search', () => {
                 `${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`,
                 tokenParams
             );
+        });
+    });
+
+    describe('Make a query on the search', () => {
+        it('should make a post call to query the search for result', () => {
+            const queryParams = {q: ''};
+            search.query(queryParams);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, queryParams);
         });
     });
 });

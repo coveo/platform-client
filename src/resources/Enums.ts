@@ -628,7 +628,7 @@ export enum ResultRankingPredicateKind {
     qplPredicate = 'qplPredicate',
 }
 
-export enum ResultRankingLocalizedContentLocale {
+export enum ResultRankingLocalizedContentLocales {
     auto = 'auto',
     specific = 'specific',
 }
