@@ -92,5 +92,9 @@ describe('Pipelines', () => {
         it('should front statements', () => {
             expect(pipelines.statements).toBeDefined();
         });
+
+        it('should front resultRanking', () => {
+            expect(pipelines.resultRanking).toBeDefined();
+        });
     });
 });
