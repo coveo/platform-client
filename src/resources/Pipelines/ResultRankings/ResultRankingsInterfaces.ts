@@ -2,6 +2,11 @@ import {ResultRankingLocales, ResultRankingMatchOperators, ResultRankingsKind} f
 import {ListStatementSortBy} from '../Statements';
 
 export interface ResultRanking {
+    id: string;
+    resultRanking: ResultRankingProps;
+}
+
+export interface ResultRankingProps {
     name: string;
     kind?: ResultRankingsKind; // default: "featured_result"
     defaultMatchOperator: ResultRankingMatchOperator;
@@ -19,6 +24,9 @@ export interface ResultRanking {
     isConstant?: boolean;
     applyToEveryResult?: boolean;
     enabled?: boolean;
+    condition?: {
+        reference: string;
+    };
 }
 
 export interface ResultRankingMatchOperator {

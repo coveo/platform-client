@@ -12,33 +12,39 @@ describe('Result Rankings', () => {
     const api = new APIMock() as jest.Mocked<API>;
 
     const resultRanking: ResultRanking = {
-        name: 'contains',
-        defaultMatchOperator: {
-            kind: ResultRankingMatchOperators.is,
+        id: 'id',
+        resultRanking: {
+            name: 'contains',
+            defaultMatchOperator: {
+                kind: ResultRankingMatchOperators.is,
+            },
+            predicates: [
+                {
+                    kind: ResultRankingPredicateKind.basicExpressionAndLocalePredicate,
+                    basicQueryExpression: 'a',
+                    matchOperator: {
+                        kind: ResultRankingMatchOperators.contains,
+                    },
+                    locale: {
+                        kind: ResultRankingLocales.all,
+                    },
+                },
+            ],
+            targets: [
+                {
+                    uniqueId: 'ed19c90c3f6d20ae28921cfcb4f425d4afb9c6d0259043b39000ab0434d0',
+                },
+            ],
+            condition: {
+                reference: 'asdfasdf',
+            },
+            matchQuery: false,
+            matchAdvancedQuery: true,
+            includeInFacets: false,
+            isMigrated: false,
+            description: '',
+            enabled: true,
         },
-        predicates: [
-            {
-                kind: ResultRankingPredicateKind.basicExpressionAndLocalePredicate,
-                basicQueryExpression: 'a',
-                matchOperator: {
-                    kind: ResultRankingMatchOperators.contains,
-                },
-                locale: {
-                    kind: ResultRankingLocales.all,
-                },
-            },
-        ],
-        targets: [
-            {
-                uniqueId: 'ed19c90c3f6d20ae28921cfcb4f425d4afb9c6d0259043b39000ab0434d0',
-            },
-        ],
-        matchQuery: false,
-        matchAdvancedQuery: true,
-        includeInFacets: false,
-        isMigrated: false,
-        description: '',
-        enabled: true,
     };
 
     beforeEach(() => {
