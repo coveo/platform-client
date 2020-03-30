@@ -13,6 +13,7 @@ export interface StatementModel {
     detailed: any;
     warnings?: string[];
     displayName?: string; // The display name for this Machine Learning model.This property only has a meaning with recommendation, topClicks, and querySuggest statements. ,
+    [key: string]: any;
 }
 
 export interface CreateStatementModel {
