@@ -79,11 +79,11 @@ describe('Result Rankings', () => {
             const pipelineId = '️a';
             const resultRankingId = 'b';
 
-            resultRankings.update(pipelineId, resultRankingId, resultRanking);
+            resultRankings.update(pipelineId, resultRankingId, resultRanking.resultRanking);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
-                resultRanking
+                resultRanking.resultRanking
             );
         });
     });
@@ -102,9 +102,9 @@ describe('Result Rankings', () => {
         it('should make a PUT call to the specific Result Rankings url', () => {
             const pipelineId = '️a';
 
-            resultRankings.create(pipelineId, resultRanking);
+            resultRankings.create(pipelineId, resultRanking.resultRanking);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), resultRanking);
+            expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), resultRanking.resultRanking);
         });
     });
 });

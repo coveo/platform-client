@@ -1,5 +1,10 @@
 import Resource from '../../Resource';
-import {ListResultRankingParams, ListResultRankingResponse, ResultRanking} from './ResultRankingsInterfaces';
+import {
+    ListResultRankingParams,
+    ListResultRankingResponse,
+    ResultRanking,
+    ResultRankingProps,
+} from './ResultRankingsInterfaces';
 
 export default class ResultRankings extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/resultRankings`;
@@ -22,7 +27,7 @@ export default class ResultRankings extends Resource {
         );
     }
 
-    update(pipelineId: string, resultRankingsId: string, resultRanking: ResultRanking) {
+    update(pipelineId: string, resultRankingsId: string, resultRanking: ResultRankingProps) {
         return this.api.put<ResultRanking>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
@@ -40,7 +45,7 @@ export default class ResultRankings extends Resource {
         );
     }
 
-    create(pipelineId: string, resultRanking: ResultRanking) {
+    create(pipelineId: string, resultRanking: ResultRankingProps) {
         return this.api.post<ResultRanking>(
             this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
