@@ -1,5 +1,4 @@
-import {ResultRankingLocales, ResultRankingMatchOperators, ResultRankingsKind} from '../../Enums';
-import {ListStatementSortBy} from '../Statements';
+import {ListStatementSortBy, ResultRankingLocales, ResultRankingMatchOperators, ResultRankingsKind} from '../../Enums';
 
 export interface ResultRanking {
     id: string;
