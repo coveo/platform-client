@@ -31,12 +31,18 @@ export interface ConditionModel {
     description: string;
     definition: string;
     detailed: any;
-    childrenCount?: number;
-    feature?: string;
+    childrenCount: number;
+    feature: string;
+    position: number;
+    ready: boolean;
     parent?: string;
     condition?: string;
-    position?: number;
-    ready?: boolean;
+}
+
+export interface NewConditionModel {
+    definition: string;
+    id?: string;
+    description?: string;
 }
 
 export interface ListPipelinesOptions {
