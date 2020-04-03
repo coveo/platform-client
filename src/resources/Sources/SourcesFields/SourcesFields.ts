@@ -2,12 +2,12 @@ import API from '../../../APICore';
 import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import Sources from '../Sources';
-import {SourceFieldModel, SourceFieldParams} from './SourcesFieldsInterfaces';
+import {ListSourcesFieldsParams, SourceFieldModel} from './SourcesFieldsInterfaces';
 
 export default class SourcesFields extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources/fields`;
 
-    list(params?: SourceFieldParams) {
+    list(params?: ListSourcesFieldsParams) {
         return this.api.get<PageModel<SourceFieldModel>>(this.buildPath(`${Sources.baseUrl}/page/fields`, params));
     }
 

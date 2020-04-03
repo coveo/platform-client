@@ -15,12 +15,12 @@ import {
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
 
-    fields: SourcesFields;
+    field: SourcesFields;
 
     constructor(protected api: API) {
         super(api);
 
-        this.fields = new SourcesFields(api);
+        this.field = new SourcesFields(api);
     }
 
     create(source: New<SourceModel, 'resourceId'>, options?: CreateSourceOptions) {

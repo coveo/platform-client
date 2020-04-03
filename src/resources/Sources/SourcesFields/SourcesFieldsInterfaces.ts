@@ -1,7 +1,7 @@
 import {FieldModel, ListFieldsParams} from '../../Fields';
 import {LightSourceModel, MappingModel} from '../SourcesInterfaces';
 
-export interface SourceFieldParams extends ListFieldsParams {
+export interface ListSourcesFieldsParams extends ListFieldsParams {
     includeMappings?: boolean;
 }
 
