@@ -3,6 +3,7 @@ import {New, PageModel} from '../BaseInterfaces';
 import {ActivityOperation} from '../Enums';
 import Resource from '../Resource';
 import {ScheduleModel} from '../SecurityCache';
+import SourcesFields from './SourcesFields/SourcesFields';
 import {
     CreateSourceOptions,
     LightSourceModel,
@@ -13,6 +14,14 @@ import {
 
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
+
+    field: SourcesFields;
+
+    constructor(protected api: API) {
+        super(api);
+
+        this.field = new SourcesFields(api);
+    }
 
     create(source: New<SourceModel, 'resourceId'>, options?: CreateSourceOptions) {
         return this.api.post<{id: string}>(this.buildPath(Sources.baseUrl, options), source);
