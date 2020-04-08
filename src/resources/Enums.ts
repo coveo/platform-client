@@ -642,3 +642,9 @@ export enum ResultRankingLocalizedContentLocales {
     auto = 'auto',
     specific = 'specific',
 }
+
+export enum ListStatementSortBy {
+    Position = 'position',
+    Definition = 'definition',
+    Description = 'description',
+}

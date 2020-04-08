@@ -1,19 +1,19 @@
-import {StatementsFeature} from '../../Enums';
+import {ListStatementSortBy, StatementsFeature} from '../../Enums';
 import {ConditionModel} from '../PipelinesInterfaces';
 
 export interface StatementModel {
     id: string;
-    description?: string;
     feature: StatementsFeature;
     definition: string;
-    parent?: ConditionModel;
-    condition?: ConditionModel;
-    position: number;
     ready: boolean; // Whether the underlying Coveo Machine Learning model is ready.This property only has a meaning with recommendation, topClicks, and querySuggest statements. ,
     detailed: any;
+    childrenCount: number;
+    position: number;
+    description?: string;
+    parent?: ConditionModel;
+    condition?: ConditionModel;
     warnings?: string[];
     displayName?: string; // The display name for this Machine Learning model.This property only has a meaning with recommendation, topClicks, and querySuggest statements. ,
-    [key: string]: any;
 }
 
 export interface CreateStatementModel {
@@ -39,12 +39,6 @@ export interface StatementModelList {
     statements: StatementModel[];
     totalEntries: number;
     totalPages: number;
-}
-
-export enum ListStatementSortBy {
-    Position = 'position',
-    Definition = 'definition',
-    Description = 'description',
 }
 
 export interface ListStatementParams {
