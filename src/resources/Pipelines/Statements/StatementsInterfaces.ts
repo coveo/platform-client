@@ -1,5 +1,5 @@
 import {ListStatementSortBy, StatementsFeature} from '../../Enums';
-import {ConditionModel} from '../PipelinesInterfaces';
+import {ConditionModel} from '../Conditions';
 
 export interface StatementModel {
     id: string;
