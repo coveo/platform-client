@@ -1,5 +1,6 @@
 import API from '../../APICore';
 import Resource from '../Resource';
+import Condition from './Conditions/Condition';
 import MLAssociations from './MLAssociations/MLAssociations';
 import {
     ListPipelinesOptions,
@@ -18,6 +19,7 @@ export default class Pipelines extends Resource {
     associations: MLAssociations;
     statements: Statements;
     resultRanking: ResultRankings;
+    conditions: Condition;
 
     constructor(protected api: API) {
         super(api);
@@ -25,6 +27,7 @@ export default class Pipelines extends Resource {
         this.associations = new MLAssociations(api);
         this.statements = new Statements(api);
         this.resultRanking = new ResultRankings(api);
+        this.conditions = new Condition(api);
     }
 
     getMLVersion() {
