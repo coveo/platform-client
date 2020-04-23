@@ -20,7 +20,7 @@ export default class ResultRankings extends Resource {
     }
 
     get(pipelineId: string, resultRankingsId: string) {
-        return this.api.get<ResultRanking>(
+        return this.api.get<ResultRankingProps>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
             })
@@ -28,7 +28,7 @@ export default class ResultRankings extends Resource {
     }
 
     update(pipelineId: string, resultRankingsId: string, resultRanking: ResultRankingProps) {
-        return this.api.put<ResultRanking>(
+        return this.api.put<void>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
             }),
