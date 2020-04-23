@@ -10,6 +10,7 @@ import {
     UpdatePipelineModel,
 } from './PipelinesInterfaces';
 import ResultRankings from './ResultRankings/ResultRankings';
+import StatementGroups from './StatementGroups/StatementGroups';
 import Statements from './Statements/Statements';
 
 export default class Pipelines extends Resource {
@@ -20,6 +21,7 @@ export default class Pipelines extends Resource {
     statements: Statements;
     resultRanking: ResultRankings;
     conditions: Condition;
+    groups: StatementGroups;
 
     constructor(protected api: API) {
         super(api);
@@ -28,6 +30,7 @@ export default class Pipelines extends Resource {
         this.statements = new Statements(api);
         this.resultRanking = new ResultRankings(api);
         this.conditions = new Condition(api);
+        this.groups = new StatementGroups(api);
     }
 
     getMLVersion() {

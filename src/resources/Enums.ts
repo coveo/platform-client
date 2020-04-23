@@ -649,3 +649,8 @@ export enum ListStatementSortBy {
     Definition = 'definition',
     Description = 'description',
 }
+
+export enum StatementGroupType {
+    campaign = 'campaign',
+    permanent = 'permanent',
+}
