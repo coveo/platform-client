@@ -9,6 +9,7 @@ import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
+import ResourceSnapshots from '../ResourceSnapshots/ResourceSnapshots';
 import Saml from '../Saml/Saml';
 import Search from '../Search/Search';
 import SecurityCache from '../SecurityCache/SecurityCache';
@@ -135,6 +136,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.search).toBeDefined();
             expect(platformResources.search).toBeInstanceOf(Search);
+        });
+
+        it('should register the resource snapshots resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.resourceSnapshot).toBeDefined();
+            expect(platformResources.resourceSnapshot).toBeInstanceOf(ResourceSnapshots);
         });
     });
 });

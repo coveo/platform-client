@@ -11,6 +11,7 @@ import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
 import Resource from './Resource';
+import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
 import Search from './Search/Search';
 import SecurityCache from './SecurityCache/SecurityCache';
@@ -34,6 +35,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'saml', resource: Saml},
     {key: 'user', resource: User},
     {key: 'search', resource: Search},
+    {key: 'resourceSnapshot', resource: ResourceSnapshots},
 ];
 
 class PlatformResources {
@@ -55,6 +57,7 @@ class PlatformResources {
     saml: Saml;
     search: Search;
     user: User;
+    resourceSnapshot: ResourceSnapshots;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
