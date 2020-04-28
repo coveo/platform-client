@@ -1,8 +1,8 @@
 export interface ResourceSnapshotsModel {
-    createdBy?: string;
-    createdDate?: number;
+    createdBy: string;
+    createdDate: number;
     developerNote?: string;
-    id?: string;
+    id: string;
     originId?: string;
     targetId?: string;
 }

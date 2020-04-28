@@ -18,7 +18,7 @@ describe('ResourceSnapshots', () => {
         it('should make a GET call to the specific Resource Snapshots url', () => {
             resourceSnapshots.list();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}`);
+            expect(api.get).toHaveBeenCalledWith(ResourceSnapshots.baseUrl);
         });
     });
 });
