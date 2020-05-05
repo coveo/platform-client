@@ -13,6 +13,7 @@ export * from './MachineLearning';
 export * from './Organizations';
 export * from './PlatformResources';
 export * from './Pipelines';
+export * from './Platforn';
 export * from './Saml';
 export * from './Search';
 export * from './Sources';

@@ -10,6 +10,7 @@ import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
+import Platform from './Platforn/Platform';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
@@ -30,6 +31,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
     {key: 'ml', resource: MachineLearning},
     {key: 'pipeline', resource: Pipelines},
+    {key: 'platform', resource: Platform},
     {key: 'source', resource: Sources},
     {key: 'field', resource: Field},
     {key: 'saml', resource: Saml},
@@ -52,6 +54,7 @@ class PlatformResources {
     ml: MachineLearning;
     securityCache: SecurityCache;
     pipeline: Pipelines;
+    platform: Platform;
     source: Sources;
     field: Field;
     saml: Saml;
