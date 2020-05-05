@@ -3,6 +3,7 @@ import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
+import CrawlingModule from './CrawlingModule/CrawlingModule';
 import Field from './Fields/Fields';
 import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
@@ -10,7 +11,6 @@ import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
-import Platform from './Platforn/Platform';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
@@ -31,7 +31,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
     {key: 'ml', resource: MachineLearning},
     {key: 'pipeline', resource: Pipelines},
-    {key: 'platform', resource: Platform},
+    {key: 'crawlingModule', resource: CrawlingModule},
     {key: 'source', resource: Sources},
     {key: 'field', resource: Field},
     {key: 'saml', resource: Saml},
@@ -54,7 +54,7 @@ class PlatformResources {
     ml: MachineLearning;
     securityCache: SecurityCache;
     pipeline: Pipelines;
-    platform: Platform;
+    crawlingModule: CrawlingModule;
     source: Sources;
     field: Field;
     saml: Saml;

@@ -2,6 +2,7 @@ import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
+import CrawlingModule from '../CrawlingModule/CrawlingModule';
 import Field from '../Fields/Fields';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
@@ -9,7 +10,6 @@ import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
-import Platform from '../Platforn/Platform';
 import ResourceSnapshots from '../ResourceSnapshots/ResourceSnapshots';
 import Saml from '../Saml/Saml';
 import Search from '../Search/Search';
@@ -99,12 +99,12 @@ describe('PlatformResources', () => {
             expect(platformResources.pipeline).toBeInstanceOf(Pipelines);
         });
 
-        it('should register the platform resource on the platform instance', () => {
+        it('should register the crawlingModule resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.platform).toBeDefined();
-            expect(platformResources.platform).toBeInstanceOf(Platform);
+            expect(platformResources.crawlingModule).toBeDefined();
+            expect(platformResources.crawlingModule).toBeInstanceOf(CrawlingModule);
         });
 
         it('should register the source resource on the platform instance', () => {

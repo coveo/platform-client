@@ -4,18 +4,18 @@ export interface MaestroVersionOptions {
     crawlingModuleVersion: string;
 }
 
-export interface CrawlingModule {
-    createdDate: 0;
+export interface CrawlingModuleEntity {
+    createdDate: number;
     databaseVersion?: string;
-    disabled: true;
+    disabled: boolean;
     id: string;
-    lastHeartbeat: 0;
-    lastVersionUpgrade: 0;
+    lastHeartbeat: number;
+    lastVersionUpgrade: number;
     maestroVersion: string;
     name: string;
     organizationId: string;
     securityWorkerVersion?: string;
-    updatedDate: 0;
+    updatedDate: number;
     workerVersion?: string;
 }
 
@@ -27,6 +27,6 @@ export interface ComponentVersion {
 }
 
 export interface UpdateStatus {
-    updateAvailable: true;
+    updateAvailable: boolean;
     updateCategory: UpdateStatusCategory;
 }

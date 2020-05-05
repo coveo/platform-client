@@ -1,33 +1,33 @@
 import API from '../../../APICore';
-import Platform from '../Platform';
+import CrawlingModule from '../CrawlingModule';
 
 jest.mock('../../../APICore');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('Platform', () => {
-    let platform: Platform;
+describe('Crawling Module Calls', () => {
+    let crawlingModule: CrawlingModule;
     const api = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        platform = new Platform(api);
+        crawlingModule = new CrawlingModule(api);
     });
 
     describe('getCrawlingModules', () => {
         it('should list the crawling modules for an org', () => {
-            platform.getCrawlingModules();
+            crawlingModule.getCrawlingModules();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}`);
         });
     });
 
     describe('getUpdateStatus', () => {
         it('should get the update status for a given crawling module', () => {
             const crawlingModuleId = 'someCrawlingModule-1d3e4r5t';
-            platform.getUpdateStatus(crawlingModuleId);
+            crawlingModule.getUpdateStatus(crawlingModuleId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/${crawlingModuleId}/update`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}/update`);
         });
     });
 
@@ -36,39 +36,39 @@ describe('Platform', () => {
             const options = {
                 crawlingModuleVersion: 'v2',
             };
-            platform.getMaestroVersions(options);
+            crawlingModule.getMaestroVersions(options);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/versions/latest?crawlingModuleVersion=v2`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/latest?crawlingModuleVersion=v2`);
         });
 
         it('should get the component versions for maestro', () => {
-            platform.getMaestroVersions();
+            crawlingModule.getMaestroVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/versions/latest`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/latest`);
         });
     });
 
     describe('listDatabaseVersions', () => {
         it('should list the database version history', () => {
-            platform.listDatabaseVersions();
+            crawlingModule.listDatabaseVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/versions/database`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/database`);
         });
     });
 
     describe('listWorkerVersions', () => {
         it('should list worker version history', () => {
-            platform.listWorkerVersions();
+            crawlingModule.listWorkerVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/versions/worker`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/worker`);
         });
     });
 
     describe('listSecurityWorkerVersions', () => {
         it('should list security worker version', () => {
-            platform.listSecurityWorkerVersions();
+            crawlingModule.listSecurityWorkerVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Platform.baseUrl}/versions/securityWorker`);
+            expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/securityWorker`);
         });
     });
 });
