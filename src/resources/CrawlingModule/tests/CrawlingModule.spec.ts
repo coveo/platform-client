@@ -14,9 +14,9 @@ describe('Crawling Module Calls', () => {
         crawlingModule = new CrawlingModule(api);
     });
 
-    describe('getCrawlingModules', () => {
+    describe('list', () => {
         it('should list the crawling modules for an org', () => {
-            crawlingModule.getCrawlingModules();
+            crawlingModule.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}`);
         });

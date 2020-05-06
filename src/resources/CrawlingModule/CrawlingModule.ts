@@ -5,7 +5,7 @@ import {ComponentVersion, CrawlingModuleEntity, MaestroVersionOptions, UpdateSta
 export default class CrawlingModule extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/crawlingmodule`;
 
-    getCrawlingModules() {
+    list() {
         return this.api.get<CrawlingModuleEntity[]>(CrawlingModule.baseUrl);
     }
 
