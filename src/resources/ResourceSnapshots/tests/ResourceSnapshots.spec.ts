@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
+import {PushSnapshotOptions} from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -19,6 +20,20 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResourceSnapshots.baseUrl);
+        });
+    });
+
+    describe('push', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const pushSnapshotOptions: PushSnapshotOptions = {targetId: '🎯', developerNotes: '🧘'};
+
+            resourceSnapshots.push(snapshotId, pushSnapshotOptions);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`,
+                {}
+            );
         });
     });
 });
