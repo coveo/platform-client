@@ -60,7 +60,7 @@ export default class API implements IAPI {
 
     async put<T = {}>(
         url: string,
-        body: any,
+        body: any = {},
         args: RequestInit = {method: 'put', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
     ): Promise<T> {
         return await this.request<T>(url, args);
