@@ -31,8 +31,7 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.push(snapshotId, pushSnapshotOptions);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`,
-                {}
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`
             );
         });
     });
