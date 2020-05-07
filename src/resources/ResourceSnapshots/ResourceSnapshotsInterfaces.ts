@@ -6,3 +6,8 @@ export interface ResourceSnapshotsModel {
     originId?: string;
     targetId?: string;
 }
+
+export interface PushSnapshotOptions {
+    targetOrganizationId: string;
+    developerNotes?: string;
+}

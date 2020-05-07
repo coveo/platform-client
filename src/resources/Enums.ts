@@ -142,6 +142,12 @@ export enum FilterStatusType {
     ERROR = 'ERROR',
 }
 
+export enum UpdateStatusCategory {
+    MINOR = 'MINOR',
+    CRITICAL = 'CRITICAL',
+    BREAKING = 'BREAKING',
+}
+
 export enum SortingType {
     TYPE = 'TYPE',
     NAME = 'NAME',
