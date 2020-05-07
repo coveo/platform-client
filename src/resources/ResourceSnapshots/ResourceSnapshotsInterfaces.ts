@@ -8,6 +8,6 @@ export interface ResourceSnapshotsModel {
 }
 
 export interface PushSnapshotOptions {
-    targetId: string;
+    targetOrganizationId: string;
     developerNotes?: string;
 }
