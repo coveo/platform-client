@@ -26,12 +26,12 @@ describe('ResourceSnapshots', () => {
     describe('push', () => {
         it('should make a PUT call to the specific Resource Snapshots url', () => {
             const snapshotId = '🤖';
-            const pushSnapshotOptions: PushSnapshotOptions = {targetId: '🎯', developerNotes: '🧘'};
+            const pushSnapshotOptions: PushSnapshotOptions = {targetOrganizationId: '🎯', developerNotes: '🧘'};
 
             resourceSnapshots.push(snapshotId, pushSnapshotOptions);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetOrganizationId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`
             );
         });
     });
