@@ -35,4 +35,13 @@ describe('ResourceSnapshots', () => {
             );
         });
     });
+
+    describe('delete a snapshot', () => {
+        it('should make a DELETE call to the specific Resource Snapshots url', () => {
+            const snapshotId = 'BossHoss';
+            resourceSnapshots.delete(snapshotId);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+        });
+    });
 });
