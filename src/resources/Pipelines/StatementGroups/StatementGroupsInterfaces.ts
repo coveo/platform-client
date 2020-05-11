@@ -16,6 +16,10 @@ export interface StatementGroupModel {
     description?: string;
     conditionId?: string;
     conditionDefinition?: string;
+    createdAt: string;
+    createdBy?: string;
+    modifiedAt?: string;
+    modifiedBy?: string;
     statementComposition: StatementGroupComposition;
 }
 
