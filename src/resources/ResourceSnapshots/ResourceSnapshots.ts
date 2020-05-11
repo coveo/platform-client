@@ -12,4 +12,8 @@ export default class ResourceSnapshots extends Resource {
     push(snapshotId: string, options: PushSnapshotOptions) {
         return this.api.put(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/push`, options));
     }
+
+    delete(snapshotId: string) {
+        return this.api.delete(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+    }
 }
