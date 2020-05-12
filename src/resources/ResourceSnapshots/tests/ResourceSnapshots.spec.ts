@@ -23,6 +23,15 @@ describe('ResourceSnapshots', () => {
         });
     });
 
+    describe('get', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            resourceSnapshots.get(snapshotToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
+        });
+    });
+
     describe('push', () => {
         it('should make a PUT call to the specific Resource Snapshots url', () => {
             const snapshotId = '🤖';
