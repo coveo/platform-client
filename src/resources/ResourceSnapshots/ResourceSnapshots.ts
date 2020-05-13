@@ -1,6 +1,6 @@
 import API from '../../APICore';
 import Resource from '../Resource';
-import {PushSnapshotOptions, ResourceSnapshotsModel} from './ResourceSnapshotsInterfaces';
+import {PushSnapshotOptions, ResourceSnapshotsModel, ResourceSnapshotUrlModel} from './ResourceSnapshotsInterfaces';
 
 export default class ResourceSnapshots extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/snapshots`;
@@ -11,6 +11,10 @@ export default class ResourceSnapshots extends Resource {
 
     get(snapshotId: string) {
         return this.api.get<ResourceSnapshotsModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+    }
+
+    generateUrl(snapshotId: string) {
+        return this.api.get<ResourceSnapshotUrlModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
     }
 
     push(snapshotId: string, options: PushSnapshotOptions) {
