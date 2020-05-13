@@ -1,7 +1,7 @@
 import API from '../../../../APICore';
 import {StatementGroupType} from '../../../Enums';
 import StatementGroups from '../StatementGroups';
-import {CreateStatementGroupModel} from '../StatementGroupsInterfaces';
+import {CreateStatementGroupModel, StatementGroupModel} from '../StatementGroupsInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -37,6 +37,39 @@ describe('StatementGroups', () => {
             groups.create(pipelineId, model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(StatementGroups.getBaseUrl(pipelineId), model);
+        });
+    });
+
+    describe('get', () => {
+        it('should make a GET call to the specific StatementGroups url', () => {
+            const pipelineId = '️a';
+            const groupId = 'b';
+
+            groups.get(pipelineId, groupId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId));
+        });
+    });
+
+    describe('update', () => {
+        const group: StatementGroupModel = {
+            id: 'a',
+            name: 'b',
+            type: StatementGroupType.permanent,
+            createdAt: 'la',
+            statementComposition: {
+                resultRankingStatementCount: 1,
+                otherStatementCount: 2,
+            },
+        };
+
+        it('should make a PUT call to the specific StatementGroups url', () => {
+            const pipelineId = '️a';
+            const groupId = 'b';
+
+            groups.update(pipelineId, groupId, group);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), group);
         });
     });
 });
