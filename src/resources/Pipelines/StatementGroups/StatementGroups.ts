@@ -8,6 +8,8 @@ import {
 
 export default class StatementGroups extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/statementGroups`;
+    static getStatementGroupUrl = (pipelineId: string, groupId: string) =>
+        `${StatementGroups.getBaseUrl(pipelineId)}/${groupId}`;
 
     list(pipelineId: string, options?: ListStatementGroupsOptions) {
         return this.api.get<StatementGroupList>(
@@ -22,6 +24,23 @@ export default class StatementGroups extends Resource {
         return this.api.post<StatementGroupModel>(
             this.buildPath(StatementGroups.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
             model
+        );
+    }
+
+    get(pipelineId: string, groupId: string) {
+        return this.api.get<StatementGroupModel>(
+            this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
+                organizationId: this.api.organizationId,
+            })
+        );
+    }
+
+    update(pipelineId: string, groupId: string, groupModel: StatementGroupModel) {
+        return this.api.put<void>(
+            this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
+                organizationId: this.api.organizationId,
+            }),
+            groupModel
         );
     }
 }
