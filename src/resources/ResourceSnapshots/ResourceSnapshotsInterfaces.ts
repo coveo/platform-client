@@ -7,6 +7,11 @@ export interface ResourceSnapshotsModel {
     targetId?: string;
 }
 
+export interface ResourceSnapshotUrlModel {
+    url: string;
+    urlExpiration: number;
+}
+
 export interface PushSnapshotOptions {
     targetOrganizationId: string;
     developerNotes?: string;
