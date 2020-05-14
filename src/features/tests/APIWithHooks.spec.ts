@@ -29,7 +29,7 @@ describe('APIWithHooks', () => {
         postForm: 'postForm',
         delete: 'delete',
         put: 'put',
-        patch: 'patch',
+        patch: 'PATCH',
     };
     const someBodyData = {};
     const someGenericArgs = {};

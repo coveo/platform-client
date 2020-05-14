@@ -168,7 +168,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options.method).toBe('patch');
+                expect(options.method).toBe('PATCH');
                 expect(options.body).toBe(JSON.stringify(testData.body));
                 expect(options.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
                 expect(response).toEqual(testData.response);
