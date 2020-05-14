@@ -14,6 +14,7 @@ const mockApi = (): jest.Mocked<IAPI> => ({
     postForm: jest.fn().mockImplementation(() => Promise.resolve({})),
     delete: jest.fn().mockImplementation(() => Promise.resolve({})),
     put: jest.fn().mockImplementation(() => Promise.resolve({})),
+    patch: jest.fn().mockImplementation(() => Promise.resolve({})),
     abortGetRequests: jest.fn(),
     checkToken: jest.fn().mockImplementation(() => Promise.resolve()),
     currentUser: {} as UserModel,
@@ -28,6 +29,7 @@ describe('APIWithHooks', () => {
         postForm: 'postForm',
         delete: 'delete',
         put: 'put',
+        patch: 'patch',
     };
     const someBodyData = {};
     const someGenericArgs = {};
@@ -82,6 +84,13 @@ describe('APIWithHooks', () => {
             expect(api.put).toHaveBeenCalledWith(urls.put, someBodyData, someGenericArgs);
         });
 
+        it('should trigger the hook on a patch', async () => {
+            await apiWithHooks.patch(urls.patch, someBodyData, someGenericArgs);
+
+            assertInvocationWasBefore(beforeMock, api.patch as jest.Mock);
+            expect(api.patch).toHaveBeenCalledWith(urls.patch, someBodyData, someGenericArgs);
+        });
+
         it('should trigger the hook on a delete', async () => {
             await apiWithHooks.delete(urls.delete, someGenericArgs);
 
@@ -133,6 +142,13 @@ describe('APIWithHooks', () => {
 
             assertInvocationWasBefore(api.put as jest.Mock, afterMock);
             expect(api.put).toHaveBeenCalledWith(urls.put, someBodyData, someGenericArgs);
+        });
+
+        it('should trigger the hook on a patch', async () => {
+            await apiWithHooks.patch(urls.patch, someBodyData, someGenericArgs);
+
+            assertInvocationWasBefore(api.patch as jest.Mock, afterMock);
+            expect(api.patch).toHaveBeenCalledWith(urls.patch, someBodyData, someGenericArgs);
         });
 
         it('should trigger the hook on a delete', async () => {
@@ -228,6 +244,21 @@ describe('APIWithHooks', () => {
 
         it('should not trigger the hook on a put success', async () => {
             await apiWithHooks.put(urls.put, someBodyData, someGenericArgs);
+
+            expect(afterExceptionMock).not.toHaveBeenCalled();
+        });
+
+        it('should trigger the hook on a patch exception', async () => {
+            api.patch.mockRejectedValue(someError);
+
+            await apiWithHooks.patch(urls.patch, someBodyData, someGenericArgs);
+
+            assertInvocationWasBefore(api.patch as jest.Mock, afterExceptionMock);
+            expect(afterExceptionMock).toHaveBeenCalledWith(urls.patch, someGenericArgs, someError);
+        });
+
+        it('should not trigger the hook on a patch success', async () => {
+            await apiWithHooks.patch(urls.patch, someBodyData, someGenericArgs);
 
             expect(afterExceptionMock).not.toHaveBeenCalled();
         });

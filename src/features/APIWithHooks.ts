@@ -42,6 +42,14 @@ export class APIWithHooks<TAPI extends IAPI = IAPI> implements IAPI {
         return this.wrapInGenericHandler(url, args, () => this.api.put<T>(url, body, args));
     }
 
+    async patch<T = {}>(
+        url: string,
+        body: any,
+        args: RequestInit = {method: 'patch', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
+    ): Promise<T> {
+        return this.wrapInGenericHandler(url, args, () => this.api.patch<T>(url, body, args));
+    }
+
     async delete<T = {}>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
         return this.wrapInGenericHandler(url, args, () => this.api.delete<T>(url, args));
     }

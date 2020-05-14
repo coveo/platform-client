@@ -66,6 +66,14 @@ export default class API implements IAPI {
         return await this.request<T>(url, args);
     }
 
+    async patch<T = {}>(
+        url: string,
+        body: any = {},
+        args: RequestInit = {method: 'patch', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
+    ): Promise<T> {
+        return await this.request<T>(url, args);
+    }
+
     async delete<T = {}>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
         return await this.request<T>(url, args);
     }

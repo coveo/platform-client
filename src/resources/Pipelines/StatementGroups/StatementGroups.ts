@@ -43,4 +43,13 @@ export default class StatementGroups extends Resource {
             groupModel
         );
     }
+
+    toggleActive(pipelineId: string, groupId: string, isActive: boolean) {
+        return this.api.patch<void>(
+            this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
+                organizationId: this.api.organizationId,
+            }),
+            {isActive}
+        );
+    }
 }
