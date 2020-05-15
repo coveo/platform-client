@@ -159,6 +159,28 @@ describe('APICore', () => {
             });
         });
 
+        describe('patch', () => {
+            it('should do a simple PATCH request', async () => {
+                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                const response = await api.patch(testData.route, testData.body);
+
+                expect(fetchMock).toHaveBeenCalledTimes(1);
+                const [url, options] = fetchMock.mock.calls[0];
+
+                expect(url).toBe(`${testConfig.host}${testData.route}`);
+                expect(options.method).toBe('PATCH');
+                expect(options.body).toBe(JSON.stringify(testData.body));
+                expect(options.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
+                expect(response).toEqual(testData.response);
+            });
+
+            it('should not bind PATCH requests to an abort signal', () => {
+                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                api.patch(testData.route, testData.body);
+                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+            });
+        });
+
         describe('delete', () => {
             it('should do a simple DELETE request', async () => {
                 const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));

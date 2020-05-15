@@ -72,4 +72,18 @@ describe('StatementGroups', () => {
             expect(api.put).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), group);
         });
     });
+
+    describe('toggleActive', () => {
+        it('should make a PATCH call to the specific StatementGroups url', () => {
+            const pipelineId = '️=)';
+            const groupId = '(=';
+            const isActive = true;
+
+            groups.toggleActive(pipelineId, groupId, isActive);
+            expect(api.patch).toHaveBeenCalledTimes(1);
+            expect(api.patch).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
+                isActive,
+            });
+        });
+    });
 });
