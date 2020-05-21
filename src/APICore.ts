@@ -1,4 +1,5 @@
-import {APIConfiguration} from './ConfigurationInterfaces';
+import {PlatformClientOptions} from './ConfigurationInterfaces';
+import {EndpointTemplates, Environment} from './Endpoints';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
 import {UserModel} from './resources/Users';
@@ -13,7 +14,7 @@ export default class API implements IAPI {
     private getRequestsController: AbortController;
     private tokenInfo: Record<string, any>;
 
-    constructor(private config: APIConfiguration) {
+    constructor(private config: PlatformClientOptions) {
         this.getRequestsController = new AbortController();
     }
 
@@ -99,12 +100,20 @@ export default class API implements IAPI {
         return customHandlers.length ? customHandlers : defaultResponseHandlers;
     }
 
+    private get environment(): string {
+        return retrieve(this.config.environment) || Environment.prod;
+    }
+
+    private get endpoint(): string {
+        return retrieve(this.config.host) || EndpointTemplates[this.environment];
+    }
+
     private get accessToken(): string {
         return retrieve(this.config.accessToken);
     }
 
     private getUrlFromRoute(route: string): string {
-        return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.organizationId);
+        return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
     private async request<T>(route: string, args: RequestInit): Promise<T> {
