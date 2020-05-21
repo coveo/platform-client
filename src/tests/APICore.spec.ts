@@ -1,18 +1,47 @@
 import API from '../APICore';
-import {APIConfiguration} from '../ConfigurationInterfaces';
+import {PlatformClientOptions} from '../ConfigurationInterfaces';
+import {EndpointTemplates, Environment} from '../Endpoints';
 import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces';
 
 describe('APICore', () => {
-    const testConfig: APIConfiguration = {
+    const testConfig: PlatformClientOptions = {
         host: 'https://some.url/',
         organizationId: 'some-org-id',
-        accessTokenRetriever: jest.fn(() => 'my-token'),
+        accessToken: jest.fn(() => 'my-token'),
     };
     const testData = {
         route: 'rest/resource',
         response: {nuggets: 12345},
         body: {q: 'how many nuggets'},
     };
+
+    describe('calling the right endpoint', () => {
+        beforeEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it('should call the production endpoint if no environment option is provided', () => {
+            const api = new API({accessToken: 'my-token', organizationId: 'some-org'});
+            api.get('this/that');
+            const [url] = fetchMock.mock.calls[0];
+            expect(url).toMatch(EndpointTemplates[Environment.prod]);
+        });
+
+        it('should call the development endpoint if the dev environment option is provided', () => {
+            const api = new API({accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev});
+            api.get('this/that');
+            const [url] = fetchMock.mock.calls[0];
+            expect(url).toMatch(EndpointTemplates[Environment.dev]);
+        });
+
+        it('should call the custom endpoint if a custom host option is provided', () => {
+            const myCustomHost = 'localhost:9999/my-api-running-locally';
+            const api = new API({accessToken: 'my-token', organizationId: 'some-org', host: myCustomHost});
+            api.get('this/that');
+            const [url] = fetchMock.mock.calls[0];
+            expect(url).toMatch(myCustomHost);
+        });
+    });
 
     describe('when making requests', () => {
         let api: API;
@@ -269,7 +298,7 @@ describe('APICore', () => {
         });
 
         it('should return call the organization id retriver function to get the organization id', () => {
-            const api = new API({...testConfig, organizationIdRetriever: () => 'another-org-id'});
+            const api = new API({...testConfig, organizationId: () => 'another-org-id'});
             expect(api.organizationId).not.toBe(testConfig.organizationId);
             expect(api.organizationId).toBe('another-org-id');
         });
@@ -293,7 +322,7 @@ describe('APICore', () => {
             expect(postFormSpy).toHaveBeenCalledTimes(1);
             expect(postFormSpy).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
             expect(mockedFormData.set).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.set).toHaveBeenCalledWith('token', testConfig.accessTokenRetriever());
+            expect(mockedFormData.set).toHaveBeenCalledWith('token', 'my-token');
         });
 
         it('should throw an error if the check token call fails', async () => {

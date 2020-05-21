@@ -10,7 +10,7 @@ const APIMock: jest.Mock<API> = API as any;
 
 describe('PlatformClient', () => {
     const baseOptions: PlatformClientOptions = {
-        accessTokenRetriever: jest.fn(() => 'my-token'),
+        accessToken: jest.fn(() => 'my-token'),
         organizationId: 'some-org',
     };
 
@@ -18,43 +18,9 @@ describe('PlatformClient', () => {
         jest.clearAllMocks();
     });
 
-    it('should throw an error when the host is undefined', () => {
-        expect(() => {
-            new PlatformClient({...baseOptions, environment: 'unknown-environment'});
-        }).toThrow();
-    });
-
     test('an API object is created when creating a platform instance', () => {
         new PlatformClient(baseOptions);
         expect(APIMock).toHaveBeenCalledTimes(1);
-    });
-
-    test('the API uses the production host if no environment option is provided', () => {
-        new PlatformClient(baseOptions);
-        expect(APIMock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                host: PlatformClient.Hosts[PlatformClient.Environments.prod],
-            })
-        );
-    });
-
-    test('the API uses the host associated with the environment specified in the options', () => {
-        new PlatformClient({...baseOptions, environment: PlatformClient.Environments.dev});
-        expect(APIMock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                host: PlatformClient.Hosts[PlatformClient.Environments.dev],
-            })
-        );
-    });
-
-    test('the API uses the custom host specified in the options if any', () => {
-        const myCustomHost = 'localhost:9999/my-api-running-locally';
-        new PlatformClient({...baseOptions, host: myCustomHost});
-        expect(APIMock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                host: myCustomHost,
-            })
-        );
     });
 
     test('the API uses the organization id specified in the options', () => {
@@ -70,7 +36,7 @@ describe('PlatformClient', () => {
         new PlatformClient(baseOptions);
         expect(APIMock).toHaveBeenCalledWith(
             expect.objectContaining({
-                accessTokenRetriever: baseOptions.accessTokenRetriever,
+                accessToken: baseOptions.accessToken,
             })
         );
     });
