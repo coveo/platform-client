@@ -1,18 +1,15 @@
 import {IAPIFeature} from './features/APIFeature';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
+import {Retrievable} from './utils/Retriever';
 
 export interface APIConfiguration {
-    /**
-     * @deprecated Use the organizationIdRetriever instead
-     */
-    organizationId?: string;
-    organizationIdRetriever?: () => string;
-    accessTokenRetriever: () => string;
-    host?: string;
+    accessToken: Retrievable<string>;
+    organizationId: Retrievable<string>;
+    host?: Retrievable<string>;
     responseHandlers?: ResponseHandler[];
     apiFeatures?: IAPIFeature[];
 }
 
 export interface PlatformClientOptions extends APIConfiguration {
-    environment?: string;
+    environment?: Retrievable<string>;
 }

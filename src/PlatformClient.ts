@@ -4,6 +4,7 @@ import {HostUndefinedError} from './Errors';
 import {IAPIFeature} from './features/APIFeature';
 import {ResponseHandlers} from './handlers/ResponseHandlers';
 import PlatformResources from './resources/PlatformResources';
+import retrieve from './utils/Retriever';
 
 export class PlatformClient extends PlatformResources {
     static Environments = {
@@ -69,8 +70,12 @@ export class PlatformClient extends PlatformResources {
         };
     }
 
+    private get environment(): string {
+        return retrieve(this.options.environment);
+    }
+
     private get host(): string {
-        return this.options.host || PlatformClient.Hosts[this.options.environment];
+        return retrieve(this.options.host) || PlatformClient.Hosts[this.environment];
     }
 }
 
