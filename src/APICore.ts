@@ -2,6 +2,7 @@ import {APIConfiguration} from './ConfigurationInterfaces';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
 import {UserModel} from './resources/Users';
+import retrieve from './utils/Retriever';
 
 type APIPrototype = typeof API.prototype;
 export type IAPI = {[P in keyof APIPrototype]: APIPrototype[P]};
@@ -16,8 +17,8 @@ export default class API implements IAPI {
         this.getRequestsController = new AbortController();
     }
 
-    get organizationId() {
-        return this.config.organizationIdRetriever?.() || this.config.organizationId;
+    get organizationId(): string {
+        return retrieve(this.config.organizationId);
     }
 
     async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
@@ -85,7 +86,7 @@ export default class API implements IAPI {
 
     async checkToken() {
         const formData = new FormData();
-        formData.set('token', this.config.accessTokenRetriever());
+        formData.set('token', this.accessToken);
         this.tokenInfo = await this.postForm<any>('/oauth/check_token', formData);
     }
 
@@ -98,6 +99,10 @@ export default class API implements IAPI {
         return customHandlers.length ? customHandlers : defaultResponseHandlers;
     }
 
+    private get accessToken(): string {
+        return retrieve(this.config.accessToken);
+    }
+
     private getUrlFromRoute(route: string): string {
         return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
@@ -106,7 +111,7 @@ export default class API implements IAPI {
         const init: RequestInit = {
             ...args,
             headers: {
-                Authorization: `Bearer ${this.config.accessTokenRetriever()}`,
+                Authorization: `Bearer ${this.accessToken}`,
                 Accept: 'application/json',
                 ...(args.headers || {}),
             },
@@ -120,7 +125,7 @@ export default class API implements IAPI {
         const init: RequestInit = {
             ...args,
             headers: {
-                Authorization: `Bearer ${this.config.accessTokenRetriever()}`,
+                Authorization: `Bearer ${this.accessToken}`,
                 ...(args.headers || {}),
             },
         };
