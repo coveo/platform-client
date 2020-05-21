@@ -5,3 +5,4 @@ export * from './Errors';
 export * from './features';
 export * from './handlers';
 export * from './resources';
+export * from './utils';
