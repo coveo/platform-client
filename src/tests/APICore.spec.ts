@@ -1,7 +1,9 @@
 import API from '../APICore';
 import {PlatformClientOptions} from '../ConfigurationInterfaces';
-import {EndpointTemplates, Environment} from '../Endpoints';
+import getEndpoint, {Environment, Region} from '../Endpoints';
 import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces';
+
+jest.mock('../Endpoints');
 
 describe('APICore', () => {
     const testConfig: PlatformClientOptions = {
@@ -20,24 +22,32 @@ describe('APICore', () => {
             jest.clearAllMocks();
         });
 
-        it('should call the production endpoint if no environment option is provided', () => {
+        it('should call the default endpoint if no environment, region, and host is specified', () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org'});
             api.get('this/that');
-            const [url] = fetchMock.mock.calls[0];
-            expect(url).toMatch(EndpointTemplates[Environment.prod]);
+            expect(getEndpoint).toHaveBeenCalledTimes(1);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.US);
+        });
+
+        it('should call the europe endpoint if the europe region is specified', () => {
+            const api = new API({accessToken: 'my-token', organizationId: 'some-org', region: Region.EU});
+            api.get('this/that');
+            expect(getEndpoint).toHaveBeenCalledTimes(1);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.EU);
         });
 
         it('should call the development endpoint if the dev environment option is provided', () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev});
             api.get('this/that');
-            const [url] = fetchMock.mock.calls[0];
-            expect(url).toMatch(EndpointTemplates[Environment.dev]);
+            expect(getEndpoint).toHaveBeenCalledTimes(1);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US);
         });
 
         it('should call the custom endpoint if a custom host option is provided', () => {
             const myCustomHost = 'localhost:9999/my-api-running-locally';
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', host: myCustomHost});
             api.get('this/that');
+            expect(getEndpoint).not.toHaveBeenCalled();
             const [url] = fetchMock.mock.calls[0];
             expect(url).toMatch(myCustomHost);
         });
