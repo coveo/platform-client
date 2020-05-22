@@ -69,6 +69,7 @@ This project is built using TypeScript and automatically generates relevant type
 | `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
 | `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
+| `region` | optional | Region.US | The target region. |
 
 ### Error handling
 
