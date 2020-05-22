@@ -1,5 +1,5 @@
 import {PlatformClientOptions} from './ConfigurationInterfaces';
-import {EndpointTemplates, Environment} from './Endpoints';
+import getEndpoint, {Environment, Region} from './Endpoints';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
 import {UserModel} from './resources/Users';
@@ -100,12 +100,16 @@ export default class API implements IAPI {
         return customHandlers.length ? customHandlers : defaultResponseHandlers;
     }
 
-    private get environment(): string {
-        return retrieve(this.config.environment) || Environment.prod;
+    private get environment(): Environment {
+        return this.config.environment || Environment.prod;
+    }
+
+    private get region(): Region {
+        return this.config.region || Region.US;
     }
 
     private get endpoint(): string {
-        return retrieve(this.config.host) || EndpointTemplates[this.environment];
+        return retrieve(this.config.host) || getEndpoint(this.environment, this.region);
     }
 
     private get accessToken(): string {
