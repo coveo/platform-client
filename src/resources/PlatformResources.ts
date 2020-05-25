@@ -1,4 +1,4 @@
-import {IAPI} from '../APICore';
+import API from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
@@ -41,7 +41,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
 ];
 
 class PlatformResources {
-    protected API: IAPI;
+    protected API: API;
 
     aws: AWS;
     catalog: Catalog;
@@ -62,7 +62,7 @@ class PlatformResources {
     user: User;
     resourceSnapshot: ResourceSnapshots;
 
-    registerAll() {
+    protected registerAll() {
         resourcesMap.forEach(({key, resource}) => {
             this[key] = new resource(this.API);
         });

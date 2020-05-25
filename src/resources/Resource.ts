@@ -1,16 +1,9 @@
-import {IAPI} from '../APICore';
-import {IAPIFeature} from '../features/APIFeature';
+import API from '../APICore';
 
 class Resource {
     static baseUrl: string;
 
-    constructor(protected api: IAPI) {}
-
-    withFeatures(...features: IAPIFeature[]): this {
-        const apiWithAllFeatures = features.reduce((acc, current) => current(acc), this.api);
-        const type = this.constructor as typeof Resource;
-        return new type(apiWithAllFeatures) as this;
-    }
+    constructor(protected api: API) {}
 
     protected buildPath(route: string, parameters: object): string {
         return route + this.convertObjectToQueryString(parameters);
