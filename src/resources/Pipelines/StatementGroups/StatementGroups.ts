@@ -44,6 +44,14 @@ export default class StatementGroups extends Resource {
         );
     }
 
+    delete(pipelineId: string, groupId: string) {
+        return this.api.delete<void>(
+            this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
+                organizationId: this.api.organizationId,
+            })
+        );
+    }
+
     toggleActive(pipelineId: string, groupId: string, isActive: boolean) {
         return this.api.patch<void>(
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {

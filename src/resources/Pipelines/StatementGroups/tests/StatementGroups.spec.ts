@@ -73,6 +73,17 @@ describe('StatementGroups', () => {
         });
     });
 
+    describe('delete', () => {
+        it('should make a DELETE call to the specific StatementGroups url', () => {
+            const pipelineId = '🍄';
+            const groupId = '🌿';
+
+            groups.delete(pipelineId, groupId);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId));
+        });
+    });
+
     describe('toggleActive', () => {
         it('should make a PATCH call to the specific StatementGroups url', () => {
             const pipelineId = '️=)';
