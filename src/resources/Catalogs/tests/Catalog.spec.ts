@@ -1,7 +1,7 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Catalog from '../Catalog';
-import {CatalogModel} from '../CatalogInterfaces';
+import {CatalogModel, CreateCatalogModel} from '../CatalogInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -26,7 +26,7 @@ describe('Catalog', () => {
 
     describe('create', () => {
         it('should make a POST call to the catalogs base url', () => {
-            const catalogModel: New<CatalogModel> = {
+            const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
                 product: {
                     idField: '@uri',

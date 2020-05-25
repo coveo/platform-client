@@ -1,7 +1,7 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CatalogModel, CatalogsListOptions} from './CatalogInterfaces';
+import {CatalogModel, CatalogsListOptions, CreateCatalogModel} from './CatalogInterfaces';
 
 export default class Catalog extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
@@ -10,8 +10,8 @@ export default class Catalog extends Resource {
         return this.api.get<PageModel<CatalogModel>>(this.buildPath(Catalog.baseUrl, options));
     }
 
-    create(catalog: New<CatalogModel>) {
-        return this.api.post<CatalogModel>(Catalog.baseUrl, catalog);
+    create(catalog: New<CreateCatalogModel>) {
+        return this.api.post<CreateCatalogModel>(Catalog.baseUrl, catalog);
     }
 
     delete(catalogId: string) {
