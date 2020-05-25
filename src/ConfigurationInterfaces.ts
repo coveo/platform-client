@@ -1,7 +1,8 @@
 import {Environment, Region} from './Endpoints';
-import {IAPIFeature} from './features/APIFeature';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import {Retrievable} from './utils/Retriever';
+
+export type Feature = (currentOptions: PlatformClientOptions) => PlatformClientOptions;
 
 export interface PlatformClientOptions {
     accessToken: Retrievable<string>;
@@ -10,5 +11,4 @@ export interface PlatformClientOptions {
     environment?: Environment;
     region?: Region;
     responseHandlers?: ResponseHandler[];
-    apiFeatures?: IAPIFeature[];
 }

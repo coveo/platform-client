@@ -1,6 +1,5 @@
 import API from '../APICore';
-import {PlatformClientOptions} from '../ConfigurationInterfaces';
-import {IAPIFeature} from '../features/APIFeature';
+import {Feature, PlatformClientOptions} from '../ConfigurationInterfaces';
 import PlatformClient from '../PlatformClient';
 import PlatformResources from '../resources/PlatformResources';
 
@@ -41,13 +40,6 @@ describe('PlatformClient', () => {
         );
     });
 
-    it('should register all the resources on the platform instance', () => {
-        const registerAllSpy = spyOn(PlatformResources.prototype, 'registerAll');
-        new PlatformClient(baseOptions);
-
-        expect(registerAllSpy).toHaveBeenCalledTimes(1);
-    });
-
     it('should abort get requests on the API instance', () => {
         const platform = new PlatformClient(baseOptions);
         const abortGetRequestsSpy = APIMock.mock.instances[0].abortGetRequests as jest.Mock<
@@ -68,18 +60,26 @@ describe('PlatformClient', () => {
         expect(checkTokenSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('should register all the resources on the platform instance', () => {
+        const registerAllSpy = spyOn(PlatformResources.prototype, 'registerAll');
+        new PlatformClient(baseOptions);
+
+        expect(registerAllSpy).toHaveBeenCalledTimes(1);
+    });
+
     describe('withFeatures', () => {
         it('should create a copy of the client with the new feature', async () => {
-            const feature: IAPIFeature = jest.fn((api) => api);
+            const feature: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
 
             const clientWithFeature = client.withFeatures(feature);
 
+            expect(clientWithFeature).toBeInstanceOf(PlatformClient);
             expect(clientWithFeature).not.toBe(client);
         });
 
         it('should execute the feature', async () => {
-            const feature: IAPIFeature = jest.fn((api) => api);
+            const feature: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
 
             client.withFeatures(feature);
@@ -87,28 +87,15 @@ describe('PlatformClient', () => {
             expect(feature).toHaveBeenCalled();
         });
 
-        it('should call the new api when accessing the resource with the feature', async () => {
-            const apiThatShouldWrapTheInitialOne = new APIMock();
-            const feature = jest.fn(() => apiThatShouldWrapTheInitialOne);
-
+        it('should execute all the features', async () => {
+            const feature1: Feature = jest.fn((currentOptions) => currentOptions);
+            const feature2: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
 
-            await client.withFeatures(feature).catalog.get('someId');
+            client.withFeatures(feature1, feature2);
 
-            expect(apiThatShouldWrapTheInitialOne.get).toHaveBeenCalled();
-        });
-
-        it('should not call the new api when accessing the resource without the feature', async () => {
-            const apiThatShouldWrapTheInitialOne = new APIMock();
-            const feature = jest.fn(() => apiThatShouldWrapTheInitialOne);
-
-            const client = new PlatformClient(baseOptions);
-
-            client.withFeatures(feature);
-
-            await client.catalog.get('someId');
-
-            expect(apiThatShouldWrapTheInitialOne.get).not.toHaveBeenCalled();
+            expect(feature1).toHaveBeenCalled();
+            expect(feature2).toHaveBeenCalled();
         });
     });
 });
