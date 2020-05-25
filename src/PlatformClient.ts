@@ -1,7 +1,6 @@
-import API, {IAPI} from './APICore';
-import {PlatformClientOptions} from './ConfigurationInterfaces';
+import API from './APICore';
+import {Feature, PlatformClientOptions} from './ConfigurationInterfaces';
 import {Environment} from './Endpoints';
-import {IAPIFeature} from './features/APIFeature';
 import {ResponseHandlers} from './handlers/ResponseHandlers';
 import PlatformResources from './resources/PlatformResources';
 
@@ -12,19 +11,14 @@ export class PlatformClient extends PlatformResources {
     constructor(private options: PlatformClientOptions) {
         super();
 
-        const api: IAPI = new API(this.options);
-        this.API = this.options.apiFeatures
-            ? this.options.apiFeatures.reduce((current, feature) => feature(current), api)
-            : api;
+        this.API = new API(options);
         this.registerAll();
     }
 
-    withFeatures(...features: IAPIFeature[]): this {
-        const type = this.constructor as typeof PlatformClient;
-        return new type({
-            ...this.options,
-            apiFeatures: [...(this.options.apiFeatures || []), ...features],
-        } as PlatformClientOptions) as this;
+    withFeatures(...features: Feature[]): this {
+        const EnhancedClient = this.constructor as typeof PlatformClient;
+        const enhancedOptions = features.reduce((current, feature) => feature(current), this.options);
+        return new EnhancedClient(enhancedOptions) as this;
     }
 
     async initialize() {

@@ -6,7 +6,7 @@ export enum Region {
 }
 
 export enum Environment {
-    dev = 'development',
+    dev = 'dev',
     staging = 'staging',
     prod = 'production',
     hipaa = 'hipaa',

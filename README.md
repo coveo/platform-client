@@ -40,13 +40,12 @@ Every action returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/Ja
 ```js
 const platform = new CoveoPlatform({
     organizationId: 'some-coveo-platform-organization-id',
-    accessTokenRetreiver: () => 'your-coveo-platform-access-token-or-api-key',
+    accessToken: () => 'your-coveo-platform-access-token-or-api-key',
 });
 
 // List the organization catalogs
-platform.catalog.list({page: 0, pageSize: 10}).then((res) => {
-    console.log(JSON.stringify(res));
-});
+const catalogs = await platform.catalog.list({page: 0, pageSize: 10});
+doSometing(catalogs);
 ```
 
 ### Compatibility
@@ -69,7 +68,7 @@ This project is built using TypeScript and automatically generates relevant type
 | `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
 | `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
-| `region` | optional | Region.US | The target region. |
+| `region`           | optional | Region.US                            | The target region.                                                                                                                               |
 
 ### Error handling
 
@@ -95,4 +94,67 @@ const MySuccessResponseHandler: ResponseHandler = {
         return data;
     };
 }
+```
+
+### Ad hoc requests
+
+Sometimes, a specific `platform-client` configuration is required for a one-time task. In such use cases, we can leverage the `withFeatures()` method on the `platform-client` instance. This will prevent having to create a `new PlatformClient` instance for just one usage.
+
+A feature is defined as a function that returns a set of new configuration options to be used for the next request.
+
+```ts
+type Feature = (currentOptions: PlatformClientOptions) => PlatformClientOptions;
+```
+
+Where `currentOptions` are the options currently used by the client instance to make requests.
+
+Example
+
+```ts
+const europeRegion: Feature = (currentOptions) => ({
+    ...currentOptions,
+    region: Region.EU,
+});
+
+const europeOrganizations = await platform.withFeatures(europeRegion).organization.list();
+```
+
+Multiple features can be used at once, **each feature will override the options returned by the previous one**.
+
+```ts
+const notifyOnSuccess = (message) => (currentOptions) => ({
+    ...currentOptions,
+    responseHandlers: [
+        {
+            canProcess: (response) => response.ok,
+            process: async (response)=> {
+                const result = await response.json();
+                showSuccessToast(message);
+                return result;
+            },
+        },
+        ...currentOptions.responseHandlers,
+    ],
+});
+
+
+const notifyOnError = (message) => (currentOptions) => ({
+    ...currentOptions,
+    responseHandlers: [
+        ...currentOptions.responseHandlers,
+        {
+            canProcess: () => true,
+            process: async (response) => {
+                const error = await response.json();
+                showErrorToast(message);
+                throw error;
+            },
+        }
+    ],
+});
+
+platform.withFeatures(
+    notifyOnSuccess('It worked!'), 
+    notifyOnError('It failed!'),
+).field.delete('unwanted-field-id');
 ```

@@ -5,10 +5,7 @@ import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handl
 import {UserModel} from './resources/Users';
 import retrieve from './utils/Retriever';
 
-type APIPrototype = typeof API.prototype;
-export type IAPI = {[P in keyof APIPrototype]: APIPrototype[P]};
-
-export default class API implements IAPI {
+export default class API {
     static orgPlaceholder = '{organizationName}';
 
     private getRequestsController: AbortController;
