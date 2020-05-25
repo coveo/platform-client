@@ -26,6 +26,7 @@ export interface ResultRankingProps {
     condition?: {
         reference: string;
     };
+    statementGroupId?: string;
 }
 
 export interface ResultRankingMatchOperator {
