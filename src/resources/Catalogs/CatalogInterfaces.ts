@@ -13,6 +13,10 @@ export interface CatalogModel {
     variant?: VariantHierarchyModel;
 }
 
+export interface CreateCatalogModel extends CatalogModel {
+    availability?: CreateAvailabilityHierarchyModel;
+}
+
 export interface VariantHierarchyModel {
     fields: string[];
     idField: string;
@@ -27,7 +31,12 @@ export interface ProductHierarchyModel {
 export interface AvailabilityHierarchyModel {
     availableSkusField: string;
     fields: string[];
+    idField?: string;
     objectType: string;
+}
+
+export interface CreateAvailabilityHierarchyModel extends AvailabilityHierarchyModel {
+    idField: string;
 }
 
 export interface ScopeModel {
