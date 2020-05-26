@@ -13,6 +13,12 @@ export default class ResourceSnapshots extends Resource {
         return this.api.get<ResourceSnapshotsModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
     }
 
+    async getContent(snapshotId: string) {
+        const {url} = await this.generateUrl(snapshotId);
+
+        return this.api.get<string>(url, undefined, true);
+    }
+
     generateUrl(snapshotId: string) {
         return this.api.get<ResourceSnapshotUrlModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
     }

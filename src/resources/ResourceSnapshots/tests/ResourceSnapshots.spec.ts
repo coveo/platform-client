@@ -1,6 +1,6 @@
 import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
-import {PushSnapshotOptions} from '../ResourceSnapshotsInterfaces';
+import {PushSnapshotOptions, ResourceSnapshotUrlModel} from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -29,6 +29,23 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.get(snapshotToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
+        });
+    });
+
+    describe('getContent', () => {
+        it('should make a GET call to the specific Resource Snapshots url and then make a get call to the url', async () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const urlReturned: ResourceSnapshotUrlModel = {
+                url: 'https://google.com',
+                urlExpiration: 1,
+            };
+
+            jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
+
+            await resourceSnapshots.getContent(snapshotToGetId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(urlReturned.url, undefined, true);
         });
     });
 
