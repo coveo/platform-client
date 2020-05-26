@@ -37,18 +37,6 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should do a simple GET request to a custom url', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                const response = await api.get<typeof testData.response>(customUrl, undefined, true);
-
-                expect(fetchMock).toHaveBeenCalledTimes(1);
-                const [url, options] = fetchMock.mock.calls[0];
-
-                expect(url).toBe(customUrl);
-                expect(options.method).toBe('get');
-                expect(response).toEqual(testData.response);
-            });
-
             it('should make the promise fail on a failed request', async () => {
                 const error = new Error('the request has failed');
                 global.fetch.mockRejectedValue(error);
@@ -80,19 +68,6 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options.method).toBe('get');
-                expect(response).toEqual(expectedResponse);
-            });
-
-            it('should do a GET request to the specified custom url and resolve with a blob', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                const expectedResponse = await new Response(JSON.stringify(testData.response)).blob();
-                const response = await api.getFile(customUrl, undefined, true);
-
-                expect(fetchMock).toHaveBeenCalledTimes(1);
-                const [url, options] = fetchMock.mock.calls[0];
-
-                expect(url).toBe(customUrl);
                 expect(options.method).toBe('get');
                 expect(response).toEqual(expectedResponse);
             });

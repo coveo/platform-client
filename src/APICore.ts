@@ -20,10 +20,10 @@ export default class API implements IAPI {
         return this.config.organizationIdRetriever?.() || this.config.organizationId;
     }
 
-    async get<T = {}>(url: string, args: RequestInit = {method: 'get'}, isCustomUrl: boolean = false): Promise<T> {
+    async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
         args.signal = args.signal || this.getRequestsController.signal;
         try {
-            return await this.request<T>(url, args, isCustomUrl);
+            return await this.request<T>(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
                 return; // We don't want to resolve or reject the promise
@@ -33,10 +33,10 @@ export default class API implements IAPI {
         }
     }
 
-    async getFile(url: string, args: RequestInit = {method: 'get'}, isCustomUrl: boolean = false): Promise<Blob> {
+    async getFile(url: string, args: RequestInit = {method: 'get'}): Promise<Blob> {
         args.signal = args.signal || this.getRequestsController.signal;
         try {
-            return await this.requestFile(url, args, isCustomUrl);
+            return await this.requestFile(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
                 return; // We don't want to resolve or reject the promise
@@ -102,7 +102,7 @@ export default class API implements IAPI {
         return `${this.config.host}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
-    private async request<T>(route: string, args: RequestInit, isCustomUrl: boolean = false): Promise<T> {
+    private async request<T>(route: string, args: RequestInit): Promise<T> {
         const init: RequestInit = {
             ...args,
             headers: {
@@ -112,11 +112,11 @@ export default class API implements IAPI {
             },
         };
 
-        const response = await fetch(isCustomUrl ? route : this.getUrlFromRoute(route), init);
+        const response = await fetch(this.getUrlFromRoute(route), init);
         return handleResponse<T>(response, this.handlers);
     }
 
-    private async requestFile(route: string, args: RequestInit, isCustomUrl: boolean = false): Promise<Blob> {
+    private async requestFile(route: string, args: RequestInit): Promise<Blob> {
         const init: RequestInit = {
             ...args,
             headers: {
@@ -124,7 +124,7 @@ export default class API implements IAPI {
                 ...(args.headers || {}),
             },
         };
-        const response = await fetch(isCustomUrl ? route : this.getUrlFromRoute(route), init);
+        const response = await fetch(this.getUrlFromRoute(route), init);
         return handleResponse<Blob>(response, [
             ResponseHandlers.noContent,
             ResponseHandlers.successBlob,
