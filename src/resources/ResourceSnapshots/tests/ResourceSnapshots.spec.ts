@@ -45,7 +45,7 @@ describe('ResourceSnapshots', () => {
             await resourceSnapshots.getContent(snapshotToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(urlReturned.url);
+            expect(api.get).toHaveBeenCalledWith(urlReturned.url, undefined, true);
         });
     });
 

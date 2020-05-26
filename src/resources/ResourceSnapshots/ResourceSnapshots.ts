@@ -14,10 +14,8 @@ export default class ResourceSnapshots extends Resource {
     }
 
     getContent(snapshotId: string) {
-        const promise = this.generateUrl(snapshotId);
-
-        promise.then((value: ResourceSnapshotUrlModel) => {
-            return this.api.get<string>(value.url);
+        this.generateUrl(snapshotId).then((value: ResourceSnapshotUrlModel) => {
+            return this.api.get<string>(value.url, undefined, true);
         });
     }
 
