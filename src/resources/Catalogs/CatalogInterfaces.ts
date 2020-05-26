@@ -39,6 +39,11 @@ export interface CreateAvailabilityHierarchyModel extends AvailabilityHierarchyM
     idField: string;
 }
 
-export interface ScopeModel {
-    query: string;
-}
+export type ScopeModel =
+    | {
+          query: string;
+      }
+    | {
+          query?: string;
+          sourceIds: string[];
+      };
