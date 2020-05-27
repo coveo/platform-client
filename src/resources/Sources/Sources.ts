@@ -28,7 +28,7 @@ export default class Sources extends Resource {
     }
 
     list(params?: ListSourcesParams) {
-        return this.api.get<PageModel<SourceModel>>(this.buildPath(`${Sources.baseUrl}/pages`, params));
+        return this.api.get<PageModel<SourceModel, 'sourceModels'>>(this.buildPath(`${Sources.baseUrl}/pages`, params));
     }
 
     createFromRaw(rawSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
