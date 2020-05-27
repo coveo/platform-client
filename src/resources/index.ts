@@ -19,3 +19,4 @@ export * from './Search';
 export * from './Sources';
 export * from './SecurityCache';
 export * from './ResourceSnapshots';
+export * from './UsageAnalytics';
