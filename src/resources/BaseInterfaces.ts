@@ -1,8 +1,9 @@
-export interface PageModel<T = any> {
-    items: T[];
+export type PageModel<T = any, TItemsKey extends string = 'items'> = {
+    [key in TItemsKey]: T[];
+} & {
     totalEntries: number;
     totalPages: number;
-}
+};
 
 export type New<T, K extends string | number | symbol = null> = Omit<T, 'id' | K>;
 
