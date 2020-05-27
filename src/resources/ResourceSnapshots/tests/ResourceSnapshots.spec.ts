@@ -41,11 +41,12 @@ describe('ResourceSnapshots', () => {
             };
 
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
+            const fetchMock = global.fetch.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
             await resourceSnapshots.getContent(snapshotToGetId);
 
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(urlReturned.url, undefined, true);
+            expect(fetchMock).toHaveBeenCalledTimes(1);
+            expect(fetchMock).toHaveBeenCalledWith(urlReturned.url, {method: 'get'});
         });
     });
 

@@ -15,8 +15,7 @@ export default class ResourceSnapshots extends Resource {
 
     async getContent(snapshotId: string) {
         const {url} = await this.generateUrl(snapshotId);
-
-        return this.api.get<string>(url, undefined, true);
+        return await fetch(url, {method: 'get'});
     }
 
     generateUrl(snapshotId: string) {
