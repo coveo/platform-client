@@ -17,6 +17,7 @@ import Saml from './Saml/Saml';
 import Search from './Search/Search';
 import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
+import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
@@ -38,6 +39,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'user', resource: User},
     {key: 'search', resource: Search},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
+    {key: 'ua', resource: UsageAnalytics},
 ];
 
 class PlatformResources {
@@ -61,6 +63,7 @@ class PlatformResources {
     search: Search;
     user: User;
     resourceSnapshot: ResourceSnapshots;
+    ua: UsageAnalytics;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
