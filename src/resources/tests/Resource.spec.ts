@@ -38,7 +38,7 @@ describe('Resource', () => {
             expect(resource.testBuildPath('/some/route', {a: false})).toBe('/some/route?a=false');
             expect(resource.testBuildPath('/some/route', {a: 0})).toBe('/some/route?a=0');
             expect(resource.testBuildPath('/some/route', {a: 'b', c: 'd'})).toBe('/some/route?a=b&c=d');
-            expect(resource.testBuildPath('/some/route', {a: ['b', 'c']})).toBe('/some/route?a=b%2Cc');
+            expect(resource.testBuildPath('/some/route', {a: ['b', 'c']})).toBe('/some/route?a=b&a=c');
         });
     });
 });

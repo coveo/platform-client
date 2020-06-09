@@ -21,7 +21,7 @@ import {
 } from './StatisticsInterfaces';
 
 export default class Statistics extends Resource {
-    static baseUrl = '/v15/stats';
+    static baseUrl = '/rest/ua/v15/stats';
 
     status() {
         return this.api.get<ServiceStatus>(`${Statistics.baseUrl}/status`);
