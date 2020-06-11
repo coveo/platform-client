@@ -3,6 +3,7 @@ import {ListStatementSortBy, ResultRankingLocales, ResultRankingMatchOperators, 
 export interface ResultRanking {
     id: string;
     resultRanking: ResultRankingProps;
+    associatedGroup?: ResultRankingAssociatedGroup;
 }
 
 export interface ResultRankingProps {
@@ -27,6 +28,12 @@ export interface ResultRankingProps {
         reference: string;
     };
     statementGroupId?: string;
+}
+
+export interface ResultRankingAssociatedGroup {
+    id: string;
+    name: string;
+    isActive: boolean;
 }
 
 export interface ResultRankingMatchOperator {
