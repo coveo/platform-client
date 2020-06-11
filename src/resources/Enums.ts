@@ -389,6 +389,7 @@ export enum ModelStatus {
     UPDATING = 'UPDATING',
     DEGRADED = 'DEGRADED',
     UPDATING_DEGRADED = 'UPDATING_DEGRADED',
+    UPDATE_FAILED = 'UPDATE_FAILED',
 }
 
 export enum ModelConfigFileType {
