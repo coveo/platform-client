@@ -57,12 +57,12 @@ describe('Statistics', () => {
     describe('update', () => {
         it('should make a POST call to the specific Statistics url', () => {
             const options: VisitViewOptions = {
-                org: 'Coulili Zazou',
+                org: 'CouliliZazou',
             };
 
             statistics.updateVisitView(options);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Statistics.baseUrl}/visits?org=Coulili+Zazou`);
+            expect(api.post).toHaveBeenCalledWith(`${Statistics.baseUrl}/visits?org=CouliliZazou`);
         });
     });
 
