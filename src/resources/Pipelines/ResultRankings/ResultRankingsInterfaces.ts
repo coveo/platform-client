@@ -28,6 +28,7 @@ export interface ResultRankingProps {
         reference: string;
     };
     statementGroupId?: string;
+    associatedGroup?: ResultRankingAssociatedGroup;
 }
 
 export interface ResultRankingAssociatedGroup {
