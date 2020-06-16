@@ -9,6 +9,8 @@ export interface ResourceSnapshotsModel {
 }
 
 export enum ResourceSnapshotsReportResultCode {
+    AccessDenied = 'ACCESS_DENIED',
+    ResourcesInError = 'RESOURCES_IN_ERROR',
     Success = 'SUCCESS',
     UnexpectedError = 'UNEXPECTED_ERROR',
     UnableToPushToOrganization = 'UNABLE_TO_PUSH_TO_ORGANIZATION',
