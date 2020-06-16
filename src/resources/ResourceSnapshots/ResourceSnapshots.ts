@@ -1,6 +1,7 @@
 import API from '../../APICore';
 import Resource from '../Resource';
 import {
+    ApplyOptions,
     DryRunOptions,
     PushSnapshotOptions,
     ResourceSnapshotsModel,
@@ -31,6 +32,12 @@ export default class ResourceSnapshots extends Resource {
     dryRun(snapshotId: string, options: DryRunOptions) {
         return this.api.put<ResourceSnapshotsReportModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun`, options)
+        );
+    }
+
+    apply(snapshotId: string, options: ApplyOptions) {
+        return this.api.put<ResourceSnapshotsReportModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/apply`, options)
         );
     }
 
