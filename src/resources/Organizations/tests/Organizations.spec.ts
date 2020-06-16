@@ -67,7 +67,7 @@ describe('Organization', () => {
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status%2Clicense`
+                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status&additionalFields=license`
             );
         });
     });

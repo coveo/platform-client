@@ -31,7 +31,7 @@
         "cz-conventional-changelog": "^3.0.2",
         "husky": "^3.1.0",
         "jest": "^24.9.0",
-        "jest-fetch-mock": "^2.1.2",
+        "jest-fetch-mock": "^3.0.3",
         "lint-staged": "^9.5.0",
         "node-blob": "0.0.2",
         "prettier": "^1.19.1",
@@ -76,5 +76,8 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
+    },
+    "dependencies": {
+        "query-string": "^6.13.0"
     }
 }

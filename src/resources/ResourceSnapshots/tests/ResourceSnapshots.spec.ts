@@ -1,6 +1,11 @@
 import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
-import {DryRunOptions, PushSnapshotOptions, ResourceSnapshotUrlModel} from '../ResourceSnapshotsInterfaces';
+import {
+    ApplyOptions,
+    DryRunOptions,
+    PushSnapshotOptions,
+    ResourceSnapshotUrlModel,
+} from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -82,6 +87,19 @@ describe('ResourceSnapshots', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun?deleteMissingResources=true`
+            );
+        });
+    });
+
+    describe('apply', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const applyOptions: ApplyOptions = {deleteMissingResources: true};
+
+            resourceSnapshots.apply(snapshotId, applyOptions);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true`
             );
         });
     });

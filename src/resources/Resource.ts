@@ -1,3 +1,5 @@
+import * as queryString from 'query-string';
+
 import API from '../APICore';
 
 class Resource {
@@ -9,28 +11,12 @@ class Resource {
         return route + this.convertObjectToQueryString(parameters);
     }
 
-    private removeEmptyEntriesFromObject(obj) {
-        return Object.entries(obj)
-            .filter(([, value]) => value != null && value !== '')
-            .reduce((newObj, [key, value]) => {
-                if (Array.isArray(value)) {
-                    return {...newObj, [key]: value.filter(Boolean).toString()};
-                } else if (typeof value === 'object') {
-                    return {...newObj, [key]: this.removeEmptyEntriesFromObject(value)};
-                } else {
-                    return {...newObj, [key]: value};
-                }
-            }, {});
-    }
-
     private convertObjectToQueryString(parameters: object): string {
         if (!parameters) {
             return '';
         } else {
-            const cleanedParameters = this.removeEmptyEntriesFromObject(parameters);
-            return Object.keys(cleanedParameters).length
-                ? `?${new URLSearchParams(Object.entries(cleanedParameters)).toString()}`
-                : '';
+            const requestURL = queryString.stringify(parameters, {skipEmptyString: true, skipNull: true, sort: false});
+            return requestURL.length ? `?${requestURL}` : '';
         }
     }
 }

@@ -39,12 +39,11 @@ describe('Field', () => {
     describe('deleteFields', () => {
         it('should make a DELETE call to the specific Field url', () => {
             const fieldIds = ['🧀', '', '🥓'];
-            const params = fieldIds.filter(Boolean).toString();
 
             field.deleteFields(fieldIds);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${Field.baseUrl}/batch/delete?${new URLSearchParams(Object.entries({fields: params})).toString()}`
+                `${Field.baseUrl}/batch/delete?fields=%F0%9F%A7%80&fields=%F0%9F%A5%93`
             );
         });
     });

@@ -55,3 +55,7 @@ export interface PushSnapshotOptions {
 export interface DryRunOptions {
     deleteMissingResources: boolean;
 }
+
+export interface ApplyOptions {
+    deleteMissingResources: boolean;
+}
