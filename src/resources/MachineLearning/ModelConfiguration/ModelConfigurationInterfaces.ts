@@ -1,22 +1,11 @@
-import {LanguageCode} from '../../Enums';
-
 export interface AdvancedRegistrationConfigFile {
     fileContents?: string;
     lastModified?: string;
-    modelId?: RegistrationId;
-    orgId?: Record<string, string>;
-}
-
-export interface RegistrationId {
     modelId?: string;
+    orgId?: string;
 }
 
 export interface AdvancedRegistrationConfigFileCreationResponse {
-    filePath?: Record<string, string>;
-    modelId?: RegistrationId;
-}
-
-export interface ModelConfigurationUpdateArgs {
-    modelConfigFileContents: string;
-    languageCode?: LanguageCode;
+    filePath?: string;
+    modelId?: string;
 }
