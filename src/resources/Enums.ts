@@ -661,3 +661,23 @@ export enum StatementGroupType {
     campaign = 'campaign',
     permanent = 'permanent',
 }
+
+export enum DimensionType {
+    TEXT = 'TEXT',
+    NUMBER = 'NUMBER',
+    SHORT = 'SHORT',
+    BOOLEAN = 'BOOLEAN',
+    DATE = 'DATE',
+    DATETIME = 'DATETIME',
+}
+
+export enum DimensionStatus {
+    AVAILABLE = 'AVAILABLE',
+    UPDATING = 'UPDATING',
+}
+
+export enum DimensionEventTypes {
+    searches = 'searches',
+    clicks = 'clicks',
+    custom_events = 'custom_events',
+}
