@@ -16,7 +16,8 @@ export default class ModelConfiguration extends Resource {
     updateAdvancedConfig(modelId: string, modelConfigFileContents: string) {
         return this.api.put<AdvancedRegistrationConfigFileCreationResponse>(
             `${ModelConfiguration.getBaseUrl(modelId)}/advanced`,
-            modelConfigFileContents
+            modelConfigFileContents,
+            {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'application/json'}}
         );
     }
 }
