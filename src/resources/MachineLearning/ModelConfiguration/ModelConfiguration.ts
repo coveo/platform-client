@@ -7,7 +7,7 @@ import {
 
 export default class ModelConfiguration extends Resource {
     static getBaseUrl = (modelId: string) =>
-        `/rest/organizations/${API.orgPlaceholder}/machinelearning/models/${modelId}/config`;
+        `/rest/organizations/${API.orgPlaceholder}/machinelearning/models/${modelId}/configs`;
 
     getAdvancedConfig(modelId: string) {
         return this.api.get<AdvancedRegistrationConfigFile>(`${ModelConfiguration.getBaseUrl(modelId)}/advanced`);
