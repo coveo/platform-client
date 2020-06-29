@@ -1,5 +1,4 @@
 import API from '../../../../APICore';
-import {ModelConfigFileType} from '../../../Enums';
 import ModelConfiguration from '../ModelConfiguration';
 
 jest.mock('../../../../APICore');
@@ -15,29 +14,27 @@ describe('ModelConfiguration', () => {
         modelConfig = new ModelConfiguration(api);
     });
 
-    describe('get', () => {
-        it('should make a GET call to the specific ModelConfiguration url', () => {
+    describe('getAdvancedConfig', () => {
+        it('should make a GET call to the advanced configuration url', () => {
             const modelId = '💀Papyrus';
-            const modelConfigFileType = ModelConfigFileType.ADVANCED_CONFIGURATION;
 
-            modelConfig.get(modelId, modelConfigFileType);
+            modelConfig.getAdvancedConfig(modelId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType));
+            expect(api.get).toHaveBeenCalledWith(`${ModelConfiguration.getBaseUrl(modelId)}/advanced`);
         });
     });
 
-    describe('update', () => {
-        it('should make a PUT call to the specific ModelConfiguration url', () => {
+    describe('updateAdvancedConfig', () => {
+        it('should make a PUT call to the advanced configuration url', () => {
             const modelId = '💀Sans';
-            const modelConfigFileType = ModelConfigFileType.FACET_ID_MAPPING;
-            const modelConfigFileContents = '🦴🦴🦴';
+            const modelConfigFileContents = JSON.stringify('{"💀": "🦴🦴🦴"}');
 
-            modelConfig.update(modelId, modelConfigFileType, {modelConfigFileContents});
+            modelConfig.updateAdvancedConfig(modelId, modelConfigFileContents);
             expect(api.put).toBeCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                ModelConfiguration.getBaseUrl(modelId, modelConfigFileType),
+                `${ModelConfiguration.getBaseUrl(modelId)}/advanced`,
                 modelConfigFileContents,
-                {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'text/plain'}}
+                {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'application/json'}}
             );
         });
     });

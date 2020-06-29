@@ -1,31 +1,23 @@
 import API from '../../../APICore';
-import {LanguageCode, ModelConfigFileType} from '../../Enums';
 import Resource from '../../Resource';
 import {
     AdvancedRegistrationConfigFile,
     AdvancedRegistrationConfigFileCreationResponse,
-    ModelConfigurationUpdateArgs,
 } from './ModelConfigurationInterfaces';
 
 export default class ModelConfiguration extends Resource {
-    static getBaseUrl = (modelId: string, modelConfigFileType: ModelConfigFileType) =>
-        `/rest/organizations/${API.orgPlaceholder}/machinelearning/models/${modelId}/configs/${modelConfigFileType}`;
+    static getBaseUrl = (modelId: string) =>
+        `/rest/organizations/${API.orgPlaceholder}/machinelearning/models/${modelId}/configs`;
 
-    get(modelId: string, modelConfigFileType: ModelConfigFileType, languageCode?: LanguageCode) {
-        return this.api.get<AdvancedRegistrationConfigFile>(
-            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode})
-        );
+    getAdvancedConfig(modelId: string) {
+        return this.api.get<AdvancedRegistrationConfigFile>(`${ModelConfiguration.getBaseUrl(modelId)}/advanced`);
     }
 
-    update(
-        modelId: string,
-        modelConfigFileType: ModelConfigFileType,
-        {modelConfigFileContents, languageCode}: ModelConfigurationUpdateArgs
-    ) {
+    updateAdvancedConfig(modelId: string, modelConfigFileContents: string) {
         return this.api.put<AdvancedRegistrationConfigFileCreationResponse>(
-            this.buildPath(ModelConfiguration.getBaseUrl(modelId, modelConfigFileType), {languageCode}),
+            `${ModelConfiguration.getBaseUrl(modelId)}/advanced`,
             modelConfigFileContents,
-            {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'text/plain'}}
+            {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'application/json'}}
         );
     }
 }
