@@ -52,6 +52,10 @@ export interface PushSnapshotOptions {
     developerNotes?: string;
 }
 
+export interface CreateFromFileOptions {
+    developerNotes?: string;
+}
+
 export interface DryRunOptions {
     deleteMissingResources: boolean;
 }

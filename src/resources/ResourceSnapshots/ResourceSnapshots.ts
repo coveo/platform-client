@@ -2,6 +2,7 @@ import API from '../../APICore';
 import Resource from '../Resource';
 import {
     ApplyOptions,
+    CreateFromFileOptions,
     DryRunOptions,
     PushSnapshotOptions,
     ResourceSnapshotsModel,
@@ -23,6 +24,26 @@ export default class ResourceSnapshots extends Resource {
     async getContent(snapshotId: string) {
         const {url} = await this.generateUrl(snapshotId);
         return await fetch(url, {method: 'get'});
+    }
+
+    createFromFile(file: File, options: CreateFromFileOptions) {
+        const computedOptions = {developerNotes: options.developerNotes, fileType: undefined};
+
+        if (file.type === 'application/zip') {
+            computedOptions.fileType = 'ZIP';
+        } else if (file.type === 'application/json') {
+            computedOptions.fileType = 'JSON';
+        } else {
+            throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+        }
+
+        const form: FormData = new FormData();
+        form.set('file', file);
+
+        return this.api.postForm<ResourceSnapshotsModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
+            form
+        );
     }
 
     generateUrl(snapshotId: string) {
