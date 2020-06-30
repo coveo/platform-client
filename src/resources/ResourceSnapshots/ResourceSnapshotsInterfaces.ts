@@ -31,6 +31,11 @@ export enum ResourceSnapshotsReportType {
     Apply = 'APPLY',
 }
 
+export enum ResourceSnapshotSupportedFileTypes {
+    ZIP = 'ZIP',
+    JSON = 'JSON',
+}
+
 export interface ResourceSnapshotsReportModel {
     id: string;
     resourceOperationResults?: object;
@@ -57,6 +62,10 @@ export interface CreateFromFileOptions {
 }
 
 export interface DryRunOptions {
+    deleteMissingResources: boolean;
+}
+
+export interface ApplyOptions {
     deleteMissingResources: boolean;
 }
 

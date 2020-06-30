@@ -7,6 +7,7 @@ import {
     PushSnapshotOptions,
     ResourceSnapshotsModel,
     ResourceSnapshotsReportModel,
+    ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
 } from './ResourceSnapshotsInterfaces';
 
@@ -30,9 +31,9 @@ export default class ResourceSnapshots extends Resource {
         const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: undefined};
 
         if (file.type === 'application/zip') {
-            computedOptions.snapshotFileType = 'ZIP';
+            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.ZIP;
         } else if (file.type === 'application/json') {
-            computedOptions.snapshotFileType = 'JSON';
+            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.JSON;
         } else {
             throw new Error('The uploaded file must be either a ZIP or a JSON file.');
         }
