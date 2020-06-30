@@ -2,6 +2,7 @@ import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
     ApplyOptions,
+    CreateFromFileOptions,
     DryRunOptions,
     PushSnapshotOptions,
     ResourceSnapshotUrlModel,
@@ -52,6 +53,61 @@ describe('ResourceSnapshots', () => {
 
             expect(fetchMock).toHaveBeenCalledTimes(1);
             expect(fetchMock).toHaveBeenCalledWith(urlReturned.url, {method: 'get'});
+        });
+    });
+
+    describe('createFromFile', () => {
+        const mockedFormData = {
+            set: jest.fn(),
+        };
+        const mockedFile = {
+            type: 'application/zip',
+        };
+
+        beforeEach(() => {
+            (global as any).FormData = jest.fn(() => mockedFormData);
+            (global as any).File = jest.fn(() => mockedFile);
+        });
+
+        it('should make a post call to the specific Resource Snapshots url if zip file', () => {
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = new File([''], 'mock.zip', {type: 'application/zip'});
+
+            resourceSnapshots.createFromFile(file, createFromFileOptions);
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
+                mockedFormData
+            );
+        });
+
+        it('should make a post call to the specific Resource Snapshots url if json file', () => {
+            const mockedFileJSON = {
+                type: 'application/json',
+            };
+            (global as any).File = jest.fn(() => mockedFileJSON);
+
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = new File([''], 'mock.zip', {type: 'application/zip'});
+
+            resourceSnapshots.createFromFile(file, createFromFileOptions);
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=JSON`,
+                mockedFormData
+            );
+        });
+
+        it('should throw an error if unsupported file type', () => {
+            const unsupportedMockedFile = {
+                type: 'image/png',
+            };
+            (global as any).File = jest.fn(() => unsupportedMockedFile);
+
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = new File([''], 'mock.zip', {type: 'application/zip'});
+
+            expect(() => resourceSnapshots.createFromFile(file, createFromFileOptions)).toThrowError(Error);
         });
     });
 
