@@ -27,12 +27,12 @@ export default class ResourceSnapshots extends Resource {
     }
 
     createFromFile(file: File, options: CreateFromFileOptions) {
-        const computedOptions = {developerNotes: options.developerNotes, fileType: undefined};
+        const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: undefined};
 
         if (file.type === 'application/zip') {
-            computedOptions.fileType = 'ZIP';
+            computedOptions.snapshotFileType = 'ZIP';
         } else if (file.type === 'application/json') {
-            computedOptions.fileType = 'JSON';
+            computedOptions.snapshotFileType = 'JSON';
         } else {
             throw new Error('The uploaded file must be either a ZIP or a JSON file.');
         }
