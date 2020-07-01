@@ -3,8 +3,10 @@ import Resource from '../Resource';
 import {
     ApplyOptions,
     CreateFromFileOptions,
+    CreateFromOrganizationOptions,
     DryRunOptions,
     PushSnapshotOptions,
+    ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsModel,
     ResourceSnapshotsReportModel,
     ResourceSnapshotSupportedFileTypes,
@@ -44,6 +46,16 @@ export default class ResourceSnapshots extends Resource {
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
             form
+        );
+    }
+
+    createFromOrganization(
+        exportConfigurationModel: ResourceSnapshotExportConfigurationModel,
+        options: CreateFromOrganizationOptions
+    ) {
+        return this.api.post<ResourceSnapshotUrlModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/self`, options),
+            exportConfigurationModel
         );
     }
 

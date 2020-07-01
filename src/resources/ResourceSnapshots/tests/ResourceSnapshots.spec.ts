@@ -3,8 +3,10 @@ import ResourceSnapshots from '../ResourceSnapshots';
 import {
     ApplyOptions,
     CreateFromFileOptions,
+    CreateFromOrganizationOptions,
     DryRunOptions,
     PushSnapshotOptions,
+    ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotUrlModel,
 } from '../ResourceSnapshotsInterfaces';
 
@@ -108,6 +110,27 @@ describe('ResourceSnapshots', () => {
             const file = new File([''], 'mock.zip', {type: 'application/zip'});
 
             expect(() => resourceSnapshots.createFromFile(file, createFromFileOptions)).toThrowError(Error);
+        });
+    });
+
+    describe('createFromOrganization', () => {
+        it('should make a POST call to the specific Resource Snapshots url', () => {
+            const exportConfigurationModel: ResourceSnapshotExportConfigurationModel = {
+                resourcesToExport: {FIELD: ['*'], EXTENSIONS: ['🤖']},
+            };
+            const createFromOrganizationOptions: CreateFromOrganizationOptions = {
+                developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
+            };
+
+            resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(
+                api.post
+            ).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5`,
+                {resourcesToExport: {EXTENSIONS: ['🤖'], FIELD: ['*']}}
+            );
         });
     });
 

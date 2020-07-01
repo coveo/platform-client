@@ -47,6 +47,10 @@ export interface ResourceSnapshotsReportModel {
     updatedDate: number;
 }
 
+export interface ResourceSnapshotExportConfigurationModel {
+    resourcesToExport: object;
+}
+
 export interface ResourceSnapshotUrlModel {
     url: string;
     urlExpiration: number;
@@ -59,6 +63,11 @@ export interface PushSnapshotOptions {
 
 export interface CreateFromFileOptions {
     developerNotes?: string;
+}
+
+export interface CreateFromOrganizationOptions {
+    developerNotes?: string;
+    targetOrganizationId?: string;
 }
 
 export interface DryRunOptions {
