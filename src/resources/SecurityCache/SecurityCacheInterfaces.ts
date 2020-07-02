@@ -111,6 +111,7 @@ export interface SecurityProviderReferenceModelAttributes {
     name: string;
     onPremisesEnabled?: boolean;
     pushEnabled?: boolean;
+    streamEnabled?: boolean;
     sourceType?: string;
 }
 
