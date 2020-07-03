@@ -682,3 +682,8 @@ export enum DimensionEventTypes {
     clicks = 'clicks',
     custom_events = 'custom_events',
 }
+
+export enum RegionType {
+    Primary = 'PRIMARY',
+    Secondary = 'SECONDARY',
+}
