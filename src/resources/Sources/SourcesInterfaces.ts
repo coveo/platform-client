@@ -52,6 +52,7 @@ export interface SourceModel extends GranularResource {
     postConversionExtensions?: SourceExtensionModel[];
     preConversionExtensions?: SourceExtensionModel[];
     pushEnabled?: boolean;
+    streamEnabled?: boolean;
     resourceId?: string;
     securityProviderReferences?: string[];
     sourceType?: SourceType;
@@ -191,6 +192,7 @@ export interface RawSourceConfig extends GranularResource {
     postConversionExtensions?: SourceExtensionModel[];
     preConversionExtensions?: SourceExtensionModel[];
     pushEnabled?: boolean;
+    streamEnabled?: boolean;
     resourceId?: string;
     securityProviderReferences?: string[];
     securityProviders?: SecurityProviderModel[];
@@ -412,5 +414,6 @@ export interface LightSourceModel {
     name?: string;
     onPremisesEnabled?: boolean;
     pushEnabled?: boolean;
+    streamEnabled?: boolean;
     sourceType?: SourceType;
 }
