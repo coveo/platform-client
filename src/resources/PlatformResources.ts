@@ -4,6 +4,7 @@ import AWS from './AWS/AWS';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
 import CrawlingModule from './CrawlingModule/CrawlingModule';
+import Extensions from './Extensions/Extensions';
 import Field from './Fields/Fields';
 import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
@@ -34,6 +35,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'pipeline', resource: Pipelines},
     {key: 'crawlingModule', resource: CrawlingModule},
     {key: 'source', resource: Sources},
+    {key: 'extension', resource: Extensions},
     {key: 'field', resource: Field},
     {key: 'saml', resource: Saml},
     {key: 'user', resource: User},
@@ -58,6 +60,7 @@ class PlatformResources {
     pipeline: Pipelines;
     crawlingModule: CrawlingModule;
     source: Sources;
+    extension: Extensions;
     field: Field;
     saml: Saml;
     search: Search;

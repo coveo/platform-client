@@ -3,6 +3,7 @@ import AWS from '../AWS/AWS';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import CrawlingModule from '../CrawlingModule/CrawlingModule';
+import Extension from '../Extensions/Extensions';
 import Field from '../Fields/Fields';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
@@ -114,6 +115,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.source).toBeDefined();
             expect(platformResources.source).toBeInstanceOf(Sources);
+        });
+
+        it('should register the extension resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.extension).toBeDefined();
+            expect(platformResources.extension).toBeInstanceOf(Extension);
         });
 
         it('should register the field resource on the platform instance', () => {
