@@ -18,7 +18,7 @@ describe('Extension', () => {
         it('should make a GET call to the specific Extension url', () => {
             extension.list();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Extension.baseUrl}`);
+            expect(api.get).toHaveBeenCalledWith(Extension.baseUrl);
         });
     });
 });

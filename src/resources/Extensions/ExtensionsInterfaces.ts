@@ -1,6 +1,5 @@
 export interface ExtensionModel {
     apiVersion: string;
-    autoMigrated: true;
     content: string;
     createdDate: number;
     description: string;
@@ -18,7 +17,7 @@ export interface ExtensionModel {
             numberOfSkips: number;
             numberOfTimeouts: number;
         };
-        disabledStatus: {
+        disabledStatus?: {
             disabledDate: number;
             reason: string;
         };
