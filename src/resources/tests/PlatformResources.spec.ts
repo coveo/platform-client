@@ -178,8 +178,8 @@ describe('PlatformResources', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.glboal).toBeDefined();
-            expect(platformResources.glboal).toBeInstanceOf(Global);
+            expect(platformResources.global).toBeDefined();
+            expect(platformResources.global).toBeInstanceOf(Global);
         });
     });
 });
