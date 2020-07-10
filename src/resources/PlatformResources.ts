@@ -69,7 +69,7 @@ class PlatformResources {
     user: User;
     resourceSnapshot: ResourceSnapshots;
     ua: UsageAnalytics;
-    glboal: Global;
+    global: Global;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
