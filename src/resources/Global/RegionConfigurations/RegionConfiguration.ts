@@ -1,4 +1,4 @@
-import Resource from '../Resource';
+import Resource from '../../Resource';
 import {RegionConfigurationModel} from './RegionConfigurationInterfaces';
 
 export default class RegionConfiguration extends Resource {
