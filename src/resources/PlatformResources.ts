@@ -6,13 +6,13 @@ import Cluster from './Clusters/Cluster';
 import CrawlingModule from './CrawlingModule/CrawlingModule';
 import Extensions from './Extensions/Extensions';
 import Field from './Fields/Fields';
+import Global from './Global/Global';
 import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
-import RegionConfiguration from './RegionConfigurations/RegionConfiguration';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
@@ -43,7 +43,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'search', resource: Search},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'ua', resource: UsageAnalytics},
-    {key: 'regionConfiguration', resource: RegionConfiguration},
+    {key: 'global', resource: Global},
 ];
 
 class PlatformResources {
@@ -69,7 +69,7 @@ class PlatformResources {
     user: User;
     resourceSnapshot: ResourceSnapshots;
     ua: UsageAnalytics;
-    regionConfiguration: RegionConfiguration;
+    glboal: Global;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

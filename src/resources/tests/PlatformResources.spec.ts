@@ -5,13 +5,13 @@ import Cluster from '../Clusters/Cluster';
 import CrawlingModule from '../CrawlingModule/CrawlingModule';
 import Extension from '../Extensions/Extensions';
 import Field from '../Fields/Fields';
+import Global from '../Global/Global';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
 import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
-import RegionConfiguration from '../RegionConfigurations/RegionConfiguration';
 import ResourceSnapshots from '../ResourceSnapshots/ResourceSnapshots';
 import Saml from '../Saml/Saml';
 import Search from '../Search/Search';
@@ -174,12 +174,12 @@ describe('PlatformResources', () => {
             expect(platformResources.ua).toBeInstanceOf(UsageAnalytics);
         });
 
-        it('should register the regionConfiguration resource on the platform instance', () => {
+        it('should register the global resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.regionConfiguration).toBeDefined();
-            expect(platformResources.regionConfiguration).toBeInstanceOf(RegionConfiguration);
+            expect(platformResources.glboal).toBeDefined();
+            expect(platformResources.glboal).toBeInstanceOf(Global);
         });
     });
 });

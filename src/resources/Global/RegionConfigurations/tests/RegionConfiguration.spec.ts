@@ -1,4 +1,4 @@
-import API from '../../../APICore';
+import API from '../../../../APICore';
 import RegionConfiguration from '../RegionConfiguration';
 
 jest.mock('../../../APICore');
