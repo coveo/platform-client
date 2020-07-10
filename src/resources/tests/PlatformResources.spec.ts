@@ -11,6 +11,7 @@ import MachineLearning from '../MachineLearning/MachineLearning';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
+import RegionConfiguration from '../RegionConfigurations/RegionConfiguration';
 import ResourceSnapshots from '../ResourceSnapshots/ResourceSnapshots';
 import Saml from '../Saml/Saml';
 import Search from '../Search/Search';
@@ -171,6 +172,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.ua).toBeDefined();
             expect(platformResources.ua).toBeInstanceOf(UsageAnalytics);
+        });
+
+        it('should register the regionConfiguration resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.regionConfiguration).toBeDefined();
+            expect(platformResources.regionConfiguration).toBeInstanceOf(RegionConfiguration);
         });
     });
 });

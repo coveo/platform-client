@@ -12,6 +12,7 @@ import Index from './Indexes/Indexes';
 import MachineLearning from './MachineLearning/MachineLearning';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
+import RegionConfiguration from './RegionConfigurations/RegionConfiguration';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
@@ -42,6 +43,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'search', resource: Search},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'ua', resource: UsageAnalytics},
+    {key: 'regionConfiguration', resource: RegionConfiguration},
 ];
 
 class PlatformResources {
@@ -67,6 +69,7 @@ class PlatformResources {
     user: User;
     resourceSnapshot: ResourceSnapshots;
     ua: UsageAnalytics;
+    regionConfiguration: RegionConfiguration;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

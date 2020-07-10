@@ -21,3 +21,4 @@ export * from './Extensions';
 export * from './SecurityCache';
 export * from './ResourceSnapshots';
 export * from './UsageAnalytics';
+export * from './RegionConfigurations';
