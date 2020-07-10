@@ -53,7 +53,7 @@ export default class ResourceSnapshots extends Resource {
         exportConfigurationModel: ResourceSnapshotExportConfigurationModel,
         options: CreateFromOrganizationOptions
     ) {
-        return this.api.post<ResourceSnapshotUrlModel>(
+        return this.api.post<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/self`, options),
             exportConfigurationModel
         );

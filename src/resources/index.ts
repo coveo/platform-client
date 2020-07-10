@@ -17,6 +17,7 @@ export * from './CrawlingModule';
 export * from './Saml';
 export * from './Search';
 export * from './Sources';
+export * from './Extensions';
 export * from './SecurityCache';
 export * from './ResourceSnapshots';
 export * from './UsageAnalytics';
