@@ -4,6 +4,7 @@ import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
 import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
 import ModelInformation from './ModelInformation/ModelInformation';
 import Models from './Models/Models';
+import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -11,6 +12,7 @@ export default class MachineLearning extends Resource {
     models: Models;
     modelInfo: ModelInformation;
     modelConfig: ModelConfiguration;
+    dneConfig: DNEConfiguration;
 
     constructor(protected api: API) {
         super(api);
@@ -18,6 +20,7 @@ export default class MachineLearning extends Resource {
         this.models = new Models(api);
         this.modelInfo = new ModelInformation(api);
         this.modelConfig = new ModelConfiguration(api);
+        this.dneConfig = new DNEConfiguration(api);
     }
 
     register(registration: RegistrationModel) {
