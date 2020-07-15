@@ -3,7 +3,7 @@
 The main goal of this package is to provide an easy to configure and straightforward way of querying Coveo Cloud APIs using JavaScript.
 
 [![Build Status](https://img.shields.io/travis/coveo/platform-client.svg?style=flat-square)](https://travis-ci.org/coveo/platform-client)
-[![Npm total downloads badge](https://img.shields.io/npm/dt/@coveord/platform-client?style=flat-square)](https://www.npmjs.com/package/react-vapor)
+[![Npm total downloads badge](https://img.shields.io/npm/dt/@coveord/platform-client?style=flat-square)](https://www.npmjs.com/package/@coveord/platform-client)
 [![license](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)](LICENSE)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
