@@ -11,6 +11,38 @@ describe('CaseAssist', () => {
     let caseAssist: CaseAssist;
     const api = new APIMock() as jest.Mocked<API>;
 
+    const caseAssistModels: CaseAssistModel[] = [
+        {
+            id: 'CaseAssist-to-update-id-1',
+            name: 'New CaseAssist1',
+            documentSuggestionConfiguration: {
+                pipeline: 'fake_pipeline1',
+                fieldsToFeed: ['field1', 'field2'],
+                filter: 'filter_string',
+                strategy: DocumentSuggestionsStrategies.ITD,
+            },
+            typingAidsConfiguration: {
+                values: ['value1', 'value2'],
+                strategy: TypingAidsStrategies.StaticValues,
+            },
+        },
+        {
+            id: 'CaseAssist-to-update-id-2',
+            name: 'New CaseAssist2',
+            documentSuggestionConfiguration: {
+                pipeline: 'fake_pipeline1',
+                fieldsToFeed: ['field1', 'field2'],
+                filter: 'filter_string',
+                strategy: DocumentSuggestionsStrategies.ITD,
+            },
+            typingAidsConfiguration: {
+                filter: 'filter_string',
+                field: 'field_string',
+                strategy: TypingAidsStrategies.ValuesFromIndex,
+            },
+        },
+    ];
+
     beforeEach(() => {
         jest.clearAllMocks();
         caseAssist = new CaseAssist(api);
@@ -26,36 +58,8 @@ describe('CaseAssist', () => {
     });
 
     describe('create', () => {
-        const caseAssistModels: Array<New<CaseAssistModel>> = [
-            {
-                name: 'New CaseAssist1',
-                documentSuggestionConfiguration: {
-                    pipeline: 'fake_pipeline1',
-                    fieldsToFeed: ['field1', 'field2'],
-                    filter: 'filter_string',
-                    strategy: DocumentSuggestionsStrategies.ITD,
-                },
-                typingAidsConfiguration: {
-                    values: ['value1', 'value2'],
-                    strategy: TypingAidsStrategies.StaticValues,
-                },
-            },
-            {
-                name: 'New CaseAssist2',
-                documentSuggestionConfiguration: {
-                    pipeline: 'fake_pipeline1',
-                    fieldsToFeed: ['field1', 'field2'],
-                    filter: 'filter_string',
-                    strategy: DocumentSuggestionsStrategies.ITD,
-                },
-                typingAidsConfiguration: {
-                    filter: 'filter_string',
-                    field: 'field_string',
-                    strategy: TypingAidsStrategies.ValuesFromIndex,
-                },
-            },
-        ];
-        caseAssistModels.forEach((caseAssistModel) => {
+        const newCaseAssistModels: Array<New<CaseAssistModel>> = caseAssistModels;
+        newCaseAssistModels.forEach((caseAssistModel) => {
             it('should make a POST call to the CaseAssists base url', () => {
                 caseAssist.create(caseAssistModel);
 
@@ -86,37 +90,6 @@ describe('CaseAssist', () => {
     });
 
     describe('update', () => {
-        const caseAssistModels: CaseAssistModel[] = [
-            {
-                id: 'CaseAssist-to-update-id-1',
-                name: 'New CaseAssist1',
-                documentSuggestionConfiguration: {
-                    pipeline: 'fake_pipeline1',
-                    fieldsToFeed: ['field1', 'field2'],
-                    filter: 'filter_string',
-                    strategy: DocumentSuggestionsStrategies.ITD,
-                },
-                typingAidsConfiguration: {
-                    values: ['value1', 'value2'],
-                    strategy: TypingAidsStrategies.StaticValues,
-                },
-            },
-            {
-                id: 'CaseAssist-to-update-id-2',
-                name: 'New CaseAssist2',
-                documentSuggestionConfiguration: {
-                    pipeline: 'fake_pipeline1',
-                    fieldsToFeed: ['field1', 'field2'],
-                    filter: 'filter_string',
-                    strategy: DocumentSuggestionsStrategies.ITD,
-                },
-                typingAidsConfiguration: {
-                    filter: 'filter_string',
-                    field: 'field_string',
-                    strategy: TypingAidsStrategies.ValuesFromIndex,
-                },
-            },
-        ];
         caseAssistModels.forEach((caseAssistModel) => {
             it('should make a PUT call to the specific CaseAssist url', () => {
                 caseAssist.update(caseAssistModel);
