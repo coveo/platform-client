@@ -1,5 +1,3 @@
-import CaseAssist from './CaseAssist';
-
 export enum DocumentSuggestionsStrategies {
     ITD = 'ITD',
 }
@@ -9,7 +7,7 @@ export enum TypingAidsStrategies {
     ValuesFromIndex = 'ValuesFromIndex',
 }
 
-export interface CaseAssistListOptions {
+export interface CaseAssistConfigListOptions {
     page?: number;
     pageSize?: number;
     filter?: string;
@@ -36,9 +34,11 @@ interface TypingAidsConfigurations {
     };
 }
 
-export interface CaseAssistModel {
+export interface CaseAssistConfigModel {
     id: string;
     name: string;
-    documentSuggestionConfiguration?: DocumentSuggestionsConfigurations['ITD'];
-    typingAidsConfiguration?: TypingAidsConfigurations['StaticValues'] | TypingAidsConfigurations['ValuesFromIndex'];
+    documentSuggestionConfiguration?: DocumentSuggestionsConfigurations[DocumentSuggestionsStrategies.ITD];
+    typingAidsConfiguration?:
+        | TypingAidsConfigurations[TypingAidsStrategies.StaticValues]
+        | TypingAidsConfigurations[TypingAidsStrategies.ValuesFromIndex];
 }
