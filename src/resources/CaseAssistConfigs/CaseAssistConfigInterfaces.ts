@@ -10,7 +10,6 @@ export enum TypingAidsStrategies {
 export interface CaseAssistConfigListOptions {
     page?: number;
     pageSize?: number;
-    filter?: string;
 }
 
 interface DocumentSuggestionsConfigurations {
