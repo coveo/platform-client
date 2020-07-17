@@ -1,20 +1,21 @@
 import API from '../../../APICore';
+import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
     AutoSelectionFieldCandidateModel,
-    ListCandidateFieldsParams,
-    DocumentExtractionPreviewParams,
-    DocumentExtractionPreviewModel,
-    DocumentExtractionQueryModel,
-    DNENewConfigurationModel,
     DNEConfigurationModel,
+    DNENewConfigurationModel,
+    DocumentExtractionPreviewModel,
+    DocumentExtractionPreviewParams,
+    DocumentExtractionQueryModel,
+    ListCandidateFieldsParams,
 } from './DNEConfigurationInterfaces';
 
 export default class DNEConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/dne`;
 
     listFields(params?: ListCandidateFieldsParams) {
-        return this.api.get<AutoSelectionFieldCandidateModel[]>(
+        return this.api.get<PageModel<AutoSelectionFieldCandidateModel>>(
             this.buildPath(`${DNEConfiguration.baseUrl}/autoselectionfieldcandidates`, params)
         );
     }
