@@ -12,32 +12,30 @@ export interface CaseAssistConfigListOptions {
     pageSize?: number;
 }
 
-interface DocumentSuggestionsConfigurations {
-    ITD: {
-        pipeline?: string;
-        fieldsToFeed: string[];
-        filter?: string;
-        strategy: DocumentSuggestionsStrategies;
-    };
+interface ITDConfigurationModel {
+    pipeline?: string;
+    fieldsToFeed: string[];
+    filter?: string;
+    strategy: DocumentSuggestionsStrategies;
 }
 
-interface TypingAidsConfigurations {
-    StaticValues: {
-        values: string[];
-        strategy: TypingAidsStrategies;
-    };
-    ValuesFromIndex: {
-        filter: string;
-        field: string;
-        strategy: TypingAidsStrategies;
-    };
+interface StaticValuesConfigurationModel {
+    values: string[];
+    strategy: TypingAidsStrategies;
 }
+
+interface ValuesFromIndexConfigurationModel {
+    filter: string;
+    field: string;
+    strategy: TypingAidsStrategies;
+}
+
+type TypingAidsConfigurations = StaticValuesConfigurationModel | ValuesFromIndexConfigurationModel;
+type DocumentSuggestionsConfigurations = ITDConfigurationModel;
 
 export interface CaseAssistConfigModel {
     id: string;
     name: string;
-    documentSuggestionConfiguration?: DocumentSuggestionsConfigurations[DocumentSuggestionsStrategies.ITD];
-    typingAidsConfiguration?:
-        | TypingAidsConfigurations[TypingAidsStrategies.StaticValues]
-        | TypingAidsConfigurations[TypingAidsStrategies.ValuesFromIndex];
+    documentSuggestionConfiguration?: DocumentSuggestionsConfigurations;
+    typingAidsConfiguration?: TypingAidsConfigurations;
 }
