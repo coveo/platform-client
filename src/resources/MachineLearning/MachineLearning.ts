@@ -1,10 +1,10 @@
 import API from '../../APICore';
 import Resource from '../Resource';
+import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
 import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
 import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
 import ModelInformation from './ModelInformation/ModelInformation';
 import Models from './Models/Models';
-import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
