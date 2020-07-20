@@ -1,6 +1,7 @@
 import API from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
+import CaseAssistConfig from './CaseAssistConfigs/CaseAssistConfig';
 import Catalog from './Catalogs/Catalog';
 import Cluster from './Clusters/Cluster';
 import CrawlingModule from './CrawlingModule/CrawlingModule';
@@ -24,6 +25,7 @@ import User from './Users/User';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
+    {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
     {key: 'cluster', resource: Cluster},
     {key: 'group', resource: Group},
@@ -50,6 +52,7 @@ class PlatformResources {
     protected API: API;
 
     aws: AWS;
+    caseAssistConfig: CaseAssistConfig;
     catalog: Catalog;
     cluster: Cluster;
     group: Group;

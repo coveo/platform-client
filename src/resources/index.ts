@@ -1,6 +1,7 @@
 export * from './ApiKeys';
 export * from './AWS';
 export * from './BaseInterfaces';
+export * from './CaseAssistConfigs';
 export * from './Catalogs';
 export * from './Clusters';
 export * from './Enums';

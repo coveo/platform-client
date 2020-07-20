@@ -1,5 +1,6 @@
 import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
+import CaseAssistConfig from '../CaseAssistConfigs/CaseAssistConfig';
 import Catalog from '../Catalogs/Catalog';
 import Cluster from '../Clusters/Cluster';
 import CrawlingModule from '../CrawlingModule/CrawlingModule';
@@ -28,6 +29,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.aws).toBeDefined();
             expect(platformResources.aws).toBeInstanceOf(AWS);
+        });
+
+        it('should register the caseAssistConfig resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.caseAssistConfig).toBeDefined();
+            expect(platformResources.caseAssistConfig).toBeInstanceOf(CaseAssistConfig);
         });
 
         it('should register the catalog resource on the platform instance', () => {
