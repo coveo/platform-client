@@ -12,26 +12,26 @@ export interface CaseAssistConfigListOptions {
     pageSize?: number;
 }
 
-interface ITDConfigurationModel {
+export interface ITDConfigurationModel {
     pipeline?: string;
     fieldsToFeed: string[];
     filter?: string;
     strategy: DocumentSuggestionsStrategies;
 }
 
-interface StaticValuesConfigurationModel {
+export interface StaticValuesConfigurationModel {
     values: string[];
     strategy: TypingAidsStrategies;
 }
 
-interface ValuesFromIndexConfigurationModel {
+export interface ValuesFromIndexConfigurationModel {
     filter: string;
     field: string;
     strategy: TypingAidsStrategies;
 }
 
-type TypingAidsConfigurations = StaticValuesConfigurationModel | ValuesFromIndexConfigurationModel;
-type DocumentSuggestionsConfigurations = ITDConfigurationModel;
+export type TypingAidsConfigurations = StaticValuesConfigurationModel | ValuesFromIndexConfigurationModel;
+export type DocumentSuggestionsConfigurations = ITDConfigurationModel;
 
 export interface CaseAssistConfigModel {
     id: string;
