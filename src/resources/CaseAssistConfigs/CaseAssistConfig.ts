@@ -7,7 +7,9 @@ export default class CaseAssistConfig extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/caseassists`;
 
     list(options?: CaseAssistConfigListOptions) {
-        return this.api.get<PageModel<CaseAssistConfigModel>>(this.buildPath(CaseAssistConfig.baseUrl, options));
+        return this.api.get<PageModel<CaseAssistConfigModel, 'configurations'>>(
+            this.buildPath(CaseAssistConfig.baseUrl, options)
+        );
     }
 
     create(caseAssistConfig: New<CaseAssistConfigModel>) {
