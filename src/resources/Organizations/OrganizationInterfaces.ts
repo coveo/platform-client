@@ -43,6 +43,7 @@ export interface ListOrganizationOptions {
     page?: number;
     perPage?: number;
     sortBy?: string;
+    type?: string;
 }
 
 export interface CreateOrganizationOptions {
