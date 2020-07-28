@@ -13,6 +13,8 @@ import {
     FilterLastOperationResultType,
     FilterLastOperationType,
     FilterStatusType,
+    FormAuthenticationFailedMethod,
+    FormInputType,
     MappingModelKind,
     OperationType,
     PatternType,
@@ -39,7 +41,7 @@ import {
 export interface SourceModel extends GranularResource {
     configurationError?: ConfigurationError;
     crawlingModuleId?: string;
-    customParameters?: any;
+    customParameters?: Record<string, string>;
     id?: string;
     information?: SourceInformation;
     logicalIndex?: string;
@@ -58,6 +60,22 @@ export interface SourceModel extends GranularResource {
     sourceType?: SourceType;
     sourceVisibility?: SourceVisibility;
     urlFilters?: UrlFilter[];
+    alwaysTrustCertificates?: boolean;
+    username?: string;
+    password?: string;
+    formAuthenticationConfig?: FormAuthenticationConfig;
+}
+
+export interface CreateSourceModel extends SourceModel, SourceInformation {
+    AutomaticFormAuth?: string;
+    FormAuth?: string;
+    authentication?: string;
+    ocrType?: string;
+    passwordInputName?: string;
+    passwordInputValue?: string;
+    usernameInputName?: string;
+    usernameInputValue?: string;
+    [key: string]: any;
 }
 
 export interface ConfigurationError {
@@ -66,6 +84,7 @@ export interface ConfigurationError {
 }
 
 export interface SourceInformation {
+    id?: string;
     collectionId?: number;
     collectionName?: string;
     documentsTotalSize?: number;
@@ -86,6 +105,8 @@ export interface MappingModel {
     id?: string;
     kind?: MappingModelKind;
     type?: string;
+    literalContent?: string;
+    metadataContent?: string;
 }
 
 export interface DocumentPermissionModel {
@@ -99,7 +120,7 @@ export interface SourceExtensionModel {
     condition?: string;
     extensionId?: string;
     itemType?: string;
-    parameters?: any;
+    parameters?: Record<string, string>;
     versionId?: string;
 }
 
@@ -255,6 +276,31 @@ export interface FormAuthenticationInput {
     name?: string;
     type?: AuthenticationInputType;
     value?: string;
+}
+
+export interface FormAuthenticationConfig {
+    actionMethod?: string;
+    actionUrl?: string;
+    addFoundInputs?: boolean;
+    authenticationFailed?: FormAuthenticationFailedConfiguration;
+    enableJavaScript?: boolean;
+    formContentType?: string;
+    formId?: string;
+    formUrl?: string;
+    inputs?: FormInput[];
+    javaScriptLoadingDelayInMilliseconds?: number;
+    customLoginSequence?: JSON;
+}
+
+export interface FormAuthenticationFailedConfiguration {
+    method: FormAuthenticationFailedMethod;
+    values: string[];
+}
+
+export interface FormInput {
+    name: string;
+    value?: string;
+    inputType: FormInputType;
 }
 
 export interface DataFile {
