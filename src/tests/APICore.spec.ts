@@ -269,9 +269,7 @@ describe('APICore', () => {
                     });
                 });
 
-                api.get(testData.route)
-                    .then(resolvedPromiseSpy)
-                    .catch(rejectedPromiseSpy);
+                api.get(testData.route).then(resolvedPromiseSpy).catch(rejectedPromiseSpy);
 
                 jest.advanceTimersByTime(500);
                 api.abortGetRequests();
