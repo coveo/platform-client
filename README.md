@@ -127,7 +127,7 @@ const notifyOnSuccess = (message) => (currentOptions) => ({
     responseHandlers: [
         {
             canProcess: (response) => response.ok,
-            process: async (response)=> {
+            process: async (response) => {
                 const result = await response.json();
                 showSuccessToast(message);
                 return result;
@@ -136,7 +136,6 @@ const notifyOnSuccess = (message) => (currentOptions) => ({
         ...currentOptions.responseHandlers,
     ],
 });
-
 
 const notifyOnError = (message) => (currentOptions) => ({
     ...currentOptions,
@@ -149,22 +148,20 @@ const notifyOnError = (message) => (currentOptions) => ({
                 showErrorToast(message);
                 throw error;
             },
-        }
+        },
     ],
 });
 
-platform.withFeatures(
-    notifyOnSuccess('It worked!'), 
-    notifyOnError('It failed!'),
-).field.delete('unwanted-field-id');
+platform.withFeatures(notifyOnSuccess('It worked!'), notifyOnError('It failed!')).field.delete('unwanted-field-id');
 ```
+
 ## Contributing
 
 ### Guidelines
 
 -   Make sure your changes are fully tested (when applicable).
 -   We tend to avoid comments in our code base, we strongly prefer good naming and code structure.
--   Avoid pushing similar changes in different commits if it's within the same feature, because we want the changelogs to be clear and simple. To avoid that, there are at least 2 options: 
+-   Avoid pushing similar changes in different commits if it's within the same feature, because we want the changelogs to be clear and simple. To avoid that, there are at least 2 options:
     1. Squash the commits into one when merging (you need to edit the final commit message though)
     1. amend the previous commit when making related changes (`git commit --amend --no-edit`)
 
