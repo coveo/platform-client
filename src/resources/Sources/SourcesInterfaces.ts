@@ -289,7 +289,7 @@ export interface FormAuthenticationConfig {
     formUrl?: string;
     inputs?: FormInput[];
     javaScriptLoadingDelayInMilliseconds?: number;
-    customLoginSequence?: JSON;
+    customLoginSequence?: any;
 }
 
 export interface FormAuthenticationFailedConfiguration {
