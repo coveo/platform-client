@@ -5,6 +5,7 @@ import Resource from '../Resource';
 import {ScheduleModel} from '../SecurityCache';
 import SourcesFields from './SourcesFields/SourcesFields';
 import {
+    CreateSourceModel,
     CreateSourceOptions,
     LightSourceModel,
     ListSourcesParams,
@@ -23,7 +24,7 @@ export default class Sources extends Resource {
         this.field = new SourcesFields(api);
     }
 
-    create(source: New<SourceModel, 'resourceId'>, options?: CreateSourceOptions) {
+    create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
         return this.api.post<{id: string}>(this.buildPath(Sources.baseUrl, options), source);
     }
 
@@ -43,7 +44,7 @@ export default class Sources extends Resource {
         return this.api.get<SourceModel>(`${Sources.baseUrl}/${sourceId}`);
     }
 
-    update(sourceId: string, source: SourceModel, options?: CreateSourceOptions) {
+    update(sourceId: string, source: CreateSourceModel, options?: CreateSourceOptions) {
         return this.api.put<{id: string}>(this.buildPath(`${Sources.baseUrl}/${sourceId}`, options), source);
     }
 
