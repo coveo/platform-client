@@ -98,7 +98,13 @@ export interface CurrentStatusModel {
 }
 
 export interface SecurityProviderStatisticsModel {
-    numberOfEntitiesByState?: {format: number; type: number};
+    numberOfEntitiesByState?: {
+        DISABLED: number;
+        IN_ERROR: number;
+        NOT_UPDATED: number;
+        OUT_OF_DATE: number;
+        UP_TO_DATE: number;
+    };
     numberOfEntitiesInError?: number;
     numberOfPermissionModels?: number;
     numberOfProviders?: number;
