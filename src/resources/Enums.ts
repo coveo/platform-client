@@ -116,6 +116,12 @@ export enum SourceVisibility {
     SHARED = 'SHARED',
 }
 
+export enum SourceCategory {
+    CLOUD = 'CLOUD',
+    ON_PREM = 'ON_PREM',
+    CRAWLING_MODULE = 'CRAWLING_MODULE',
+}
+
 export enum FilterHostType {
     CLOUD = 'CLOUD',
     CRAWLING_MODULE = 'CRAWLING_MODULE',
@@ -686,4 +692,17 @@ export enum DimensionEventTypes {
 export enum RegionType {
     Primary = 'PRIMARY',
     Secondary = 'SECONDARY',
+}
+
+export enum FormAuthenticationFailedMethod {
+    RedirectedToUrl = 'RedirectedToUrl',
+    PageDoesNotContain = 'PageDoesNotContain',
+    PageContains = 'PageContains',
+    CookieNotSet = 'CookieNotSet',
+}
+
+export enum FormInputType {
+    Username = 'Username',
+    Password = 'Password',
+    Input = 'Input',
 }

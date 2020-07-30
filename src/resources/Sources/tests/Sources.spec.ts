@@ -3,7 +3,7 @@ import {New} from '../../BaseInterfaces';
 import {ActivityOperation} from '../../Enums';
 import {ScheduleModel} from '../../SecurityCache';
 import Sources from '../Sources';
-import {RawSourceConfig, SourceModel} from '../SourcesInterfaces';
+import {CreateSourceModel, RawSourceConfig} from '../SourcesInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -20,7 +20,7 @@ describe('Sources', () => {
 
     describe('create', () => {
         it('should make a POST call to the Sources base url', () => {
-            const sourceModel: New<SourceModel> = {};
+            const sourceModel: New<CreateSourceModel> = {};
 
             source.create(sourceModel);
             expect(api.post).toHaveBeenCalledTimes(1);
@@ -69,7 +69,7 @@ describe('Sources', () => {
     describe('update', () => {
         it('should make a PUT call to the specific Sources url', () => {
             const sourceId = '🙀';
-            const sourceModel: SourceModel = {};
+            const sourceModel: CreateSourceModel = {};
 
             source.update(sourceId, sourceModel);
             expect(api.put).toHaveBeenCalledTimes(1);
