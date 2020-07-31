@@ -20,6 +20,19 @@ module.exports = (env, argv) => {
                 {
                     test: /\.ts$/,
                     exclude: /node_modules/,
+                    enforce: 'pre',
+                    use: {
+                        loader: 'eslint-loader',
+                        options: {
+                            cache: true,
+                            fix: true,
+                            failOnError: true,
+                        },
+                    },
+                },
+                {
+                    test: /\.ts$/,
+                    exclude: /node_modules/,
                     use: {
                         loader: 'ts-loader',
                         options: {

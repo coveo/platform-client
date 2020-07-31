@@ -19,7 +19,7 @@ export default class API {
         return retrieve(this.config.organizationId);
     }
 
-    async get<T = {}>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
+    async get<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
         args.signal = args.signal || this.getRequestsController.signal;
         try {
             return await this.request<T>(url, args);
@@ -45,7 +45,7 @@ export default class API {
         }
     }
 
-    async post<T = {}>(
+    async post<T = Record<string, unknown>>(
         url: string,
         body: any = {},
         args: RequestInit = {method: 'post', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
@@ -53,11 +53,15 @@ export default class API {
         return await this.request<T>(url, args);
     }
 
-    async postForm<T = {}>(url: string, form: FormData, args: RequestInit = {method: 'post', body: form}): Promise<T> {
+    async postForm<T = Record<string, unknown>>(
+        url: string,
+        form: FormData,
+        args: RequestInit = {method: 'post', body: form}
+    ): Promise<T> {
         return await this.request<T>(url, args);
     }
 
-    async put<T = {}>(
+    async put<T = Record<string, unknown>>(
         url: string,
         body: any = {},
         args: RequestInit = {method: 'put', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
@@ -65,7 +69,7 @@ export default class API {
         return await this.request<T>(url, args);
     }
 
-    async patch<T = {}>(
+    async patch<T = Record<string, unknown>>(
         url: string,
         body: any = {},
         args: RequestInit = {method: 'PATCH', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}}
@@ -73,7 +77,7 @@ export default class API {
         return await this.request<T>(url, args);
     }
 
-    async delete<T = {}>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
+    async delete<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'delete'}): Promise<T> {
         return await this.request<T>(url, args);
     }
 

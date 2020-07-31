@@ -1,9 +1,0 @@
-{
-    "extends": ["tsjs/tslint-config"],
-    "linterOptions": {
-        "exclude": ["**/node_modules/**", "**/dist/**", "jest.setup.ts"]
-    },
-    "rules": {
-        "no-default-export": false
-    }
-}

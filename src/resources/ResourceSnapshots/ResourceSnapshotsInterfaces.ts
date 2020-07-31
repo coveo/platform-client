@@ -38,8 +38,8 @@ export enum ResourceSnapshotSupportedFileTypes {
 
 export interface ResourceSnapshotsReportModel {
     id: string;
-    resourceOperationResults?: object;
-    resourceOperations?: object;
+    resourceOperationResults?: Record<string, unknown>;
+    resourceOperations?: Record<string, unknown>;
     resourcesProcessed?: number;
     resultCode: ResourceSnapshotsReportResultCode;
     status: ResourceSnapshotsReportStatus;
@@ -48,7 +48,7 @@ export interface ResourceSnapshotsReportModel {
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
-    resourcesToExport: object;
+    resourcesToExport: Record<string, unknown>;
 }
 
 export interface ResourceSnapshotUrlModel {

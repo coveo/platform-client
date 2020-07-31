@@ -7,11 +7,11 @@ class Resource {
 
     constructor(protected api: API) {}
 
-    protected buildPath(route: string, parameters: object): string {
+    protected buildPath(route: string, parameters: any): string {
         return route + this.convertObjectToQueryString(parameters);
     }
 
-    private convertObjectToQueryString(parameters: object): string {
+    private convertObjectToQueryString(parameters: any): string {
         if (!parameters) {
             return '';
         } else {

@@ -6,7 +6,7 @@ jest.mock('../../APICore');
 const APIMock: jest.Mock<API> = API as any;
 
 class ResourceFixture extends Resource {
-    testBuildPath(route: string, params: object) {
+    testBuildPath(route: string, params: Record<string, unknown>) {
         return super.buildPath(route, params);
     }
     getSomething() {

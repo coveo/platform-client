@@ -25,6 +25,5 @@ const error: ResponseHandler = {
 export const defaultResponseHandlers = [noContent, success, error];
 export const ResponseHandlers = {noContent, success, successBlob, error};
 
-export default function <T>(response: Response, handlers = defaultResponseHandlers) {
-    return handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);
-}
+export default <T>(response: Response, handlers = defaultResponseHandlers) =>
+    handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);

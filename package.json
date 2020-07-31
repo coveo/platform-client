@@ -20,29 +20,32 @@
         "test:watch": "jest --watchAll",
         "release": "semantic-release",
         "commit-cli": "git-cz",
-        "lintfix": "prettier --write \"*.{ts,js,json,md}\" && tslint -c ./tslint.json -p ./tsconfig.json --fix"
+        "lintfix": "prettier --write \"**/*.{ts,js,json,md}\" && eslint -c ./.eslintrc.js --fix --ext .js,.ts ./src"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
         "@commitlint/travis-cli": "^8.3.5",
         "@types/jest": "^24.9.0",
-        "abortcontroller-polyfill": "^1.4.0",
+        "abortcontroller-polyfill": "^1.5.0",
         "clean-webpack-plugin": "^3.0.0",
         "cz-conventional-changelog": "^3.0.2",
+        "eslint": "^7.5.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-jest": "^23.20.0",
         "husky": "^4.2.5",
         "jest": "^24.9.0",
         "jest-fetch-mock": "^3.0.3",
+        "jest-runner-eslint": "^0.10.0",
         "lint-staged": "^9.5.0",
         "node-blob": "0.0.2",
         "prettier": "^2.0.5",
         "semantic-release": "^16.0.2",
         "ts-jest": "^24.3.0",
         "ts-loader": "^6.2.1",
-        "tsjs": "^2.0.0",
-        "tslint": "^6.1.2",
+        "tsjs": "^3.0.1",
         "typescript": "^3.9.7",
-        "webpack": "^4.44.0",
+        "webpack": "^4.44.1",
         "webpack-cli": "^3.3.12"
     },
     "prettier": "tsjs/prettier-config",
@@ -55,7 +58,7 @@
     "lint-staged": {
         "**/*.ts": [
             "prettier --write",
-            "tslint -c ./tslint.json -p ./tsconfig.json --fix",
+            "eslint -c ./.eslintrc.js --fix",
             "git add"
         ],
         "**/*.{js,json}": [
