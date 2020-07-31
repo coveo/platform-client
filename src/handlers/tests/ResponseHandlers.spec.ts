@@ -23,11 +23,9 @@ describe('ResponseHandlers', () => {
         const error = {code: 'WRONG_UTENSIL', message: 'Use a spoon to eat the soup.'};
         const errorResponse = new Response(JSON.stringify(error), {status: 400});
 
-        try {
-            await handleResponse(errorResponse);
-        } catch (err) {
+        await handleResponse(errorResponse).catch((err) => {
             expect(err).toEqual(error);
-        }
+        });
 
         expect.assertions(1);
     });

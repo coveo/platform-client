@@ -61,7 +61,7 @@ describe('PlatformClient', () => {
     });
 
     it('should register all the resources on the platform instance', () => {
-        const registerAllSpy = spyOn(PlatformResources.prototype, 'registerAll');
+        const registerAllSpy = jest.spyOn(PlatformResources.prototype, 'registerAll');
         new PlatformClient(baseOptions);
 
         expect(registerAllSpy).toHaveBeenCalledTimes(1);

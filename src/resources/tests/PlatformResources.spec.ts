@@ -47,7 +47,7 @@ describe('PlatformResources', () => {
             expect(platformResources.catalog).toBeInstanceOf(Catalog);
         });
 
-        it('should register the aws resource on the platform instance', () => {
+        it('should register the cluster resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 

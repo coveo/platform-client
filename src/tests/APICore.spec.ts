@@ -78,13 +78,7 @@ describe('APICore', () => {
                 const error = new Error('the request has failed');
                 global.fetch.mockRejectedValue(error);
 
-                try {
-                    await api.get(testData.route);
-                } catch (e) {
-                    expect(e).toEqual(error);
-                } finally {
-                    expect.assertions(1);
-                }
+                await expect(api.get(testData.route)).rejects.toThrow(error);
             });
 
             it('should bind GET requests to an abort signal', () => {
@@ -112,14 +106,7 @@ describe('APICore', () => {
             it('should make the promise fail on a failed request', async () => {
                 const error = new Error('the request has failed');
                 global.fetch.mockRejectedValue(error);
-
-                try {
-                    await api.getFile(testData.route);
-                } catch (e) {
-                    expect(e).toEqual(error);
-                } finally {
-                    expect.assertions(1);
-                }
+                await expect(api.getFile(testData.route)).rejects.toThrow(error);
             });
 
             it('should bind GET requests to an abort signal', () => {
@@ -261,13 +248,14 @@ describe('APICore', () => {
                 const resolvedPromiseSpy = jest.fn().mockName('resolvedPromiseSpy');
                 const rejectedPromiseSpy = jest.fn().mockName('rejectedPromiseSpy');
 
-                global.fetch.mockImplementationOnce(() => {
-                    return new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve(new Response(JSON.stringify(testData.response), {status: 200}));
-                        }, 1000);
-                    });
-                });
+                global.fetch.mockImplementationOnce(
+                    () =>
+                        new Promise((resolve) => {
+                            setTimeout(() => {
+                                resolve(new Response(JSON.stringify(testData.response), {status: 200}));
+                            }, 1000);
+                        })
+                );
 
                 api.get(testData.route).then(resolvedPromiseSpy).catch(rejectedPromiseSpy);
 
@@ -336,14 +324,7 @@ describe('APICore', () => {
         it('should throw an error if the check token call fails', async () => {
             jest.spyOn(API.prototype, 'postForm').mockRejectedValue(new Error('invalid token'));
             const api = new API(testConfig);
-
-            try {
-                await api.checkToken();
-            } catch (err) {
-                expect(err.message).toBe('invalid token');
-            } finally {
-                expect.assertions(1);
-            }
+            await expect(api.checkToken()).rejects.toThrow(new Error('invalid token'));
         });
 
         it('should store the token info returned by the promise', async () => {
