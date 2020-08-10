@@ -1,3 +1,5 @@
+import {ModelTypes} from '../../Enums';
+
 export interface AssociationsListModel {
     rules: MLAssociationModel[];
     totalEntries: number;
@@ -10,6 +12,7 @@ export interface MLAssociationModel {
     modelId: string;
     modelStatus: string;
     cacheMaximumAge: string;
+    modelEngine?: ModelTypes;
     condition?: string;
     conditionDefinition?: string;
     customQueryParameters?: any;

@@ -706,3 +706,11 @@ export enum FormInputType {
     Password = 'Password',
     Input = 'Input',
 }
+
+export enum ModelTypes {
+    TopClicks = 'topclicks',
+    QuerySuggest = 'querysuggest',
+    EventRecommendation = 'eventrecommendation',
+    FacetSense = 'facetsense',
+    ECommerce = 'ecommerce',
+}
