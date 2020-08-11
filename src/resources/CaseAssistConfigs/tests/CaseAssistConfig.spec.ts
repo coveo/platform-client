@@ -21,7 +21,6 @@ describe('CaseAssistConfig', () => {
             name: 'New CaseAssistConfig1',
             documentSuggestionConfiguration: {
                 pipeline: 'fake_pipeline1',
-                fieldsToFeed: ['field1', 'field2'],
                 filter: 'filter_string',
                 strategy: DocumentSuggestionsStrategies.ITD,
             },
@@ -35,7 +34,6 @@ describe('CaseAssistConfig', () => {
             name: 'New CaseAssistConfig2',
             documentSuggestionConfiguration: {
                 pipeline: 'fake_pipeline1',
-                fieldsToFeed: ['field1', 'field2'],
                 filter: 'filter_string',
                 strategy: DocumentSuggestionsStrategies.ITD,
             },
