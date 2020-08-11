@@ -22,6 +22,7 @@ import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
+import SchemaService from './SchemaService/SchemaService';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
@@ -46,6 +47,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'ua', resource: UsageAnalytics},
     {key: 'global', resource: Global},
+    {key: 'schemaService', resource: SchemaService},
 ];
 
 class PlatformResources {
@@ -73,6 +75,7 @@ class PlatformResources {
     resourceSnapshot: ResourceSnapshots;
     ua: UsageAnalytics;
     global: Global;
+    schemaService: SchemaService;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
