@@ -20,6 +20,7 @@ import SecurityCache from '../SecurityCache/SecurityCache';
 import Sources from '../Sources/Sources';
 import UsageAnalytics from '../UsageAnalytics/UsageAnalytics';
 import User from '../Users/User';
+import SchemaService from '../SchemaService/SchemaService';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -189,6 +190,13 @@ describe('PlatformResources', () => {
 
             expect(platformResources.global).toBeDefined();
             expect(platformResources.global).toBeInstanceOf(Global);
+        });
+        it('should register the schemaService resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.schemaService).toBeDefined();
+            expect(platformResources.schemaService).toBeInstanceOf(SchemaService);
         });
     });
 });
