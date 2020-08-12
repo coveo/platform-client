@@ -14,7 +14,6 @@ export interface CaseAssistConfigListOptions {
 
 export interface ITDConfigurationModel {
     pipeline?: string;
-    fieldsToFeed: string[];
     filter?: string;
     strategy: DocumentSuggestionsStrategies;
 }
