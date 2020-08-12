@@ -4,9 +4,8 @@ import {SchemaEntities, SchemaServiceQueryParams, SchemaFields} from './SchemaSe
 import {SourceType} from '../Enums';
 
 export default class SchemaService extends Ressource {
-    static baseUrl = `/rest`;
     static getBaseUrl = (sourceType: SourceType) =>
-        `${SchemaService.baseUrl}/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}`;
+        `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}`;
 
     constructor(protected api: API) {
         super(api);
