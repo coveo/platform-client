@@ -19,10 +19,10 @@ import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
 import Search from './Search/Search';
 import SecurityCache from './SecurityCache/SecurityCache';
+import SchemaService from './SchemaService/SchemaService';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
-import SchemaService from './SchemaService/SchemaService';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
