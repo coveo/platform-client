@@ -1,10 +1,10 @@
 export interface SchemaEntities {
     entities?: SchemaEntity[];
-    extensions?: string[];
 }
 
 export interface SchemaEntity {
     name?: string;
+    displayName?: string;
     id?: string;
 }
 
