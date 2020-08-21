@@ -3,6 +3,7 @@ import {New} from '../../BaseInterfaces';
 import CaseAssistConfig from '../CaseAssistConfig';
 import {
     CaseAssistConfigModel,
+    CaseClassificationStrategies,
     DocumentSuggestionsStrategies,
     TypingAidsStrategies,
 } from '../CaseAssistConfigInterfaces';
@@ -28,6 +29,17 @@ describe('CaseAssistConfig', () => {
                 values: ['value1', 'value2'],
                 strategy: TypingAidsStrategies.StaticValues,
             },
+            classificationConfigurations: [
+                {
+                    filter: 'filter_string',
+                    fieldsToPredict: [
+                        {
+                            name: 'field1',
+                        },
+                    ],
+                    strategy: CaseClassificationStrategies.Some,
+                },
+            ],
         },
         {
             id: 'CaseAssist-to-update-id-2',
@@ -42,6 +54,17 @@ describe('CaseAssistConfig', () => {
                 field: 'field_string',
                 strategy: TypingAidsStrategies.ValuesFromIndex,
             },
+            classificationConfigurations: [
+                {
+                    filter: 'filter_string',
+                    fieldsToPredict: [
+                        {
+                            name: 'field1',
+                        },
+                    ],
+                    strategy: CaseClassificationStrategies.Some,
+                },
+            ],
         },
     ];
 
