@@ -45,12 +45,12 @@ export interface CaseClassificationSomeConfigurationModel {
 
 export type TypingAidsConfigurations = StaticValuesConfigurationModel | ValuesFromIndexConfigurationModel;
 export type DocumentSuggestionsConfigurations = ITDConfigurationModel;
-export type CaseClassificationConfigurations = CaseClassificationSomeConfigurationModel;
+export type CaseClassificationConfiguration = CaseClassificationSomeConfigurationModel;
 
 export interface CaseAssistConfigModel {
     id: string;
     name: string;
     documentSuggestionConfiguration?: DocumentSuggestionsConfigurations;
     typingAidsConfiguration?: TypingAidsConfigurations;
-    classificationConfigurations?: CaseClassificationConfigurations[];
+    classificationConfigurations?: CaseClassificationConfiguration[];
 }
