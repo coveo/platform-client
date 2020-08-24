@@ -1,6 +1,7 @@
 import API from '../../APICore';
 import Resource from '../Resource';
 import Condition from './Conditions/Condition';
+import FacetStateRules from './FacetStateRules/FacetStateRules';
 import MLAssociations from './MLAssociations/MLAssociations';
 import {
     ListPipelinesOptions,
@@ -22,6 +23,7 @@ export default class Pipelines extends Resource {
     resultRanking: ResultRankings;
     conditions: Condition;
     groups: StatementGroups;
+    facetRules: FacetStateRules;
 
     constructor(protected api: API) {
         super(api);
@@ -31,6 +33,7 @@ export default class Pipelines extends Resource {
         this.resultRanking = new ResultRankings(api);
         this.conditions = new Condition(api);
         this.groups = new StatementGroups(api);
+        this.facetRules = new FacetStateRules(api);
     }
 
     getMLVersion() {
