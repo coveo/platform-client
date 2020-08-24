@@ -18,6 +18,7 @@ import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
 import Search from './Search/Search';
+import SearchPages from './SearchPages/SearchPages';
 import SecurityCache from './SecurityCache/SecurityCache';
 import SchemaService from './SchemaService/SchemaService';
 import Sources from './Sources/Sources';
@@ -48,6 +49,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ua', resource: UsageAnalytics},
     {key: 'global', resource: Global},
     {key: 'schemaService', resource: SchemaService},
+    {key: 'searchPages', resource: SearchPages},
 ];
 
 class PlatformResources {
@@ -76,6 +78,7 @@ class PlatformResources {
     ua: UsageAnalytics;
     global: Global;
     schemaService: SchemaService;
+    searchPages: SearchPages;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
