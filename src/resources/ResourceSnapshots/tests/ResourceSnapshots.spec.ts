@@ -40,6 +40,28 @@ describe('ResourceSnapshots', () => {
         });
     });
 
+    describe('validateReadAccess', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            resourceSnapshots.validateReadAccess(snapshotToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/hasResourcesReadAccess`
+            );
+        });
+    });
+
+    describe('validateWriteAccess', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            resourceSnapshots.validateWriteAccess(snapshotToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/hasResourcesWriteAccess`
+            );
+        });
+    });
+
     describe('getContent', () => {
         it('should make a GET call to the specific Resource Snapshots url and then make a get call to the url', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
