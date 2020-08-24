@@ -11,6 +11,8 @@ import {
     ResourceSnapshotsReportModel,
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
+    SnapshotAccessModel,
+    ValidateAccessOptions,
 } from './ResourceSnapshotsInterfaces';
 
 export default class ResourceSnapshots extends Resource {
@@ -24,12 +26,10 @@ export default class ResourceSnapshots extends Resource {
         return this.api.get<ResourceSnapshotsModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
     }
 
-    validateReadAccess(snapshotId: string) {
-        return this.api.get<boolean>(`${ResourceSnapshots.baseUrl}/${snapshotId}/hasResourcesReadAccess`);
-    }
-
-    validateWriteAccess(snapshotId: string) {
-        return this.api.get<boolean>(`${ResourceSnapshots.baseUrl}/${snapshotId}/hasResourcesWriteAccess`);
+    validateAccess(snapshotId: string, options: ValidateAccessOptions) {
+        return this.api.get<SnapshotAccessModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access`, options)
+        );
     }
 
     async getContent(snapshotId: string) {

@@ -8,6 +8,8 @@ import {
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotUrlModel,
+    SnapshotAccessType,
+    ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
@@ -40,24 +42,28 @@ describe('ResourceSnapshots', () => {
         });
     });
 
-    describe('validateReadAccess', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+    describe('validateAccess', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when READ', () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
-            resourceSnapshots.validateReadAccess(snapshotToGetId);
+            const options: ValidateAccessOptions = {
+                snapshotAccessType: SnapshotAccessType.Read,
+            };
+            resourceSnapshots.validateAccess(snapshotToGetId, options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/hasResourcesReadAccess`
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=READ`
             );
         });
-    });
 
-    describe('validateWriteAccess', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
-            resourceSnapshots.validateWriteAccess(snapshotToGetId);
+            const options: ValidateAccessOptions = {
+                snapshotAccessType: SnapshotAccessType.Write,
+            };
+            resourceSnapshots.validateAccess(snapshotToGetId, options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/hasResourcesWriteAccess`
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
             );
         });
     });

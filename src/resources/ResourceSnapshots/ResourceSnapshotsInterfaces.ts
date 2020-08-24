@@ -8,6 +8,11 @@ export interface ResourceSnapshotsModel {
     reports?: ResourceSnapshotsReportModel[];
 }
 
+export enum SnapshotAccessType {
+    Read = 'READ',
+    Write = 'WRITE',
+}
+
 export enum ResourceSnapshotsReportResultCode {
     AccessDenied = 'ACCESS_DENIED',
     ResourcesInError = 'RESOURCES_IN_ERROR',
@@ -56,6 +61,10 @@ export interface ResourceSnapshotUrlModel {
     urlExpiration: number;
 }
 
+export interface SnapshotAccessModel {
+    allowed: boolean;
+}
+
 export interface PushSnapshotOptions {
     targetOrganizationId: string;
     developerNotes?: string;
@@ -63,6 +72,10 @@ export interface PushSnapshotOptions {
 
 export interface CreateFromFileOptions {
     developerNotes?: string;
+}
+
+export interface ValidateAccessOptions {
+    snapshotAccessType: SnapshotAccessType;
 }
 
 export interface CreateFromOrganizationOptions {
