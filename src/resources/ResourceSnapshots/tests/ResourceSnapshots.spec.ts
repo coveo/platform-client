@@ -1,3 +1,4 @@
+import fetch from 'jest-fetch-mock';
 import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
