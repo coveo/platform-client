@@ -3,32 +3,19 @@ export interface CatalogsListOptions {
     pageSize?: number;
 }
 
-export interface BaseCatalogModel {
+export interface CatalogModel {
     id: string;
     name: string;
+    product: ProductHierarchyModel;
+    availability?: AvailabilityHierarchyModel;
     description?: string;
     scope?: ScopeModel;
-}
-
-export interface CatalogModel extends BaseCatalogModel {
-    product: ProductHierarchyModel;
     variant?: VariantHierarchyModel;
-    availability?: AvailabilityHierarchyModel;
 }
 
-export interface CreateCatalogModel extends BaseCatalogModel {
-    product: CreateProductHierarchyModel;
-    variant?: CreateVariantHierarchyModel;
+export interface CreateCatalogModel extends CatalogModel {
     availability?: CreateAvailabilityHierarchyModel;
 }
-
-export interface ProductHierarchyModel {
-    idField: string;
-    objectType: string;
-    fields: string[];
-}
-
-export type CreateProductHierarchyModel = Omit<ProductHierarchyModel, 'fields'>;
 
 export interface VariantHierarchyModel {
     fields: string[];
@@ -36,7 +23,10 @@ export interface VariantHierarchyModel {
     objectType: string;
 }
 
-export type CreateVariantHierarchyModel = Omit<VariantHierarchyModel, 'fields'>;
+export interface ProductHierarchyModel {
+    idField: string;
+    objectType: string;
+}
 
 export interface AvailabilityHierarchyModel {
     availableSkusField: string;
@@ -45,10 +35,9 @@ export interface AvailabilityHierarchyModel {
     objectType: string;
 }
 
-export type CreateAvailabilityHierarchyModel = Omit<AvailabilityHierarchyModel, 'fields'> & {
-    // Override `idField` to make it required
+export interface CreateAvailabilityHierarchyModel extends AvailabilityHierarchyModel {
     idField: string;
-};
+}
 
 export type ScopeModel =
     | {
