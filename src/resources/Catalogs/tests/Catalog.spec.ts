@@ -60,7 +60,7 @@ describe('Catalog', () => {
 
     describe('update', () => {
         it('should make a PUT call to the specific catalog url', () => {
-            const catalogModel: CatalogModel = {
+            const catalogModel: CreateCatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'Catalog to be updated',
                 product: {
