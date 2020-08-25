@@ -41,4 +41,13 @@ export default class FacetStateRules extends Ressource {
             })
         );
     }
+
+    move(pipelineId: string, facetStateRuleId: string, position: number) {
+        return this.api.put<void>(
+            this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}/position`, {
+                organizationId: this.api.organizationId,
+            }),
+            {position}
+        );
+    }
 }

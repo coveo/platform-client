@@ -84,4 +84,16 @@ describe('FacetStateRule', () => {
             expect(api.delete).toHaveBeenCalledWith(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetRuleId}`);
         });
     });
+
+    describe('move', () => {
+        it('should make a pul call to position a facet state rule', () => {
+            const pipelineId = '👾';
+            const facetRuleId = '🚀';
+            facetStateRules.move(pipelineId, facetRuleId, 3);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetRuleId}/position`, {
+                position: 3,
+            });
+        });
+    });
 });
