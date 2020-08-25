@@ -22,7 +22,7 @@ export default class Catalog extends Resource {
         return this.api.get<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`);
     }
 
-    update(catalog: CreateCatalogModel) {
-        return this.api.put<CreateCatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
+    update(catalog: CatalogModel) {
+        return this.api.put<CatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
     }
 }
