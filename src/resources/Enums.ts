@@ -648,9 +648,35 @@ export enum ResultRankingMatchOperators {
     matches = 'matches',
 }
 
+// @deprecated use PredicateKind instead
 export enum ResultRankingPredicateKind {
     basicExpressionAndLocalePredicate = 'basicExpressionAndLocalePredicate',
     qplPredicate = 'qplPredicate',
+}
+
+export enum PredicateKind {
+    BasicExpressionAndLocalePredicate = 'basicExpressionAndLocalePredicate',
+    QPLPredicate = 'qplPredicate',
+}
+
+export enum PredicateLocaleKind {
+    All = 'all',
+    Unspecified = 'unspecified',
+    Specific = 'specific',
+}
+
+export enum PredicateMatchOperator {
+    Is = 'is',
+    Contain = 'contains',
+    Matches = 'matches',
+}
+
+export enum FacetRuleKind {
+    AutoSelect = 'autoSelect',
+}
+
+export enum FacetRuleState {
+    Selected = 'selected',
 }
 
 export enum ResultRankingLocalizedContentLocales {

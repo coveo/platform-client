@@ -1,5 +1,5 @@
 import API from '../../../../APICore';
-import {ResultRankingLocales, ResultRankingMatchOperators, ResultRankingPredicateKind} from '../../../Enums';
+import {PredicateKind, ResultRankingLocales, ResultRankingMatchOperators} from '../../../Enums';
 import ResultRankings from '../ResultRankings';
 import {ResultRanking} from '../ResultRankingsInterfaces';
 
@@ -20,7 +20,7 @@ describe('Result Rankings', () => {
             },
             predicates: [
                 {
-                    kind: ResultRankingPredicateKind.basicExpressionAndLocalePredicate,
+                    kind: PredicateKind.BasicExpressionAndLocalePredicate,
                     basicQueryExpression: 'a',
                     matchOperator: {
                         kind: ResultRankingMatchOperators.contains,
