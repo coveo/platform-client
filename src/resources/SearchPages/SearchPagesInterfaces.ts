@@ -1,7 +1,10 @@
-export interface SearchPageModel {
+import {GranularResource} from '../BaseInterfaces';
+
+export interface SearchPageModel extends GranularResource {
     id: string;
     name: string;
     title: string;
+    filter?: string;
     html?: string;
     javascript?: JavaScriptResourceModel[];
     css?: CSSResourceModel[];
