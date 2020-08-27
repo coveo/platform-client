@@ -2,7 +2,7 @@ import Ressource from '../../Resource';
 import {FacetStateRule, ListFacetStateRuleParams, ListFacetStateRuleResponse} from './FacetStateRulesInterface';
 
 export default class FacetStateRules extends Ressource {
-    static getBaseUrl = (pipelineId: string) => `rest/search/admin/pipelines/${pipelineId}/facetStateRules`;
+    static getBaseUrl = (pipelineId: string) => `/rest/search/admin/pipelines/${pipelineId}/facetStateRules`;
 
     list(pipelineId: string, params?: ListFacetStateRuleParams) {
         return this.api.get<ListFacetStateRuleResponse>(
