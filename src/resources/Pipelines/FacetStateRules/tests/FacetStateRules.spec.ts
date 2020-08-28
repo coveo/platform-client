@@ -9,16 +9,18 @@ const APIMock: jest.Mock<API> = API as any;
 
 const facetStateRuleMock: FacetStateRule = {
     condition: {reference: ''},
-    defaultMatchOperator: PredicateMatchOperator.Contain,
+    defaultMatchOperator: {kind: PredicateMatchOperator.Contain},
     description: '',
     field: '',
     kind: FacetRuleKind.AutoSelect,
-    predicates: {
-        kind: PredicateKind.BasicExpressionAndLocalePredicate,
-        matchOperator: PredicateMatchOperator.Contain,
-        code: '',
-        basicQueryExpression: '',
-    },
+    predicates: [
+        {
+            kind: PredicateKind.BasicExpressionAndLocalePredicate,
+            matchOperator: {kind: PredicateMatchOperator.Contain},
+            code: '',
+            basicQueryExpression: '',
+        },
+    ],
     state: FacetRuleState.Selected,
     values: ['', ''],
 };
