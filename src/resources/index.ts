@@ -24,3 +24,4 @@ export * from './ResourceSnapshots';
 export * from './UsageAnalytics';
 export * from './Global';
 export * from './SchemaService';
+export * from './SearchPages';

@@ -21,6 +21,7 @@ import Sources from '../Sources/Sources';
 import UsageAnalytics from '../UsageAnalytics/UsageAnalytics';
 import User from '../Users/User';
 import SchemaService from '../SchemaService/SchemaService';
+import SearchPages from '../SearchPages/SearchPages';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -191,12 +192,21 @@ describe('PlatformResources', () => {
             expect(platformResources.global).toBeDefined();
             expect(platformResources.global).toBeInstanceOf(Global);
         });
+
         it('should register the schemaService resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
             expect(platformResources.schemaService).toBeDefined();
             expect(platformResources.schemaService).toBeInstanceOf(SchemaService);
+        });
+
+        it('should register the searchPages resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.searchPages).toBeDefined();
+            expect(platformResources.searchPages).toBeInstanceOf(SearchPages);
         });
     });
 });
