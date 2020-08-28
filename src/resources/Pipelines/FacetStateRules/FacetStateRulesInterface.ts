@@ -15,11 +15,11 @@ export interface IdentifiedFacetStateRule {
 
 export interface FacetStateRule {
     condition?: FacetStateRuleCondition;
-    defaultMatchOperator?: PredicateMatchOperator;
+    defaultMatchOperator?: FacetStateRuleMatchOperator;
     description?: string;
     field?: string;
     kind: FacetRuleKind;
-    predicates?: Predicate;
+    predicates?: FacetStateRulePredicate[];
     state?: FacetRuleState;
     values?: string[];
 }
@@ -28,12 +28,16 @@ export interface FacetStateRuleCondition {
     reference: string;
 }
 
-export interface Predicate {
+export interface FacetStateRulePredicate {
     basicQueryExpression?: string;
     code?: string;
     kind: PredicateKind;
     locale?: PredicateLocale;
-    matchOperator: PredicateMatchOperator;
+    matchOperator: FacetStateRuleMatchOperator;
+}
+
+export interface FacetStateRuleMatchOperator {
+    kind: PredicateMatchOperator;
 }
 
 export interface PredicateLocale {
