@@ -9,16 +9,18 @@ const APIMock: jest.Mock<API> = API as any;
 
 const facetStateRuleMock: FacetStateRule = {
     condition: {reference: ''},
-    defaultMatchOperator: PredicateMatchOperator.Contain,
+    defaultMatchOperator: {kind: PredicateMatchOperator.Contain},
     description: '',
     field: '',
     kind: FacetRuleKind.AutoSelect,
-    predicates: {
-        kind: PredicateKind.BasicExpressionAndLocalePredicate,
-        matchOperator: PredicateMatchOperator.Contain,
-        code: '',
-        basicQueryExpression: '',
-    },
+    predicates: [
+        {
+            kind: PredicateKind.BasicExpressionAndLocalePredicate,
+            matchOperator: {kind: PredicateMatchOperator.Contain},
+            code: '',
+            basicQueryExpression: '',
+        },
+    ],
     state: FacetRuleState.Selected,
     values: ['', ''],
 };
@@ -82,6 +84,18 @@ describe('FacetStateRule', () => {
             facetStateRules.delete(pipelineId, facetRuleId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetRuleId}`);
+        });
+    });
+
+    describe('move', () => {
+        it('should make a pul call to position a facet state rule', () => {
+            const pipelineId = '👾';
+            const facetRuleId = '🚀';
+            facetStateRules.move(pipelineId, facetRuleId, 3);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetRuleId}/position`, {
+                position: 3,
+            });
         });
     });
 });

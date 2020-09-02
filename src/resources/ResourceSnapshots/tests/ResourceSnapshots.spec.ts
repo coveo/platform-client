@@ -9,6 +9,8 @@ import {
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotUrlModel,
+    SnapshotAccessType,
+    ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
@@ -38,6 +40,32 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.get(snapshotToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
+        });
+    });
+
+    describe('validateAccess', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when READ', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const options: ValidateAccessOptions = {
+                snapshotAccessType: SnapshotAccessType.Read,
+            };
+            resourceSnapshots.validateAccess(snapshotToGetId, options);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=READ`
+            );
+        });
+
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const options: ValidateAccessOptions = {
+                snapshotAccessType: SnapshotAccessType.Write,
+            };
+            resourceSnapshots.validateAccess(snapshotToGetId, options);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
+            );
         });
     });
 

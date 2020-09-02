@@ -624,6 +624,7 @@ export enum StatementsFeature {
     Stop = 'stop',
     Thesaurus = 'thesaurus',
     Top = 'top',
+    ResultRankings = 'resultRankings',
     TopClicks = 'topClicks',
     QuerySuggest = 'querySuggest',
     RankingWeight = 'rankingweight',

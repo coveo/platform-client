@@ -2,7 +2,7 @@ import Ressource from '../../Resource';
 import {FacetStateRule, ListFacetStateRuleParams, ListFacetStateRuleResponse} from './FacetStateRulesInterface';
 
 export default class FacetStateRules extends Ressource {
-    static getBaseUrl = (pipelineId: string) => `rest/search/admin/pipelines/${pipelineId}/facetStateRules`;
+    static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/facetStateRules`;
 
     list(pipelineId: string, params?: ListFacetStateRuleParams) {
         return this.api.get<ListFacetStateRuleResponse>(
@@ -39,6 +39,15 @@ export default class FacetStateRules extends Ressource {
             this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}`, {
                 organizationId: this.api.organizationId,
             })
+        );
+    }
+
+    move(pipelineId: string, facetStateRuleId: string, position: number) {
+        return this.api.put<void>(
+            this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}/position`, {
+                organizationId: this.api.organizationId,
+            }),
+            {position}
         );
     }
 }
