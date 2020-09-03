@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "declarationDir": null,
+        "declaration": false
+    },
+    "include": ["src/**/*.spec.ts"]
+}

@@ -22,7 +22,14 @@ export default class Catalog extends Resource {
         return this.api.get<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`);
     }
 
-    update(catalog: CatalogModel) {
-        return this.api.put<CatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
+    /* eslint-disable @typescript-eslint/unified-signatures */
+    update(catalog: CreateCatalogModel);
+    /**
+     * @deprecated `update(catalog: CatalogModel) is kept for backward compatibility, you should now use `update(catalog: CreateCatalogModel)`.
+     */
+    update(catalog: CatalogModel);
+    update(catalog: CreateCatalogModel | CatalogModel) {
+        return this.api.put<CreateCatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
     }
+    /* eslint-enable @typescript-eslint/unified-signatures */
 }
