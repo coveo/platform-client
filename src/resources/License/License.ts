@@ -1,18 +1,17 @@
-import {SectionTypes} from '../Enums';
+import {LicenseSection} from '../Enums';
 import Resource from '../Resource';
 import {LicenseModel} from './LicenseInterfaces';
+import API from '../../APICore';
 
 export default class License extends Resource {
-    static baseUrl = '/rest/organizations';
+    static getBaseUrl = (sectionName: LicenseSection) =>
+        `/rest/organizations/${API.orgPlaceholder}/license/${sectionName}`;
 
-    get(organizationId: string, sectionName: SectionTypes) {
-        return this.api.get<LicenseModel>(`${License.baseUrl}/${organizationId}/license/${sectionName}`);
+    get(sectionName: LicenseSection) {
+        return this.api.get<LicenseModel>(License.getBaseUrl(sectionName));
     }
 
-    update(organizationId: string, sectionName: SectionTypes, licenseSection: {[x: string]: number}) {
-        return this.api.put<LicenseModel>(
-            `${License.baseUrl}/${organizationId}/license/${sectionName}`,
-            licenseSection
-        );
+    update(sectionName: LicenseSection, licenseSection: Record<string, number>) {
+        return this.api.put<LicenseModel>(License.getBaseUrl(sectionName), licenseSection);
     }
 }

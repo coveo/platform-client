@@ -741,7 +741,7 @@ export enum ModelTypes {
     ECommerce = 'ecommerce',
 }
 
-export enum SectionTypes {
+export enum LicenseSection {
     internal = 'internal',
     organization = 'organization',
     usageAnalytics = 'usageAnalytics',
