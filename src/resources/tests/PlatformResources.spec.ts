@@ -10,6 +10,7 @@ import Global from '../Global/Global';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
 import MachineLearning from '../MachineLearning/MachineLearning';
+import License from '../License/License';
 import Organization from '../Organizations/Organization';
 import Pipelines from '../Pipelines/Pipelines';
 import PlatformResources from '../PlatformResources';
@@ -71,6 +72,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.globalGroup).toBeDefined();
             expect(platformResources.globalGroup).toBeInstanceOf(GlobalGroup);
+        });
+
+        it('should register the license resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.license).toBeDefined();
+            expect(platformResources.license).toBeInstanceOf(License);
         });
 
         it('should register the organization resource on the platform instance', () => {
