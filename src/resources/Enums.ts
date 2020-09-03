@@ -740,3 +740,13 @@ export enum ModelTypes {
     FacetSense = 'facetsense',
     ECommerce = 'ecommerce',
 }
+
+export enum SectionTypes {
+    internal = 'internal',
+    organization = 'organization',
+    usageAnalytics = 'usageAnalytics',
+    inProductExperience = 'inProductExperience',
+    commerce = 'commerce',
+    content = 'content',
+    searchapi = 'searchapi',
+}
