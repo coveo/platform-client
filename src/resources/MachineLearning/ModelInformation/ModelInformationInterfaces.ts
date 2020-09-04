@@ -29,7 +29,8 @@ export interface ModelInformationART {
             filters: any;
             words: number;
             stopwords: number;
-            [otherKeys: string]: number;
+            docPerFilters: Record<string, number>;
+            [otherKeys: string]: number | Record<string, number>;
         };
     };
     contentIDKeys: string[];
