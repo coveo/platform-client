@@ -3,6 +3,7 @@ const regionPlaceholder = '{region}';
 export enum Region {
     US = 'us',
     EU = 'eu',
+    AU = 'au',
 }
 
 export enum Environment {
