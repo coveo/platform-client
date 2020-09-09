@@ -30,7 +30,7 @@ export interface ModelInformationART {
             words: number;
             stopwords: number;
             docPerFilters: Record<string, number>;
-            [otherKeys: string]: number | Record<string, number>;
+            [otherKeys: string]: any;
         };
     };
     contentIDKeys: string[];
