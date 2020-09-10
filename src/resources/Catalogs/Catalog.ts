@@ -1,7 +1,7 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CatalogModel, CatalogsListOptions, CreateCatalogModel} from './CatalogInterfaces';
+import {CachedCatalogFieldsModel, CatalogModel, CatalogsListOptions, CreateCatalogModel} from './CatalogInterfaces';
 
 export default class Catalog extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
@@ -20,6 +20,10 @@ export default class Catalog extends Resource {
 
     get(catalogId: string) {
         return this.api.get<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`);
+    }
+
+    getFields(catalogId: string) {
+        return this.api.get<CachedCatalogFieldsModel>(`${Catalog.baseUrl}/${catalogId}/fields`);
     }
 
     /* eslint-disable @typescript-eslint/unified-signatures */

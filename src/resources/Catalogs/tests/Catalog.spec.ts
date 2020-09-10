@@ -84,6 +84,15 @@ describe('Catalog', () => {
         });
     });
 
+    describe('getFields', () => {
+        it("should make a GET call to the specific catalog's fields url", () => {
+            const catalogOfFieldsToGetId = 'catalog-of-fields';
+            catalog.getFields(catalogOfFieldsToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields`);
+        });
+    });
+
     describe('update', () => {
         it('should make a PUT call to the specific catalog url', () => {
             const catalogModel: CreateCatalogModel = {

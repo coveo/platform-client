@@ -14,6 +14,20 @@ export type HierarchyWithFields<T extends {fields?: string[]}> = Omit<T, 'fields
     fields: string[];
 };
 
+interface Cached<T> {
+    item: T;
+    lastUpdated: number;
+    nextUpdate: number;
+}
+
+interface CatalogFieldsModel {
+    productFields: string[];
+    variantFields: string[];
+    availabilityFields: string[];
+}
+
+export type CachedCatalogFieldsModel = Cached<CatalogFieldsModel>;
+
 export interface CatalogModel extends BaseCatalogModel {
     product: ProductHierarchyModel;
     variant?: HierarchyWithFields<VariantHierarchyModel>;
