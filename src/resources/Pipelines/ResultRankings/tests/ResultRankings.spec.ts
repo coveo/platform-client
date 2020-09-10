@@ -88,6 +88,22 @@ describe('Result Rankings', () => {
         });
     });
 
+    describe('updateJSON', () => {
+        it('should make a PUTJSON call to the specific Result Rankings url', () => {
+            const pipelineId = '️a';
+            const resultRankingId = 'b';
+            const json = JSON.stringify(resultRanking.resultRanking);
+
+            resultRankings.updateJSON(pipelineId, resultRankingId, json);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
+                json,
+                {method: 'put', body: json, headers: {'Content-Type': 'application/json'}}
+            );
+        });
+    });
+
     describe('list', () => {
         it('should make a GET call to the specific Result Rankings url', () => {
             const pipelineId = '️a';
@@ -99,12 +115,27 @@ describe('Result Rankings', () => {
     });
 
     describe('create', () => {
-        it('should make a PUT call to the specific Result Rankings url', () => {
+        it('should make a POST call to the specific Result Rankings url', () => {
             const pipelineId = '️a';
 
             resultRankings.create(pipelineId, resultRanking.resultRanking);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), resultRanking.resultRanking);
+        });
+    });
+
+    describe('createJSON', () => {
+        it('should make a POSTJSON call to the specific Result Rankings url', () => {
+            const pipelineId = '️a';
+            const json = JSON.stringify(resultRanking.resultRanking);
+
+            resultRankings.createJSON(pipelineId, json);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), json, {
+                method: 'post',
+                body: json,
+                headers: {'Content-Type': 'application/json'},
+            });
         });
     });
 });

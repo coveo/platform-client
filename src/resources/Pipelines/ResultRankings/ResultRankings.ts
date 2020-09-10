@@ -36,6 +36,16 @@ export default class ResultRankings extends Resource {
         );
     }
 
+    updateJSON(pipelineId: string, resultRankingsId: string, resultRanking: string) {
+        return this.api.put<void>(
+            this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
+                organizationId: this.api.organizationId,
+            }),
+            resultRanking,
+            {method: 'put', body: resultRanking, headers: {'Content-Type': 'application/json'}}
+        );
+    }
+
     list(pipelineId: string, params?: ListResultRankingParams) {
         return this.api.get<ListResultRankingResponse>(
             this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
@@ -51,6 +61,16 @@ export default class ResultRankings extends Resource {
                 organizationId: this.api.organizationId,
             }),
             resultRanking
+        );
+    }
+
+    createJSON(pipelineId: string, resultRanking: string) {
+        return this.api.post<ResultRanking>(
+            this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
+                organizationId: this.api.organizationId,
+            }),
+            resultRanking,
+            {method: 'post', body: resultRanking, headers: {'Content-Type': 'application/json'}}
         );
     }
 }
