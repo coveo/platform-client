@@ -13,7 +13,7 @@ export enum CaseClassificationStrategies {
 
 export interface CaseAssistConfigListOptions {
     page?: number;
-    pageSize?: number;
+    perPage?: number;
 }
 
 export interface ITDConfigurationModel {

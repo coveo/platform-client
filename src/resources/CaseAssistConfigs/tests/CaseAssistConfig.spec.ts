@@ -75,10 +75,10 @@ describe('CaseAssistConfig', () => {
 
     describe('list', () => {
         it('should make a GET call to the CaseAssistConfig base url', () => {
-            caseAssist.list({page: 2, pageSize: 10});
+            caseAssist.list({page: 2, perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}?page=2&pageSize=10`);
+            expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}?page=2&perPage=10`);
         });
     });
 
