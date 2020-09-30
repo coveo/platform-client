@@ -19,13 +19,13 @@ describe('Condition', () => {
         it('should make a GET call to the specific Condition url', () => {
             conditions.list();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements?feature=when');
+            expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/statements?feature=when');
         });
 
         it('should use the passed options in the query parameters', () => {
             conditions.list({filter: 'cat', page: 2});
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2'
+                '/rest/search/v2/admin/pipelines/statements?feature=when&filter=cat&page=2'
             );
         });
     });
@@ -38,7 +38,7 @@ describe('Condition', () => {
 
             conditions.create(model);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements', model);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/statements', model);
         });
     });
 
@@ -53,7 +53,7 @@ describe('Condition', () => {
 
             conditions.update(conditionId, model);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🎯', model);
+            expect(api.put).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/statements/🎯', model);
         });
     });
 
@@ -63,7 +63,7 @@ describe('Condition', () => {
 
             conditions.get(conditionId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🏒');
+            expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/statements/🏒');
         });
     });
 
@@ -73,7 +73,7 @@ describe('Condition', () => {
 
             conditions.delete(conditionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🎽');
+            expect(api.delete).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/statements/🎽');
         });
     });
 });
