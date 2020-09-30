@@ -22,6 +22,10 @@ export interface PipelineModel extends PipelineShared {
     position?: number;
     created_by?: string;
     last_modified_by?: string;
+    statementComposition?: {
+        totalCount?: number;
+        [key: string]: number;
+    };
 }
 
 export interface NewPipelineModel extends PipelineShared, GranularResource {}
