@@ -138,4 +138,16 @@ describe('Result Rankings', () => {
             });
         });
     });
+
+    describe('duplicate', () => {
+        it('should make a POST call to the specific Result Rankingsn duplicate url', () => {
+            const pipelineId = '️a';
+
+            resultRankings.duplicate(pipelineId, resultRanking.id);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                ResultRankings.getResultRankingsDuplicateUrl(pipelineId, resultRanking.id)
+            );
+        });
+    });
 });
