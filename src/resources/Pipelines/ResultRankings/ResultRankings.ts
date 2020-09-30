@@ -11,9 +11,6 @@ export default class ResultRankings extends Resource {
     static getResultRankingsUrl = (pipelineId: string, resultRankingsId: string) =>
         `${ResultRankings.getBaseUrl(pipelineId)}/${resultRankingsId}`;
 
-    static getResultRankingsDuplicateUrl = (pipelineId: string, resultRankingsId: string) =>
-        `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRankingsId}`;
-
     delete(pipelineId: string, resultRankingsId: string) {
         return this.api.delete<ResultRanking>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
@@ -79,7 +76,7 @@ export default class ResultRankings extends Resource {
 
     duplicate(pipelineId: string, resultRankingsId: string) {
         return this.api.post<ResultRanking>(
-            this.buildPath(ResultRankings.getResultRankingsDuplicateUrl(pipelineId, resultRankingsId), {
+            this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRankingsId}`, {
                 organizationId: this.api.organizationId,
             })
         );

@@ -146,7 +146,7 @@ describe('Result Rankings', () => {
             resultRankings.duplicate(pipelineId, resultRanking.id);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                ResultRankings.getResultRankingsDuplicateUrl(pipelineId, resultRanking.id)
+                `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRanking.id}`
             );
         });
     });
