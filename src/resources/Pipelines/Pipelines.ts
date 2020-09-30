@@ -44,13 +44,13 @@ export default class Pipelines extends Resource {
 
     list(options?: ListPipelinesOptions) {
         return this.api.get<PipelineModel[]>(
-            this.buildPath(Pipelines.searchUrlVersion2, {organizationId: this.api.organizationId, ...options})
+            this.buildPath(Pipelines.searchUrlVersion1, {organizationId: this.api.organizationId, ...options})
         );
     }
 
     get(pipelineId: string) {
         return this.api.get<PipelineModel>(
-            this.buildPath(`${Pipelines.searchUrlVersion2}/${pipelineId}`, {
+            this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}`, {
                 organizationId: this.api.organizationId,
             })
         );
@@ -58,7 +58,7 @@ export default class Pipelines extends Resource {
 
     delete(pipelineId: string) {
         return this.api.delete(
-            this.buildPath(`${Pipelines.searchUrlVersion2}/${pipelineId}`, {
+            this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}`, {
                 organizationId: this.api.organizationId,
             })
         );
@@ -66,7 +66,7 @@ export default class Pipelines extends Resource {
 
     update(pipeline: UpdatePipelineModel) {
         return this.api.put<PipelineModel>(
-            this.buildPath(`${Pipelines.searchUrlVersion2}/${pipeline.id}`, {
+            this.buildPath(`${Pipelines.searchUrlVersion1}/${pipeline.id}`, {
                 organizationId: this.api.organizationId,
             }),
             pipeline
@@ -75,7 +75,7 @@ export default class Pipelines extends Resource {
 
     duplicate(pipelineId: string) {
         return this.api.post<PipelineModel>(
-            this.buildPath(`${Pipelines.searchUrlVersion2}/${pipelineId}/duplicate`, {
+            this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}/duplicate`, {
                 organizationId: this.api.organizationId,
             })
         );
@@ -83,7 +83,7 @@ export default class Pipelines extends Resource {
 
     create(pipeline: NewPipelineModel) {
         return this.api.post<PipelineModel>(
-            this.buildPath(Pipelines.searchUrlVersion2, {
+            this.buildPath(Pipelines.searchUrlVersion1, {
                 organizationId: this.api.organizationId,
             }),
             pipeline
