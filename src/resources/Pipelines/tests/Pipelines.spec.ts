@@ -16,10 +16,10 @@ describe('Pipelines', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Pipelines v2 url', () => {
+        it('should make a GET call to the Pipelines v1 url', () => {
             pipelines.list();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(Pipelines.searchUrlVersion2);
+            expect(api.get).toHaveBeenCalledWith(Pipelines.searchUrlVersion1);
         });
     });
 
@@ -32,11 +32,11 @@ describe('Pipelines', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to /rest/search/v2/admin/pipelines/:id', () => {
+        it('should make a GET call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.get('🔥');
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🔥');
+            expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥');
         });
     });
 
@@ -45,12 +45,12 @@ describe('Pipelines', () => {
             pipelines.delete('🔥');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🔥');
+            expect(api.delete).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥');
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to /rest/search/v2/admin/pipelines/:id', () => {
+        it('should make a PUT call to /rest/search/v1/admin/pipelines/:id', () => {
             const pipelineToUpdate: UpdatePipelineModel = {
                 id: '🔥',
                 name: 'fire',
@@ -58,21 +58,21 @@ describe('Pipelines', () => {
             pipelines.update(pipelineToUpdate);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🔥', pipelineToUpdate);
+            expect(api.put).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥', pipelineToUpdate);
         });
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to /rest/search/v2/admin/pipelines/:id/duplicate', () => {
+        it('should make a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', () => {
             pipelines.duplicate('🔥');
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🔥/duplicate');
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥/duplicate');
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to /rest/search/v2/admin/pipelines', () => {
+        it('should make a POST call to /rest/search/v1/admin/pipelines', () => {
             const newPipeline: NewPipelineModel = {
                 name: 'fire',
                 description: 'this-is-lit',
@@ -80,7 +80,7 @@ describe('Pipelines', () => {
             pipelines.create(newPipeline);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines', newPipeline);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines', newPipeline);
         });
     });
 
