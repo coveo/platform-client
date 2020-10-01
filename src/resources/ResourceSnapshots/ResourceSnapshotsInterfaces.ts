@@ -21,6 +21,8 @@ export enum ResourceSnapshotsReportResultCode {
     UnableToPushToOrganization = 'UNABLE_TO_PUSH_TO_ORGANIZATION',
     NoResourceRetrieved = 'NO_RESOURCE_RETRIEVED',
     UnableToRetrieveResources = 'UNABLE_TO_RETRIEVE_RESOURCES',
+    ResourceDependencyCyle = 'RESOURCE_DEPENDENCY_CYCLE',
+    ExternalServiceCommunicationError = 'EXTERNAL_SERVICE_COMMUNICATION_ERROR',
 }
 
 export enum ResourceSnapshotsReportStatus {
