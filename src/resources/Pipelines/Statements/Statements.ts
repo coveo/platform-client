@@ -10,7 +10,7 @@ import {
 } from './StatementsInterfaces';
 
 export default class Statements extends Resource {
-    static getBaseUrl = (pipelineId: string) => `/rest/search/v1/admin/pipelines/${pipelineId}/statements`;
+    static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/statements`;
     static getLegacyUrl = (pipelineId: string) => `/rest/search/admin/pipelines/${pipelineId}/statements`;
     static getStatementUrl = (pipelineId: string, statementId: string) =>
         `${Statements.getBaseUrl(pipelineId)}/${statementId}`;
