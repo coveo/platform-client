@@ -149,6 +149,7 @@ describe('ResourceSnapshots', () => {
             };
             const createFromOrganizationOptions: CreateFromOrganizationOptions = {
                 developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
+                includeChildrenResources: false,
             };
 
             resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
@@ -157,7 +158,7 @@ describe('ResourceSnapshots', () => {
             expect(
                 api.post
             ).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5`,
+                `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&includeChildrenResources=false`,
                 {resourcesToExport: {EXTENSIONS: ['🤖'], FIELD: ['*']}}
             );
         });

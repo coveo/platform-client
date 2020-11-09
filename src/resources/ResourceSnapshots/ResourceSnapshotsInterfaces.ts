@@ -83,6 +83,7 @@ export interface ValidateAccessOptions {
 export interface CreateFromOrganizationOptions {
     developerNotes?: string;
     targetOrganizationId?: string;
+    includeChildrenResources?: boolean;
 }
 
 export interface DryRunOptions {
