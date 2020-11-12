@@ -24,6 +24,7 @@ export interface MLAssociationModel {
     maxRecommendations?: number;
     modelDisplayName?: string;
     rankingModifier?: number;
+    useAdvancedConfiguration?: boolean;
 }
 
 export interface ListAssociationsParams {
