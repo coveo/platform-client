@@ -11,6 +11,7 @@ import Global from './Global/Global';
 import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
+import Limits from './Limits/Limits';
 import MachineLearning from './MachineLearning/MachineLearning';
 import License from './License/License';
 import Organization from './Organizations/Organization';
@@ -41,6 +42,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'index', resource: Index},
     {key: 'ml', resource: MachineLearning},
     {key: 'license', resource: License},
+    {key: 'limits', resource: Limits},
     {key: 'organization', resource: Organization},
     {key: 'pipeline', resource: Pipelines},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
@@ -71,6 +73,7 @@ class PlatformResources {
     index: Index;
     ml: MachineLearning;
     license: License;
+    limits: Limits;
     organization: Organization;
     pipeline: Pipelines;
     resourceSnapshot: ResourceSnapshots;

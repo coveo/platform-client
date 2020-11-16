@@ -9,6 +9,7 @@ import Field from '../Fields/Fields';
 import Global from '../Global/Global';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
+import Limits from '../Limits/Limits';
 import MachineLearning from '../MachineLearning/MachineLearning';
 import License from '../License/License';
 import Organization from '../Organizations/Organization';
@@ -216,6 +217,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.searchPages).toBeDefined();
             expect(platformResources.searchPages).toBeInstanceOf(SearchPages);
+        });
+
+        it('should register the limits resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.limits).toBeDefined();
+            expect(platformResources.limits).toBeInstanceOf(Limits);
         });
     });
 });
