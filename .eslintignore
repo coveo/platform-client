@@ -1,5 +1,7 @@
-node_modules/*
-dist/*
+node_modules
+dist
 jest.setup.ts
+jest.config.js
+commitlint.config.js
 .eslintrc.js
 webpack.config.js

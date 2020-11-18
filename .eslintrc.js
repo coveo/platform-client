@@ -5,7 +5,7 @@ module.exports = {
     },
     extends: [require.resolve('tsjs/eslint-config')],
     parserOptions: {
-        project: ['./tsconfig.build.json', './tsconfig.test.json'],
+        project: 'tsconfig.eslint.json',
         tsconfigRootDir: __dirname,
         sourceType: 'module',
     },
