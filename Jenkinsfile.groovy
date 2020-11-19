@@ -15,8 +15,6 @@ library identifier: 'jsadmin_pipeline@next', retriever: modernSCM([
   credentialsId: 'coveo-bitbucket-rd-ssh'
 ])
 
-def skipRemainingStages = false
-
 pipeline {
 
   agent { label "build && docker && linux" }
@@ -35,29 +33,7 @@ pipeline {
   }
 
   stages {
-
-    stage('Skip') {
-      // TODO: remove this once DT-3364 is fixed, set parameter `excludeJenkinsCommit=true` in the webhook instead
-      steps {
-        script {
-          setLastStageName();
-          commitMessage = sh(returnStdout: true, script: "git log -1 --pretty=%B").trim()
-          if(commitMessage.contains("[version bump]")) {
-            skipRemainingStages = true
-            println "Skipping this build because it was triggered by a version bump."
-          } else {
-            skipRemainingStages = false
-            println "Not a version bump, the build will proceed."
-          }
-        }
-      }
-    }
-
     stage('Prepare') {
-      when {
-        expression { !skipRemainingStages }
-      }
-
       steps {
         script {
           setLastStageName();
@@ -86,10 +62,6 @@ pipeline {
     }
 
     stage('Analyse Commits') {
-      when {
-        expression { !skipRemainingStages }
-      }
-
       steps {
         script {
           if (env.CHANGE_TARGET) {
@@ -102,10 +74,6 @@ pipeline {
     }
 
     stage('Build') {
-      when {
-        expression { !skipRemainingStages }
-      }
-
       steps {
         script {
           setLastStageName();
@@ -115,10 +83,6 @@ pipeline {
     }
 
     stage('Test') {
-      when {
-        expression { !skipRemainingStages }
-      }
-
       steps {
         script {
           setLastStageName();
@@ -129,11 +93,9 @@ pipeline {
 
     stage('Publish') {
       when {
-        allOf {
-          expression { env.BRANCH_NAME == 'master' }
-          expression { !skipRemainingStages }
-        }
+        expression { env.BRANCH_NAME == 'master' }
       }
+      
       steps {
         script {
           setLastStageName();
