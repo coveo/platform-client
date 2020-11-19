@@ -9,6 +9,8 @@ import {
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsModel,
     ResourceSnapshotsReportModel,
+    ResourceSnapshotsSynchronizationPlanModel,
+    ResourceSnapshotsSynchronizationReportModel,
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
@@ -89,5 +91,34 @@ export default class ResourceSnapshots extends Resource {
 
     delete(snapshotId: string) {
         return this.api.delete(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+    }
+
+    createSynchronizationPlan(snapshotId: string) {
+        return this.api.post<ResourceSnapshotsSynchronizationPlanModel>(
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`
+        );
+    }
+
+    getSynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
+        return this.api.get<ResourceSnapshotsSynchronizationPlanModel>(
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`
+        );
+    }
+
+    updateSynchronizationPlan(
+        snapshotId: string,
+        synchronizationPlanId: string,
+        synchronizationPlanModel: ResourceSnapshotsSynchronizationPlanModel
+    ) {
+        return this.api.put<ResourceSnapshotsSynchronizationPlanModel>(
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
+            synchronizationPlanModel
+        );
+    }
+
+    applySynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
+        return this.api.put<ResourceSnapshotsSynchronizationReportModel>(
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+        );
     }
 }
