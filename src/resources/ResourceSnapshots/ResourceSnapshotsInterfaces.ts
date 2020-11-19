@@ -6,6 +6,7 @@ export interface ResourceSnapshotsModel {
     originId?: string;
     targetId?: string;
     reports?: ResourceSnapshotsReportModel[];
+    synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
 }
 
 export enum SnapshotAccessType {
@@ -32,10 +33,18 @@ export enum ResourceSnapshotsReportStatus {
     Aborted = 'ABORTED',
 }
 
+export enum ResourceSnapshotsSynchronizationPlanStatus {
+    Creating = 'CREATING',
+    Created = 'CREATED',
+    InError = 'IN_ERROR',
+}
+
 export enum ResourceSnapshotsReportType {
     CreateSnapshot = 'CREATE_SNAPSHOT',
     DryRun = 'DRY_RUN',
     Apply = 'APPLY',
+    CreateSynchronizationPlan = 'CREATE_SYNCHRONIZATION_PLAN',
+    ApplySynchronizationPlan = 'APPLY_SYNCHRONIZATION_PLAN',
 }
 
 export enum ResourceSnapshotSupportedFileTypes {
@@ -52,6 +61,49 @@ export interface ResourceSnapshotsReportModel {
     status: ResourceSnapshotsReportStatus;
     type: ResourceSnapshotsReportType;
     updatedDate: number;
+}
+
+export interface ResourceSnapshotsSynchronizationReportModel {
+    id: string;
+    synchronizationPlanId: string;
+    linkOperations?: Record<string, unknown>;
+    linkOperationDetails?: Record<string, unknown>;
+    resourcesProcessed?: number;
+    resultCode: ResourceSnapshotsReportResultCode;
+    status: ResourceSnapshotsReportStatus;
+    type: ResourceSnapshotsReportType;
+    updatedDate: number;
+}
+
+export interface ResourceSnapshotsSynchronizationPlanModel {
+    id: string;
+    snapshotId: string;
+    status: ResourceSnapshotsSynchronizationPlanStatus;
+    alreadyLinkedResources?: Record<string, ResourceSnapshotsAlreadyLinkedResourcesModel[]>;
+    resourceSynchronizationOperations?: Record<string, ResourceSnapshotsSynchronizationOperationsModel[]>;
+}
+
+export interface ResourceSnapshotsSynchronizationOperationsModel {
+    resourceName: string;
+    matches: ResourceSnapshotsSynchronizationMatchModel[];
+}
+
+export interface ResourceSnapshotsAlreadyLinkedResourcesModel {
+    resourceName: string;
+    linkModel: ResourceSnapshotsLinkModel;
+}
+
+export interface ResourceSnapshotsSynchronizationMatchModel {
+    associateScore: number;
+    linkModel: ResourceSnapshotsLinkModel[];
+}
+
+export interface ResourceSnapshotsLinkModel {
+    id: string;
+    organizationId: string;
+    resourceId: string;
+    resourceName: string;
+    resourceType: string;
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
