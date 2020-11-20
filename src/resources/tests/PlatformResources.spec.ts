@@ -24,6 +24,7 @@ import UsageAnalytics from '../UsageAnalytics/UsageAnalytics';
 import User from '../Users/User';
 import SchemaService from '../SchemaService/SchemaService';
 import SearchPages from '../SearchPages/SearchPages';
+import Notifications from '../Notification/notification';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -225,6 +226,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.limits).toBeDefined();
             expect(platformResources.limits).toBeInstanceOf(Limits);
+        });
+
+        it('should register the Notification resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.notification).toBeDefined();
+            expect(platformResources.notification).toBeInstanceOf(Notifications);
         });
     });
 });

@@ -26,3 +26,4 @@ export * from './Global';
 export * from './SchemaService';
 export * from './SearchPages';
 export * from './Limits';
+export * from './Notification';

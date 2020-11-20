@@ -11,18 +11,19 @@ import Global from './Global/Global';
 import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
+import License from './License/License';
 import Limits from './Limits/Limits';
 import MachineLearning from './MachineLearning/MachineLearning';
-import License from './License/License';
+import Notifications from './Notification/notification';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
 import Saml from './Saml/Saml';
+import SchemaService from './SchemaService/SchemaService';
 import Search from './Search/Search';
 import SearchPages from './SearchPages/SearchPages';
 import SecurityCache from './SecurityCache/SecurityCache';
-import SchemaService from './SchemaService/SchemaService';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
@@ -54,6 +55,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'source', resource: Sources},
     {key: 'ua', resource: UsageAnalytics},
     {key: 'user', resource: User},
+    {key: 'notification', resource: Notifications},
 ];
 
 class PlatformResources {
@@ -85,6 +87,7 @@ class PlatformResources {
     source: Sources;
     ua: UsageAnalytics;
     user: User;
+    notification: Notifications;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

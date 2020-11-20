@@ -751,3 +751,23 @@ export enum LicenseSection {
     content = 'content',
     searchapi = 'searchapi',
 }
+
+export enum SubscriptionFrequencyEnum {
+    live = 'LIVE',
+    hourly = 'HOURLY',
+    daily = 'DAILY',
+    weekly = 'WEEKLY',
+}
+
+export enum SubscriptionTypeEnum {
+    email = 'EMAIL',
+    emailJson = 'EMAIL_JSON',
+    webHook = 'WEB_HOOK',
+}
+
+export enum SubscriptionStatusHealthIndicatorEnum {
+    good = 'GOOD',
+    warning = 'WARNING',
+    problematic = 'PROBLEMATIC',
+    unknown = 'UNKNOWN',
+}
