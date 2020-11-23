@@ -1,5 +1,4 @@
 import API from '../../../../APICore';
-import Pipelines from '../../Pipelines';
 import MLAssociations from '../MLAssociations';
 
 jest.mock('../../../../APICore');
@@ -92,7 +91,7 @@ describe('MLAssociations', () => {
         it('should make a GET call to the specific MLAssociations url', () => {
             associations.getAssociatedPipelines();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Pipelines.baseUrl}/ml/model/associations`);
+            expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/ml/model/associations');
         });
     });
 });
