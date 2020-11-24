@@ -10,6 +10,7 @@ export * from './GlobalGroups';
 export * from './Groups';
 export * from './Indexes';
 export * from './License';
+export * from './Logs';
 export * from './MachineLearning';
 export * from './Organizations';
 export * from './PlatformResources';

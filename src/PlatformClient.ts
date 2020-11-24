@@ -12,6 +12,8 @@ export class PlatformClient extends PlatformResources {
         super();
 
         this.API = new API(options);
+        this.ServerlessAPI = new API({...options, host: options.serverlessHost});
+
         this.registerAll();
     }
 
@@ -27,6 +29,7 @@ export class PlatformClient extends PlatformResources {
 
     abortPendingGetRequests() {
         this.API.abortGetRequests();
+        this.ServerlessAPI.abortGetRequests();
     }
 }
 
