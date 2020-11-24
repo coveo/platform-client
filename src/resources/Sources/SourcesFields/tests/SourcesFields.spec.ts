@@ -1,5 +1,4 @@
 import API from '../../../../APICore';
-import Sources from '../../Sources';
 import SourcesFields from '../SourcesFields';
 import {ListSourcesFieldsParams, SourceFieldModel} from '../SourcesFieldsInterfaces';
 
@@ -22,7 +21,7 @@ describe('SourcesFields', () => {
 
             field.list(params);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/page/fields`);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/sources/page/fields');
         });
     });
 
@@ -32,7 +31,9 @@ describe('SourcesFields', () => {
 
             field.get(fieldId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SourcesFields.baseUrl}/${fieldId}?includeMappings=true`);
+            expect(api.get).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/sources/fields/${fieldId}?includeMappings=true`
+            );
         });
     });
 
@@ -42,7 +43,7 @@ describe('SourcesFields', () => {
 
             field.create(fieldModel);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(SourcesFields.baseUrl, fieldModel);
+            expect(api.post).toHaveBeenCalledWith('/rest/organizations/{organizationName}/sources/fields', fieldModel);
         });
     });
 
@@ -53,7 +54,10 @@ describe('SourcesFields', () => {
 
             field.update(fieldId, fieldModel);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${SourcesFields.baseUrl}/${fieldId}`, fieldModel);
+            expect(api.put).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/sources/fields/${fieldId}`,
+                fieldModel
+            );
         });
     });
 });

@@ -1,4 +1,4 @@
-import {ScheduleType, SecurityCacheStateOptions} from '../Enums';
+import {PermissionIdentityType, ScheduleType, SecurityCacheStateOptions} from '../Enums';
 import {ParameterModel, UserIdentityModel} from '../Sources';
 
 export interface ScheduleModel {
@@ -19,17 +19,6 @@ export interface SecurityCacheStatus {
 export interface SecurityCacheIdentityModel {
     data?: string;
     provider?: string;
-}
-
-export interface DetailedSecurityCacheMemberModel {
-    infos?: SecurityCacheMemberInfoModel[];
-    lastUpdateDate?: number;
-    lastUpdateErrorDetail?: string;
-    lastUpdateResult?: string;
-    name: string;
-    provider?: string;
-    state?: string;
-    type?: string;
 }
 
 export interface SecurityProviderModelWithStatus {
@@ -130,6 +119,26 @@ export interface SecurityCacheListOptions {
     states?: SecurityCacheStateOptions;
     to?: string;
     usePageModel?: boolean;
+}
+
+export interface SecurityCacheListRelationshipsOptions {
+    page?: number;
+    perPage?: number;
+    recursive?: boolean;
+}
+
+export interface SecurityCacheMemberModel {
+    infos?: SecurityCacheMemberInfoModel[];
+    name: string;
+    provider?: string;
+    type?: PermissionIdentityType;
+}
+
+export interface DetailedSecurityCacheMemberModel extends SecurityCacheMemberModel {
+    lastUpdateDate?: number;
+    lastUpdateErrorDetail?: string;
+    lastUpdateResult?: string;
+    state?: string;
 }
 
 export interface SecurityCacheMemberInfoModel {
