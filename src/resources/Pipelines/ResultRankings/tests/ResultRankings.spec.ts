@@ -10,6 +10,7 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Result Rankings', () => {
     let resultRankings: ResultRankings;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     const resultRanking: ResultRanking = {
         id: 'id',
@@ -49,7 +50,7 @@ describe('Result Rankings', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        resultRankings = new ResultRankings(api);
+        resultRankings = new ResultRankings(api, serverlessApi);
     });
 
     describe('delete', () => {

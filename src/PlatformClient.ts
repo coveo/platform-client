@@ -12,7 +12,7 @@ export class PlatformClient extends PlatformResources {
         super();
 
         this.API = new API(options);
-        this.ServerlessAPI = new API({...options, host: options.serverlessHost});
+        this.ServerlessAPI = new API(options, true);
 
         this.registerAll();
     }

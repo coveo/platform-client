@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('SourcesFields', () => {
     let field: SourcesFields;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        field = new SourcesFields(api);
+        field = new SourcesFields(api, serverlessApi);
     });
 
     describe('list', () => {

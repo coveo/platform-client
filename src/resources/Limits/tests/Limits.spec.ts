@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Limits', () => {
     let limits: Limits;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        limits = new Limits(api);
+        limits = new Limits(api, serverlessApi);
     });
 
     describe('get', () => {

@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Field', () => {
     let field: Field;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        field = new Field(api);
+        field = new Field(api, serverlessApi);
     });
 
     describe('create', () => {

@@ -10,11 +10,12 @@ const APIMock: jest.Mock<API> = API as any;
 describe('groupInvite', () => {
     let invite: GroupInvite;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     const groupId = '💎';
 
     beforeEach(() => {
         jest.clearAllMocks();
-        invite = new GroupInvite(api);
+        invite = new GroupInvite(api, serverlessApi);
     });
 
     describe('list', () => {

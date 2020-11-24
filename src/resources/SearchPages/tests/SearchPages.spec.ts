@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('SearchPages', () => {
     let searchPageService: SearchPages;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        searchPageService = new SearchPages(api);
+        searchPageService = new SearchPages(api, serverlessApi);
     });
 
     describe('list', () => {

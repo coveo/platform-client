@@ -10,10 +10,11 @@ describe('License', () => {
     let license: License;
     const sectionName = LicenseSection.searchapi;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        license = new License(api);
+        license = new License(api, serverlessApi);
     });
 
     describe('get', () => {

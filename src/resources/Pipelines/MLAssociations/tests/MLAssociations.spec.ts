@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('MLAssociations', () => {
     let associations: MLAssociations;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        associations = new MLAssociations(api);
+        associations = new MLAssociations(api, serverlessApi);
     });
 
     describe('list', () => {

@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('securityCache', () => {
     let securityCache: SecurityCache;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        securityCache = new SecurityCache(api);
+        securityCache = new SecurityCache(api, serverlessApi);
     });
 
     describe('list', () => {

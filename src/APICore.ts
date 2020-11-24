@@ -11,7 +11,7 @@ export default class API {
     private getRequestsController: AbortController;
     private tokenInfo: Record<string, any>;
 
-    constructor(private config: PlatformClientOptions) {
+    constructor(private config: PlatformClientOptions, private isServerlessHost?: boolean) {
         this.getRequestsController = new AbortController();
     }
 
@@ -110,7 +110,10 @@ export default class API {
     }
 
     private get endpoint(): string {
-        return retrieve(this.config.host) || getEndpoint(this.environment, this.region);
+        return (
+            retrieve(this.isServerlessHost ? this.config.serverlessHost : this.config.host) ||
+            getEndpoint(this.environment, this.region, this.isServerlessHost)
+        );
     }
 
     private get accessToken(): string {

@@ -9,11 +9,12 @@ const APIMock: jest.Mock<API> = API as any;
 describe('clusterAgent', () => {
     let clusterAgent: ClusterAgent;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     const clusterId = '🦋';
 
     beforeEach(() => {
         jest.clearAllMocks();
-        clusterAgent = new ClusterAgent(api);
+        clusterAgent = new ClusterAgent(api, serverlessApi);
     });
 
     describe('list', () => {

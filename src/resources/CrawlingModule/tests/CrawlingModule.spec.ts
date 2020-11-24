@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Crawling Module Calls', () => {
     let crawlingModule: CrawlingModule;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        crawlingModule = new CrawlingModule(api);
+        crawlingModule = new CrawlingModule(api, serverlessApi);
     });
 
     describe('list', () => {

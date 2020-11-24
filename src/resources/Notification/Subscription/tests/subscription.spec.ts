@@ -24,10 +24,11 @@ const subscriptionModelMock: EditSubscriptionModel = {
 describe('Subscriptions', () => {
     let subscription: Subscription;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        subscription = new Subscription(api);
+        subscription = new Subscription(api, serverlessApi);
     });
 
     describe('list', () => {
