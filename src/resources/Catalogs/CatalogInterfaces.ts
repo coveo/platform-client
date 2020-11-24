@@ -3,10 +3,37 @@ export interface CatalogsListOptions {
     pageSize?: number;
 }
 
+export interface CatalogFieldsMapping {
+    [name: string]: string;
+}
+
+export interface CreateCatalogConfigurationModel {
+    id: string;
+    name: string;
+    product: Omit<CreateProductHierarchyModel, 'fields'>;
+    variant?: Omit<CreateVariantHierarchyModel, 'fields'>;
+    availability?: Omit<CreateAvailabilityHierarchyModel, 'fields'>;
+    fieldsMapping: CatalogFieldsMapping;
+}
+
+export interface CatalogConfigurationModel {
+    id: string;
+    name: string;
+    product: HierarchyWithFields<ProductHierarchyModel>;
+    variant?: HierarchyWithFields<VariantHierarchyModel>;
+    availability?: HierarchyWithFields<AvailabilityHierarchyModel>;
+    fieldsMapping: CatalogFieldsMapping;
+}
+
 export interface BaseCatalogModel {
     id: string;
     name: string;
     description?: string;
+    sourceId?: string;
+    availabilitySourceId?: string;
+    /**
+     * @deprecated use `sourceId` and `availabilitySourceId` instead.
+     */
     scope?: ScopeModel;
 }
 
@@ -29,16 +56,39 @@ interface CatalogFieldsModel {
 export type CachedCatalogFieldsModel = Cached<CatalogFieldsModel>;
 
 export interface CatalogModel extends BaseCatalogModel {
+    /**
+     * @deprecated use `configuration.product` instead.
+     */
     product: ProductHierarchyModel;
+    /**
+     * @deprecated use `configuration.variant` instead.
+     */
     variant?: HierarchyWithFields<VariantHierarchyModel>;
+    /**
+     * @deprecated use `configuration.availability` instead.
+     */
     availability?: HierarchyWithFields<AvailabilityHierarchyModel>;
+
+    // Have to be optional for backward compatibility.
+    catalogConfigurationId?: string;
+    configuration?: CatalogConfigurationModel;
 }
 
-export interface CreateCatalogModel extends BaseCatalogModel {
-    product: CreateProductHierarchyModel;
-    variant?: CreateVariantHierarchyModel;
-    availability?: CreateAvailabilityHierarchyModel;
-}
+export type CreateCatalogModel = BaseCatalogModel &
+    (
+        | {
+              product: CreateProductHierarchyModel;
+              variant?: CreateVariantHierarchyModel;
+              availability?: CreateAvailabilityHierarchyModel;
+              catalogConfigurationId?: never;
+          }
+        | {
+              product?: never;
+              variant?: never;
+              availability?: never;
+              catalogConfigurationId: string;
+          }
+    );
 
 export interface ProductHierarchyModel {
     /**

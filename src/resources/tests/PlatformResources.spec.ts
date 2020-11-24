@@ -2,6 +2,7 @@ import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
 import CaseAssistConfig from '../CaseAssistConfigs/CaseAssistConfig';
 import Catalog from '../Catalogs/Catalog';
+import CatalogConfiguration from '../Catalogs/CatalogConfiguration';
 import Cluster from '../Clusters/Cluster';
 import CrawlingModule from '../CrawlingModule/CrawlingModule';
 import Extension from '../Extensions/Extensions';
@@ -50,6 +51,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.catalog).toBeDefined();
             expect(platformResources.catalog).toBeInstanceOf(Catalog);
+        });
+
+        it('should register the catalogConfigurations resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.catalogConfigurations).toBeDefined();
+            expect(platformResources.catalogConfigurations).toBeInstanceOf(CatalogConfiguration);
         });
 
         it('should register the cluster resource on the platform instance', () => {
