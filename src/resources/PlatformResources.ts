@@ -3,6 +3,7 @@ import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
 import CaseAssistConfig from './CaseAssistConfigs/CaseAssistConfig';
 import Catalog from './Catalogs/Catalog';
+import CatalogConfiguration from './Catalogs/CatalogConfiguration';
 import Cluster from './Clusters/Cluster';
 import CrawlingModule from './CrawlingModule/CrawlingModule';
 import Extensions from './Extensions/Extensions';
@@ -33,6 +34,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
+    {key: 'catalogConfigurations', resource: CatalogConfiguration},
     {key: 'cluster', resource: Cluster},
     {key: 'crawlingModule', resource: CrawlingModule},
     {key: 'extension', resource: Extensions},
@@ -65,6 +67,7 @@ class PlatformResources {
     aws: AWS;
     caseAssistConfig: CaseAssistConfig;
     catalog: Catalog;
+    catalogConfigurations: CatalogConfiguration;
     cluster: Cluster;
     crawlingModule: CrawlingModule;
     extension: Extensions;

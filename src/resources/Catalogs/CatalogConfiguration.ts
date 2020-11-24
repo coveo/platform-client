@@ -1,0 +1,33 @@
+import API from '../../APICore';
+import {New, PageModel} from '../BaseInterfaces';
+import Resource from '../Resource';
+import {CatalogConfigurationModel, CatalogsListOptions, CreateCatalogConfigurationModel} from './CatalogInterfaces';
+
+export default class CatalogConfiguration extends Resource {
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogconfigurations`;
+
+    list(options?: CatalogsListOptions) {
+        return this.api.get<PageModel<CatalogConfigurationModel>>(
+            this.buildPath(CatalogConfiguration.baseUrl, options)
+        );
+    }
+
+    create(catalog: New<CreateCatalogConfigurationModel>) {
+        return this.api.post<CatalogConfigurationModel>(CatalogConfiguration.baseUrl, catalog);
+    }
+
+    delete(catalogId: string) {
+        return this.api.delete(`${CatalogConfiguration.baseUrl}/${catalogId}`);
+    }
+
+    get(configurationId: string) {
+        return this.api.get<CatalogConfigurationModel>(`${CatalogConfiguration.baseUrl}/${configurationId}`);
+    }
+
+    update(configuration: CreateCatalogConfigurationModel) {
+        return this.api.put<CatalogConfigurationModel>(
+            `${CatalogConfiguration.baseUrl}/${configuration.id}`,
+            configuration
+        );
+    }
+}

@@ -1,7 +1,7 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Catalog from '../Catalog';
-import {CreateCatalogModel, CatalogModel, AvailabilityHierarchyModel} from '../CatalogInterfaces';
+import {CreateCatalogModel, CatalogModel} from '../CatalogInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -28,6 +28,17 @@ describe('Catalog', () => {
         it('should make a POST call to the catalogs base url', () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
+                catalogConfigurationId: 'id',
+            };
+
+            catalog.create(catalogModel);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(Catalog.baseUrl, catalogModel);
+        });
+
+        it('should be backward compatible with the legacy structure', () => {
+            const catalogModel: New<CreateCatalogModel> = {
+                name: 'New catalog',
                 product: {
                     idField: '@uri',
                     objectType: 'product',
@@ -39,7 +50,7 @@ describe('Catalog', () => {
             expect(api.post).toHaveBeenCalledWith(Catalog.baseUrl, catalogModel);
         });
 
-        it('should be backward compatible', () => {
+        it('should be backward compatible with the fields array', () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
                 product: {
@@ -109,7 +120,19 @@ describe('Catalog', () => {
             expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
         });
 
-        it('should be backward compatible', () => {
+        it('should allow a PUT call with a catalog configuration id', () => {
+            const catalogModel: CreateCatalogModel = {
+                id: 'catalog-to-update-id',
+                name: 'Catalog to be updated',
+                catalogConfigurationId: 'abc-123-def',
+            };
+
+            catalog.update(catalogModel);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
+        });
+
+        it('should be backward compatible with the legacy structure', () => {
             const catalogModel: CatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'New catalog',
