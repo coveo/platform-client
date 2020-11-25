@@ -18,10 +18,10 @@ export default class Sources extends Resource {
 
     field: SourcesFields;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
 
-        this.field = new SourcesFields(api);
+        this.field = new SourcesFields(api, serverlessApi);
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {

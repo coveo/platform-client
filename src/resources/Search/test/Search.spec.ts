@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Search', () => {
     let search: Search;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        search = new Search(api);
+        search = new Search(api, serverlessApi);
     });
 
     describe('createToken', () => {

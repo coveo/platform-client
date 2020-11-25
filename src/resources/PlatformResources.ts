@@ -14,6 +14,7 @@ import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
 import License from './License/License';
 import Limits from './Limits/Limits';
+import Logs from './Logs/Logs';
 import MachineLearning from './MachineLearning/MachineLearning';
 import Notifications from './Notification/notification';
 import Organization from './Organizations/Organization';
@@ -46,6 +47,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ml', resource: MachineLearning},
     {key: 'license', resource: License},
     {key: 'limits', resource: Limits},
+    {key: 'logs', resource: Logs},
     {key: 'organization', resource: Organization},
     {key: 'pipeline', resource: Pipelines},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
@@ -62,6 +64,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
 
 class PlatformResources {
     protected API: API;
+    protected ServerlessAPI: API;
 
     apiKey: ApiKey;
     aws: AWS;
@@ -79,6 +82,7 @@ class PlatformResources {
     ml: MachineLearning;
     license: License;
     limits: Limits;
+    logs: Logs;
     organization: Organization;
     pipeline: Pipelines;
     resourceSnapshot: ResourceSnapshots;
@@ -94,7 +98,7 @@ class PlatformResources {
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
-            this[key] = new resource(this.API);
+            this[key] = new resource(this.API, this.ServerlessAPI);
         });
     }
 }

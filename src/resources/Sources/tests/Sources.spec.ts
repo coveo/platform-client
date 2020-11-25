@@ -12,10 +12,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Sources', () => {
     let source: Sources;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        source = new Sources(api);
+        source = new Sources(api, serverlessApi);
     });
 
     describe('create', () => {

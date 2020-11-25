@@ -28,10 +28,11 @@ const facetStateRuleMock: FacetStateRule = {
 describe('FacetStateRule', () => {
     let facetStateRules: FacetStateRules;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        facetStateRules = new FacetStateRules(api);
+        facetStateRules = new FacetStateRules(api, serverlessApi);
     });
 
     describe('list', () => {

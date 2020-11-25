@@ -15,6 +15,7 @@ const APIMock: jest.Mock<API> = API as any;
 describe('CaseAssistConfig', () => {
     let caseAssist: CaseAssistConfig;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     const caseAssistModels: CaseAssistConfigModel[] = [
         {
@@ -70,7 +71,7 @@ describe('CaseAssistConfig', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        caseAssist = new CaseAssistConfig(api);
+        caseAssist = new CaseAssistConfig(api, serverlessApi);
     });
 
     describe('list', () => {

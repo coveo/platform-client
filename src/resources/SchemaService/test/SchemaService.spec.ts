@@ -11,6 +11,7 @@ const APIMock: jest.Mock<API> = API as any;
 describe('SchemaService', () => {
     let schemaService: SchemaService;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     const sourceType: SourceType = SourceType.SERVICENOW;
     const params: SchemaServiceQueryParams = {
         clientId: 'ici',
@@ -21,7 +22,7 @@ describe('SchemaService', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        schemaService = new SchemaService(api);
+        schemaService = new SchemaService(api, serverlessApi);
     });
 
     describe('getEntities', () => {

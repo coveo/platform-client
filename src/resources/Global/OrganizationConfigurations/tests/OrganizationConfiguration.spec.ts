@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('OrganizationConfiguration', () => {
     let organizationConfiguration: OrganizationConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        organizationConfiguration = new OrganizationConfiguration(api);
+        organizationConfiguration = new OrganizationConfiguration(api, serverlessApi);
     });
 
     describe('list', () => {

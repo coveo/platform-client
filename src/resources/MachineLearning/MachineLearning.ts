@@ -14,13 +14,13 @@ export default class MachineLearning extends Resource {
     modelConfig: ModelConfiguration;
     dneConfig: DNEConfiguration;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
 
-        this.models = new Models(api);
-        this.modelInfo = new ModelInformation(api);
-        this.modelConfig = new ModelConfiguration(api);
-        this.dneConfig = new DNEConfiguration(api);
+        this.models = new Models(api, serverlessApi);
+        this.modelInfo = new ModelInformation(api, serverlessApi);
+        this.modelConfig = new ModelConfiguration(api, serverlessApi);
+        this.dneConfig = new DNEConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

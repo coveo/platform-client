@@ -26,6 +26,7 @@ import User from '../Users/User';
 import SchemaService from '../SchemaService/SchemaService';
 import SearchPages from '../SearchPages/SearchPages';
 import Notifications from '../Notification/notification';
+import Logs from '../Logs/Logs';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -243,6 +244,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.notification).toBeDefined();
             expect(platformResources.notification).toBeInstanceOf(Notifications);
+        });
+
+        it('should register the Logs resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.logs).toBeDefined();
+            expect(platformResources.logs).toBeInstanceOf(Logs);
         });
     });
 });

@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Condition', () => {
     let conditions: Condition;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        conditions = new Condition(api);
+        conditions = new Condition(api, serverlessApi);
     });
 
     describe('list', () => {

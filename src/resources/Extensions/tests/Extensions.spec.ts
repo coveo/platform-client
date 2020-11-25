@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Extension', () => {
     let extension: Extension;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        extension = new Extension(api);
+        extension = new Extension(api, serverlessApi);
     });
 
     describe('list', () => {

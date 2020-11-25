@@ -26,21 +26,31 @@ describe('APICore', () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org'});
             api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
-            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.US);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.US, undefined);
         });
 
         it('should call the europe endpoint if the europe region is specified', () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', region: Region.EU});
             api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
-            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.EU);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.EU, undefined);
         });
 
         it('should call the development endpoint if the dev environment option is provided', () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev});
             api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
-            expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US, undefined);
+        });
+
+        it('should call the serverless endpoint if it is serverless host', () => {
+            const api = new API(
+                {accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev},
+                true
+            );
+            api.get('this/that');
+            expect(getEndpoint).toHaveBeenCalledTimes(1);
+            expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US, true);
         });
 
         it('should call the custom endpoint if a custom host option is provided', () => {

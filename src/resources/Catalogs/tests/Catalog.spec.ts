@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Catalog', () => {
     let catalog: Catalog;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        catalog = new Catalog(api);
+        catalog = new Catalog(api, serverlessApi);
     });
 
     describe('list', () => {

@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Saml', () => {
     let saml: Saml;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        saml = new Saml(api);
+        saml = new Saml(api, serverlessApi);
     });
 
     describe('isEnabled', () => {

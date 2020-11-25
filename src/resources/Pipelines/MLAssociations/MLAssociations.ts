@@ -1,5 +1,4 @@
 import Resource from '../../Resource';
-import Pipelines from '../Pipelines';
 import {
     AssociatedPipelinesData,
     AssociationsListModel,
@@ -62,7 +61,9 @@ export default class MLAssociations extends Resource {
 
     getAssociatedPipelines() {
         return this.api.get<AssociatedPipelinesData[]>(
-            this.buildPath(`${Pipelines.baseUrl}/ml/model/associations`, {organizationId: this.api.organizationId})
+            this.buildPath('/rest/search/v2/admin/pipelines/ml/model/associations', {
+                organizationId: this.api.organizationId,
+            })
         );
     }
 }
