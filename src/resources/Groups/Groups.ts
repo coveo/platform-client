@@ -13,12 +13,12 @@ export default class Group extends Resource {
     member: GroupMember;
     invite: GroupInvite;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
 
-        this.realm = new GroupRealm(api);
-        this.member = new GroupMember(api);
-        this.invite = new GroupInvite(api);
+        this.realm = new GroupRealm(api, serverlessApi);
+        this.member = new GroupMember(api, serverlessApi);
+        this.invite = new GroupInvite(api, serverlessApi);
     }
 
     list() {

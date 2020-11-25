@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Global', () => {
     let global: Global;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        global = new Global(api);
+        global = new Global(api, serverlessApi);
     });
 
     it('should register the region resource', () => {

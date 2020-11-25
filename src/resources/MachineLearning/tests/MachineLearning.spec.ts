@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('MachineLearning', () => {
     let ml: MachineLearning;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        ml = new MachineLearning(api);
+        ml = new MachineLearning(api, serverlessApi);
     });
 
     describe('register', () => {

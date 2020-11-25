@@ -17,9 +17,9 @@ describe('PlatformClient', () => {
         jest.clearAllMocks();
     });
 
-    test('an API object is created when creating a platform instance', () => {
+    test('2 API objects are created when creating a platform instance', () => {
         new PlatformClient(baseOptions);
-        expect(APIMock).toHaveBeenCalledTimes(1);
+        expect(APIMock).toHaveBeenCalledTimes(2);
     });
 
     test('the API uses the organization id specified in the options', () => {
@@ -45,10 +45,14 @@ describe('PlatformClient', () => {
         const abortGetRequestsSpy = APIMock.mock.instances[0].abortGetRequests as jest.Mock<
             ReturnType<typeof API.prototype.abortGetRequests>
         >;
+        const abortServerlessGetRequestsSpy = APIMock.mock.instances[1].abortGetRequests as jest.Mock<
+            ReturnType<typeof API.prototype.abortGetRequests>
+        >;
 
         platform.abortPendingGetRequests();
 
         expect(abortGetRequestsSpy).toHaveBeenCalledTimes(1);
+        expect(abortServerlessGetRequestsSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should check the validity of the access token when initializing the platform client', () => {

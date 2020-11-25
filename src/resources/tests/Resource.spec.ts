@@ -16,11 +16,12 @@ class ResourceFixture extends Resource {
 
 describe('Resource', () => {
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     let resource: ResourceFixture;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        resource = new ResourceFixture(api);
+        resource = new ResourceFixture(api, serverlessApi);
     });
 
     describe('buildPath', () => {

@@ -771,3 +771,35 @@ export enum SubscriptionStatusHealthIndicatorEnum {
     problematic = 'PROBLEMATIC',
     unknown = 'UNKNOWN',
 }
+
+export enum IndexingPipelineLogOperations {
+    add = 'ADD',
+    addByReference = 'ADD_BY_REFERENCE',
+    batchFile = 'BATCH_FILE',
+    delete = 'DELETE',
+    deleteAndChildren = 'DELETE_AND_CHILDREN',
+    deleteOlderThan = 'DELETE_OLDER_THAN',
+    update = 'UPDATE',
+}
+
+export enum IndexingPipelineLogResults {
+    completed = 'COMPLETED',
+    error = 'ERROR',
+    rejected = 'REJECTED',
+    skipped = 'SKIPPED',
+    warning = 'WARNING',
+}
+
+export enum IndexingPipelineLogTasks {
+    consuming = 'CONSUMING',
+    consumingBatch = 'CONSUMING_BATCH',
+    crawling = 'CRAWLING',
+    streamingExtension = 'STREAMING_EXTENSION',
+    extension = 'EXTENSION',
+    indexing = 'INDEXING',
+    mapping = 'MAPPING',
+    processing = 'PROCESSING',
+    streaming = 'STREAMING',
+    streamingBatch = 'STREAMING_BATCH',
+    preindexing = 'PREINDEXING',
+}

@@ -9,11 +9,12 @@ const APIMock: jest.Mock<API> = API as any;
 describe('groupmember', () => {
     let groupMember: GroupMember;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     const groupId = '💎';
 
     beforeEach(() => {
         jest.clearAllMocks();
-        groupMember = new GroupMember(api);
+        groupMember = new GroupMember(api, serverlessApi);
     });
 
     describe('list', () => {

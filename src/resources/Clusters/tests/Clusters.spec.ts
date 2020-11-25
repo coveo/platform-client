@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Cluster', () => {
     let cluster: Cluster;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        cluster = new Cluster(api);
+        cluster = new Cluster(api, serverlessApi);
     });
 
     describe('list', () => {

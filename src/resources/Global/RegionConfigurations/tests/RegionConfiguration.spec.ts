@@ -8,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('RegionConfiguration', () => {
     let regionConfiguration: RegionConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        regionConfiguration = new RegionConfiguration(api);
+        regionConfiguration = new RegionConfiguration(api, serverlessApi);
     });
 
     describe('list', () => {

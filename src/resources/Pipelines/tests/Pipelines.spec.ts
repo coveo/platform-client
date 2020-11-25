@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Pipelines', () => {
     let pipelines: Pipelines;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        pipelines = new Pipelines(api);
+        pipelines = new Pipelines(api, serverlessApi);
     });
 
     describe('list', () => {

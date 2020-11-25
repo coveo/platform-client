@@ -21,10 +21,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('ResourceSnapshots', () => {
     let resourceSnapshots: ResourceSnapshots;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        resourceSnapshots = new ResourceSnapshots(api);
+        resourceSnapshots = new ResourceSnapshots(api, serverlessApi);
     });
 
     describe('list', () => {
