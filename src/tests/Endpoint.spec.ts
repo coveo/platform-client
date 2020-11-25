@@ -95,6 +95,7 @@ describe('Endpoint', () => {
 
             it('should return the endpoint corresponding to each specified environment and region', () => {
                 expect(getEndpoint(Environment.staging, Region.EU, true)).toBe('https://apiqa-eu.cloud.coveo.com');
+                expect(getEndpoint(Environment.staging, Region.AU, true)).toBe('https://apiqa-au.cloud.coveo.com');
             });
         });
 

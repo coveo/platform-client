@@ -67,7 +67,7 @@ This project is built using TypeScript and automatically generates relevant type
 | `organizationId`   | yes      | undefined                            | The unique identifier of the target organization.                                                                                                |
 | `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
-| `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target serverless host. Used for Logs endpoints.                                                                                             |
+| `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target host for serverless APIs.                                                                                                             |
 | `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
 | `region`           | optional | Region.US                            | The target region.                                                                                                                               |
 
