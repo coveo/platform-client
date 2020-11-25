@@ -54,12 +54,12 @@ describe('PlatformResources', () => {
             expect(platformResources.catalog).toBeInstanceOf(Catalog);
         });
 
-        it('should register the catalogConfigurations resource on the platform instance', () => {
+        it('should register the catalogConfiguration resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.catalogConfigurations).toBeDefined();
-            expect(platformResources.catalogConfigurations).toBeInstanceOf(CatalogConfiguration);
+            expect(platformResources.catalogConfiguration).toBeDefined();
+            expect(platformResources.catalogConfiguration).toBeInstanceOf(CatalogConfiguration);
         });
 
         it('should register the cluster resource on the platform instance', () => {

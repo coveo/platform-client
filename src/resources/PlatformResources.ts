@@ -35,7 +35,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'aws', resource: AWS},
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
-    {key: 'catalogConfigurations', resource: CatalogConfiguration},
+    {key: 'catalogConfiguration', resource: CatalogConfiguration},
     {key: 'cluster', resource: Cluster},
     {key: 'crawlingModule', resource: CrawlingModule},
     {key: 'extension', resource: Extensions},
@@ -70,7 +70,7 @@ class PlatformResources {
     aws: AWS;
     caseAssistConfig: CaseAssistConfig;
     catalog: Catalog;
-    catalogConfigurations: CatalogConfiguration;
+    catalogConfiguration: CatalogConfiguration;
     cluster: Cluster;
     crawlingModule: CrawlingModule;
     extension: Extensions;
