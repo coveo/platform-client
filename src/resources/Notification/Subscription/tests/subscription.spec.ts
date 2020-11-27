@@ -16,7 +16,8 @@ const subscriptionModelMock: EditSubscriptionModel = {
     pattern: {
         content: {additionnalProperties: '🍔'},
         operations: ['👾', '🚀'],
-        recourceTypes: ['🍔', '🥤', '🍟'],
+        resourceTypes: ['🍔', '🥤', '🍟'],
+        resultTypes: ['🍆', '👌', '💩'],
     },
     type: SubscriptionTypeEnum.email,
 };

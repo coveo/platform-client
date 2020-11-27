@@ -29,12 +29,13 @@ export interface SubscriptionParameters {
 export interface SubscriptionPatternModel {
     content: {additionnalProperties: string};
     operations: string[];
-    recourceTypes: string[];
+    resourceTypes: string[];
+    resultTypes: string[];
 }
 
 export interface SubscriptionStatusModel {
     healthIndicator: SubscriptionStatusHealthIndicatorEnum;
-    latestResponseMassage: string;
+    latestResponseMessage: string;
     statistics: SubscriptionStatisticsModel;
 }
 
