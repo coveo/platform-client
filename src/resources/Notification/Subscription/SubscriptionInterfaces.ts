@@ -5,8 +5,8 @@ export interface EditSubscriptionModel {
     enabled: boolean;
     frequency: SubscriptionFrequencyEnum;
     name: string;
-    parameters: SubscriptionParameters;
-    pattern: SubscriptionPatternModel;
+    parameters?: SubscriptionParameters;
+    pattern?: SubscriptionPatternModel;
     type: SubscriptionTypeEnum;
 }
 
@@ -15,19 +15,19 @@ export interface SubscriptionModel extends EditSubscriptionModel {
     id: string;
     lastModified: number;
     organizationId: string;
-    status: SubscriptionStatusModel;
+    status?: SubscriptionStatusModel;
     userId: string;
 }
 
 export interface SubscriptionParameters {
-    emailRecipients: string[];
-    emailSubject: string;
-    fromDisplayName: string;
-    serviceUrl: string;
+    emailRecipients?: string[];
+    emailSubject?: string;
+    fromDisplayName?: string;
+    serviceUrl?: string;
 }
 
 export interface SubscriptionPatternModel {
-    content: {additionnalProperties: string};
+    content: Record<string, unknown>;
     operations: string[];
     resourceTypes: string[];
     resultTypes: string[];
