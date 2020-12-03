@@ -94,7 +94,7 @@ export interface ResourceSnapshotsAlreadyLinkedResourcesModel {
 }
 
 export interface ResourceSnapshotsSynchronizationMatchModel {
-    associateScore: number;
+    associationScore: number;
     linkModel: ResourceSnapshotsLinkModel[];
 }
 
