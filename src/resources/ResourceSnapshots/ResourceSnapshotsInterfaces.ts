@@ -9,6 +9,26 @@ export interface ResourceSnapshotsModel {
     synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
 }
 
+export enum ResourceType {
+    extension = 'EXTENSION',
+    featuredResult = 'FEATURED_RESULT',
+    field = 'FIELD',
+    filter = 'FILTER',
+    mlModel = 'ML_MODEL',
+    mlModelAssociation = 'ML_MODEL_ASSOCIATION',
+    queryParameter = 'QUERY_PARAMETER',
+    queryPipeline = 'QUERY_PIPELINE',
+    queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
+    rankingExpression = 'RANKING_EXPRESSION',
+    rankingWeight = 'RANKING_WEIGHT',
+    searchPage = 'SEARCH_PAGE',
+    source = 'SOURCE',
+    stopWord = 'STOP_WORD',
+    subscription = 'SUBSCRIPTION',
+    thesaurus = 'THESAURUS',
+    trigger = 'TRIGGER',
+}
+
 export enum SnapshotAccessType {
     Read = 'READ',
     Write = 'WRITE',
