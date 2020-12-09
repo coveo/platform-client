@@ -1,7 +1,7 @@
+import API from '../../APICore';
 import {LicenseSection} from '../Enums';
 import Resource from '../Resource';
-import API from '../../APICore';
-import {LimitsModel} from './LimitsInterfaces';
+import {AllLimitsModel, LimitsModel} from './LimitsInterfaces';
 
 export default class Limits extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/limits`;
@@ -12,6 +12,6 @@ export default class Limits extends Resource {
     }
 
     getAll() {
-        return this.api.get<LimitsModel>(Limits.getBaseUrl());
+        return this.api.get<AllLimitsModel>(Limits.getBaseUrl());
     }
 }

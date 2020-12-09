@@ -6,3 +6,7 @@ export interface LimitModel {
 export interface LimitsModel {
     [name: string]: LimitModel;
 }
+
+export interface AllLimitsModel {
+    [name: string]: LimitsModel;
+}
