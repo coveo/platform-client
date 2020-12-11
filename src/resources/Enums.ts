@@ -726,6 +726,8 @@ export enum FormAuthenticationFailedMethod {
     PageDoesNotContain = 'PageDoesNotContain',
     PageContains = 'PageContains',
     CookieNotSet = 'CookieNotSet',
+    UrlMatch = 'UrlMatch',
+    UrlDoesNotMatch = 'UrlDoesNotMatch',
 }
 
 export enum FormInputType {
