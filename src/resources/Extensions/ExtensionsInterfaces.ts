@@ -1,14 +1,19 @@
+import {GranularResource} from '../../Entry';
+import {DataStreamType, ExtensionLanguageType} from '../Enums';
+
+type Version = 'v1' | 'v2';
+
 export interface ExtensionModel {
-    apiVersion: string;
+    apiVersion: Version;
     content: string;
     createdDate: number;
     description: string;
     enabled: boolean;
     id: string;
-    language: string;
+    language: ExtensionLanguageType;
     lastModified: number;
     name: string;
-    requiredDataStreams: string[];
+    requiredDataStreams: DataStreamType[];
     status: {
         dailyStatistics: {
             averageDurationInSeconds: number;
@@ -40,4 +45,13 @@ export interface ExtensionModel {
         }
     ];
     versionId: string;
+}
+
+export interface CreateExtension extends GranularResource {
+    content: string;
+    name: string;
+    apiVersion?: Version;
+    description?: string;
+    language?: ExtensionLanguageType;
+    requiredDataStreams?: DataStreamType[];
 }

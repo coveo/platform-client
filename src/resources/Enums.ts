@@ -54,6 +54,17 @@ export enum OperationType {
     SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR = 'SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR',
 }
 
+export enum DataStreamType {
+    BODY_TEXT = 'BODY_TEXT',
+    BODY_HTML = 'BODY_HTML',
+    THUMBNAIL = 'THUMBNAIL',
+    DOCUMENT_DATA = 'DOCUMENT_DATA',
+}
+
+export enum ExtensionLanguageType {
+    'PYTHON3' = 'PYTHON3',
+}
+
 export enum SourceStatusType {
     CREATING = 'CREATING',
     DISABLED = 'DISABLED',
