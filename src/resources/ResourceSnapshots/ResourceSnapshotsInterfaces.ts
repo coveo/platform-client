@@ -105,6 +105,7 @@ export interface ResourceSnapshotsSynchronizationPlanModel {
 
 export interface ResourceSnapshotsSynchronizationOperationsModel {
     resourceName: string;
+    displayName: string;
     matches: ResourceSnapshotsSynchronizationMatchModel[];
 }
 
@@ -115,11 +116,12 @@ export interface ResourceSnapshotsAlreadyLinkedResourcesModel {
 
 export interface ResourceSnapshotsSynchronizationMatchModel {
     associationScore: number;
+    displayName: string;
     linkModel: ResourceSnapshotsLinkModel;
 }
 
 export interface ResourceSnapshotsLinkModel {
-    id: string;
+    id?: string;
     organizationId: string;
     resourceId: string;
     resourceName: string;

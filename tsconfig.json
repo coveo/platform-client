@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "CommonJS",
         "esModuleInterop": true,
         "sourceMap": true,
         "declaration": true,
         "target": "ES5",
         "declarationDir": "dist/definitions",
-        "lib": ["es6", "dom"],
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
+        "importHelpers": true,
         "outDir": "dist"
     }
 }

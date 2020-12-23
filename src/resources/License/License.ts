@@ -4,14 +4,17 @@ import {LicenseModel} from './LicenseInterfaces';
 import API from '../../APICore';
 
 export default class License extends Resource {
-    static getBaseUrl = (sectionName: LicenseSection) =>
-        `/rest/organizations/${API.orgPlaceholder}/license/${sectionName}`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/license`;
 
     get(sectionName: LicenseSection) {
-        return this.api.get<LicenseModel>(License.getBaseUrl(sectionName));
+        return this.api.get<LicenseModel>(`${License.baseUrl}/${sectionName}`);
     }
 
     update(sectionName: LicenseSection, licenseSection: Record<string, number>) {
-        return this.api.put<LicenseModel>(License.getBaseUrl(sectionName), licenseSection);
+        return this.api.put<LicenseModel>(`${License.baseUrl}/${sectionName}`, licenseSection);
+    }
+
+    updateLicense(license: LicenseModel) {
+        return this.api.put<LicenseModel>(License.baseUrl, license);
     }
 }
