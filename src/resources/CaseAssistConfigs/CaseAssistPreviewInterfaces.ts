@@ -23,10 +23,12 @@ export interface CaseClassifications {
     fields: Record<string, FieldValueSuggestion>;
 }
 
+export interface ContextField {
+    value: string;
+}
+
 export interface ContextFields {
-    [key: string]: {
-        value: string;
-    };
+    [key: string]: ContextField;
 }
 
 export interface PreviewRequestBody {
