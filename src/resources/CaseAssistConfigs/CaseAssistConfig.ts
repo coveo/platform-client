@@ -2,6 +2,7 @@ import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {CaseAssistConfigListOptions, CaseAssistConfigModel} from './CaseAssistConfigInterfaces';
+import {PreviewRequestBody, DocumentSuggestions, CaseClassifications} from './CaseAssistPreviewInterfaces';
 
 export default class CaseAssistConfig extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/caseassists`;
@@ -29,5 +30,13 @@ export default class CaseAssistConfig extends Resource {
             `${CaseAssistConfig.baseUrl}/${caseAssistConfig.id}`,
             caseAssistConfig
         );
+    }
+
+    previewDocumentSuggestion(body: PreviewRequestBody) {
+        return this.api.post<DocumentSuggestions>(`${CaseAssistConfig.baseUrl}/preview/documents/suggest`, body);
+    }
+
+    previewCaseClassication(body: PreviewRequestBody) {
+        return this.api.post<CaseClassifications>(`${CaseAssistConfig.baseUrl}/preview/classify`, body);
     }
 }

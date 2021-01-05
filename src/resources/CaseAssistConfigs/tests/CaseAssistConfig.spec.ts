@@ -7,6 +7,7 @@ import {
     DocumentSuggestionsStrategies,
     TypingAidsStrategies,
 } from '../CaseAssistConfigInterfaces';
+import {ContextFields, PreviewRequestBody} from '../CaseAssistPreviewInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -68,6 +69,17 @@ describe('CaseAssistConfig', () => {
         },
     ];
 
+    const testLocale = 'en-US';
+    const testVisitorId = '8djf9s0d-9d8f-f9dj-897f-8dhf7dkg0d84';
+    const testContextFields: ContextFields = {
+        subject: {
+            value: "GC3000 won't start",
+        },
+        description: {
+            value: "My GC3000 series propane generator won't start",
+        },
+    };
+
     beforeEach(() => {
         jest.clearAllMocks();
         caseAssist = new CaseAssistConfig(api);
@@ -124,6 +136,43 @@ describe('CaseAssistConfig', () => {
                     `${CaseAssistConfig.baseUrl}/${caseAssistModel.id}`,
                     caseAssistModel
                 );
+            });
+        });
+    });
+
+    describe('previewDocumentSuggestion', () => {
+        caseAssistModels.forEach((caseAssistModel) => {
+            it('should make a POST call to get document suggestion preview for configuration', () => {
+                const testBody: PreviewRequestBody = {
+                    visitorId: testVisitorId,
+                    locale: testLocale,
+                    fields: testContextFields,
+                    configuration: caseAssistModel,
+                };
+                caseAssist.previewDocumentSuggestion(testBody);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(
+                    `${CaseAssistConfig.baseUrl}/preview/documents/suggest`,
+                    testBody
+                );
+            });
+        });
+    });
+
+    describe('previewCaseClassication', () => {
+        caseAssistModels.forEach((caseAssistModel) => {
+            it('should make a POST call to get document suggestion preview for configuration', () => {
+                const testBody: PreviewRequestBody = {
+                    visitorId: testVisitorId,
+                    locale: testLocale,
+                    fields: testContextFields,
+                    configuration: caseAssistModel,
+                };
+                caseAssist.previewCaseClassication(testBody);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/preview/classify`, testBody);
             });
         });
     });
