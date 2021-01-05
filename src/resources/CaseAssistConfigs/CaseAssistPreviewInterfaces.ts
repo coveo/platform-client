@@ -9,7 +9,6 @@ export interface Document {
 
 export interface DocumentSuggestions {
     documents: Document[];
-    responseId: string;
     totalCount: number;
 }
 
@@ -22,7 +21,6 @@ export interface FieldValueSuggestion {
 
 export interface CaseClassifications {
     fields: Record<string, FieldValueSuggestion>;
-    responseId: string;
 }
 
 export interface ContextFields {
