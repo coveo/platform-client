@@ -1,3 +1,4 @@
+import {New} from '../BaseInterfaces';
 import {CaseAssistConfigModel} from './CaseAssistConfigInterfaces';
 
 export interface Document {
@@ -35,5 +36,5 @@ export interface PreviewRequestBody {
     visitorId: string;
     locale: string;
     fields: ContextFields;
-    configuration: CaseAssistConfigModel;
+    configuration: New<CaseAssistConfigModel>;
 }
