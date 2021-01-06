@@ -4,7 +4,7 @@ export interface Document {
     title: string;
     clickUri: string;
     excerpt: string;
-    fields: any;
+    fields: string;
 }
 
 export interface DocumentSuggestions {
@@ -35,5 +35,5 @@ export interface PreviewRequestBody {
     visitorId: string;
     locale: string;
     fields: ContextFields;
-    configuration: Partial<CaseAssistConfigModel>;
+    configuration: CaseAssistConfigModel;
 }
