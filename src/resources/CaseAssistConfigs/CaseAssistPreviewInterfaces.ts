@@ -5,7 +5,7 @@ export interface Document {
     title: string;
     clickUri: string;
     excerpt: string;
-    fields: string;
+    fields: Record<string, number | string>;
 }
 
 export interface DocumentSuggestions {
