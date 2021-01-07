@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Pipelines', () => {
     let pipelines: Pipelines;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        pipelines = new Pipelines(api);
+        pipelines = new Pipelines(api, serverlessApi);
     });
 
     describe('list', () => {
@@ -32,7 +33,7 @@ describe('Pipelines', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to /rest/searc/v1/admin/pipelines/:id', () => {
+        it('should make a GET call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.get('🔥');
 
             expect(api.get).toHaveBeenCalledTimes(1);
@@ -41,7 +42,7 @@ describe('Pipelines', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to /rest/searc/v1/admin/pipelines/:id', () => {
+        it('should make a DELETE call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.delete('🔥');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
@@ -50,7 +51,7 @@ describe('Pipelines', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to /rest/searc/v1/admin/pipelines/:id', () => {
+        it('should make a PUT call to /rest/search/v1/admin/pipelines/:id', () => {
             const pipelineToUpdate: UpdatePipelineModel = {
                 id: '🔥',
                 name: 'fire',
@@ -63,7 +64,7 @@ describe('Pipelines', () => {
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to /rest/searc/v1/admin/pipelines/:id/duplicate', () => {
+        it('should make a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', () => {
             pipelines.duplicate('🔥');
 
             expect(api.post).toHaveBeenCalledTimes(1);
@@ -72,7 +73,7 @@ describe('Pipelines', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to /rest/searc/v1/admin/pipelines', () => {
+        it('should make a POST call to /rest/search/v1/admin/pipelines', () => {
             const newPipeline: NewPipelineModel = {
                 name: 'fire',
                 description: 'this-is-lit',

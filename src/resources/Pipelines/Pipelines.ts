@@ -25,15 +25,15 @@ export default class Pipelines extends Resource {
     groups: StatementGroups;
     facetRules: FacetStateRules;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
 
-        this.associations = new MLAssociations(api);
-        this.statements = new Statements(api);
-        this.resultRanking = new ResultRankings(api);
-        this.conditions = new Condition(api);
-        this.groups = new StatementGroups(api);
-        this.facetRules = new FacetStateRules(api);
+        this.associations = new MLAssociations(api, serverlessApi);
+        this.statements = new Statements(api, serverlessApi);
+        this.resultRanking = new ResultRankings(api, serverlessApi);
+        this.conditions = new Condition(api, serverlessApi);
+        this.groups = new StatementGroups(api, serverlessApi);
+        this.facetRules = new FacetStateRules(api, serverlessApi);
     }
 
     getMLVersion() {

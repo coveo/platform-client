@@ -6,6 +6,27 @@ export interface ResourceSnapshotsModel {
     originId?: string;
     targetId?: string;
     reports?: ResourceSnapshotsReportModel[];
+    synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
+}
+
+export enum ResourceType {
+    extension = 'EXTENSION',
+    featuredResult = 'FEATURED_RESULT',
+    field = 'FIELD',
+    filter = 'FILTER',
+    mlModel = 'ML_MODEL',
+    mlModelAssociation = 'ML_MODEL_ASSOCIATION',
+    queryParameter = 'QUERY_PARAMETER',
+    queryPipeline = 'QUERY_PIPELINE',
+    queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
+    rankingExpression = 'RANKING_EXPRESSION',
+    rankingWeight = 'RANKING_WEIGHT',
+    searchPage = 'SEARCH_PAGE',
+    source = 'SOURCE',
+    stopWord = 'STOP_WORD',
+    subscription = 'SUBSCRIPTION',
+    thesaurus = 'THESAURUS',
+    trigger = 'TRIGGER',
 }
 
 export enum SnapshotAccessType {
@@ -21,6 +42,8 @@ export enum ResourceSnapshotsReportResultCode {
     UnableToPushToOrganization = 'UNABLE_TO_PUSH_TO_ORGANIZATION',
     NoResourceRetrieved = 'NO_RESOURCE_RETRIEVED',
     UnableToRetrieveResources = 'UNABLE_TO_RETRIEVE_RESOURCES',
+    ResourceDependencyCyle = 'RESOURCE_DEPENDENCY_CYCLE',
+    ExternalServiceCommunicationError = 'EXTERNAL_SERVICE_COMMUNICATION_ERROR',
 }
 
 export enum ResourceSnapshotsReportStatus {
@@ -30,10 +53,18 @@ export enum ResourceSnapshotsReportStatus {
     Aborted = 'ABORTED',
 }
 
+export enum ResourceSnapshotsSynchronizationPlanStatus {
+    Creating = 'CREATING',
+    Created = 'CREATED',
+    InError = 'IN_ERROR',
+}
+
 export enum ResourceSnapshotsReportType {
     CreateSnapshot = 'CREATE_SNAPSHOT',
     DryRun = 'DRY_RUN',
     Apply = 'APPLY',
+    CreateSynchronizationPlan = 'CREATE_SYNCHRONIZATION_PLAN',
+    ApplySynchronizationPlan = 'APPLY_SYNCHRONIZATION_PLAN',
 }
 
 export enum ResourceSnapshotSupportedFileTypes {
@@ -50,6 +81,51 @@ export interface ResourceSnapshotsReportModel {
     status: ResourceSnapshotsReportStatus;
     type: ResourceSnapshotsReportType;
     updatedDate: number;
+}
+
+export interface ResourceSnapshotsSynchronizationReportModel {
+    id: string;
+    synchronizationPlanId: string;
+    linkOperations?: Record<string, unknown>;
+    linkOperationDetails?: Record<string, unknown>;
+    resourcesProcessed?: number;
+    resultCode: ResourceSnapshotsReportResultCode;
+    status: ResourceSnapshotsReportStatus;
+    type: ResourceSnapshotsReportType;
+    updatedDate: number;
+}
+
+export interface ResourceSnapshotsSynchronizationPlanModel {
+    id: string;
+    snapshotId: string;
+    status: ResourceSnapshotsSynchronizationPlanStatus;
+    alreadyLinkedResources?: Record<string, ResourceSnapshotsAlreadyLinkedResourcesModel[]>;
+    resourceSynchronizationOperations?: Record<string, ResourceSnapshotsSynchronizationOperationsModel[]>;
+}
+
+export interface ResourceSnapshotsSynchronizationOperationsModel {
+    resourceName: string;
+    displayName: string;
+    matches: ResourceSnapshotsSynchronizationMatchModel[];
+}
+
+export interface ResourceSnapshotsAlreadyLinkedResourcesModel {
+    resourceName: string;
+    linkModel: ResourceSnapshotsLinkModel;
+}
+
+export interface ResourceSnapshotsSynchronizationMatchModel {
+    associationScore?: number;
+    displayName?: string;
+    linkModel: ResourceSnapshotsLinkModel;
+}
+
+export interface ResourceSnapshotsLinkModel {
+    id?: string;
+    organizationId: string;
+    resourceId: string;
+    resourceName: string;
+    resourceType: string;
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
@@ -81,6 +157,7 @@ export interface ValidateAccessOptions {
 export interface CreateFromOrganizationOptions {
     developerNotes?: string;
     targetOrganizationId?: string;
+    includeChildrenResources?: boolean;
 }
 
 export interface DryRunOptions {

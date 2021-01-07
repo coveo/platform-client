@@ -1,5 +1,4 @@
 import API from '../../../../APICore';
-import Pipelines from '../../Pipelines';
 import MLAssociations from '../MLAssociations';
 
 jest.mock('../../../../APICore');
@@ -9,10 +8,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('MLAssociations', () => {
     let associations: MLAssociations;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        associations = new MLAssociations(api);
+        associations = new MLAssociations(api, serverlessApi);
     });
 
     describe('list', () => {
@@ -92,7 +92,7 @@ describe('MLAssociations', () => {
         it('should make a GET call to the specific MLAssociations url', () => {
             associations.getAssociatedPipelines();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Pipelines.baseUrl}/ml/model/associations`);
+            expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/ml/model/associations');
         });
     });
 });

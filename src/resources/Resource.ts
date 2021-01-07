@@ -5,7 +5,7 @@ import API from '../APICore';
 class Resource {
     static baseUrl: string;
 
-    constructor(protected api: API) {}
+    constructor(protected api: API, protected serverlessApi: API) {}
 
     protected buildPath(route: string, parameters: any): string {
         return route + this.convertObjectToQueryString(parameters);

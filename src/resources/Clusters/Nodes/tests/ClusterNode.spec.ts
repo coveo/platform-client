@@ -9,11 +9,12 @@ const APIMock: jest.Mock<API> = API as any;
 describe('clusterNode', () => {
     let clusterNode: ClusterNode;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
     const clusterId = 'cluster-id';
 
     beforeEach(() => {
         jest.clearAllMocks();
-        clusterNode = new ClusterNode(api);
+        clusterNode = new ClusterNode(api, serverlessApi);
     });
 
     describe('list', () => {

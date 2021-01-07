@@ -1,4 +1,3 @@
-import fetch from 'jest-fetch-mock';
 import API from '../../../APICore';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
@@ -8,6 +7,8 @@ import {
     DryRunOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
+    ResourceSnapshotsSynchronizationPlanModel,
+    ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotUrlModel,
     SnapshotAccessType,
     ValidateAccessOptions,
@@ -20,10 +21,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('ResourceSnapshots', () => {
     let resourceSnapshots: ResourceSnapshots;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        resourceSnapshots = new ResourceSnapshots(api);
+        resourceSnapshots = new ResourceSnapshots(api, serverlessApi);
     });
 
     describe('list', () => {
@@ -149,6 +151,7 @@ describe('ResourceSnapshots', () => {
             };
             const createFromOrganizationOptions: CreateFromOrganizationOptions = {
                 developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
+                includeChildrenResources: false,
             };
 
             resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
@@ -157,7 +160,7 @@ describe('ResourceSnapshots', () => {
             expect(
                 api.post
             ).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5`,
+                `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&includeChildrenResources=false`,
                 {resourcesToExport: {EXTENSIONS: ['🤖'], FIELD: ['*']}}
             );
         });
@@ -218,6 +221,62 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.delete(snapshotId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+        });
+    });
+
+    describe('get synchronization plan', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const synchronizationPlanId = '🥱';
+
+            resourceSnapshots.getSynchronizationPlan(snapshotId, synchronizationPlanId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`
+            );
+        });
+    });
+
+    describe('create synchronization plan', () => {
+        it('should make a POST call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+
+            resourceSnapshots.createSynchronizationPlan(snapshotId);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`);
+        });
+    });
+
+    describe('update synchronization plan', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const synchronizationPlanId = '🥱';
+
+            const synchronizationPlan: ResourceSnapshotsSynchronizationPlanModel = {
+                id: '😨',
+                snapshotId: snapshotId,
+                status: ResourceSnapshotsSynchronizationPlanStatus.Created,
+            };
+
+            resourceSnapshots.updateSynchronizationPlan(snapshotId, synchronizationPlanId, synchronizationPlan);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
+                synchronizationPlan
+            );
+        });
+    });
+
+    describe('apply synchronization plan', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const synchronizationPlanId = '🥱';
+
+            resourceSnapshots.applySynchronizationPlan(snapshotId, synchronizationPlanId);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+            );
         });
     });
 });

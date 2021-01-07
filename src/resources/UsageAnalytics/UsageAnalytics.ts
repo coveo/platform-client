@@ -7,10 +7,10 @@ export default class UsageAnalytics extends Resource {
     statistics: Statistics;
     dimensions: Dimensions;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
 
-        this.dimensions = new Dimensions(api);
-        this.statistics = new Statistics(api);
+        this.dimensions = new Dimensions(api, serverlessApi);
+        this.statistics = new Statistics(api, serverlessApi);
     }
 }

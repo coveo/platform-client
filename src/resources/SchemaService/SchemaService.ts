@@ -14,8 +14,8 @@ import {SourceType} from '../Enums';
 export default class SchemaService extends Ressource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/schema/sources`;
 
-    constructor(protected api: API) {
-        super(api);
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
     }
 
     getEntities(sourceType: SourceType, parameters?: SchemaServiceQueryParams) {

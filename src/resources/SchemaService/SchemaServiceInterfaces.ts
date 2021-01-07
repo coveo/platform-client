@@ -26,7 +26,7 @@ export interface SchemaField {
 export interface SchemaServiceQueryParams {
     oauthRefreshTokenGuid?: string;
     clientSecretGuid?: string;
-    instanceId: string;
+    instanceUrl: string;
     clientId?: string;
     passwordGuid?: string;
     username?: string;

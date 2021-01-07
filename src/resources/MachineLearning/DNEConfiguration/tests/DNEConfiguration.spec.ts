@@ -13,10 +13,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('DNEConfiguration', () => {
     let dneConfig: DNEConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        dneConfig = new DNEConfiguration(api);
+        dneConfig = new DNEConfiguration(api, serverlessApi);
     });
 
     describe('listFields', () => {

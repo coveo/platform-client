@@ -1,6 +1,7 @@
 import {LicenseSection} from '../..';
 import API from '../../../APICore';
 import License from '../License';
+import {LicenseModel} from '../LicenseInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -10,10 +11,11 @@ describe('License', () => {
     let license: License;
     const sectionName = LicenseSection.searchapi;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        license = new License(api);
+        license = new License(api, serverlessApi);
     });
 
     describe('get', () => {
@@ -29,6 +31,16 @@ describe('License', () => {
             license.update(sectionName, {value: 100});
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license/searchapi`, {
+                value: 100,
+            });
+        });
+    });
+
+    describe('updateAll', () => {
+        it('should make a PUT call to the specific License url', () => {
+            license.updateLicense(({value: 100} as unknown) as LicenseModel);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license`, {
                 value: 100,
             });
         });

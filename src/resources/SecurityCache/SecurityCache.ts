@@ -8,6 +8,8 @@ import {
     SecurityCacheListOptions,
     SecurityCacheStatus,
     SecurityProviderModelWithStatus,
+    SecurityCacheListRelationshipsOptions,
+    SecurityCacheMemberModel,
 } from './SecurityCacheInterfaces';
 
 export default class SecurityCache extends Ressource {
@@ -16,14 +18,32 @@ export default class SecurityCache extends Ressource {
     static providersUrl = `/${SecurityCache.baseUrl}/securityproviders`;
 
     listMembers(providerId: string, options?: SecurityCacheListOptions) {
-        return this.api.get<PageModel<DetailedSecurityCacheMemberModel[]>>(
+        return this.api.get<PageModel<DetailedSecurityCacheMemberModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members`, options)
         );
     }
 
     listEntities(providerId: string, options?: SecurityCacheListOptions) {
-        return this.api.get<PageModel<SecurityCacheIdentityModel[]>>(
+        return this.api.get<PageModel<SecurityCacheIdentityModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}`, options)
+        );
+    }
+
+    listChildren(
+        providerId: string,
+        member: SecurityCacheMemberModel,
+        options?: SecurityCacheListRelationshipsOptions
+    ) {
+        return this.api.post<PageModel<DetailedSecurityCacheMemberModel>>(
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members/children`, options),
+            member
+        );
+    }
+
+    listParents(providerId: string, member: SecurityCacheMemberModel, options?: SecurityCacheListRelationshipsOptions) {
+        return this.api.post<PageModel<DetailedSecurityCacheMemberModel>>(
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members/parents`, options),
+            member
         );
     }
 
@@ -43,7 +63,7 @@ export default class SecurityCache extends Ressource {
         return this.api.post(`${SecurityCache.cacheUrl}/${providerId}/refresh`);
     }
 
-    refreshIdentity(identityModel: DetailedSecurityCacheMemberModel) {
+    refreshIdentity(identityModel: SecurityCacheMemberModel) {
         return this.api.post(`${SecurityCache.cacheUrl}/refresh/entity`, identityModel);
     }
 

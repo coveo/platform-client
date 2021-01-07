@@ -73,4 +73,12 @@ export default class ResultRankings extends Resource {
             {method: 'post', body: resultRanking, headers: {'Content-Type': 'application/json'}}
         );
     }
+
+    duplicate(pipelineId: string, resultRankingsId: string) {
+        return this.api.post<ResultRanking>(
+            this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRankingsId}`, {
+                organizationId: this.api.organizationId,
+            })
+        );
+    }
 }

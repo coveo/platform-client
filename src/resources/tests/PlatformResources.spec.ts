@@ -2,6 +2,7 @@ import ApiKey from '../ApiKeys/ApiKeys';
 import AWS from '../AWS/AWS';
 import CaseAssistConfig from '../CaseAssistConfigs/CaseAssistConfig';
 import Catalog from '../Catalogs/Catalog';
+import CatalogConfiguration from '../Catalogs/CatalogConfiguration';
 import Cluster from '../Clusters/Cluster';
 import CrawlingModule from '../CrawlingModule/CrawlingModule';
 import Extension from '../Extensions/Extensions';
@@ -9,6 +10,7 @@ import Field from '../Fields/Fields';
 import Global from '../Global/Global';
 import GlobalGroup from '../GlobalGroups/GlobalGroup';
 import Group from '../Groups/Groups';
+import Limits from '../Limits/Limits';
 import MachineLearning from '../MachineLearning/MachineLearning';
 import License from '../License/License';
 import Organization from '../Organizations/Organization';
@@ -23,6 +25,8 @@ import UsageAnalytics from '../UsageAnalytics/UsageAnalytics';
 import User from '../Users/User';
 import SchemaService from '../SchemaService/SchemaService';
 import SearchPages from '../SearchPages/SearchPages';
+import Notifications from '../Notification/notification';
+import Logs from '../Logs/Logs';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -48,6 +52,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.catalog).toBeDefined();
             expect(platformResources.catalog).toBeInstanceOf(Catalog);
+        });
+
+        it('should register the catalogConfiguration resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.catalogConfiguration).toBeDefined();
+            expect(platformResources.catalogConfiguration).toBeInstanceOf(CatalogConfiguration);
         });
 
         it('should register the cluster resource on the platform instance', () => {
@@ -216,6 +228,30 @@ describe('PlatformResources', () => {
 
             expect(platformResources.searchPages).toBeDefined();
             expect(platformResources.searchPages).toBeInstanceOf(SearchPages);
+        });
+
+        it('should register the limits resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.limits).toBeDefined();
+            expect(platformResources.limits).toBeInstanceOf(Limits);
+        });
+
+        it('should register the Notification resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.notification).toBeDefined();
+            expect(platformResources.notification).toBeInstanceOf(Notifications);
+        });
+
+        it('should register the Logs resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.logs).toBeDefined();
+            expect(platformResources.logs).toBeInstanceOf(Logs);
         });
     });
 });

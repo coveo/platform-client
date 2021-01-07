@@ -10,10 +10,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('Dimensions', () => {
     let dimensions: Dimensions;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        dimensions = new Dimensions(api);
+        dimensions = new Dimensions(api, serverlessApi);
     });
 
     describe('list', () => {

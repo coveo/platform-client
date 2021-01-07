@@ -17,10 +17,23 @@ npm install @coveord/platform-client
 # Typescript types are included in the package
 ```
 
+### Import
+
+```js
+// using default import
+import PlatformClient from '@coveord/platform-client';
+
+// using named import
+import {PlatformClient} from '@coveord/platform-client';
+
+// using commonjs require
+const PlatformClient = require('@coveord/platform-client').default;
+```
+
 ### Configure
 
 ```js
-const platform = new CoveoPlatform({
+const platform = new PlatformClient({
     /* configuration options */
 });
 ```
@@ -38,7 +51,7 @@ Every action returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/Ja
 ### Example
 
 ```js
-const platform = new CoveoPlatform({
+const platform = new PlatformClient({
     organizationId: 'some-coveo-platform-organization-id',
     accessToken: () => 'your-coveo-platform-access-token-or-api-key',
 });
@@ -52,8 +65,29 @@ doSometing(catalogs);
 
 The `platform-client` package is built on top of the `fetch` API and some related features such as the `AbortController` which are not entirely supported by all JavaScript runtime environments. Consequently, we recommend including the following list of polyfills to your project before using it in production.
 
--   [Polyfill for `fetch`](https://github.com/github/fetch)
+-   [Polyfill for `fetch`](https://github.com/matthew-andrews/isomorphic-fetch)
 -   [Polyfill for `AbortController`](https://github.com/mo/abortcontroller-polyfill)
+
+#### Node.js example
+
+```js
+require('isomorphic-fetch');
+require('abortcontroller-polyfill');
+const PlatformClient = require('@coveord/platform-client').default;
+
+const coveoPlatform = new PlatformClient({
+    /* options */
+});
+
+coveoPlatform.source
+    .list()
+    .then((res) => {
+        console.log(JSON.stringify(res));
+    })
+    .catch((e) => {
+        console.error(e);
+    });
+```
 
 ## Documentation
 
@@ -67,6 +101,7 @@ This project is built using TypeScript and automatically generates relevant type
 | `organizationId`   | yes      | undefined                            | The unique identifier of the target organization.                                                                                                |
 | `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
+| `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target host for serverless APIs.                                                                                                             |
 | `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
 | `region`           | optional | Region.US                            | The target region.                                                                                                                               |
 

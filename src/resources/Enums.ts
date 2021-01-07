@@ -54,6 +54,17 @@ export enum OperationType {
     SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR = 'SECURITY_CACHE_REFRESH_ENTITIES_IN_ERROR',
 }
 
+export enum DataStreamType {
+    BODY_TEXT = 'BODY_TEXT',
+    BODY_HTML = 'BODY_HTML',
+    THUMBNAIL = 'THUMBNAIL',
+    DOCUMENT_DATA = 'DOCUMENT_DATA',
+}
+
+export enum ExtensionLanguageType {
+    'PYTHON3' = 'PYTHON3',
+}
+
 export enum SourceStatusType {
     CREATING = 'CREATING',
     DISABLED = 'DISABLED',
@@ -726,6 +737,8 @@ export enum FormAuthenticationFailedMethod {
     PageDoesNotContain = 'PageDoesNotContain',
     PageContains = 'PageContains',
     CookieNotSet = 'CookieNotSet',
+    UrlMatch = 'UrlMatch',
+    UrlDoesNotMatch = 'UrlDoesNotMatch',
 }
 
 export enum FormInputType {
@@ -750,4 +763,56 @@ export enum LicenseSection {
     commerce = 'commerce',
     content = 'content',
     searchapi = 'searchapi',
+}
+
+export enum SubscriptionFrequencyEnum {
+    live = 'LIVE',
+    hourly = 'HOURLY',
+    daily = 'DAILY',
+    weekly = 'WEEKLY',
+}
+
+export enum SubscriptionTypeEnum {
+    email = 'EMAIL',
+    emailJson = 'EMAIL_JSON',
+    webHook = 'WEB_HOOK',
+}
+
+export enum SubscriptionStatusHealthIndicatorEnum {
+    good = 'GOOD',
+    warning = 'WARNING',
+    problematic = 'PROBLEMATIC',
+    unknown = 'UNKNOWN',
+}
+
+export enum IndexingPipelineLogOperations {
+    add = 'ADD',
+    addByReference = 'ADD_BY_REFERENCE',
+    batchFile = 'BATCH_FILE',
+    delete = 'DELETE',
+    deleteAndChildren = 'DELETE_AND_CHILDREN',
+    deleteOlderThan = 'DELETE_OLDER_THAN',
+    update = 'UPDATE',
+}
+
+export enum IndexingPipelineLogResults {
+    completed = 'COMPLETED',
+    error = 'ERROR',
+    rejected = 'REJECTED',
+    skipped = 'SKIPPED',
+    warning = 'WARNING',
+}
+
+export enum IndexingPipelineLogTasks {
+    consuming = 'CONSUMING',
+    consumingBatch = 'CONSUMING_BATCH',
+    crawling = 'CRAWLING',
+    streamingExtension = 'STREAMING_EXTENSION',
+    extension = 'EXTENSION',
+    indexing = 'INDEXING',
+    mapping = 'MAPPING',
+    processing = 'PROCESSING',
+    streaming = 'STREAMING',
+    streamingBatch = 'STREAMING_BATCH',
+    preindexing = 'PREINDEXING',
 }

@@ -16,6 +16,7 @@ const APIMock: jest.Mock<API> = API as any;
 describe('CaseAssistConfig', () => {
     let caseAssist: CaseAssistConfig;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     const caseAssistModels: CaseAssistConfigModel[] = [
         {
@@ -82,15 +83,15 @@ describe('CaseAssistConfig', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        caseAssist = new CaseAssistConfig(api);
+        caseAssist = new CaseAssistConfig(api, serverlessApi);
     });
 
     describe('list', () => {
         it('should make a GET call to the CaseAssistConfig base url', () => {
-            caseAssist.list({page: 2, pageSize: 10});
+            caseAssist.list({page: 2, perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}?page=2&pageSize=10`);
+            expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}?page=2&perPage=10`);
         });
     });
 

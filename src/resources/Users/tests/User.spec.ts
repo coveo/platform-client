@@ -9,10 +9,11 @@ const APIMock: jest.Mock<API> = API as any;
 describe('User', () => {
     let user: User;
     const api = new APIMock() as jest.Mocked<API>;
+    const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        user = new User(api);
+        user = new User(api, serverlessApi);
     });
 
     describe('get', () => {

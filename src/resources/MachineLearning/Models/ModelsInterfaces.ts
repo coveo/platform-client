@@ -27,6 +27,7 @@ export interface MLModel extends MLModelInfo, ModelAttributes, GranularResource 
     customEventFilter?: string;
     searchEventFilter?: string;
     viewEventFilter?: string;
+    modelSizeStatistic?: number;
 }
 
 export interface ModelErrorDescription {
