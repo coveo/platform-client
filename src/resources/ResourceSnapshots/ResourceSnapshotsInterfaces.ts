@@ -7,6 +7,7 @@ export interface ResourceSnapshotsModel {
     targetId?: string;
     reports?: ResourceSnapshotsReportModel[];
     synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
+    contentSummary?: Record<string, number>;
 }
 
 export enum ResourceType {
@@ -161,10 +162,6 @@ export interface CreateFromOrganizationOptions {
 }
 
 export interface DryRunOptions {
-    deleteMissingResources: boolean;
-}
-
-export interface ApplyOptions {
     deleteMissingResources: boolean;
 }
 
