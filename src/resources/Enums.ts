@@ -816,3 +816,10 @@ export enum IndexingPipelineLogTasks {
     streamingBatch = 'STREAMING_BATCH',
     preindexing = 'PREINDEXING',
 }
+
+export enum RedshiftEndpointStatus {
+    online = 'ONLINE',
+    unavailable = 'UNAVAILABLE',
+    readOnly = 'READ_ONLY',
+    writeOnly = 'WRITE_ONLY',
+}
