@@ -29,6 +29,7 @@ import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
+import Links from './ResourceSnapshots/links/Links';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -82,6 +83,7 @@ class PlatformResources {
     ml: MachineLearning;
     license: License;
     limits: Limits;
+    links: Links;
     logs: Logs;
     organization: Organization;
     pipeline: Pipelines;
