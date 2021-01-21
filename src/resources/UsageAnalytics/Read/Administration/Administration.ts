@@ -11,11 +11,16 @@ export default class Administration extends Resource {
     static baseUrl = '/rest/ua/v15/admin';
 
     getAccount() {
-        return this.api.get<AccountResponseV15>(`${Administration.baseUrl}/account`);
+        return this.api.get<AccountResponseV15>(
+            this.buildPath(`${Administration.baseUrl}/account`, {org: this.api.organizationId})
+        );
     }
 
     updateAccount(model: AccountInfoModelV15) {
-        return this.api.put<AccountResponseV15>(`${Administration.baseUrl}/account`, model);
+        return this.api.put<AccountResponseV15>(
+            this.buildPath(`${Administration.baseUrl}/account`, {org: this.api.organizationId}),
+            model
+        );
     }
 
     setRedshiftStatus(endpoint: string, status: RedshiftEndpointStatus) {
