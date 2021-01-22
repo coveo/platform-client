@@ -1,3 +1,2 @@
-export * from './Read/Dimensions';
-export * from './Read/Statistics';
+export * from './Read';
 export * from './UsageAnalytics';
