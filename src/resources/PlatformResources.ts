@@ -30,6 +30,7 @@ import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 import Links from './ResourceSnapshots/links/Links';
+import Connectivity from './Connectivity/Connectivity';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -74,6 +75,7 @@ class PlatformResources {
     catalogConfiguration: CatalogConfiguration;
     cluster: Cluster;
     crawlingModule: CrawlingModule;
+    connectivity: Connectivity;
     extension: Extensions;
     field: Field;
     global: Global;
