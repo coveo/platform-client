@@ -48,6 +48,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ml', resource: MachineLearning},
     {key: 'license', resource: License},
     {key: 'limits', resource: Limits},
+    {key: 'links', resource: Links},
     {key: 'logs', resource: Logs},
     {key: 'organization', resource: Organization},
     {key: 'pipeline', resource: Pipelines},
