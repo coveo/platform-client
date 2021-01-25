@@ -39,6 +39,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'catalog', resource: Catalog},
     {key: 'catalogConfiguration', resource: CatalogConfiguration},
     {key: 'cluster', resource: Cluster},
+    {key: 'connectivity', resource: Connectivity},
     {key: 'crawlingModule', resource: CrawlingModule},
     {key: 'extension', resource: Extensions},
     {key: 'field', resource: Field},

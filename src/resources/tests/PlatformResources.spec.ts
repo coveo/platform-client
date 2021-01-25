@@ -27,6 +27,7 @@ import SchemaService from '../SchemaService/SchemaService';
 import SearchPages from '../SearchPages/SearchPages';
 import Notifications from '../Notification/notification';
 import Logs from '../Logs/Logs';
+import Connectivity from '../Connectivity/Connectivity';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -252,6 +253,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.logs).toBeDefined();
             expect(platformResources.logs).toBeInstanceOf(Logs);
+        });
+
+        it('should register the Connectivity resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.connectivity).toBeDefined();
+            expect(platformResources.connectivity).toBeInstanceOf(Connectivity);
         });
     });
 });
