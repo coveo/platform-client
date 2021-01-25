@@ -44,19 +44,19 @@ describe('CatalogConfiguration', () => {
 
     describe('delete', () => {
         it('should make a DELETE call to the specific configuration url', () => {
-            const catalogToDeleteId = 'configuration-to-be-deleted';
-            catalogConfiguration.delete(catalogToDeleteId);
+            const configurationToDeleteId = 'configuration-to-be-deleted';
+            catalogConfiguration.delete(configurationToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}/${catalogToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}/${configurationToDeleteId}`);
         });
     });
 
     describe('get', () => {
         it('should make a GET call to the specific configuration url', () => {
-            const catalogToGetId = 'configuration-to-be-fetched';
-            catalogConfiguration.get(catalogToGetId);
+            const configurationToGetId = 'configuration-to-be-fetched';
+            catalogConfiguration.get(configurationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}/${catalogToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}/${configurationToGetId}`);
         });
     });
 

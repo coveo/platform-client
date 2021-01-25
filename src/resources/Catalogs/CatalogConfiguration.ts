@@ -12,12 +12,12 @@ export default class CatalogConfiguration extends Resource {
         );
     }
 
-    create(catalog: New<CreateCatalogConfigurationModel>) {
-        return this.api.post<CatalogConfigurationModel>(CatalogConfiguration.baseUrl, catalog);
+    create(configuration: New<CreateCatalogConfigurationModel>) {
+        return this.api.post<CatalogConfigurationModel>(CatalogConfiguration.baseUrl, configuration);
     }
 
-    delete(catalogId: string) {
-        return this.api.delete(`${CatalogConfiguration.baseUrl}/${catalogId}`);
+    delete(configurationId: string) {
+        return this.api.delete(`${CatalogConfiguration.baseUrl}/${configurationId}`);
     }
 
     get(configurationId: string) {
