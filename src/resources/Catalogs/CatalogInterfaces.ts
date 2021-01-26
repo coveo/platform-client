@@ -23,6 +23,12 @@ export interface CatalogConfigurationModel {
     variant?: HierarchyWithFields<VariantHierarchyModel>;
     availability?: HierarchyWithFields<AvailabilityHierarchyModel>;
     fieldsMapping: CatalogFieldsMapping;
+    associatedCatalogs: IAssociatedCatalogModel[];
+}
+
+export interface IAssociatedCatalogModel {
+    id: string;
+    name: string;
 }
 
 export interface BaseCatalogModel {
