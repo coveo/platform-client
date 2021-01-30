@@ -168,3 +168,7 @@ export interface DryRunOptions {
 export interface ApplyOptions {
     deleteMissingResources: boolean;
 }
+
+export interface GenerateUrlOptions {
+    contentType: string;
+}
