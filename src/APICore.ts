@@ -1,3 +1,4 @@
+import {backOff} from 'exponential-backoff';
 import {PlatformClientOptions} from './ConfigurationInterfaces';
 import getEndpoint, {Environment, Region} from './Endpoints';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
@@ -129,13 +130,20 @@ export default class API {
             ...args,
             headers: {
                 Authorization: `Bearer ${this.accessToken}`,
-                Accept: 'application/json',
                 ...(args.headers || {}),
             },
         };
 
-        const response = await fetch(this.getUrlFromRoute(route), init);
-        return handleResponse<T>(response, this.handlers);
+        const req = async () => {
+            const response = await fetch(this.getUrlFromRoute(route), init);
+            if (this.isThrottled(response.status)) {
+                throw response;
+            }
+            return response;
+        };
+
+        const out = await backOff(req, {retry: (e: Response) => this.isThrottled(e.status)});
+        return handleResponse<T>(out, this.handlers);
     }
 
     private async requestFile(route: string, args: RequestInit): Promise<Blob> {
@@ -152,5 +160,9 @@ export default class API {
             ResponseHandlers.successBlob,
             ResponseHandlers.error,
         ]);
+    }
+
+    private isThrottled(status: number): boolean {
+        return status === 429;
     }
 }

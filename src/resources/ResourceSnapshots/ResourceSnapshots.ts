@@ -15,6 +15,7 @@ import {
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
+    UpdateChildrenOptions,
     ValidateAccessOptions,
 } from './ResourceSnapshotsInterfaces';
 
@@ -122,6 +123,19 @@ export default class ResourceSnapshots extends Resource {
     applySynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
         return this.api.put<ResourceSnapshotsSynchronizationReportModel>(
             `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+        );
+    }
+
+    updateSynchronizationPlanForChildren(
+        snapshotId: string,
+        synchronizationPlanId: string,
+        options: UpdateChildrenOptions
+    ) {
+        return this.api.put<ResourceSnapshotsSynchronizationPlanModel>(
+            this.buildPath(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children`,
+                options
+            )
         );
     }
 }

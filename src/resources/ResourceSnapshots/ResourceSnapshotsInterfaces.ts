@@ -177,3 +177,8 @@ export interface ApplyOptions {
 export interface GenerateUrlOptions {
     contentType: ResourceSnapshotContentType;
 }
+
+export interface UpdateChildrenOptions {
+    snapshotParentResourceName: string;
+    targetParentId: string;
+}
