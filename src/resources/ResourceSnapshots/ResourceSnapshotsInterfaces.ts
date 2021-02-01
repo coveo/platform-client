@@ -73,6 +73,11 @@ export enum ResourceSnapshotSupportedFileTypes {
     JSON = 'JSON',
 }
 
+export enum ResourceSnapshotContentType {
+    PRIMARY = 'PRIMARY',
+    CURRENT_STATE = 'CURRENT_STATE',
+}
+
 export interface ResourceSnapshotsReportModel {
     id: string;
     resourceOperationResults?: Record<string, unknown>;
@@ -170,5 +175,5 @@ export interface ApplyOptions {
 }
 
 export interface GenerateUrlOptions {
-    contentType: string;
+    contentType: ResourceSnapshotContentType;
 }
