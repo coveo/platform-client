@@ -20,43 +20,44 @@ describe('APICore', () => {
     describe('calling the right endpoint', () => {
         beforeEach(() => {
             jest.clearAllMocks();
+            global.fetch.mockResponseOnce(JSON.stringify(testData.response));
         });
 
-        it('should call the default endpoint if no environment, region, and host is specified', () => {
+        it('should call the default endpoint if no environment, region, and host is specified', async () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org'});
-            api.get('this/that');
+            await api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
             expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.US, undefined);
         });
 
-        it('should call the europe endpoint if the europe region is specified', () => {
+        it('should call the europe endpoint if the europe region is specified', async () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', region: Region.EU});
-            api.get('this/that');
+            await api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
             expect(getEndpoint).toHaveBeenCalledWith(Environment.prod, Region.EU, undefined);
         });
 
-        it('should call the development endpoint if the dev environment option is provided', () => {
+        it('should call the development endpoint if the dev environment option is provided', async () => {
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev});
-            api.get('this/that');
+            await api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
             expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US, undefined);
         });
 
-        it('should call the serverless endpoint if it is serverless host', () => {
+        it('should call the serverless endpoint if it is serverless host', async () => {
             const api = new API(
                 {accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev},
                 true
             );
-            api.get('this/that');
+            await api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
             expect(getEndpoint).toHaveBeenCalledWith(Environment.dev, Region.US, true);
         });
 
-        it('should call the custom endpoint if a custom host option is provided', () => {
+        it('should call the custom endpoint if a custom host option is provided', async () => {
             const myCustomHost = 'localhost:9999/my-api-running-locally';
             const api = new API({accessToken: 'my-token', organizationId: 'some-org', host: myCustomHost});
-            api.get('this/that');
+            await api.get('this/that');
             expect(getEndpoint).not.toHaveBeenCalled();
             const [url] = fetchMock.mock.calls[0];
             expect(url).toMatch(myCustomHost);
@@ -69,6 +70,15 @@ describe('APICore', () => {
         beforeEach(() => {
             api = new API(testConfig);
             jest.clearAllMocks();
+        });
+
+        it('should retry on throttle', async () => {
+            const fetchMock = global.fetch
+                .mockResponseOnce('too fast there cowboy!', {status: 429})
+                .mockResponseOnce(JSON.stringify(testData.response));
+            await api.get(testData.route);
+
+            expect(fetchMock).toHaveBeenCalledTimes(2);
         });
 
         describe('get', () => {
@@ -91,9 +101,9 @@ describe('APICore', () => {
                 await expect(api.get(testData.route)).rejects.toThrow(error);
             });
 
-            it('should bind GET requests to an abort signal', () => {
+            it('should bind GET requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.get(testData.route);
+                await api.get(testData.route);
                 expect(global.fetch.mock.calls[0][1].signal).toBeDefined();
                 expect(global.fetch.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
             });
@@ -119,9 +129,9 @@ describe('APICore', () => {
                 await expect(api.getFile(testData.route)).rejects.toThrow(error);
             });
 
-            it('should bind GET requests to an abort signal', () => {
+            it('should bind GET requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.getFile(testData.route);
+                await api.getFile(testData.route);
                 expect(global.fetch.mock.calls[0][1].signal).toBeDefined();
                 expect(global.fetch.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
             });
@@ -142,9 +152,9 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should not bind POST requests to an abort signal', () => {
+            it('should not bind POST requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.post(testData.route, testData.body);
+                await api.post(testData.route, testData.body);
                 expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
             });
         });
@@ -166,9 +176,9 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should not bind POST requests to an abort signal', () => {
+            it('should not bind POST requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.postForm(testData.route, formMock);
+                await api.postForm(testData.route, formMock);
                 expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
             });
         });
@@ -188,9 +198,9 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should not bind PUT requests to an abort signal', () => {
+            it('should not bind PUT requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.put(testData.route, testData.body);
+                await api.put(testData.route, testData.body);
                 expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
             });
         });
@@ -210,9 +220,9 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should not bind PATCH requests to an abort signal', () => {
+            it('should not bind PATCH requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.patch(testData.route, testData.body);
+                await api.patch(testData.route, testData.body);
                 expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
             });
         });
@@ -230,26 +240,26 @@ describe('APICore', () => {
                 expect(response).toEqual(testData.response);
             });
 
-            it('should not bind DELETE requests to an abort signal', () => {
+            it('should not bind DELETE requests to an abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.delete(testData.route);
+                await api.delete(testData.route);
                 expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
         describe('when calling abortGetRequests', () => {
-            it('should abort pending get requests', () => {
+            it('should abort pending get requests', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.get(testData.route);
+                await api.get(testData.route);
                 expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(false);
-                api.abortGetRequests();
+                await api.abortGetRequests();
                 expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(true);
             });
 
-            it('should not abort get requests that are being sent after the abort signal', () => {
+            it('should not abort get requests that are being sent after the abort signal', async () => {
                 global.fetch.mockResponseOnce(JSON.stringify(testData.response));
-                api.abortGetRequests();
-                api.get(testData.route);
+                await api.abortGetRequests();
+                await api.get(testData.route);
                 expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(false);
             });
 
