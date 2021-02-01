@@ -168,3 +168,8 @@ export interface DryRunOptions {
 export interface ApplyOptions {
     deleteMissingResources: boolean;
 }
+
+export interface UpdateChildrenOptions {
+    snapshotParentResourceName: string;
+    targetParentId: string;
+}

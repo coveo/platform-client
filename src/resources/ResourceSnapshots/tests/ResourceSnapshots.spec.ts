@@ -11,6 +11,7 @@ import {
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotUrlModel,
     SnapshotAccessType,
+    UpdateChildrenOptions,
     ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
 
@@ -276,6 +277,27 @@ describe('ResourceSnapshots', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+            );
+        });
+    });
+
+    describe('update synchronization plan children', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const synchronizationPlanId = '🥱';
+            const updateChildrenOptions: UpdateChildrenOptions = {
+                snapshotParentResourceName: 'GME',
+                targetParentId: 'AMC',
+            };
+
+            resourceSnapshots.updateSynchronizationPlanForChildren(
+                snapshotId,
+                synchronizationPlanId,
+                updateChildrenOptions
+            );
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC`
             );
         });
     });
