@@ -132,7 +132,7 @@ describe('Statements', () => {
 
     describe('import', () => {
         const mockedFormData = {
-            set: jest.fn(),
+            append: jest.fn(),
         };
 
         beforeEach(() => {
@@ -150,8 +150,8 @@ describe('Statements', () => {
                 '/rest/search/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
                 mockedFormData
             );
-            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.set).toHaveBeenCalledWith('file', myCSVFile);
+            expect(mockedFormData.append).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.append).toHaveBeenCalledWith('file', myCSVFile);
         });
     });
 });

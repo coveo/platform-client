@@ -322,7 +322,7 @@ describe('APICore', () => {
 
     describe('checkToken', () => {
         const mockedFormData = {
-            set: jest.fn(),
+            append: jest.fn(),
         };
 
         beforeEach(() => {
@@ -337,8 +337,8 @@ describe('APICore', () => {
 
             expect(postFormSpy).toHaveBeenCalledTimes(1);
             expect(postFormSpy).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
-            expect(mockedFormData.set).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.set).toHaveBeenCalledWith('token', 'my-token');
+            expect(mockedFormData.append).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.append).toHaveBeenCalledWith('token', 'my-token');
         });
 
         it('should throw an error if the check token call fails', async () => {
