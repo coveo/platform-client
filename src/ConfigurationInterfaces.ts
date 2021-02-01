@@ -1,7 +1,6 @@
 import {Environment, Region} from './Endpoints';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import {Retrievable} from './utils/Retriever';
-
 export type Feature = (currentOptions: PlatformClientOptions) => PlatformClientOptions;
 
 export interface PlatformClientOptions {
