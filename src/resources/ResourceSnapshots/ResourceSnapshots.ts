@@ -5,6 +5,7 @@ import {
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
+    GenerateUrlOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsModel,
@@ -35,8 +36,8 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 
-    async getContent(snapshotId: string) {
-        const {url} = await this.generateUrl(snapshotId);
+    async getContent(snapshotId: string, options: GenerateUrlOptions) {
+        const {url} = await this.generateUrl(snapshotId, options);
         return await fetch(url, {method: 'get'});
     }
 
@@ -70,8 +71,10 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 
-    generateUrl(snapshotId: string) {
-        return this.api.get<ResourceSnapshotUrlModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
+    generateUrl(snapshotId: string, options: GenerateUrlOptions) {
+        return this.api.get<ResourceSnapshotUrlModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`, options)
+        );
     }
 
     dryRun(snapshotId: string, options: DryRunOptions) {

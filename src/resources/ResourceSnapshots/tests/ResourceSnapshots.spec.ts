@@ -6,6 +6,7 @@ import {
     CreateFromOrganizationOptions,
     DryRunOptions,
     PushSnapshotOptions,
+    ResourceSnapshotContentType,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
@@ -90,7 +91,7 @@ describe('ResourceSnapshots', () => {
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
             const fetchMock = global.fetch.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
-            await resourceSnapshots.getContent(snapshotToGetId);
+            await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
             expect(fetchMock).toHaveBeenCalledTimes(1);
             expect(fetchMock).toHaveBeenCalledWith(urlReturned.url, {method: 'get'});
@@ -180,10 +181,10 @@ describe('ResourceSnapshots', () => {
         it('should make a GET call to the specific Resource Snapshots url', () => {
             const snapshotId = '🤖';
 
-            resourceSnapshots.generateUrl(snapshotId);
+            resourceSnapshots.generateUrl(snapshotId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/url?contentType=PRIMARY`);
         });
     });
 
