@@ -1,3 +1,4 @@
+import {getFormData} from '../../../utils/FormData';
 import Resource from '../../Resource';
 import {
     CopyStatementModel,
@@ -31,8 +32,8 @@ export default class Statements extends Resource {
     }
 
     importCSV(pipelineId: string, csvFile: File, options?: ExportStatementParams) {
-        const formData = new FormData();
-        formData.set('file', csvFile);
+        const formData = getFormData();
+        formData.append('file', csvFile);
         return this.api.postForm(
             this.buildPath(`${Statements.getLegacyUrl(pipelineId)}/import`, {
                 mode: 'overwrite',

@@ -100,7 +100,7 @@ describe('ResourceSnapshots', () => {
 
     describe('createFromFile', () => {
         const mockedFormData = {
-            set: jest.fn(),
+            append: jest.fn(),
         };
         const mockedFile = {
             type: 'application/zip',

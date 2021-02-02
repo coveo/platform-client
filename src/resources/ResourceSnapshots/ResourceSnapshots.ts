@@ -1,4 +1,5 @@
 import API from '../../APICore';
+import {getFormData} from '../../utils/FormData';
 import Resource from '../Resource';
 import {
     ApplyOptions,
@@ -52,8 +53,8 @@ export default class ResourceSnapshots extends Resource {
             throw new Error('The uploaded file must be either a ZIP or a JSON file.');
         }
 
-        const form: FormData = new FormData();
-        form.set('file', file);
+        const form: FormData = getFormData();
+        form.append('file', file);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
