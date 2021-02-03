@@ -33,6 +33,14 @@ describe('License', () => {
         });
     });
 
+    describe('full', () => {
+        it('should make a GET call to the full License url', () => {
+            license.get(sectionName);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license`);
+        });
+    });
+
     describe('update', () => {
         it('should make a PUT call to the specific License url', () => {
             license.update(sectionName, {value: 100});
