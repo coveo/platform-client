@@ -35,7 +35,7 @@ describe('License', () => {
 
     describe('full', () => {
         it('should make a GET call to the full License url', () => {
-            license.get(sectionName);
+            license.full();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license`);
         });
