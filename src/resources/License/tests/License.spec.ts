@@ -22,7 +22,14 @@ describe('License', () => {
         it('should make a GET call to the specific License url', () => {
             license.get(sectionName);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license/searchapi`);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license/searchapi');
+        });
+
+        it('should make a get call to the generic License URL if no section is specified', () => {
+            license.get();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license');
         });
     });
 
@@ -30,7 +37,7 @@ describe('License', () => {
         it('should make a PUT call to the specific License url', () => {
             license.update(sectionName, {value: 100});
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license/searchapi`, {
+            expect(api.put).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license/searchapi', {
                 value: 100,
             });
         });
@@ -40,7 +47,7 @@ describe('License', () => {
         it('should make a PUT call to the specific License url', () => {
             license.updateLicense(({value: 100} as unknown) as LicenseModel);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/license`, {
+            expect(api.put).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license', {
                 value: 100,
             });
         });
