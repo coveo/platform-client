@@ -5,22 +5,18 @@ export interface SchemaEntities {
 }
 
 export interface SchemaEntity {
-    name?: string;
-    displayName?: string;
     id?: string;
 }
 
 export interface SchemaFields {
-    name?: string;
-    id?: string;
-    fields?: SchemaField[];
+    id: string;
+    fields: SchemaField[];
+    recordCount?: number;
 }
 
 export interface SchemaField {
-    name?: string;
     id?: string;
-    coveoType?: string;
-    reference?: string;
+    type?: string;
 }
 
 export interface SchemaServiceQueryParams {
@@ -30,6 +26,8 @@ export interface SchemaServiceQueryParams {
     clientId?: string;
     passwordGuid?: string;
     username?: string;
+    offset?: number;
+    limit?: number;
 }
 
 export interface ObjectsToGetField {
@@ -56,6 +54,7 @@ export interface ObjectsToGetObject {
     fields?: ObjectsToGetField[];
     relations?: ObjectsToGetRelation[];
     attachment?: string;
+    filter?: string;
 }
 
 export interface ObjectsToGet {
