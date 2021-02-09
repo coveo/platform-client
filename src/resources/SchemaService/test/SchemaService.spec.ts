@@ -19,6 +19,13 @@ describe('SchemaService', () => {
         clientSecretGuid: 'les',
         oauthRefreshTokenGuid: 'params',
     };
+    const genericObjectsToGet = {
+        objects: [
+            {
+                name: "I'm a good object",
+            },
+        ],
+    };
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -26,17 +33,17 @@ describe('SchemaService', () => {
     });
 
     describe('getEntities', () => {
-        it('should make a GET call to the specific SchemaService url with the good params', () => {
-            schemaService.getEntities(sourceType, params);
+        it('should make a GET call to the specific SchemaService url with the correct params', () => {
+            schemaService.getEntities(sourceType, {...params, offset: 100, limit: 100});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100`
             );
         });
     });
 
     describe('getFields', () => {
-        it('should make a GET call to the specific SchemaService url with the good params', () => {
+        it('should make a GET call to the specific SchemaService url with the correct params', () => {
             const entityName = 'miaowouioui';
             schemaService.getFields(sourceType, entityName, params);
             expect(api.get).toHaveBeenCalledTimes(1);
@@ -84,6 +91,41 @@ describe('SchemaService', () => {
             schemaService.update(sourceId, sourceModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceId}`, sourceModel);
+        });
+    });
+
+    describe('translateToSpecificObjectsToGet', () => {
+        it('should make a POST call to the specific SchemaSources url', () => {
+            schemaService.translateToSpecificObjectsToGet(sourceType, genericObjectsToGet, params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${SchemaService.baseUrl}/${sourceType}/translate/specific?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
+                genericObjectsToGet
+            );
+        });
+    });
+
+    describe('translateToSpecificObjectsToGetWithFields', () => {
+        it('should make a POST call to the specific SchemaSources url', () => {
+            schemaService.translateToSpecificObjectsToGetWithFields(sourceType, genericObjectsToGet, params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${SchemaService.baseUrl}/${sourceType}/translate/specificWithFields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
+                genericObjectsToGet
+            );
+        });
+    });
+
+    describe('translateToGenericObjectsToGet', () => {
+        it('should make a POST call to the specific SchemaSources url', () => {
+            schemaService.translateToGenericObjectsToGet(sourceType, {toTheMoon: '🚀'}, params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(
+                api.post
+            ).toHaveBeenCalledWith(
+                `${SchemaService.baseUrl}/${sourceType}/translate/generic?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
+                {toTheMoon: '🚀'}
+            );
         });
     });
 });

@@ -47,24 +47,36 @@ export default class SchemaService extends Ressource {
         return this.api.post<{id: string}>(this.buildPath(SchemaService.baseUrl, options), source);
     }
 
-    translateToSpecificObjectsToGet(sourceType: SourceType, genericObjectsToGet: ObjectsToGet,parameters?: SchemaServiceQueryParams){
+    translateToSpecificObjectsToGet(
+        sourceType: SourceType,
+        genericObjectsToGet: ObjectsToGet,
+        parameters?: SchemaServiceQueryParams
+    ) {
         return this.api.post<any>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/specific`, parameters),
-            genericObjectsToGet,
+            genericObjectsToGet
         );
     }
 
-    translateToGenericObjectsToGet(sourceType: SourceType, specificObjectsToGet: any, parameters?: SchemaServiceQueryParams) {
-        return this.api.post<ObjectsToGet>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/generic`, parameters),
-            specificObjectsToGet,
-        );
-    }
-
-    translateToSpecificObjectsToGetWithFields(sourceType: SourceType, genericObjectsToGet: ObjectsToGet, parameters?: SchemaServiceQueryParams) {
+    translateToSpecificObjectsToGetWithFields(
+        sourceType: SourceType,
+        genericObjectsToGet: ObjectsToGet,
+        parameters?: SchemaServiceQueryParams
+    ) {
         return this.api.post<any>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/specificWithFields`, parameters),
-            genericObjectsToGet,
+            genericObjectsToGet
+        );
+    }
+
+    translateToGenericObjectsToGet(
+        sourceType: SourceType,
+        specificObjectsToGet: any,
+        parameters?: SchemaServiceQueryParams
+    ) {
+        return this.api.post<ObjectsToGet>(
+            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/generic`, parameters),
+            specificObjectsToGet
         );
     }
 }
