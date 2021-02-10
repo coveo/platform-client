@@ -73,6 +73,11 @@ export enum ResourceSnapshotSupportedFileTypes {
     JSON = 'JSON',
 }
 
+export enum ResourceSnapshotContentType {
+    PRIMARY = 'PRIMARY',
+    CURRENT_STATE = 'CURRENT_STATE',
+}
+
 export interface ResourceSnapshotsReportModel {
     id: string;
     resourceOperationResults?: Record<string, unknown>;
@@ -167,4 +172,14 @@ export interface DryRunOptions {
 
 export interface ApplyOptions {
     deleteMissingResources: boolean;
+}
+
+export interface GenerateUrlOptions {
+    contentType: ResourceSnapshotContentType;
+}
+
+export interface UpdateChildrenOptions {
+    snapshotParentResourceName: string;
+    parentResourceType: string;
+    targetParentId: string;
 }

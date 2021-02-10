@@ -1,10 +1,12 @@
 import API from '../../APICore';
+import {getFormData} from '../../utils/FormData';
 import Resource from '../Resource';
 import {
     ApplyOptions,
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
+    GenerateUrlOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsModel,
@@ -14,6 +16,7 @@ import {
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
+    UpdateChildrenOptions,
     ValidateAccessOptions,
 } from './ResourceSnapshotsInterfaces';
 
@@ -34,8 +37,8 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 
-    async getContent(snapshotId: string) {
-        const {url} = await this.generateUrl(snapshotId);
+    async getContent(snapshotId: string, options: GenerateUrlOptions) {
+        const {url} = await this.generateUrl(snapshotId, options);
         return await fetch(url, {method: 'get'});
     }
 
@@ -50,8 +53,8 @@ export default class ResourceSnapshots extends Resource {
             throw new Error('The uploaded file must be either a ZIP or a JSON file.');
         }
 
-        const form: FormData = new FormData();
-        form.set('file', file);
+        const form: FormData = getFormData();
+        form.append('file', file);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
@@ -69,8 +72,10 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 
-    generateUrl(snapshotId: string) {
-        return this.api.get<ResourceSnapshotUrlModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
+    generateUrl(snapshotId: string, options: GenerateUrlOptions) {
+        return this.api.get<ResourceSnapshotUrlModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`, options)
+        );
     }
 
     dryRun(snapshotId: string, options: DryRunOptions) {
@@ -119,6 +124,19 @@ export default class ResourceSnapshots extends Resource {
     applySynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
         return this.api.put<ResourceSnapshotsSynchronizationReportModel>(
             `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+        );
+    }
+
+    updateSynchronizationPlanForChildren(
+        snapshotId: string,
+        synchronizationPlanId: string,
+        options: UpdateChildrenOptions
+    ) {
+        return this.api.put<ResourceSnapshotsSynchronizationPlanModel>(
+            this.buildPath(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children`,
+                options
+            )
         );
     }
 }

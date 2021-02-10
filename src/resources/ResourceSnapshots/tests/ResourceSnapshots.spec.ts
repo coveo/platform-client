@@ -6,11 +6,14 @@ import {
     CreateFromOrganizationOptions,
     DryRunOptions,
     PushSnapshotOptions,
+    ResourceSnapshotContentType,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotUrlModel,
+    ResourceType,
     SnapshotAccessType,
+    UpdateChildrenOptions,
     ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
 
@@ -31,6 +34,7 @@ describe('ResourceSnapshots', () => {
     describe('list', () => {
         it('should make a GET call to the specific Resource Snapshots url', () => {
             resourceSnapshots.list();
+
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResourceSnapshots.baseUrl);
         });
@@ -39,7 +43,9 @@ describe('ResourceSnapshots', () => {
     describe('get', () => {
         it('should make a GET call to the specific Resource Snapshots url', () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
+
             resourceSnapshots.get(snapshotToGetId);
+
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
         });
@@ -51,7 +57,9 @@ describe('ResourceSnapshots', () => {
             const options: ValidateAccessOptions = {
                 snapshotAccessType: SnapshotAccessType.Read,
             };
+
             resourceSnapshots.validateAccess(snapshotToGetId, options);
+
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=READ`
@@ -63,7 +71,9 @@ describe('ResourceSnapshots', () => {
             const options: ValidateAccessOptions = {
                 snapshotAccessType: SnapshotAccessType.Write,
             };
+
             resourceSnapshots.validateAccess(snapshotToGetId, options);
+
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
@@ -82,7 +92,7 @@ describe('ResourceSnapshots', () => {
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
             const fetchMock = global.fetch.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
-            await resourceSnapshots.getContent(snapshotToGetId);
+            await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
             expect(fetchMock).toHaveBeenCalledTimes(1);
             expect(fetchMock).toHaveBeenCalledWith(urlReturned.url, {method: 'get'});
@@ -91,7 +101,7 @@ describe('ResourceSnapshots', () => {
 
     describe('createFromFile', () => {
         const mockedFormData = {
-            set: jest.fn(),
+            append: jest.fn(),
         };
         const mockedFile = {
             type: 'application/zip',
@@ -107,6 +117,7 @@ describe('ResourceSnapshots', () => {
             const file = new File([''], 'mock.zip', {type: 'application/zip'});
 
             resourceSnapshots.createFromFile(file, createFromFileOptions);
+
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
@@ -124,6 +135,7 @@ describe('ResourceSnapshots', () => {
             const file = new File([''], 'mock.zip', {type: 'application/zip'});
 
             resourceSnapshots.createFromFile(file, createFromFileOptions);
+
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=JSON`,
@@ -170,9 +182,10 @@ describe('ResourceSnapshots', () => {
         it('should make a GET call to the specific Resource Snapshots url', () => {
             const snapshotId = '🤖';
 
-            resourceSnapshots.generateUrl(snapshotId);
+            resourceSnapshots.generateUrl(snapshotId, {contentType: ResourceSnapshotContentType.PRIMARY});
+
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/url?contentType=PRIMARY`);
         });
     });
 
@@ -182,6 +195,7 @@ describe('ResourceSnapshots', () => {
             const pushSnapshotOptions: PushSnapshotOptions = {targetOrganizationId: '🎯', developerNotes: '🧘'};
 
             resourceSnapshots.push(snapshotId, pushSnapshotOptions);
+
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetOrganizationId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`
@@ -195,6 +209,7 @@ describe('ResourceSnapshots', () => {
             const dryRunOptions: DryRunOptions = {deleteMissingResources: true};
 
             resourceSnapshots.dryRun(snapshotId, dryRunOptions);
+
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun?deleteMissingResources=true`
@@ -208,6 +223,7 @@ describe('ResourceSnapshots', () => {
             const applyOptions: ApplyOptions = {deleteMissingResources: true};
 
             resourceSnapshots.apply(snapshotId, applyOptions);
+
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true`
@@ -218,7 +234,9 @@ describe('ResourceSnapshots', () => {
     describe('delete a snapshot', () => {
         it('should make a DELETE call to the specific Resource Snapshots url', () => {
             const snapshotId = 'BossHoss';
+
             resourceSnapshots.delete(snapshotId);
+
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
         });
@@ -230,6 +248,7 @@ describe('ResourceSnapshots', () => {
             const synchronizationPlanId = '🥱';
 
             resourceSnapshots.getSynchronizationPlan(snapshotId, synchronizationPlanId);
+
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`
@@ -242,6 +261,7 @@ describe('ResourceSnapshots', () => {
             const snapshotId = '🤖';
 
             resourceSnapshots.createSynchronizationPlan(snapshotId);
+
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`);
         });
@@ -259,6 +279,7 @@ describe('ResourceSnapshots', () => {
             };
 
             resourceSnapshots.updateSynchronizationPlan(snapshotId, synchronizationPlanId, synchronizationPlan);
+
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
@@ -273,9 +294,33 @@ describe('ResourceSnapshots', () => {
             const synchronizationPlanId = '🥱';
 
             resourceSnapshots.applySynchronizationPlan(snapshotId, synchronizationPlanId);
+
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+            );
+        });
+    });
+
+    describe('update synchronization plan children', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', () => {
+            const snapshotId = '🤖';
+            const synchronizationPlanId = '🥱';
+            const updateChildrenOptions: UpdateChildrenOptions = {
+                snapshotParentResourceName: 'GME',
+                targetParentId: 'AMC',
+                parentResourceType: ResourceType.featuredResult,
+            };
+
+            resourceSnapshots.updateSynchronizationPlanForChildren(
+                snapshotId,
+                synchronizationPlanId,
+                updateChildrenOptions
+            );
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC&parentResourceType=FEATURED_RESULT`
             );
         });
     });
