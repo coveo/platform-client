@@ -6,8 +6,8 @@ import API from '../../APICore';
 export default class License extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/license`;
 
-    get(sectionName: LicenseSection) {
-        return this.api.get<LicenseModel>(`${License.baseUrl}/${sectionName}`);
+    get(sectionName?: LicenseSection) {
+        return this.api.get<LicenseModel>(sectionName ? `${License.baseUrl}/${sectionName}` : License.baseUrl);
     }
 
     update(sectionName: LicenseSection, licenseSection: Record<string, number>) {
