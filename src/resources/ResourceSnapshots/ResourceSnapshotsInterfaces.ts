@@ -180,5 +180,6 @@ export interface GenerateUrlOptions {
 
 export interface UpdateChildrenOptions {
     snapshotParentResourceName: string;
+    parentResourceType: string;
     targetParentId: string;
 }

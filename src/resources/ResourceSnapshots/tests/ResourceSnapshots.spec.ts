@@ -11,6 +11,7 @@ import {
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotUrlModel,
+    ResourceType,
     SnapshotAccessType,
     UpdateChildrenOptions,
     ValidateAccessOptions,
@@ -308,6 +309,7 @@ describe('ResourceSnapshots', () => {
             const updateChildrenOptions: UpdateChildrenOptions = {
                 snapshotParentResourceName: 'GME',
                 targetParentId: 'AMC',
+                parentResourceType: ResourceType.featuredResult,
             };
 
             resourceSnapshots.updateSynchronizationPlanForChildren(
@@ -318,7 +320,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC&parentResourceType=FEATURED_RESULT`
             );
         });
     });
