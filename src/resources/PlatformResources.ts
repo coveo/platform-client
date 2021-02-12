@@ -29,7 +29,7 @@ import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
-import Links from './ResourceSnapshots/links/Links';
+import Links from './Links/Links';
 import Connectivity from './Connectivity/Connectivity';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
