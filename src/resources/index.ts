@@ -22,6 +22,7 @@ export * from './Sources';
 export * from './Extensions';
 export * from './SecurityCache';
 export * from './ResourceSnapshots';
+export * from './Links';
 export * from './UsageAnalytics';
 export * from './Global';
 export * from './SchemaService';
