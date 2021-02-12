@@ -34,10 +34,10 @@ describe('SchemaService', () => {
 
     describe('getEntities', () => {
         it('should make a GET call to the specific SchemaService url with the correct params', () => {
-            schemaService.getEntities(sourceType, {...params, offset: 100, limit: 100});
+            schemaService.getEntities(sourceType, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
             );
         });
     });
@@ -45,10 +45,10 @@ describe('SchemaService', () => {
     describe('getFields', () => {
         it('should make a GET call to the specific SchemaService url with the correct params', () => {
             const entityName = 'miaowouioui';
-            schemaService.getFields(sourceType, entityName, params);
+            schemaService.getFields(sourceType, entityName, {...params, offset: 100, limit: 100});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entity/${entityName}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entity/${entityName}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100`
             );
         });
     });
@@ -96,10 +96,10 @@ describe('SchemaService', () => {
 
     describe('translateToSpecificObjectsToGet', () => {
         it('should make a POST call to the specific SchemaSources url', () => {
-            schemaService.translateToSpecificObjectsToGet(sourceType, genericObjectsToGet, params);
+            schemaService.translateToSpecificObjectsToGet(sourceType, genericObjectsToGet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${SchemaService.baseUrl}/${sourceType}/translate/specific?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
+                `${SchemaService.baseUrl}/${sourceType}/translate/specific`,
                 genericObjectsToGet
             );
         });
@@ -118,14 +118,11 @@ describe('SchemaService', () => {
 
     describe('translateToGenericObjectsToGet', () => {
         it('should make a POST call to the specific SchemaSources url', () => {
-            schemaService.translateToGenericObjectsToGet(sourceType, {toTheMoon: '🚀'}, params);
+            schemaService.translateToGenericObjectsToGet(sourceType, {toTheMoon: '🚀'});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(
-                api.post
-            ).toHaveBeenCalledWith(
-                `${SchemaService.baseUrl}/${sourceType}/translate/generic?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
-                {toTheMoon: '🚀'}
-            );
+            expect(api.post).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceType}/translate/generic`, {
+                toTheMoon: '🚀',
+            });
         });
     });
 });
