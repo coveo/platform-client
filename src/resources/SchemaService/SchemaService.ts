@@ -9,6 +9,7 @@ import {
     CreateSchemaSourceModel,
     CreateSchemaSourceOptions,
     ObjectsToGet,
+    OffsetOrLimit,
 } from './SchemaServiceInterfaces';
 import {SourceType} from '../Enums';
 
@@ -25,7 +26,7 @@ export default class SchemaService extends Ressource {
         );
     }
 
-    getFields(sourceType: SourceType, entityName, parameters?: SchemaServiceQueryParams) {
+    getFields(sourceType: SourceType, entityName, parameters?: SchemaServiceQueryParams & OffsetOrLimit) {
         return this.api.get<SchemaFields>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entity/${entityName}`, parameters)
         );
@@ -47,15 +48,8 @@ export default class SchemaService extends Ressource {
         return this.api.post<{id: string}>(this.buildPath(SchemaService.baseUrl, options), source);
     }
 
-    translateToSpecificObjectsToGet(
-        sourceType: SourceType,
-        genericObjectsToGet: ObjectsToGet,
-        parameters?: SchemaServiceQueryParams
-    ) {
-        return this.api.post<any>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/specific`, parameters),
-            genericObjectsToGet
-        );
+    translateToSpecificObjectsToGet(sourceType: SourceType, genericObjectsToGet: ObjectsToGet) {
+        return this.api.post<any>(`${SchemaService.baseUrl}/${sourceType}/translate/specific`, genericObjectsToGet);
     }
 
     translateToSpecificObjectsToGetWithFields(
@@ -69,13 +63,9 @@ export default class SchemaService extends Ressource {
         );
     }
 
-    translateToGenericObjectsToGet(
-        sourceType: SourceType,
-        specificObjectsToGet: any,
-        parameters?: SchemaServiceQueryParams
-    ) {
+    translateToGenericObjectsToGet(sourceType: SourceType, specificObjectsToGet: any) {
         return this.api.post<ObjectsToGet>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/generic`, parameters),
+            `${SchemaService.baseUrl}/${sourceType}/translate/generic`,
             specificObjectsToGet
         );
     }

@@ -26,6 +26,9 @@ export interface SchemaServiceQueryParams {
     clientId?: string;
     passwordGuid?: string;
     username?: string;
+}
+
+export interface OffsetOrLimit {
     offset?: number;
     limit?: number;
 }
