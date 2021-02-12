@@ -83,7 +83,7 @@ export interface CatalogModel extends BaseCatalogModel {
 export type CreateCatalogModel = BaseCatalogModel &
     (
         | {
-              product: CreateProductHierarchyModel;
+              product?: CreateProductHierarchyModel;
               variant?: CreateVariantHierarchyModel;
               availability?: CreateAvailabilityHierarchyModel;
               catalogConfigurationId?: never;
