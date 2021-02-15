@@ -146,8 +146,8 @@ describe('securityCache', () => {
         });
     });
 
-    describe('providerEntity', () => {
-        it('should make a POST call to the security Identity refresh url', () => {
+    describe('getProviderEntity', () => {
+        it('should make a POST call to the specified security provider member', () => {
             const member: SecurityCacheMemberModel = {
                 infos: [
                     {
@@ -160,7 +160,7 @@ describe('securityCache', () => {
                 type: PermissionIdentityType.Group,
             };
 
-            securityCache.providerEntity('🏀', member);
+            securityCache.getProviderEntity('🏀', member);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/🏀/entity`, member);
