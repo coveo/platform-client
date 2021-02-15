@@ -145,4 +145,25 @@ describe('securityCache', () => {
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/status`);
         });
     });
+
+    describe('providerEntity', () => {
+        it('should make a POST call to the security Identity refresh url', () => {
+            const member: SecurityCacheMemberModel = {
+                infos: [
+                    {
+                        key: '🥔',
+                        value: '👑',
+                    },
+                ],
+                name: '👌',
+                provider: '💰',
+                type: PermissionIdentityType.Group,
+            };
+
+            securityCache.providerEntity('🏀', member);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/🏀/entity`, member);
+        });
+    });
 });
