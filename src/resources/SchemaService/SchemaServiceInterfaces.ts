@@ -1,25 +1,19 @@
 import {SourceModel, CreateSourceModel, CreateSourceOptions} from '../Sources/SourcesInterfaces';
 
 export interface SchemaEntities {
-    entities?: SchemaEntity[];
+    entities: SchemaEntity[];
 }
 
 export interface SchemaEntity {
-    name?: string;
-    displayName?: string;
-    id?: string;
-}
-
-export interface SchemaFields {
-    name?: string;
-    id?: string;
+    id: string;
     fields?: SchemaField[];
+    recordCount?: number;
 }
 
+// look into renaming to SchemaEntityField
 export interface SchemaField {
-    name?: string;
-    id?: string;
-    coveoType?: string;
+    id: string;
+    type: string;
     reference?: string;
 }
 
@@ -32,34 +26,40 @@ export interface SchemaServiceQueryParams {
     username?: string;
 }
 
-export interface ObjectsToGetField {
+export interface OffsetOrLimit {
+    offset?: number;
+    limit?: number;
+}
+
+export interface GenericObjectField {
     name?: string;
 }
 
-export interface ObjectsToGetRelation {
+export interface GenericObjectRelation {
     name?: string;
     fields?: string[];
     fromField?: string;
     toField?: string;
     toObject?: string;
 }
-export interface ObjectsToGetCondition {
+export interface GenericObjectCondition {
     field?: string;
     operator?: string;
     type?: string;
     values?: string[];
 }
 
-export interface ObjectsToGetObject {
-    name: string;
-    conditions?: ObjectsToGetCondition[];
-    fields?: ObjectsToGetField[];
-    relations?: ObjectsToGetRelation[];
+export interface GenericObject {
+    name?: string;
+    conditions?: GenericObjectCondition[];
+    fields?: GenericObjectField[];
+    relations?: GenericObjectRelation[];
     attachment?: string;
+    filter?: string;
 }
 
 export interface ObjectsToGet {
-    objects?: ObjectsToGetObject[];
+    objects?: GenericObject[];
 }
 
 export interface SchemaServiceSource extends SourceModel {
