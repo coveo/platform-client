@@ -1,15 +1,15 @@
 import Resource from '../Resource';
 import API from '../../APICore';
-import {LogRequestState} from './ConnectivityInterface';
+import {LogRequest, LogRequestResult} from './ConnectivityInterface';
 
 export default class Connectivity extends Resource {
-    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/logrequests`;
 
-    requestLog(sourceId: string, activityId: string) {
-        return this.api.post(`${Connectivity.baseUrl}/${sourceId}/diagnostics/${activityId}/logs`);
+    requestLog(body: LogRequest) {
+        return this.api.post<LogRequest>(`${Connectivity.baseUrl}`, body);
     }
 
-    getLogRequestState(sourceId: string, activityId) {
-        return this.api.get<LogRequestState>(`${Connectivity.baseUrl}/${sourceId}/diagnostics/${activityId}/state`);
+    getLogRequestState(logRequestId: string) {
+        return this.api.get<LogRequestResult>(`${Connectivity.baseUrl}/${logRequestId}`);
     }
 }
