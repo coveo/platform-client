@@ -59,17 +59,9 @@ export interface ContextField {
     value: string;
 }
 
-export interface ContextFields {
-    [key: string]: ContextField;
-}
+export type ContextFields = Record<string, ContextField>;
 
-export interface ClassifyRequestBody {
-    visitorId: string;
-    locale: string;
-    fields: ContextFields;
-}
-
-export interface DocumentsSuggestRequestBody {
+export interface SuggestionRequestBody {
     visitorId: string;
     locale: string;
     fields: ContextFields;

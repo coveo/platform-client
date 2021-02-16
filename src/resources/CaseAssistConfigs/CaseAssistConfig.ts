@@ -1,12 +1,7 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {
-    CaseAssistConfigListOptions,
-    CaseAssistConfigModel,
-    ClassifyRequestBody,
-    DocumentsSuggestRequestBody,
-} from './CaseAssistConfigInterfaces';
+import {CaseAssistConfigListOptions, CaseAssistConfigModel, SuggestionRequestBody} from './CaseAssistConfigInterfaces';
 import {PreviewRequestBody, DocumentSuggestions, CaseClassifications} from './CaseAssistPreviewInterfaces';
 
 export default class CaseAssistConfig extends Resource {
@@ -37,11 +32,11 @@ export default class CaseAssistConfig extends Resource {
         );
     }
 
-    classify(caseAssistConfigId: string, body: ClassifyRequestBody) {
+    classify(caseAssistConfigId: string, body: SuggestionRequestBody) {
         return this.api.post<CaseClassifications>(`${CaseAssistConfig.baseUrl}/${caseAssistConfigId}/classify`, body);
     }
 
-    suggestDocuments(caseAssistConfigId: string, body: DocumentsSuggestRequestBody) {
+    suggestDocuments(caseAssistConfigId: string, body: SuggestionRequestBody) {
         return this.api.post<DocumentSuggestions>(
             `${CaseAssistConfig.baseUrl}/${caseAssistConfigId}/documents/suggest`,
             body

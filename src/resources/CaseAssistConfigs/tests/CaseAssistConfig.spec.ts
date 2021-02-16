@@ -4,10 +4,9 @@ import CaseAssistConfig from '../CaseAssistConfig';
 import {
     CaseAssistConfigModel,
     CaseClassificationStrategies,
-    ClassifyRequestBody,
     ContextFields,
-    DocumentsSuggestRequestBody,
     DocumentSuggestionsStrategies,
+    SuggestionRequestBody,
     TypingAidsStrategies,
 } from '../CaseAssistConfigInterfaces';
 import {PreviewRequestBody} from '../CaseAssistPreviewInterfaces';
@@ -147,7 +146,7 @@ describe('CaseAssistConfig', () => {
     describe('classify', () => {
         it('should make a POST call to get classifications', () => {
             const testId = 'some config id';
-            const testBody: ClassifyRequestBody = {
+            const testBody: SuggestionRequestBody = {
                 visitorId: testVisitorId,
                 locale: testLocale,
                 fields: testContextFields,
@@ -163,7 +162,7 @@ describe('CaseAssistConfig', () => {
     describe('suggestDocuments', () => {
         it('should make a POST call to get document suggestions', () => {
             const testId = 'some config id';
-            const testBody: DocumentsSuggestRequestBody = {
+            const testBody: SuggestionRequestBody = {
                 visitorId: testVisitorId,
                 locale: testLocale,
                 fields: testContextFields,
