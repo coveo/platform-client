@@ -78,4 +78,11 @@ export default class SecurityCache extends Ressource {
     getProvider(providerId: string) {
         return this.api.get<SecurityProviderModelWithStatus>(`${SecurityCache.providersUrl}/${providerId}`);
     }
+
+    getProviderEntity(providerId: string, member: SecurityCacheMemberModel) {
+        return this.api.post<DetailedSecurityCacheMemberModel>(
+            `${SecurityCache.cacheUrl}/entities/${providerId}/entity`,
+            member
+        );
+    }
 }

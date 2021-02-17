@@ -145,4 +145,25 @@ describe('securityCache', () => {
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/status`);
         });
     });
+
+    describe('getProviderEntity', () => {
+        it('should make a POST call to the specified security provider member', () => {
+            const member: SecurityCacheMemberModel = {
+                infos: [
+                    {
+                        key: '🥔',
+                        value: '👑',
+                    },
+                ],
+                name: '👌',
+                provider: '💰',
+                type: PermissionIdentityType.Group,
+            };
+
+            securityCache.getProviderEntity('🏀', member);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/🏀/entity`, member);
+        });
+    });
 });
