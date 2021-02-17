@@ -4,10 +4,12 @@ import CaseAssistConfig from '../CaseAssistConfig';
 import {
     CaseAssistConfigModel,
     CaseClassificationStrategies,
+    ContextFields,
     DocumentSuggestionsStrategies,
+    SuggestionRequestBody,
     TypingAidsStrategies,
 } from '../CaseAssistConfigInterfaces';
-import {ContextFields, PreviewRequestBody} from '../CaseAssistPreviewInterfaces';
+import {PreviewRequestBody} from '../CaseAssistPreviewInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -138,6 +140,38 @@ describe('CaseAssistConfig', () => {
                     caseAssistModel
                 );
             });
+        });
+    });
+
+    describe('classify', () => {
+        it('should make a POST call to get classifications', () => {
+            const testId = 'some config id';
+            const testBody: SuggestionRequestBody = {
+                visitorId: testVisitorId,
+                locale: testLocale,
+                fields: testContextFields,
+            };
+
+            caseAssist.classify(testId, testBody);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${testId}/classify`, testBody);
+        });
+    });
+
+    describe('suggestDocuments', () => {
+        it('should make a POST call to get document suggestions', () => {
+            const testId = 'some config id';
+            const testBody: SuggestionRequestBody = {
+                visitorId: testVisitorId,
+                locale: testLocale,
+                fields: testContextFields,
+            };
+
+            caseAssist.suggestDocuments(testId, testBody);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${testId}/documents/suggest`, testBody);
         });
     });
 

@@ -54,3 +54,15 @@ export interface CaseAssistConfigModel {
     typingAidsConfiguration?: TypingAidsConfigurations;
     classificationConfigurations?: CaseClassificationConfiguration[];
 }
+
+export interface ContextField {
+    value: string;
+}
+
+export type ContextFields = Record<string, ContextField>;
+
+export interface SuggestionRequestBody {
+    visitorId: string;
+    locale: string;
+    fields: ContextFields;
+}

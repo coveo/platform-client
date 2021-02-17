@@ -1,5 +1,5 @@
 import {New} from '../BaseInterfaces';
-import {CaseAssistConfigModel} from './CaseAssistConfigInterfaces';
+import {CaseAssistConfigModel, ContextFields} from './CaseAssistConfigInterfaces';
 
 export interface Document {
     title: string;
@@ -22,14 +22,6 @@ export interface FieldValueSuggestion {
 
 export interface CaseClassifications {
     fields: Record<string, FieldValueSuggestion>;
-}
-
-export interface ContextField {
-    value: string;
-}
-
-export interface ContextFields {
-    [key: string]: ContextField;
 }
 
 export interface PreviewRequestBody {
