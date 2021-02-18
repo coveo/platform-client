@@ -17,6 +17,7 @@ export enum ResourceType {
     filter = 'FILTER',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
+    mapping = 'MAPPING',
     queryParameter = 'QUERY_PARAMETER',
     queryPipeline = 'QUERY_PIPELINE',
     queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
