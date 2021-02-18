@@ -5,6 +5,7 @@ export interface SchemaEntities {
 }
 
 export interface SchemaEntity {
+    displayName: string;
     id: string;
     fields?: SchemaField[];
     recordCount?: number;
@@ -12,6 +13,7 @@ export interface SchemaEntity {
 
 // look into renaming to SchemaEntityField
 export interface SchemaField {
+    displayName: string;
     id: string;
     type: string;
     reference?: string;
