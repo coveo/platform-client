@@ -11,7 +11,7 @@ export default class License extends Resource {
     }
 
     full() {
-        return this.api.get<LicenseModel>(`${License.baseUrl}`);
+        return this.api.get<LicenseModel>(License.baseUrl);
     }
 
     update(sectionName: LicenseSection, licenseSection: Record<string, number>) {
