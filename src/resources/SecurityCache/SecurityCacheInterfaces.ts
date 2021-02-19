@@ -1,10 +1,16 @@
-import {PermissionIdentityType, ScheduleType, SecurityCacheStateOptions} from '../Enums';
+import {
+    PermissionIdentityType,
+    ScheduleType,
+    SecurityCacheStateOptions,
+    SecurityProviderReferenceType,
+    SecurityProviderType,
+} from '../Enums';
 import {ParameterModel, UserIdentityModel} from '../Sources';
 
 export interface ScheduleModel {
     enabled: boolean;
     frequency?: ScheduleFrequency;
-    id?: string;
+    id: string;
     organizationId?: string;
     refreshType?: string;
     resourceId?: string;
@@ -21,14 +27,13 @@ export interface SecurityCacheIdentityModel {
     provider?: string;
 }
 
-export interface SecurityProviderModelWithStatus {
+export interface SecurityProviderModel {
     cascadingSecurityProviders?: CascadingSecurityProvider;
     caseSensitive?: boolean;
-    currentStatus?: CurrentStatusModel;
+    crawlingModuleId?: string;
     displayName?: string;
     id: string;
     instanceId?: string;
-    lastRefreshOperation?: LastRefreshOperation;
     name: string;
     nodeRequired?: boolean;
     nodeTypeName?: string;
@@ -37,15 +42,20 @@ export interface SecurityProviderModelWithStatus {
     parameters?: ParameterModel;
     referencedBy?: SecurityProviderReferenceModel[];
     sourceTypeName?: string;
-    statistics?: SecurityProviderStatisticsModel;
-    type?: string;
+    type?: SecurityProviderType;
     userIdentities?: UserIdentityModel;
+}
+
+export interface SecurityProviderModelWithStatus extends Required<SecurityProviderModel> {
+    currentStatus: CurrentStatusModel;
+    lastRefreshOperation: LastRefreshOperation;
+    statistics: SecurityProviderStatisticsModel;
 }
 
 export interface CascadingSecurityProvider {
     id: string;
     name: string;
-    type?: string;
+    type?: SecurityProviderType;
     typeName?: string;
 }
 
@@ -75,7 +85,7 @@ export interface LastRefreshOperation {
 export interface SecurityProviderReferenceModel {
     attributes?: SecurityProviderReferenceModelAttributes;
     id: string;
-    type?: string;
+    type?: SecurityProviderReferenceType;
 }
 
 export interface CurrentStatusModel {

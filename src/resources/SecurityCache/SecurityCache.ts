@@ -10,6 +10,7 @@ import {
     SecurityProviderModelWithStatus,
     SecurityCacheListRelationshipsOptions,
     SecurityCacheMemberModel,
+    SecurityProviderModel,
 } from './SecurityCacheInterfaces';
 
 export default class SecurityCache extends Ressource {
@@ -71,12 +72,30 @@ export default class SecurityCache extends Ressource {
         return this.api.get<SecurityProviderModelWithStatus[]>(SecurityCache.providersUrl);
     }
 
-    providerSchedules() {
-        return this.api.get<ScheduleModel[]>(`${SecurityCache.providersUrl}/schedules`);
+    getProvider(securityProviderId: string) {
+        return this.api.get<SecurityProviderModelWithStatus>(`${SecurityCache.providersUrl}/${securityProviderId}`);
     }
 
-    getProvider(providerId: string) {
-        return this.api.get<SecurityProviderModelWithStatus>(`${SecurityCache.providersUrl}/${providerId}`);
+    createOrUpdateProvider(securityProvider: SecurityProviderModel) {
+        return this.api.put<SecurityProviderModelWithStatus>(
+            `${SecurityCache.providersUrl}/${securityProvider.id}`,
+            securityProvider
+        );
+    }
+
+    deleteProvider(securityProviderId: string) {
+        return this.api.delete(`${SecurityCache.providersUrl}/${securityProviderId}`);
+    }
+
+    getSchedules(securityProviderId: string) {
+        return this.api.get<ScheduleModel[]>(`${SecurityCache.providersUrl}/${securityProviderId}/schedules`);
+    }
+
+    updateSchedule(securityProviderId: string, schedule: ScheduleModel) {
+        return this.api.put<ScheduleModel>(
+            `${SecurityCache.providersUrl}/${securityProviderId}/schedules/${schedule.id}`,
+            schedule
+        );
     }
 
     getProviderEntity(providerId: string, member: SecurityCacheMemberModel) {

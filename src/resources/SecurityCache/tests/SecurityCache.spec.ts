@@ -1,4 +1,4 @@
-import {SecurityCacheMemberModel} from '..';
+import {ScheduleModel, SecurityCacheMemberModel, SecurityProviderModel} from '..';
 import API from '../../../APICore';
 import {PermissionIdentityType} from '../../Enums';
 import SecurityCache from '../SecurityCache';
@@ -94,6 +94,7 @@ describe('securityCache', () => {
     });
 
     describe('schedules', () => {
+        const securityProviderId = 'SECURITY_ID';
         it('should make a GET call to the specific securityCache url to fetch the schedules', () => {
             securityCache.listSchedules();
             expect(api.get).toHaveBeenCalledTimes(1);
@@ -101,9 +102,42 @@ describe('securityCache', () => {
         });
 
         it('should make a GET call to the specific securityProvider url to fetch the schedules', () => {
-            securityCache.providerSchedules();
+            securityCache.getSchedules(securityProviderId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/schedules`);
+            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${securityProviderId}/schedules`);
+        });
+
+        it('should make a PUT call to the specific securityProvider url to update a schedule', () => {
+            const scheduleId = 'SCHEDULE_ID';
+            const scheduleConfig: ScheduleModel = {id: scheduleId, enabled: true};
+            securityCache.updateSchedule(securityProviderId, scheduleConfig);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${SecurityCache.providersUrl}/${securityProviderId}/schedules/${scheduleId}`,
+                scheduleConfig
+            );
+        });
+    });
+
+    describe('providers', () => {
+        const providerId = 'PROVIDER_ID';
+        it('should make a GET call to the specific securityCache url to fetch a provider', () => {
+            securityCache.getProvider(providerId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${providerId}`);
+        });
+
+        it('should make a PUT call to the specific securityCache url to create or update a provider', () => {
+            const providerUpdate: SecurityProviderModel = {id: providerId, name: 'Test Security Provider'};
+            securityCache.createOrUpdateProvider(providerUpdate);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${providerId}`, providerUpdate);
+        });
+
+        it('should make a DELETE call to the specific securityCache url to delete a provider', () => {
+            securityCache.deleteProvider(providerId);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${providerId}`);
         });
     });
 

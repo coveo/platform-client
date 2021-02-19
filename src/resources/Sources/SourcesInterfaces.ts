@@ -19,7 +19,6 @@ import {
     OperationType,
     PatternType,
     PermissionIdentityType,
-    SecurityProviderType,
     SinglePermissionIdentityType,
     SinglePermissionResult,
     SinglePermissionState,
@@ -32,11 +31,7 @@ import {
     SourceVisibility,
     UrlFilterType,
 } from '../Enums';
-import {
-    CascadingSecurityProvider,
-    SecurityProvider,
-    SecurityProviderReferenceModel,
-} from '../SecurityCache/SecurityCacheInterfaces';
+import {SecurityProvider, SecurityProviderModel} from '../SecurityCache/SecurityCacheInterfaces';
 
 export interface SourceModel extends GranularResource {
     configurationError?: ConfigurationError;
@@ -237,23 +232,6 @@ export interface ExtendedConfig {
     sourceInformation?: SourceInformation;
     sourceSecurityOption?: SourceSecurityOption;
     startingAddresses?: string[];
-    userIdentities?: Record<string, UserIdentityModel>;
-}
-
-export interface SecurityProviderModel {
-    cascadingSecurityProviders?: Record<string, CascadingSecurityProvider>;
-    caseSensitive?: boolean;
-    displayName?: string;
-    id?: string;
-    instanceId?: string;
-    name?: string;
-    nodeRequired?: boolean;
-    nodeTypeName?: string;
-    organizationId?: string;
-    parameters?: Record<string, ParameterModel>;
-    referencedBy?: SecurityProviderReferenceModel[];
-    sourceTypeName?: string;
-    type?: SecurityProviderType;
     userIdentities?: Record<string, UserIdentityModel>;
 }
 
