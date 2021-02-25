@@ -4,6 +4,10 @@ export interface LogRequestResult {
     error?: string;
 }
 
+export interface LogRequestId {
+    value: string;
+}
+
 export interface LogRequest {
     resourceId: string;
     activityId: string;
