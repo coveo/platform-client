@@ -89,8 +89,31 @@ export interface ResultRankingQplCodePredicate {
     code: string;
 }
 
+export interface ResultRankingGroupByStatementGroups {
+    associated: Record<string,number>
+    orphaned: number;
+}
+
+export interface ResultRankingGroupByStatus {
+    active: number;
+    inactive: number;
+}
+
+export interface ResultRankingGroupByTypes {
+    rankingExpressions: number;
+    featuredResults: number;
+}
+
+export interface ResultRankingGroupBy{
+    groups: ResultRankingGroupByStatementGroups;
+    status: ResultRankingGroupByStatus;
+    type: ResultRankingGroupByTypes;
+
+}
+
 export interface ListResultRankingResponse {
     resultRankings: ResultRanking[];
+    groupedBy: ResultRankingGroupBy;
     totalCount: number;
     totalPages: number;
 }
@@ -102,4 +125,6 @@ export interface ListResultRankingParams {
     page?: number;
     perPage?: number;
     organizationId?: string;
+    associatedGroups?: Array<string | null>;
+    kind?: ResultRankingsKind;
 }
