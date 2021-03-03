@@ -1,7 +1,7 @@
 import API from '../../../../APICore';
 import {PredicateKind, ResultRankingLocales, ResultRankingMatchOperators} from '../../../Enums';
 import ResultRankings from '../ResultRankings';
-import {ResultRanking} from '../ResultRankingsInterfaces';
+import {ListResultRankingParams, ResultRanking} from '../ResultRankingsInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -112,6 +112,30 @@ describe('Result Rankings', () => {
             resultRankings.list(pipelineId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId));
+        });
+        it('should convert associated groups empty array to a JSON string', () => {
+            const pipelineId = '️a';
+            const associatedGroups = [];
+            const expectedUri =
+                ResultRankings.getBaseUrl(pipelineId) +
+                '?associatedGroups=' +
+                encodeURIComponent(JSON.stringify(associatedGroups));
+
+            resultRankings.list(pipelineId, {associatedGroups});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(expectedUri);
+        });
+        it('should convert associated groups array to a JSON string', () => {
+            const pipelineId = '️a';
+            const associatedGroups = [null, 'g1', 'g2'];
+            const expectedUri =
+                ResultRankings.getBaseUrl(pipelineId) +
+                '?associatedGroups=' +
+                encodeURIComponent(JSON.stringify(associatedGroups));
+
+            resultRankings.list(pipelineId, {associatedGroups});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
     });
 
