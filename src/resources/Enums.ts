@@ -653,6 +653,16 @@ export enum ResultRankingsKind {
     rankingExpression = 'ranking_expression',
 }
 
+export enum ResultRankingsRuleTypes {
+    featuredResults = 'featuredResults',
+    rankingExpressions = 'rankingExpressions',
+}
+
+export enum ResultRankingsStatuses {
+    active = 'active',
+    inactive = 'inactive',
+}
+
 export enum ResultRankingLocales {
     all = 'all',
     unspecified = 'unspecified',

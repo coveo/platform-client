@@ -51,7 +51,9 @@ export default class ResultRankings extends Resource {
             this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
                 ...params,
-                associatedGroups: JSON.stringify(params?.associatedGroups)
+                associatedGroups: JSON.stringify(params?.associatedGroups),
+                ruleStatuses: JSON.stringify(params?.ruleStatuses),
+                ruleTypes: JSON.stringify(params?.ruleTypes),
             })
         );
     }
