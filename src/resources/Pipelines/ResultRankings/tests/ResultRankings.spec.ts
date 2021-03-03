@@ -1,5 +1,11 @@
 import API from '../../../../APICore';
-import {PredicateKind, ResultRankingLocales, ResultRankingMatchOperators} from '../../../Enums';
+import {
+    PredicateKind,
+    ResultRankingLocales,
+    ResultRankingMatchOperators,
+    ResultRankingsRuleTypes,
+    ResultRankingsStatuses,
+} from '../../../Enums';
 import ResultRankings from '../ResultRankings';
 import {ListResultRankingParams, ResultRanking} from '../ResultRankingsInterfaces';
 
@@ -125,15 +131,22 @@ describe('Result Rankings', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
-        it('should convert associated groups array to a JSON string', () => {
+        it('should convert required fields to a JSON string', () => {
             const pipelineId = '️a';
             const associatedGroups = [null, 'g1', 'g2'];
-            const expectedUri =
-                ResultRankings.getBaseUrl(pipelineId) +
-                '?associatedGroups=' +
-                encodeURIComponent(JSON.stringify(associatedGroups));
+            const ruleStatuses = [ResultRankingsStatuses.active, ResultRankingsStatuses.inactive];
+            const ruleTypes = [ResultRankingsRuleTypes.featuredResults, ResultRankingsRuleTypes.rankingExpressions];
+            const expectedUri = [
+                ResultRankings.getBaseUrl(pipelineId),
+                '?associatedGroups=',
+                encodeURIComponent(JSON.stringify(associatedGroups)),
+                '&ruleStatuses=',
+                encodeURIComponent(JSON.stringify(ruleStatuses)),
+                '&ruleTypes=',
+                encodeURIComponent(JSON.stringify(ruleTypes)),
+            ].join('');
 
-            resultRankings.list(pipelineId, {associatedGroups});
+            resultRankings.list(pipelineId, {associatedGroups, ruleStatuses, ruleTypes});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
