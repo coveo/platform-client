@@ -69,4 +69,8 @@ export default class SchemaService extends Ressource {
             specificObjectsToGet
         );
     }
+
+    getDefaultObjectsToGet(sourceType: string) {
+        return this.api.get<ObjectsToGet>(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
+    }
 }
