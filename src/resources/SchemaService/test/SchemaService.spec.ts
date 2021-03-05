@@ -125,4 +125,12 @@ describe('SchemaService', () => {
             });
         });
     });
+
+    describe('getDefaultObjectsToGet', () => {
+        it('should make a GET call to the specific SchemaSources url', () => {
+            schemaService.getDefaultObjectsToGet(sourceType);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
+        });
+    });
 });
