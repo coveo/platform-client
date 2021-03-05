@@ -1,4 +1,6 @@
 import API from '../../../../APICore';
+import {IntervalUnit} from '../../../Enums';
+import {RegistrationModel} from '../../MachineLearningInterfaces';
 import Models from '../Models';
 
 jest.mock('../../../../APICore');
@@ -58,6 +60,23 @@ describe('Models', () => {
             models.delete(modelId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Models.baseUrl}/${modelId}`);
+        });
+    });
+
+    describe('update', () => {
+        it('should make a PUT call to the specific Models url', () => {
+            const modelId = 'O .O';
+            const registrationUpdate: RegistrationModel = {
+                engineId: 'OvO',
+                modelName: 'super model',
+                exportPeriod: 'ABC',
+                intervalTime: 666,
+                intervalUnit: IntervalUnit.DAY,
+            };
+
+            models.update(modelId, registrationUpdate);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Models.baseUrl}/${modelId}`, registrationUpdate);
         });
     });
 });
