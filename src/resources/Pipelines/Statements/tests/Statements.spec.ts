@@ -147,7 +147,7 @@ describe('Statements', () => {
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
-                '/rest/search/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
+                '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
                 mockedFormData
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
@@ -161,7 +161,7 @@ describe('Statements', () => {
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
-                '/rest/search/admin/pipelines/🥚/statements/import?mode=overwrite&feature=thesaurus',
+                '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=thesaurus',
                 mockedFormData
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
