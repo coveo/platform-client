@@ -32,9 +32,9 @@ export default class MLAssociations extends Resource {
         );
     }
 
-    disassociate(pipelineId: string, modelId: string, associationId: string) {
+    disassociate(pipelineId: string, associationId: string) {
         return this.api.delete(
-            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}`, {
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
                 organizationId: this.api.organizationId,
             })
         );

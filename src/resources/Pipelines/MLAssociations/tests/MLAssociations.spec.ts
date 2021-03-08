@@ -50,14 +50,11 @@ describe('MLAssociations', () => {
     describe('disassociate', () => {
         it('should make a DELETE call to the specific MLAssociations url', () => {
             const pipelineId = '123';
-            const modelId = '321';
             const associationId = '000';
 
-            associations.disassociate(pipelineId, modelId, associationId);
+            associations.disassociate(pipelineId, associationId);
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(
-                `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/${modelId}`
-            );
+            expect(api.delete).toHaveBeenCalledWith(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`);
         });
     });
 
