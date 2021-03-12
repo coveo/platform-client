@@ -28,7 +28,7 @@ export interface SecurityCacheIdentityModel {
 }
 
 export interface SecurityProviderModel {
-    cascadingSecurityProviders?: CascadingSecurityProvider;
+    cascadingSecurityProviders?: Record<string, CascadingSecurityProvider>;
     caseSensitive?: boolean;
     crawlingModuleId?: string;
     displayName?: string;
