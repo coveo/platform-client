@@ -12,7 +12,6 @@ import {
 
 export default class Statements extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/statements`;
-    static getLegacyUrl = (pipelineId: string) => `/rest/search/admin/pipelines/${pipelineId}/statements`;
     static getStatementUrl = (pipelineId: string, statementId: string) =>
         `${Statements.getBaseUrl(pipelineId)}/${statementId}`;
 
@@ -37,7 +36,7 @@ export default class Statements extends Resource {
         formData.append('file', csvFile, fileName);
 
         return this.api.postForm(
-            this.buildPath(`${Statements.getLegacyUrl(pipelineId)}/import`, {
+            this.buildPath(`${Statements.getBaseUrl(pipelineId)}/import`, {
                 mode: 'overwrite',
                 organizationId: this.api.organizationId,
                 ...options,
