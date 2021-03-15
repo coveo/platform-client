@@ -1,25 +1,32 @@
 import {SourceModel, CreateSourceModel, CreateSourceOptions} from '../Sources/SourcesInterfaces';
 
-export interface SchemaEntities {
-    entities: SimpleSchemaEntity[];
-}
-
-export interface SchemaEntity extends SimpleSchemaEntity {
-    fields?: SchemaField[];
-    recordCount?: number;
-}
-
 export interface SimpleSchemaEntity {
     id: string;
     displayName: string;
 }
 
-// look into renaming to SchemaEntityField
-export interface SchemaField {
+export interface SimpleSchemaEntityMap {
+    [index: string]: SimpleSchemaEntity;
+}
+
+export interface SchemaEntities {
+    entities: SimpleSchemaEntityMap;
+}
+
+export interface SchemaEntityField {
     displayName: string;
     id: string;
     type: string;
     reference?: string;
+}
+
+export interface SchemaEntityFieldMap {
+    [index: string]: SchemaEntityField;
+}
+
+export interface SchemaEntityFields {
+    fieldCount: number;
+    fields: SchemaEntityFieldMap;
 }
 
 export interface SchemaServiceQueryParams {
