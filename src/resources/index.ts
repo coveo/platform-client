@@ -15,6 +15,7 @@ export * from './MachineLearning';
 export * from './Organizations';
 export * from './PlatformResources';
 export * from './Pipelines';
+export * from './PushApi';
 export * from './CrawlingModule';
 export * from './Saml';
 export * from './Search';
