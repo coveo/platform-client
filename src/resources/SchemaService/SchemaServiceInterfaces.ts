@@ -3,14 +3,11 @@ import {SourceModel, CreateSourceModel, CreateSourceOptions} from '../Sources/So
 export interface SimpleSchemaEntity {
     id: string;
     displayName: string;
-}
-
-export interface SimpleSchemaEntityMap {
-    [index: string]: SimpleSchemaEntity;
+    recordCount?: number;
 }
 
 export interface SchemaEntities {
-    entities: SimpleSchemaEntityMap;
+    entities: Record<string, SimpleSchemaEntity>;
 }
 
 export interface SchemaEntityField {
@@ -20,13 +17,9 @@ export interface SchemaEntityField {
     reference?: string;
 }
 
-export interface SchemaEntityFieldMap {
-    [index: string]: SchemaEntityField;
-}
-
 export interface SchemaEntityFields {
-    fieldCount: number;
-    fields: SchemaEntityFieldMap;
+    fieldsCount: number;
+    fields: Record<string, SchemaEntityField>;
 }
 
 export interface SchemaServiceQueryParams {
