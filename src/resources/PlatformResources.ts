@@ -31,6 +31,7 @@ import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 import Links from './Links/Links';
 import Connectivity from './Connectivity/Connectivity';
+import PushApi from './PushApi/PushApi';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -54,6 +55,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'logs', resource: Logs},
     {key: 'organization', resource: Organization},
     {key: 'pipeline', resource: Pipelines},
+    {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'saml', resource: Saml},
     {key: 'schemaService', resource: SchemaService},
@@ -91,6 +93,7 @@ class PlatformResources {
     logs: Logs;
     organization: Organization;
     pipeline: Pipelines;
+    pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;
     saml: Saml;
     schemaService: SchemaService;
