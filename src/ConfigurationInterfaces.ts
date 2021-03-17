@@ -11,4 +11,5 @@ export interface PlatformClientOptions {
     environment?: Environment;
     region?: Region;
     responseHandlers?: ResponseHandler[];
+    globalRequestSettings?: RequestInit;
 }

@@ -89,6 +89,35 @@ coveoPlatform.source
     });
 ```
 
+### Global Configuration
+
+It is also possible to provide global request settings for all requests made by the client; Simply provide the configuration in the `globalRequestSettings` property of the options. This can be useful for applying necessary headers or configurations for network requests. For example, you might include a proxy authorization header for requests routed through a proxy server using the [`Proxy-Authorization` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Proxy-Authorization):
+
+#### Node.js example
+
+```js
+require('isomorphic-fetch');
+require('abortcontroller-polyfill');
+const PlatformClient = require('@coveord/platform-client').default;
+
+const coveoPlatform = new PlatformClient({
+    globalRequestSettings: {
+        headers: {
+            'Proxy-Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1l',
+        },
+    },
+});
+
+coveoPlatform.source
+    .list()
+    .then((res) => {
+        console.log(JSON.stringify(res));
+    })
+    .catch((e) => {
+        console.error(e);
+    });
+```
+
 ## Documentation
 
 This project is built using TypeScript and automatically generates relevant type declarations. Most IDEs with TypeScript integration will display those type declarations as autocompletions, so that you typically will not need to refer to external documentation. Hence, the decision has been made not to document any option, resource, or action, except for the main configuration options. For in-depth documentation on the APIs exposed by this package, please consult our [official documentation portal](https://docs.coveo.com/en/151/cloud-v2-developers/coveo-cloud-v2-for-developers).
