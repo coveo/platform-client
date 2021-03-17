@@ -357,4 +357,60 @@ describe('APICore', () => {
             expect(api.currentUser).toBe('💎');
         });
     });
+
+    describe('fetch configuration', () => {
+        it('should allow a fetch configuration to be included for all requests', async () => {
+            const globalRequestSettings: RequestInit = {
+                headers: {
+                    override: 'value',
+                },
+            };
+
+            const responseBody = {
+                type: '🐟',
+            };
+
+            global.fetch.mockImplementation(
+                (_url: string, config: RequestInit): Promise<Response> => {
+                    if (config.headers && config.headers['override']) {
+                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
+                    }
+                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+                }
+            );
+
+            const api = new API({...testConfig, globalRequestSettings});
+
+            const res = await api.get('/', {headers: new Headers({noOverride: 'value'})});
+            expect(res).toEqual(responseBody);
+        });
+
+        it('should prefer the method calls passed request arguments over the default config', async () => {
+            const globalRequestSettings: RequestInit = {
+                headers: new Headers({
+                    override: 'value',
+                }),
+            };
+
+            const responseBody = {
+                type: '🐟',
+            };
+
+            const overriddenValue = 'not-the-value';
+
+            global.fetch.mockImplementation(
+                (_url: string, config: RequestInit): Promise<Response> => {
+                    if (config.headers && config.headers['override'] === overriddenValue) {
+                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
+                    }
+                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+                }
+            );
+
+            const api = new API({...testConfig, globalRequestSettings});
+
+            const res = await api.get('/', {headers: new Headers({override: overriddenValue})});
+            expect(res).toEqual(testData.response);
+        });
+    });
 });
