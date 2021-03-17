@@ -8,14 +8,12 @@ import {
     ExtensionSettingAction,
     ExtensionSettingActionOnError,
     ExtensionSettingConverter,
-    FieldTypes,
     FilterHostType,
     FilterLastOperationResultType,
     FilterLastOperationType,
     FilterStatusType,
     FormAuthenticationFailedMethod,
     FormInputType,
-    MappingModelKind,
     OperationType,
     PatternType,
     PermissionIdentityType,
@@ -32,6 +30,7 @@ import {
     UrlFilterType,
 } from '../Enums';
 import {SecurityProvider, SecurityProviderModel} from '../SecurityCache/SecurityCacheInterfaces';
+import {MappingModel} from './SourcesMappings';
 
 export interface SourceModel extends GranularResource {
     configurationError?: ConfigurationError;
@@ -90,18 +89,6 @@ export interface SourceInformation {
     sourceId?: number;
     sourceName?: string;
     sourceStatus?: SourceStatus;
-}
-
-export interface MappingModel {
-    content?: string;
-    extractionMethod?: string;
-    fieldName?: string;
-    fieldTypeHint?: FieldTypes;
-    id?: string;
-    kind?: MappingModelKind;
-    type?: string;
-    literalContent?: string;
-    metadataContent?: string;
 }
 
 export interface DocumentPermissionModel {
