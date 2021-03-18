@@ -48,3 +48,7 @@ export interface MajorMinorVersion {
     major: string;
     minor: string;
 }
+
+export type SearchPageHeadersModel = Pick<SearchPageModel, 'css' | 'javascript'>;
+
+export type ReorderSearchPageHeadersModel = Record<'css' | 'javascript', string[]>;
