@@ -1,4 +1,5 @@
 export interface CatalogsListOptions {
+    filter?: string; 
     page?: number;
     pageSize?: number;
 }
