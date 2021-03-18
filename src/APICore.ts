@@ -122,15 +122,21 @@ export default class API {
         return retrieve(this.config.accessToken);
     }
 
+    private get globalRequestSettings(): RequestInit {
+        return this.config.globalRequestSettings || {};
+    }
+
     private getUrlFromRoute(route: string): string {
         return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
     private async request<T>(route: string, args: RequestInit): Promise<T> {
         const init: RequestInit = {
+            ...this.globalRequestSettings,
             ...args,
             headers: {
                 Authorization: `Bearer ${this.accessToken}`,
+                ...(this.globalRequestSettings.headers || {}),
                 ...(args.headers || {}),
             },
         };
@@ -149,9 +155,11 @@ export default class API {
 
     private async requestFile(route: string, args: RequestInit): Promise<Blob> {
         const init: RequestInit = {
+            ...this.globalRequestSettings,
             ...args,
             headers: {
                 Authorization: `Bearer ${this.accessToken}`,
+                ...(this.globalRequestSettings.headers || {}),
                 ...(args.headers || {}),
             },
         };

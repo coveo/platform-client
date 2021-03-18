@@ -48,7 +48,7 @@ describe('SchemaService', () => {
             schemaService.getFields(sourceType, entityName, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entity/${entityName}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityName}/fields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
             );
         });
     });
