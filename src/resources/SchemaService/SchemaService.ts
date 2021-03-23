@@ -8,10 +8,10 @@ import {
     CreateSchemaSourceModel,
     CreateSchemaSourceOptions,
     ObjectsToGet,
-    OffsetOrLimit,
-    Filter,
     SchemaEntityFields,
     SimpleSchemaEntity,
+    GetEntitiesQueryParams,
+    GetEntityQueryParams,
 } from './SchemaServiceInterfaces';
 import {SourceType} from '../Enums';
 
@@ -22,13 +22,13 @@ export default class SchemaService extends Ressource {
         super(api, serverlessApi);
     }
 
-    getEntities(sourceType: SourceType, parameters?: SchemaServiceQueryParams & OffsetOrLimit) {
+    getEntities(sourceType: SourceType, parameters?: GetEntitiesQueryParams) {
         return this.api.get<SchemaEntities>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities`, parameters)
         );
     }
 
-    getEntity(sourceType: SourceType, entityId: string, parameters?: SchemaServiceQueryParams & Filter) {
+    getEntity(sourceType: SourceType, entityId: string, parameters?: GetEntityQueryParams) {
         return this.api.get<SimpleSchemaEntity>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}`, parameters)
         );
