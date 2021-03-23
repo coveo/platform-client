@@ -36,6 +36,10 @@ export interface OffsetOrLimit {
     limit?: number;
 }
 
+export interface Filter {
+    filter?: string;
+}
+
 export interface GenericObjectField {
     name?: string;
 }
