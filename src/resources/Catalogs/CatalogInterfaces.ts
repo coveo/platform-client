@@ -4,6 +4,8 @@ export interface CatalogsListOptions {
     pageSize?: number;
 }
 
+export type CatalogConfigurationsListOptions = Omit<CatalogsListOptions, 'filter'>;
+
 export interface CatalogFieldsMapping {
     [name: string]: string;
 }
