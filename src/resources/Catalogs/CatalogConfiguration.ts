@@ -1,12 +1,12 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {CatalogConfigurationModel, CreateCatalogConfigurationModel, ConfigurationsListOptions} from './CatalogInterfaces';
+import {CatalogConfigurationModel, CreateCatalogConfigurationModel, CatalogConfigurationsListOptions} from './CatalogInterfaces';
 
 export default class CatalogConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogconfigurations`;
 
-    list(options?: ConfigurationsListOptions) {
+    list(options?: CatalogConfigurationsListOptions) {
         return this.api.get<PageModel<CatalogConfigurationModel>>(
             this.buildPath(CatalogConfiguration.baseUrl, options)
         );
