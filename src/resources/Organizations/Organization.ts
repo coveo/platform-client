@@ -9,16 +9,16 @@ import {
     OrganizationsStatusModel,
 } from './OrganizationInterfaces';
 
-type ListDependingOnPagination<T> = T extends ListOrganizationOptions
-    ? PageModel<OrganizationModel>
-    : OrganizationModel[];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type NoPagination = undefined | null | {};
+
 export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
 
-    list<PossiblyPaginated extends ListOrganizationOptions | null | undefined>(options?: PossiblyPaginated) {
-        return this.api.get<ListDependingOnPagination<PossiblyPaginated>>(
-            this.buildPath(Organization.baseUrl, options)
-        );
+    list(noPagination?: NoPagination): Promise<OrganizationModel[]>;
+    list(options: ListOrganizationOptions): Promise<PageModel<OrganizationModel>>;
+    list(...args: [] | [ListOrganizationOptions]): unknown {
+        return this.api.get<unknown>(this.buildPath(Organization.baseUrl, args[0]));
     }
 
     create(options: CreateOrganizationOptions) {
