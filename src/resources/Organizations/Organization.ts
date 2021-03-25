@@ -9,11 +9,16 @@ import {
     OrganizationsStatusModel,
 } from './OrganizationInterfaces';
 
+type ListDependingOnPagination<T> = T extends ListOrganizationOptions
+    ? PageModel<OrganizationModel>
+    : OrganizationModel[];
 export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
 
-    list(options?: ListOrganizationOptions) {
-        return this.api.get<PageModel<OrganizationModel>>(this.buildPath(Organization.baseUrl, options));
+    list<PossiblyPaginated extends ListOrganizationOptions | null | undefined>(options?: PossiblyPaginated) {
+        return this.api.get<ListDependingOnPagination<PossiblyPaginated>>(
+            this.buildPath(Organization.baseUrl, options)
+        );
     }
 
     create(options: CreateOrganizationOptions) {
