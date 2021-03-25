@@ -31,9 +31,13 @@ export interface SchemaServiceQueryParams {
     username?: string;
 }
 
-export interface OffsetOrLimit {
+export interface GetEntitiesQueryParams extends SchemaServiceQueryParams {
     offset?: number;
     limit?: number;
+}
+
+export interface GetEntityQueryParams extends SchemaServiceQueryParams {
+    filter?: string;
 }
 
 export interface GenericObjectField {
