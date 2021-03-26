@@ -1,9 +1,11 @@
 import Resource from '../../../Resource';
 import {
+    CreateExportScheduleModel,
     EstimateExportParams,
     EstimateVisitExportParams,
     ExportEstimateModel,
     ExportModel,
+    ExportScheduleModel,
     GenerateExportParams,
     GenerateVisitExportParams,
 } from './ExportsInterfaces';
@@ -52,6 +54,38 @@ export default class Exports extends Resource {
     estimateVisitExportRowsCount(params: EstimateVisitExportParams) {
         return this.api.get<ExportEstimateModel>(
             this.buildPath(`${Exports.baseUrl}/visits/estimate`, {...params, org: this.api.organizationId})
+        );
+    }
+
+    listSchedules() {
+        return this.api.get<ExportScheduleModel[]>(
+            this.buildPath(`${Exports.baseUrl}/schedules`, {org: this.api.organizationId})
+        );
+    }
+
+    createSchedule(model: CreateExportScheduleModel) {
+        return this.api.post<ExportScheduleModel>(
+            this.buildPath(`${Exports.baseUrl}/schedules`, {org: this.api.organizationId}),
+            model
+        );
+    }
+
+    getSchedule(exportScheduleId: string) {
+        return this.api.get<ExportScheduleModel>(
+            this.buildPath(`${Exports.baseUrl}/schedules/${exportScheduleId}`, {org: this.api.organizationId})
+        );
+    }
+
+    updateSchedule(exportScheduleId: string, model: CreateExportScheduleModel) {
+        return this.api.put<ExportScheduleModel>(
+            this.buildPath(`${Exports.baseUrl}/schedules/${exportScheduleId}`, {org: this.api.organizationId}),
+            model
+        );
+    }
+
+    deleteSchedule(exportScheduleId: string) {
+        return this.api.delete<ExportModel>(
+            this.buildPath(`${Exports.baseUrl}/schedules/${exportScheduleId}`, {org: this.api.organizationId})
         );
     }
 }

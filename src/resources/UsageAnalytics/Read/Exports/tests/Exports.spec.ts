@@ -1,6 +1,8 @@
 import API from '../../../../../APICore';
+import {ExportScheduleFrequency} from '../../../../Enums';
 import Exports from '../Exports';
 import {
+    CreateExportScheduleModel,
     EstimateExportParams,
     EstimateVisitExportParams,
     GenerateExportParams,
@@ -117,6 +119,62 @@ describe('Exports', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/visits/estimate?from=741&to=369`);
+        });
+    });
+
+    describe('listSchedules', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            exports.listSchedules();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules`);
+        });
+    });
+
+    describe('createSchedule', () => {
+        it('makes a POST call to the specific Exports url', () => {
+            const model: CreateExportScheduleModel = {
+                frequency: ExportScheduleFrequency.monthly,
+                timezone: 'Area51',
+            };
+            exports.createSchedule(model);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules`, model);
+        });
+    });
+
+    describe('getSchedule', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            const exportScheduleId = '🌞';
+            exports.getSchedule(exportScheduleId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`);
+        });
+    });
+
+    describe('updateSchedule', () => {
+        it('makes a PUT call to the specific Exports url', () => {
+            const exportScheduleId = '🌞';
+            const model: CreateExportScheduleModel = {
+                frequency: ExportScheduleFrequency.monthly,
+                timezone: 'Area51',
+            };
+            exports.updateSchedule(exportScheduleId, model);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`, model);
+        });
+    });
+
+    describe('deleteSchedule', () => {
+        it('makes a DELETE call to the specific Exports url', () => {
+            const exportScheduleId = '🌞';
+            exports.deleteSchedule(exportScheduleId);
+
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`);
         });
     });
 });
