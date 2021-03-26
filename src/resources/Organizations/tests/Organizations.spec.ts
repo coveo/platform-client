@@ -21,6 +21,12 @@ describe('Organization', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Organization.baseUrl);
         });
+
+        it('should make a paginated call when pagination parameters are passed', () => {
+            organization.list({page: 0, filter: 'foo'});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}?page=0&filter=foo`);
+        });
     });
 
     describe('create', () => {
