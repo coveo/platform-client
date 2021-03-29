@@ -838,3 +838,23 @@ export enum RedshiftEndpointStatus {
     readOnly = 'READ_ONLY',
     writeOnly = 'WRITE_ONLY',
 }
+
+export enum ExportStatus {
+    available = 'AVAILABLE',
+    pending = 'PENDING',
+    failed = 'FAILED',
+}
+
+export enum ExportTablesType {
+    searches = 'SEARCHES',
+    clicks = 'CLICKS',
+    customEvents = 'CUSTOM_EVENTS',
+    keywords = 'KEYWORDS',
+    groups = 'GROUPS',
+    allEvents = 'ALL_EVENTS',
+}
+
+export enum CSVFileFormat {
+    excel = 'EXCEL',
+    noNewline = 'NO_NEWLINE',
+}
