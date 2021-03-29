@@ -10,15 +10,17 @@ import {
 } from './OrganizationInterfaces';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type NoPagination = undefined | null | {};
+export type NoPagination = undefined | null;
 
 export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
 
     list(noPagination?: NoPagination): Promise<OrganizationModel[]>;
-    list(options: ListOrganizationOptions): Promise<PageModel<OrganizationModel>>;
-    list(...args: [] | [ListOrganizationOptions]): unknown {
-        return this.api.get<unknown>(this.buildPath(Organization.baseUrl, args[0]));
+    list<T extends ListOrganizationOptions>(
+        options: T
+    ): keyof T extends never ? Promise<OrganizationModel[]> : Promise<PageModel<OrganizationModel>>;
+    list(options?: NoPagination | ListOrganizationOptions) {
+        return this.api.get<unknown>(options ? this.buildPath(Organization.baseUrl, options) : Organization.baseUrl);
     }
 
     create(options: CreateOrganizationOptions) {
