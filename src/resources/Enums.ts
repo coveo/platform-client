@@ -858,3 +858,19 @@ export enum CSVFileFormat {
     excel = 'EXCEL',
     noNewline = 'NO_NEWLINE',
 }
+
+export enum DayOfWeek {
+    monday = 'MONDAY',
+    tuesday = 'TUESDAY',
+    wednesday = 'WEDNESDAY',
+    thursday = 'THURSDAY',
+    friday = 'FRIDAY',
+    saturday = 'SATURDAY',
+    sunday = 'SUNDAY',
+}
+
+export enum ExportScheduleFrequency {
+    daily = 'DAILY',
+    monthly = 'MONTHLY',
+    weekly = 'WEEKLY',
+}
