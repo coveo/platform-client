@@ -1,4 +1,4 @@
-import {CSVFileFormat, ExportStatus, ExportTablesType} from '../../../Enums';
+import {CSVFileFormat, DayOfWeek, ExportScheduleFrequency, ExportStatus, ExportTablesType} from '../../../Enums';
 
 export interface ExportModel {
     id: string;
@@ -73,3 +73,30 @@ export type GenerateVisitExportParams = EstimateVisitExportParams &
     GenerateExportCommonParams & {
         ordered?: boolean;
     };
+
+interface ScheduleCommonProperties {
+    frequency: ExportScheduleFrequency;
+    dayOfWeek?: DayOfWeek;
+    timezone: string;
+    dimensions?: string[];
+    usingDisplayNames?: boolean;
+    notificationsEmails?: string[];
+}
+
+export interface ExportScheduleModel extends ScheduleCommonProperties {
+    id: string;
+    author: string;
+    filters: Record<string, string>;
+    tables?: string[];
+    description: string;
+    errorInfo?: Record<string, string>;
+}
+
+export interface CreateExportScheduleModel extends ScheduleCommonProperties {
+    commonFilters?: string[];
+    searchesFilters?: string[];
+    customEventsFilters?: string[];
+    description?: string;
+    tables?: ExportTablesType[];
+    exportFormat?: CSVFileFormat;
+}
