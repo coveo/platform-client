@@ -104,4 +104,8 @@ export default class SecurityCache extends Ressource {
             member
         );
     }
+
+    cancelRefresh(securityProviderId: string) {
+        return this.api.post(`${SecurityCache.providersUrl}/${securityProviderId}/refresh/cancel`);
+    }
 }

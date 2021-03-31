@@ -170,6 +170,13 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/refresh/entity`, identityModel);
         });
+
+        it('should make a POST when canceling a refresh operation', () => {
+            const PROVIDER_ID = 'OhnoOhNoNONo';
+            securityCache.cancelRefresh(PROVIDER_ID);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${PROVIDER_ID}/refresh/cancel`);
+        });
     });
 
     describe('status', () => {
