@@ -30,6 +30,12 @@ export default class DNEConfiguration extends Resource {
         return this.api.post<string>(`${DNEConfiguration.baseUrl}/documentextractionquery`, model);
     }
 
+    parseDocumentExtractionQuery(query: string) {
+        return this.api.get<DocumentExtractionQueryModel>(
+            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionquery`, {query: query})
+        );
+    }
+
     async createWithoutQuery(
         newModel: DNENewConfigurationModel,
         documentExtractionQueryModel: DocumentExtractionQueryModel
