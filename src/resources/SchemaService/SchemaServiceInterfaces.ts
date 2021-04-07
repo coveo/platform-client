@@ -8,6 +8,7 @@ export interface SimpleSchemaEntity {
 
 export interface SchemaEntities {
     entities: Record<string, SimpleSchemaEntity>;
+    entitiesCount?: number;
 }
 
 export interface SchemaEntityField {
