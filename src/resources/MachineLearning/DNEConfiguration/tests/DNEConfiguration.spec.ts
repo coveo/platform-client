@@ -46,6 +46,16 @@ describe('DNEConfiguration', () => {
         });
     });
 
+    describe('parseDocumentExtractionQuery', () => {
+        it('should make a GET call to the specific DNEConfiguration url', () => {
+            const query = 'lala';
+            dneConfig.parseDocumentExtractionQuery(query);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${DNEConfiguration.baseUrl}/documentextractionquery?query=lala`);
+        });
+    });
+
     describe('createWithoutQuery', () => {
         it('should make a POST call to get documentExtractionQueryModel, then use this param to create a new DNE model ', async () => {
             const newModel: DNENewConfigurationModel = {modelDisplayName: '🐩'};
