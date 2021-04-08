@@ -3,7 +3,9 @@ import {New} from '../../BaseInterfaces';
 import {ActivityOperation} from '../../Enums';
 import {ScheduleModel} from '../../SecurityCache';
 import Sources from '../Sources';
+import SourcesFields from '../SourcesFields/SourcesFields';
 import {CreateSourceModel, RawSourceConfig} from '../SourcesInterfaces';
+import SourcesMappings from '../SourcesMappings/SourcesMappings';
 
 jest.mock('../../../APICore');
 
@@ -330,6 +332,16 @@ describe('Sources', () => {
             expect(api.post).toHaveBeenCalledWith(
                 `${Sources.baseUrl}/${sourceId}/tasks/abort?activityId=not-enough-emoji`
             );
+        });
+    });
+
+    describe('clients', () => {
+        it('should have a fields client', () => {
+            expect(source.field).toBeInstanceOf(SourcesFields);
+        });
+
+        it('should have a mappings client', () => {
+            expect(source.mappings).toBeInstanceOf(SourcesMappings);
         });
     });
 });

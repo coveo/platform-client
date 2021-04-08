@@ -22,6 +22,7 @@ export default class Sources extends Resource {
         super(api, serverlessApi);
 
         this.field = new SourcesFields(api, serverlessApi);
+        this.mappings = new SourcesMappings(api, serverlessApi);
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
