@@ -42,13 +42,24 @@ describe('SchemaService', () => {
         });
     });
 
-    describe('getFields', () => {
+    describe('getEntity', () => {
         it('should make a GET call to the specific SchemaService url with the correct params', () => {
-            const entityName = 'miaowouioui';
-            schemaService.getFields(sourceType, entityName, params);
+            const entityId = '🆔';
+            schemaService.getEntity(sourceType, entityId, {...params, filter: 'filter'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entity/${entityName}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&filter=filter`
+            );
+        });
+    });
+
+    describe('getFields', () => {
+        it('should make a GET call to the specific SchemaService url with the correct params', () => {
+            const entityId = 'miaowouioui';
+            schemaService.getFields(sourceType, entityId, params);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}/fields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
             );
         });
     });
@@ -123,6 +134,14 @@ describe('SchemaService', () => {
             expect(api.post).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceType}/translate/generic`, {
                 toTheMoon: '🚀',
             });
+        });
+    });
+
+    describe('getDefaultObjectsToGet', () => {
+        it('should make a GET call to the specific SchemaSources url', () => {
+            schemaService.getDefaultObjectsToGet(sourceType);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
         });
     });
 });

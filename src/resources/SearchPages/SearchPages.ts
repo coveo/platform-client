@@ -7,6 +7,10 @@ import {
     UpdateSearchPageModel,
     SearchPageVersionModel,
     MajorMinorVersion,
+    SearchPageHeadersModel,
+    ReorderSearchPageHeadersModel,
+    JavaScriptResourceModel,
+    CSSResourceModel,
 } from './SearchPagesInterfaces';
 
 export default class SearchPages extends Resource {
@@ -38,5 +42,43 @@ export default class SearchPages extends Resource {
 
     updateVersion(pageId: string, version: MajorMinorVersion) {
         return this.api.put(this.buildPath(`${SearchPages.baseUrl}/${pageId}/searchui`, version));
+    }
+
+    getHeaders(pageId: string) {
+        return this.api.get<SearchPageHeadersModel>(`${SearchPages.baseUrl}/${pageId}/header`);
+    }
+
+    reorderHeaders(pageId: string, resources: ReorderSearchPageHeadersModel) {
+        return this.api.put<SearchPageHeadersModel>(`${SearchPages.baseUrl}/${pageId}/header`, resources);
+    }
+
+    createCssResource(pageId: string, resource: CSSResourceModel) {
+        return this.api.post<SearchPageHeadersModel>(`${SearchPages.baseUrl}/${pageId}/header/css`, resource);
+    }
+
+    updateCssResource(pageId: string, resourceName: string, resource: CSSResourceModel) {
+        return this.api.put<SearchPageHeadersModel>(
+            `${SearchPages.baseUrl}/${pageId}/header/css/${resourceName}`,
+            resource
+        );
+    }
+
+    deleteCssResource(pageId: string, resourceName: string) {
+        return this.api.delete(`${SearchPages.baseUrl}/${pageId}/header/css/${resourceName}`);
+    }
+
+    createJsResource(pageId: string, resource: JavaScriptResourceModel) {
+        return this.api.post<SearchPageHeadersModel>(`${SearchPages.baseUrl}/${pageId}/header/javascript`, resource);
+    }
+
+    updateJsResource(pageId: string, resourceName: string, resource: JavaScriptResourceModel) {
+        return this.api.put<SearchPageHeadersModel>(
+            `${SearchPages.baseUrl}/${pageId}/header/javascript/${resourceName}`,
+            resource
+        );
+    }
+
+    deleteJsResource(pageId: string, resourceName: string) {
+        return this.api.delete(`${SearchPages.baseUrl}/${pageId}/header/javascript/${resourceName}`);
     }
 }

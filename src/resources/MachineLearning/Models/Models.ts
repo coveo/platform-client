@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import Resource from '../../Resource';
+import {RegistrationModel} from '../MachineLearningInterfaces';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 import {MLModel} from './ModelsInterfaces';
 
@@ -24,5 +25,9 @@ export default class Models extends Resource {
 
     delete(modelId: string) {
         return this.api.delete(`${Models.baseUrl}/${modelId}`);
+    }
+
+    update(modelId: string, update: RegistrationModel) {
+        return this.api.put<MLModel>(`${Models.baseUrl}/${modelId}`, update);
     }
 }

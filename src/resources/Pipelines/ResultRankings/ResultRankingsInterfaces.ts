@@ -1,4 +1,11 @@
-import {ListStatementSortBy, ResultRankingLocales, ResultRankingMatchOperators, ResultRankingsKind} from '../../Enums';
+import {
+    ListStatementSortBy,
+    ResultRankingLocales,
+    ResultRankingMatchOperators,
+    ResultRankingsKind,
+    ResultRankingsRuleTypes,
+    ResultRankingsStatuses,
+} from '../../Enums';
 
 export interface ResultRanking {
     id: string;
@@ -90,7 +97,7 @@ export interface ResultRankingQplCodePredicate {
 }
 
 export interface ResultRankingGroupByStatementGroups {
-    associated: Record<string,number>
+    associated: Record<string, number>;
     orphaned: number;
 }
 
@@ -104,11 +111,10 @@ export interface ResultRankingGroupByTypes {
     featuredResults: number;
 }
 
-export interface ResultRankingGroupBy{
+export interface ResultRankingGroupBy {
     groups: ResultRankingGroupByStatementGroups;
     status: ResultRankingGroupByStatus;
     type: ResultRankingGroupByTypes;
-
 }
 
 export interface ListResultRankingResponse {
@@ -126,5 +132,18 @@ export interface ListResultRankingParams {
     perPage?: number;
     organizationId?: string;
     associatedGroups?: Array<string | null>;
+
+    /**
+     * @deprecated `ruleTypes` should be preferred over _kind_.
+     * @see ruleTypes
+     */
     kind?: ResultRankingsKind;
+
+    /**
+     * Similar to `kind`, the _ruleTypes_ parameter allows to filter by result ranking rule type.
+     * This new parameter should be preferred over `kind` as it may eventually support other rule types.
+     * @see kind
+     */
+    ruleTypes?: ResultRankingsRuleTypes[];
+    ruleStatuses?: ResultRankingsStatuses[];
 }

@@ -12,11 +12,13 @@ import {
     RawSourceConfig,
     SourceModel,
 } from './SourcesInterfaces';
+import SourcesMappings from './SourcesMappings/SourcesMappings';
 
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
 
     field: SourcesFields;
+    mappings: SourcesMappings;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);

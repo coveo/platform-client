@@ -653,6 +653,16 @@ export enum ResultRankingsKind {
     rankingExpression = 'ranking_expression',
 }
 
+export enum ResultRankingsRuleTypes {
+    featuredResults = 'featuredResults',
+    rankingExpressions = 'rankingExpressions',
+}
+
+export enum ResultRankingsStatuses {
+    active = 'active',
+    inactive = 'inactive',
+}
+
 export enum ResultRankingLocales {
     all = 'all',
     unspecified = 'unspecified',
@@ -827,4 +837,40 @@ export enum RedshiftEndpointStatus {
     unavailable = 'UNAVAILABLE',
     readOnly = 'READ_ONLY',
     writeOnly = 'WRITE_ONLY',
+}
+
+export enum ExportStatus {
+    available = 'AVAILABLE',
+    pending = 'PENDING',
+    failed = 'FAILED',
+}
+
+export enum ExportTablesType {
+    searches = 'SEARCHES',
+    clicks = 'CLICKS',
+    customEvents = 'CUSTOM_EVENTS',
+    keywords = 'KEYWORDS',
+    groups = 'GROUPS',
+    allEvents = 'ALL_EVENTS',
+}
+
+export enum CSVFileFormat {
+    excel = 'EXCEL',
+    noNewline = 'NO_NEWLINE',
+}
+
+export enum DayOfWeek {
+    monday = 'MONDAY',
+    tuesday = 'TUESDAY',
+    wednesday = 'WEDNESDAY',
+    thursday = 'THURSDAY',
+    friday = 'FRIDAY',
+    saturday = 'SATURDAY',
+    sunday = 'SUNDAY',
+}
+
+export enum ExportScheduleFrequency {
+    daily = 'DAILY',
+    monthly = 'MONTHLY',
+    weekly = 'WEEKLY',
 }

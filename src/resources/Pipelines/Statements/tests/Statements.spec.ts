@@ -147,11 +147,25 @@ describe('Statements', () => {
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
-                '/rest/search/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
+                '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
                 mockedFormData
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.append).toHaveBeenCalledWith('file', myCSVFile);
+            expect(mockedFormData.append).toHaveBeenCalledWith('file', myCSVFile, myCSVFile.name);
+        });
+
+        it('should post the string content inside a form multi part data', async () => {
+            const content = `definition,condition,description,feature\n"alias ""CPU"", ""processor""",,Tech thesaurus,thesaurus\n"alias ""Television"", ""Televisions"", ""TV"", ""TVs""",,Basic thesaurus,thesaurus`;
+
+            statements.importCSV('🥚', content, {feature: StatementsFeature.Thesaurus});
+
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=thesaurus',
+                mockedFormData
+            );
+            expect(mockedFormData.append).toHaveBeenCalledTimes(1);
+            expect(mockedFormData.append).toHaveBeenCalledWith('file', content, 'raw-string');
         });
     });
 });
