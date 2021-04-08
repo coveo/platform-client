@@ -84,7 +84,7 @@ export default class Exports extends Resource {
     }
 
     deleteSchedule(exportScheduleId: string) {
-        return this.api.delete<ExportModel>(
+        return this.api.delete<void>(
             this.buildPath(`${Exports.baseUrl}/schedules/${exportScheduleId}`, {org: this.api.organizationId})
         );
     }
