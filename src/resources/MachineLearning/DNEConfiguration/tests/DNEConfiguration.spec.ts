@@ -48,8 +48,8 @@ describe('DNEConfiguration', () => {
 
     describe('parseDocumentExtractionQuery', () => {
         it('should make a GET call to the specific DNEConfiguration url', () => {
-            const aString: string = 'lala';
-            dneConfig.parseDocumentExtractionQuery(aString);
+            const query = 'lala';
+            dneConfig.parseDocumentExtractionQuery(query);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${DNEConfiguration.baseUrl}/documentextractionquery?query=lala`);
