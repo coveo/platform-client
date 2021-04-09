@@ -52,7 +52,7 @@ describe('DNEConfiguration', () => {
             dneConfig.parseDocumentExtractionQuery(query);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${DNEConfiguration.baseUrl}/documentextractionquery?query=lala`);
+            expect(api.get).toHaveBeenCalledWith(`${DNEConfiguration.baseUrl}/documentextractionquerymodel?query=lala`);
         });
     });
 
