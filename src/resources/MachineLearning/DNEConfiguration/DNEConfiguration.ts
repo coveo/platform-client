@@ -32,7 +32,7 @@ export default class DNEConfiguration extends Resource {
 
     parseDocumentExtractionQuery(query: string) {
         return this.api.get<DocumentExtractionQueryModel>(
-            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionquery`, {query})
+            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionquery`, {query: decodeURI(query)})
         );
     }
 
