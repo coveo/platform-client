@@ -15,6 +15,7 @@ export interface SchemaEntityField {
     id: string;
     type: string;
     reference?: string;
+    isAlwaysIndexed?: boolean;
 }
 
 export interface SchemaEntityFields {
