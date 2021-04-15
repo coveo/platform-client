@@ -103,6 +103,15 @@ describe('Catalog', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields`);
         });
+
+        it('should allow bypassing the cache', () => {
+            const catalogOfFieldsToGetId = 'catalog-of-fields';
+            catalog.getFields(catalogOfFieldsToGetId, {bypassCache: true});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields?bypassCache=true`
+            );
+        });
     });
 
     describe('update', () => {
