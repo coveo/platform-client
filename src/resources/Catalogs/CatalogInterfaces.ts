@@ -1,10 +1,14 @@
 export interface CatalogsListOptions {
-    filter?: string; 
+    filter?: string;
     page?: number;
     pageSize?: number;
 }
 
 export type CatalogConfigurationsListOptions = Omit<CatalogsListOptions, 'filter'>;
+
+export interface CatalogFieldsOptions {
+    bypassCache?: boolean;
+}
 
 export interface CatalogFieldsMapping {
     [name: string]: string;
