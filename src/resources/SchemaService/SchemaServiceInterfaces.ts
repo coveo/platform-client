@@ -36,6 +36,7 @@ export interface SchemaServiceQueryParams {
 export interface GetEntitiesQueryParams extends SchemaServiceQueryParams {
     offset?: number;
     limit?: number;
+    query?: string;
 }
 
 export interface GetEntityQueryParams extends SchemaServiceQueryParams {

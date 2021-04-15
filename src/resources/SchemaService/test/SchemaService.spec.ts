@@ -34,10 +34,10 @@ describe('SchemaService', () => {
 
     describe('getEntities', () => {
         it('should make a GET call to the specific SchemaService url with the correct params', () => {
-            schemaService.getEntities(sourceType, {...params, offset: 100, limit: 100});
+            schemaService.getEntities(sourceType, {...params, offset: 100, limit: 100, query: 'toTheMoon'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100&query=toTheMoon`
             );
         });
     });
