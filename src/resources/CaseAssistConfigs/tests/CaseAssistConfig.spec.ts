@@ -60,13 +60,13 @@ describe('CaseAssistConfig', () => {
             },
             classificationConfigurations: [
                 {
-                    filter: 'filter_string',
+                    modelId: 'model-id',
                     fieldsToPredict: [
                         {
                             name: 'field1',
                         },
                     ],
-                    strategy: CaseClassificationStrategies.Some,
+                    strategy: CaseClassificationStrategies.Axon,
                 },
             ],
         },

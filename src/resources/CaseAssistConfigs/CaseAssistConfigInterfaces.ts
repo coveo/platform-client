@@ -9,6 +9,7 @@ export enum TypingAidsStrategies {
 
 export enum CaseClassificationStrategies {
     Some = 'Some',
+    Axon = 'Axon',
 }
 
 export interface CaseAssistConfigListOptions {
@@ -43,9 +44,17 @@ export interface CaseClassificationSomeConfigurationModel {
     strategy: CaseClassificationStrategies;
 }
 
+export interface CaseClassificationAxonConfigurationModel {
+    modelId: string;
+    fieldsToPredict: Array<{name: string}>;
+    strategy: CaseClassificationStrategies;
+}
+
 export type TypingAidsConfigurations = StaticValuesConfigurationModel | ValuesFromIndexConfigurationModel;
 export type DocumentSuggestionsConfigurations = ITDConfigurationModel;
-export type CaseClassificationConfiguration = CaseClassificationSomeConfigurationModel;
+export type CaseClassificationConfiguration =
+    | CaseClassificationSomeConfigurationModel
+    | CaseClassificationAxonConfigurationModel;
 
 export interface CaseAssistConfigModel {
     id: string;
