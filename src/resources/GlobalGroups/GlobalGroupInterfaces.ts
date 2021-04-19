@@ -12,7 +12,6 @@ export interface GlobalGroupModel {
 }
 
 export interface GlobalPrivilegeModel extends PrivilegeModel {
-    global: boolean;
     level: string;
 }
 

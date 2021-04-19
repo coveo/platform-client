@@ -15,7 +15,7 @@ export interface IdAndDisplayNameModel {
 export interface PrivilegeModel {
     owner: string;
     targetDomain: string;
-    targetId: string;
+    targetId?: string;
     type?: string;
 }
 
