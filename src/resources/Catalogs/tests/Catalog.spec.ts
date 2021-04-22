@@ -1,7 +1,7 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Catalog from '../Catalog';
-import {CreateCatalogModel, CatalogModel, FieldsSuggestionsQueryModel} from '../CatalogInterfaces';
+import {CreateCatalogModel, CatalogModel} from '../CatalogInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -111,21 +111,6 @@ describe('Catalog', () => {
             expect(api.get).toHaveBeenCalledWith(
                 `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields?bypassCache=true`
             );
-        });
-    });
-
-    describe('getFieldsSuggestions', () => {
-        it('should make a POST call to to retrieve fields suggestions', () => {
-            const query: FieldsSuggestionsQueryModel = {
-                sourceNames: ['source1'],
-                availabilitySourceNames: ['availability_source1'],
-                productObjectType: 'Product',
-                variantObjectType: 'Variant',
-                availabilityObjectType: 'Availability',
-            };
-            catalog.getFieldsSuggestions(query);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Catalog.baseUrl}/fieldsSuggestions`, query);
         });
     });
 

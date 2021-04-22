@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import Organization from '../Organization';
+import {DefinitionModel} from '../OrganizationInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -128,6 +129,35 @@ describe('Organization', () => {
             organization.listApiKeysPrivileges();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/privileges/apikeys');
+        });
+    });
+
+    describe('Definitions', () => {
+        describe('get', () => {
+            it('should make a GET call to the specific Organization Definition url', () => {
+                organization.getDefinition();
+
+                expect(api.get).toHaveBeenCalledTimes(1);
+                expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/definition`);
+            });
+        });
+
+        describe('update', () => {
+            it('should make a PUT call to the specific Organization Definition url', () => {
+                const definitionModel: DefinitionModel = {
+                    organizationId: 'organizationId',
+                    baseLicenseTemplateId: 'baseLicenseTemplateId',
+                    modifiers: [],
+                    overrides: [],
+                };
+                organization.updateDefinition(definitionModel);
+
+                expect(api.put).toHaveBeenCalledTimes(1);
+                expect(api.put).toHaveBeenCalledWith(
+                    `/rest/organizations/{organizationName}/definition`,
+                    definitionModel
+                );
+            });
         });
     });
 });

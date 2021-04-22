@@ -32,6 +32,7 @@ import User from './Users/User';
 import Links from './Links/Links';
 import Connectivity from './Connectivity/Connectivity';
 import PushApi from './PushApi/PushApi';
+import ModifierTemplates from './ModifierTemplates/ModifierTemplates';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -49,6 +50,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'group', resource: Group},
     {key: 'index', resource: Index},
     {key: 'ml', resource: MachineLearning},
+    {key: 'modifierTemplates', resource: ModifierTemplates},
     {key: 'license', resource: License},
     {key: 'limits', resource: Limits},
     {key: 'links', resource: Links},
@@ -87,6 +89,7 @@ class PlatformResources {
     group: Group;
     index: Index;
     ml: MachineLearning;
+    modifierTemplates: ModifierTemplates;
     license: License;
     limits: Limits;
     links: Links;
