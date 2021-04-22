@@ -103,23 +103,6 @@ export type CreateCatalogModel = BaseCatalogModel &
           }
     );
 
-export interface FieldsSuggestionsQueryModel {
-    sourceNames: string[];
-    availabilitySourceNames?: string[];
-    productObjectType: string;
-    variantObjectType?: string;
-    availabilityObjectType?: string;
-}
-
-export interface FieldsSuggestionsModel {
-    fields: FieldSuggestions[];
-}
-
-export interface FieldSuggestions {
-    name: string;
-    examples: string[];
-}
-
 export interface ProductHierarchyModel {
     /**
      * @deprecated `fields` will be ignored by the service on creation or update, but is kept for backward compatibility.
