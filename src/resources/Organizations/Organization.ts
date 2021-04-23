@@ -3,6 +3,7 @@ import {PageModel, PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {
     CreateOrganizationOptions,
+    DefinitionModel,
     GetOrganizationOptions,
     ListOrganizationOptions,
     OrganizationModel,
@@ -53,5 +54,16 @@ export default class Organization extends Resource {
 
     listApiKeysPrivileges() {
         return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/apikeys`);
+    }
+
+    getDefinition() {
+        return this.api.get<DefinitionModel>(`${Organization.baseUrl}/${API.orgPlaceholder}/definition`);
+    }
+
+    updateDefinition(organizationDefinition: DefinitionModel) {
+        return this.api.put<DefinitionModel>(
+            `${Organization.baseUrl}/${API.orgPlaceholder}/definition`,
+            organizationDefinition
+        );
     }
 }
