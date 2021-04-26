@@ -17,7 +17,10 @@ export default class Snowflake extends Resource {
     }
 
     createUser(model: SnowflakeUserModel) {
-        return this.api.post<void>(this.buildPath(`${Snowflake.baseUrl}/users`, {org: this.api.organizationId}), model);
+        return this.api.post<SnowflakeUserModel>(
+            this.buildPath(`${Snowflake.baseUrl}/users`, {org: this.api.organizationId}),
+            model
+        );
     }
 
     deleteUser(snowflakeUser: string) {
