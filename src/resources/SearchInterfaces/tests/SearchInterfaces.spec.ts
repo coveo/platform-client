@@ -1,6 +1,7 @@
 import API from '../../../APICore';
 import {New} from '../../../Entry';
-import SearchInterfaces, {IListSearchInterfacesParameters} from '../SearchInterfaces';
+import SearchInterfaces from '../SearchInterfaces';
+import {ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
 
 jest.mock('../../../APICore');
 
