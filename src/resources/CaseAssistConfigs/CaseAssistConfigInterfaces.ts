@@ -46,7 +46,6 @@ export interface CaseClassificationSomeConfigurationModel {
 
 export interface CaseClassificationAxonConfigurationModel {
     modelId: string;
-    fieldsToPredict: FieldToPredict[];
     strategy: CaseClassificationStrategies;
 }
 

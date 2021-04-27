@@ -61,11 +61,6 @@ describe('CaseAssistConfig', () => {
             classificationConfigurations: [
                 {
                     modelId: 'model-id',
-                    fieldsToPredict: [
-                        {
-                            name: 'field1',
-                        },
-                    ],
                     strategy: CaseClassificationStrategies.Axon,
                 },
             ],
