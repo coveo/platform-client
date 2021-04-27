@@ -33,6 +33,7 @@ import Links from './Links/Links';
 import Connectivity from './Connectivity/Connectivity';
 import PushApi from './PushApi/PushApi';
 import ModifierTemplates from './ModifierTemplates/ModifierTemplates';
+import SearchInterfaces from './SearchInterfaces/SearchInterfaces';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -62,6 +63,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'saml', resource: Saml},
     {key: 'schemaService', resource: SchemaService},
     {key: 'search', resource: Search},
+    {key: 'searchInterfaces', resource: SearchInterfaces},
     {key: 'searchPages', resource: SearchPages},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'source', resource: Sources},
@@ -101,6 +103,7 @@ class PlatformResources {
     saml: Saml;
     schemaService: SchemaService;
     search: Search;
+    searchInterfaces: SearchInterfaces;
     searchPages: SearchPages;
     securityCache: SecurityCache;
     source: Sources;
