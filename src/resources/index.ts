@@ -31,3 +31,4 @@ export * from './SearchPages';
 export * from './Limits';
 export * from './Notification';
 export * from './Connectivity';
+export * from './SearchInterfaces';
