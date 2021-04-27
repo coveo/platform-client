@@ -22,18 +22,45 @@ export default class SchemaService extends Ressource {
         super(api, serverlessApi);
     }
 
+    /**
+     * Retrieve entities from the targeted instance
+     * (can be matches of a given query)
+     *
+     * @param {SourceType} sourceType
+     * @param {GetEntitiesQueryParams} [parameters]
+     * @return {SchemaEntities} schemaEntities
+     * @memberof SchemaService
+     */
     getEntities(sourceType: SourceType, parameters?: GetEntitiesQueryParams) {
         return this.api.get<SchemaEntities>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities`, parameters)
         );
     }
 
+    /**
+     * Retrieve the entity of matching ID from the targeted instance
+     *
+     * @param {SourceType} sourceType
+     * @param {string} entityId
+     * @param {GetEntityQueryParams} [parameters]
+     * @return {SimpleSchemaEntity} simpleSchemaEntity
+     * @memberof SchemaService
+     */
     getEntity(sourceType: SourceType, entityId: string, parameters?: GetEntityQueryParams) {
         return this.api.get<SimpleSchemaEntity>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}`, parameters)
         );
     }
 
+    /**
+     * Retrieve the fields of the given entity from the targeted instance
+     *
+     * @param {SourceType} sourceType
+     * @param {string} entityId
+     * @param {SchemaServiceQueryParams} [parameters]
+     * @return {SchemaEntityFields} schemaEntityFields
+     * @memberof SchemaService
+     */
     getFields(sourceType: SourceType, entityId: string, parameters?: SchemaServiceQueryParams) {
         return this.api.get<SchemaEntityFields>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}/fields`, parameters)
@@ -78,6 +105,13 @@ export default class SchemaService extends Ressource {
         );
     }
 
+    /**
+     * Retrieve the default objectsToGet of the given sourceType
+     *
+     * @param {string} sourceType
+     * @return {ObjectsToGet} ObjectsToGet
+     * @memberof SchemaService
+     */
     getDefaultObjectsToGet(sourceType: string) {
         return this.api.get<ObjectsToGet>(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
     }
