@@ -876,3 +876,8 @@ export enum ExportScheduleFrequency {
     monthly = 'MONTHLY',
     weekly = 'WEEKLY',
 }
+
+export enum ReportType {
+    Dashboard = 'dashboard',
+    Explorer = 'explorer',
+}
