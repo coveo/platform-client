@@ -7,6 +7,8 @@ import {
     CatalogModel,
     CatalogsListOptions,
     CreateCatalogModel,
+    FieldsSuggestionsModel,
+    FieldsSuggestionsQueryModel,
 } from './CatalogInterfaces';
 
 export default class Catalog extends Resource {
@@ -44,4 +46,8 @@ export default class Catalog extends Resource {
         return this.api.put<CreateCatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
     }
     /* eslint-enable @typescript-eslint/unified-signatures */
+
+    getFieldsSuggestions(query: FieldsSuggestionsQueryModel) {
+        return this.api.post<FieldsSuggestionsModel>(`${Catalog.baseUrl}/fieldsSuggestions`, query);
+    }
 }
