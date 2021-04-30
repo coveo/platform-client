@@ -1,7 +1,7 @@
 import API from '../../../../../APICore';
 import {ReportType} from '../../../../Enums';
 import Reports from '../Reports';
-import {CreateReportModel, UpdateReportModel} from '../ReportsInterfaces';
+import {CreateReportModel, ReportAccessRequest, ReportAccessType, UpdateReportModel} from '../ReportsInterfaces';
 
 jest.mock('../../../../../APICore');
 
@@ -12,6 +12,7 @@ describe('Reports', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
     const testReportId = 'test-report-id';
+    const testTemplateId = 'test-template-id';
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -76,6 +77,86 @@ describe('Reports', () => {
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}`);
+        });
+    });
+
+    describe('getAccess', () => {
+        it('should make a GET call to the specific report ID url for access', () => {
+            reports.getAccess(testReportId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/access`);
+        });
+    });
+
+    describe('setAccess', () => {
+        it('should make a PUT call to the specific report ID url for access', () => {
+            const access: ReportAccessRequest = {
+                accessType: ReportAccessType.Public,
+                allowedGroups: [],
+                allowedUsers: [],
+            };
+
+            reports.setAccess(testReportId, access);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/access`, access);
+        });
+    });
+
+    describe('getUsers', () => {
+        it('should make a GET call to the specific report ID url for users', () => {
+            reports.getUsers(testReportId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/users`);
+        });
+    });
+
+    describe('setUsers', () => {
+        it('should make a PUT call to the specific report ID url for users', () => {
+            const users: string[] = [];
+
+            reports.setUsers(testReportId, users);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/users`, users);
+        });
+    });
+
+    describe('healthcheck', () => {
+        it('should make a GET call to the specific report endpoint for healthchecks', () => {
+            reports.healthcheck();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('getReportTemplate', () => {
+        it('should make a GET call to the Reports base url for the specific template ID', () => {
+            reports.getReportTemplate(testTemplateId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/templates/${testTemplateId}`);
+        });
+    });
+
+    describe('listReportTemplates', () => {
+        it('should make a GET call to the Reports base url for templates', () => {
+            reports.listReportTemplates(ReportType.Dashboard);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/templates?type=${ReportType.Dashboard}`);
+        });
+    });
+
+    describe('status', () => {
+        it('should make a GET call to the specific report endpoint for service status', () => {
+            reports.getServiceStatus();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/status`);
         });
     });
 });
