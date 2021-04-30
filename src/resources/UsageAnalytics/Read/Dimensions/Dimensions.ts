@@ -52,7 +52,7 @@ export default class Dimensions extends Resource {
         );
     }
 
-    createCustomDimension(model: CustomDimensionModel, params?: CreateCustomDimensionParams) {
+    createCustomDimension(model: CustomDimensionModel, params: CreateCustomDimensionParams) {
         return this.api.post<DimensionModel>(
             this.buildPath(`${Dimensions.baseUrl}/custom`, {...params, org: this.api.organizationId}),
             model
