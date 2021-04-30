@@ -23,6 +23,14 @@ describe('Models', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Models.baseUrl);
         });
+
+        it('should make a GET call to the Models base url with provided engineIds', () => {
+            const engines = ['first', 'second'];
+            const expectedUrl = `${Models.baseUrl}?engines=${engines[0]}&engines=${engines[1]}`;
+            models.list(engines);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(expectedUrl);
+        });
     });
 
     describe('listDetails', () => {
