@@ -878,6 +878,6 @@ export enum ExportScheduleFrequency {
 }
 
 export enum ReportType {
-    Dashboard = 'dashboard',
-    Explorer = 'explorer',
+    Dashboard = 'DASHBOARD',
+    Explorer = 'EXPLORER',
 }
