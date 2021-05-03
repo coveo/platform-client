@@ -47,7 +47,7 @@ describe('CCConfiguration', () => {
             caseFilterConditions: [
                 {
                     field: 'test-field',
-                    operator: Operator.Equals,
+                    operator: Operator.NotEquals,
                     value: 'test-value',
                 },
             ],

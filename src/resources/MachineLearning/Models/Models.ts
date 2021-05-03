@@ -8,8 +8,8 @@ export default class Models extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/models`;
 
     list(engines?: string[]) {
-        const requestUrl = Boolean(engines)
-            ? `${Models.baseUrl}?${engines.map((id) => `engines=${id}`).join('&')}`
+        const requestUrl = engines?.length
+            ? `${Models.baseUrl}?${engines.map((id) => `engines=${encodeURI(id)}`).join('&')}`
             : Models.baseUrl;
         return this.api.get<MLModel[]>(requestUrl);
     }
