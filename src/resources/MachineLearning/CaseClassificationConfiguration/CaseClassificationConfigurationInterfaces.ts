@@ -77,7 +77,7 @@ export interface FixedExtractionPeriod {
 export interface IntervalExtractionPeriod {
     /**
      * The period to export data from. The exportPeriod uses the moment when the model was generated as a base.
-     * Must be in the ISO8601 period format (i.e., PyYmMwWdDThHmMsS)
+     * Must be in the ISO8601 period format (i.e., PyYmMwWdDThHmMsS).
      */
     exportPeriod: string;
 }
