@@ -1,21 +1,37 @@
 import {DimensionStatus, DimensionType} from '../../../Enums';
 
 export interface DimensionModel {
-    // A collection of possible names to use when querying the statistics service with this dimension
+    /**
+     * A collection of possible names to use when querying the statistics service with this dimension
+     */
     apiNames: string[];
-    // Whether the dimension is available in a visit's statistics.
+    /**
+     * Whether the dimension is available in a visit's statistics.
+     */
     availableInVisit?: boolean;
-    // A flag indicating if the dimension is a custom dimension
+    /**
+     * A flag indicating if the dimension is a custom dimension
+     */
     custom: boolean;
-    // The display name of the dimension
+    /**
+     * The display name of the dimension
+     */
     displayName: string;
-    // Indicates the type of events that this dimension can be attached to.
+    /**
+     * Indicates the type of events that this dimension can be attached to.
+     */
     eventTypes: string[];
-    // The name of the dimension when returned by the statistics service
+    /**
+     * The name of the dimension when returned by the statistics service
+     */
     returnName: string;
-    // The status of the dimension
+    /**
+     * The status of the dimension
+     */
     status: DimensionStatus;
-    // The type of the dimension
+    /**
+     * The type of the dimension
+     */
     type: DimensionType;
 }
 
@@ -56,11 +72,17 @@ export interface CreateCustomDimensionParams {
      * If not present, the prefix will be added automatically.
      */
     name: string;
-    // The name of the organization (Coveo Cloud V2 only)
+    /**
+     * The name of the organization (Coveo Cloud V2 only)
+     */
     org?: string;
-    // The types of event where this dimension will be added.
+    /**
+     * The types of event where this dimension will be added.
+     */
     event?: string[];
-    // Whether to update the custom dimension in past events.
+    /**
+     * Whether to update the custom dimension in past events.
+     */
     updatePastEvents?: boolean;
 }
 
