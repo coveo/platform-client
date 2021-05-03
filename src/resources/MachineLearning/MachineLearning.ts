@@ -1,5 +1,6 @@
 import API from '../../APICore';
 import Resource from '../Resource';
+import CaseClassificationConfiguration from './CaseClassificationConfiguration/CaseClassificationConfiguration';
 import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
 import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
 import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
@@ -13,6 +14,7 @@ export default class MachineLearning extends Resource {
     modelInfo: ModelInformation;
     modelConfig: ModelConfiguration;
     dneConfig: DNEConfiguration;
+    caseClassificationConfig: CaseClassificationConfiguration;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -21,6 +23,7 @@ export default class MachineLearning extends Resource {
         this.modelInfo = new ModelInformation(api, serverlessApi);
         this.modelConfig = new ModelConfiguration(api, serverlessApi);
         this.dneConfig = new DNEConfiguration(api, serverlessApi);
+        this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

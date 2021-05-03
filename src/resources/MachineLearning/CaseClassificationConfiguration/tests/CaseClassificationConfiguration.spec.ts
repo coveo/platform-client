@@ -1,7 +1,7 @@
 import API from '../../../../APICore';
 import {New} from '../../../BaseInterfaces';
-import CCConfiguration from '../CCConfiguration';
-import {CCConfigurationModel, Operator} from '../CCConfigurationInterfaces';
+import CCConfiguration from '../CaseClassificationConfiguration';
+import {CaseClassificationConfigurationModel, Operator} from '../CaseClassificationConfigurationInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -12,7 +12,7 @@ describe('CCConfiguration', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
-    const modelConfigs: CCConfigurationModel[] = [
+    const modelConfigs: CaseClassificationConfigurationModel[] = [
         {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
@@ -69,7 +69,7 @@ describe('CCConfiguration', () => {
     });
 
     describe('create', () => {
-        const newCCConfigModel: Array<New<CCConfigurationModel>> = modelConfigs;
+        const newCCConfigModel: Array<New<CaseClassificationConfigurationModel>> = modelConfigs;
         newCCConfigModel.forEach((config) => {
             it('should make a POST call to the Case Classification Configuration base url', () => {
                 ccConfig.create(config);
