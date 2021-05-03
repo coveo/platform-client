@@ -17,7 +17,9 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            exportPeriod: 'test-export-period',
+            documentExtractionPeriod: {
+                exportPeriod: 'test-export-period',
+            },
             caseFilterConditions: [
                 {
                     field: 'test-field',
@@ -33,7 +35,9 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            exportPeriod: 'test-export-period',
+            documentExtractionPeriod: {
+                exportPeriod: 'test-export-period',
+            },
             caseIdField: 'test-case-id',
             fieldsForModelTraining: ['1st-field', '2nd-field'],
             fieldsToPredict: ['1st-field', '2nd-field'],
@@ -42,8 +46,10 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            startTime: 9876543210,
-            endTime: 1234567890,
+            documentExtractionPeriod: {
+                startTime: 9876543210,
+                endTime: 1234567890,
+            },
             caseFilterConditions: [
                 {
                     field: 'test-field',

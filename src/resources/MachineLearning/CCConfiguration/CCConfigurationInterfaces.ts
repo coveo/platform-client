@@ -9,12 +9,15 @@ export interface FilterConditions {
     value: string;
 }
 
-export interface CCConfigurationModelBase {
+export type ExtractionPeriod = FixedExtractionPeriod | IntervalExtractionPeriod;
+
+export interface CCConfigurationModel {
     modelId: string;
     modelDisplayName: string;
     sources: string[];
     caseFilterConditions?: FilterConditions[];
     caseIdField: string;
+    documentExtractionPeriod: ExtractionPeriod;
     fieldsForModelTraining: string[];
     fieldsToPredict: string[];
 }
@@ -27,7 +30,3 @@ export interface FixedExtractionPeriod {
 export interface IntervalExtractionPeriod {
     exportPeriod: string;
 }
-
-export type ExtractionPeriod = FixedExtractionPeriod | IntervalExtractionPeriod;
-
-export type CCConfigurationModel = CCConfigurationModelBase & ExtractionPeriod;
