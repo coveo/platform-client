@@ -7,8 +7,11 @@ import {MLModel} from './ModelsInterfaces';
 export default class Models extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/models`;
 
-    list() {
-        return this.api.get<MLModel[]>(Models.baseUrl);
+    list(engines?: string[]) {
+        const requestUrl = engines?.length
+            ? `${Models.baseUrl}?${engines.map((id) => `engines=${encodeURI(id)}`).join('&')}`
+            : Models.baseUrl;
+        return this.api.get<MLModel[]>(requestUrl);
     }
 
     listDetails() {
