@@ -1,7 +1,7 @@
 import API from '../../../../../APICore';
 import {DimensionEventTypes, DimensionType} from '../../../../Enums';
 import Dimensions from '../Dimensions';
-import {CustomDimensionModel} from '../DimensionsInterfaces';
+import {CreateCustomDimensionParams, CustomDimensionModel} from '../DimensionsInterfaces';
 
 jest.mock('../../../../../APICore');
 
@@ -88,10 +88,14 @@ describe('Dimensions', () => {
                 displayName: '🆒',
                 type: DimensionType.TEXT,
             };
-            dimensions.createCustomDimension(model);
+            const params: CreateCustomDimensionParams = {
+                name: 'new-dimension',
+            };
+
+            dimensions.createCustomDimension(model, params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom`, model);
+            expect(api.post).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom?name=${params.name}`, model);
         });
     });
 
