@@ -6,7 +6,7 @@ import {CaseClassificationConfigurationModel} from './CaseClassificationConfigur
 export default class CaseClassificationConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/caseclassif/model`;
 
-    create(configModel: New<CaseClassificationConfigurationModel>) {
+    create(configModel: New<CaseClassificationConfigurationModel, 'modelId'>) {
         return this.api.post<CaseClassificationConfigurationModel>(
             CaseClassificationConfiguration.baseUrl,
             configModel

@@ -66,13 +66,14 @@ describe('CCConfiguration', () => {
     });
 
     describe('create', () => {
-        const newCCConfigModel: Array<New<CaseClassificationConfigurationModel>> = modelConfigs;
+        const newCCConfigModel = modelConfigs;
         newCCConfigModel.forEach((config) => {
             it('should make a POST call to the Case Classification Configuration base url', () => {
-                ccConfig.create(config);
+                const {modelId, ...newConfig} = config;
+                ccConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(CCConfiguration.baseUrl, config);
+                expect(api.post).toHaveBeenCalledWith(CCConfiguration.baseUrl, newConfig);
             });
         });
     });
