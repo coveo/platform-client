@@ -35,9 +35,6 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            documentExtractionPeriod: {
-                exportPeriod: 'test-export-period',
-            },
             caseIdField: 'test-case-id',
             fieldsForModelTraining: ['1st-field', '2nd-field'],
             fieldsToPredict: ['1st-field', '2nd-field'],
