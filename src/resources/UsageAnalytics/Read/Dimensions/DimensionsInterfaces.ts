@@ -1,13 +1,37 @@
 import {DimensionStatus, DimensionType} from '../../../Enums';
 
 export interface DimensionModel {
+    /**
+     * A collection of possible names to use when querying the statistics service with this dimension
+     */
     apiNames: string[];
+    /**
+     * Whether the dimension is available in a visit's statistics.
+     */
     availableInVisit?: boolean;
+    /**
+     * A flag indicating if the dimension is a custom dimension
+     */
     custom: boolean;
+    /**
+     * The display name of the dimension
+     */
     displayName: string;
+    /**
+     * Indicates the type of events that this dimension can be attached to.
+     */
     eventTypes: string[];
+    /**
+     * The name of the dimension when returned by the statistics service
+     */
     returnName: string;
+    /**
+     * The status of the dimension
+     */
     status: DimensionStatus;
+    /**
+     * The type of the dimension
+     */
     type: DimensionType;
 }
 
@@ -43,9 +67,22 @@ export interface GetDimensionValuesParams {
 }
 
 export interface CreateCustomDimensionParams {
+    /**
+     * The name of the custom dimension. It should start with the 'c_' prefix.
+     * If not present, the prefix will be added automatically.
+     */
+    name: string;
+    /**
+     * The name of the organization (Coveo Cloud V2 only)
+     */
     org?: string;
-    name?: string;
+    /**
+     * The types of event where this dimension will be added.
+     */
     event?: string[];
+    /**
+     * Whether to update the custom dimension in past events.
+     */
     updatePastEvents?: boolean;
 }
 
