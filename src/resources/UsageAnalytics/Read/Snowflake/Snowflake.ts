@@ -3,6 +3,7 @@ import {
     GetCreditUsageParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
+    SnowflakeReaderAccountModel,
     SnowflakeUserModel,
     SnowflakeUsersModel,
 } from './SnowflakeInterfaces';
@@ -57,6 +58,18 @@ export default class Snowflake extends Resource {
     getCreditUsage(params: GetCreditUsageParams) {
         return this.api.get<SnowflakeCreditUsageModel>(
             this.buildPath(`${Snowflake.baseUrl}/creditusage`, {...params, org: this.api.organizationId})
+        );
+    }
+
+    getSnowflakeReaderAccount() {
+        return this.api.get<SnowflakeReaderAccountModel>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
+        );
+    }
+
+    updateSnowflakeReaderAccount() {
+        return this.api.put<SnowflakeReaderAccountModel>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
         );
     }
 }

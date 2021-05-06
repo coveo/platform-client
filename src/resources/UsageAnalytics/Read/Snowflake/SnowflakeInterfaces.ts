@@ -28,3 +28,7 @@ export interface GetCreditUsageParams {
 export interface SnowflakeCreditUsageModel {
     creditsUsed: number;
 }
+
+export interface SnowflakeReaderAccountModel {
+    snowflakeReaderAccountStatus: string;
+}
