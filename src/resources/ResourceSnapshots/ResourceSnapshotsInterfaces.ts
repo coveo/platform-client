@@ -10,6 +10,9 @@ export interface ResourceSnapshotsModel {
     contentSummary?: Record<string, number>;
 }
 
+/*
+ * 'Resource' is defined as anything uniquely identified on the platform's domain that can be created, updated or deleted
+ */
 export enum ResourceType {
     apiKey = 'API_KEY',
     catalog = 'CATALOG',
