@@ -861,6 +861,11 @@ export enum CSVFileFormat {
     noNewline = 'NO_NEWLINE',
 }
 
+export enum SnowflakeReaderAccountStatus {
+    creating = 'CREATING',
+    available = 'AVAILABLE',
+}
+
 export enum DayOfWeek {
     monday = 'MONDAY',
     tuesday = 'TUESDAY',

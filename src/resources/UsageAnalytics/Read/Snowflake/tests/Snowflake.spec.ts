@@ -102,4 +102,30 @@ describe('Snowflake', () => {
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/creditusage?from=coulilizazou&to=ross`);
         });
     });
+
+    describe('getSnowflakeReaderAccountStatus', () => {
+        /*
+         * TODO uncomment when the API call is public
+         */
+        // eslint-disable-next-line jest/no-commented-out-tests
+        // it('makes a GET call to the specific Snowflake url', () => {
+        //     snowflake.getSnowflakeReaderAccountStatus();
+
+        //     expect(api.get).toHaveBeenCalledTimes(1);
+        //     expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
+        // });
+    });
+
+    describe('createSnowflakeReaderAccount', () => {
+        /*
+         * TODO uncomment when the API call is public
+         */
+        // eslint-disable-next-line jest/no-commented-out-tests
+        // it('makes a PUT call to the specific Snowflake url', () => {
+        //     snowflake.createSnowflakeReaderAccount();
+
+        //     expect(api.put).toHaveBeenCalledTimes(1);
+        //     expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
+        // });
+    });
 });
