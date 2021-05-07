@@ -10,22 +10,31 @@ export interface ResourceSnapshotsModel {
     contentSummary?: Record<string, number>;
 }
 
+/*
+ * 'Resource' is defined as anything uniquely identified on the platform's domain that can be created, updated or deleted
+ */
 export enum ResourceType {
+    apiKey = 'API_KEY',
+    catalog = 'CATALOG',
     extension = 'EXTENSION',
     featuredResult = 'FEATURED_RESULT',
     field = 'FIELD',
     filter = 'FILTER',
+    group = 'GROUP',
+    mapping = 'MAPPING',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
-    mapping = 'MAPPING',
     queryParameter = 'QUERY_PARAMETER',
     queryPipeline = 'QUERY_PIPELINE',
     queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
     rankingExpression = 'RANKING_EXPRESSION',
     rankingWeight = 'RANKING_WEIGHT',
+    searchInterface = 'SEARCH_INTERFACE',
     searchPage = 'SEARCH_PAGE',
+    securityProvider = 'SECURITY_PROVIDER',
     source = 'SOURCE',
     stopWord = 'STOP_WORD',
+    statementGroup = 'STATEMENT_GROUP',
     subscription = 'SUBSCRIPTION',
     thesaurus = 'THESAURUS',
     trigger = 'TRIGGER',
