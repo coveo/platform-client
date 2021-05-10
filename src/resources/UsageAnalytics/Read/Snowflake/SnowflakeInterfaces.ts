@@ -1,3 +1,5 @@
+import {SnowflakeReaderAccountStatus} from '../../../Enums';
+
 export interface SnowflakeUsersModel {
     snowflakeUsers: SnowflakeUserModel[];
 }
@@ -27,4 +29,11 @@ export interface GetCreditUsageParams {
 
 export interface SnowflakeCreditUsageModel {
     creditsUsed: number;
+}
+
+export interface SnowflakeReaderAccountStatusModel {
+    /**
+     * The status of the create reader account request
+     */
+    snowflakeReaderAccountStatus: SnowflakeReaderAccountStatus;
 }
