@@ -50,7 +50,7 @@ export interface CaseClassificationConfigurationModel {
      * The time period for which to extract cases for model building.
      * Must contain an export period or a start time and end time.
      */
-    documentExtractionPeriod?: ExtractionPeriod;
+    caseExtractionPeriod?: ExtractionPeriod;
     /**
      * The case fields to use for model training.
      * Example: [subject, reason, category]
