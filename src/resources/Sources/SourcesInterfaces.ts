@@ -249,6 +249,7 @@ export interface FormAuthenticationConfig {
     addFoundInputs?: boolean;
     authenticationFailed?: FormAuthenticationFailedConfiguration;
     enableJavaScript?: boolean;
+    forceLogin?: boolean;
     formContentType?: string;
     formId?: string;
     formUrl?: string;
