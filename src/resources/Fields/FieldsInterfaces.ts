@@ -24,6 +24,7 @@ export interface FieldModel {
 }
 
 export interface ListFieldsParams {
+    facetsOnly?: boolean;
     filter?: string;
     order?: SortingOrder;
     origin?: FieldOrigin;
