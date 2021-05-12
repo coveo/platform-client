@@ -102,4 +102,24 @@ describe('Snowflake', () => {
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/creditusage?from=coulilizazou&to=ross`);
         });
     });
+
+    describe('getSnowflakeReaderAccount', () => {
+        it('makes a GET call to the specific Snowflake url', () => {
+            snowflake.getSnowflakeReaderAccount();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
+        });
+    });
+
+    // TODO remove when api is ready
+    // eslint-disable-next-line jest/no-disabled-tests
+    describe.skip('putSnowflakeReaderAccount', () => {
+        it('makes a PUT call to the specific Snowflake url', () => {
+            snowflake.createSnowflakeReaderAccount();
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
+        });
+    });
 });
