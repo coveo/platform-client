@@ -4,3 +4,4 @@ export * from './Models/';
 export * from './ModelInformation/';
 export * from './ModelConfiguration/';
 export * from './DNEConfiguration';
+export * from './CaseClassificationConfiguration';
