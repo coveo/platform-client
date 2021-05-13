@@ -106,5 +106,13 @@ describe('Field', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/page/fields`);
         });
+
+        it('should make a GET call to the specific Field url with the facetsOnly parameter set as true', () => {
+            const params: ListFieldsParams = {facetsOnly: true};
+
+            field.list(params);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/page/fields?facetsOnly=true`);
+        });
     });
 });

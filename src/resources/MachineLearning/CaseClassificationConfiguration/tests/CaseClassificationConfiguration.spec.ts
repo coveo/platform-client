@@ -17,7 +17,7 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            documentExtractionPeriod: {
+            caseExtractionPeriod: {
                 exportPeriod: 'test-export-period',
             },
             caseFilterConditions: [
@@ -43,7 +43,7 @@ describe('CCConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
-            documentExtractionPeriod: {
+            caseExtractionPeriod: {
                 startTime: 9876543210,
                 endTime: 1234567890,
             },

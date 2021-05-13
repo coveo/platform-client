@@ -1,8 +1,10 @@
+import {SnowflakeReaderAccountStatus} from '../../../Enums';
 import Resource from '../../../Resource';
 import {
     GetCreditUsageParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
+    SnowflakeReaderAccountStatusModel,
     SnowflakeUserModel,
     SnowflakeUsersModel,
 } from './SnowflakeInterfaces';
@@ -58,5 +60,23 @@ export default class Snowflake extends Resource {
         return this.api.get<SnowflakeCreditUsageModel>(
             this.buildPath(`${Snowflake.baseUrl}/creditusage`, {...params, org: this.api.organizationId})
         );
+    }
+
+    getSnowflakeReaderAccount() {
+        return this.api.get<SnowflakeReaderAccountStatusModel>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
+        );
+    }
+
+    createSnowflakeReaderAccount() {
+        return new Promise<SnowflakeReaderAccountStatusModel>((resolve) =>
+            resolve({snowflakeReaderAccountStatus: SnowflakeReaderAccountStatus.creating})
+        );
+        /*
+         * TODO uncomment when the API call is public
+         */
+        // return this.api.put<SnowflakeReaderAccountStatusModel>(
+        //     this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
+        // );
     }
 }
