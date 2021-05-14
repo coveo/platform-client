@@ -770,6 +770,7 @@ export enum ModelTypes {
     EventRecommendation = 'eventrecommendation',
     FacetSense = 'facetsense',
     ECommerce = 'ecommerce',
+    CaseClassification = 'caseclassification',
 }
 
 export enum LicenseSection {
