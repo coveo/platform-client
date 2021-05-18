@@ -34,6 +34,7 @@ import Connectivity from './Connectivity/Connectivity';
 import PushApi from './PushApi/PushApi';
 import ModifierTemplates from './ModifierTemplates/ModifierTemplates';
 import SearchInterfaces from './SearchInterfaces/SearchInterfaces';
+import InProductExperiences from './InProductExperiences/InProductExperiences';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -50,6 +51,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'globalGroup', resource: GlobalGroup},
     {key: 'group', resource: Group},
     {key: 'index', resource: Index},
+    {key: 'ipx', resource: InProductExperiences},
     {key: 'ml', resource: MachineLearning},
     {key: 'modifierTemplates', resource: ModifierTemplates},
     {key: 'license', resource: License},
@@ -90,6 +92,7 @@ class PlatformResources {
     globalGroup: GlobalGroup;
     group: Group;
     index: Index;
+    ipx: InProductExperiences;
     ml: MachineLearning;
     modifierTemplates: ModifierTemplates;
     license: License;
