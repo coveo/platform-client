@@ -36,6 +36,8 @@ export interface CatalogConfigurationModel {
 export interface IAssociatedCatalogModel {
     id: string;
     name: string;
+    sourceId?: string;
+    availabilitySourceId?: string;
 }
 
 export interface BaseCatalogModel {
