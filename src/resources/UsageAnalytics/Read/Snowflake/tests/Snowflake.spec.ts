@@ -112,6 +112,15 @@ describe('Snowflake', () => {
         });
     });
 
+    describe('getSnowflakeReaderAccountEndpoint', () => {
+        it('makes a GET call to the specific Snowflake url', () => {
+            snowflake.getSnowflakeReaderAccountEndpoint();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount/endpoint`);
+        });
+    });
+
     // TODO remove when api is ready
     // eslint-disable-next-line jest/no-disabled-tests
     describe.skip('putSnowflakeReaderAccount', () => {

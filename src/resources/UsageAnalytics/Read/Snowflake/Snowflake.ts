@@ -4,6 +4,7 @@ import {
     GetCreditUsageParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
+    SnowflakeReaderAccountEndpointModel,
     SnowflakeReaderAccountStatusModel,
     SnowflakeUserModel,
     SnowflakeUsersModel,
@@ -68,6 +69,12 @@ export default class Snowflake extends Resource {
         );
     }
 
+    getSnowflakeReaderAccountEndpoint() {
+        return this.api.get<SnowflakeReaderAccountEndpointModel>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccount/endpoint`, {org: this.api.organizationId})
+        );
+    }
+
     createSnowflakeReaderAccount() {
         return new Promise<SnowflakeReaderAccountStatusModel>((resolve) =>
             resolve({snowflakeReaderAccountStatus: SnowflakeReaderAccountStatus.creating})
@@ -76,7 +83,7 @@ export default class Snowflake extends Resource {
          * TODO uncomment when the API call is public
          */
         // return this.api.put<SnowflakeReaderAccountStatusModel>(
-        //     this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
+        //     this.buildPath(`${Snowflake.baseUrl}/readerAccount`, {org: this.api.organizationId})
         // );
     }
 }

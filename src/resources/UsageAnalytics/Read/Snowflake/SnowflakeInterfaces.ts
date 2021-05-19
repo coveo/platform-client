@@ -37,3 +37,10 @@ export interface SnowflakeReaderAccountStatusModel {
      */
     snowflakeReaderAccountStatus: SnowflakeReaderAccountStatus;
 }
+
+export interface SnowflakeReaderAccountEndpointModel {
+    /**
+     * The endpoint of the reader account
+     */
+    endpoint: string;
+}
