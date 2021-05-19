@@ -29,6 +29,7 @@ import Notifications from '../Notification/notification';
 import Logs from '../Logs/Logs';
 import Connectivity from '../Connectivity/Connectivity';
 import SearchInterfaces from '../SearchInterfaces/SearchInterfaces';
+import InProductExperiences from '../InProductExperiences/InProductExperiences';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -270,6 +271,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.searchInterfaces).toBeDefined();
             expect(platformResources.searchInterfaces).toBeInstanceOf(SearchInterfaces);
+        });
+
+        it('should register the In Product Experiences resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.ipx).toBeDefined();
+            expect(platformResources.ipx).toBeInstanceOf(InProductExperiences);
         });
     });
 });
