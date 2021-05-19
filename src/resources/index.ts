@@ -9,6 +9,7 @@ export * from './Fields';
 export * from './GlobalGroups';
 export * from './Groups';
 export * from './Indexes';
+export * from './InProductExperiences';
 export * from './License';
 export * from './Logs';
 export * from './MachineLearning';
