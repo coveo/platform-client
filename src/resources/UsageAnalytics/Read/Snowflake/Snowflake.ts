@@ -83,7 +83,7 @@ export default class Snowflake extends Resource {
          * TODO uncomment when the API call is public
          */
         // return this.api.put<SnowflakeReaderAccountStatusModel>(
-        //     this.buildPath(`${Snowflake.baseUrl}/readerAccount`, {org: this.api.organizationId})
+        //     this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
         // );
     }
 }
