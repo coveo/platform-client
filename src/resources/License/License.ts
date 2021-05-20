@@ -1,6 +1,6 @@
 import {LicenseSection} from '../Enums';
 import Resource from '../Resource';
-import {LicenseModel} from './LicenseInterfaces';
+import {LicenseModel, LicenseSourceTypeModel} from './LicenseInterfaces';
 import API from '../../APICore';
 
 export default class License extends Resource {
@@ -20,5 +20,9 @@ export default class License extends Resource {
 
     updateLicense(license: LicenseModel) {
         return this.api.put<LicenseModel>(License.baseUrl, license);
+    }
+
+    getPossibleSourceTypes() {
+        return this.api.get<LicenseSourceTypeModel[]>(`${License.baseUrl}/sourcetypes`);
     }
 }
