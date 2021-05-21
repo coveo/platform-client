@@ -60,4 +60,12 @@ describe('License', () => {
             });
         });
     });
+
+    describe('getPossibleSourceTypes', () => {
+        it('should make a GET call to the specific License url', () => {
+            license.getPossibleSourceTypes();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license/sourcetypes');
+        });
+    });
 });

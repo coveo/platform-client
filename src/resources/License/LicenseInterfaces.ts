@@ -25,3 +25,14 @@ export interface LicenseModel {
     expirationDate: number;
     type: string;
 }
+
+/**
+ * Simplified version of a License's LicenseConnectorModel
+ * Mostly used to list what's possible, compared to a license who will itself only list what's enabled
+ */
+export interface LicenseSourceTypeModel {
+    /**
+     * Type of Source, e.g.CATALOG, PUSH, WEB, SALESFORCE etc.
+     */
+    type: string;
+}
