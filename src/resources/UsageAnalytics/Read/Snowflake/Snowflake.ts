@@ -4,6 +4,7 @@ import {
     GetCreditUsageParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
+    SnowflakeReaderAccountEndpointModel,
     SnowflakeReaderAccountStatusModel,
     SnowflakeUserModel,
     SnowflakeUsersModel,
@@ -65,6 +66,12 @@ export default class Snowflake extends Resource {
     getSnowflakeReaderAccount() {
         return this.api.get<SnowflakeReaderAccountStatusModel>(
             this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
+        );
+    }
+
+    getSnowflakeReaderAccountEndpoint() {
+        return this.api.get<SnowflakeReaderAccountEndpointModel>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccount/endpoint`, {org: this.api.organizationId})
         );
     }
 
