@@ -29,6 +29,7 @@ export * from './UsageAnalytics';
 export * from './Global';
 export * from './SchemaService';
 export * from './SearchPages';
+export * from './SearchUsageMetrics';
 export * from './Limits';
 export * from './Notification';
 export * from './Connectivity';
