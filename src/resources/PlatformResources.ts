@@ -68,6 +68,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'search', resource: Search},
     {key: 'searchInterfaces', resource: SearchInterfaces},
     {key: 'searchPages', resource: SearchPages},
+    {key: 'searchUsageMetrics', resource: SearchUsageMetrics},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'source', resource: Sources},
     {key: 'ua', resource: UsageAnalytics},
