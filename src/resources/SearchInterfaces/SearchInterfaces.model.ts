@@ -41,7 +41,7 @@ export interface ISortCriteria {
      * Default value when sorting by field is ascending.
      * No sort order value is applicable when sorting by relevancy.
      */
-    sort?: SortingOrder;
+    order?: SortingOrder;
 
     /**
      * The [field](https://docs.coveo.com/en/200) on which the sort is based on.

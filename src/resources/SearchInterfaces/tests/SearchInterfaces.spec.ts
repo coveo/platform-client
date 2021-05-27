@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import {New} from '../../../Entry';
+import {SortingBy, SortingOrder} from '../../Enums';
 import SearchInterfaces from '../SearchInterfaces';
 import {ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
 
@@ -23,6 +24,23 @@ describe('SearchInterfaces', () => {
             {
                 field: 'someotherfield',
                 label: 'Some Other Field',
+            },
+        ],
+        sortCriteria: [
+            {
+                by: SortingBy.RELEVANCY,
+                label: 'label',
+            },
+            {
+                by: SortingBy.DATE,
+                label: 'labelx',
+                order: SortingOrder.DESC,
+            },
+            {
+                by: SortingBy.FIELD,
+                label: 'fieldlabel',
+                order: SortingOrder.ASC,
+                field: 'field',
             },
         ],
         accesses: {
