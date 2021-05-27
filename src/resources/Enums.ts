@@ -43,6 +43,12 @@ export enum SortingOrder {
     DESC = 'DESC',
 }
 
+export enum SortingBy {
+    RELEVANCY = 'relevancy',
+    DATE = 'date',
+    FIELD = 'field',
+}
+
 export enum OperationType {
     REBUILD = 'REBUILD',
     FULL_REFRESH = 'FULL_REFRESH',

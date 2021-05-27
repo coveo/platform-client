@@ -1,3 +1,5 @@
+import {SortingBy, SortingOrder} from '../Enums';
+
 export interface IAccesses {
     /**
      * The list of users that are allowed to access the search interface.
@@ -22,6 +24,33 @@ export interface IFacet {
     label: string;
 }
 
+export interface ISortCriteria {
+    /**
+     * Indicates the kind of sort criterion.
+     */
+    by: SortingBy;
+
+    /**
+     * Label of the sort criterion.
+     */
+    label: string;
+
+    /**
+     * Specify the sort order if applicable.
+     * Default value when sorting by date is descending.
+     * Default value when sorting by field is ascending.
+     * No sort order value is applicable when sorting by relevancy.
+     */
+    order?: SortingOrder;
+
+    /**
+     * The [field](https://docs.coveo.com/en/200) on which the sort is based on. For example: filetype.
+     * Required when sorting by field.
+     * This property is ignored unless you are sorting by field.
+     */
+    field?: string;
+}
+
 export interface ISearchInterfaceConfiguration {
     /**
      * The configuration identifier.
@@ -42,6 +71,11 @@ export interface ISearchInterfaceConfiguration {
      * The List of facets to display in the search interface.
      */
     facets: IFacet[];
+
+    /**
+     * The list of sorts to display in the search interface.
+     */
+    sortCriteria: ISortCriteria[];
 
     /**
      * The public access configuration.
