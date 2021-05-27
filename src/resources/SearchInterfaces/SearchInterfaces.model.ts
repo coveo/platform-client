@@ -44,8 +44,9 @@ export interface ISortCriteria {
     order?: SortingOrder;
 
     /**
-     * The [field](https://docs.coveo.com/en/200) on which the sort is based on.
+     * The [field](https://docs.coveo.com/en/200) on which the sort is based on. For example: filetype.
      * Required when sorting by field.
+     * This property is ignored unless you are sorting by field.
      */
     field?: string;
 }
