@@ -1,6 +1,7 @@
 import API from '../../APICore';
 import {PageModel, PrivilegeModel} from '../BaseInterfaces';
 import Resource from '../Resource';
+import Members from './Members/Members';
 import {
     CreateOrganizationOptions,
     DefinitionModel,
@@ -15,6 +16,13 @@ export type NoPagination = undefined | null;
 
 export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
+    members: Members;
+
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
+
+        this.members = new Members(api, serverlessApi);
+    }
 
     list(noPagination?: NoPagination): Promise<OrganizationModel[]>;
     list<T extends ListOrganizationOptions>(

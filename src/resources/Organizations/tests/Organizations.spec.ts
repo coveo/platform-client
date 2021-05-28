@@ -1,4 +1,5 @@
 import API from '../../../APICore';
+import Members from '../Members/Members';
 import Organization from '../Organization';
 import {DefinitionModel} from '../OrganizationInterfaces';
 
@@ -159,5 +160,10 @@ describe('Organization', () => {
                 );
             });
         });
+    });
+
+    it('registers the members resource', () => {
+        expect(organization.members).toBeDefined();
+        expect(organization.members).toBeInstanceOf(Members);
     });
 });
