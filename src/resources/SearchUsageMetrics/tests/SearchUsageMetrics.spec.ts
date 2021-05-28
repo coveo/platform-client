@@ -16,7 +16,7 @@ describe('SearchUsageMetrics', () => {
         searchUsageMetrics = new SearchUsageMetrics(api, serverlessApi);
     });
 
-    it('registers the administration resource', () => {
+    it('registers the licenseMetrics resource', () => {
         expect(searchUsageMetrics.licenseMetrics).toBeDefined();
         expect(searchUsageMetrics.licenseMetrics).toBeInstanceOf(LicenseMetrics);
     });

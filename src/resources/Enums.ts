@@ -5,6 +5,7 @@ export enum AuthProvider {
     OFFICE365 = 'OFFICE365',
     SAML = 'SAML',
     EMAIL = 'EMAIL',
+    OTHER = 'OTHER',
 }
 
 export enum SecurityCacheStateOptions {

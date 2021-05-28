@@ -1,18 +1,36 @@
 export interface RestListOfMetricsModel {
+    /**
+     * The list of metrics
+     */
     metrics: RestMetricsModel[];
 }
 
 export interface RestMetricsModel {
+    /**
+     * The id of the metric
+     */
     id: string;
-    label: string;
+    /**
+     * The display name of the metric
+     */
+    label?: string;
 }
 
 export interface RestListOfMetricValues {
+    /**
+     * The list of daily metric values
+     */
     values: RestMetricValueForDate[];
 }
 
 export interface RestMetricValueForDate {
+    /**
+     * The date for the usage metric value
+     */
     date: string;
+    /**
+     * The numeric metric value
+     */
     value: number;
 }
 
