@@ -3,7 +3,7 @@ import Resource from '../../Resource';
 import {OrganizationMemberModel} from './MembersInterface';
 
 export default class Members extends Resource {
-    static baseUrl = `/rest/organization/${API.orgPlaceholder}/members`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/members`;
 
     getAll() {
         return this.api.get<OrganizationMemberModel[]>(Members.baseUrl);
