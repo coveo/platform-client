@@ -25,6 +25,16 @@ describe('StatementGroups', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(StatementGroups.getBaseUrl(pipelineId));
         });
+
+        it('should make a GET call with a filter', () => {
+            const pipelineId = '️🍰';
+            const filter = 'nameOfCondition';
+            groups.list(pipelineId, {filter});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?filter=nameOfCondition'
+            );
+        });
     });
 
     describe('create', () => {
