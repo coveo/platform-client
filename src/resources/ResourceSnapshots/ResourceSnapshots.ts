@@ -20,7 +20,7 @@ import {
     ValidateAccessOptions,
 } from './ResourceSnapshotsInterfaces';
 
-export default class ResourceSnapshots extends Resource {
+export class ResourceSnapshots extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/snapshots`;
 
     list() {
@@ -140,3 +140,5 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 }
+
+export default ResourceSnapshots;
