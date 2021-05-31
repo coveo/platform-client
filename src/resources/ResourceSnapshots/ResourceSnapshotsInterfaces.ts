@@ -166,6 +166,10 @@ export interface CreateFromFileOptions {
     developerNotes?: string;
 }
 
+export interface GetSnapshotOptions {
+    includeReports?: boolean;
+}
+
 export interface ValidateAccessOptions {
     snapshotAccessType: SnapshotAccessType;
 }

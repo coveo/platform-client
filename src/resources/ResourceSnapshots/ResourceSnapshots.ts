@@ -7,6 +7,7 @@ import {
     CreateFromOrganizationOptions,
     DryRunOptions,
     GenerateUrlOptions,
+    GetSnapshotOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsModel,
@@ -27,8 +28,10 @@ export default class ResourceSnapshots extends Resource {
         return this.api.get<ResourceSnapshotsModel[]>(ResourceSnapshots.baseUrl);
     }
 
-    get(snapshotId: string) {
-        return this.api.get<ResourceSnapshotsModel>(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
+    get(snapshotId: string, options?: GetSnapshotOptions) {
+        return this.api.get<ResourceSnapshotsModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}`, options)
+        );
     }
 
     validateAccess(snapshotId: string, options: ValidateAccessOptions) {
