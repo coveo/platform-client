@@ -6,7 +6,7 @@ export default class Members extends Resource {
     static baseUrl = `/rest/organization/${API.orgPlaceholder}/members`;
 
     getAll() {
-        return this.api.get<OrganizationMemberModel>(Members.baseUrl);
+        return this.api.get<OrganizationMemberModel[]>(Members.baseUrl);
     }
 
     delete(username: string) {
