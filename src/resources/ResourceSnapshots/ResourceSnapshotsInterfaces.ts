@@ -167,6 +167,10 @@ export interface CreateFromFileOptions {
 }
 
 export interface GetSnapshotOptions {
+    /**
+     * Whether to include reports with the snapshot.
+     * @default false
+     */
     includeReports?: boolean;
 }
 
