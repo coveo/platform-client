@@ -49,6 +49,15 @@ describe('ResourceSnapshots', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
         });
+
+        it('should make a GET call to the specific Resource Snapshots url with the includeReports query param', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+
+            resourceSnapshots.get(snapshotToGetId, {includeReports: true});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}?includeReports=true`);
+        });
     });
 
     describe('validateAccess', () => {
