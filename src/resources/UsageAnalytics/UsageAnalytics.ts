@@ -3,6 +3,7 @@ import Resource from '../Resource';
 import Administration from './Read/Administration/Administration';
 import Dimensions from './Read/Dimensions/Dimensions';
 import Exports from './Read/Exports/Exports';
+import Filters from './Read/Filters/Filters';
 import Reports from './Read/Reports/Reports';
 import Snowflake from './Read/Snowflake/Snowflake';
 import Statistics from './Read/Statistics/Statistics';
@@ -14,6 +15,7 @@ export default class UsageAnalytics extends Resource {
     administration: Administration;
     snowflake: Snowflake;
     reports: Reports;
+    filters: Filters;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -24,5 +26,6 @@ export default class UsageAnalytics extends Resource {
         this.administration = new Administration(api, serverlessApi);
         this.snowflake = new Snowflake(api, serverlessApi);
         this.reports = new Reports(api, serverlessApi);
+        this.filters = new Filters(api, serverlessApi);
     }
 }
