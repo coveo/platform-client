@@ -2,6 +2,7 @@ import API from '../../../APICore';
 import Administration from '../Read/Administration/Administration';
 import Dimensions from '../Read/Dimensions/Dimensions';
 import Exports from '../Read/Exports/Exports';
+import Filters from '../Read/Filters/Filters';
 import Reports from '../Read/Reports/Reports';
 import Snowflake from '../Read/Snowflake/Snowflake';
 import Statistics from '../Read/Statistics/Statistics';
@@ -49,5 +50,10 @@ describe('UsageAnalytics', () => {
     it('registers the reports resource', () => {
         expect(ua.reports).toBeDefined();
         expect(ua.reports).toBeInstanceOf(Reports);
+    });
+
+    it('registers the filters resource', () => {
+        expect(ua.filters).toBeDefined();
+        expect(ua.filters).toBeInstanceOf(Filters);
     });
 });
