@@ -36,8 +36,22 @@ export interface StatementGroupComposition {
 }
 
 export interface ListStatementGroupsOptions {
+    /**
+     * The 0-based number of the page of results to get.
+     */
     page?: number;
+
+    /**
+     * The number of results to include per page.
+     */
     perPage?: number;
+
+    /**
+     * The query filter to match.
+     *
+     * This allows you to search within group name, group user notes and condition definition.
+     */
+    filter?: string;
 }
 
 export interface CreateStatementGroupModel {
