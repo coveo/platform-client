@@ -1,5 +1,7 @@
 import Resource from '../../Resource';
 import {
+    CopyResultRankingRequest,
+    CopyResultRankingResponse,
     ListResultRankingParams,
     ListResultRankingResponse,
     ResultRanking,
@@ -82,6 +84,15 @@ export default class ResultRankings extends Resource {
             this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRankingsId}`, {
                 organizationId: this.api.organizationId,
             })
+        );
+    }
+
+    copyTo(pipelineId: string, copyResultRankingRequest: CopyResultRankingRequest) {
+        return this.api.post<CopyResultRankingResponse>(
+            this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/copy`, {
+                organizationId: this.api.organizationId,
+            }),
+            copyResultRankingRequest
         );
     }
 }
