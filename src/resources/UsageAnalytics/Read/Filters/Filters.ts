@@ -5,6 +5,7 @@ import {
     CreateReportingFilterModel,
     CreateReportingFilterResponse,
     FilterModel,
+    FilterResponse,
     FilterServiceHealthResponse,
     FilterServiceStatusResponse,
     FilterTargetsModel,
@@ -35,7 +36,7 @@ export default class Filters extends Resource {
      * Get a reporting filter
      */
     getReportFilter(id: string) {
-        return this.api.get<FilterModel>(
+        return this.api.get<FilterResponse>(
             this.buildPath(`${Filters.reportingBaseUrl}/${id}`, {org: this.api.organizationId})
         );
     }
@@ -80,7 +81,7 @@ export default class Filters extends Resource {
      * Get a permission filter
      */
     getPermissionFilter(id: string) {
-        return this.api.get<FilterModel>(
+        return this.api.get<FilterResponse>(
             this.buildPath(`${Filters.permissionsBaseUrl}/${id}`, {org: this.api.organizationId})
         );
     }
