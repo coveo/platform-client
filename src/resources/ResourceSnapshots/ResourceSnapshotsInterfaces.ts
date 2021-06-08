@@ -115,18 +115,41 @@ export interface ResourceSnapshotsReportOperationModel {
     resourcesUpdated: number
 }
 
-export interface ResourceSnapshotsReportOperationResults {
-    [props: string]: string[];
-}
+
+export type ResourceSnapshotsReportOperationResults = Record<string, string[]>
 
 export interface ResourceSnapshotsReportModel {
+    /**
+     * The unique identifier of the report.
+     */
     id: string;
+    /**
+     * For each type of resource, an object containing failure details, if applicable.
+     */
     resourceOperationResults: Record<string, ResourceSnapshotsReportOperationResults>;
+    /**
+     * For each type of resource, a breakdown of the number of resources per operation.
+     */
     resourceOperations: Record<string, ResourceSnapshotsReportOperationModel>;
-    resourcesProcessed?: number;
+    /**
+     * The number of resources processed by the event.
+     */
+    resourcesProcessed: number;
+    /**
+     * The result code of the snapshot event, if applicable.
+     */
     resultCode: ResourceSnapshotsReportResultCode;
+    /**
+     * The status of the snapshot.
+     */
     status: ResourceSnapshotsReportStatus;
+    /**
+     * The type of snapshot event.
+     */
     type: ResourceSnapshotsReportType;
+    /**
+     * The report creation date in number of milliseconds since UNIX epoch.
+     */
     updatedDate: number;
 }
 
