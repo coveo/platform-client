@@ -11,18 +11,25 @@ describe('SmartSnippetsConfiguration', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
-    const modelConfig: SmartSnippetsConfigurationModel = {
-        modelId: 'test-model-id',
-        modelDisplayName: 'Model Name 1',
-        sources: ['1st-source', '2nd-source'],
-        cssSelectorsToExclude: ['div.mock[id="this-is-a-test"]', '#wow'],
-        documentTypes: [
-            {
-                contentFields: ['field-1', 'field-2'],
-                documentType: 'HTMLFile',
-            },
-        ],
-    };
+    const modelConfigs: SmartSnippetsConfigurationModel[] = [
+        {
+            modelId: 'test-model-id',
+            modelDisplayName: 'Model Name 1',
+            sources: ['1st-source', '2nd-source'],
+        },
+        {
+            modelId: 'test-model-id',
+            modelDisplayName: 'Model Name 1',
+            sources: ['1st-source', '2nd-source'],
+            cssSelectorsToExclude: ['div.mock[id="this-is-a-test"]', '#wow'],
+            documentTypes: [
+                {
+                    contentFields: ['field-1', 'field-2'],
+                    documentType: 'HTMLFile',
+                },
+            ],
+        },
+    ];
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -30,12 +37,14 @@ describe('SmartSnippetsConfiguration', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the Smart Snippets Configuration base url', () => {
-            const {modelId, ...newConfig} = modelConfig;
-            smartSnippetsConfig.create(newConfig);
+        modelConfigs.forEach((modelConfig, index) => {
+            it(`should make a POST call to the Smart Snippets Configuration base url with config ${index}`, () => {
+                const {modelId, ...newConfig} = modelConfig;
+                smartSnippetsConfig.create(newConfig);
 
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.baseUrl, newConfig);
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.baseUrl, newConfig);
+            });
         });
     });
 
@@ -60,14 +69,16 @@ describe('SmartSnippetsConfiguration', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Smart Snippets Configuration url', () => {
-            smartSnippetsConfig.update(modelConfig);
+        modelConfigs.forEach((modelConfig, index) => {
+            it(`should make a PUT call to the specific Smart Snippets Configuration url for config ${index}`, () => {
+                smartSnippetsConfig.update(modelConfig);
 
-            expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(
-                `${SmartSnippetsConfiguration.baseUrl}/${modelConfig.modelId}`,
-                modelConfig
-            );
+                expect(api.put).toHaveBeenCalledTimes(1);
+                expect(api.put).toHaveBeenCalledWith(
+                    `${SmartSnippetsConfiguration.baseUrl}/${modelConfig.modelId}`,
+                    modelConfig
+                );
+            });
         });
     });
 });

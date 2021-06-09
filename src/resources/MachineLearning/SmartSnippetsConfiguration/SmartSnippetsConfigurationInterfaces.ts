@@ -26,10 +26,9 @@ export interface SmartSnippetsConfigurationModel {
     /**
      * An array of css selectors to evaluate content to exclude.
      */
-    cssSelectorsToExclude: string[];
+    cssSelectorsToExclude?: string[];
     /**
-     * Details of the documents to use for smart snippets
-     * Example: sfid
+     * The document type for which content is in custom index fields.
      */
-    documentTypes: DocumentType[];
+    documentTypes?: DocumentType[];
 }
