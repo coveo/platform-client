@@ -5,3 +5,4 @@ export * from './ModelInformation/';
 export * from './ModelConfiguration/';
 export * from './DNEConfiguration';
 export * from './CaseClassificationConfiguration';
+export * from './SmartSnippetsConfiguration';

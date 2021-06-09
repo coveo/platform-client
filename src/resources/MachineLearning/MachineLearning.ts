@@ -2,6 +2,7 @@ import API from '../../APICore';
 import Resource from '../Resource';
 import CaseClassificationConfiguration from './CaseClassificationConfiguration/CaseClassificationConfiguration';
 import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
+import SmartSnippetsConfiguration from './SmartSnippetsConfiguration/SmartSnippetsConfiguration';
 import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
 import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
 import ModelInformation from './ModelInformation/ModelInformation';
@@ -15,6 +16,7 @@ export default class MachineLearning extends Resource {
     modelConfig: ModelConfiguration;
     dneConfig: DNEConfiguration;
     caseClassificationConfig: CaseClassificationConfiguration;
+    smartSnippetsConfig: SmartSnippetsConfiguration;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -24,6 +26,7 @@ export default class MachineLearning extends Resource {
         this.modelConfig = new ModelConfiguration(api, serverlessApi);
         this.dneConfig = new DNEConfiguration(api, serverlessApi);
         this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
+        this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

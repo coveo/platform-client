@@ -34,7 +34,7 @@ export interface CaseClassificationConfigurationModel {
      */
     modelDisplayName: string;
     /**
-     * The IDs of the sources containing the cases to use for model building.
+     * The names of the sources containing the cases to use for model building.
      */
     sources: string[];
     /**
