@@ -117,7 +117,7 @@ export default class Filters extends Resource {
      * Get the users of a permission filters
      */
     getPermissionFilterUsers(id: string) {
-        return this.api.get<PermissionsFilterUser[]>(this.buildPath(`${Filters.permissionsBaseUrl}/${id}/users`, {}));
+        return this.api.get<PermissionsFilterUser[]>(`${Filters.permissionsBaseUrl}/${id}/users`);
     }
 
     /**
@@ -134,14 +134,14 @@ export default class Filters extends Resource {
      * Get the targets of a permission filters
      */
     getPermissionFilterTargets(id: string) {
-        return this.api.get<PermissionsFilterUser[]>(this.buildPath(`${Filters.permissionsBaseUrl}/${id}/targets`, {}));
+        return this.api.get<FilterTargetsResponse[]>(`${Filters.permissionsBaseUrl}/${id}/targets`);
     }
 
     /**
      * Set the targets of a permission filter
      */
     updatePermissionFilterTargets(id: string, targets: FilterTargetsModel) {
-        return this.api.put<FilterTargetsResponse>(
+        return this.api.put(
             this.buildPath(`${Filters.permissionsBaseUrl}/${id}/targets`, {org: this.api.organizationId}),
             targets
         );
