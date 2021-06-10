@@ -6,7 +6,7 @@ jest.mock('../../../../APICore');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('CCConfiguration', () => {
+describe('CaseClassificationConfiguration', () => {
     let ccConfig: CaseClassificationConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
