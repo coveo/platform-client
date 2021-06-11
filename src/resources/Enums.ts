@@ -777,6 +777,7 @@ export enum ModelTypes {
     FacetSense = 'facetsense',
     ECommerce = 'ecommerce',
     CaseClassification = 'caseclassification',
+    SmartSnippets = 'mlquestionanswering',
 }
 
 export enum LicenseSection {
