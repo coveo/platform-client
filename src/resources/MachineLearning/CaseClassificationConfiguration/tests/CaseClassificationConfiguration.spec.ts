@@ -1,14 +1,13 @@
 import API from '../../../../APICore';
-import {New} from '../../../BaseInterfaces';
-import CCConfiguration from '../CaseClassificationConfiguration';
+import CaseClassificationConfiguration from '../CaseClassificationConfiguration';
 import {CaseClassificationConfigurationModel, Operator} from '../CaseClassificationConfigurationInterfaces';
 
 jest.mock('../../../../APICore');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('CCConfiguration', () => {
-    let ccConfig: CCConfiguration;
+describe('CaseClassificationConfiguration', () => {
+    let ccConfig: CaseClassificationConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
@@ -62,7 +61,7 @@ describe('CCConfiguration', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        ccConfig = new CCConfiguration(api, serverlessApi);
+        ccConfig = new CaseClassificationConfiguration(api, serverlessApi);
     });
 
     describe('create', () => {
@@ -73,7 +72,7 @@ describe('CCConfiguration', () => {
                 ccConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(CCConfiguration.baseUrl, newConfig);
+                expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.baseUrl, newConfig);
             });
         });
     });
@@ -84,7 +83,7 @@ describe('CCConfiguration', () => {
             ccConfig.delete(configToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${CCConfiguration.baseUrl}/${configToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${CaseClassificationConfiguration.baseUrl}/${configToDeleteId}`);
         });
     });
 
@@ -94,7 +93,7 @@ describe('CCConfiguration', () => {
             ccConfig.get(configToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CCConfiguration.baseUrl}/${configToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${CaseClassificationConfiguration.baseUrl}/${configToGetId}`);
         });
     });
 
@@ -104,7 +103,10 @@ describe('CCConfiguration', () => {
                 ccConfig.update(config);
 
                 expect(api.put).toHaveBeenCalledTimes(1);
-                expect(api.put).toHaveBeenCalledWith(`${CCConfiguration.baseUrl}/${config.modelId}`, config);
+                expect(api.put).toHaveBeenCalledWith(
+                    `${CaseClassificationConfiguration.baseUrl}/${config.modelId}`,
+                    config
+                );
             });
         });
     });
