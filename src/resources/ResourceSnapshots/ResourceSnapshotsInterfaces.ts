@@ -88,14 +88,68 @@ export enum ResourceSnapshotContentType {
     CURRENT_STATE = 'CURRENT_STATE',
 }
 
+export interface ResourceSnapshotsReportOperationModel {
+    /**
+     * The number of resources created by the operation.
+     */
+    resourcesCreated: number
+    /**
+     * The number of resources deleted by the operation.
+     */
+    resourcesDeleted: number
+    /**
+     * The number of resources for which an error occurred during the operation.
+     */
+    resourcesInError: number
+    /**
+     * The number of pre-existing resources recreated by the operation. This happens when a resource cannot be updated. For example, it is not possible to rename a query pipeline, so in such a case the pipeline would be deleted and created again with the desired name. This operation counts as one recreation.
+     */
+    resourcesRecreated: number
+    /**
+     * The number of resources unchanged by the operation.
+     */
+    resourcesUnchanged: number
+    /**
+     * The number of resources updated by the operation.
+     */
+    resourcesUpdated: number
+}
+
+
+export type ResourceSnapshotsReportOperationResults = Record<string, string[]>
+
 export interface ResourceSnapshotsReportModel {
+    /**
+     * The unique identifier of the report.
+     */
     id: string;
-    resourceOperationResults?: Record<string, unknown>;
-    resourceOperations?: Record<string, unknown>;
-    resourcesProcessed?: number;
+    /**
+     * For each type of resource, an object containing failure details, if applicable.
+     */
+    resourceOperationResults: Record<string, ResourceSnapshotsReportOperationResults>;
+    /**
+     * For each type of resource, a breakdown of the number of resources per operation.
+     */
+    resourceOperations: Record<string, ResourceSnapshotsReportOperationModel>;
+    /**
+     * The number of resources processed by the event.
+     */
+    resourcesProcessed: number;
+    /**
+     * The result code of the snapshot event, if applicable.
+     */
     resultCode: ResourceSnapshotsReportResultCode;
+    /**
+     * The status of the snapshot.
+     */
     status: ResourceSnapshotsReportStatus;
+    /**
+     * The type of snapshot event.
+     */
     type: ResourceSnapshotsReportType;
+    /**
+     * The report creation date in number of milliseconds since UNIX epoch.
+     */
     updatedDate: number;
 }
 
