@@ -66,3 +66,44 @@ export interface CreateStatementGroupModel {
 export interface UpdateStatementGroupModel extends CreateStatementGroupModel {
     isActive?: boolean;
 }
+
+export interface UpdateStatementGroupRuleAssociationsRequest {
+    /**
+     * The rules to add to this group. (max-length: 50)
+     *
+     * If you specify a rule from another group, it will be removed from the original group and added to this one instead.
+     *
+     * **Note**: Invalid rule IDs will cause the request to fail.
+     */
+    toAdd?: Array<StatementGroupRuleAssociationItem>;
+
+    /**
+     * The rules to remove from this group. (max-length: 50)
+     *
+     * **Note**: Orphaned rules, rules that are associated with another group, and non-existent rules will be ignored.
+     */
+    toRemove?: Array<StatementGroupRuleAssociationItem>;
+}
+
+export interface StatementGroupRuleAssociationItem {
+    /**
+     * The query pipeline feature that's enabled by this rule.
+     */
+    featureType: StatementGroupRuleAssociationFeatureTypeEnum;
+
+    /**
+     * The unique identifier of the rule.
+     */
+    ruleId: string;
+}
+
+export enum StatementGroupRuleAssociationFeatureTypeEnum {
+    ResultRankings = 'resultRankings',
+}
+
+export interface UpdateStatementGroupRuleAssociationsResponse {
+    /**
+     * The rules associated with this group.
+     */
+    associatedRules: Array<StatementGroupRuleAssociationItem>;
+}

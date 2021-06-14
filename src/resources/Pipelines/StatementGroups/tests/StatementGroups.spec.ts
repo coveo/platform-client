@@ -1,7 +1,11 @@
 import API from '../../../../APICore';
 import {StatementGroupType} from '../../../Enums';
 import StatementGroups from '../StatementGroups';
-import {CreateStatementGroupModel, StatementGroupModel} from '../StatementGroupsInterfaces';
+import {
+    CreateStatementGroupModel,
+    StatementGroupModel,
+    StatementGroupRuleAssociationFeatureTypeEnum,
+} from '../StatementGroupsInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -106,6 +110,54 @@ describe('StatementGroups', () => {
             expect(api.patch).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 isActive,
             });
+        });
+    });
+
+    describe('bulkUpdateRuleAssociations', () => {
+        it('should make a PUT call to the specific statements group url', () => {
+            const pipelineId = 'pipeline1';
+            const groupId = 'group1';
+
+            groups.bulkUpdateRuleAssociations(pipelineId, groupId, {
+                toAdd: [
+                    {
+                        ruleId: 'rule1',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                    {
+                        ruleId: 'rule2',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                ],
+                toRemove: [
+                    {
+                        ruleId: 'rule3',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                ],
+            });
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/pipeline1/statementGroups/group1/associations',
+                {
+                    toAdd: [
+                        {
+                            ruleId: 'rule1',
+                            featureType: 'resultRankings',
+                        },
+                        {
+                            ruleId: 'rule2',
+                            featureType: 'resultRankings',
+                        },
+                    ],
+                    toRemove: [
+                        {
+                            ruleId: 'rule3',
+                            featureType: 'resultRankings',
+                        },
+                    ],
+                }
+            );
         });
     });
 });
