@@ -10,6 +10,10 @@ export interface IAccesses {
      * The list of domains that are allowed to access the search interface.
      */
     domains: string[];
+
+    sharingLinkEnabled?: boolean;
+
+    sharingDomainEnabled?: boolean;
 }
 
 export interface IFacet {

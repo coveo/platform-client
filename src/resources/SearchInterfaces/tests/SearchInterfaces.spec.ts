@@ -2,7 +2,7 @@ import API from '../../../APICore';
 import {New} from '../../../Entry';
 import {SortingBy, SortingOrder} from '../../Enums';
 import SearchInterfaces from '../SearchInterfaces';
-import {ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
+import {IAccesses, ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
 
 jest.mock('../../../APICore');
 
@@ -129,6 +129,22 @@ describe('SearchInterfaces', () => {
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}`);
+        });
+    });
+
+    describe('updateAccesses', () => {
+        it('makes a PUT call to the SearchInterfaces accesses url', () => {
+            const someAccesses: IAccesses = {
+                users: [],
+                domains: [],
+                sharingDomainEnabled: false,
+                sharingLinkEnabled: false,
+            };
+            const id = 'SearchInterface-id-to-update-accesses';
+            searchInterfaces.updateAccesses(id, someAccesses);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses`, someAccesses);
         });
     });
 });
