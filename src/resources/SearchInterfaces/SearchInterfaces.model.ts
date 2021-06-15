@@ -17,7 +17,7 @@ export interface IAccesses {
     sharingLinkEnabled?: boolean;
 
     /**
-     * When set to true, the domain sharing is enabled. Otherwise, all users have access to the search page.
+     * When set to true, the domain sharing is enabled. Otherwise, only users that have explicitly access to the search page can access it.
      */
     sharingDomainEnabled?: boolean;
 }
