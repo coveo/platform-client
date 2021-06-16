@@ -22,7 +22,7 @@ export interface ResourceSnapshotsModel {
     /**
      * The unique identifier of the organization in which the snapshot applies.
      */
-    targetId?: string;
+    targetId: string;
     /**
      * The list of reports of events on the snapshot.
      */
