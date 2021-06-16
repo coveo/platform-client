@@ -92,31 +92,30 @@ export interface ResourceSnapshotsReportOperationModel {
     /**
      * The number of resources created by the operation.
      */
-    resourcesCreated: number
+    resourcesCreated: number;
     /**
      * The number of resources deleted by the operation.
      */
-    resourcesDeleted: number
+    resourcesDeleted: number;
     /**
      * The number of resources for which an error occurred during the operation.
      */
-    resourcesInError: number
+    resourcesInError: number;
     /**
      * The number of pre-existing resources recreated by the operation. This happens when a resource cannot be updated. For example, it is not possible to rename a query pipeline, so in such a case the pipeline would be deleted and created again with the desired name. This operation counts as one recreation.
      */
-    resourcesRecreated: number
+    resourcesRecreated: number;
     /**
      * The number of resources unchanged by the operation.
      */
-    resourcesUnchanged: number
+    resourcesUnchanged: number;
     /**
      * The number of resources updated by the operation.
      */
-    resourcesUpdated: number
+    resourcesUpdated: number;
 }
 
-
-export type ResourceSnapshotsReportOperationResults = Record<string, string[]>
+export type ResourceSnapshotsReportOperationResults = Record<string, string[]>;
 
 export interface ResourceSnapshotsReportModel {
     /**
@@ -199,7 +198,7 @@ export interface ResourceSnapshotsLinkModel {
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
-    resourcesToExport: Record<string, unknown>;
+    resourcesToExport: Partial<Record<ResourceType, string[] | null>>;
 }
 
 export interface ResourceSnapshotUrlModel {
@@ -223,6 +222,7 @@ export interface CreateFromFileOptions {
 export interface GetSnapshotOptions {
     /**
      * Whether to include reports with the snapshot.
+     *
      * @default false
      */
     includeReports?: boolean;
