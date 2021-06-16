@@ -168,7 +168,7 @@ describe('ResourceSnapshots', () => {
     describe('createFromOrganization', () => {
         it('should make a POST call to the specific Resource Snapshots url', () => {
             const exportConfigurationModel: ResourceSnapshotExportConfigurationModel = {
-                resourcesToExport: {FIELD: ['*'], EXTENSIONS: ['🤖']},
+                resourcesToExport: {FIELD: ['*'], EXTENSION: ['🤖']},
             };
             const createFromOrganizationOptions: CreateFromOrganizationOptions = {
                 developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
@@ -182,7 +182,7 @@ describe('ResourceSnapshots', () => {
                 api.post
             ).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&includeChildrenResources=false`,
-                {resourcesToExport: {EXTENSIONS: ['🤖'], FIELD: ['*']}}
+                {resourcesToExport: {EXTENSION: ['🤖'], FIELD: ['*']}}
             );
         });
     });
