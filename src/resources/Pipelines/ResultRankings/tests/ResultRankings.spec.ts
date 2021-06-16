@@ -7,7 +7,7 @@ import {
     ResultRankingsStatuses,
 } from '../../../Enums';
 import ResultRankings from '../ResultRankings';
-import {ListResultRankingParams, ResultRanking} from '../ResultRankingsInterfaces';
+import {CopyResultRankingRequest, ListResultRankingParams, ResultRanking} from '../ResultRankingsInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -178,7 +178,7 @@ describe('Result Rankings', () => {
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to the specific Result Rankingsn duplicate url', () => {
+        it('should make a POST call to the specific Result Rankings duplicate url', () => {
             const pipelineId = '️a';
 
             resultRankings.duplicate(pipelineId, resultRanking.id);
@@ -186,6 +186,23 @@ describe('Result Rankings', () => {
             expect(api.post).toHaveBeenCalledWith(
                 `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRanking.id}`
             );
+        });
+    });
+
+    describe('copy', () => {
+        it('should make a POST call to the specific Result Rankings copy url', () => {
+            const pipelineId = '️a';
+            const params: CopyResultRankingRequest = {
+                destinationPipelineId: 'target',
+                resultRankingIds: ['rule1', 'rule2'],
+            };
+
+            resultRankings.copyTo(pipelineId, params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${ResultRankings.getBaseUrl(pipelineId)}/copy`, {
+                destinationPipelineId: 'target',
+                resultRankingIds: ['rule1', 'rule2'],
+            });
         });
     });
 });

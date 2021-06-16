@@ -147,3 +147,32 @@ export interface ListResultRankingParams {
     ruleTypes?: ResultRankingsRuleTypes[];
     ruleStatuses?: ResultRankingsStatuses[];
 }
+
+export interface CopyResultRankingRequest {
+    /**
+     * The unique identifier of the query pipeline to copy the statements to
+     */
+    destinationPipelineId: string;
+
+    /**
+     * The unique identifiers of the result ranking rules to copy.
+     */
+    resultRankingIds: string[];
+}
+
+export interface CopyResultRankingResponse {
+    /**
+     * The list of result rankings that were copied to the destination pipeline.
+     */
+    resultRankings: Array<{
+        /**
+         * The identifier of the result ranking rule
+         */
+        id: string;
+
+        /**
+         * The result ranking rule content.
+         */
+        resultRanking: ResultRankingProps;
+    }>;
+}
