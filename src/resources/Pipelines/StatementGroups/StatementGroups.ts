@@ -4,6 +4,8 @@ import {
     ListStatementGroupsOptions,
     StatementGroupList,
     StatementGroupModel,
+    UpdateStatementGroupRuleAssociationsRequest,
+    UpdateStatementGroupRuleAssociationsResponse,
 } from './StatementGroupsInterfaces';
 
 export default class StatementGroups extends Resource {
@@ -58,6 +60,19 @@ export default class StatementGroups extends Resource {
                 organizationId: this.api.organizationId,
             }),
             {isActive}
+        );
+    }
+
+    bulkUpdateRuleAssociations(
+        pipelineId: string,
+        groupId: string,
+        request: UpdateStatementGroupRuleAssociationsRequest
+    ) {
+        return this.api.put<UpdateStatementGroupRuleAssociationsResponse>(
+            this.buildPath(`${StatementGroups.getStatementGroupUrl(pipelineId, groupId)}/associations`, {
+                organizationId: this.api.organizationId,
+            }),
+            request
         );
     }
 }
