@@ -4,7 +4,7 @@ export interface ResourceSnapshotsModel {
     developerNote?: string;
     id: string;
     originId?: string;
-    targetId?: string;
+    targetId: string;
     reports?: ResourceSnapshotsReportModel[];
     synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
     contentSummary?: Record<string, number>;
