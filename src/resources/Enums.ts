@@ -730,6 +730,28 @@ export enum StatementGroupType {
     permanent = 'permanent',
 }
 
+/**
+ * An union of all the possible status that you can filter on.
+ */
+export enum ListStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
+    Expired = 'expired',
+    NotStarted = 'notStarted',
+}
+
+export enum CampaignStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
+    Expired = 'expired',
+    NotStarted = 'notStarted',
+}
+
+export enum PermanentStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
+}
+
 export enum DimensionType {
     TEXT = 'TEXT',
     NUMBER = 'NUMBER',

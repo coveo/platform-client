@@ -1,6 +1,7 @@
 import Resource from '../../Resource';
 import {
     CreateStatementGroupModel,
+    UpdateStatementGroupModel,
     ListStatementGroupsOptions,
     StatementGroupList,
     StatementGroupModel,
@@ -18,6 +19,8 @@ export default class StatementGroups extends Resource {
             this.buildPath(StatementGroups.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
                 ...options,
+                status: JSON.stringify(options?.status),
+                types: JSON.stringify(options?.types),
             })
         );
     }
@@ -37,7 +40,7 @@ export default class StatementGroups extends Resource {
         );
     }
 
-    update(pipelineId: string, groupId: string, groupModel: StatementGroupModel) {
+    update(pipelineId: string, groupId: string, groupModel: UpdateStatementGroupModel) {
         return this.api.put<void>(
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
