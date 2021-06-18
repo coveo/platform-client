@@ -131,6 +131,24 @@ describe('Organization', () => {
         });
     });
 
+    describe('pause', () => {
+        it('should make a POST call to the specific Organization url', () => {
+            organization.pause();
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}/${API.orgPlaceholder}/pause`);
+        });
+    });
+
+    describe('resume', () => {
+        it('should make a POST call to the specific Organization url', () => {
+            organization.resume();
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}/${API.orgPlaceholder}/resume`);
+        });
+    });
+
     describe('listPrivileges', () => {
         it('should make a GET call /rest/organizations/{organizationName}/privileges', () => {
             organization.listPrivileges();
