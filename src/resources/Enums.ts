@@ -423,6 +423,11 @@ export enum ModelStatus {
     UPDATE_FAILED = 'UPDATE_FAILED',
 }
 
+export enum ModelActivenessState {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+}
+
 export enum ModelConfigFileType {
     ADVANCED_CONFIGURATION = 'ADVANCED_CONFIGURATION',
     STOPWORDS = 'STOPWORDS',
