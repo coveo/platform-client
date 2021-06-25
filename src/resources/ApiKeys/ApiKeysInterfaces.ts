@@ -9,6 +9,7 @@ export interface ApiKeyModel extends GranularResource {
     description?: string;
     createdBy?: any;
     createdDate?: number;
+    lastUsedDate?: number;
     allowedIps?: string[];
     deniedIps?: string[];
     privileges?: PrivilegeModel[];
