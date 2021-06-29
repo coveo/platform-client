@@ -16,7 +16,7 @@ export interface ResourceSnapshotsModel {
      */
     id: string;
     /**
-     * The unique identifier of the organization from whichthe snapshot originates, if it differs from the current organization.
+     * The unique identifier of the organization from which the snapshot originates if it differs from the current organization.
      */
     originId?: string;
     /**
