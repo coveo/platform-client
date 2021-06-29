@@ -17,6 +17,28 @@ describe('Organization', () => {
         organization = new Organization(api, serverlessApi);
     });
 
+    describe('updateSupportActivated', () => {
+        it('should make a PUT call to the proper URL to activate support', () => {
+            const organizationToBeUpdated = 'Organization-to-be-updated';
+            const supportActivated = true;
+            organization.updateSupportActivated(organizationToBeUpdated, supportActivated);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`
+            );
+        });
+
+        it('should make a PUT call to the proper URL to disable support', () => {
+            const organizationToBeUpdated = 'Organization-to-be-updated';
+            const supportActivated = false;
+            organization.updateSupportActivated(organizationToBeUpdated, supportActivated);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`
+            );
+        });
+    });
+
     describe('list', () => {
         it('should make a GET call to the Organization base url', () => {
             organization.list();
@@ -106,6 +128,24 @@ describe('Organization', () => {
             organization.status();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/status`);
+        });
+    });
+
+    describe('pause', () => {
+        it('should make a POST call to the specific Organization url', () => {
+            organization.pause();
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}/${API.orgPlaceholder}/pause`);
+        });
+    });
+
+    describe('resume', () => {
+        it('should make a POST call to the specific Organization url', () => {
+            organization.resume();
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}/${API.orgPlaceholder}/resume`);
         });
     });
 

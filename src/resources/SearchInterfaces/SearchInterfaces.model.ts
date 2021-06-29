@@ -10,6 +10,16 @@ export interface IAccesses {
      * The list of domains that are allowed to access the search interface.
      */
     domains: string[];
+
+    /**
+     * When set to true, all users can share and see the search page.
+     */
+    sharingLinkEnabled?: boolean;
+
+    /**
+     * When set to true, the domain sharing is enabled. Otherwise, only users that have explicitly access to the search page can access it.
+     */
+    sharingDomainEnabled?: boolean;
 }
 
 export interface IFacet {

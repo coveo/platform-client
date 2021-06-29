@@ -10,6 +10,13 @@ The main goal of this package is to provide an easy to configure and straightfor
 
 ## Getting started
 
+### Build
+
+```bash
+npm i
+npm run build
+```
+
 ### Install
 
 ```bash

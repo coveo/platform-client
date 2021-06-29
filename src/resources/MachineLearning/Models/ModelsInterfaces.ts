@@ -1,5 +1,5 @@
 import {GranularResource} from '../../BaseInterfaces';
-import {IntervalUnit, ModelStatus} from '../../Enums';
+import {IntervalUnit, ModelActivenessState, ModelStatus} from '../../Enums';
 import {AssociatedPipelineModel} from '../../Pipelines';
 import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 
@@ -28,6 +28,7 @@ export interface MLModel extends MLModelInfo, ModelAttributes, GranularResource 
     searchEventFilter?: string;
     viewEventFilter?: string;
     modelSizeStatistic?: number;
+    modelActivenessState?: ModelActivenessState;
 }
 
 export interface ModelErrorDescription {

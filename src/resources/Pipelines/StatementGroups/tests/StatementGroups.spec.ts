@@ -1,7 +1,11 @@
 import API from '../../../../APICore';
-import {StatementGroupType} from '../../../Enums';
+import {ListStatementGroupStatusType, StatementGroupType} from '../../../Enums';
 import StatementGroups from '../StatementGroups';
-import {CreateStatementGroupModel, StatementGroupModel} from '../StatementGroupsInterfaces';
+import {
+    CreateStatementGroupModel,
+    UpdateStatementGroupModel,
+    StatementGroupRuleAssociationFeatureTypeEnum,
+} from '../StatementGroupsInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -35,6 +39,37 @@ describe('StatementGroups', () => {
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?filter=nameOfCondition'
             );
         });
+
+        it('should make a GET call with a status filter', () => {
+            const pipelineId = '️🍰';
+            const status = [
+                ListStatementGroupStatusType.Active,
+                ListStatementGroupStatusType.Expired,
+                ListStatementGroupStatusType.Inactive,
+                ListStatementGroupStatusType.NotStarted,
+            ];
+            groups.list(pipelineId, {status});
+
+            const expectedUri = [
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?status=',
+                encodeURIComponent(JSON.stringify(status)),
+            ].join('');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(expectedUri);
+        });
+
+        it('should make a GET call with a status type filter', () => {
+            const pipelineId = '️🍰';
+            const types = [StatementGroupType.campaign, StatementGroupType.permanent];
+            groups.list(pipelineId, {types});
+
+            const expectedUri = [
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?types=',
+                encodeURIComponent(JSON.stringify(types)),
+            ].join('');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(expectedUri);
+        });
     });
 
     describe('create', () => {
@@ -43,6 +78,7 @@ describe('StatementGroups', () => {
             const model: CreateStatementGroupModel = {
                 name: '🥂',
                 type: StatementGroupType.permanent,
+                isActive: true,
             };
 
             groups.create(pipelineId, model);
@@ -63,15 +99,9 @@ describe('StatementGroups', () => {
     });
 
     describe('update', () => {
-        const group: StatementGroupModel = {
-            id: 'a',
+        const group: UpdateStatementGroupModel = {
             name: 'b',
             type: StatementGroupType.permanent,
-            createdAt: 'la',
-            statementComposition: {
-                resultRankingStatementCount: 1,
-                otherStatementCount: 2,
-            },
         };
 
         it('should make a PUT call to the specific StatementGroups url', () => {
@@ -106,6 +136,54 @@ describe('StatementGroups', () => {
             expect(api.patch).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 isActive,
             });
+        });
+    });
+
+    describe('bulkUpdateRuleAssociations', () => {
+        it('should make a PUT call to the specific statements group url', () => {
+            const pipelineId = 'pipeline1';
+            const groupId = 'group1';
+
+            groups.bulkUpdateRuleAssociations(pipelineId, groupId, {
+                toAdd: [
+                    {
+                        ruleId: 'rule1',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                    {
+                        ruleId: 'rule2',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                ],
+                toRemove: [
+                    {
+                        ruleId: 'rule3',
+                        featureType: StatementGroupRuleAssociationFeatureTypeEnum.ResultRankings,
+                    },
+                ],
+            });
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/pipeline1/statementGroups/group1/associations',
+                {
+                    toAdd: [
+                        {
+                            ruleId: 'rule1',
+                            featureType: 'resultRankings',
+                        },
+                        {
+                            ruleId: 'rule2',
+                            featureType: 'resultRankings',
+                        },
+                    ],
+                    toRemove: [
+                        {
+                            ruleId: 'rule3',
+                            featureType: 'resultRankings',
+                        },
+                    ],
+                }
+            );
         });
     });
 });

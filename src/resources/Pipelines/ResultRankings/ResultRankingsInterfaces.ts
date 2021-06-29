@@ -142,8 +142,38 @@ export interface ListResultRankingParams {
     /**
      * Similar to `kind`, the _ruleTypes_ parameter allows to filter by result ranking rule type.
      * This new parameter should be preferred over `kind` as it may eventually support other rule types.
+     *
      * @see kind
      */
     ruleTypes?: ResultRankingsRuleTypes[];
     ruleStatuses?: ResultRankingsStatuses[];
+}
+
+export interface CopyResultRankingRequest {
+    /**
+     * The unique identifier of the query pipeline to copy the statements to
+     */
+    destinationPipelineId: string;
+
+    /**
+     * The unique identifiers of the result ranking rules to copy.
+     */
+    resultRankingIds: string[];
+}
+
+export interface CopyResultRankingResponse {
+    /**
+     * The list of result rankings that were copied to the destination pipeline.
+     */
+    resultRankings: Array<{
+        /**
+         * The identifier of the result ranking rule
+         */
+        id: string;
+
+        /**
+         * The result ranking rule content.
+         */
+        resultRanking: ResultRankingProps;
+    }>;
 }

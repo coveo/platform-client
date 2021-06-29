@@ -423,6 +423,11 @@ export enum ModelStatus {
     UPDATE_FAILED = 'UPDATE_FAILED',
 }
 
+export enum ModelActivenessState {
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+}
+
 export enum ModelConfigFileType {
     ADVANCED_CONFIGURATION = 'ADVANCED_CONFIGURATION',
     STOPWORDS = 'STOPWORDS',
@@ -728,6 +733,28 @@ export enum ListStatementSortBy {
 export enum StatementGroupType {
     campaign = 'campaign',
     permanent = 'permanent',
+}
+
+/**
+ * An union of all the possible status that you can filter on.
+ */
+export enum ListStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
+    Expired = 'expired',
+    NotStarted = 'notStarted',
+}
+
+export enum CampaignStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
+    Expired = 'expired',
+    NotStarted = 'notStarted',
+}
+
+export enum PermanentStatementGroupStatusType {
+    Active = 'active',
+    Inactive = 'inactive',
 }
 
 export enum DimensionType {

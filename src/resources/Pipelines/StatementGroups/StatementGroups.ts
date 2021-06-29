@@ -1,9 +1,12 @@
 import Resource from '../../Resource';
 import {
     CreateStatementGroupModel,
+    UpdateStatementGroupModel,
     ListStatementGroupsOptions,
     StatementGroupList,
     StatementGroupModel,
+    UpdateStatementGroupRuleAssociationsRequest,
+    UpdateStatementGroupRuleAssociationsResponse,
 } from './StatementGroupsInterfaces';
 
 export default class StatementGroups extends Resource {
@@ -16,6 +19,8 @@ export default class StatementGroups extends Resource {
             this.buildPath(StatementGroups.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
                 ...options,
+                status: JSON.stringify(options?.status),
+                types: JSON.stringify(options?.types),
             })
         );
     }
@@ -35,7 +40,7 @@ export default class StatementGroups extends Resource {
         );
     }
 
-    update(pipelineId: string, groupId: string, groupModel: StatementGroupModel) {
+    update(pipelineId: string, groupId: string, groupModel: UpdateStatementGroupModel) {
         return this.api.put<void>(
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
@@ -58,6 +63,19 @@ export default class StatementGroups extends Resource {
                 organizationId: this.api.organizationId,
             }),
             {isActive}
+        );
+    }
+
+    bulkUpdateRuleAssociations(
+        pipelineId: string,
+        groupId: string,
+        request: UpdateStatementGroupRuleAssociationsRequest
+    ) {
+        return this.api.put<UpdateStatementGroupRuleAssociationsResponse>(
+            this.buildPath(`${StatementGroups.getStatementGroupUrl(pipelineId, groupId)}/associations`, {
+                organizationId: this.api.organizationId,
+            }),
+            request
         );
     }
 }

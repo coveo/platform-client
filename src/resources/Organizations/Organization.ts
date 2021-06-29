@@ -48,8 +48,28 @@ export default class Organization extends Resource {
         return this.api.put<OrganizationModel>(`${Organization.baseUrl}/${organization.id}`, organization);
     }
 
+    updateSupportActivated(organizationId: string, supportActivated: boolean) {
+        return this.api.put(`${Organization.baseUrl}/${organizationId}/support?activate=${supportActivated}`);
+    }
+
     status(organizationId: string = API.orgPlaceholder) {
         return this.api.get<OrganizationsStatusModel>(`${Organization.baseUrl}/${organizationId}/status`);
+    }
+
+    /**
+     * Pauses an [organization](https://docs.coveo.com/en/222/).
+     * Required privilege: Organization - Edit
+     */
+    pause(organizationId: string = API.orgPlaceholder) {
+        return this.api.post(`${Organization.baseUrl}/${organizationId}/pause`);
+    }
+
+    /**
+     * Resumes a paused [organization](https://docs.coveo.com/en/222/).
+     * Required privilege: Organization - Edit
+     */
+    resume(organizationId: string = API.orgPlaceholder) {
+        return this.api.post(`${Organization.baseUrl}/${organizationId}/resume`);
     }
 
     listPrivileges() {
