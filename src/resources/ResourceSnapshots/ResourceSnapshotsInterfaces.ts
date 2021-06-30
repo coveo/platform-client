@@ -1,12 +1,39 @@
 export interface ResourceSnapshotsModel {
+    /**
+     * The username of the snapshot creator.
+     */
     createdBy: string;
+    /**
+     * The date of creation of the snapshot in number of milliseconds since UNIX epoch.
+     */
     createdDate: number;
+    /**
+     * A note you can attach to your snapshot.
+     */
     developerNote?: string;
+    /**
+     * The unique identifier of the target snapshot.
+     */
     id: string;
+    /**
+     * The unique identifier of the organization from which the snapshot originates if it differs from the current organization.
+     */
     originId?: string;
-    targetId?: string;
+    /**
+     * The unique identifier of the organization in which the snapshot applies.
+     */
+    targetId: string;
+    /**
+     * The list of reports of events on the snapshot.
+     */
     reports?: ResourceSnapshotsReportModel[];
+    /**
+     * The list of synchronization reports on the snapshot.
+     */
     synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
+    /**
+     * A summary of the contents of the snapshot.
+     */
     contentSummary?: Record<string, number>;
 }
 
