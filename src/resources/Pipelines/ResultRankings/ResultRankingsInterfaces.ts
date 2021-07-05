@@ -142,6 +142,7 @@ export interface ListResultRankingParams {
     /**
      * Similar to `kind`, the _ruleTypes_ parameter allows to filter by result ranking rule type.
      * This new parameter should be preferred over `kind` as it may eventually support other rule types.
+     *
      * @see kind
      */
     ruleTypes?: ResultRankingsRuleTypes[];

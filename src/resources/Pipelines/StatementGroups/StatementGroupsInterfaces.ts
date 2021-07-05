@@ -23,6 +23,7 @@ interface StatementGroupModelBase {
     /**
      * Date of creation
      * Format: ISO-8601
+     *
      * @example 2021-09-09T19:00:45.603-04:00
      */
     createdAt: string;
@@ -31,6 +32,7 @@ interface StatementGroupModelBase {
     /**
      * Last date of modification
      * Format: ISO-8601
+     *
      * @example 2021-09-09T19:00:45.603-04:00
      */
     modifiedAt?: string;
@@ -53,6 +55,7 @@ export interface CampaignStatementGroup extends StatementGroupModelBase {
     /**
      * The start date of the campaign.
      * Format: ISO-8601
+     *
      * @example 2020-09-09T19:00:45.603-04:00
      */
     campaignStart?: string;
@@ -60,6 +63,7 @@ export interface CampaignStatementGroup extends StatementGroupModelBase {
     /**
      * The end date of the campaign.
      * Format: ISO-8601
+     *
      * @example 2021-09-09T19:00:45.603-04:00
      */
     campaignEnd?: string;
@@ -117,6 +121,7 @@ export interface CreateStatementGroupModel {
     /**
      * The start date of the campaign.
      * Format: ISO-8601
+     *
      * @example 2020-09-09T19:00:45.603-04:00
      */
     campaignStart?: string;
@@ -124,6 +129,7 @@ export interface CreateStatementGroupModel {
     /**
      * The end date of the campaign.
      * Format: ISO-8601
+     *
      * @example 2021-09-09T19:00:45.603-04:00
      */
     campaignEnd?: string;
@@ -142,14 +148,14 @@ export interface UpdateStatementGroupRuleAssociationsRequest {
      *
      * **Note**: Invalid rule IDs will cause the request to fail.
      */
-    toAdd?: Array<StatementGroupRuleAssociationItem>;
+    toAdd?: StatementGroupRuleAssociationItem[];
 
     /**
      * The rules to remove from this group. (max-length: 50)
      *
      * **Note**: Orphaned rules, rules that are associated with another group, and non-existent rules will be ignored.
      */
-    toRemove?: Array<StatementGroupRuleAssociationItem>;
+    toRemove?: StatementGroupRuleAssociationItem[];
 }
 
 export interface StatementGroupRuleAssociationItem {
@@ -172,5 +178,5 @@ export interface UpdateStatementGroupRuleAssociationsResponse {
     /**
      * The rules associated with this group.
      */
-    associatedRules: Array<StatementGroupRuleAssociationItem>;
+    associatedRules: StatementGroupRuleAssociationItem[];
 }
