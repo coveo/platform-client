@@ -36,3 +36,13 @@ export interface LicenseSourceTypeModel {
      */
     type: string;
 }
+
+/**
+ * Request parameters when updating an organization's expiration date
+ */
+export interface LicenseExpirationDateOptions {
+    /**
+     * Expiration date in epoch in milliseconds, e.g. 1625518417000
+     */
+    expirationDate: number;
+}
