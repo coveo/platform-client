@@ -5,7 +5,7 @@ export default class ModifierTemplates extends Resource {
     static baseUrl = `/rest/modifiertemplates`;
 
     list() {
-        return this.api.get<ModifierModel>(`${ModifierTemplates.baseUrl}`);
+        return this.api.get<ModifierModel[]>(`${ModifierTemplates.baseUrl}`);
     }
 
     listPossibleStatements() {

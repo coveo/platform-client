@@ -61,6 +61,18 @@ describe('License', () => {
         });
     });
 
+    describe('updateExpirationDate', () => {
+        it('should make a PUT call to the specific License url', () => {
+            const now = new Date();
+
+            license.updateExpirationDate({expirationDate: now.getTime()});
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/license/expiration?expirationDate=${now.getTime()}`
+            );
+        });
+    });
+
     describe('getPossibleSourceTypes', () => {
         it('should make a GET call to the specific License url', () => {
             license.getPossibleSourceTypes();

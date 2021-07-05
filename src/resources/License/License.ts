@@ -1,6 +1,6 @@
 import {LicenseSection} from '../Enums';
 import Resource from '../Resource';
-import {LicenseModel, LicenseSourceTypeModel} from './LicenseInterfaces';
+import {LicenseExpirationDateOptions, LicenseModel, LicenseSourceTypeModel} from './LicenseInterfaces';
 import API from '../../APICore';
 
 export default class License extends Resource {
@@ -20,6 +20,10 @@ export default class License extends Resource {
 
     updateLicense(license: LicenseModel) {
         return this.api.put<LicenseModel>(License.baseUrl, license);
+    }
+
+    updateExpirationDate(options: LicenseExpirationDateOptions) {
+        return this.api.put<LicenseModel>(this.buildPath(`${License.baseUrl}/expiration`, options));
     }
 
     getPossibleSourceTypes() {
