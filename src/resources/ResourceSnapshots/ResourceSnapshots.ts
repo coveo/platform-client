@@ -7,6 +7,7 @@ import {
     CreateFromOrganizationOptions,
     DryRunOptions,
     GenerateUrlOptions,
+    ExportSnapshotContentOptions,
     GetSnapshotOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
@@ -38,6 +39,23 @@ export default class ResourceSnapshots extends Resource {
         return this.api.get<SnapshotAccessModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access`, options)
         );
+    }
+
+    /**
+     * Retrieves a ZIP file holding the content of the target snapshot, in the target format.
+     *
+     * @param {string} snapshotId The unique identifier of the target snapshot.
+     * @param {ExportSnapshotContentOptions} [options]
+     * @returns
+     */
+    async export(snapshotId: string, options?: ExportSnapshotContentOptions) {
+        const blob = await this.api.getFile(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options),
+            {
+                headers: {accept: 'application/zip'},
+            }
+        );
+        return blob.arrayBuffer();
     }
 
     async getContent(snapshotId: string, options: GenerateUrlOptions) {
