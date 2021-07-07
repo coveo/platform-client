@@ -72,9 +72,33 @@ export interface CampaignStatementGroup extends StatementGroupModelBase {
 }
 
 export interface PipelineGroupsComposition {
+    /**
+     * The number of active groups in the pipeline.
+     */
     activeGroupCount: number;
+    /**
+     * The number of inactive groups in the pipeline.
+     */
     inactiveGroupCount: number;
+
+    /**
+     * The number of expired groups in the pipeline.
+     */
+    expiredGroupCount: number;
+
+    /**
+     * The number of not started groups in the pipeline.
+     */
+    notStartedGroupCount: number;
+
+    /**
+     * The number of campaign groups in the pipeline.
+     */
     campaignGroupCount: number;
+
+    /**
+     * The number of permanent groups in the pipeline.
+     */
     permanentGroupCount: number;
 }
 
