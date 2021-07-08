@@ -93,6 +93,28 @@ export interface ISearchInterfaceConfiguration {
     accesses: IAccesses;
 }
 
+export interface ISearchInterfaceConfigurationResponse extends ISearchInterfaceConfiguration {
+    /**
+     * The creation timestamp. (ISO 8601)
+     */
+    created: string;
+
+    /**
+     * The creator principal.
+     */
+    createdBy: string;
+
+    /**
+     * The last update timestamp. (ISO 8601)
+     */
+    updated: string;
+
+    /**
+     * The last updated principal.
+     */
+    updatedBy: string;
+}
+
 export interface IListSearchInterfacesParameters {
     /**
      * A substring that must appear in a search interface configuration name for this configuration to appear in results.

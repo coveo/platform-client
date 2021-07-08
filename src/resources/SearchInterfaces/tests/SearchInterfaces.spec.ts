@@ -105,6 +105,7 @@ describe('SearchInterfaces', () => {
     describe('get', () => {
         it('should make a GET call to the SearchInterfaces base url', () => {
             const id = 'SearchInterface-id-to-get';
+
             searchInterfaces.get(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
@@ -115,6 +116,7 @@ describe('SearchInterfaces', () => {
     describe('update', () => {
         it('should make a UPDATE call to the SearchInterfaces base url', () => {
             const id = 'SearchInterface-id-to-update';
+
             searchInterfaces.update({...config, id});
 
             expect(api.put).toHaveBeenCalledTimes(1);
@@ -125,10 +127,22 @@ describe('SearchInterfaces', () => {
     describe('delete', () => {
         it('should make a DELETE call to the SearchInterfaces base url', () => {
             const id = 'SearchInterface-id-to-delete';
+
             searchInterfaces.delete(id);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}`);
+        });
+    });
+
+    describe('getAccesses', () => {
+        it('makes a GET call to the searchInterfaces accesses url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+
+            searchInterfaces.getAccesses(id);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses`);
         });
     });
 
@@ -141,10 +155,34 @@ describe('SearchInterfaces', () => {
                 sharingLinkEnabled: false,
             };
             const id = 'SearchInterface-id-to-update-accesses';
+
             searchInterfaces.updateAccesses(id, someAccesses);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses`, someAccesses);
+        });
+    });
+
+    describe('getAccessesUsers', () => {
+        it('makes a GET call to the searchInterfaces accesses users url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+
+            searchInterfaces.getAccessesUsers(id);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users`);
+        });
+    });
+
+    describe('updateAccessesUsers', () => {
+        it('makes a PUT call to the searchInterfaces accesses users url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+            const someUsers = ['Tinky Winky', 'Dipsy', 'Laa-Laa', 'Po'];
+
+            searchInterfaces.updateAccessesUsers(id, someUsers);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users`, someUsers);
         });
     });
 });
