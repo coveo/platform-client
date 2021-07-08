@@ -49,13 +49,9 @@ export default class ResourceSnapshots extends Resource {
      * @returns
      */
     async export(snapshotId: string, options?: ExportSnapshotContentOptions) {
-        const blob = await this.api.getFile(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options),
-            {
-                headers: {accept: 'application/zip'},
-            }
-        );
-        return blob.arrayBuffer();
+        return this.api.getFile(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
+            headers: {accept: 'application/zip'},
+        });
     }
 
     async getContent(snapshotId: string, options: GenerateUrlOptions) {

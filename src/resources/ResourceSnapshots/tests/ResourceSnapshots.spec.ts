@@ -5,6 +5,7 @@ import {
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
+    ExportSnapshotContentOptions,
     PushSnapshotOptions,
     ResourceSnapshotContentType,
     ResourceSnapshotExportConfigurationModel,
@@ -13,6 +14,7 @@ import {
     ResourceSnapshotUrlModel,
     ResourceType,
     SnapshotAccessType,
+    SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
@@ -86,6 +88,36 @@ describe('ResourceSnapshots', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
+            );
+        });
+    });
+
+    describe('export', () => {
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with default content format', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+
+            resourceSnapshots.export(snapshotToGetId);
+
+            expect(api.getFile).toHaveBeenCalledTimes(1);
+            expect(api.getFile).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content`, {
+                headers: {accept: 'application/zip'},
+            });
+        });
+
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with specific content format', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const exportSnapshotContentOptions: ExportSnapshotContentOptions = {
+                contentFormat: SnapshotExportContentFormat.SplitPerType,
+            };
+
+            resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
+
+            expect(api.getFile).toHaveBeenCalledTimes(1);
+            expect(
+                api.getFile
+            ).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content?contentFormat=SPLIT_PER_TYPE`,
+                {headers: {accept: 'application/zip'}}
             );
         });
     });
