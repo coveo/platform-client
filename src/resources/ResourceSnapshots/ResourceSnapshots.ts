@@ -48,7 +48,7 @@ export default class ResourceSnapshots extends Resource {
      * @param {ExportSnapshotContentOptions} [options]
      * @returns
      */
-    async export(snapshotId: string, options?: ExportSnapshotContentOptions) {
+    export(snapshotId: string, options?: ExportSnapshotContentOptions) {
         return this.api.getFile(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
             headers: {accept: 'application/zip'},
         });
