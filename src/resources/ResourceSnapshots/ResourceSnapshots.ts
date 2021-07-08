@@ -46,7 +46,7 @@ export default class ResourceSnapshots extends Resource {
      *
      * @param {string} snapshotId The unique identifier of the target snapshot.
      * @param {ExportSnapshotContentOptions} [options]
-     * @returns
+     * @returns {Promise<Blob>} A newly created Blob object which contains the zipped snapshot
      */
     export(snapshotId: string, options?: ExportSnapshotContentOptions) {
         return this.api.getFile(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
