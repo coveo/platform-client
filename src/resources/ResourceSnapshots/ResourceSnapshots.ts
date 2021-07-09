@@ -45,8 +45,21 @@ export default class ResourceSnapshots extends Resource {
         return await fetch(url, {method: 'get'});
     }
 
+    /**
+     * Creates a snapshot from a file containing the configuration.
+     *
+     * @param {File} file The file containing the configuration.
+     * @param {CreateFromFileOptions} options
+     */
     createFromFile(file: File, options: CreateFromFileOptions): Promise<ResourceSnapshotsModel>;
 
+    /**
+     * Creates a snapshot from a file buffer containing the configuration.
+     *
+     * @param {Buffer} file The file containing the configuration.
+     * @param {ResourceSnapshotSupportedFileTypes} fileType The type of the file containing the configuration.
+     * @param {CreateFromFileOptions} options
+     */
     createFromFile(
         file: Buffer,
         fileType: ResourceSnapshotSupportedFileTypes,
