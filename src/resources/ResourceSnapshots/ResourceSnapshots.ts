@@ -45,19 +45,39 @@ export default class ResourceSnapshots extends Resource {
         return await fetch(url, {method: 'get'});
     }
 
-    createFromFile(file: File, options: CreateFromFileOptions) {
-        const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: undefined};
+    createFromFile(file: File, options: CreateFromFileOptions): Promise<ResourceSnapshotsModel>;
 
-        if (file.type === 'application/zip') {
-            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.ZIP;
-        } else if (file.type === 'application/json') {
-            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.JSON;
+    createFromFile(
+        file: Buffer,
+        fileType: ResourceSnapshotSupportedFileTypes,
+        options: CreateFromFileOptions
+    ): Promise<ResourceSnapshotsModel>;
+
+    createFromFile(
+        file: File | Buffer,
+        typeOrOptions: ResourceSnapshotSupportedFileTypes | CreateFromFileOptions,
+        options?: CreateFromFileOptions
+    ) {
+        let value: File | string;
+        let computedOptions = {developerNotes: undefined, snapshotFileType: undefined};
+
+        if (Buffer.isBuffer(file)) {
+            value = file.toString();
+            computedOptions = {developerNotes: options.developerNotes, snapshotFileType: typeOrOptions};
         } else {
-            throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+            const type = file.type;
+            computedOptions.developerNotes = (typeOrOptions as CreateFromFileOptions).developerNotes;
+            if (type === 'application/zip') {
+                computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.ZIP;
+            } else if (type === 'application/json') {
+                computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.JSON;
+            } else {
+                throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+            }
         }
 
         const form: FormData = getFormData();
-        form.append('file', file);
+        form.append('file', value);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
