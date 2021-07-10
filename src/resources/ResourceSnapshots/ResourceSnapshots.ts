@@ -71,11 +71,11 @@ export default class ResourceSnapshots extends Resource {
         typeOrOptions: ResourceSnapshotSupportedFileTypes | CreateFromFileOptions,
         options?: CreateFromFileOptions
     ) {
-        let value: File | string;
+        let fileContent: File | string;
         let computedOptions = {developerNotes: undefined, snapshotFileType: undefined};
 
         if (Buffer.isBuffer(file)) {
-            value = file.toString();
+            fileContent = file.toString();
             computedOptions = {developerNotes: options.developerNotes, snapshotFileType: typeOrOptions};
         } else {
             const type = file.type;
@@ -90,7 +90,7 @@ export default class ResourceSnapshots extends Resource {
         }
 
         const form: FormData = getFormData();
-        form.append('file', value);
+        form.append('file', fileContent);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),

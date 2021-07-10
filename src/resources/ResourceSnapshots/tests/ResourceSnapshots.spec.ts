@@ -110,8 +110,9 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('createFromFile', () => {
+        const mockedAppendToFormData = jest.fn();
         const mockedFormData = {
-            append: jest.fn(),
+            append: mockedAppendToFormData,
         };
         const mockedFile = {
             type: 'application/zip',
@@ -124,7 +125,7 @@ describe('ResourceSnapshots', () => {
 
         it('should make a post call to the specific Resource Snapshots url if JSON buffer', () => {
             const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
-            const file = Buffer.from(['']);
+            const file = Buffer.from('');
 
             resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.JSON, createFromFileOptions);
 
@@ -135,9 +136,18 @@ describe('ResourceSnapshots', () => {
             );
         });
 
+        it('should append the file content to the formData', () => {
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = Buffer.from('file-data-content');
+
+            resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.JSON, createFromFileOptions);
+
+            expect(mockedAppendToFormData).toHaveBeenCalledWith('file', 'file-data-content');
+        });
+
         it('should make a post call to the specific Resource Snapshots url if ZIP buffer', () => {
             const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
-            const file = Buffer.from(['']);
+            const file = Buffer.from('');
 
             resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.ZIP, createFromFileOptions);
 
