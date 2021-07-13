@@ -78,15 +78,9 @@ export default class ResourceSnapshots extends Resource {
             fileContent = file.toString();
             computedOptions = {developerNotes: options.developerNotes, snapshotFileType: typeOrOptions};
         } else {
-            const type = file.type;
+            fileContent = file;
             computedOptions.developerNotes = (typeOrOptions as CreateFromFileOptions).developerNotes;
-            if (type === 'application/zip') {
-                computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.ZIP;
-            } else if (type === 'application/json') {
-                computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.JSON;
-            } else {
-                throw new Error('The uploaded file must be either a ZIP or a JSON file.');
-            }
+            computedOptions.snapshotFileType = this.getSnapshotFileType(file);
         }
 
         const form: FormData = getFormData();
@@ -174,5 +168,16 @@ export default class ResourceSnapshots extends Resource {
                 options
             )
         );
+    }
+
+    private getSnapshotFileType(file: File) {
+        switch (file.type) {
+            case 'application/zip':
+                return ResourceSnapshotSupportedFileTypes.ZIP;
+            case 'application/json':
+                return ResourceSnapshotSupportedFileTypes.JSON;
+            default:
+                throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+        }
     }
 }
