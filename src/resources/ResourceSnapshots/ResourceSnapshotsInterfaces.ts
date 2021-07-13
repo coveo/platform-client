@@ -265,6 +265,8 @@ export interface ExportSnapshotContentOptions {
      * The format of the snapshot content.
      * - FLAT: Content unified into a single file
      * - SPLIT_PER_TYPE: Content split into one file per resource type
+     *
+     * @default SnapshotExportContentFormat.Flat
      */
     contentFormat?: SnapshotExportContentFormat;
 }
