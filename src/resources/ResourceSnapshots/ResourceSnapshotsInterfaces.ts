@@ -72,6 +72,11 @@ export enum SnapshotAccessType {
     Write = 'WRITE',
 }
 
+export enum SnapshotExportContentFormat {
+    Flat = 'FLAT',
+    SplitPerType = 'SPLIT_PER_TYPE',
+}
+
 export enum ResourceSnapshotsReportResultCode {
     AccessDenied = 'ACCESS_DENIED',
     ResourcesInError = 'RESOURCES_IN_ERROR',
@@ -253,6 +258,17 @@ export interface GetSnapshotOptions {
      * @default false
      */
     includeReports?: boolean;
+}
+
+export interface ExportSnapshotContentOptions {
+    /**
+     * The format of the snapshot content.
+     * - FLAT: Content unified into a single file
+     * - SPLIT_PER_TYPE: Content split into one file per resource type
+     *
+     * @default SnapshotExportContentFormat.Flat
+     */
+    contentFormat?: SnapshotExportContentFormat;
 }
 
 export interface ValidateAccessOptions {
