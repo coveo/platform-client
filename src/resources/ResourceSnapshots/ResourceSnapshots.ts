@@ -59,19 +59,46 @@ export default class ResourceSnapshots extends Resource {
         return await fetch(url, {method: 'get'});
     }
 
-    createFromFile(file: File, options: CreateFromFileOptions) {
-        const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: undefined};
+    /**
+     * Creates a snapshot from a file containing the configuration.
+     *
+     * @param {File} file The file containing the configuration.
+     * @param {CreateFromFileOptions} options
+     */
+    createFromFile(file: File, options: CreateFromFileOptions): Promise<ResourceSnapshotsModel>;
 
-        if (file.type === 'application/zip') {
-            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.ZIP;
-        } else if (file.type === 'application/json') {
-            computedOptions.snapshotFileType = ResourceSnapshotSupportedFileTypes.JSON;
+    /**
+     * Creates a snapshot from a file buffer containing the configuration.
+     *
+     * @param {Buffer} file The file containing the configuration.
+     * @param {ResourceSnapshotSupportedFileTypes} fileType The type of the file containing the configuration.
+     * @param {CreateFromFileOptions} options
+     */
+    createFromFile(
+        file: Buffer,
+        fileType: ResourceSnapshotSupportedFileTypes,
+        options: CreateFromFileOptions
+    ): Promise<ResourceSnapshotsModel>;
+
+    createFromFile(
+        file: File | Buffer,
+        typeOrOptions: ResourceSnapshotSupportedFileTypes | CreateFromFileOptions,
+        options?: CreateFromFileOptions
+    ) {
+        let fileContent: File | string;
+        let computedOptions = {developerNotes: undefined, snapshotFileType: undefined};
+
+        if (Buffer.isBuffer(file)) {
+            fileContent = file.toString();
+            computedOptions = {developerNotes: options.developerNotes, snapshotFileType: typeOrOptions};
         } else {
-            throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+            fileContent = file;
+            computedOptions.developerNotes = (typeOrOptions as CreateFromFileOptions).developerNotes;
+            computedOptions.snapshotFileType = this.getSnapshotFileType(file);
         }
 
         const form: FormData = getFormData();
-        form.append('file', file);
+        form.append('file', fileContent);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
@@ -155,5 +182,16 @@ export default class ResourceSnapshots extends Resource {
                 options
             )
         );
+    }
+
+    private getSnapshotFileType(file: File) {
+        switch (file.type) {
+            case 'application/zip':
+                return ResourceSnapshotSupportedFileTypes.ZIP;
+            case 'application/json':
+                return ResourceSnapshotSupportedFileTypes.JSON;
+            default:
+                throw new Error('The uploaded file must be either a ZIP or a JSON file.');
+        }
     }
 }
