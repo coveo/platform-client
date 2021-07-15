@@ -40,7 +40,7 @@ export interface ResourceSnapshotsModel {
 /*
  * 'Resource' is defined as anything uniquely identified on the platform's domain that can be created, updated or deleted
  */
-export enum ResourceType {
+export enum ResourceSnapshotType {
     extension = 'EXTENSION',
     featuredResult = 'FEATURED_RESULT',
     field = 'FIELD',
@@ -220,7 +220,7 @@ export interface ResourceSnapshotsLinkModel {
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
-    resourcesToExport: Partial<Record<ResourceType, string[] | null>>;
+    resourcesToExport: Partial<Record<ResourceSnapshotType, string[] | null>>;
 }
 
 export interface ResourceSnapshotUrlModel {
