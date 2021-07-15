@@ -40,14 +40,11 @@ export interface ResourceSnapshotsModel {
 /*
  * 'Resource' is defined as anything uniquely identified on the platform's domain that can be created, updated or deleted
  */
-export enum ResourceType {
-    apiKey = 'API_KEY',
-    catalog = 'CATALOG',
+export enum ResourceSnapshotType {
     extension = 'EXTENSION',
     featuredResult = 'FEATURED_RESULT',
     field = 'FIELD',
     filter = 'FILTER',
-    group = 'GROUP',
     mapping = 'MAPPING',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
@@ -56,12 +53,10 @@ export enum ResourceType {
     queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
     rankingExpression = 'RANKING_EXPRESSION',
     rankingWeight = 'RANKING_WEIGHT',
-    searchInterface = 'SEARCH_INTERFACE',
     searchPage = 'SEARCH_PAGE',
     securityProvider = 'SECURITY_PROVIDER',
     source = 'SOURCE',
     stopWord = 'STOP_WORD',
-    statementGroup = 'STATEMENT_GROUP',
     subscription = 'SUBSCRIPTION',
     thesaurus = 'THESAURUS',
     trigger = 'TRIGGER',
@@ -230,7 +225,7 @@ export interface ResourceSnapshotsLinkModel {
 }
 
 export interface ResourceSnapshotExportConfigurationModel {
-    resourcesToExport: Partial<Record<ResourceType, string[] | null>>;
+    resourcesToExport: Partial<Record<ResourceSnapshotType, string[] | null>>;
 }
 
 export interface ResourceSnapshotUrlModel {
