@@ -5,14 +5,17 @@ import {
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
+    ExportSnapshotContentOptions,
     PushSnapshotOptions,
     ResourceSnapshotContentType,
     ResourceSnapshotExportConfigurationModel,
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
+    ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     ResourceSnapshotType,
     SnapshotAccessType,
+    SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
 } from '../ResourceSnapshotsInterfaces';
@@ -90,6 +93,36 @@ describe('ResourceSnapshots', () => {
         });
     });
 
+    describe('export', () => {
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with default content format', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+
+            resourceSnapshots.export(snapshotToGetId);
+
+            expect(api.getFile).toHaveBeenCalledTimes(1);
+            expect(api.getFile).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content`, {
+                headers: {accept: 'application/zip'},
+            });
+        });
+
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with specific content format', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const exportSnapshotContentOptions: ExportSnapshotContentOptions = {
+                contentFormat: SnapshotExportContentFormat.SplitPerType,
+            };
+
+            resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
+
+            expect(api.getFile).toHaveBeenCalledTimes(1);
+            expect(
+                api.getFile
+            ).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content?contentFormat=SPLIT_PER_TYPE`,
+                {headers: {accept: 'application/zip'}}
+            );
+        });
+    });
+
     describe('getContent', () => {
         it('should make a GET call to the specific Resource Snapshots url and then make a get call to the url', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
@@ -109,8 +142,9 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('createFromFile', () => {
+        const mockedAppendToFormData = jest.fn();
         const mockedFormData = {
-            append: jest.fn(),
+            append: mockedAppendToFormData,
         };
         const mockedFile = {
             type: 'application/zip',
@@ -119,6 +153,41 @@ describe('ResourceSnapshots', () => {
         beforeEach(() => {
             (global as any).FormData = jest.fn(() => mockedFormData);
             (global as any).File = jest.fn(() => mockedFile);
+        });
+
+        it('should make a post call to the specific Resource Snapshots url if JSON buffer', () => {
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = Buffer.from('');
+
+            resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.JSON, createFromFileOptions);
+
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=JSON`,
+                mockedFormData
+            );
+        });
+
+        it('should append the file content to the formData', () => {
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = Buffer.from('file-data-content');
+
+            resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.JSON, createFromFileOptions);
+
+            expect(mockedAppendToFormData).toHaveBeenCalledWith('file', 'file-data-content');
+        });
+
+        it('should make a post call to the specific Resource Snapshots url if ZIP buffer', () => {
+            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
+            const file = Buffer.from('');
+
+            resourceSnapshots.createFromFile(file, ResourceSnapshotSupportedFileTypes.ZIP, createFromFileOptions);
+
+            expect(api.postForm).toHaveBeenCalledTimes(1);
+            expect(api.postForm).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
+                mockedFormData
+            );
         });
 
         it('should make a post call to the specific Resource Snapshots url if zip file', () => {
