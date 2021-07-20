@@ -57,7 +57,8 @@ describe('Cluster', () => {
                     storageSpec: {
                         numberOfIops: 0,
                         sizeInGibibytes: 45,
-                        storageType: 'STANDARD',
+                        storageType: 'SSD',
+                        throughputInMebibytes: 0,
                     },
                 },
             };
