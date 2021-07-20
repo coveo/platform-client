@@ -1,3 +1,4 @@
+import type FormDataNode from 'form-data';
 import API from '../../APICore';
 import {getFormData} from '../../utils/FormData';
 import Resource from '../Resource';
@@ -65,40 +66,31 @@ export default class ResourceSnapshots extends Resource {
      * @param {File} file The file containing the configuration.
      * @param {CreateFromFileOptions} options
      */
-    createFromFile(file: File, options: CreateFromFileOptions): Promise<ResourceSnapshotsModel>;
+    createFromFile(file: File, options?: CreateFromFileOptions) {
+        const computedOptions = {
+            developerNotes: options.developerNotes,
+            snapshotFileType: this.getSnapshotFileType(file),
+        };
+        const form = getFormData();
+        form.append('file', file);
+
+        return this.api.postForm<ResourceSnapshotsModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
+            form
+        );
+    }
 
     /**
-     * Creates a snapshot from a file buffer containing the configuration.
+     * Creates a snapshot from a buffer containing the configuration.
      *
-     * @param {Buffer} file The file containing the configuration.
+     * @param {Buffer} file The buffer containing the configuration.
      * @param {ResourceSnapshotSupportedFileTypes} fileType The type of the file containing the configuration.
      * @param {CreateFromFileOptions} options
      */
-    createFromFile(
-        file: Buffer,
-        fileType: ResourceSnapshotSupportedFileTypes,
-        options: CreateFromFileOptions
-    ): Promise<ResourceSnapshotsModel>;
-
-    createFromFile(
-        file: File | Buffer,
-        typeOrOptions: ResourceSnapshotSupportedFileTypes | CreateFromFileOptions,
-        options?: CreateFromFileOptions
-    ) {
-        let fileContent: File | string;
-        let computedOptions = {developerNotes: undefined, snapshotFileType: undefined};
-
-        if (Buffer.isBuffer(file)) {
-            fileContent = file.toString();
-            computedOptions = {developerNotes: options.developerNotes, snapshotFileType: typeOrOptions};
-        } else {
-            fileContent = file;
-            computedOptions.developerNotes = (typeOrOptions as CreateFromFileOptions).developerNotes;
-            computedOptions.snapshotFileType = this.getSnapshotFileType(file);
-        }
-
-        const form: FormData = getFormData();
-        form.append('file', fileContent);
+    createFromBuffer(file: Buffer, fileType: ResourceSnapshotSupportedFileTypes, options: CreateFromFileOptions) {
+        const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: fileType};
+        const form = getFormData();
+        ((form as unknown) as FormDataNode).append('file', file, `snapshot.${fileType.toString().toLowerCase()}`);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
