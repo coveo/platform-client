@@ -3,6 +3,7 @@ export interface IndexStorageSpec {
     sizeInGibibytes: number;
     sizeInGigabytes: number;
     storageType: string;
+    throughputInMebibytes: number;
 }
 
 export interface IndexMachineSpec {
@@ -78,6 +79,7 @@ export interface IndexStorageSpecModel {
     numberOfIops: number;
     sizeInGibibytes: number;
     storageType: string;
+    throughputInMebibytes: number;
 }
 
 export interface IndexVersionsModel {
