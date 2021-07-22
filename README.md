@@ -238,7 +238,7 @@ platform.withFeatures(notifyOnSuccess('It worked!'), notifyOnError('It failed!')
 
 ### Commit messages
 
-**Every commit message must comply with the [Coventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. We use the commit messages to automatically bump the package version according to the semantic versionning notation. Moreover, we generate changlogs for each version using those commit messages.**
+**Every commit message must comply with the [Angular Commit Message Conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format) specification. We use the commit messages to automatically bump the package version according to the semantic versionning notation. Moreover, we generate changlogs for each version using those commit messages.**
 
 -   You can either manually write a commit message that follows the convention using your favorite method.
 -   Or you can run `npm run commit-cli`. It will prompt you some questions about the nature of your changes, then it will commit your staged changes along with a generated message that follows our convention.
