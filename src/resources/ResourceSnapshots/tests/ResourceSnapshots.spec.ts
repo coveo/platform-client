@@ -13,7 +13,7 @@ import {
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
-    ResourceType,
+    ResourceSnapshotType,
     SnapshotAccessType,
     SnapshotExportContentFormat,
     UpdateChildrenOptions,
@@ -404,7 +404,7 @@ describe('ResourceSnapshots', () => {
             const updateChildrenOptions: UpdateChildrenOptions = {
                 snapshotParentResourceName: 'GME',
                 targetParentId: 'AMC',
-                parentResourceType: ResourceType.featuredResult,
+                parentResourceType: ResourceSnapshotType.featuredResult,
             };
 
             resourceSnapshots.updateSynchronizationPlanForChildren(
