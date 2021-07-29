@@ -31,4 +31,12 @@ describe('Limits', () => {
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits`);
         });
     });
+
+    describe('getHistoryLimit', () => {
+        it('should make a GET call to get specific history limit to the specific part of the limit', () => {
+            limits.getHistoryLimit(LicenseSection.content, '123');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits/content/123/history`);
+        });
+    });
 });
