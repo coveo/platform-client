@@ -46,8 +46,18 @@ export interface CustomDimensionSuggestionModel {
 }
 
 export interface CustomDimensionModel {
+    /**
+     * The type of the dimension.
+     */
     type: DimensionType;
+    /**
+     * The display name of the dimension. Should be human readable.
+     */
     displayName: string;
+    /**
+     * Strings that correspond to the path that must be followed to fetch the desired value of the dimension in the custom_datas map.
+     */
+    path?: string[];
 }
 
 export interface ListDimensionsParams {

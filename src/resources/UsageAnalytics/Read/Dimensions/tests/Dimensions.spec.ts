@@ -87,6 +87,7 @@ describe('Dimensions', () => {
             const model: CustomDimensionModel = {
                 displayName: '🆒',
                 type: DimensionType.TEXT,
+                path: ['Louis', 'est', 'sympa'],
             };
             const params: CreateCustomDimensionParams = {
                 name: 'new-dimension',
