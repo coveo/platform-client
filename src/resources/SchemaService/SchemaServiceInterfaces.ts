@@ -82,13 +82,17 @@ export interface GetEntitiesQueryParams extends SchemaServiceQueryParams {
     offset?: number;
     /**
      * The number of entities to fetch
-     * (user for server-side pagination)
+     * (used for server-side pagination)
      */
     limit?: number;
     /**
      * A query to fetch matching entity names and ids
      */
     query?: string;
+    /**
+     * IDs of the entities to retrieve, as a comma-separated list
+     */
+    entityIds?: string;
 }
 
 export interface GetEntityQueryParams extends SchemaServiceQueryParams {
