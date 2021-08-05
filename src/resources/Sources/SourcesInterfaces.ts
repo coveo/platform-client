@@ -35,6 +35,7 @@ import {MappingModel} from './SourcesMappings';
 export interface SourceModel extends GranularResource {
     configurationError?: ConfigurationError;
     crawlingModuleId?: string;
+    pendingCrawlingModuleId?: string;
     customParameters?: Record<string, string>;
     id?: string;
     information?: SourceInformation;
