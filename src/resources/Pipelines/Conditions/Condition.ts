@@ -1,12 +1,12 @@
+import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
-import {StatementModelList} from '../Statements';
 import {ConditionModel, ListConditionsOptions, NewConditionModel} from './ConditionInterfaces';
 
 export default class Condition extends Resource {
     static baseUrl = `/rest/search/v1/admin/pipelines/statements`;
 
     list(options: ListConditionsOptions = {}) {
-        return this.api.get<StatementModelList>(
+        return this.api.get<PageModel<ConditionModel, 'statements'>>(
             this.buildPath(Condition.baseUrl, {feature: 'when', organizationId: this.api.organizationId, ...options})
         );
     }
