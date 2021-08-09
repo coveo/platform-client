@@ -1,7 +1,7 @@
+import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
     AssociatedPipelinesData,
-    AssociationsListModel,
     CreateAssociation,
     EditAssociation,
     ListAssociationsParams,
@@ -12,7 +12,7 @@ export default class MLAssociations extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/ml/model/associations`;
 
     list(pipelineId: string, options?: ListAssociationsParams) {
-        return this.api.get<AssociationsListModel>(
+        return this.api.get<PageModel<MLAssociationModel, 'rules'>>(
             this.buildPath(MLAssociations.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options})
         );
     }

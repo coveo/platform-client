@@ -1,5 +1,8 @@
 import {ModelTypes} from '../../Enums';
 
+/**
+ * @deprecated - Use `PageModel<MLAssociationModel, 'rules'>` instead.
+ */
 export interface AssociationsListModel {
     rules: MLAssociationModel[];
     totalEntries: number;
