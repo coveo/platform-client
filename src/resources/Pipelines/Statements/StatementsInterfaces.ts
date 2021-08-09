@@ -35,6 +35,9 @@ export interface CopyStatementModel {
     destinationPipelineId: string;
 }
 
+/**
+ * @deprecated - Use `PageModel<StatementModel, 'statements'>` instead.
+ */
 export interface StatementModelList {
     statements: StatementModel[];
     totalEntries: number;

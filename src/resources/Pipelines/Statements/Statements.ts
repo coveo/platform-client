@@ -1,4 +1,5 @@
 import {getFormData} from '../../../utils/FormData';
+import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
     CopyStatementModel,
@@ -7,7 +8,6 @@ import {
     ListStatementParams,
     MoveStatementModel,
     StatementModel,
-    StatementModelList,
 } from './StatementsInterfaces';
 
 export default class Statements extends Resource {
@@ -16,7 +16,7 @@ export default class Statements extends Resource {
         `${Statements.getBaseUrl(pipelineId)}/${statementId}`;
 
     list(pipelineId: string, options?: ListStatementParams) {
-        return this.api.get<StatementModelList>(
+        return this.api.get<PageModel<StatementModel, 'statements'>>(
             this.buildPath(Statements.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options})
         );
     }
@@ -62,7 +62,7 @@ export default class Statements extends Resource {
     }
 
     copy(pipelineId: string, model: CopyStatementModel) {
-        return this.api.post<StatementModelList>(
+        return this.api.post<PageModel<StatementModel, 'statements'>>(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/copy`, {organizationId: this.api.organizationId}),
             model
         );
@@ -77,7 +77,7 @@ export default class Statements extends Resource {
     }
 
     move(pipelineId: string, statementId: string, model: MoveStatementModel) {
-        return this.api.put<StatementModelList>(
+        return this.api.put<PageModel<StatementModel, 'statements'>>(
             this.buildPath(`${Statements.getStatementUrl(pipelineId, statementId)}/move`, {
                 organizationId: this.api.organizationId,
             }),
