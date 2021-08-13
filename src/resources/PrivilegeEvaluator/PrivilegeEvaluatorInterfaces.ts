@@ -1,4 +1,4 @@
-import {GlobalPrivilegeModel} from '../GlobalGroups';
+import {PrivilegeModel} from '../BaseInterfaces';
 
 export interface PrivilegeEvaluatorModel {
     /**
@@ -16,7 +16,7 @@ export interface PrivilegeEvaluatorModel {
     /**
      * The unique identifier of the organization in which the target privilege applies.
      */
-    requestedPrivilege: GlobalPrivilegeModel;
+    requestedPrivilege: PrivilegeModel;
 }
 
 export enum PrivilegeRequestEvaluationReportModel {
