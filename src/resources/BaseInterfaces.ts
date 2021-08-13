@@ -17,12 +17,12 @@ export interface PrivilegeModel {
      * The owner of the privilege.
      * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
      */
-    owner?: string;
+    owner: string;
     /**
      * The target domain of the privilege.
      * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
      */
-    targetDomain?: string;
+    targetDomain: string;
     /**
      * The `displayName` of the source targeted by the privilege.
      * Note: The wildcard character (`*`) will include all sources.
