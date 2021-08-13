@@ -13,9 +13,25 @@ export interface IdAndDisplayNameModel {
 }
 
 export interface PrivilegeModel {
-    owner: string;
-    targetDomain: string;
+    /**
+     * The owner of the privilege.
+     * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
+     */
+    owner?: string;
+    /**
+     * The target domain of the privilege.
+     * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
+     */
+    targetDomain?: string;
+    /**
+     * The `displayName` of the source targeted by the privilege.
+     * Note: The wildcard character (`*`) will include all sources.
+     */
     targetId?: string;
+    /**
+     * The type of the privilege.
+     * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
+     */
     type?: string;
 }
 

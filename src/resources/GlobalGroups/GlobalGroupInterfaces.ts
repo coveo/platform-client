@@ -12,7 +12,10 @@ export interface GlobalGroupModel {
 }
 
 export interface GlobalPrivilegeModel extends PrivilegeModel {
-    level: string;
+    /**
+     * The access level of the global privileges.
+     */
+    level?: string;
 }
 
 export interface TemporaryPrivilegeConfigurationModel {
