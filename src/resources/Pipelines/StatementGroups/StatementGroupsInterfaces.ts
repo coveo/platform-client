@@ -7,17 +7,47 @@ import {
 
 export interface StatementGroupList {
     groups: StatementGroupModel[];
+
+    /**
+     * The total number of matching statements across all pages of results.
+     */
     totalCount: number;
+
     groupComposition: PipelineGroupsComposition;
 }
 
 export type StatementGroupModel = PermanentStatementGroup | CampaignStatementGroup;
 
 interface StatementGroupModelBase {
+    /**
+     * The unique identifier of the statement group.
+     */
     id: string;
+
+    /**
+     * The name of the statement groups.
+     */
     name: string;
+
+    /**
+     * The intented purpose of this statement group.
+     */
     description?: string;
+
+    /**
+     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * A query cannot be routed through a query pipeline that does not have a condition unless:
+     * - That query pipeline is set as the default query pipeline.
+     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
+     */
     conditionId?: string;
+
+    /**
+     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * A query cannot be routed through a query pipeline that does not have a condition unless:
+     * - That query pipeline is set as the default query pipeline.
+     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
+     */
     conditionDefinition?: string;
 
     /**
@@ -27,6 +57,10 @@ interface StatementGroupModelBase {
      * @example 2021-09-09T19:00:45.603-04:00
      */
     createdAt: string;
+
+    /**
+     * The creator principal.
+     */
     createdBy?: string;
 
     /**
@@ -36,6 +70,10 @@ interface StatementGroupModelBase {
      * @example 2021-09-09T19:00:45.603-04:00
      */
     modifiedAt?: string;
+
+    /**
+     * The last modified principal.
+     */
     modifiedBy?: string;
     statementComposition: StatementGroupComposition;
 }
@@ -44,7 +82,14 @@ export interface PermanentStatementGroup extends StatementGroupModelBase {
     // Discriminator
     type: StatementGroupType.permanent;
 
+    /**
+     * Whether or not the group is active.
+     */
     isActive?: boolean;
+
+    /**
+     * The status of the group.
+     */
     status: PermanentStatementGroupStatusType;
 }
 
@@ -58,7 +103,7 @@ export interface CampaignStatementGroup extends StatementGroupModelBase {
      *
      * @example 2020-09-09T19:00:45.603-04:00
      */
-    campaignStart?: string;
+    campaignStart: string;
 
     /**
      * The end date of the campaign.
@@ -66,8 +111,11 @@ export interface CampaignStatementGroup extends StatementGroupModelBase {
      *
      * @example 2021-09-09T19:00:45.603-04:00
      */
-    campaignEnd?: string;
+    campaignEnd: string;
 
+    /**
+     * The status of the campaign.
+     */
     status: CampaignStatementGroupStatusType;
 }
 
@@ -76,6 +124,7 @@ export interface PipelineGroupsComposition {
      * The number of active groups in the pipeline.
      */
     activeGroupCount: number;
+
     /**
      * The number of inactive groups in the pipeline.
      */
@@ -103,7 +152,14 @@ export interface PipelineGroupsComposition {
 }
 
 export interface StatementGroupComposition {
+    /**
+     * The number of result ranking statements in this group.
+     */
     resultRankingStatementCount: number;
+
+    /**
+     * The number of other types of statements in this group.
+     */
     otherStatementCount: number;
 }
 
@@ -138,9 +194,41 @@ export interface ListStatementGroupsOptions {
     types?: StatementGroupType[];
 }
 
-export interface CreateStatementGroupModel {
+export type CreateStatementGroupModel = CreatePermanentStatementGroupModel | CreateCampaignStatementGroupModel;
+
+interface CreateStatementGroupModelBase {
+    /**
+     * The name of the statement groups.
+     */
     name: string;
-    type: StatementGroupType;
+
+    /**
+     * The intented purpose of this statement group.
+     */
+    description?: string;
+
+    /**
+     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * A query cannot be routed through a query pipeline that does not have a condition unless:
+     * - That query pipeline is set as the default query pipeline.
+     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
+     */
+    conditionId?: string;
+}
+
+export interface CreatePermanentStatementGroupModel extends CreateStatementGroupModelBase {
+    // Discriminator
+    type: StatementGroupType.permanent;
+
+    /**
+     * Whether or not the group is active.
+     */
+    isActive?: boolean;
+}
+
+export interface CreateCampaignStatementGroupModel extends CreateStatementGroupModelBase {
+    // Discriminator
+    type: StatementGroupType.campaign;
 
     /**
      * The start date of the campaign.
@@ -148,7 +236,7 @@ export interface CreateStatementGroupModel {
      *
      * @example 2020-09-09T19:00:45.603-04:00
      */
-    campaignStart?: string;
+    campaignStart: string;
 
     /**
      * The end date of the campaign.
@@ -156,13 +244,13 @@ export interface CreateStatementGroupModel {
      *
      * @example 2021-09-09T19:00:45.603-04:00
      */
-    campaignEnd?: string;
-    description?: string;
-    conditionId?: string;
-    isActive?: boolean;
+    campaignEnd: string;
 }
 
-export interface UpdateStatementGroupModel extends CreateStatementGroupModel {}
+export type UpdateStatementGroupModel = UpdatePermanentStatementGroupModel | UpdateCampaignStatementGroupsModel;
+
+export interface UpdatePermanentStatementGroupModel extends CreatePermanentStatementGroupModel {}
+export interface UpdateCampaignStatementGroupsModel extends CreateCampaignStatementGroupModel {}
 
 export interface UpdateStatementGroupRuleAssociationsRequest {
     /**
