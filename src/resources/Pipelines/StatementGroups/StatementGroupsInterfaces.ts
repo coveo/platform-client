@@ -25,7 +25,7 @@ interface StatementGroupModelBase {
     id: string;
 
     /**
-     * The name of the statement groups.
+     * The name of the statement group.
      */
     name: string;
 
@@ -35,7 +35,7 @@ interface StatementGroupModelBase {
     description?: string;
 
     /**
-     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * The unique identifier of the condition that must be satisfied for a request to be processed by the statement group.
      * A query cannot be routed through a query pipeline that does not have a condition unless:
      * - That query pipeline is set as the default query pipeline.
      * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
@@ -43,7 +43,7 @@ interface StatementGroupModelBase {
     conditionId?: string;
 
     /**
-     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * The definition of the condition that must be satisfied for a request to be processed by the statement group.
      * A query cannot be routed through a query pipeline that does not have a condition unless:
      * - That query pipeline is set as the default query pipeline.
      * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
@@ -83,7 +83,7 @@ export interface PermanentStatementGroup extends StatementGroupModelBase {
     type: StatementGroupType.permanent;
 
     /**
-     * Whether or not the group is active.
+     * Whether the group is active.
      */
     isActive?: boolean;
 
@@ -198,7 +198,7 @@ export type CreateStatementGroupModel = CreatePermanentStatementGroupModel | Cre
 
 interface CreateStatementGroupModelBase {
     /**
-     * The name of the statement groups.
+     * The name of the statement group.
      */
     name: string;
 
@@ -208,7 +208,7 @@ interface CreateStatementGroupModelBase {
     description?: string;
 
     /**
-     * The id of the condition that must be met by a query in order to route that query through this query pipeline.
+     * The unique identifier of the condition that must be satisfied for a request to be processed by the statement group.
      * A query cannot be routed through a query pipeline that does not have a condition unless:
      * - That query pipeline is set as the default query pipeline.
      * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
@@ -221,7 +221,7 @@ export interface CreatePermanentStatementGroupModel extends CreateStatementGroup
     type: StatementGroupType.permanent;
 
     /**
-     * Whether or not the group is active.
+     * Whether the group is active.
      */
     isActive?: boolean;
 }
