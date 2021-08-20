@@ -36,17 +36,11 @@ interface StatementGroupModelBase {
 
     /**
      * The unique identifier of the condition that must be satisfied for a request to be processed by the statement group.
-     * A query cannot be routed through a query pipeline that does not have a condition unless:
-     * - That query pipeline is set as the default query pipeline.
-     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
      */
     conditionId?: string;
 
     /**
      * The definition of the condition that must be satisfied for a request to be processed by the statement group.
-     * A query cannot be routed through a query pipeline that does not have a condition unless:
-     * - That query pipeline is set as the default query pipeline.
-     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
      */
     conditionDefinition?: string;
 
@@ -209,9 +203,6 @@ interface CreateStatementGroupModelBase {
 
     /**
      * The unique identifier of the condition that must be satisfied for a request to be processed by the statement group.
-     * A query cannot be routed through a query pipeline that does not have a condition unless:
-     * - That query pipeline is set as the default query pipeline.
-     * - That query pipeline is enforced through the pipeline parameter of the query itself, in which case the query pipeline condition is bypassed.
      */
     conditionId?: string;
 }
