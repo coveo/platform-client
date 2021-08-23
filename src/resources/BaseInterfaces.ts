@@ -33,6 +33,10 @@ export interface PrivilegeModel {
      * See [Valid Privilege owner, targetDomain, and type Combinations](https://docs.coveo.com/en/159/).
      */
     type?: string;
+    /**
+     * The access level of the global privileges.
+     */
+    level?: string;
 }
 
 export interface GranularResource {
