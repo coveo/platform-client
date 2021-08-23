@@ -33,6 +33,10 @@ export interface DimensionModel {
      * The type of the dimension
      */
     type: DimensionType;
+    /**
+     * The path in the custom_datas map corresponding to this dimension. For custom dimensions only.
+     */
+    path?: string[];
 }
 
 export interface DimensionValuesModel {
@@ -55,7 +59,7 @@ export interface CustomDimensionModel {
      */
     displayName: string;
     /**
-     * Strings that correspond to the path that must be followed to fetch the desired value of the dimension in the custom_datas map.
+     * The path in the custom_datas map corresponding to this dimension. For custom dimensions only.
      */
     path?: string[];
 }
