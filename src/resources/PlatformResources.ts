@@ -23,6 +23,7 @@ import ModifierTemplates from './ModifierTemplates/ModifierTemplates';
 import Notifications from './Notification/notification';
 import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
+import PrivilegeEvaluator from './PrivilegeEvaluator/PrivilegeEvaluator';
 import PushApi from './PushApi/PushApi';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
@@ -74,6 +75,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ua', resource: UsageAnalytics},
     {key: 'user', resource: User},
     {key: 'notification', resource: Notifications},
+    {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
 ];
 
 class PlatformResources {
@@ -116,6 +118,7 @@ class PlatformResources {
     ua: UsageAnalytics;
     user: User;
     notification: Notifications;
+    privilegeEvaluator: PrivilegeEvaluator;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
