@@ -1,5 +1,7 @@
 import {
+    CampaignStatementGroupStatusType,
     ListStatementSortBy,
+    PermanentStatementGroupStatusType,
     ResultRankingLocales,
     ResultRankingMatchOperators,
     ResultRankingsKind,
@@ -8,9 +10,25 @@ import {
 } from '../../Enums';
 
 export interface ResultRanking {
+    /**
+     * The unique identifier of the result ranking rule.
+     */
     id: string;
+    /**
+     * The configuration of the result ranking rule.
+     */
     resultRanking: ResultRankingProps;
+    /**
+     * Associated statement group's information.
+     */
     associatedGroup?: ResultRankingAssociatedGroup;
+}
+
+export interface ListResultRanking extends ResultRanking {
+    /**
+     * Associated statement group's information.
+     */
+    associatedGroup?: ResultRankingAssociatedGroupWithStatus;
 }
 
 export interface ResultRankingProps {
@@ -42,6 +60,14 @@ export interface ResultRankingAssociatedGroup {
     id: string;
     name: string;
     isActive: boolean;
+}
+
+export interface ResultRankingAssociatedGroupWithStatus extends ResultRankingAssociatedGroup {
+    // TODO: Make required: https://coveord.atlassian.net/browse/SEARCHAPI-6177
+    /**
+     * Activation status
+     */
+    status?: CampaignStatementGroupStatusType | PermanentStatementGroupStatusType;
 }
 
 export interface ResultRankingMatchOperator {
@@ -118,7 +144,7 @@ export interface ResultRankingGroupBy {
 }
 
 export interface ListResultRankingResponse {
-    resultRankings: ResultRanking[];
+    resultRankings: ListResultRanking[];
     groupedBy: ResultRankingGroupBy;
     totalCount: number;
     totalPages: number;
