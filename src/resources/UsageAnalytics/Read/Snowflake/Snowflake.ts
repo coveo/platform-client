@@ -76,14 +76,8 @@ export default class Snowflake extends Resource {
     }
 
     createSnowflakeReaderAccount() {
-        return new Promise<SnowflakeReaderAccountStatusModel>((resolve) =>
-            resolve({snowflakeReaderAccountStatus: SnowflakeReaderAccountStatus.creating})
+        return this.api.post<void>(
+            this.buildPath(`${Snowflake.baseUrl}/readeraccounts`, {org: this.api.organizationId})
         );
-        /*
-         * TODO uncomment when the API call is public
-         */
-        // return this.api.put<SnowflakeReaderAccountStatusModel>(
-        //     this.buildPath(`${Snowflake.baseUrl}/readeraccount`, {org: this.api.organizationId})
-        // );
     }
 }

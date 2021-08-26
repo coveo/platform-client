@@ -121,14 +121,12 @@ describe('Snowflake', () => {
         });
     });
 
-    // TODO remove when api is ready
-    // eslint-disable-next-line jest/no-disabled-tests
-    describe.skip('putSnowflakeReaderAccount', () => {
+    describe('putSnowflakeReaderAccount', () => {
         it('makes a PUT call to the specific Snowflake url', () => {
             snowflake.createSnowflakeReaderAccount();
 
-            expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccounts`);
         });
     });
 });
