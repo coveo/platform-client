@@ -185,4 +185,45 @@ describe('SearchInterfaces', () => {
             expect(api.put).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users`, someUsers);
         });
     });
+
+    describe('addAccessesUsers', () => {
+        it('makes a POST call to the searchInterfaces accesses users url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+            const someUsers = ['Tinky Winky', 'Dipsy', 'Laa-Laa', 'Po'];
+
+            searchInterfaces.addAccessesUsers(id, someUsers);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users`, {
+                users: someUsers,
+            });
+        });
+
+        it('makes a POST with a notify query param when notify is true', () => {
+            const id = 'search-interface-id';
+            const someUsers = ['Tinky Winky', 'Dipsy', 'Laa-Laa', 'Po'];
+
+            searchInterfaces.addAccessesUsers(id, someUsers, true);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users?notify=1`, {
+                users: someUsers,
+            });
+        });
+
+        it('makes a POST with a message body param when notify is true and a message is provided', () => {
+            const id = 'search-interface-id';
+            const someUsers = ['Tinky Winky', 'Dipsy', 'Laa-Laa', 'Po'];
+            const message =
+                'The oldest and strongest emotion of mankind is fear, and the oldest and strongest kind of fear is fear of the unknown.';
+
+            searchInterfaces.addAccessesUsers(id, someUsers, true, message);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/accesses/users?notify=1`, {
+                users: someUsers,
+                message,
+            });
+        });
+    });
 });
