@@ -46,4 +46,12 @@ export default class SearchInterfaces extends Resource {
     updateAccessesUsers(interfaceId: string, users: string[]): Promise<string[]> {
         return this.api.put(`${SearchInterfaces.baseUrl}/${interfaceId}/accesses/users`, users);
     }
+
+    addAccessesUsers(interfaceId: string, users: string[], notify?: boolean, message?: string): Promise<string[]> {
+        const body = message ? {users, message} : {users};
+        return this.api.post(
+            `${SearchInterfaces.baseUrl}/${interfaceId}/accesses/users${notify ? '?notify=1' : ''}`,
+            body
+        );
+    }
 }
