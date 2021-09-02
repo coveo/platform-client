@@ -30,6 +30,7 @@ describe('Snowflake', () => {
             const model: SnowflakeUserModel = {
                 username: 'ross.blais',
                 email: 'ross.blais@gmail.com',
+                daysToExpiry: 66,
             };
             snowflake.createUser(model);
 
