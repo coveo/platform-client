@@ -5,8 +5,18 @@ export interface SnowflakeUsersModel {
 }
 
 export interface SnowflakeUserModel {
+    /**
+     * The username of the user
+     */
     username: string;
+    /**
+     * The email of the user
+     */
     email: string;
+    /**
+     * The number of days that the user has access to the reader account, ranging from 0 (indefinitely) to 90 days)
+     */
+    daysToExpiry?: number;
 }
 
 export interface SnowflakeNetworkPolicyModel {
