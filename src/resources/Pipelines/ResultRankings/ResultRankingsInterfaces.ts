@@ -63,11 +63,10 @@ export interface ResultRankingAssociatedGroup {
 }
 
 export interface ResultRankingAssociatedGroupWithStatus extends ResultRankingAssociatedGroup {
-    // TODO: Make required: https://coveord.atlassian.net/browse/SEARCHAPI-6177
     /**
      * Activation status
      */
-    status?: CampaignStatementGroupStatusType | PermanentStatementGroupStatusType;
+    status: CampaignStatementGroupStatusType | PermanentStatementGroupStatusType;
 }
 
 export interface ResultRankingMatchOperator {
