@@ -1,7 +1,7 @@
 import API from '../../../APICore';
 import Members from '../Members/Members';
 import Organization from '../Organization';
-import {DefinitionModel} from '../OrganizationInterfaces';
+import {DefinitionModel, OrganizationCreationOrigin} from '../OrganizationInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -56,10 +56,13 @@ describe('Organization', () => {
     describe('create', () => {
         it('should make a POST call to the Organization base url with the parameters', () => {
             const name = 'OrgName';
+            const creationOrigin = OrganizationCreationOrigin.TEST;
 
-            organization.create({name});
+            organization.create({name, creationOrigin});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Organization.baseUrl}?name=${name}`);
+            expect(api.post).toHaveBeenCalledWith(
+                `${Organization.baseUrl}?name=${name}&creationOrigin=${creationOrigin}`
+            );
         });
     });
 

@@ -48,9 +48,22 @@ export interface ListOrganizationOptions {
 }
 
 export interface CreateOrganizationOptions {
+    /*
+     * The human-readable display name to give to the organization
+     */
     name: string;
+    /*
+     * The name of the template to create the initial organization definition
+     */
     organizationTemplate?: string;
+    /*
+     * The owner of the organization, usually an email address
+     */
     owner?: string;
+    /*
+     * Metadata about the context where the organization creation request originated
+     */
+    creationOrigin?: OrganizationCreationOrigin;
 }
 
 export interface DefinitionModel {
@@ -82,4 +95,54 @@ export interface OverrideModel {
      * List of statements to apply when computing the resulting license
      */
     statements: ModifierStatementModel[];
+}
+
+/*
+ * Metadata about the context where the organization creation request originated
+ */
+export enum OrganizationCreationOrigin {
+    /*
+     * Created from the Coveo Administration Console
+     */
+    ADMIN_UI = 'ADMIN_UI',
+    /*
+     * Created from the API, default value in the backend if parameter is omitted
+     */
+    API = 'API',
+    /*
+     * Created when syncing from our CRM solution
+     */
+    BUSINESS_CRM = 'BUSINESS_CRM',
+    /*
+     * Created from a training portal
+     */
+    TRAINING = 'TRAINING',
+    /*
+     * Created by one of our partners
+     */
+    PARTNER_PROGRAM = 'PARTNER_PROGRAM',
+    /*
+     * Created as a scratch organization
+     */
+    TEST = 'TEST',
+    /*
+     * Created from the Coveo website
+     */
+    WEBSITE = 'WEBSITE',
+    /*
+     * Created from the Salesforce Coveo integration package
+     */
+    SALESFORCE_INTEGRATION_TRIAL = 'SALESFORCE_INTEGRATION_TRIAL',
+    /*
+     * Created from the ServiceNow Coveo integration package
+     */
+    SERVICENOW_INTEGRATION_TRIAL = 'SERVICENOW_INTEGRATION_TRIAL',
+    /*
+     * Created from the Sitecore Coveo integration package
+     */
+    SITECORE_INTEGRATION_TRIAL = 'SITECORE_INTEGRATION_TRIAL',
+    /*
+     * Unknown origin
+     */
+    UNKNOWN = 'UNKNOWN',
 }
