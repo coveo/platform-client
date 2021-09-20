@@ -197,7 +197,7 @@ interface CreateStatementGroupModelBase {
     name: string;
 
     /**
-     * The intented purpose of this statement group.
+     * The intended purpose of this statement group.
      */
     description?: string;
 
