@@ -110,6 +110,10 @@ export enum OrganizationCreationOrigin {
      */
     API = 'API',
     /*
+     * Created from the Coveo CLI
+     */
+    CLI = 'CLI',
+    /*
      * Created when syncing from our CRM solution
      */
     BUSINESS_CRM = 'BUSINESS_CRM',
