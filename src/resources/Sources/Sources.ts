@@ -3,6 +3,7 @@ import {New, PageModel} from '../BaseInterfaces';
 import {ActivityOperation} from '../Enums';
 import Resource from '../Resource';
 import {ScheduleModel} from '../SecurityCache';
+import SourcesDatasets from './SourcesDatasets/SourcesDatasets';
 import SourcesFields from './SourcesFields/SourcesFields';
 import {
     CreateSourceModel,
@@ -19,12 +20,14 @@ export default class Sources extends Resource {
 
     field: SourcesFields;
     mappings: SourcesMappings;
+    datasets: SourcesDatasets;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
 
         this.field = new SourcesFields(api, serverlessApi);
         this.mappings = new SourcesMappings(api, serverlessApi);
+        this.datasets = new SourcesDatasets(api, serverlessApi);
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
