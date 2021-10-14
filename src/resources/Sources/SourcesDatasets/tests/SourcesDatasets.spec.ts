@@ -30,11 +30,10 @@ describe('SourcesDatasets', () => {
             dataset.import(DatasetType.web);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith('/rest/organizations/{organizationName}/sources/datasets/import', {
-                datasetName: DatasetType.web,
-                withContent: true,
-                organizationId: api.organizationId,
-            });
+            expect(api.put).toHaveBeenCalledWith(
+                '/rest/organizations/{organizationName}/sources/datasets/import?datasetName=WEB&withContent=true',
+                {}
+            );
         });
     });
 });
