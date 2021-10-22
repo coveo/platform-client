@@ -7,6 +7,7 @@ import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
 import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
 import ModelInformation from './ModelInformation/ModelInformation';
 import Models from './Models/Models';
+import PQSConfiguration from './PQSConfiguration/PQSConfiguration';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -17,6 +18,7 @@ export default class MachineLearning extends Resource {
     dneConfig: DNEConfiguration;
     caseClassificationConfig: CaseClassificationConfiguration;
     smartSnippetsConfig: SmartSnippetsConfiguration;
+    pqsConfig: PQSConfiguration;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -27,6 +29,7 @@ export default class MachineLearning extends Resource {
         this.dneConfig = new DNEConfiguration(api, serverlessApi);
         this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
         this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
+        this.pqsConfig = new PQSConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {
