@@ -28,7 +28,7 @@ export interface ResultRanking {
      */
     modifiedBy?: string;
     /**
-     * The last time this was modified.
+     * The last time this was modified. (ISO 8601)
      */
     modifiedAt?: string;
 }
@@ -42,11 +42,11 @@ export interface ListResultRanking extends ResultRanking {
 
 export interface ResultRankingProps {
     /**
-     * The name of the result ranking
+     * The name of the result ranking.
      */
     name: string;
     /**
-     * The kind of result ranking. The default value is "featured_result"
+     * The kind of result ranking. The default value is "featured_result".
      */
     kind?: ResultRankingsKind;
     defaultMatchOperator: ResultRankingMatchOperator;
@@ -56,11 +56,11 @@ export interface ResultRankingProps {
     >;
     qplPredicates?: ResultRankingQplCodePredicate;
     /**
-     * Whether to add the current query (q) to the disjunction part (dq) of the combined expression using an OR operator.
+     * Whether to add the current Query (q) to the Disjunction part (dq) of the combined expression using an OR operator.
      */
     matchQuery?: boolean;
     /**
-     * Whether to append the current advanced query (aq) to the disjunction part (dq) of the combined query expression using an OR operator.
+     * Whether to append the current Advanced Query (aq) to the Disjunction part (dq) of the combined query expression using an OR operator.
      */
     matchAdvancedQuery?: boolean;
     includeInFacets?: boolean;
@@ -73,16 +73,16 @@ export interface ResultRankingProps {
      */
     description?: string;
     /**
-     * The ranking score modifier to apply
+     * The ranking score modifier to apply.
      * Use a positive value to promote the target, or a negative value to demote it.
      */
     rankingModifier?: number;
     /**
-     * Whether to treat the expression as a constant query expression (cq) (and cache its result set).
+     * Whether to treat the expression as a Constant Query (cq) expression (and cache its result set).
      */
     isConstant?: boolean;
     /**
-     * Whether to apply the QRE to every item in the expression query result set, regardless of its current ranking score. When this option is set to 'false', the QRE only applies to query result set items whose current ranking score is considered high enough by the index.
+     * Whether to apply the Query Ranking Expression (QRE) to every item in the expression query result set, regardless of its current ranking score. When this option is set to 'false', the QRE only applies to query result set items whose current ranking score is considered high enough by the index.
      */
     applyToEveryResult?: boolean;
     /**
@@ -107,14 +107,14 @@ export interface ResultRankingAssociatedGroup {
 
 export interface ResultRankingAssociatedGroupWithStatus extends ResultRankingAssociatedGroup {
     /**
-     * Activation status
+     * Activation status.
      */
     status: CampaignStatementGroupStatusType | PermanentStatementGroupStatusType;
 }
 
 export interface ResultRankingMatchOperator {
     /**
-     * The kind of match operator
+     * The kind of match operator.
      */
     kind: string | ResultRankingMatchOperators;
 }
@@ -122,13 +122,13 @@ export interface ResultRankingMatchOperator {
 export interface ResultRankingPredicate {
     kind: string;
     /**
-     * The value to compare with the search query’s actual q value.
+     * The value to compare with the search query's actual q value.
      */
     basicQueryExpression?: string;
     matchOperator: ResultRankingMatchOperator;
     locale?: ResultRankingPredicateLocale;
     /**
-     * The query pipeline language (QPL) definition of the condition.
+     * The Query Pipeline Language (QPL) definition of the condition.
      */
     code?: string;
 }
@@ -153,7 +153,7 @@ export interface ResultRankingTargetUniqueId {
 
 export interface ResultRankingTargetLocalizedContent {
     /**
-     * The ID of the KB article to show.
+     * The ID of the knowledge article to show.
      */
     familyId: string;
     locale: ResultRankingLocalizedContentLocale;
@@ -176,7 +176,7 @@ export interface ResultRankingLocalizedContentLocale {
 export interface ResultRankingLocalizedContentLocaleAuto {
     auto: {
         /**
-         * The default locale of the Knowledge Article to default to if it's not available in the user's locale.
+         * The default locale of the knowledge article to default to if it's not available in the user's locale.
          */
         default: string;
     };
@@ -184,7 +184,7 @@ export interface ResultRankingLocalizedContentLocaleAuto {
 
 export interface ResultRankingLocalizedContentLocaleSpecific {
     /**
-     * The locale code of the KB article to show.
+     * The locale code of the knowledge article to show.
      */
     code: string;
 }
@@ -269,10 +269,6 @@ export interface ListResultRankingParams {
      *
      * @see kind
      */
-
-    /**
-     * The rule types to allow in the results.
-     */
     ruleTypes?: ResultRankingsRuleTypes[];
     /**
      * The rule status to allow in the results.
@@ -282,7 +278,7 @@ export interface ListResultRankingParams {
 
 export interface CopyResultRankingRequest {
     /**
-     * The unique identifier of the query pipeline to copy the statements to
+     * The unique identifier of the query pipeline to copy the statements to.
      */
     destinationPipelineId: string;
 
@@ -298,7 +294,7 @@ export interface CopyResultRankingResponse {
      */
     resultRankings: Array<{
         /**
-         * The identifier of the result ranking rule
+         * The identifier of the result ranking rule.
          */
         id: string;
 
