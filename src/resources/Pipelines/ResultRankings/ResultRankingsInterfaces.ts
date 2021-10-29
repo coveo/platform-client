@@ -176,7 +176,7 @@ export interface ResultRankingLocalizedContentLocale {
 export interface ResultRankingLocalizedContentLocaleAuto {
     auto: {
         /**
-         * The default locale of the knowledge article to default to if it's not available in the user's locale.
+         * The default locale of the knowledge article to default to if it's not available in the user's locale. (IETF BCP 47)
          */
         default: string;
     };
@@ -184,7 +184,7 @@ export interface ResultRankingLocalizedContentLocaleAuto {
 
 export interface ResultRankingLocalizedContentLocaleSpecific {
     /**
-     * The locale code of the knowledge article to show.
+     * The locale code of the knowledge article to show. (IETF BCP 47)
      */
     code: string;
 }
