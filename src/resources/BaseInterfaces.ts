@@ -40,6 +40,6 @@ export interface PrivilegeModel {
 }
 
 export interface GranularResource {
-    groupsThatCanEdit?: IdAndDisplayNameModel[];
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
+    groupsThatCanEdit?: IdAndDisplayNameModel[];
 }

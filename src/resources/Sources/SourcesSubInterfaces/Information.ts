@@ -1,9 +1,24 @@
 import {ActivityOperation, OperationType, SourceStatusType} from '../../Enums';
 
+export interface SourceCurrentOperation {
+    itemsAdded: number;
+    itemsFiltered: number;
+    itemsRemoved: number;
+    itemsUnchanged: number;
+    itemsUpdated: number;
+    operationType: OperationType;
+    statusMessage: string;
+}
+
 export interface SourceLastOperation {
     errorCode?: string;
     id?: string;
     initialBuild?: boolean;
+    itemsAdded: number;
+    itemsFiltered: number;
+    itemsRemoved: number;
+    itemsUnchanged: number;
+    itemsUpdated: number;
     numberOfDocuments?: number;
     operationType?: OperationType;
     result?: string;
@@ -30,6 +45,7 @@ export interface SourceInformation {
     id?: string;
     collectionId?: number;
     collectionName?: string;
+    currentOperation?: SourceCurrentOperation;
     documentsTotalSize?: number;
     lastOperation?: SourceLastOperation;
     nextOperation?: NextOperation;

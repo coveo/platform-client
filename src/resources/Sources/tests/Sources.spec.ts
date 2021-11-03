@@ -39,6 +39,14 @@ describe('Sources', () => {
         });
     });
 
+    describe('listOperationalStatus', () => {
+        it('should make a GET call to the specific Sources url', () => {
+            source.listOperationalStatus();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/sourceoperationalstatus`);
+        });
+    });
+
     describe('createFromRaw', () => {
         it('should make a POST call to the specific Sources url', () => {
             const rawSource: RawSourceConfig = {};
