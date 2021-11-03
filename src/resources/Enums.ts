@@ -71,15 +71,28 @@ export enum ExtensionLanguageType {
     'PYTHON3' = 'PYTHON3',
 }
 
+export enum SourceOperationalStatus {
+    ALL = 'ALL',
+    LAST_OPERATION_IN_ERROR = 'LAST_OPERATION_IN_ERROR',
+    OK = 'OK',
+    PAUSED = 'PAUSED',
+    READY = 'READY',
+    RUNNING = 'RUNNING',
+}
+
 export enum SourceStatusType {
+    CANCELING = 'CANCELING',
     CREATING = 'CREATING',
     DISABLED = 'DISABLED',
-    REFRESHING = 'REFRESHING',
+    ERROR = 'ERROR',
+    IDLE = 'IDLE',
     PAUSED = 'PAUSED',
     PAUSED_ON_ERROR = 'PAUSED_ON_ERROR',
-    IDLE = 'IDLE',
-    ERROR = 'ERROR',
+    PAUSING = 'PAUSING',
     PUSH_READY = 'PUSH_READY',
+    REFRESHING = 'REFRESHING',
+    RESUMING = 'RESUMING',
+    STARTING_REFRESH = 'STARTING_REFRESH',
 }
 
 export enum SourceType {

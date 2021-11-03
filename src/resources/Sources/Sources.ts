@@ -9,6 +9,7 @@ import {
     CreateSourceModel,
     CreateSourceOptions,
     LightSourceModel,
+    ListOperationalStatusSourcesParams,
     ListSourcesParams,
     RawSourceConfig,
     SourceModel,
@@ -36,6 +37,16 @@ export default class Sources extends Resource {
 
     list(params?: ListSourcesParams) {
         return this.api.get<PageModel<SourceModel, 'sourceModels'>>(this.buildPath(`${Sources.baseUrl}/pages`, params));
+    }
+
+    /**
+     * @description New API resource for the list of sources
+     * @experimental
+     */
+    listOperationalStatus(params?: ListOperationalStatusSourcesParams) {
+        return this.api.get<PageModel<SourceModel, 'sourceModels'>>(
+            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus`, params)
+        );
     }
 
     createFromRaw(rawSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {

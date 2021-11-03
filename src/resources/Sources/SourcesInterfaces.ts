@@ -6,6 +6,7 @@ import {
     FilterStatusType,
     SortingOrder,
     SortingType,
+    SourceOperationalStatus,
     SourceSecurityOption,
     SourceType,
     SourceVisibility,
@@ -16,17 +17,24 @@ import {MappingModel} from './SourcesMappings';
 
 export * from './SourcesSubInterfaces';
 
-export interface ListSourcesParams {
+interface ListParams {
     filter?: string;
-    filterHostType?: FilterHostType;
-    filterLastOperationResultType?: FilterLastOperationResultType;
-    filterLastOperationType?: FilterLastOperationType;
-    filterStatusType?: FilterStatusType;
     page?: number;
     perPage?: number;
     sortingOrder?: SortingOrder;
     sortingType?: SortingType;
     writeAccessOnly?: boolean;
+}
+
+export interface ListOperationalStatusSourcesParams extends ListParams {
+    sourceOperationalStatus: SourceOperationalStatus;
+}
+
+export interface ListSourcesParams extends ListParams {
+    filterHostType?: FilterHostType;
+    filterLastOperationResultType?: FilterLastOperationResultType;
+    filterLastOperationType?: FilterLastOperationType;
+    filterStatusType?: FilterStatusType;
 }
 
 export interface ExtendedConfig {
@@ -73,10 +81,11 @@ export interface RawSourceConfig extends GranularResource {
 }
 
 export interface SourceModel extends GranularResource {
+    alwaysTrustCertificates?: boolean;
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
-    pendingCrawlingModuleId?: string;
     customParameters?: Record<string, string>;
+    formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;
     id?: string;
     information?: SourcesSubInterface.SourceInformation;
     logicalIndex?: string;
@@ -85,20 +94,19 @@ export interface SourceModel extends GranularResource {
     ocrFileTypes?: string[];
     onPremisesEnabled?: boolean;
     owner?: string;
+    password?: string;
+    pendingCrawlingModuleId?: string;
     permissions?: SourcesSubInterface.DocumentPermissionModel;
     postConversionExtensions?: SourcesSubInterface.SourceExtensionModel[];
     preConversionExtensions?: SourcesSubInterface.SourceExtensionModel[];
     pushEnabled?: boolean;
-    streamEnabled?: boolean;
     resourceId?: string;
     securityProviderReferences?: string[];
     sourceType?: SourceType;
     sourceVisibility?: SourceVisibility;
+    streamEnabled?: boolean;
     urlFilters?: SourcesSubInterface.UrlFilter[];
-    alwaysTrustCertificates?: boolean;
     username?: string;
-    password?: string;
-    formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;
 }
 
 export interface LightSourceModel {
