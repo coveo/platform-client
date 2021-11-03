@@ -43,8 +43,6 @@ interface SearchHubBucketParams {
     bucket: string;
 }
 
-export type DeleteSearchHubParams = SearchHubNameParams;
-
 export type UpdateSearchHubParams = SearchHubNameParams & SearchHubModel;
 
 export type UpdateSearchHubBucketParams = SearchHubNameParams & SearchHubBucketParams;

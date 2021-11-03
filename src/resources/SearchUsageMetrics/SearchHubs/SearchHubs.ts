@@ -6,7 +6,6 @@ import {
     RestSearchHub,
     SearchHubModel,
     UpdateSearchHubParams,
-    DeleteSearchHubParams,
     UpdateSearchHubBucketParams,
 } from './SearchHubsInterface';
 
@@ -31,7 +30,7 @@ export default class SearchHubs extends Resource {
         );
     }
 
-    delete({hubName}: DeleteSearchHubParams) {
+    delete({hubName}: SearchHubNameParams) {
         return this.api.delete<void>(
             this.buildPath(`${SearchHubs.baseUrl}/${hubName}`, {organizationId: this.api.organizationId})
         );
