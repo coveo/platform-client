@@ -21,8 +21,8 @@ pipeline {
 
   environment {
     NPM_TOKEN = credentials("npmjs_com_token")
-    GIT = credentials("github-coveobot")
-    GH_TOKEN = credentials("github-coveobot_token")
+    GIT = credentials("github-commit-token")
+    GH_TOKEN = credentials("github-commit-token")
   }
 
   options {
@@ -46,7 +46,7 @@ pipeline {
             $class: 'GitSCM',
             branches: scm.branches,
             extensions: scm.extensions + [[$class: "CleanCheckout"]] + [[$class: "LocalBranch", localBranch: "**"]] + [[$class: 'CloneOption', noTags: false, reference: '', shallow: false]],
-            userRemoteConfigs: [[credentialsId: "github-coveobot", url: "https://github.com/coveo/platform-client.git"]]
+            userRemoteConfigs: [[credentialsId: "github-app-dev", url: "https://github.com/coveo/platform-client.git"]]
           ])
 
           sh "git config --global user.email \"jenkins@coveo.com\""
