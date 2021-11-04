@@ -40,7 +40,7 @@ describe('SearchHubs', () => {
             searchHubs.get(getSearchHub);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}/${getSearchHub.hubName}`);
+            expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${getSearchHub.hubName}`);
         });
     });
 
@@ -50,7 +50,7 @@ describe('SearchHubs', () => {
             searchHubs.delete(deleteSearchHub);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${SearchHubs.baseUrl}/${deleteSearchHub.hubName}`);
+            expect(api.delete).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${deleteSearchHub.hubName}`);
         });
     });
 
@@ -61,7 +61,7 @@ describe('SearchHubs', () => {
             searchHubs.update(updateSearchHub);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${SearchHubs.baseUrl}/${updateSearchHub.hubName}`, {
+            expect(api.put).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${updateSearchHub.hubName}`, {
                 hub: updateSearchHubParams,
             });
         });
@@ -74,7 +74,7 @@ describe('SearchHubs', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${SearchHubs.baseUrl}/${updateBucketSearchHub.hubName}?bucket=${updateBucketSearchHub.bucket}`
+                `${SearchHubs.baseUrl}${updateBucketSearchHub.hubName}/bucket?bucket=${updateBucketSearchHub.bucket}`
             );
         });
     });
