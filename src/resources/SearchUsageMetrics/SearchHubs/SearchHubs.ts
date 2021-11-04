@@ -3,7 +3,6 @@ import Resource from '../../Resource';
 import {
     SearchHubNameParams,
     RestSearchHub,
-    SearchHubModel,
     UpdateSearchHubParams,
     UpdateSearchHubBucketParams,
 } from './SearchHubsInterface';
@@ -15,7 +14,7 @@ export default class SearchHubs extends Resource {
         return this.api.get<{hubs: RestSearchHub[]}>(SearchHubs.baseUrl);
     }
 
-    create(params: SearchHubModel) {
+    create(params: RestSearchHub) {
         return this.api.post<void>(SearchHubs.baseUrl, params);
     }
 
@@ -28,7 +27,7 @@ export default class SearchHubs extends Resource {
     }
 
     update({hubName, hub}: UpdateSearchHubParams) {
-        return this.api.put<void>(`${SearchHubs.baseUrl}${hubName}`, {hub});
+        return this.api.put<void>(`${SearchHubs.baseUrl}${hubName}`, hub);
     }
 
     updateBucket({hubName, bucket}: UpdateSearchHubBucketParams) {

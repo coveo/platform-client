@@ -15,18 +15,18 @@ export interface RestSearchHub {
     description?: string;
 }
 
-export interface SearchHubModel {
-    /**
-     * The search hub data
-     */
-    hub: RestSearchHub;
-}
-
 export interface SearchHubNameParams {
     /**
      * The search hub name
      */
     hubName: string;
+}
+
+interface SearchHubModel {
+    /**
+     * The search hub data
+     */
+    hub: RestSearchHub;
 }
 
 interface SearchHubBucketParams {

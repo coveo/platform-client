@@ -26,11 +26,11 @@ describe('SearchHubs', () => {
 
     describe('create', () => {
         it('makes a POST call to the SearchHub base url with the set hub', () => {
-            const newSearchHub = {hub: {name: 'hello', bucket: 'bonjour', description: 'hola'}};
+            const newSearchHub = {name: 'hello', bucket: 'bonjour', description: 'hola'};
             searchHubs.create(newSearchHub);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${SearchHubs.baseUrl}`, {hub: newSearchHub.hub});
+            expect(api.post).toHaveBeenCalledWith(`${SearchHubs.baseUrl}`, newSearchHub);
         });
     });
 
@@ -61,9 +61,10 @@ describe('SearchHubs', () => {
             searchHubs.update(updateSearchHub);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${updateSearchHub.hubName}`, {
-                hub: updateSearchHubParams,
-            });
+            expect(api.put).toHaveBeenCalledWith(
+                `${SearchHubs.baseUrl}${updateSearchHub.hubName}`,
+                updateSearchHubParams
+            );
         });
     });
 
