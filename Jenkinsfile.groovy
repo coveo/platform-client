@@ -22,9 +22,9 @@ pipeline {
   environment {
     NPM_TOKEN = credentials("npmjs_com_token")
     GIT = credentials("github-coveobot")
-    GH_TOKEN = credentials("github-coveobot_token")
-  }
+    GH_TOKEN = credentials("github-commit-token")
 
+  }
   options {
     ansiColor("xterm")
     timestamps()
