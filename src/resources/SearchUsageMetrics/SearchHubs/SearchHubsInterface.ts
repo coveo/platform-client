@@ -22,13 +22,6 @@ export interface SearchHubModel {
     hub: RestSearchHub;
 }
 
-export interface SearchHubsList {
-    /**
-     * List of search hub data
-     */
-    hubs: RestSearchHub[];
-}
-
 export interface SearchHubNameParams {
     /**
      * The search hub name

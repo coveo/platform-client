@@ -1,7 +1,6 @@
 import API from '../../../APICore';
 import Resource from '../../Resource';
 import {
-    SearchHubsList,
     SearchHubNameParams,
     RestSearchHub,
     SearchHubModel,
@@ -13,15 +12,16 @@ export default class SearchHubs extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/hubs`;
 
     list() {
-        return this.api.get<SearchHubsList>(
+        return this.api.get<{hubs: RestSearchHub[]}>(
             this.buildPath(SearchHubs.baseUrl, {organizationId: this.api.organizationId})
         );
     }
 
     create(params: SearchHubModel) {
-        return this.api.post<void>(this.buildPath(SearchHubs.baseUrl, {organizationId: this.api.organizationId}), {
-            ...params,
-        });
+        return this.api.post<void>(
+            this.buildPath(SearchHubs.baseUrl, {organizationId: this.api.organizationId}),
+            params
+        );
     }
 
     get({hubName}: SearchHubNameParams) {
