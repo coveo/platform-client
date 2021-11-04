@@ -21,8 +21,8 @@ pipeline {
 
   environment {
     NPM_TOKEN = credentials("npmjs_com_token")
-    GIT = credentials("github-coveobot")
-    GH_TOKEN = credentials("github-commit-token")
+    GIT = credentials("github-commit-token")
+    GH_TOKEN = credentials("github-coveobot")
 
   }
   options {
@@ -46,12 +46,12 @@ pipeline {
             $class: 'GitSCM',
             branches: scm.branches,
             extensions: scm.extensions + [[$class: "CleanCheckout"]] + [[$class: "LocalBranch", localBranch: "**"]] + [[$class: 'CloneOption', noTags: false, reference: '', shallow: false]],
-            userRemoteConfigs: [[credentialsId: "github-coveobot", url: "https://github.com/coveo/platform-client.git"]]
+            userRemoteConfigs: [[credentialsId: "github-app-dev", url: "https://github.com/coveo/platform-client.git"]]
           ])
 
           sh "git config --global user.email \"jenkins@coveo.com\""
           sh "git config --global user.name \"Jenkins CI\""
-          sh "git remote set-url origin \"https://${env.GIT_USR}:${env.GH_TOKEN}@github.com/coveo/platform-client.git\""
+          sh "git remote set-url origin \"https://${env.GIT_USR}:${env.GIT_PSW}@github.com/coveo/platform-client.git\""
 
           def nodeHome = tool name: env.BUILD_NODE_VERSION, type: "nodejs"
           env.PATH = "${nodeHome}/bin:${env.PATH}"
