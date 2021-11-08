@@ -30,6 +30,7 @@ export enum FieldTypes {
     DOUBLE = 'DOUBLE',
     DATE = 'DATE',
     STRING = 'STRING',
+    VECTOR = 'VECTOR',
 }
 
 export enum FieldOrigin {
