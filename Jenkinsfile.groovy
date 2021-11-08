@@ -93,7 +93,7 @@ pipeline {
 
     stage('Publish') {
       when {
-        expression { env.BRANCH_NAME ==~ /(master|fix\/create-release)/ }
+        expression { env.BRANCH_NAME == 'master' }
       }
       
       steps {

@@ -18,7 +18,7 @@
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
-        "release": "semantic-release --dry-run",
+        "release": "semantic-release",
         "commit-cli": "git-cz",
         "lintfix": "prettier --write \"**/*.{ts,js,json,md}\" && eslint \"src/**.*\" --fix"
     },

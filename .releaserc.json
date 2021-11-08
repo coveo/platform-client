@@ -1,5 +1,4 @@
 {
-    "branches": ["fix/create-release"],
     "plugins": [
         [
             "@semantic-release/commit-analyzer",
