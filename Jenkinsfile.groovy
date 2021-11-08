@@ -52,7 +52,6 @@ pipeline {
           sh "git config --global user.name \"Jenkins CI\""
           sh "git remote set-url origin \"https://${env.GIT_USR}:${env.GIT_PSW}@github.com/coveo/platform-client.git\""
 
-
           def nodeHome = tool name: env.BUILD_NODE_VERSION, type: "nodejs"
           env.PATH = "${nodeHome}/bin:${env.PATH}"
           sh "npm config set //registry.npmjs.org/:_authToken=${env.NPM_TOKEN}"
