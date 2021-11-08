@@ -51,7 +51,7 @@ pipeline {
 
           sh "git config --global user.email \"jenkins@coveo.com\""
           sh "git config --global user.name \"Jenkins CI\""
-          sh "git remote set-url origin \"https://${env.GH_TOKEN}@github.com/coveo/platform-client.git\""
+          sh "git remote set-url origin \"https://x-access-token:${env.GH_TOKEN}@github.com/coveo/platform-client.git\""
 
           def nodeHome = tool name: env.BUILD_NODE_VERSION, type: "nodejs"
           env.PATH = "${nodeHome}/bin:${env.PATH}"
