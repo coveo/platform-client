@@ -22,9 +22,8 @@ pipeline {
   environment {
     NPM_TOKEN = credentials("npmjs_com_token")
     GIT = credentials("github-commit-token")
-    GH_TOKEN = credentials("github-coveobot")
-
   }
+
   options {
     ansiColor("xterm")
     timestamps()
@@ -46,7 +45,7 @@ pipeline {
             $class: 'GitSCM',
             branches: scm.branches,
             extensions: scm.extensions + [[$class: "CleanCheckout"]] + [[$class: "LocalBranch", localBranch: "**"]] + [[$class: 'CloneOption', noTags: false, reference: '', shallow: false]],
-            userRemoteConfigs: [[credentialsId: "github-app-dev", url: "https://github.com/coveo/platform-client.git"]]
+            userRemoteConfigs: [[credentialsId: "github-coveobot", url: "https://github.com/coveo/platform-client.git"]]
           ])
 
           sh "git config --global user.email \"jenkins@coveo.com\""
@@ -110,7 +109,11 @@ pipeline {
             STARTED_BY_USER = cause.user()
             STARTED_BY_UPSTREAM = cause.upstream()
 
-            sh "npm run release"
+            withCredentials([usernamePassword(credentialsId: 'github-commit-token',
+                                              usernameVariable: 'GITHUB_APP',
+                                              passwordVariable: 'GH_TOKEN')]) {
+              sh "npm run release"
+            }
           } else {
             sh "echo \"skipping publish since remote changed (something was merged)\""
           }
