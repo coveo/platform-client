@@ -21,8 +21,7 @@ pipeline {
 
   environment {
     NPM_TOKEN = credentials("npmjs_com_token")
-    GIT = credentials("github-coveobot")
-    GH_TOKEN = credentials("github-commit-token")
+    GIT = credentials("github-commit-token")
   }
 
   options {
@@ -51,7 +50,8 @@ pipeline {
 
           sh "git config --global user.email \"jenkins@coveo.com\""
           sh "git config --global user.name \"Jenkins CI\""
-          sh "git remote set-url origin \"https://x-access-token:${env.GH_TOKEN_PSW}@github.com/coveo/platform-client.git\""
+          sh "git remote set-url origin \"https://${env.GIT_USR}:${env.GIT_PSW}@github.com/coveo/platform-client.git\""
+
 
           def nodeHome = tool name: env.BUILD_NODE_VERSION, type: "nodejs"
           env.PATH = "${nodeHome}/bin:${env.PATH}"
@@ -110,7 +110,11 @@ pipeline {
             STARTED_BY_USER = cause.user()
             STARTED_BY_UPSTREAM = cause.upstream()
 
-            sh "npm run release"
+            withCredentials([usernamePassword(credentialsId: 'github-commit-token',
+                                              usernameVariable: 'GITHUB_APP',
+                                              passwordVariable: 'GH_TOKEN')]) {
+              sh "npm run release"
+            }
           } else {
             sh "echo \"skipping publish since remote changed (something was merged)\""
           }
