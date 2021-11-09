@@ -23,6 +23,9 @@ export interface MLModel extends MLModelInfo, ModelAttributes, GranularResource 
     exportOffset?: string;
     status: ModelStatus;
     commandLineParameters?: string[];
+    extraConfig?: {
+        [key: string]: any;
+    };
     commonFilter?: string;
     customEventFilter?: string;
     searchEventFilter?: string;
