@@ -128,7 +128,6 @@ export interface SecurityCacheListOptions {
     securityProviderId?: string;
     states?: SecurityCacheStateOptions;
     to?: string;
-    usePageModel?: boolean;
 }
 
 export interface SecurityCacheListRelationshipsOptions {

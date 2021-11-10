@@ -18,9 +18,13 @@ export default class SecurityCache extends Ressource {
     static cacheUrl = `/${SecurityCache.baseUrl}/securitycache`;
     static providersUrl = `/${SecurityCache.baseUrl}/securityproviders`;
 
-    listMembers(providerId: string, options?: SecurityCacheListOptions) {
+    listMembers(
+        providerId: string,
+        options: SecurityCacheListOptions = {}
+    ): Promise<PageModel<DetailedSecurityCacheMemberModel>> {
+        // TODO: SECCACHE-710 remove `usePageModel` once API has removed this parameter
         return this.api.get<PageModel<DetailedSecurityCacheMemberModel>>(
-            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members`, options)
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members`, {...options, usePageModel: true})
         );
     }
 

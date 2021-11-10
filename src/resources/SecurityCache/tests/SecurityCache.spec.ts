@@ -23,7 +23,9 @@ describe('securityCache', () => {
         it('should make a GET call to the securityCache correct url with listMembers', () => {
             securityCache.listMembers(providerId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/${providerId}/members`);
+            expect(api.get).toHaveBeenCalledWith(
+                `${SecurityCache.cacheUrl}/entities/${providerId}/members?usePageModel=true`
+            );
         });
 
         it('should make a GET call to the securityCache correct url with listEntities', () => {
