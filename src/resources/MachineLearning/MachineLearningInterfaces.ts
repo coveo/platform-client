@@ -27,6 +27,10 @@ export interface RegistrationModel extends GranularResource {
     exportOffset?: string;
     // The additional command line parameters that can be passed to the drill
     commandLineParameters?: string[];
+    // The additional configuration that can be passed to the model
+    extraConfig?: {
+        [key: string]: any;
+    };
     /**
      * The filter to apply to the common event dimensions (shared by all event types) in the export.
      * Multiple filter parameters are joined with the AND operator
