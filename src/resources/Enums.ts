@@ -82,6 +82,17 @@ export enum SourceOperationalStatus {
 }
 
 export enum SourceStatusType {
+    CREATING = 'CREATING',
+    DISABLED = 'DISABLED',
+    ERROR = 'ERROR',
+    IDLE = 'IDLE',
+    PAUSED = 'PAUSED',
+    PAUSED_ON_ERROR = 'PAUSED_ON_ERROR',
+    PUSH_READY = 'PUSH_READY',
+    REFRESHING = 'REFRESHING',
+}
+
+export enum SourceStatusTypeWithTransition {
     CANCELING = 'CANCELING',
     CREATING = 'CREATING',
     DISABLED = 'DISABLED',

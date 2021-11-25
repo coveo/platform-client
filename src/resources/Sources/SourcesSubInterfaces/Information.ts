@@ -1,4 +1,4 @@
-import {ActivityOperation, OperationType, SourceStatusType} from '../../Enums';
+import {ActivityOperation, OperationType, SourceStatusType, SourceStatusTypeWithTransition} from '../../Enums';
 
 export interface SourceCurrentOperation {
     itemsAdded?: number;
@@ -32,12 +32,19 @@ export interface NextOperation {
 
 export interface SourceStatus {
     allowedOperations?: ActivityOperation[];
+    /**
+     * The status type including transition statuses.
+     */
+    extendedCurrentStatus?: SourceStatusTypeWithTransition;
     initialBuild?: boolean;
     numberOfDocuments?: number;
     numberOfProcessedDocuments?: number;
     pausedOnErrorCode?: string;
     refreshType?: OperationType;
     timestamp?: number;
+    /**
+     * The status type.
+     */
     type?: SourceStatusType;
 }
 
