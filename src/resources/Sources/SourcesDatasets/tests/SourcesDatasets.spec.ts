@@ -26,12 +26,24 @@ describe('SourcesDatasets', () => {
     });
 
     describe('import', () => {
-        it('makes a POST call to the specific SourcesDatasets endpoint', () => {
+        it('makes a PUT call to the specific SourcesDatasets endpoint', () => {
             dataset.import(DatasetType.web);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/sources/datasets/import?datasetName=WEB&withContent=true',
+                {}
+            );
+        });
+    });
+
+    describe('progress', () => {
+        it('makes a GET call to the specific SourcesDatasets endpoint', () => {
+            dataset.progress('randomId');
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/organizations/{organizationName}/sources/datasets/import/progress?requestId=randomId',
                 {}
             );
         });
