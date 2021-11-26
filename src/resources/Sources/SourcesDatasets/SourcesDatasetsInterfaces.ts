@@ -23,3 +23,38 @@ export enum DatasetType {
      */
     ecommerce = 'ecommerce',
 }
+
+export enum DatasetResult {
+    error = 'ERROR',
+    success = 'SUCCESS',
+}
+
+export enum DatasetStatus {
+    /*
+     * The dataset import is completed and the rebuilt of the sources is started
+     */
+    completed = 'COMPLETED',
+    /*
+     * The dataset import is currently ongoing
+     */
+    inProgress = 'IN_PROGRESS',
+    /*
+     * The dataset import is waiting
+     */
+    pending = 'PENDING',
+}
+export interface DatasetImportProgressModel {
+    errorCode: string;
+    /*
+     * The request ID returned from /rest/organizations/{organizationId}/sources/datasets/import
+     */
+    requestId: string;
+    /*
+     * Result after dataset import completion
+     */
+    result: DatasetResult;
+    /*
+     * Status of the current dataset import
+     */
+    status: DatasetStatus;
+}
