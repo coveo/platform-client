@@ -10,6 +10,7 @@ import {
     OrganizationModel,
     OrganizationsStatusModel,
 } from './OrganizationInterfaces';
+import {AuthProvider} from '../Enums';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NoPagination = undefined | null;
@@ -93,5 +94,9 @@ export default class Organization extends Resource {
             `${Organization.baseUrl}/${API.orgPlaceholder}/definition`,
             organizationDefinition
         );
+    }
+
+    getAllowedAuthenticationProviders(organizationId: string) {
+        return this.api.get<AuthProvider[]>(`${Organization.baseUrl}/${organizationId}/authproviders/allowed`);
     }
 }
