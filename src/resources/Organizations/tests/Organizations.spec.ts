@@ -205,6 +205,14 @@ describe('Organization', () => {
         });
     });
 
+    describe('authentication providers', () => {
+        it('should make a GET call /rest/organizations/{organizationName}/authproviders/allowed', () => {
+            organization.getAllowedAuthenticationProviders(API.orgPlaceholder);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/${API.orgPlaceholder}/authproviders/allowed`);
+        });
+    });
+
     it('registers the members resource', () => {
         expect(organization.members).toBeDefined();
         expect(organization.members).toBeInstanceOf(Members);
