@@ -96,7 +96,7 @@ export default class Organization extends Resource {
         );
     }
 
-    getAllowedAuthenticationProviders(organizationId: string) {
+    getAllowedAuthenticationProviders(organizationId: string = API.orgPlaceholder) {
         return this.api.get<AuthProvider[]>(`${Organization.baseUrl}/${organizationId}/authproviders/allowed`);
     }
 }
