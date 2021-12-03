@@ -206,10 +206,17 @@ describe('Organization', () => {
     });
 
     describe('authentication providers', () => {
-        it('should make a GET call /rest/organizations/{organizationName}/authproviders/allowed', () => {
-            organization.getAllowedAuthenticationProviders(API.orgPlaceholder);
+        it('should make a GET call to the specific Organization url', () => {
+            const organizationId = 'Organization-to-be-fetched';
+            organization.getAllowedAuthenticationProviders(organizationId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/${API.orgPlaceholder}/authproviders/allowed`);
+            expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationId}/authproviders/allowed`);
+        });
+
+        it('should make a GET call /rest/organizations/{organizationName}/authproviders/allowed', () => {
+            organization.getAllowedAuthenticationProviders();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Organization.baseUrl}/${API.orgPlaceholder}/authproviders/allowed`);
         });
     });
 
