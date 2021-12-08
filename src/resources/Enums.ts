@@ -95,6 +95,7 @@ export enum SourceStatusType {
 export enum SourceStatusTypeWithTransition {
     CANCELING = 'CANCELING',
     CREATING = 'CREATING',
+    DELETING = 'DELETING',
     DISABLED = 'DISABLED',
     ERROR = 'ERROR',
     IDLE = 'IDLE',
