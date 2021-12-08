@@ -32,3 +32,44 @@ export interface SmartSnippetsConfigurationModel {
      */
     documentTypes?: DocumentType[];
 }
+
+export type DocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
+
+export interface SmartSnippetsDocumentGroupPreviewParams {
+    sources: string[];
+}
+
+export interface SmartSnippetsDocumentGroupPreview {
+    query: string;
+    documentRequirementStatus: DocumentRequirementStatus;
+    numberOfDocuments: number;
+    numberOfDocumentsWithPermanentId: number;
+    numberOfValidDocuments: number;
+}
+
+export interface SmartSnippetsContentFieldsParams {
+    documentType: string;
+    sources: string[];
+}
+
+export interface SmartSnippetsContentField {
+    name: string;
+}
+
+export interface SmartSnippetsContentFields {
+    query: string;
+    fields: SmartSnippetsContentField[];
+}
+
+export interface SmartSnippetsDocumentTypesParams {
+    sources: string[];
+}
+
+export interface SmartSnippetsDocumentType {
+    documentType: string;
+}
+
+export interface SmartSnippetsDocumentTypes {
+    query: string;
+    documentTypes: SmartSnippetsDocumentType[];
+}

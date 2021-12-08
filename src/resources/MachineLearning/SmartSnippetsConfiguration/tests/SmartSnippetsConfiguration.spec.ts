@@ -81,4 +81,41 @@ describe('SmartSnippetsConfiguration', () => {
             });
         });
     });
+
+    describe('contentFields', () => {
+        it('should make a POST call to retrieve valid content fields from the Smart Snippets Configuration contentfields url', () => {
+            const params = {
+                documentType: 'test-type',
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.contentFields(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.contentFieldsUrl, params);
+        });
+    });
+
+    describe('documentTypes', () => {
+        it('should make a POST call to retrieve valid document types from the Smart Snippets Configuration documenttypes url', () => {
+            const params = {
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.documentTypes(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.documentTypesUrl, params);
+        });
+    });
+
+    describe('preview', () => {
+        it('should make a POST call to retrieve document group preview info from the Smart Snippets Configuration preview url', () => {
+            const params = {
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.preview(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.previewUrl, params);
+        });
+    });
 });
