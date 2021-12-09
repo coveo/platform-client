@@ -43,7 +43,7 @@ describe('SmartSnippetsConfiguration', () => {
                 smartSnippetsConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.baseUrl, newConfig);
+                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.modelUrl, newConfig);
             });
         });
     });
@@ -54,7 +54,7 @@ describe('SmartSnippetsConfiguration', () => {
             smartSnippetsConfig.delete(configToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.baseUrl}/${configToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToDeleteId}`);
         });
     });
 
@@ -64,7 +64,7 @@ describe('SmartSnippetsConfiguration', () => {
             smartSnippetsConfig.get(configToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.baseUrl}/${configToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToGetId}`);
         });
     });
 
@@ -75,10 +75,47 @@ describe('SmartSnippetsConfiguration', () => {
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
-                    `${SmartSnippetsConfiguration.baseUrl}/${modelConfig.modelId}`,
+                    `${SmartSnippetsConfiguration.modelUrl}/${modelConfig.modelId}`,
                     modelConfig
                 );
             });
+        });
+    });
+
+    describe('contentFields', () => {
+        it('should make a POST call to retrieve valid content fields from the Smart Snippets Configuration contentfields url', () => {
+            const params = {
+                documentType: 'test-type',
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.contentFields(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.contentFieldsUrl, params);
+        });
+    });
+
+    describe('documentTypes', () => {
+        it('should make a POST call to retrieve valid document types from the Smart Snippets Configuration documenttypes url', () => {
+            const params = {
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.documentTypes(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.documentTypesUrl, params);
+        });
+    });
+
+    describe('preview', () => {
+        it('should make a POST call to retrieve document group preview info from the Smart Snippets Configuration preview url', () => {
+            const params = {
+                sources: ['source1', 'source2'],
+            };
+            smartSnippetsConfig.preview(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.previewUrl, params);
         });
     });
 });
