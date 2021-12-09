@@ -43,7 +43,7 @@ describe('SmartSnippetsConfiguration', () => {
                 smartSnippetsConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.baseUrl, newConfig);
+                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.modelUrl, newConfig);
             });
         });
     });
@@ -54,7 +54,7 @@ describe('SmartSnippetsConfiguration', () => {
             smartSnippetsConfig.delete(configToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.baseUrl}/${configToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToDeleteId}`);
         });
     });
 
@@ -64,7 +64,7 @@ describe('SmartSnippetsConfiguration', () => {
             smartSnippetsConfig.get(configToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.baseUrl}/${configToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToGetId}`);
         });
     });
 
@@ -75,7 +75,7 @@ describe('SmartSnippetsConfiguration', () => {
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
-                    `${SmartSnippetsConfiguration.baseUrl}/${modelConfig.modelId}`,
+                    `${SmartSnippetsConfiguration.modelUrl}/${modelConfig.modelId}`,
                     modelConfig
                 );
             });

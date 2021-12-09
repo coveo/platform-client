@@ -20,7 +20,7 @@ export interface SmartSnippetsConfigurationModel {
      */
     modelDisplayName: string;
     /**
-     * The names of the sources containing the content to use for model building.
+     * The sources to consider.
      */
     sources: string[];
     /**
@@ -71,7 +71,7 @@ export interface SmartSnippetsContentFieldsParams {
      */
     documentType: string;
     /**
-     * The names of the sources to consider.
+     * The sources to consider.
      */
     sources: string[];
 }
@@ -96,7 +96,7 @@ export interface SmartSnippetsContentFields {
 
 export interface SmartSnippetsDocumentTypesParams {
     /**
-     * The sources to use to consider.
+     * The sources to consider.
      */
     sources: string[];
 }
