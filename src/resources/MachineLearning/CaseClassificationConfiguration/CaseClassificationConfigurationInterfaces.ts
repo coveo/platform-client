@@ -1,7 +1,11 @@
+import {SmartSnippetsDocumentRequirementStatus} from '../SmartSnippetsConfiguration';
+
 export enum Operator {
     Equals = 'EQUALS',
     NotEquals = 'NOT_EQUALS',
 }
+
+export type CaseClassificationDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
 
 export interface FilterConditions {
     /**
@@ -94,4 +98,51 @@ export interface CaseClassificationConfigurationModel {
      * The field value to use as language.
      */
     languageField: string;
+}
+
+export interface CaseClassificationDocumentGroupPreviewParams {
+    /**
+     * The time period for which to extract cases for model building.
+     * Must contain an export period or a start time and end time.
+     */
+    caseExtractionPeriod: ExtractionPeriod;
+    /**
+     * An array of filtering conditions.
+     */
+    caseFilterConditions: FilterConditions[];
+    /**
+     * The field value to use as language.
+     */
+    languageField: string;
+    /**
+     * The names of the sources containing the cases to use for model building.
+     */
+    sources: string[];
+}
+
+export interface CaseClassificationDocumentGroupPreview {
+    /**
+     * The query that was used to fetch document information.
+     */
+    query: string;
+    /**
+     * Status indicating whether there are enough candidates for learning.
+     */
+    documentRequirementStatus: CaseClassificationDocumentRequirementStatus;
+    /**
+     * The total number of documents in all sources.
+     */
+    numberOfDocuments: number;
+    /**
+     * The number of documents matching the configured conditions.
+     */
+    numberOfDocumentsMatchingConditions: number;
+    /**
+     * The number of English documents matching the configured conditions.
+     */
+    numberOfDocumentsMatchingConditionsAndInEnglish: number;
+    /**
+     * The number of documents that are candidates for learning.
+     */
+    numberOfValidDocuments: number;
 }
