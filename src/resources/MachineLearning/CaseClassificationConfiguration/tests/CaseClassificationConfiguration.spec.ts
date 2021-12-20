@@ -16,7 +16,9 @@ describe('CaseClassificationConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            languageField: 'English',
             caseExtractionPeriod: {
+                dateField: 'date',
                 exportPeriod: 'test-export-period',
             },
             caseFilterConditions: [
@@ -37,12 +39,15 @@ describe('CaseClassificationConfiguration', () => {
             caseIdField: 'test-case-id',
             fieldsForModelTraining: ['1st-field', '2nd-field'],
             fieldsToPredict: ['1st-field', '2nd-field'],
+            languageField: 'Gerudo',
         },
         {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            languageField: 'Klingon',
             caseExtractionPeriod: {
+                dateField: 'date',
                 startTime: 9876543210,
                 endTime: 1234567890,
             },

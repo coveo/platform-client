@@ -21,7 +21,36 @@ export interface FilterConditions {
     value: string;
 }
 
-export type ExtractionPeriod = FixedExtractionPeriod | IntervalExtractionPeriod;
+export interface DateField {
+    /**
+     * The field to use as date.
+     */
+    dateField: string;
+}
+
+export interface FixedExtractionPeriod {
+    /**
+     * Date in milliseconds that indicates the beginning of the time interval to include cases.
+     * The date format is the difference, measured in milliseconds, between the current time and midnight, January 1, 1970 UTC.
+     */
+    startTime: number;
+    /**
+     * Date in milliseconds that indicates the end of the time interval to include cases.
+     * The date format is the difference, measured in milliseconds, between the current time and midnight, January 1, 1970 UTC.
+     */
+    endTime: number;
+}
+
+export interface IntervalExtractionPeriod {
+    /**
+     * The period to export data from. The exportPeriod uses the moment when the model was generated as a base.
+     * Must be in the ISO8601 period format (i.e., PyYmMwWdDThHmMsS).
+     * Example: P3Y6M4DT12H30M5S Represents a duration of three years, six months, four days, twelve hours, thirty minutes, and five seconds.
+     */
+    exportPeriod: string;
+}
+
+export type ExtractionPeriod = DateField & (FixedExtractionPeriod | IntervalExtractionPeriod);
 
 export interface CaseClassificationConfigurationModel {
     /**
@@ -61,26 +90,8 @@ export interface CaseClassificationConfigurationModel {
      * Example: [subject, reason, category]
      */
     fieldsToPredict: string[];
-}
-
-export interface FixedExtractionPeriod {
     /**
-     * Date in milliseconds that indicates the beginning of the time interval to include cases.
-     * The date format is the difference, measured in milliseconds, between the current time and midnight, January 1, 1970 UTC.
+     * The field value to use as language.
      */
-    startTime: number;
-    /**
-     * Date in milliseconds that indicates the end of the time interval to include cases.
-     * The date format is the difference, measured in milliseconds, between the current time and midnight, January 1, 1970 UTC.
-     */
-    endTime: number;
-}
-
-export interface IntervalExtractionPeriod {
-    /**
-     * The period to export data from. The exportPeriod uses the moment when the model was generated as a base.
-     * Must be in the ISO8601 period format (i.e., PyYmMwWdDThHmMsS).
-     * Example: P3Y6M4DT12H30M5S Represents a duration of three years, six months, four days, twelve hours, thirty minutes, and five seconds.
-     */
-    exportPeriod: string;
+    languageField: string;
 }
