@@ -8,6 +8,7 @@ import ModelInformation from '../ModelInformation/ModelInformation';
 import Models from '../Models/Models';
 import PQSConfiguration from '../PQSConfiguration/PQSConfiguration';
 import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration/SmartSnippetsConfiguration';
+import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration/UserActionHistoryConfiguration';
 
 jest.mock('../../../APICore');
 
@@ -67,5 +68,10 @@ describe('MachineLearning', () => {
     it('should register the pqsConfig resource', () => {
         expect(ml.pqsConfig).toBeDefined();
         expect(ml.pqsConfig).toBeInstanceOf(PQSConfiguration);
+    });
+
+    it('should register the userActionHistory resource', () => {
+        expect(ml.userActionHistoryConfig).toBeDefined();
+        expect(ml.userActionHistoryConfig).toBeInstanceOf(UserActionHistoryConfiguration);
     });
 });
