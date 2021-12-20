@@ -27,7 +27,7 @@ export interface DateField {
     /**
      * The field to use as date.
      */
-    dateField: string;
+    dateField?: string;
 }
 
 export interface FixedExtractionPeriod {
@@ -95,7 +95,7 @@ export interface CaseClassificationConfigurationModel {
     /**
      * The field value to use as language.
      */
-    languageField: string;
+    languageField?: string;
 }
 
 export interface CaseClassificationDocumentGroupPreviewParams {
