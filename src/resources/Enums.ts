@@ -831,6 +831,7 @@ export enum ModelTypes {
     ECommerce = 'ecommerce',
     CaseClassification = 'caseclassification',
     SmartSnippets = 'mlquestionanswering',
+    UserActionHistory = 'useractionhistory',
 }
 
 export enum LicenseSection {
