@@ -116,6 +116,30 @@ describe('CaseClassificationConfiguration', () => {
         });
     });
 
+    describe('fields', () => {
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification Configuration', () => {
+            const params = {
+                sources: ['1st-source', '2nd-source'],
+                languageField: 'English',
+                caseExtractionPeriod: {
+                    dateField: 'date',
+                    exportPeriod: 'test-export-period',
+                },
+                caseFilterConditions: [
+                    {
+                        field: 'test-field',
+                        operator: Operator.Equals,
+                        value: 'test-value',
+                    },
+                ],
+            };
+            ccConfig.fields(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
+        });
+    });
+
     describe('preview', () => {
         it('should make a POST call to retrieve document group preview info from the Case Classification Configuration preview url', () => {
             const params = {

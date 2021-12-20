@@ -1,4 +1,9 @@
-import {CaseClassificationDocumentGroupPreview, CaseClassificationDocumentGroupPreviewParams} from '.';
+import {
+    CaseClassificationContentFields,
+    CaseClassificationContentFieldsParams,
+    CaseClassificationDocumentGroupPreview,
+    CaseClassificationDocumentGroupPreviewParams,
+} from '.';
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
 import Resource from '../../Resource';
@@ -7,6 +12,7 @@ import {CaseClassificationConfigurationModel} from './CaseClassificationConfigur
 export default class CaseClassificationConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/caseclassif`;
     static modelUrl = `${CaseClassificationConfiguration.baseUrl}/model`;
+    static fieldsUrl = `${CaseClassificationConfiguration.baseUrl}/fields`;
     static previewUrl = `${CaseClassificationConfiguration.baseUrl}/preview`;
 
     create(configModel: New<CaseClassificationConfigurationModel, 'modelId'>) {
@@ -31,6 +37,10 @@ export default class CaseClassificationConfiguration extends Resource {
             `${CaseClassificationConfiguration.modelUrl}/${configModel.modelId}`,
             configModel
         );
+    }
+
+    fields(params: CaseClassificationContentFieldsParams) {
+        return this.api.post<CaseClassificationContentFields>(CaseClassificationConfiguration.fieldsUrl, params);
     }
 
     preview(params: CaseClassificationDocumentGroupPreviewParams) {

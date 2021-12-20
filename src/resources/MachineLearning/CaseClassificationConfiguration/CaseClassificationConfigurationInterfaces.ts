@@ -146,3 +146,32 @@ export interface CaseClassificationDocumentGroupPreview {
      */
     numberOfValidDocuments: number;
 }
+
+export interface CaseClassificationContentFieldsParams {
+    /**
+     * The time period for which to extract cases for model building.
+     * Must contain an export period or a start time and end time.
+     */
+    caseExtractionPeriod: ExtractionPeriod;
+    /**
+     * An array of filtering conditions.
+     */
+    caseFilterConditions: FilterConditions[];
+    /**
+     * The field value to use as language.
+     */
+    languageField: string;
+    /**
+     * The names of the sources containing the cases to use for model building.
+     */
+    sources: string[];
+}
+
+export interface CaseClassificationContentField {
+    name: string;
+}
+
+export interface CaseClassificationContentFields {
+    fields: CaseClassificationContentField[];
+    query: string;
+}
