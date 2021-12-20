@@ -1,13 +1,13 @@
+import API from '../../../APICore';
+import {New} from '../../BaseInterfaces';
+import Resource from '../../Resource';
 import {
+    CaseClassificationConfigurationModel,
     CaseClassificationContentFields,
     CaseClassificationContentFieldsParams,
     CaseClassificationDocumentGroupPreview,
     CaseClassificationDocumentGroupPreviewParams,
-} from '.';
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import Resource from '../../Resource';
-import {CaseClassificationConfigurationModel} from './CaseClassificationConfigurationInterfaces';
+} from './CaseClassificationConfigurationInterfaces';
 
 export default class CaseClassificationConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/caseclassif`;

@@ -1,5 +1,3 @@
-import {SmartSnippetsDocumentRequirementStatus} from '../SmartSnippetsConfiguration';
-
 export enum Operator {
     Equals = 'EQUALS',
     NotEquals = 'NOT_EQUALS',
