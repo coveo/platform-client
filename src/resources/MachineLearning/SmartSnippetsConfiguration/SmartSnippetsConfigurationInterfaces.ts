@@ -33,7 +33,7 @@ export interface SmartSnippetsConfigurationModel {
     documentTypes?: DocumentType[];
 }
 
-export type DocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
+export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
 
 export interface SmartSnippetsDocumentGroupPreviewParams {
     /**
@@ -50,7 +50,7 @@ export interface SmartSnippetsDocumentGroupPreview {
     /**
      * Status indicating whether there are enough candidates for learning.
      */
-    documentRequirementStatus: DocumentRequirementStatus;
+    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
     /**
      * The total number of documents in all sources.
      */
