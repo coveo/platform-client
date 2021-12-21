@@ -115,7 +115,7 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('fields', () => {
-        it('should make a POST call to retrieve valid content field candidates for the Case Classification Configuration', () => {
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration', () => {
             const params = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
@@ -139,7 +139,7 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('preview', () => {
-        it('should make a POST call to retrieve document group preview info from the Case Classification Configuration preview url', () => {
+        it('should make a POST call to retrieve document group preview info from the Case Classification model configuration preview url', () => {
             const params = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
