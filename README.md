@@ -242,3 +242,4 @@ platform.withFeatures(notifyOnSuccess('It worked!'), notifyOnError('It failed!')
 
 -   You can either manually write a commit message that follows the convention using your favorite method.
 -   Or you can run `npm run commit-cli`. It will prompt you some questions about the nature of your changes, then it will commit your staged changes along with a generated message that follows our convention.
+-   Commits containing breaking changes need to be marked as such in the commit footer. See [BREAKING CHANGE convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-message-footer).

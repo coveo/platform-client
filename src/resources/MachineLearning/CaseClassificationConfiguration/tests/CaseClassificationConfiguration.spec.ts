@@ -16,7 +16,9 @@ describe('CaseClassificationConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            languageField: 'English',
             caseExtractionPeriod: {
+                dateField: 'date',
                 exportPeriod: 'test-export-period',
             },
             caseFilterConditions: [
@@ -42,6 +44,7 @@ describe('CaseClassificationConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            languageField: 'Klingon',
             caseExtractionPeriod: {
                 startTime: 9876543210,
                 endTime: 1234567890,
@@ -72,7 +75,7 @@ describe('CaseClassificationConfiguration', () => {
                 ccConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.baseUrl, newConfig);
+                expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.modelUrl, newConfig);
             });
         });
     });
@@ -83,7 +86,7 @@ describe('CaseClassificationConfiguration', () => {
             ccConfig.delete(configToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${CaseClassificationConfiguration.baseUrl}/${configToDeleteId}`);
+            expect(api.delete).toHaveBeenCalledWith(`${CaseClassificationConfiguration.modelUrl}/${configToDeleteId}`);
         });
     });
 
@@ -93,7 +96,7 @@ describe('CaseClassificationConfiguration', () => {
             ccConfig.get(configToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CaseClassificationConfiguration.baseUrl}/${configToGetId}`);
+            expect(api.get).toHaveBeenCalledWith(`${CaseClassificationConfiguration.modelUrl}/${configToGetId}`);
         });
     });
 
@@ -104,10 +107,58 @@ describe('CaseClassificationConfiguration', () => {
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
-                    `${CaseClassificationConfiguration.baseUrl}/${config.modelId}`,
+                    `${CaseClassificationConfiguration.modelUrl}/${config.modelId}`,
                     config
                 );
             });
+        });
+    });
+
+    describe('fields', () => {
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration', () => {
+            const params = {
+                sources: ['1st-source', '2nd-source'],
+                languageField: 'English',
+                caseExtractionPeriod: {
+                    dateField: 'date',
+                    exportPeriod: 'test-export-period',
+                },
+                caseFilterConditions: [
+                    {
+                        field: 'test-field',
+                        operator: Operator.Equals,
+                        value: 'test-value',
+                    },
+                ],
+            };
+            ccConfig.fields(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
+        });
+    });
+
+    describe('preview', () => {
+        it('should make a POST call to retrieve document group preview info from the Case Classification model configuration preview url', () => {
+            const params = {
+                sources: ['1st-source', '2nd-source'],
+                languageField: 'English',
+                caseExtractionPeriod: {
+                    dateField: 'date',
+                    exportPeriod: 'test-export-period',
+                },
+                caseFilterConditions: [
+                    {
+                        field: 'test-field',
+                        operator: Operator.Equals,
+                        value: 'test-value',
+                    },
+                ],
+            };
+            ccConfig.preview(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.previewUrl, params);
         });
     });
 });
