@@ -40,6 +40,5 @@ export interface TokenModel {
 }
 
 export interface PostSearchQueryStringParams {
-    organizationId: string;
     viewAllContent?: boolean;
 }

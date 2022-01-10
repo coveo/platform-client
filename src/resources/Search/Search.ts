@@ -14,15 +14,11 @@ export default class Search extends Ressource {
     // or : https://docs.coveo.com/en/13/cloud-v2-api-reference/search-api#operation/searchUsingGet
     query(restQueryParameters: any & PostSearchQueryStringParams) {
         const {viewAllContent, ...bodyParameters} = restQueryParameters;
-        const queryStringParameters: PostSearchQueryStringParams = {
-            organizationId: this.api.organizationId,
-            viewAllContent,
-        };
 
         return this.api.post<any>(
             this.buildPath(Search.baseUrl, {
-                ...queryStringParameters,
-                viewAllContent: queryStringParameters.viewAllContent ? 1 : undefined,
+                organizationId: this.api.organizationId,
+                viewAllContent: viewAllContent ? 1 : undefined,
             }),
             bodyParameters
         );
