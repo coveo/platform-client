@@ -26,7 +26,7 @@ export interface RestUserId {
     type?: RestUserIdType;
     infos?: any;
     authCookie?: string;
-    password?: string; // Depecrated: This property is exposed for backward compatibility reasons only.
+    password?: string; // Deprecated: This property is exposed for backward compatibility reasons only.
 }
 
 export interface RestCommerceParameters {
@@ -37,4 +37,8 @@ export interface RestCommerceParameters {
 
 export interface TokenModel {
     token: string;
+}
+
+export interface PostSearchQueryStringParams {
+    viewAllContent?: boolean;
 }
