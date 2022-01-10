@@ -7,3 +7,4 @@ export * from './DNEConfiguration';
 export * from './CaseClassificationConfiguration';
 export * from './SmartSnippetsConfiguration';
 export * from './PQSConfiguration';
+export * from './UserActionHistoryConfiguration';
