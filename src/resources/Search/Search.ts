@@ -1,7 +1,6 @@
-import {PostSearchQueryStringParams} from '.';
 import API from '../../APICore';
 import Ressource from '../Resource';
-import {RestTokenParams, TokenModel} from './SearchInterfaces';
+import {PostSearchQueryStringParams, RestTokenParams, TokenModel} from './SearchInterfaces';
 
 export default class Search extends Ressource {
     static baseUrl = `/rest/search/v2`;
