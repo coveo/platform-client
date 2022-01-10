@@ -1,3 +1,4 @@
+import {PostSearchQueryStringParams} from '.';
 import API from '../../APICore';
 import Ressource from '../Resource';
 import {RestTokenParams, TokenModel} from './SearchInterfaces';
@@ -12,17 +13,19 @@ export default class Search extends Ressource {
     // For more info about restQueryParameters values available
     // See: https://platform.cloud.coveo.com/docs?api=SearchApi#!/Search/post_rest_search_v2
     // or : https://docs.coveo.com/en/13/cloud-v2-api-reference/search-api#operation/searchUsingGet
-    query(restQueryParameters: any) {
+    query(restQueryParameters: any & PostSearchQueryStringParams) {
         const {viewAllContent, ...bodyParameters} = restQueryParameters;
-
-        const queryParameters = {
+        const queryStringParameters: PostSearchQueryStringParams = {
             organizationId: this.api.organizationId,
-            viewAllContent: undefined,
+            viewAllContent,
         };
-        if (typeof viewAllContent !== 'undefined') {
-            queryParameters.viewAllContent = viewAllContent ? 1 : 0;
-        }
 
-        return this.api.post<any>(this.buildPath(Search.baseUrl, queryParameters), bodyParameters);
+        return this.api.post<any>(
+            this.buildPath(Search.baseUrl, {
+                ...queryStringParameters,
+                viewAllContent: queryStringParameters.viewAllContent ? 1 : undefined,
+            }),
+            bodyParameters
+        );
     }
 }

@@ -68,25 +68,25 @@ describe('Search', () => {
             expect(api.post).toHaveBeenCalledWith(Search.baseUrl, queryParams);
         });
 
-        it('should not add viewAllContent parameter when not specified', () => {
+        it('should not add #viewAllContent query string parameter when not specified', () => {
             const queryParams = {q: ''};
             search.query(queryParams);
 
             expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
         });
 
-        it('should add #viewAllContent=1 parameter when set to true', () => {
+        it('should add #viewAllContent=1 to the query string when set to true', () => {
             const queryParams = {q: '', viewAllContent: true};
             search.query(queryParams);
 
             expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}?viewAllContent=1`, {q: ''});
         });
 
-        it('should add #viewAllContent=0 parameter when set to false', () => {
+        it('should not add #viewAllContent query string parameter when set to false', () => {
             const queryParams = {q: '', viewAllContent: false};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}?viewAllContent=0`, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
         });
     });
 });
