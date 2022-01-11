@@ -8,6 +8,7 @@ import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
 import ModelInformation from './ModelInformation/ModelInformation';
 import Models from './Models/Models';
 import PQSConfiguration from './PQSConfiguration/PQSConfiguration';
+import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -18,6 +19,7 @@ export default class MachineLearning extends Resource {
     dneConfig: DNEConfiguration;
     caseClassificationConfig: CaseClassificationConfiguration;
     smartSnippetsConfig: SmartSnippetsConfiguration;
+    userActionHistoryConfig: UserActionHistoryConfiguration;
     pqsConfig: PQSConfiguration;
 
     constructor(protected api: API, protected serverlessApi: API) {
@@ -30,6 +32,7 @@ export default class MachineLearning extends Resource {
         this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
         this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
         this.pqsConfig = new PQSConfiguration(api, serverlessApi);
+        this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

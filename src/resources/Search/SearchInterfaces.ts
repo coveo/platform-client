@@ -39,6 +39,10 @@ export interface TokenModel {
     token: string;
 }
 
+export interface PostSearchQueryStringParams {
+    viewAllContent?: boolean;
+}
+
 export interface RestQueryParams {
     q: string;
     aq: string;
