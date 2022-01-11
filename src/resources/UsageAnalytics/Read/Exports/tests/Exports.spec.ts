@@ -55,6 +55,15 @@ describe('Exports', () => {
         });
     });
 
+    describe('getExportDownloadLink', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            const exportId = 'Soubame';
+            exports.getExportDownloadLink(exportId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/${exportId}/downloadlink`);
+        });
+    });
+
     describe('delete', () => {
         it('makes a DELETE call to the specific Exports url', () => {
             const exportId = '🌞';
