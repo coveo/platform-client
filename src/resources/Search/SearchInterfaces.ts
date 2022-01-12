@@ -39,181 +39,241 @@ export interface TokenModel {
     token: string;
 }
 
+export type RestQueryParams = PostSearchBodyQueryParams & PostSearchQueryStringParams;
+
 export interface PostSearchQueryStringParams {
     viewAllContent?: boolean;
 }
 
-export interface RestQueryParams {
-    q: string;
-    aq: string;
-    cq: string;
-    dq: string;
-    lq: string;
-    enableDidYouMean: boolean;
-    mlDidYouMeanMaxCandidates: number;
-    mlDidYouMeanMinScore: number;
-    mlDidYouMeanUseFacetCount: boolean;
-    enableMLDidYouMean: boolean;
-    partialMatch: boolean;
-    partialMatchKeywords: string;
-    partialMatchThreshold: RestQueryParamsThreshold;
-    lqPartialMatchMaxKeywords: number;
-    lqPartialMatchKeywords: string;
-    lqPartialMatchThreshold: RestQueryParamsThreshold;
-    wildcards: boolean;
-    questionMark: boolean;
-    enableQuerySyntax: boolean;
-    lowercaseOperators: boolean;
-    excerptLength: number;
-    retrieveFirstSentences: boolean;
-    fieldsToInclude: string[]; // TODO: I think we should pass it only when defined
-    fieldsToExclude: string[]; // TODO: I think we should pass it only when defined
-    groupBy: RestQueryGroupByParams[];
-    facets: RestQueryFacetParams[];
-    facetOptions: RestQueryFacetOptionsParams[];
-    categoryFacets: RestQueryCategoryFacetParams[];
-    sortCriteria: string;
-    rankingFunctions: RestQueryRankingFunctionParams[];
-    queryFunctions: RestQueryFunctionParams[];
-    firstResult: number;
-    numberOfResults: number;
-    enableDuplicateFiltering: boolean;
-    filterField: string;
-    parentField: string;
-    childField: string;
-    filterFieldRange: number;
-    searchById: boolean;
-    syntax: string;
-    enableCollaborativeRating: boolean;
-    summaryLength: number;
-    staticQuery: boolean;
-    userActions: RestQueryUserActionsParams;
-    commerce: RestCommerceParameters;
-    dictionaryFieldContext: Record<string, string>; // TODO: Check which value types are allowed here
-    pipeline: string;
-    maximumAge: number;
-    searchHub: string;
-    tab: string;
-    referrer: string;
-    context: Record<string, unknown>; // TODO: Find out the best typing for this one
-    actionsHistory: RestQueryActionHistoryParams[];
-    recommendation: string;
-    locale: string;
-    timezone: string;
-    format: string; // TODO: We should probably be using an enum here
-    debug: boolean;
-    indexToken: string;
-    visitorId: string;
-    mlParameters: RestQueryMLParametersParams;
-    indexType: string; // TODO: should use an enum here
-    index: string;
-    logicalIndex: string;
-    analytics: RestQueryAnalyticsParams;
+export interface PostSearchBodyQueryParams {
+    actionsHistory?: RestActionHistory[];
+    analytics?: RestAnalyticsRequest;
+    aq?: string;
+    categoryFacets?: RestCategoryFacetRequest[];
+    childField?: string;
+    commerce?: RestCommerceParameters;
+    context?: RestContextRequest;
+    cq?: string;
+    debug?: boolean;
+    dictionaryFieldContext?: RestDictionaryFieldContextRequest;
+    dq?: string;
+    enableCollaborativeRating?: boolean;
+    enableDidYouMean?: boolean;
+    enableDuplicateFiltering?: boolean;
+    enableMLDidYouMean?: boolean;
+    enableQuerySyntax?: boolean;
+    excerptLength?: number;
+    facetOptions?: RestFacetOptions[];
+    facets?: RestFacetRequest[];
+    format?: RestFormat;
+    fieldsToExclude?: string[];
+    fieldsToInclude?: string[];
+    filterField?: string;
+    filterFieldRange?: number;
+    firstResult?: number;
+    groupBy?: RestGroupByRequest[];
+    index?: string;
+    indexToken?: string;
+    indexType?: string;
+    isGuestUser?: boolean;
+    locale?: string;
+    logicalIndex?: string;
+    lowercaseOperators?: boolean;
+    lq?: string;
+    lqPartialMatchKeywords?: string;
+    lqPartialMatchMaxKeywords?: number;
+    lqPartialMatchThreshold?: RestThreshold;
+    maximumAge?: number;
+    mlDidYouMeanMaxCandidates?: number;
+    mlDidYouMeanMinScore?: number;
+    mlDidYouMeanUseFacetCount?: boolean;
+    mlParameters?: RestMLParameters;
+    numberOfResults?: number;
+    parentField?: string;
+    partialMatch?: boolean;
+    partialMatchKeywords?: string;
+    partialMatchThreshold?: RestThreshold;
+    pipeline?: string;
+    q?: string;
+    queryFunctions?: RestQueryFunctionRequest[];
+    questionMark?: boolean;
+    rankingFunctions?: RestRankingFunctionRequest[];
+    recommendation?: string;
+    referrer?: string;
+    retrieveFirstSentences?: boolean;
+    searchById?: boolean;
+    searchHub?: string;
+    sortCriteria?: string;
+    staticQuery?: boolean;
+    summaryLength?: number;
+    syntax?: string;
+    tab?: string;
+    timezone?: string;
+    userActions?: RestUserActionsParameters;
+    visitorId?: string;
+    wildcards?: boolean;
 }
 
-export type RestQueryParamsThreshold = string | number;
+export type RestThreshold = string | number;
 
-export interface RestQueryGroupByParams {
+export type RestComputedFieldOperation = 'average' | 'maximum' | 'minimum' | 'sum';
+
+export type RestFacetSortCriteria = 'alphanumeric' | 'ascending' | 'descending' | 'occurrences' | 'score';
+
+export type RestFacetType = 'dateRange' | 'hierarchical' | 'numericalRange' | 'specific';
+
+export type RestFormat = 'json' | 'opensearch-atom' | 'opensearch-rss' | 'xlsx';
+
+export type RestGroupBySortCriteria =
+    | 'alphaascending'
+    | 'alphadescending'
+    | 'chisquare'
+    | 'computedfieldascending'
+    | 'computedfielddescending'
+    | 'nosort'
+    | 'occurrences'
+    | 'score';
+
+export type RestMLParametersPadding = 'popular' | 'trending';
+
+export interface RestActionHistory {
+    internalTime?: number;
+    name?: string;
+    time?: string;
+    value?: string;
+}
+
+export interface RestAnalyticsRequest {
+    clientId?: string;
+    clientRequestId?: string;
+    clientTimestamp?: string;
+    deviceId?: string;
+    documentLocation?: string;
+    documentReferrer?: string;
+    pageId?: string;
+    userAgent?: string;
+    userId?: string;
+    userIp?: string;
+}
+
+export interface RestCategoryFacetRequest {
+    delimitingCharacter?: string;
     field: string;
-    allowedValues: string[];
-    allowedValuesPatternType: string; // TODO: should use an enum here
-    maximumNumberOfValues: number;
-    completeFacetWithStandardValues: boolean;
-    injectionDepth: number;
-    rangeValues: unknown[]; // TODO: should be able to provide some typing here
-    generateAutomaticRanges: boolean;
-    sortCriteria: string; // TODO: should use an enum here
-    computedFields: Array<{
-        field: string;
-        operation: string; // TODO: should use an enum here
-    }>;
-    queryOverride: string;
-    advancedQueryOverride: string;
-    constantQueryOverride: string;
-    disjunctionQueryOverride: string;
-    filterFacetCount: boolean;
+    filterFacetCount?: boolean;
+    injectionDepth?: number;
+    maximumNumberOfValues?: number;
+    path?: string[];
 }
 
-export interface RestQueryFacetParams {
+export interface RestComputedField {
     field: string;
-    facetId: string;
-    type: string; // TODO: should use an enum here
-    mlDebugTitle: string;
-    basePath: string[];
-    filterByBasePath: boolean;
-    sortCriteria: string; // TODO: should use an enum here
-    numberOfValues: number;
-    injectionDepth: number;
-    freezeCurrentValues: boolean;
-    currentValues: Array<{
-        value: string;
-        state: string; // TODO: should use an enum here
-        preventAutoSelect: boolean;
-        start: unknown; // TODO: provide some typing for this
-        end: unknown; // TODO: provide some typing for this
-        endInclusive: boolean;
-        children: unknown[]; // TODO: check the typing on this
-        retrieveChildren: boolean;
-        retrieveCount: number;
-    }>;
-    isFieldExpanded: boolean;
-    generateAutomaticRanges: boolean;
-    rangeAlgorithm: string; // TODO: should use an enum here
-    filterFacetCount: boolean;
-    delimitingCharacter: string;
-    preventAutoSelect: boolean;
+    operation: RestComputedFieldOperation;
 }
 
-export interface RestQueryFacetOptionsParams {
-    freezeFacetOrder: boolean;
-    enableIndexFacetOrdering: boolean;
+export interface RestContextRequest {
+    [fieldName: string]: string | string[];
 }
 
-export interface RestQueryCategoryFacetParams {
+export interface RestDictionaryFieldContextRequest {
+    [fieldName: string]: string;
+}
+
+export interface RestFacetOptions {
+    enableIndexFacetOrdering?: boolean;
+    freezeFacetOrder?: boolean;
+}
+
+export interface RestFacetRequest {
+    basePath?: string[];
+    currentValues?: RestFacetValue[];
+    delimitingCharacter?: string;
+    facetId?: string;
     field: string;
-    path: string[];
-    maximumNumberOfValues: number;
-    injectionDepth: number;
-    delimitingCharacter: string;
-    filterFacetCount: boolean;
+    filterByBasePath?: boolean;
+    filterFacetCount?: boolean;
+    freezeCurrentValues?: boolean;
+    generateAutomaticRanges?: boolean;
+    injectionDepth?: number;
+    isFieldExpanded?: boolean;
+    mlDebugTitle?: string;
+    numberOfValues?: number;
+    preventAutoSelect?: boolean;
+    rangeAlgorithm?: string;
+    sortCriteria?: RestFacetSortCriteria;
+    type?: RestFacetType;
 }
 
-export interface RestQueryRankingFunctionParams {
-    expression: string;
-    normalizeWeight: boolean;
-    modifier: number;
-}
-
-export interface RestQueryFunctionParams {
-    function: string;
-    fieldName: string;
-}
-
-export interface RestQueryUserActionsParams {
-    tagViewsOfUser: string;
-}
-
-export interface RestQueryActionHistoryParams {
-    name: string; // TODO: could possibly use an enum for that, but might be safest just to use a string
+export interface RestFacetValue {
+    children?: RestHierarchicalFacetValue[];
+    end?: string;
+    endInclusive?: boolean;
+    preventAutoSelect?: boolean;
+    retrieveChildren?: boolean;
+    retrieveCount?: number;
+    start?: string;
+    state?: string;
     value: string;
-    time: string;
-    internalTime: number;
 }
 
-export interface RestQueryMLParametersParams {
-    num: number;
-    padding: string; // TODO: should probably use an enum for that
+export interface RestGroupByRangeValue {
+    end: number;
+    endInclusive?: boolean;
+    label?: string;
+    start: number;
 }
 
-export interface RestQueryAnalyticsParams {
-    userId: string;
-    clientId: string;
-    deviceId: string;
-    documentLocation: string;
-    documentReferrer: string;
-    pageId: string;
-    userIp: string;
-    clientRequestId: string;
-    clientTimestamp: string;
-    userAgent: string;
+export interface RestGroupByRequest {
+    advancedQueryOverride?: string;
+    allowedValues?: string[];
+    allowedValuesPatternType?: string;
+    completeFacetWithStandardValues?: boolean;
+    computedFields?: RestComputedField[];
+    constantQueryOverride?: string;
+    disjunctionQueryOverride?: string;
+    field: string;
+    filterFacetCount?: boolean;
+    generateAutomaticRanges?: boolean;
+    injectionDepth?: number;
+    maximumNumberOfValues?: number;
+    queryOverride?: string;
+    rangeValues?: RestGroupByRangeValue[];
+    sortCriteria?: RestGroupBySortCriteria;
+}
+
+export interface RestHierarchicalFacetValue {
+    children?: RestHierarchicalFacetValue[];
+    preventAutoSelect?: boolean;
+    retrieveChildren?: boolean;
+    retrieveCount?: number;
+    state?: string;
+    value?: string;
+}
+
+export interface RestMLParameters {
+    considerUserContext?: boolean;
+    maxActionsHistoryItemsToConsider?: number;
+    num?: number;
+    padding?: RestMLParametersPadding;
+    wordSelection?: string;
+    minNumberOfWords?: number;
+    itemId?: string;
+    itemIds?: string[];
+    categoryFilter?: string;
+    brandFilter?: string;
+    filters?: Record<string, string>;
+}
+
+export interface RestQueryFunctionRequest {
+    fieldName: string;
+    function: string;
+}
+
+export interface RestRankingFunctionRequest {
+    expression: string;
+    modifier?: number;
+    normalizeWeight?: boolean;
+}
+
+export interface RestUserActionsParameters {
+    tagViewsOfUser?: string;
 }
