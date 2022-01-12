@@ -112,6 +112,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'github-commit-token',
                                               usernameVariable: 'GITHUB_APP',
                                               passwordVariable: 'GH_TOKEN')]) {
+              sh "npm config set //registry.npmjs.org/:_authToken=${env.NPM_TOKEN}"
               sh "npm run release"
             }
           } else {
