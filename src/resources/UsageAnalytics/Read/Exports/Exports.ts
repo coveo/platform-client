@@ -3,6 +3,7 @@ import {
     CreateExportScheduleModel,
     EstimateExportParams,
     EstimateVisitExportParams,
+    ExportDownloadLink,
     ExportEstimateModel,
     ExportModel,
     ExportScheduleModel,
@@ -24,6 +25,12 @@ export default class Exports extends Resource {
     get(exportId: string, redirect = false) {
         return this.api.get<ExportModel>(
             this.buildPath(`${Exports.baseUrl}/${exportId}`, {redirect, org: this.api.organizationId})
+        );
+    }
+
+    getExportDownloadLink(exportId: string) {
+        return this.api.get<ExportDownloadLink>(
+            this.buildPath(`${Exports.baseUrl}/${exportId}/downloadlink`, {org: this.api.organizationId})
         );
     }
 
