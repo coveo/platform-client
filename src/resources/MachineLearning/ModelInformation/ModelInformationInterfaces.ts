@@ -1,6 +1,12 @@
 export interface MLModelInfo {
     id: string;
-    info?: ModelInformationART | ModelInformationDNE | ModelInformationER | ModelInformationPR | ModelInformationQS;
+    info?:
+        | ModelInformationART
+        | ModelInformationDNE
+        | ModelInformationER
+        | ModelInformationPR
+        | ModelInformationQS
+        | ModelInformationSS;
 }
 
 export interface ModelInformationART {
@@ -205,4 +211,24 @@ export interface ModelInformationQS {
     stopwords: Record<string, number>;
     featureSelectLog: FeatureSelectLog;
     [key: string]: any;
+}
+
+export interface ModelInformationSS {
+    metaInfo: {
+        modelId: string;
+        modelName: string;
+        modelVersion: string;
+        engineName: string;
+        version: string;
+        environment: string;
+        org: string;
+        modelSize: string;
+        createdDate: string;
+    };
+    modelBuildingStats: {
+        documentCount: number;
+        snippetCount: number;
+        headerCount: number;
+        meanSnippetLength: number;
+    };
 }
