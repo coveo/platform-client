@@ -9,7 +9,7 @@ export interface MLModelInfo {
         | ModelInformationSS;
 }
 
-export interface MetaInfoCore {
+export interface MetaInfo {
     modelName: string;
     version: string;
     environment: string;
@@ -19,7 +19,7 @@ export interface MetaInfoCore {
 }
 
 export interface ModelInformationART {
-    metaInfo: MetaInfoCore;
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         searchEventCount: number;
         clickEventCount: number;
@@ -86,7 +86,7 @@ export interface ModelInformationDNE {
             queries: number;
         };
     };
-    metaInfo: MetaInfoCore;
+    metaInfo: MetaInfo;
 }
 
 export interface ModelInformationER {
@@ -113,7 +113,7 @@ export interface ModelInformationER {
     primaryEventGroupName: string;
     eventGroupValuesExamplesInHistory: any;
     indicatorsMap: any;
-    metaInfo: MetaInfoCore;
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         viewCount: number;
         PageViewCount: number;
@@ -132,7 +132,7 @@ export interface ModelInformationER {
 }
 
 export interface ModelInformationPR {
-    metaInfo: MetaInfoCore;
+    metaInfo: MetaInfo;
     itemBasedNamesAndNumOfRecordedItems: any;
     itemBasedNamesWithCandidateItems: any;
     numOfEventsPerEventType: any;
@@ -165,7 +165,7 @@ export interface ModelInformationQS {
     };
     candidates: number;
     numUserClusters: number;
-    metaInfo: MetaInfoCore;
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         searchEventCount: number;
         clickEventCount: number;
@@ -184,7 +184,7 @@ export interface ModelInformationQS {
     [key: string]: any;
 }
 
-export interface MetaInfoSS extends MetaInfoCore {
+export interface MetaInfoSS extends MetaInfo {
     modelId: string;
     engineName: string;
     modelSize: string;
