@@ -200,3 +200,65 @@ export interface ModelInformationSS {
     metaInfo: MetaInfoSS;
     modelBuildingStats: BuildingStatsSS;
 }
+
+export interface MetaInfoCC extends MetaInfo {
+    modelId: string;
+    engineName: string;
+    modelSize: string;
+}
+
+export interface DatasetFieldDetails {
+    numSamples: number;
+    facetsLabelsDistribution: Record<string, number>;
+}
+
+export interface DatasetDetails {
+    numRows: number;
+    dataDetails: Record<string, DatasetFieldDetails>;
+}
+
+export interface FacetPerformanceDetails {
+    hit1: number;
+    hit3: number;
+}
+
+export interface HyperParameterDetails {
+    learningRate: number;
+    warmUp: number;
+}
+
+export interface FacetDetails {
+    facetLabels: Record<string, string[]>;
+    defaultFacets: Partial<Record<string, string>>;
+    facetDisregardedLabels: Record<string, string[]>;
+}
+
+export interface PreparationConfigCC {
+    documentGroupId: number;
+    caseIdColumn: string;
+    facetFields: string[];
+    contextFields: string[];
+    minLen: number;
+    maxLen: number;
+    maxPortionDisregarded: number;
+    condensationMapPath?: string;
+    testPortion: number;
+}
+
+export interface PreparationDetailsCC {
+    preparationConfig: PreparationConfigCC;
+    facetsDetails: FacetDetails;
+    trainDatasetsDetails: DatasetDetails;
+    testDatasetsDetails: DatasetDetails;
+}
+
+export interface TrainingDetailsCC {
+    performanceDetails: Record<string, FacetPerformanceDetails>;
+    hyperParameterDetails: HyperParameterDetails;
+}
+
+export interface ModelInformationCC {
+    metaInfo: MetaInfoCC;
+    preparationDetails: PreparationDetailsCC;
+    trainingDetails: TrainingDetailsCC;
+}
