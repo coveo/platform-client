@@ -74,7 +74,7 @@ export interface PostSearchBodyQueryParams {
     groupBy?: RestGroupByRequest[];
     index?: string;
     indexToken?: string;
-    indexType?: string;
+    indexType?: RestIndexType;
     isGuestUser?: boolean;
     locale?: string;
     logicalIndex?: string;
@@ -134,7 +134,11 @@ export type RestGroupBySortCriteria =
     | 'occurrences'
     | 'score';
 
+export type RestIndexType = 'coveo' | 'coveov1' | 'elasticsearch' | 'on-prem' | 'sf';
+
 export type RestMLParametersPadding = 'popular' | 'trending';
+
+export type RestRangeAlgorithm = 'equiprobable' | 'even';
 
 export interface RestActionHistory {
     internalTime?: number;
@@ -198,7 +202,7 @@ export interface RestFacetRequest {
     mlDebugTitle?: string;
     numberOfValues?: number;
     preventAutoSelect?: boolean;
-    rangeAlgorithm?: string;
+    rangeAlgorithm?: RestRangeAlgorithm;
     sortCriteria?: RestFacetSortCriteria;
     type?: RestFacetType;
 }
