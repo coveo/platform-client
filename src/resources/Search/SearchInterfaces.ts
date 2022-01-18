@@ -42,7 +42,7 @@ export interface TokenModel {
 export type RestQueryParams = PostSearchBodyQueryParams & PostSearchQueryStringParams;
 
 export interface PostSearchQueryStringParams {
-    viewAllContent?: boolean;
+    viewAllContent?: boolean | number;
 }
 
 export interface PostSearchBodyQueryParams {
@@ -100,6 +100,7 @@ export interface PostSearchBodyQueryParams {
     rankingFunctions?: RestRankingFunctionRequest[];
     recommendation?: string;
     referrer?: string;
+    resultRankings?: unknown[];
     retrieveFirstSentences?: boolean;
     searchById?: boolean;
     searchHub?: string;
