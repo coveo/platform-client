@@ -6,7 +6,8 @@ export interface MLModelInfo {
         | ModelInformationER
         | ModelInformationPR
         | ModelInformationQS
-        | ModelInformationSS;
+        | ModelInformationSS
+        | ModelInformationCC;
 }
 
 export interface MetaInfo {
