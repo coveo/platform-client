@@ -210,7 +210,7 @@ export interface MetaInfoCC extends MetaInfo {
 
 export interface DatasetFieldDetails {
     numSamples: number;
-    facetsLabelsDistribution: Record<string, number>;
+    labelsDistribution: Record<string, number>;
 }
 
 export interface DatasetDetails {
