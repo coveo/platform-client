@@ -74,7 +74,7 @@ export interface PostSearchBodyQueryParams {
     groupBy?: RestGroupByRequest[];
     index?: string;
     indexToken?: string;
-    indexType?: RestIndexType;
+    indexType?: string;
     isGuestUser?: boolean;
     locale?: string;
     logicalIndex?: string;
@@ -134,8 +134,6 @@ export type RestGroupBySortCriteria =
     | 'nosort'
     | 'occurrences'
     | 'score';
-
-export type RestIndexType = 'coveo' | 'coveov1' | 'elasticsearch' | 'on-prem' | 'sf';
 
 export type RestMLParametersPadding = 'popular' | 'trending';
 
