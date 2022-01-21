@@ -202,12 +202,6 @@ export interface ModelInformationSS {
     modelBuildingStats: BuildingStatsSS;
 }
 
-export interface MetaInfoCC extends MetaInfo {
-    modelId: string;
-    engineName: string;
-    modelSize: string;
-}
-
 export interface DatasetFieldDetails {
     numSamples: number;
     labelsDistribution: Record<string, number>;
@@ -244,6 +238,12 @@ export interface PreparationConfigCC {
     maxPortionDisregarded: number;
     condensationMapPath?: string;
     testPortion: number;
+}
+
+export interface MetaInfoCC extends MetaInfo {
+    modelId: string;
+    engineName: string;
+    modelSize: string;
 }
 
 export interface PreparationDetailsCC {
