@@ -68,7 +68,18 @@ describe('Pipelines', () => {
             pipelines.duplicate('🔥');
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥/duplicate');
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥/duplicate', undefined);
+        });
+
+        it('includes the granular resource if set on the POST call request body', () => {
+            const granularResource = {
+                groupsThatCanEdit: [{id: 'hello'}, {id: 'bonjour'}],
+                apiKeysThatCanEdit: [{id: 'bonne'}, {id: 'nuit'}],
+            };
+            pipelines.duplicate('yeah', granularResource);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/yeah/duplicate', granularResource);
         });
     });
 
