@@ -253,17 +253,17 @@ export interface RestHierarchicalFacetValue {
 }
 
 export interface RestMLParameters {
+    brandFilter?: string;
+    categoryFilter?: string;
     considerUserContext?: boolean;
+    filters?: Record<string, string>;
+    itemId?: string;
+    itemIds?: string[];
     maxActionsHistoryItemsToConsider?: number;
+    minNumberOfWords?: number;
     num?: number;
     padding?: RestMLParametersPadding;
     wordSelection?: string;
-    minNumberOfWords?: number;
-    itemId?: string;
-    itemIds?: string[];
-    categoryFilter?: string;
-    brandFilter?: string;
-    filters?: Record<string, string>;
 }
 
 export interface RestQueryFunctionRequest {
