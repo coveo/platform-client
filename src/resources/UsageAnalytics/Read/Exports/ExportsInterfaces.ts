@@ -23,6 +23,16 @@ export interface ExportEstimateModel {
     estimates: Record<string, number>;
 }
 
+export interface ExportDownloadLink {
+    /**
+     * The export's unique identifier
+     */
+    id: string;
+    /**
+     * The export download link. Only appears when export is ready
+     */
+    downloadLink?: string;
+}
 interface EstimateExportCommonParams {
     from: string;
     to: string;
