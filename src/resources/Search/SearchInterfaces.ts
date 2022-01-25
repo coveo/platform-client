@@ -63,7 +63,7 @@ export interface PostSearchBodyQueryParams {
     enableMLDidYouMean?: boolean;
     enableQuerySyntax?: boolean;
     excerptLength?: number;
-    facetOptions?: RestFacetOptions[];
+    facetOptions?: RestFacetOptions;
     facets?: RestFacetRequest[];
     format?: RestFormat;
     fieldsToExclude?: string[];
@@ -87,7 +87,7 @@ export interface PostSearchBodyQueryParams {
     mlDidYouMeanMaxCandidates?: number;
     mlDidYouMeanMinScore?: number;
     mlDidYouMeanUseFacetCount?: boolean;
-    mlParameters?: RestMLParameters;
+    mlParameters?: Record<string, any>;
     numberOfResults?: number;
     parentField?: string;
     partialMatch?: boolean;
@@ -100,7 +100,7 @@ export interface PostSearchBodyQueryParams {
     rankingFunctions?: RestRankingFunctionRequest[];
     recommendation?: string;
     referrer?: string;
-    resultRankings?: unknown[];
+    resultRankings?: any[];
     retrieveFirstSentences?: boolean;
     searchById?: boolean;
     searchHub?: string;
@@ -115,13 +115,21 @@ export interface PostSearchBodyQueryParams {
     wildcards?: boolean;
 }
 
+export type RestFacetRequest =
+    | RestSpecificFacetRequest
+    | RestDateRangeFacetRequest
+    | RestNumericalRangeFacetRequest
+    | RestHierarchicalFacetRequest;
+
 export type RestThreshold = string | number;
 
 export type RestComputedFieldOperation = 'average' | 'maximum' | 'minimum' | 'sum';
 
-export type RestFacetSortCriteria = 'alphanumeric' | 'ascending' | 'descending' | 'occurrences' | 'score';
+export type RestHierarchicalFacetSortCriteria = 'score' | 'alphanumeric' | 'occurrences';
 
-export type RestFacetType = 'dateRange' | 'hierarchical' | 'numericalRange' | 'specific';
+export type RestRangeFacetSortCriteria = 'score' | 'alphanumeric' | 'ascending' | 'descending';
+
+export type RestSpecificFacetSortCriteria = 'score' | 'alphanumeric';
 
 export type RestFormat = 'json' | 'opensearch-atom' | 'opensearch-rss' | 'xlsx';
 
@@ -140,7 +148,6 @@ export type RestMLParametersPadding = 'popular' | 'trending';
 export type RestRangeAlgorithm = 'equiprobable' | 'even';
 
 export interface RestActionHistory {
-    internalTime?: number;
     name?: string;
     time?: string;
     value?: string;
@@ -186,13 +193,41 @@ export interface RestFacetOptions {
     freezeFacetOrder?: boolean;
 }
 
-export interface RestFacetRequest {
-    basePath?: string[];
+export interface RestSpecificFacetRequest {
     currentValues?: RestFacetValue[];
-    delimitingCharacter?: string;
     facetId?: string;
     field: string;
-    filterByBasePath?: boolean;
+    filterFacetCount?: boolean;
+    freezeCurrentValues?: boolean;
+    injectionDepth?: number;
+    isFieldExpanded?: boolean;
+    mlDebugTitle?: string;
+    numberOfValues?: number;
+    preventAutoSelect?: boolean;
+    sortCriteria?: RestSpecificFacetSortCriteria;
+    type?: 'specific';
+}
+
+export interface RestDateRangeFacetRequest {
+    currentValues?: RestFacetValue[];
+    facetId?: string;
+    field: string;
+    filterFacetCount?: boolean;
+    freezeCurrentValues?: boolean;
+    generateAutomaticRanges?: boolean;
+    injectionDepth?: number;
+    isFieldExpanded?: boolean;
+    mlDebugTitle?: string;
+    numberOfValues?: number;
+    preventAutoSelect?: boolean;
+    sortCriteria?: RestRangeFacetSortCriteria;
+    type: 'dateRange';
+}
+
+export interface RestNumericalRangeFacetRequest {
+    currentValues?: RestFacetValue[];
+    facetId?: string;
+    field: string;
     filterFacetCount?: boolean;
     freezeCurrentValues?: boolean;
     generateAutomaticRanges?: boolean;
@@ -202,8 +237,25 @@ export interface RestFacetRequest {
     numberOfValues?: number;
     preventAutoSelect?: boolean;
     rangeAlgorithm?: RestRangeAlgorithm;
-    sortCriteria?: RestFacetSortCriteria;
-    type?: RestFacetType;
+    sortCriteria?: RestRangeFacetSortCriteria;
+    type: 'numericalRange';
+}
+
+export interface RestHierarchicalFacetRequest {
+    basePath?: string[];
+    currentValues?: RestFacetValue[];
+    delimitingCharacter?: string;
+    facetId?: string;
+    field: string;
+    filterByBasePath?: boolean;
+    filterFacetCount?: boolean;
+    injectionDepth?: number;
+    isFieldExpanded?: boolean;
+    mlDebugTitle?: string;
+    numberOfValues?: number;
+    preventAutoSelect?: boolean;
+    sortCriteria?: RestHierarchicalFacetSortCriteria;
+    type: 'hierarchical';
 }
 
 export interface RestFacetValue {
@@ -250,20 +302,6 @@ export interface RestHierarchicalFacetValue {
     retrieveCount?: number;
     state?: string;
     value?: string;
-}
-
-export interface RestMLParameters {
-    brandFilter?: string;
-    categoryFilter?: string;
-    considerUserContext?: boolean;
-    filters?: Record<string, string>;
-    itemId?: string;
-    itemIds?: string[];
-    maxActionsHistoryItemsToConsider?: number;
-    minNumberOfWords?: number;
-    num?: number;
-    padding?: RestMLParametersPadding;
-    wordSelection?: string;
 }
 
 export interface RestQueryFunctionRequest {
