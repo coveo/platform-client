@@ -1,17 +1,26 @@
 export interface MLModelInfo {
     id: string;
-    info?: ModelInformationART | ModelInformationDNE | ModelInformationER | ModelInformationPR | ModelInformationQS;
+    info?:
+        | ModelInformationART
+        | ModelInformationDNE
+        | ModelInformationER
+        | ModelInformationPR
+        | ModelInformationQS
+        | ModelInformationSS
+        | ModelInformationCC;
+}
+
+export interface MetaInfo {
+    modelName: string;
+    version: string;
+    environment: string;
+    org: string;
+    modelVersion: string;
+    createdDate: string;
 }
 
 export interface ModelInformationART {
-    metaInfo: {
-        modelName: string;
-        version: string;
-        environment: string;
-        org: string;
-        modelVersion: string;
-        createdDate: string;
-    };
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         searchEventCount: number;
         clickEventCount: number;
@@ -78,14 +87,7 @@ export interface ModelInformationDNE {
             queries: number;
         };
     };
-    metaInfo: {
-        modelName: string;
-        version: string;
-        environment: string;
-        org: string;
-        modelVersion: string;
-        createdDate: string;
-    };
+    metaInfo: MetaInfo;
 }
 
 export interface ModelInformationER {
@@ -112,14 +114,7 @@ export interface ModelInformationER {
     primaryEventGroupName: string;
     eventGroupValuesExamplesInHistory: any;
     indicatorsMap: any;
-    metaInfo: {
-        modelName: string;
-        version: string;
-        environment: string;
-        org: string;
-        modelVersion: string;
-        createdDate: string;
-    };
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         viewCount: number;
         PageViewCount: number;
@@ -138,25 +133,15 @@ export interface ModelInformationER {
 }
 
 export interface ModelInformationPR {
-    metaInfo: {
-        createdDate: string;
-        environment: string;
-        modelName: string;
-        modelVersion: string;
-        org: string;
-        version: string;
-    };
-
+    metaInfo: MetaInfo;
     itemBasedNamesAndNumOfRecordedItems: any;
     itemBasedNamesWithCandidateItems: any;
     numOfEventsPerEventType: any;
     userBasedCandidates: any;
     userBasedNumOfItems: any;
     userBasedNumOfUsers: any;
-
     contentIDKeys: string[];
     parentIDKeys: [];
-
     modelBuildingStats?: any;
     languages?: any;
 }
@@ -181,14 +166,7 @@ export interface ModelInformationQS {
     };
     candidates: number;
     numUserClusters: number;
-    metaInfo: {
-        modelName: string;
-        version: string;
-        environment: string;
-        org: string;
-        modelVersion: string;
-        createdDate: string;
-    };
+    metaInfo: MetaInfo;
     modelBuildingStats: {
         searchEventCount: number;
         clickEventCount: number;
@@ -205,4 +183,83 @@ export interface ModelInformationQS {
     stopwords: Record<string, number>;
     featureSelectLog: FeatureSelectLog;
     [key: string]: any;
+}
+
+export interface MetaInfoSS extends MetaInfo {
+    modelId: string;
+    engineName: string;
+    modelSize: string;
+}
+
+export interface BuildingStatsSS {
+    documentCount: number;
+    snippetCount: number;
+    headerCount: number;
+    meanSnippetLength: number;
+}
+export interface ModelInformationSS {
+    metaInfo: MetaInfoSS;
+    modelBuildingStats: BuildingStatsSS;
+}
+
+export interface DatasetFieldDetails {
+    numSamples: number;
+    labelsDistribution: Record<string, number>;
+}
+
+export interface DatasetDetails {
+    numRows: number;
+    dataDetails: Record<string, DatasetFieldDetails>;
+}
+
+export interface FacetPerformanceDetails {
+    hit1: number;
+    hit3: number;
+}
+
+export interface HyperParameterDetails {
+    learningRate: number;
+    warmUp: number;
+}
+
+export interface FacetDetails {
+    facetLabels: Record<string, string[]>;
+    defaultFacets: Partial<Record<string, string>>;
+    facetDisregardedLabels: Record<string, string[]>;
+}
+
+export interface PreparationConfigCC {
+    documentGroupId: number;
+    caseIdColumn: string;
+    facetFields: string[];
+    contextFields: string[];
+    minLen: number;
+    maxLen: number;
+    maxPortionDisregarded: number;
+    condensationMapPath?: string;
+    testPortion: number;
+}
+
+export interface MetaInfoCC extends MetaInfo {
+    modelId: string;
+    engineName: string;
+    modelSize: string;
+}
+
+export interface PreparationDetailsCC {
+    preparationConfig: PreparationConfigCC;
+    facetsDetails: FacetDetails;
+    trainDatasetsDetails: DatasetDetails;
+    testDatasetsDetails: DatasetDetails;
+}
+
+export interface TrainingDetailsCC {
+    performanceDetails: Record<string, FacetPerformanceDetails>;
+    hyperParameterDetails: HyperParameterDetails;
+}
+
+export interface ModelInformationCC {
+    metaInfo: MetaInfoCC;
+    preparationDetails: PreparationDetailsCC;
+    trainingDetails: TrainingDetailsCC;
 }
