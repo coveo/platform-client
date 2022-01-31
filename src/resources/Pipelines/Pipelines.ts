@@ -1,4 +1,5 @@
 import API from '../../APICore';
+import {GranularResource} from '../BaseInterfaces';
 import Resource from '../Resource';
 import Condition from './Conditions/Condition';
 import FacetStateRules from './FacetStateRules/FacetStateRules';
@@ -73,11 +74,12 @@ export default class Pipelines extends Resource {
         );
     }
 
-    duplicate(pipelineId: string) {
+    duplicate(pipelineId: string, granularResource?: GranularResource) {
         return this.api.post<PipelineModel>(
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}/duplicate`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
+            granularResource
         );
     }
 
