@@ -97,8 +97,8 @@ interface AdditionalConfigurationModel {
     /**
      * Configuration specific to commerce organization. [to be revised]
      */
-    commerce: CommerceConfigurationModel;
-    search: SearchConfigurationModel;
+    commerce?: CommerceConfigurationModel;
+    search?: SearchConfigurationModel;
 }
 
 interface CommerceConfigurationModel {
@@ -109,9 +109,9 @@ interface CommerceConfigurationModel {
 }
 
 interface SearchConfigurationModel {
-    apiKeyQueryAuthentication: QueryAuthenticationModel[];
-    enforcedQueryPipelineConfiguration: EnforceQueryPipelineConfigurationModel;
-    impersonationRestriction: ImpersonationRestrictionsModel;
+    apiKeyQueryAuthentication?: QueryAuthenticationModel[];
+    enforcedQueryPipelineConfiguration?: EnforceQueryPipelineConfigurationModel;
+    impersonationRestriction?: ImpersonationRestrictionsModel;
 }
 
 interface QueryAuthenticationModel {
