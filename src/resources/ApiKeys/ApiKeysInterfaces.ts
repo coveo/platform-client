@@ -79,6 +79,8 @@ export interface ApiKeyModel extends GranularResource {
      * **Example:** t4hk287bfj5sg6wskg64ckk5a
      */
     resourceId?: string;
+
+    additionalConfiguration?: AdditionalConfigurationModel;
 }
 
 export interface CreateApiKeyOptions {
@@ -86,4 +88,33 @@ export interface CreateApiKeyOptions {
      * The unique identifier of the template on which to base the API key.
      */
     apiKeyTemplateId?: string;
+}
+
+interface AdditionalConfigurationModel {
+    commerce: CommerceConfigurationModel;
+    search: SearchConfigurationModel;
+}
+
+interface CommerceConfigurationModel {
+    catalogId: string;
+}
+
+interface SearchConfigurationModel {
+    apiKeyQueryAuthentication: QueryAuthenticationModel[];
+    enforcedQueryPipelineConfiguration: EnforceQueryPipelineConfigurationModel;
+    impersonationRestriction: ImpersonationRestrictionsModel;
+}
+
+interface QueryAuthenticationModel {
+    name: string;
+    provider: string;
+    type: string;
+}
+
+interface EnforceQueryPipelineConfigurationModel {
+    searchHub: string;
+}
+
+interface ImpersonationRestrictionsModel {
+    allowedUserIds: QueryAuthenticationModel[];
 }
