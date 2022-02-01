@@ -80,6 +80,9 @@ export interface ApiKeyModel extends GranularResource {
      */
     resourceId?: string;
 
+    /**
+     * Additional configuration to be included in an API key. [to be revised]
+     */
     additionalConfiguration?: AdditionalConfigurationModel;
 }
 
@@ -91,11 +94,17 @@ export interface CreateApiKeyOptions {
 }
 
 interface AdditionalConfigurationModel {
+    /**
+     * Configuration specific to commerce organization. [to be revised]
+     */
     commerce: CommerceConfigurationModel;
     search: SearchConfigurationModel;
 }
 
 interface CommerceConfigurationModel {
+    /**
+     * The catalog identifier to be linked to an API key. [to be revised]
+     */
     catalogId: string;
 }
 
@@ -106,12 +115,24 @@ interface SearchConfigurationModel {
 }
 
 interface QueryAuthenticationModel {
+    /**
+     * Authentication name. [to be revised]
+     */
     name: string;
+    /**
+     * Authentication provider. [to be revised]
+     */
     provider: string;
+    /**
+     * Authentication type. [to be revised]
+     */
     type: string;
 }
 
 interface EnforceQueryPipelineConfigurationModel {
+    /**
+     * Search hub name to be linked to an API key. [to be revised]
+     */
     searchHub: string;
 }
 
