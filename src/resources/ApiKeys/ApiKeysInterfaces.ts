@@ -109,9 +109,9 @@ interface CommerceConfigurationModel {
 }
 
 interface SearchConfigurationModel {
-    apiKeyQueryAuthentication?: QueryAuthenticationModel[];
-    enforcedQueryPipelineConfiguration?: EnforceQueryPipelineConfigurationModel;
-    impersonationRestriction?: ImpersonationRestrictionsModel;
+    apiKeyQueryAuthentication?: QueryAuthenticationModel[]; // TODO: ADUI-7802 - complete this information when the documentation is complete or the initial team confirm the API implementation.
+    enforcedQueryPipelineConfiguration?: EnforceQueryPipelineConfigurationModel; // TODO: ADUI-7802 - complete this information when the documentation is complete or the initial team confirm the API implementation.
+    impersonationRestriction?: ImpersonationRestrictionsModel; // TODO: ADUI-7802 - complete this information when the documentation is complete or the initial team confirm the API implementation.
 }
 
 interface QueryAuthenticationModel {
