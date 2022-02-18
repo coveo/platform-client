@@ -220,6 +220,7 @@ export interface RestDateRangeFacetRequest {
     mlDebugTitle?: string;
     numberOfValues?: number;
     preventAutoSelect?: boolean;
+    rangeAlgorithm?: RestRangeAlgorithm;
     sortCriteria?: RestRangeFacetSortCriteria;
     type: 'dateRange';
 }
