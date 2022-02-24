@@ -31,9 +31,7 @@ describe('Dimensions', () => {
         it('should make a POST call to the snowflake data share accounts url', () => {
             dataShare.addSnowflakeAccount(dataShareParams);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(
-                `${DataShare.baseUrl}/accounts?accountLocator=Soubane&snowflakeRegion=LOUBAME`
-            );
+            expect(api.post).toHaveBeenCalledWith(`${DataShare.baseUrl}/accounts`, dataShareParams);
         });
     });
 
