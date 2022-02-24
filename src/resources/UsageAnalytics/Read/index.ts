@@ -5,3 +5,4 @@ export * from './Filters';
 export * from './Reports';
 export * from './Snowflake';
 export * from './Statistics';
+export * from './DataShare';

@@ -1,6 +1,7 @@
 import API from '../../APICore';
 import Resource from '../Resource';
 import Administration from './Read/Administration/Administration';
+import DataShare from './Read/DataShare/DataShare';
 import Dimensions from './Read/Dimensions/Dimensions';
 import Exports from './Read/Exports/Exports';
 import Filters from './Read/Filters/Filters';
@@ -16,6 +17,7 @@ export default class UsageAnalytics extends Resource {
     snowflake: Snowflake;
     reports: Reports;
     filters: Filters;
+    dataShare: DataShare;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -27,5 +29,6 @@ export default class UsageAnalytics extends Resource {
         this.snowflake = new Snowflake(api, serverlessApi);
         this.reports = new Reports(api, serverlessApi);
         this.filters = new Filters(api, serverlessApi);
+        this.dataShare = new DataShare(api, serverlessApi);
     }
 }
