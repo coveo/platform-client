@@ -14,9 +14,10 @@ export default class DataShare extends Resource {
         );
     }
 
-    addSnowflakeAccount(params: SnowflakeAccountDataSharingParams) {
+    addSnowflakeAccount(snowflakeAccount: SnowflakeAccountDataSharingParams) {
         return this.api.post<void>(
-            this.buildPath(`${DataShare.baseUrl}/accounts`, {...params, org: this.api.organizationId})
+            this.buildPath(`${DataShare.baseUrl}/accounts`, {org: this.api.organizationId}),
+            snowflakeAccount
         );
     }
 
