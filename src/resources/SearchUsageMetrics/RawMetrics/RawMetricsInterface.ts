@@ -1,6 +1,6 @@
 import {SearchHubRawMetrics} from '../../Enums';
 
-export interface DailyMetricParameters extends CommonMetricParameters {
+export interface DailyRawMetricParameters extends CommonMetricParameters {
     /**
      * The last day to report for
      * Format YYYY-MM-DD
@@ -14,7 +14,7 @@ export interface DailyMetricParameters extends CommonMetricParameters {
     from: string;
 }
 
-export interface MonthlyMetricParameters extends CommonMetricParameters {
+export interface MonthlyRawMetricParameters extends CommonMetricParameters {
     /**
      * The last day to report for
      * Format YYYY-MM
@@ -28,7 +28,7 @@ export interface MonthlyMetricParameters extends CommonMetricParameters {
     from: string;
 }
 
-export interface MonthlyMetricsParameters {
+export interface MonthlyRawMetricsParameters {
     /**
      * The month to report for
      * Format YYYY-MM
@@ -41,21 +41,21 @@ export interface MonthlyMetricsParameters {
     minimumQueries?: string;
 }
 
-export interface RestListOfMetrics {
+export interface RestListOfRawMetrics {
     /**
      * The list of metrics
      */
     metrics: RestMetric[];
 }
 
-export interface RestListOfMetricValues {
+export interface RestListOfRawMetricValues {
     /**
      * The list of daily metric values
      */
     values: RestMetricValueForDate[];
 }
 
-export interface RestListOfSearchHubMetrics {
+export interface RestListOfSearchHubRawMetrics {
     /**
      * The list of search hubs
      */
