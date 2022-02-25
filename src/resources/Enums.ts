@@ -876,8 +876,8 @@ export enum SearchHubLicenseMetrics {
 }
 
 export enum SearchHubLicenseType {
-    Assignment = 'assignment',
-    Global = 'global',
+    assignment = 'assignment',
+    global = 'global',
 }
 
 export enum SubscriptionFrequencyEnum {

@@ -16,13 +16,13 @@ export interface DailyRawMetricParameters extends CommonMetricParameters {
 
 export interface MonthlyRawMetricParameters extends CommonMetricParameters {
     /**
-     * The last day to report for
+     * The last month to report for
      * Format YYYY-MM
      */
     to: string;
 
     /**
-     * The first day to report for
+     * The first month to report for
      * Format YYYY-MM
      */
     from: string;
@@ -81,7 +81,7 @@ interface RestMetricValueForDate {
     date: string;
 
     /**
-     * The numeric metric value (int64)
+     * The numeric metric value
      */
     value: number;
 }
@@ -98,27 +98,27 @@ interface RestSearchHubMetrics {
     assignement: SearchHubRawMetrics;
 
     /**
-     * The number of normal queries (int64)
+     * The number of normal queries
      */
     normalQueries: number;
 
     /**
-     * The number of recommendation queries (int64)
+     * The number of recommendation queries
      */
     recommendationQueries: number;
 
     /**
-     * The number of distinct users (int64)
+     * The number of distinct users
      */
     users: number;
 
     /**
-     * The number of distinct persistent queries (int64)
+     * The number of distinct persistent queries
      */
     staticQueries: number;
 
     /**
-     * The number of product listing queries (int64)
+     * The number of product listing queries
      */
     productListingQueries: number;
 }
