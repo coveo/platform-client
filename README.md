@@ -131,15 +131,15 @@ This project is built using TypeScript and automatically generates relevant type
 
 ### Configuration Options
 
-| Option             | Required | Default Value                        | Description                                                                                                                                      |
-| ------------------ | -------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `accessToken`      | yes      | undefined                            | The access token or API key.                                                                                                                     |
-| `organizationId`   | yes      | undefined                            | The unique identifier of the target organization.                                                                                                |
-| `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'production'`, `'hipaa'`; automatically targets the associated host. |
-| `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                      |
-| `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target host for serverless APIs.                                                                                                             |
-| `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                         |
-| `region`           | optional | Region.US                            | The target region.                                                                                                                               |
+| Option             | Required | Default Value                        | Description                                                                                                                                              |
+| ------------------ | -------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessToken`      | yes      | undefined                            | The access token or API key.                                                                                                                             |
+| `organizationId`   | yes      | undefined                            | The unique identifier of the target organization.                                                                                                        |
+| `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'staging'`, `'stg'` `'production'`, `'hipaa'`; automatically targets the associated host. |
+| `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                              |
+| `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target host for serverless APIs.                                                                                                                     |
+| `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                                 |
+| `region`           | optional | Region.US                            | The target region.                                                                                                                                       |
 
 ### Error handling
 
