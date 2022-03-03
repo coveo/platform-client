@@ -2,43 +2,38 @@ import {SearchHubRawMetrics} from '../../Enums';
 
 export interface DailyRawMetricParameters extends CommonMetricParameters {
     /**
-     * The last day to report for
-     * Format YYYY-MM-DD
+     * The first day to report for
      */
-    to: string;
+    from: DateWithoutTime;
 
     /**
-     * The first day to report for
-     * Format YYYY-MM-DD
+     * The last day to report for
      */
-    from: string;
+    to: DateWithoutTime;
 }
 
 export interface MonthlyRawMetricParameters extends CommonMetricParameters {
     /**
-     * The last month to report for
-     * Format YYYY-MM
+     * The first month to report for
      */
-    to: string;
+    from: DateWithoutTimeAndDay;
 
     /**
-     * The first month to report for
-     * Format YYYY-MM
+     * The last month to report for
      */
-    from: string;
+    to: DateWithoutTimeAndDay;
 }
 
 export interface MonthlyRawMetricsParameters {
     /**
      * The month to report for
-     * Format YYYY-MM
      */
-    month: string;
+    month: DateWithoutTimeAndDay;
 
     /**
      * The minimum number of queries required for a search hub to be listed
      */
-    minimumQueries?: string;
+    minimumQueries?: number;
 }
 
 export interface RestListOfRawMetrics {
@@ -134,3 +129,24 @@ interface CommonMetricParameters {
      */
     searchHub: string;
 }
+
+interface DateWithoutTime {
+    /**
+     * Year of the selected date
+     */
+    year: number;
+
+    /**
+     * Month of the selected date
+     * Between 1 to 12
+     */
+    month: number;
+
+    /**
+     * Day of the selected date
+     * Between 1 to 31
+     */
+    day: number;
+}
+
+type DateWithoutTimeAndDay = Omit<DateWithoutTime, 'day'>;
