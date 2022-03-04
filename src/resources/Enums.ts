@@ -844,6 +844,42 @@ export enum LicenseSection {
     searchapi = 'searchapi',
 }
 
+export enum SearchHubRawMetrics {
+    normalQueries = 'normalQueries',
+    recommendationQueries = 'recommendationQueries',
+    commerceProductListingQueries = 'commerceProductListingQueries',
+    users = 'users',
+    staticQueries = 'staticQueries',
+}
+
+export enum SearchHubLicenseMetrics {
+    normalQueries = 'normalQueries',
+    recommendationQueries = 'recommendationQueries',
+    commerceProductListingQueries = 'commerceProductListingQueries',
+    agents = 'agents',
+    staticQueries = 'staticQueries',
+    intranetUsers = 'intranetUsers',
+    partnetUsers = 'partnerUsers',
+    timesExceededQps = 'timesExceededQps',
+    platformIntranetUsers = 'platformIntranetUsers',
+    platformAgents = 'platformAgents',
+    platformPortalUsers = 'platformPortalUsers',
+    salesforceServiceCloudAgents = 'salesforceServiceCloudAgents',
+    salesforceSalesCloudUsers = 'salesforceSalesCloudUsers',
+    salesforcePlatformUsers = 'salesforcePlatformUsers',
+    salesforceCommunityCloudUsers = 'salesforceCommunityCloudUsers',
+    snowCSMAgents = 'snowCSMAgents',
+    snowFulfillers = 'snowFulfillers',
+    snowITSMUsers = 'snowITSMUsers',
+    snowHRSDUsers = 'snowHRSDUsers',
+    dynamicsCustomerEngagementUsers = 'dynamicsCustomerEngagementUsers',
+}
+
+export enum SearchHubLicenseType {
+    assignment = 'assignment',
+    global = 'global',
+}
+
 export enum SubscriptionFrequencyEnum {
     live = 'LIVE',
     hourly = 'HOURLY',
