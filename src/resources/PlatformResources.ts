@@ -37,6 +37,7 @@ import SecurityCache from './SecurityCache/SecurityCache';
 import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
+import Vaults from './Vaults/Vaults';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -54,14 +55,16 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'group', resource: Group},
     {key: 'index', resource: Index},
     {key: 'ipx', resource: InProductExperiences},
-    {key: 'ml', resource: MachineLearning},
-    {key: 'modifierTemplates', resource: ModifierTemplates},
     {key: 'license', resource: License},
     {key: 'limits', resource: Limits},
     {key: 'links', resource: Links},
     {key: 'logs', resource: Logs},
+    {key: 'ml', resource: MachineLearning},
+    {key: 'modifierTemplates', resource: ModifierTemplates},
+    {key: 'notification', resource: Notifications},
     {key: 'organization', resource: Organization},
     {key: 'pipeline', resource: Pipelines},
+    {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'saml', resource: Saml},
@@ -74,8 +77,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'source', resource: Sources},
     {key: 'ua', resource: UsageAnalytics},
     {key: 'user', resource: User},
-    {key: 'notification', resource: Notifications},
-    {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
+    {key: 'vault', resource: Vaults},
 ];
 
 class PlatformResources {
@@ -97,14 +99,16 @@ class PlatformResources {
     group: Group;
     index: Index;
     ipx: InProductExperiences;
-    ml: MachineLearning;
-    modifierTemplates: ModifierTemplates;
     license: License;
     limits: Limits;
     links: Links;
     logs: Logs;
+    ml: MachineLearning;
+    modifierTemplates: ModifierTemplates;
+    notification: Notifications;
     organization: Organization;
     pipeline: Pipelines;
+    privilegeEvaluator: PrivilegeEvaluator;
     pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;
     saml: Saml;
@@ -117,8 +121,7 @@ class PlatformResources {
     source: Sources;
     ua: UsageAnalytics;
     user: User;
-    notification: Notifications;
-    privilegeEvaluator: PrivilegeEvaluator;
+    vault: Vaults;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
