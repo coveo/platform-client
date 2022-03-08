@@ -60,6 +60,16 @@ describe('Search', () => {
         });
     });
 
+    describe('getFieldValue', () => {
+        it('should make a get call to searchAPI correct url with its params to fetch the values of a field', () => {
+            const params = {ignoreAccents: false};
+            const fieldName = 'author';
+            search.getFieldValues(fieldName, params);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/values?field=author&ignoreAccents=false`);
+        });
+    });
+
     describe('Make a query on the search', () => {
         it('should make a post call to query the search for result', () => {
             const queryParams = {q: ''};
