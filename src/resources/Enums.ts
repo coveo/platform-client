@@ -984,3 +984,9 @@ export enum ReportType {
     Dashboard = 'DASHBOARD',
     Explorer = 'EXPLORER',
 }
+
+export enum VaultFetchStrategy {
+    allOrNothing = 'ALL_OR_NOTHING',
+    onlyMissing = 'ONLY_MISSING',
+    overwrite = 'OVERWRITE',
+}
