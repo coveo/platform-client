@@ -1,3 +1,4 @@
+import {ListFieldValuesBodyQueryParams, PostSearchBodyQueryParams} from '.';
 import API from '../../APICore';
 import Ressource from '../Resource';
 import {RestQueryParams, RestTokenParams, TokenModel} from './SearchInterfaces';
@@ -7,6 +8,16 @@ export default class Search extends Ressource {
 
     createToken(tokenParams: RestTokenParams) {
         return this.api.post<TokenModel>(`${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`, tokenParams);
+    }
+
+    getFieldValues(fieldName: string, params?: ListFieldValuesBodyQueryParams) {
+        return this.api.get<any>(
+            this.buildPath(`${Search.baseUrl}/values`, {
+                field: encodeURI(`${fieldName}`),
+                ...params,
+                organizationId: params?.organizationId ?? this.api.organizationId,
+            })
+        );
     }
 
     // For more info about restQueryParameters values available

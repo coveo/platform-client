@@ -46,6 +46,396 @@ export interface PostSearchQueryStringParams {
 }
 
 /**
+ * Defines the body parameters of the list field values request.
+ */
+
+export interface ListFieldValuesBodyQueryParams {
+    /**
+     * The unique identifier of the target Coveo Cloud organization.
+     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
+     */
+    organizationId?: string;
+
+    /**
+     * Whether to treat accentuated characters as non-accentuated characters when retrieving field values (e.g., treat é, è, ê, etc., as e).
+     *
+     * Default: true
+     */
+    ignoreAccents?: boolean;
+
+    /**
+     * The sort criteria to use.
+     *
+     * Use:
+     * - occurrences: to sort by number of occurrences, with field values having the highest number of occurrences appearing first.
+     * - nosort: to avoid sorting the results of the Group By operation. The field values will appear in an unspecified order.
+     *
+     * @default `occurrences`
+     */
+    sortCriteria?: string;
+
+    /**
+     * The maximum number of values to return.
+     *
+     * @default `10`
+     */
+    maximumNumberOfValues?: number;
+
+    /**
+     * The query expression that should override the basic query expression on which the Group By operation is being performed (see the `q` query parameter).
+     *
+     * **Note:** If *any* query override parameter (e.g., `queryOverride`, `advancedQueryOverride`, etc.) is set in a Group By operation, **all** original parts of the query expression (i.e., `q`, `aq`, `cq`, and `dq`) will be ignored.
+     *
+     * @example `Coveo Cloud V2 Platform`
+     */
+    queryOverride?: string;
+
+    /**
+     * The query expression that should override the constant query expression on which the Group By operation is being performed (see the `cq` query parameter).
+     *
+     * **Note:** If *any* query override parameter (e.g., `queryOverride`, `advancedQueryOverride`, etc.) is set in a Group By operation, **all** original parts of the query expression (i.e., `q`, `aq`, `cq`, and `dq`) will be ignored.
+     *
+     * @example `@filetype==forumpost`
+     */
+    constantQueryOverride?: string;
+
+    /**
+     * The query expression that should override the disjunction query expression on which the Group By operation is being performed (see the `dq` query parameter).
+     *
+     * **Note:** If *any* query override parameter (e.g., `queryOverride`, `advancedQueryOverride`, etc.) is set in a Group By operation, **all** original parts of the query expression (i.e., `q`, `aq`, `cq`, and `dq`) will be ignored.
+     *
+     * @example `@date=2016-12-01..2016-12-31`
+     */
+    disjunctionQueryOverride?: string;
+
+    /**
+     * The pattern that the field values must match.
+     *
+     * See also the patternType parameter."
+     */
+    pattern?: string;
+
+    /**
+     * The type of pattern that is being used to list field values.
+     *
+     * Use:
+     * - wildcard: to parse the specified pattern as a wildcard expression.
+     * - regularexpression: to parse the specified pattern as a regular expression.
+     * - editdistance: to apply the Edit Distance algorithm to match values that are close to the specified pattern.
+     * - phonetic to apply a phonetic algorithm to match values that are phonetically similar to the specified pattern.
+     *
+     * @default `wildcard`
+     */
+    patternType?: string;
+
+    /**
+     * The parameters for Coveo for Commerce.
+     */
+    commerce?: RestCommerceParameters;
+
+    /**
+     * A key-value store where each pair corresponds to the name of a dictionary field to query, along with the key to target within that field.
+     *
+     * @example
+     * Suppose that in your index, the `@price` dictionary field contains different values for its `storeA` and `storeB` keys. Including `"dictionaryFieldContext": { "price": "storeA" }` in the query means that any part of the query expression that targets the `@price` field will in fact only query the `storeA` values of that field.
+     */
+    dictionaryFieldContext?: RestDictionaryFieldContextRequest;
+
+    /**
+     * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
+     *
+     * You can pass an empty `pipeline` value to use an empty query pipeline (i.e., `?pipeline=` or `"pipeline": ""`).
+     *
+     * If a query does not contain the `pipeline` parameter, the first query pipeline whose conditions are met by the request is used (query pipelines without conditions are not evaluated). Should the request fail to meet the conditions of each evaluated query pipeline, the default query pipeline of the target Coveo Cloud organization is used (bypassing its conditions, if it has any).
+     *
+     * **Notes:**
+     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `pipeline`, or a `searchHub` that routes queries to a specific `pipeline` via a query pipeline condition.
+     * - For reporting purposes, when logging a **Search** usage analytics event for a query, the `queryPipeline` field of that event should be set to the `pipeline` value of the query (or to the `"default"` string, if no `pipeline` value was specified in the query).
+     *
+     * See also [Managing Query Pipelines](https://docs.coveo.com/en/1450/).
+     *
+     * @example `CustomerQueryPipeline`
+     */
+    pipeline?: string;
+
+    /**
+     * The maximum age of cached results, in milliseconds.
+     *
+     * If the results of a specific request are available in the cache, and if those results are no older than the `maximumAge` value, the service returns those results rather than forwarding a new query to the index.
+     *
+     * **Note:** This parameter is automatically overridden when `staticQuery` is set to `true`.
+     *
+     * @default `-1` (which corresponds to the internal default value (15 minutes))
+     */
+    maximumAge?: number;
+
+    /**
+     * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output.
+     *
+     * **Notes:**
+     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `searchHub`.
+     * - When logging a **Search** usage analytics event for a query, the `originLevel1` field of that event should be set to the value of the `searchHub` search request parameter.
+     *
+     * See also the `tab` parameter.
+     *
+     * @example `CustomerPortal`
+     */
+    searchHub?: string;
+
+    /**
+     * The second level of origin of the request, typically the identifier of the selected tab in the graphical search interface from which the request originates.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output.
+     *
+     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel2` field of that event should be set to the `tab` value of the query (or to the `"default"` string, if no `tab` value was specified in the query).
+     *
+     * See also the `searchHub` parameter.
+     *
+     * @example `ForumTab`
+     */
+    tab?: string;
+
+    /**
+     * The third level of origin of the request, typically the URL of the page that linked to the search interface from which the request originates (e.g., in JavaScript, this would correspond to the `document.referrer` value).
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output.
+     *
+     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel3` field of that event should be set to the `referrer` value of the query, if specified.
+     *
+     * See also the `context` parameter.
+     *
+     * @example `http://www.example.com`
+     */
+    referrer?: string;
+
+    /**
+     * The custom context information to send along with the request. Must be a dictionary of key-value pairs (JSON) where each key is a string, and each value is either a string or an array of strings.
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$context` object.
+     *
+     * **Note:**
+     * When logging a **Search** usage analytics event for a query, the `customData` field of that event should include the same data as the `context` parameter of the query. However, each `context` key included in `customData` must be prefixed by `context_` (e.g., the `userRoles` key in `context` becomes `context_userRoles` in `customData`).
+     *
+     * See also the `referrer` parameter.
+     *
+     * @example
+     * ```json
+     * {
+     *   "userAgeRange":"25-35",
+     *   "userRoles": ["PremiumCustomer", "ProductReviewer"]
+     * }
+     * ```
+     */
+    context?: RestContextRequest;
+
+    /**
+     * The query and page view actions previously made by the current user.
+     *
+     * Coveo Machine Learning content recommendations models use this information to provide contextually relevant output.
+     *
+     * @type {RestActionHistory[]}
+     */
+    actionsHistory?: RestActionHistory[];
+
+    /**
+     * The identifier of the recommendation interface from which the request originates.
+     *
+     * Coveo Machine Learning content recommendations models may use this information to provide contextually relevant output.
+     *
+     * @example `RecommendedProducts`
+     */
+    recommendation?: string;
+
+    /**
+     * The locale of the current user. Must comply with IETF’s [BCP 47](http://www.rfc-editor.org/rfc/bcp/bcp47.txt) definition.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$locale` object.
+     *
+     * **Note:** When logging a **Search** usage analytics event, the language field of that event should match the language part of the `locale` value of the query (e.g., `en-US` in `locale` becomes `en` in `language`).
+     *
+     * @example `en-US`
+     */
+    locale?: string;
+
+    /**
+     * The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) identifier of the time zone to use to correctly interpret dates in the query expression and result items.
+     *
+     * If not specified, the default time zone of the server hosting the index is used.
+     *
+     * **Note:** While no Coveo Machine Learning model uses this information, it can nevertheless affect the ranking scores (and thus, potentially the order) of result items, as ranking expressions may be based on time constants.
+     *
+     * @example `America/New_York`
+     */
+    timezone?: string;
+
+    /**
+     * The format of a successful response.
+     *
+     * - Use `json` to get the response in the JSON format.
+     * - Use `opensearch-atom` or `opensearch-rss` to get the results in an OpenSearch format (XML).
+     * - Use `xlsx` to generate an Excel file containing the results (binary).
+     *
+     * **Note:** Debug information (see the `debug` parameter) can only appear in a response in the JSON format.
+     *
+     * @default `json`
+     */
+    format?: RestFormat;
+
+    /**
+     * Whether to force a successful response to include debug information.
+     *
+     * **Notes:**
+     * - Debug information can only appear in responses in the JSON format (see the `format` parameter).
+     * - Avoid setting this parameter to `true` in production, as it has a negative impact on query performance.
+     *
+     * @default `false`
+     */
+    debug?: boolean;
+
+    /**
+     * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
+     *
+     * If you do not specify an `indexToken` (or `index`) value, any index mirror could be used.
+     *
+     * **Note:** Passing an `indexToken` (or `index`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
+     *
+     * @example `ZXhhbXBsZWluZGV4bWlycm9yLS4uLg==`
+     */
+    indexToken?: string;
+
+    /**
+     * A GUID representing the current user, who can be authenticated or anonymous. This GUID is normally generated by the usage analytics service and stored in a non-expiring browser cookie.
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output.
+     *
+     * @example `5cb98953-9c13-42ff-8176-e6fcba6a50bf`
+     */
+    visitorId?: string;
+
+    /**
+     * Whether the current user is anonymous.
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output.
+     *
+     * **Note:** When logging a **Search** usage analytics event for a query, the anonymous field of that event should be set to the `isGuestUser` value of the query.
+     *
+     * @default `false`
+     */
+    isGuestUser?: boolean;
+
+    /**
+     * A map of options to pass to the Coveo ML models associated with the request’s target query pipeline.
+     *
+     * **Available parameters:**
+     * - `considerUserContext` (boolean): Whether the models should attempt to leverage the `context` object of the request to personalize their output. Applies to CR models only. Default is `true`.
+     * - `maxActionsHistoryItemsToConsider` (unsigned integer): The maximum number of items in the `actionsHistory` array of the request that should be taken into account by the models. Applies to CR models only. By default, all `actionsHistory` items are considered.
+     * - `num` (unsigned integer):  The maximum number of recommendations/suggestions to request from the models. Must be in range `[1, 50]`, if specified. Applies to ART, CR, and QS models. Default depends on model configuration.
+     * - `padding` (string enum): The kind of padding the models should complete their output with, if their maximum number of recommendations/suggestions (i.e., `num`) has not been reached. Applies to CR models only. Allowed values are popular (i.e., pad recommendations with all time most popular items) and trending (i.e., pad recommendations with items that have recently been increasingly popular). By default, no padding applies.
+     * - `wordSelection` (string): The ITD keyword selection options the models should use. Applies only to ART models with ITD enabled. If specified, must be a string in the format `option:value`. The only available option is `wordsKept` (i.e., the maximum number of `lq` keywords to inject in `q`); its default value is `5`.
+     * - `minNumberOfWords` (unsigned integer): The minimum number of words a query suggestion may contain to be returned by the model. Applies to QS models only. Must be in range `[1, 10]` Default is `1`, which implies that the model will return all candidates.
+     * - `itemId` (string): The unique identifier (e.g., SKU) of a product to get recommendations for. Only applies when querying a Product Recommendations model with an association strategy considering a single item as an input.
+     * - `itemIds` (array of strings): The unique identifiers (e.g., SKUs) of the products to get recommendations for. Only applies when querying a Product Recommendations model with an association strategy considering multiple items as an input.
+     * - `categoryFilter` (string): The name of a category of products to get recommendations for.
+     * - `brandFilter` (string): The name of a brand of products to get recommendations for.
+     * - `filters` (map of strings): The dimensions along with the values to be used at query time by the model as filters for potential suggestions. Only applies to Automatic relevance Tuning, Query Suggestions, or Dynamic Navigation Experience models that don’t use the default `filterFields` advanced parameter values. **Example:** `"filters": { "originContext": "<MY-VALUE>", "originLevel2": "<MY-VALUE>" }`.
+     *
+     * @example
+     * ```json
+     * {
+     *   "num": 3,
+     *   "padding": "trending",
+     *   "maxActionsHistoryItemsToConsider": 10,
+     *   "considerUserContext": false
+     * }
+     * ```
+     *
+     * @example
+     * ```json
+     * {"wordSelection": "wordsKept:4"}
+     * ```
+     */
+    mlParameters?: Record<string, any>;
+
+    /**
+     * The type of index against which to execute the query. Must correspond to an index that has been configured for the target Coveo Cloud organization.
+     *
+     * @default `coveo`
+     */
+    indexType?: string;
+
+    /**
+     * The identifier of the index mirror to forward the request to. See also the `indexToken` parameter.
+     *
+     * If you do not specify an `index` (or `indexToken`) value, any index mirror could be used.
+     *
+     * **Note:** Passing an `index` (or `indexToken`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
+     *
+     * @example `myorg-nvoqun-Indexer1-pbi2nbuw`
+     */
+    index?: string;
+
+    /**
+     * The identifier for a logical group of indexes that have been configured to include documents form the same sources.
+     *
+     * If you do not specify a `logicalIndex` value, the `default` grouping will be used, typically including all indexes.
+     *
+     * @example `webcontentonly`
+     */
+    logicalIndex?: string;
+
+    /**
+     * The maximum number of milliseconds to allow the request to last before timing out. Maximum: 16000
+     * Coveo determines the most appropriate timeout to use.
+     *
+     * @default: `0`
+     */
+    maximumTimeOutMs?: string;
+
+    /**
+     * Contextual information about the user performing the request and the request itself.
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output.
+     *
+     * Available parameters:
+     * - `userId` (string): The ID of the logged user. If not present, the id is obtained from the authentication token.
+     * - `clientId` (string): A GUID representing the client id. The `clientId` and `deviceId` replaces the deprecated `visitorId`.
+     * - `deviceId` (string): The name of the device that the end user is using. It has to be explicitly passed from native mobile apps. The `clientId` and `deviceId` replaces the deprecated `visitorId`.
+     * - `documentLocation` (string): The URL of the current page or component. If not present, the referrer is obtained from the [Referer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) header. This information can be obtained from `coveo.analytics.js`.
+     * - `documentReferrer` (string): Typically the URL of the page that linked to the search interface from which the request originates (e.g., in JavaScript, this would correspond to the document.referrer value). This information can be obtained from `coveo.analytics.js`.
+     * - `pageId` (string): A GUID representing the page ID. This information can be obtained from `coveo.analytics.js`.
+     * - `userIp` (string): The user IP. If not present, the IP is obtained from the [X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For) and [Forwarded](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded) headers. This information is required when endpoints are behind a proxy.
+     * - `clientRequestId` (string): A GUID generated by the client representing the current request. This information is used to identify operations across different apis related to the same request.
+     * - `clientTimestamp` (string): Client ISO 8601 timestamp with milliseconds.
+     * - `userAgent` (string): The user agent of the request. If not present, the user agent is obtained from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) header. This information is required when endpoints are behind a proxy.
+     *
+     * @example
+     * ```json
+     * {
+     *   "userId": "user@email.com",
+     *   "clientId": "6d148f06-5f15-4639-81b4-792a9b94eb5f",
+     *   "deviceId": "Chrome"
+     * }
+     * ```
+     *
+     * @example
+     * ```json
+     * {
+     *   "clientTimestamp": "2020-09-09T19:00:45.603-04:00",
+     *   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+     * }
+     * ```
+     */
+    analytics?: RestAnalyticsRequest;
+
+    /**
+     * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
+     */
+    viewAllContent?: boolean;
+}
+
+/**
  * Defines the body parameters of the search request.
  */
 export interface PostSearchBodyQueryParams {
