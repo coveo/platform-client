@@ -1,61 +1,56 @@
 import {SearchHubRawMetrics} from '../../Enums';
 
-export interface DailyMetricParameters extends CommonMetricParameters {
-    /**
-     * The last day to report for
-     * Format YYYY-MM-DD
-     */
-    to: string;
-
+export interface DailyRawMetricParameters extends CommonMetricParameters {
     /**
      * The first day to report for
-     * Format YYYY-MM-DD
      */
-    from: string;
-}
+    from: DateWithoutTime;
 
-export interface MonthlyMetricParameters extends CommonMetricParameters {
     /**
      * The last day to report for
-     * Format YYYY-MM
      */
-    to: string;
-
-    /**
-     * The first day to report for
-     * Format YYYY-MM
-     */
-    from: string;
+    to: DateWithoutTime;
 }
 
-export interface MonthlyMetricsParameters {
+export interface MonthlyRawMetricParameters extends CommonMetricParameters {
+    /**
+     * The first month to report for
+     */
+    from: DateWithoutTimeAndDay;
+
+    /**
+     * The last month to report for
+     */
+    to: DateWithoutTimeAndDay;
+}
+
+export interface MonthlyRawMetricsParameters {
     /**
      * The month to report for
-     * Format YYYY-MM
      */
-    month: string;
+    month: DateWithoutTimeAndDay;
 
     /**
      * The minimum number of queries required for a search hub to be listed
      */
-    minimumQueries?: string;
+    minimumQueries?: number;
 }
 
-export interface RestListOfMetrics {
+export interface RestListOfRawMetrics {
     /**
      * The list of metrics
      */
     metrics: RestMetric[];
 }
 
-export interface RestListOfMetricValues {
+export interface RestListOfRawMetricValues {
     /**
      * The list of daily metric values
      */
     values: RestMetricValueForDate[];
 }
 
-export interface RestListOfSearchHubMetrics {
+export interface RestListOfSearchHubRawMetrics {
     /**
      * The list of search hubs
      */
@@ -81,7 +76,7 @@ interface RestMetricValueForDate {
     date: string;
 
     /**
-     * The numeric metric value (int64)
+     * The numeric metric value
      */
     value: number;
 }
@@ -98,27 +93,27 @@ interface RestSearchHubMetrics {
     assignement: SearchHubRawMetrics;
 
     /**
-     * The number of normal queries (int64)
+     * The number of normal queries
      */
     normalQueries: number;
 
     /**
-     * The number of recommendation queries (int64)
+     * The number of recommendation queries
      */
     recommendationQueries: number;
 
     /**
-     * The number of distinct users (int64)
+     * The number of distinct users
      */
     users: number;
 
     /**
-     * The number of distinct persistent queries (int64)
+     * The number of distinct persistent queries
      */
     staticQueries: number;
 
     /**
-     * The number of product listing queries (int64)
+     * The number of product listing queries
      */
     productListingQueries: number;
 }
@@ -134,3 +129,24 @@ interface CommonMetricParameters {
      */
     searchHub: string;
 }
+
+interface DateWithoutTime {
+    /**
+     * Year of the selected date
+     */
+    year: number;
+
+    /**
+     * Month of the selected date
+     * Between 1 to 12
+     */
+    month: number;
+
+    /**
+     * Day of the selected date
+     * Between 1 to 31
+     */
+    day: number;
+}
+
+type DateWithoutTimeAndDay = Omit<DateWithoutTime, 'day'>;

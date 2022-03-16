@@ -876,8 +876,8 @@ export enum SearchHubLicenseMetrics {
 }
 
 export enum SearchHubLicenseType {
-    Assignment = 'assignment',
-    Global = 'global',
+    assignment = 'assignment',
+    global = 'global',
 }
 
 export enum SubscriptionFrequencyEnum {
@@ -983,4 +983,10 @@ export enum ExportScheduleFrequency {
 export enum ReportType {
     Dashboard = 'DASHBOARD',
     Explorer = 'EXPLORER',
+}
+
+export enum VaultFetchStrategy {
+    allOrNothing = 'ALL_OR_NOTHING',
+    onlyMissing = 'ONLY_MISSING',
+    overwrite = 'OVERWRITE',
 }
