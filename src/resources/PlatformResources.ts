@@ -14,6 +14,7 @@ import GlobalGroup from './GlobalGroups/GlobalGroup';
 import Group from './Groups/Groups';
 import Index from './Indexes/Indexes';
 import InProductExperiences from './InProductExperiences/InProductExperiences';
+import InsightPanelConfig from './InsightPanelConfigs/InsightPanelConfig';
 import License from './License/License';
 import Limits from './Limits/Limits';
 import Links from './Links/Links';
@@ -54,6 +55,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'globalGroup', resource: GlobalGroup},
     {key: 'group', resource: Group},
     {key: 'index', resource: Index},
+    {key: 'insightPanelConfig', resource: InsightPanelConfig},
     {key: 'ipx', resource: InProductExperiences},
     {key: 'license', resource: License},
     {key: 'limits', resource: Limits},
@@ -98,6 +100,7 @@ class PlatformResources {
     globalGroup: GlobalGroup;
     group: Group;
     index: Index;
+    insightPanelConfig: InsightPanelConfig;
     ipx: InProductExperiences;
     license: License;
     limits: Limits;
