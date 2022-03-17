@@ -19,6 +19,7 @@ import {
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
+    SnapshotListParams,
     UpdateChildrenOptions,
     ValidateAccessOptions,
 } from './ResourceSnapshotsInterfaces';
@@ -26,8 +27,8 @@ import {
 export default class ResourceSnapshots extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/snapshots`;
 
-    list() {
-        return this.api.get<ResourceSnapshotsModel[]>(ResourceSnapshots.baseUrl);
+    list(params?: SnapshotListParams) {
+        return this.api.get<ResourceSnapshotsModel[]>(this.buildPath(`${ResourceSnapshots.baseUrl}`, params));
     }
 
     get(snapshotId: string, options?: GetSnapshotOptions) {

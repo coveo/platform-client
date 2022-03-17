@@ -205,6 +205,13 @@ export enum SortingType {
     CONTENT = 'CONTENT',
 }
 
+export enum SnapshotSortingType {
+    CAPTURED_ON = 'CAPTURED_ON',
+    DESCRIPTION = 'DESCRIPTION',
+    CREATED_BY = 'CREATED_BY',
+    CAPTURED_FROM = 'CAPTURED_FROM',
+}
+
 export enum ActivityOperation {
     COMMIT = 'COMMIT',
     CREATE = 'CREATE',
