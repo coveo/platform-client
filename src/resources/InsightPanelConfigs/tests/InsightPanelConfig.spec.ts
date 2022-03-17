@@ -17,34 +17,34 @@ describe('InsightPanelConfig', () => {
 
     describe('list', () => {
         it('should make a GET call to the InsightPanelConfig base URL', () => {
-            insightPanel.list({page: 2, perPage: 10, filter: 'anything', sorting: 'desc'});
+            insightPanel.list({page: 2, perPage: 10, filter: 'anything', order: 'desc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${InsightPanelConfig.baseUrl}?page=2&perPage=10&filter=anything&sorting=desc`
+                `${InsightPanelConfig.baseUrl}?page=2&perPage=10&filter=anything&order=desc`
             );
         });
 
-        describe('with sorting parameter', () => {
+        describe('with order parameter', () => {
             it('should sort in ascending order by default', () => {
                 insightPanel.list();
 
                 expect(api.get).toHaveBeenCalledTimes(1);
-                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?sorting=asc`);
+                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=asc`);
             });
 
             it('should sort in ascending order when specified', () => {
-                insightPanel.list({sorting: 'asc'});
+                insightPanel.list({order: 'asc'});
 
                 expect(api.get).toHaveBeenCalledTimes(1);
-                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?sorting=asc`);
+                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=asc`);
             });
 
             it('should sort in descending order when specified', () => {
-                insightPanel.list({sorting: 'desc'});
+                insightPanel.list({order: 'desc'});
 
                 expect(api.get).toHaveBeenCalledTimes(1);
-                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?sorting=desc`);
+                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=desc`);
             });
         });
     });

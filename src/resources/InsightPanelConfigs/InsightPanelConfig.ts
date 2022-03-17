@@ -8,21 +8,21 @@ import {
 } from './InsightPanelConfigInterfaces';
 
 export default class InsightPanelConfig extends Resource {
-    static baseUrl = `/rest/organization/${API.orgPlaceholder}/insight-config/v1/configs`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightconfig/v1/configs`;
 
     list(options?: InsightPanelConfigListOptions) {
         const effectiveOptions = {
             ...options,
-            sorting: options?.sorting ?? 'asc',
+            order: options?.order ?? 'asc',
         };
 
-        return this.api.get<PageModel<InsightPanelConfigModel, 'configurations'>>(
+        return this.api.get<PageModel<InsightPanelConfigModel>>(
             this.buildPath(InsightPanelConfig.baseUrl, effectiveOptions)
         );
     }
 
     create(insightPanelConfig: New<InsightPanelConfigCreationParams>) {
-        return this.api.post<InsightPanelConfigCreationParams>(InsightPanelConfig.baseUrl, insightPanelConfig);
+        return this.api.post<InsightPanelConfigModel>(InsightPanelConfig.baseUrl, insightPanelConfig);
     }
 
     delete(insightPanelConfigId: string) {
@@ -36,6 +36,6 @@ export default class InsightPanelConfig extends Resource {
     update(insightPanelConfig: InsightPanelConfigCreationParams) {
         const {id, ...body} = insightPanelConfig;
 
-        return this.api.put<InsightPanelConfigCreationParams>(`${InsightPanelConfig.baseUrl}/${id}`, body);
+        return this.api.put<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, body);
     }
 }

@@ -27,7 +27,7 @@ export interface InsightPanelConfigListOptions {
      *
      * @default `asc`
      */
-    sorting?: 'asc' | 'desc';
+    order?: 'asc' | 'desc';
 }
 
 /**
