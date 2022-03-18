@@ -13,6 +13,7 @@ export interface OrganizationsStatusModel {
         ongoing: boolean;
         status: string;
     };
+    readOnly: boolean;
     status: string;
     supportActivated: boolean;
 }
