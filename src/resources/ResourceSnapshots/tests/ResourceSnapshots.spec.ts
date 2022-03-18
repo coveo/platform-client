@@ -1,4 +1,5 @@
 import API from '../../../APICore';
+import {SortingOrder, SnapshotSortingType} from '../../Enums';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
     ApplyOptions,
@@ -40,6 +41,18 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResourceSnapshots.baseUrl);
+        });
+
+        it('should make a GET call to the specific Resource Snapshots url with parameters', () => {
+            const filter = 'filter';
+            const direction = SortingOrder.ASC;
+            const sortingType = SnapshotSortingType.CAPTURED_ON;
+            resourceSnapshots.list({filter, direction, sortingType});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}?filter=${filter}&direction=${direction}&sortingType=${sortingType}`
+            );
         });
     });
 
