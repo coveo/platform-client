@@ -336,8 +336,6 @@ export interface CatalogFieldStatsModel {
     availability: FieldStatsItemModel;
 }
 
-export type CachedCatalogFieldStatsModel = Cached<CatalogFieldStatsModel>;
-
 export interface CatalogFieldStatsOptions {
     /**
      * Wether we need to force a refresh of field statistics. Field statistics are cached and computed on a regular interval.
