@@ -1,19 +1,104 @@
 import {LicenseModel} from '../License';
 import {ModifierModel, ModifierStatementModel} from '../ModifierTemplates/ModifierTemplateInterfaces';
 
+/**
+ * Describes the status of an organization.
+ */
 export interface OrganizationsStatusModel {
+    /**
+     * A list of error codes that are present in the organization at the time of the request.
+     *
+     * **Allowed values:**
+     * - `SEARCH_ERROR`: An error occurred during a search request.
+     * - `PAUSING_FAILED`: An error occurred when attempting to pause the organization.
+     * - `RESUMING_FAILED`: An error occurred when attempting to resume the organization.
+     */
     errorCodes: string[];
+    /**
+     * The life-cycle state of the organization.
+     *
+     * **Allowed values:**
+     * - `ACTIVE`: The organization is healthy and fully functional.
+     * - `PAUSED`: The organization is currently inactive.
+     * - `DELETING`: The organization is currently in the process of being deleted.
+     *
+     * @example `PAUSED`
+     */
     lifeCycleState: string;
+    /**
+     * The pause status of the organization.
+     *
+     * **Allowed values:**
+     * - `ACTIVE`: The organization is active.
+     * - `IDLE`: The organization is inactive.
+     * - `PAUSING`: The organization is transitioning to `PAUSED`.
+     * - `PAUSED`: The organization is paused.
+     * - `RESUMING`: The organization is transitioning to `ACTIVE`.
+     * - `PAUSING_FAILED`: The organization threw an error while transitioning to `PAUSED`.
+     * - `RESUMING_FAILED`: The organization threw an error while transitioning to `ACTIVE`.
+     *
+     * @example `PAUSED`
+     */
     pauseState: string;
+    /**
+     * Whether the organization is currently paused.
+     */
     paused: boolean;
+    /**
+     * The provisioning status of the organization.
+     */
     provisioningStatus: {
+        /**
+         * The progress, in percentage, of the ongoing provisioning.
+         *
+         * @example `100`
+         */
         currentProvisioningProgress: number;
+        /**
+         * Whether the initial provisioning has been completed.
+         */
         initialProvisioningDone: boolean;
+        /**
+         * The last time provisioning was successfully completed in number of milliseconds since UNIX epoch.
+         *
+         * @example `1556722921779`
+         */
         lastProvisioningCompletedDate: number;
+        /**
+         * Whether the provisioning is currently ongoing.
+         */
         ongoing: boolean;
+        /**
+         * The status of the last provisioning.
+         *
+         * **Allowed values:**
+         * - `ERROR`: The last provisioning failed with an error.
+         * - `HEALTHY`: The last provisioning finished successfully.
+         */
         status: string;
     };
+    /**
+     * Whether the organization enforces all of its resources (e.g., query pipelines, sources, etc.) to be read-only.
+     *
+     * **Note:** This parameter is typically only updated when an organization is inactive.
+     *
+     * @default `false`
+     */
+    readOnly: boolean;
+    /**
+     * The current status of the organization.
+     *
+     * **Allowed values:**
+     * - `HEALTHY`: The organization is healthy and fully functional.
+     * - `ERROR`: The organization has thrown an error and is currently inactive.
+     *
+     * @example `ERROR`
+     */
     status: string;
+    /**
+     * Whether support has been activated for the organization.
+     * See [Coveo Customer Global Support and Success Guide](https://docs.coveo.com/en/1352/).
+     */
     supportActivated: boolean;
 }
 
