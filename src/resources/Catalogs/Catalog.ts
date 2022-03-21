@@ -3,7 +3,9 @@ import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {
     CachedCatalogFieldsModel,
+    CachedCatalogFieldStatsModel,
     CatalogFieldsOptions,
+    CatalogFieldStatsOptions,
     CatalogModel,
     CatalogsListOptions,
     CreateCatalogModel,
@@ -49,5 +51,11 @@ export default class Catalog extends Resource {
 
     getFieldsSuggestions(query: FieldsSuggestionsQueryModel) {
         return this.api.post<FieldsSuggestionsModel>(`${Catalog.baseUrl}/fieldsSuggestions`, query);
+    }
+
+    getFieldStats(catalogId: string, options?: CatalogFieldStatsOptions) {
+        return this.api.get<CachedCatalogFieldStatsModel>(
+            this.buildPath(`${Catalog.baseUrl}/${catalogId}/fieldStats`, options)
+        );
     }
 }

@@ -184,4 +184,22 @@ describe('Catalog', () => {
             expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
         });
     });
+
+    describe('getFieldStats', () => {
+        it("should make a GET call to the specific catalog's fields stats url", () => {
+            const catalogOfFieldsToGetId = 'catalog-of-fields';
+            catalog.getFieldStats(catalogOfFieldsToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats`);
+        });
+
+        it('should allow refreshing the field statistics cache', () => {
+            const catalogOfFieldsToGetId = 'catalog-of-fields';
+            catalog.getFieldStats(catalogOfFieldsToGetId, {forceRefresh: true});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats?forceRefresh=true`
+            );
+        });
+    });
 });
