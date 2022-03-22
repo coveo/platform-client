@@ -323,3 +323,22 @@ export type ScopeModel =
           query?: string;
           sourceIds: string[];
       };
+
+export interface FieldStatsItemModel {
+    objectsWithField: number;
+    objectsWithType: number;
+}
+
+export interface CatalogFieldStatsModel {
+    fieldName: string;
+    product: FieldStatsItemModel;
+    variant: FieldStatsItemModel;
+    availability: FieldStatsItemModel;
+}
+
+export interface CatalogFieldStatsOptions {
+    /**
+     * Wether we need to force a refresh of field statistics. Field statistics are cached and computed on a regular interval.
+     */
+    forceRefresh?: boolean;
+}
