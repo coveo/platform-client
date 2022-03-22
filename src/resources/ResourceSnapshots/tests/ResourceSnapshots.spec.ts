@@ -45,13 +45,13 @@ describe('ResourceSnapshots', () => {
 
         it('should make a GET call to the specific Resource Snapshots url with parameters', () => {
             const filter = 'filter';
-            const direction = SortingOrder.ASC;
-            const sortingType = SnapshotSortingType.CAPTURED_ON;
-            resourceSnapshots.list({filter, direction, sortingType});
+            const sortingOrder = SortingOrder.ASC;
+            const sortingType = SnapshotSortingType.CREATED_DATE;
+            resourceSnapshots.list({filter, sortingOrder, sortingType});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}?filter=${filter}&direction=${direction}&sortingType=${sortingType}`
+                `${ResourceSnapshots.baseUrl}?filter=${filter}&sortingOrder=${sortingOrder}&sortingType=${sortingType}`
             );
         });
     });

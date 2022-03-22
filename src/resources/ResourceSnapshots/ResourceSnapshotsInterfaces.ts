@@ -241,7 +241,7 @@ export interface SnapshotAccessModel {
 
 export interface SnapshotListParams {
     filter?: string;
-    direction?: SortingOrder;
+    sortingOrder?: SortingOrder;
     sortingType?: SnapshotSortingType;
 }
 

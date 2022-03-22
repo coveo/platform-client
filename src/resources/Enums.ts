@@ -206,10 +206,10 @@ export enum SortingType {
 }
 
 export enum SnapshotSortingType {
-    CAPTURED_ON = 'CAPTURED_ON',
-    DESCRIPTION = 'DESCRIPTION',
+    CREATED_DATE = 'CREATED_DATE',
+    DEVELOPER_NOTE = 'DEVELOPER_NOTE',
     CREATED_BY = 'CREATED_BY',
-    CAPTURED_FROM = 'CAPTURED_FROM',
+    ORIGIN_ID = 'ORIGIN_ID',
 }
 
 export enum ActivityOperation {
