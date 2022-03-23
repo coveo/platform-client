@@ -224,4 +224,29 @@ describe('Organization', () => {
         expect(organization.members).toBeDefined();
         expect(organization.members).toBeInstanceOf(Members);
     });
+
+    describe('additional information', () => {
+        it('should make a GET call with additional information', () => {
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.getAdditionalInformation(organizationToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToGetId}/additionalinformation`
+            );
+        });
+        it('should make a PUT call to put data in additional information', () => {
+            const additionalInformationObj = {
+                trialProgress: {
+                    completedSource: true,
+                },
+            };
+            organization.updateAdditionalInformation(additionalInformationObj);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/{organizationName}/additionalinformation`,
+                additionalInformationObj
+            );
+        });
+    });
 });
