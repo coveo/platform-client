@@ -73,6 +73,17 @@ export default class Organization extends Resource {
         return this.api.post(`${Organization.baseUrl}/${organizationId}/resume`);
     }
 
+    updateAdditionalInformation(additionalInformationObj: Record<string, unknown>) {
+        return this.api.put<Record<string, unknown>>(
+            `${Organization.baseUrl}/${API.orgPlaceholder}/additionalinformation`,
+            additionalInformationObj
+        );
+    }
+
+    getAdditionalInformation(organizationId: string = API.orgPlaceholder) {
+        return this.api.get<any>(`${Organization.baseUrl}/${organizationId}/additionalinformation`);
+    }
+
     listPrivileges() {
         return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges`);
     }
