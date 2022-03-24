@@ -1,3 +1,5 @@
+import {SortingOrder, SnapshotSortingType} from '../Enums';
+
 export interface ResourceSnapshotsModel {
     /**
      * The username of the snapshot creator.
@@ -235,6 +237,12 @@ export interface ResourceSnapshotUrlModel {
 
 export interface SnapshotAccessModel {
     allowed: boolean;
+}
+
+export interface SnapshotListParams {
+    filter?: string;
+    sortingOrder?: SortingOrder;
+    sortingType?: SnapshotSortingType;
 }
 
 export interface PushSnapshotOptions {

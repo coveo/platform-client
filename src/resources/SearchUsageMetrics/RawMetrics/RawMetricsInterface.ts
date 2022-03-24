@@ -90,7 +90,7 @@ interface RestSearchHubMetrics {
     /**
      * The usage buckets to which the search hub is assigned
      */
-    assignement: SearchHubRawMetrics;
+    assignment: SearchHubRawMetrics;
 
     /**
      * The number of normal queries

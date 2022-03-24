@@ -205,6 +205,13 @@ export enum SortingType {
     CONTENT = 'CONTENT',
 }
 
+export enum SnapshotSortingType {
+    CREATED_DATE = 'CREATED_DATE',
+    DEVELOPER_NOTE = 'DEVELOPER_NOTE',
+    CREATED_BY = 'CREATED_BY',
+    ORIGIN_ID = 'ORIGIN_ID',
+}
+
 export enum ActivityOperation {
     COMMIT = 'COMMIT',
     CREATE = 'CREATE',
