@@ -22,10 +22,11 @@ export interface InsightPanelConfigListOptions {
      * The sort order to apply on the Insight Panel configuration name.
      *
      * **Allowed values:**
+     * - `undefined`: Configurations are returned in no specific order.
      * - `asc`: Sort configurations by name in ascending order.
      * - `desc`: Sort configurations by name in descending order.
      *
-     * @default `asc`
+     * @default `undefined`
      */
     order?: 'asc' | 'desc';
 }

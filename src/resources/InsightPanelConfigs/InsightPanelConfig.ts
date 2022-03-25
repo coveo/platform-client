@@ -11,14 +11,7 @@ export default class InsightPanelConfig extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightconfig/v1/configs`;
 
     list(options?: InsightPanelConfigListOptions) {
-        const effectiveOptions = {
-            ...options,
-            order: options?.order ?? 'asc',
-        };
-
-        return this.api.get<PageModel<InsightPanelConfigModel>>(
-            this.buildPath(InsightPanelConfig.baseUrl, effectiveOptions)
-        );
+        return this.api.get<PageModel<InsightPanelConfigModel>>(this.buildPath(InsightPanelConfig.baseUrl, options));
     }
 
     create(insightPanelConfig: New<InsightPanelConfigCreationParams>) {

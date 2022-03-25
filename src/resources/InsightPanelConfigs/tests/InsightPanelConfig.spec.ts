@@ -26,11 +26,11 @@ describe('InsightPanelConfig', () => {
         });
 
         describe('with order parameter', () => {
-            it('should sort in ascending order by default', () => {
+            it('should not sort by default', () => {
                 insightPanel.list();
 
                 expect(api.get).toHaveBeenCalledTimes(1);
-                expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=asc`);
+                expect(api.get).toHaveBeenCalledWith(InsightPanelConfig.baseUrl);
             });
 
             it('should sort in ascending order when specified', () => {
