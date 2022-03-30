@@ -36,5 +36,6 @@ export * from './SearchPages';
 export * from './SearchUsageMetrics';
 export * from './SecurityCache';
 export * from './Sources';
+export * from './TableauService';
 export * from './UsageAnalytics';
 export * from './Vaults';

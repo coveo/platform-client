@@ -39,6 +39,7 @@ import Sources from './Sources/Sources';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 import Vaults from './Vaults/Vaults';
+import TableauService from './TableauService/TableauService';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -80,6 +81,9 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'ua', resource: UsageAnalytics},
     {key: 'user', resource: User},
     {key: 'vault', resource: Vaults},
+    {key: 'notification', resource: Notifications},
+    {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
+    {key: 'tableauService', resource: TableauService},
 ];
 
 class PlatformResources {
@@ -125,6 +129,7 @@ class PlatformResources {
     ua: UsageAnalytics;
     user: User;
     vault: Vaults;
+    tableauService: TableauService;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
