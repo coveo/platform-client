@@ -324,15 +324,42 @@ export type ScopeModel =
           sourceIds: string[];
       };
 
+export interface CatalogFieldStatsModel {
+    /**
+     * List of field statistics
+     */
+    fieldStats: FieldStatsModel[];
+}
+
+export type CachedCatalogFieldStatsModel = Cached<CatalogFieldStatsModel>;
+
 export interface FieldStatsItemModel {
+    /**
+     * Number of objects in the catalog with this field
+     */
     objectsWithField: number;
+    /**
+     * Number of objects in the catalog with this type
+     */
     objectsWithType: number;
 }
 
-export interface CatalogFieldStatsModel {
+export interface FieldStatsModel {
+    /**
+     * Field name
+     */
     fieldName: string;
+    /**
+     * The field stats for product structure
+     */
     product: FieldStatsItemModel;
+    /**
+     * The field stats for variant structure
+     */
     variant: FieldStatsItemModel;
+    /**
+     * The field stats for availability structure
+     */
     availability: FieldStatsItemModel;
 }
 
