@@ -6,6 +6,8 @@ import {
     IListSearchInterfacesParameters,
     ISearchInterfaceConfiguration,
     ISearchInterfaceConfigurationResponse,
+    IManifestParameters,
+    IManifestResponse,
 } from './SearchInterfaces.model';
 
 export default class SearchInterfaces extends Resource {
@@ -53,5 +55,9 @@ export default class SearchInterfaces extends Resource {
             `${SearchInterfaces.baseUrl}/${interfaceId}/accesses/users${notify ? '?notify=1' : ''}`,
             body
         );
+    }
+
+    manifest(interfaceId: string, options?: IManifestParameters): Promise<IManifestResponse> {
+        return this.api.post(`${SearchInterfaces.baseUrl}/${interfaceId}/manifest/v1`, options);
     }
 }

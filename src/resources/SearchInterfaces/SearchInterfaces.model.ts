@@ -136,3 +136,38 @@ export interface IListSearchInterfacesParameters {
      */
     perPage?: number;
 }
+
+export interface IManifestParameters {
+    pagePlaceholders?: IPagePlaceholders;
+}
+
+export interface IPagePlaceholders {
+    results?: string;
+}
+
+export interface IManifestResponse {
+    markup: string;
+    results: IPageManifestResults;
+    style: IPageManifestStyle;
+    config: IPageManifestConfig;
+}
+
+export interface IPageManifestConfig {
+    title: string;
+}
+
+export interface IPageManifestResultTemplate {
+    markup: string;
+    attributes: Record<string, string>;
+}
+
+export interface IPageManifestResults {
+    placeholder?: string;
+    attributes: Record<string, string>;
+    templates: IPageManifestResultTemplate[];
+}
+
+export interface IPageManifestStyle {
+    theme: string;
+    layout: string;
+}
