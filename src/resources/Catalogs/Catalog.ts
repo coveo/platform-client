@@ -3,8 +3,8 @@ import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {
     CachedCatalogFieldsModel,
+    CachedCatalogFieldStatsModel,
     CatalogFieldsOptions,
-    CatalogFieldStatsModel,
     CatalogFieldStatsOptions,
     CatalogModel,
     CatalogsListOptions,
@@ -54,7 +54,7 @@ export default class Catalog extends Resource {
     }
 
     getFieldStats(catalogId: string, options?: CatalogFieldStatsOptions) {
-        return this.api.get<CatalogFieldStatsModel[]>(
+        return this.api.get<CachedCatalogFieldStatsModel>(
             this.buildPath(`${Catalog.baseUrl}/${catalogId}/fieldStats`, options)
         );
     }
