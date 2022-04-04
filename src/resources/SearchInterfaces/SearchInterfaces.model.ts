@@ -138,36 +138,71 @@ export interface IListSearchInterfacesParameters {
 }
 
 export interface IManifestParameters {
+    /**
+     * Replace pieces of markup with various placeholders.
+     */
     pagePlaceholders?: IPagePlaceholders;
 }
 
 export interface IPagePlaceholders {
+    /**
+     * Placeholder for the result list and result templates.
+     */
     results?: string;
 }
 
 export interface IManifestResponse {
+    /**
+     * The html markup of the search interface along with configured placeholders.
+     */
     markup: string;
+    /**
+     * Atomic results configuration information.
+     */
     results: IPageManifestResults;
+    /**
+     * Atomic related styling in CSS format.
+     */
     style: IPageManifestStyle;
-    config: IPageManifestConfig;
-}
-
-export interface IPageManifestConfig {
-    title: string;
+    /**
+     * The complete search interface configuration.
+     */
+    config: ISearchInterfaceConfigurationResponse;
 }
 
 export interface IPageManifestResultTemplate {
+    /**
+     * The html markup of the content of the result template
+     */
     markup: string;
+    /**
+     * Atomic [result template component](https://docs.coveo.com/en/atomic/latest/reference/components/atomic-result-template/)'s properties.
+     */
     attributes: Record<string, string>;
 }
 
 export interface IPageManifestResults {
+    /**
+     * Placeholder for the result list and result templates.
+     */
     placeholder?: string;
+    /**
+     * Atomic [result list component](https://docs.coveo.com/en/atomic/latest/reference/components/atomic-result-list/#properties)'s properties.
+     */
     attributes: Record<string, string>;
+    /**
+     * The list of associated result templates.
+     */
     templates: IPageManifestResultTemplate[];
 }
 
 export interface IPageManifestStyle {
+    /**
+     * CSS with various [Atomic theme variables](https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/#theme-variables).
+     */
     theme: string;
+    /**
+     * CSS for the page's layout.
+     */
     layout: string;
 }
