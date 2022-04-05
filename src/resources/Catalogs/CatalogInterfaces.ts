@@ -140,11 +140,7 @@ export type HierarchyWithFields<T extends {fields?: string[]}> = Omit<T, 'fields
     fields: string[];
 };
 
-interface Cached<T> {
-    /**
-     * Cached items
-     */
-    item: T;
+interface Updated {
     /**
      * Cache last updated timestamp
      */
@@ -153,6 +149,13 @@ interface Cached<T> {
      * Cache next update timestamp
      */
     nextUpdate: number;
+}
+
+interface Cached<T> extends Updated {
+    /**
+     * Cached items
+     */
+    item: T;
 }
 
 interface CatalogFieldsModel {
@@ -324,15 +327,40 @@ export type ScopeModel =
           sourceIds: string[];
       };
 
+export interface CachedCatalogFieldStatsModel extends Updated {
+    /**
+     * List of field statistics
+     */
+    fieldStats: FieldStatsModel[];
+}
+
 export interface FieldStatsItemModel {
+    /**
+     * Number of objects in the catalog with this field
+     */
     objectsWithField: number;
+    /**
+     * Number of objects in the catalog with this type
+     */
     objectsWithType: number;
 }
 
-export interface CatalogFieldStatsModel {
+export interface FieldStatsModel {
+    /**
+     * Field name
+     */
     fieldName: string;
+    /**
+     * The field stats for product structure
+     */
     product: FieldStatsItemModel;
+    /**
+     * The field stats for variant structure
+     */
     variant: FieldStatsItemModel;
+    /**
+     * The field stats for availability structure
+     */
     availability: FieldStatsItemModel;
 }
 
