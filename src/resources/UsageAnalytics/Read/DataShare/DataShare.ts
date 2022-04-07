@@ -29,7 +29,7 @@ export default class DataShare extends Resource {
 
     listAllowedSnowflakeRegions() {
         return this.api.get<SnowflakeAccountDataSharingRegionsModel>(
-            this.buildPath(`${DataShare.baseUrl}/regions`, null)
+            this.buildPath(`${DataShare.baseUrl}/regions`, {org: this.api.organizationId})
         );
     }
 }
