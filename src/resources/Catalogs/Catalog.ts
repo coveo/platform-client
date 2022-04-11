@@ -32,6 +32,9 @@ export default class Catalog extends Resource {
         return this.api.get<CatalogModel>(`${Catalog.baseUrl}/${catalogId}`);
     }
 
+    /**
+     * @deprecated getFields(catalogId: string, options?: CatalogFieldsOptions) is kept for backward compatibility, you should now use `getFieldStats(catalogId: string, options?: CatalogFieldStatsOptions)`.
+     */
     getFields(catalogId: string, options?: CatalogFieldsOptions) {
         return this.api.get<CachedCatalogFieldsModel>(
             this.buildPath(`${Catalog.baseUrl}/${catalogId}/fields`, options)
