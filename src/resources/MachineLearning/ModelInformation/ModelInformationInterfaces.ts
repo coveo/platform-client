@@ -93,7 +93,17 @@ export interface ModelInformationDNE {
 export interface ModelInformationER {
     indicatorsModifier: Record<string, number>;
     deprecatedUrlToFieldValueSize: number;
+    /**
+     * The sample of the top queries for which the model could recommend items for each listed context key.
+     *
+     * Consider using `contextCandidateExamples` which provides the same data but not prefixed with
+     * `c_context` and no `visit` suffix
+     */
     candidateExamples: Record<string, string[]>;
+    /**
+     * The sample of the top queries for which the model could recommend items for each listed context key.
+     */
+    contextCandidateExamples: Record<string, string[]>;
     primaryIdToValue: number;
     eventGroups: string[];
     primaryEventType: string;
