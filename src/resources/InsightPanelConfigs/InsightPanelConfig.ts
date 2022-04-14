@@ -1,4 +1,5 @@
 import API from '../../APICore';
+import {WithRequiredProperty} from '../../utils/WithRequired';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
 import {
@@ -26,7 +27,7 @@ export default class InsightPanelConfig extends Resource {
         return this.api.get<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${insightPanelConfigId}`);
     }
 
-    update(insightPanelConfig: InsightPanelConfigCreationParams) {
+    update(insightPanelConfig: WithRequiredProperty<InsightPanelConfigCreationParams, 'contextFields'>) {
         const {id, ...body} = insightPanelConfig;
 
         return this.api.put<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, body);
