@@ -1,6 +1,6 @@
 import {GranularResource} from '../BaseInterfaces';
 import {IntervalUnit} from '../Enums';
-import {MLModel} from './Models/ModelsInterfaces';
+import {MLModel} from './Models';
 
 export interface RegistrationModel extends GranularResource {
     // The id of the engine
