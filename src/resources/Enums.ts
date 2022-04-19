@@ -109,7 +109,7 @@ export enum SourceStatusTypeWithTransition {
 }
 
 export enum SourceType {
-    ADOBE_EXPERIENCE_MANAGER = 'ADOBE_EXPERIENCE_MANAGE',
+    ADOBE_EXPERIENCE_MANAGER = 'ADOBE_EXPERIENCE_MANAGER',
     AMAZONS3 = 'AMAZONS3',
     BOX = 'BOX',
     BOX_ENTERPRISE = 'BOX_ENTERPRISE',
