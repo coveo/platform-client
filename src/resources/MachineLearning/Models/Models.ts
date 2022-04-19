@@ -1,8 +1,8 @@
 import API from '../../../APICore';
 import Resource from '../../Resource';
 import {RegistrationModel} from '../MachineLearningInterfaces';
-import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
 import {MLModel} from './ModelsInterfaces';
+import {MLModelTypeInfo} from '../ModelInformation';
 
 export default class Models extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/models`;
@@ -15,11 +15,11 @@ export default class Models extends Resource {
     }
 
     listDetails() {
-        return this.api.get<MLModel[]>(`${Models.baseUrl}/details`);
+        return this.api.get<Array<MLModel<MLModelTypeInfo>>>(`${Models.baseUrl}/details`);
     }
 
-    getDetails(modelId: string) {
-        return this.api.get<MLModelInfo>(`${Models.baseUrl}/${modelId}/details`);
+    getDetails<T extends MLModelTypeInfo>(modelId: string) {
+        return this.api.get<MLModel<T>>(`${Models.baseUrl}/${modelId}/details`);
     }
 
     get(modelId: string) {

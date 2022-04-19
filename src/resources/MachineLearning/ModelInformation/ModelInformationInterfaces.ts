@@ -1,14 +1,16 @@
-export interface MLModelInfo {
+export interface MLModelInfo<T extends MLModelTypeInfo = never> {
     id: string;
-    info?:
-        | ModelInformationART
-        | ModelInformationDNE
-        | ModelInformationER
-        | ModelInformationPR
-        | ModelInformationQS
-        | ModelInformationSS
-        | ModelInformationCC;
+    info?: T;
 }
+
+export type MLModelTypeInfo =
+    | ModelInformationART
+    | ModelInformationCC
+    | ModelInformationDNE
+    | ModelInformationER
+    | ModelInformationPR
+    | ModelInformationQS
+    | ModelInformationSS;
 
 export interface MetaInfo {
     modelName: string;
