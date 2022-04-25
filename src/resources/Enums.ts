@@ -1015,3 +1015,10 @@ export enum VaultFetchStrategy {
     onlyMissing = 'ONLY_MISSING',
     overwrite = 'OVERWRITE',
 }
+
+export enum DataShareStatus {
+    UNKNOWN = 'UNKNOWN',
+    PENDING = 'PENDING',
+    ACTIVE = 'ACTIVE',
+    INVALID = 'INVALID',
+}
