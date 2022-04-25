@@ -109,6 +109,7 @@ export enum SourceStatusTypeWithTransition {
 }
 
 export enum SourceType {
+    ADOBE_EXPERIENCE_MANAGER = 'ADOBE_EXPERIENCE_MANAGER',
     AMAZONS3 = 'AMAZONS3',
     BOX = 'BOX',
     BOX_ENTERPRISE = 'BOX_ENTERPRISE',
@@ -124,15 +125,17 @@ export enum SourceType {
     EXCHANGE = 'EXCHANGE',
     EXCHANGE_ENTERPRISE = 'EXCHANGE_ENTERPRISE',
     FILE = 'FILE',
+    GENERIC = 'GENERIC_REST',
     GMAIL = 'GMAIL',
     GMAIL_DOMAIN_WIDE = 'GMAIL_DOMAIN_WIDE',
     GMAIL_SINGLE_USER = 'GMAIL_SINGLE_USER',
-    GENERIC = 'GENERIC_REST',
     GOOGLE_DRIVE_DOMAIN_WIDE = 'GOOGLE_DRIVE_DOMAIN_WIDE',
+    GOOGLE_DRIVE_SINGLE_USER = 'GOOGLE_DRIVE_SINGLE_USER',
     JIRA2 = 'JIRA2',
     JIRA2_HOSTED = 'JIRA2_HOSTED',
     JIVE = 'JIVE',
     JIVE_HOSTED = 'JIVE_HOSTED',
+    KHOROS = 'KHOROS',
     LITHIUM = 'LITHIUM',
     MICROSOFT = 'MICROSOFT_DYNAMICS',
     ONEDRIVE = 'ONEDRIVE_FOR_BUSINESS',
@@ -162,6 +165,19 @@ export enum SourceCategory {
     CLOUD = 'CLOUD',
     ON_PREM = 'ON_PREM',
     CRAWLING_MODULE = 'CRAWLING_MODULE',
+}
+
+export enum IndexBackupTypes {
+    FULL = 'FULL',
+    NONE = 'NONE',
+    REGULAR = 'REGULAR',
+}
+
+export enum IndexType {
+    COVEO = 'COVEO',
+    ELASTIC = 'ELASTIC',
+    INDEX_LESS = 'INDEX_LESS',
+    ON_PREMISES = 'ON_PREMISES',
 }
 
 export enum FilterHostType {
@@ -469,18 +485,21 @@ export enum ModelConfigFileType {
 }
 
 export enum ProductType {
+    ALLIANCE = 'ALLIANCE',
     INTERNAL = 'INTERNAL',
     SALES = 'SALES',
-    ALLIANCE = 'ALLIANCE',
     SANDBOX = 'SANDBOX',
     STANDARD = 'STANDARD',
+    TEST = 'TEST',
     TRIAL = 'TRIAL',
 }
 
 export enum ProductEdition {
+    BASE = 'BASE',
     ENTERPRISE = 'ENTERPRISE',
     FREE = 'FREE',
     PRO = 'PRO',
+    STANDARD = 'STANDARD',
 }
 
 export enum ProductName {

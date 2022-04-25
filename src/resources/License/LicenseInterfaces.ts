@@ -1,29 +1,115 @@
+import {
+    IndexBackupTypes,
+    IndexType,
+    ProductEdition,
+    ProductName,
+    ProductType,
+    ScheduleType,
+    SourceType,
+    SourceVisibility,
+} from '../Enums';
+
 export interface LicenseConnectorScheduleModel {
+    /**
+     * The refresh type of use for a given connector.
+     */
     refreshType: string;
-    scheduleFrequencies: string[];
+    /**
+     * The frequency at which to refresh the connector.
+     */
+    scheduleFrequencies: ScheduleType[];
 }
 
 export interface LicenseConnectorModel {
+    /**
+     * Whether the connector is allowed to execute.
+     */
     allowed: boolean;
+    /**
+     * A set of schedule models that are allowed to refresh the connector
+     */
     allowedSchedules: LicenseConnectorScheduleModel[];
-    sourceVisibilities: string[];
-    type: string;
+    /**
+     * The visibility level of the connector
+     */
+    sourceVisibilities: SourceVisibility[];
+    /**
+     * The type of connector
+     */
+    type: SourceType;
 }
 
 export interface LicenseModel {
+    /**
+     * The unique identifier of the account that created the organization.
+     */
     accountId: string;
+    /**
+     * The name of the account.
+     */
     accountName: string;
+    /**
+     * A set of connectors that the license has access to.
+     */
     connectors: LicenseConnectorModel[];
+    /**
+     * The department the organization was created for.
+     */
     department: string;
-    indexBackupType: string;
-    indexType: string;
-    monitoringLevel: string;
-    productEdition: string;
-    productName: string;
-    productType: string;
-    properties: any;
+    /**
+     * A set of entitlements describing what the organization has access to.
+     */
+    entitlements: EntitlementModel[];
+    /**
+     * The date at which the license will expire in number of milliseconds since UNIX epoch.
+     */
     expirationDate: number;
+    /**
+     * The index backup type in Coveo Cloud V2.
+     */
+    indexBackupType: IndexBackupTypes;
+    /**
+     * The type of index that is used for all sources in an organization.
+     */
+    indexType: IndexType;
+    /**
+     * The level of monitoring to apply to the license
+     */
+    monitoringLevel: LicenseMonitoringLevel;
+    /**
+     * The edition of Coveo Cloud in which the organization is registered as.
+     */
+    productEdition: ProductEdition;
+    /**
+     * The product integration of which the organization has been registered.
+     */
+    productName: ProductName;
+    /**
+     * The type of product integration in which the organization has been registered.
+     */
+    productType: ProductType;
+    /**
+     * Various properties/configurations settings that apply to the organization.
+     */
+    properties: any;
+    /**
+     * The type of the license
+     */
     type: string;
+}
+
+export interface EntitlementModel {
+    itemLimit: number;
+    lrpmLimit: number;
+    name: string;
+    qpmLimit: number;
+    recommendationLimit: number;
+    status: string;
+    unlimitedQPM: boolean;
+    unlimitedRecommendations: boolean;
+    unlimitedUsers: boolean;
+    useCase: string;
+    userLimit: number;
 }
 
 /**

@@ -1,9 +1,9 @@
 import {GranularResource} from '../../BaseInterfaces';
 import {IntervalUnit, ModelActivenessState, ModelStatus} from '../../Enums';
 import {AssociatedPipelineModel} from '../../Pipelines';
-import {MLModelInfo} from '../ModelInformation/ModelInformationInterfaces';
+import {MLModelInfo, MLModelTypeInfo} from '../ModelInformation';
 
-export interface MLModel extends MLModelInfo, ModelAttributes, GranularResource {
+export interface MLModel<T extends MLModelTypeInfo = never> extends MLModelInfo<T>, ModelAttributes, GranularResource {
     orgId: string;
     id: string;
     engineId: string;
