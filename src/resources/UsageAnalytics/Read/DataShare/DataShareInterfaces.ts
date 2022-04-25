@@ -1,3 +1,5 @@
+import {DataShareStatus} from '../../../Enums';
+
 export interface SnowflakeAccountDataSharingAccountModel {
     /**
      * The Snowflake account locator.
@@ -11,6 +13,14 @@ export interface SnowflakeAccountDataSharingAccountModel {
      * The date and time at which the share was initiated.
      */
     createdAt?: string;
+    /**
+     * The share status of the account.
+     */
+    status: DataShareStatus;
+    /**
+     * The error message in case of an 'UNKNOWN' or 'INVALID' status.
+     */
+    errorMessage?: string;
 }
 
 export interface SnowflakeAccountDataSharingParams {
