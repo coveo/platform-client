@@ -1,7 +1,7 @@
 import API from '../../APICore';
 import {VaultFetchStrategy} from '../Enums';
 import Resource from '../Resource';
-import {MissingVaultModel} from './VaultsInterfaces';
+import {MissingVaultModel, VaultEntryModel} from './VaultsInterfaces';
 
 export default class Vaults extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/vaultentries`;
@@ -39,5 +39,14 @@ export default class Vaults extends Resource {
                 fetchStrategy,
             })
         );
+    }
+
+    /**
+     * Create a vault entry.
+     *
+     * @param {VaultEntryModel} model Vault entry model
+     */
+    create(model: VaultEntryModel) {
+        return this.api.post<VaultEntryModel>(Vaults.baseUrl, model);
     }
 }
