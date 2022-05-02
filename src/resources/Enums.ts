@@ -879,7 +879,7 @@ export enum SearchHubRawMetrics {
 
 export enum SearchHubLicenseMetrics {
     normalQueries = 'normalQueries',
-    recommendationQueries = 'recommendationQueries',
+    recommendationsQueries = 'recommendationsQueries',
     commerceProductListingQueries = 'commerceProductListingQueries',
     agents = 'agents',
     staticQueries = 'staticQueries',
