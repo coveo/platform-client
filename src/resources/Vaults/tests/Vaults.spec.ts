@@ -1,6 +1,7 @@
 import API from '../../../APICore';
 import Vaults from '../Vaults';
 import {VaultFetchStrategy} from '../../Enums';
+import {VaultEntryModel} from '../VaultsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -39,6 +40,16 @@ describe('Vaults', () => {
             expect(api.put).toHaveBeenCalledWith(
                 `${Vaults.baseUrl}/fetch?referenceSnapshotId=${currentSnaphostId}&organizationId=${currentOrganizationId}&sourceOrganizationId=${sourceOrganizationId}&fetchStrategy=${VaultFetchStrategy.overwrite}`
             );
+        });
+    });
+
+    describe('create', () => {
+        it('should make a POST call to the specific Vaults url', () => {
+            const vaultEntryModel: VaultEntryModel = {};
+            vaults.create(vaultEntryModel);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(Vaults.baseUrl, vaultEntryModel);
         });
     });
 });

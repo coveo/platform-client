@@ -1022,3 +1022,16 @@ export enum DataShareStatus {
     ACTIVE = 'ACTIVE',
     INVALID = 'INVALID',
 }
+
+export enum VaultVisibilityType {
+    OBFUSCATED = 'OBFUSCATED',
+    PUBLIC = 'PUBLIC',
+    STRICT = 'STRICT',
+}
+
+export enum VaultValueType {
+    BOOLEAN = 'BOOLEAN',
+    FLOAT = 'FLOAT',
+    INTEGER = 'INTEGER',
+    STRING = 'STRING',
+}
