@@ -52,4 +52,13 @@ describe('Vaults', () => {
             expect(api.post).toHaveBeenCalledWith(Vaults.baseUrl, vaultEntryModel);
         });
     });
+
+    describe('list', () => {
+        it('should make a GET call to the specific Vaults url', () => {
+            vaults.list({page: 2, perPage: 10});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Vaults.baseUrl}?page=2&pageSize=10`);
+        });
+    });
 });
