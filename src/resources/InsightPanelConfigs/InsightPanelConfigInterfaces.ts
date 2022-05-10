@@ -1,7 +1,9 @@
+import {Paginated} from '../BaseInterfaces';
+
 /**
  * Defines the options to list Insight Panel configurations.
  */
-export interface InsightPanelConfigListOptions {
+export interface InsightPanelConfigListOptions extends Paginated {
     /**
      * The zero-based page to retrieve.
      *

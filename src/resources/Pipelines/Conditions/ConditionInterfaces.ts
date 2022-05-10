@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {ListStatementSortBy} from '../../Enums';
 
 export interface ConditionModel {
@@ -19,11 +20,9 @@ export interface NewConditionModel {
     description?: string;
 }
 
-export interface ListConditionsOptions {
+export interface ListConditionsOptions extends Paginated {
     isOrderDescending?: boolean;
     filter?: string;
     sortBy?: ListStatementSortBy;
-    page?: number;
-    perPage?: number;
     organizationId?: string;
 }

@@ -1,3 +1,4 @@
+import {Paginated} from '../BaseInterfaces';
 import {LicenseModel} from '../License';
 import {ModifierModel, ModifierStatementModel} from '../ModifierTemplates/ModifierTemplateInterfaces';
 
@@ -122,12 +123,10 @@ export interface GetOrganizationOptions {
     additionalFields?: AdditionalOrganizationField | AdditionalOrganizationField[];
 }
 
-export interface ListOrganizationOptions {
+export interface ListOrganizationOptions extends Paginated {
     additionalFields?: AdditionalOrganizationField | AdditionalOrganizationField[];
     filter?: string;
     order?: string;
-    page?: number;
-    perPage?: number;
     sortBy?: string;
     type?: string;
 }

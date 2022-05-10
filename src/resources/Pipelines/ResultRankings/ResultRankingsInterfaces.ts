@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {
     CampaignStatementGroupStatusType,
     ListStatementSortBy,
@@ -228,7 +229,7 @@ export interface ListResultRankingResponse {
     totalPages: number;
 }
 
-export interface ListResultRankingParams {
+export interface ListResultRankingParams extends Paginated {
     /**
      * Whether to sort the results in ascending order.
      */

@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {ListStatementSortBy, StatementsFeature} from '../../Enums';
 import {ConditionModel} from '../Conditions';
 
@@ -100,7 +101,7 @@ export interface StatementModelList {
     totalPages: number;
 }
 
-export interface ListStatementParams {
+export interface ListStatementParams extends Paginated {
     /**
      * Whether to sort the results in ascending order.
      */

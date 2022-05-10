@@ -1,3 +1,4 @@
+import {Paginated} from '../BaseInterfaces';
 import {
     PermissionIdentityType,
     ScheduleType,
@@ -120,19 +121,15 @@ export interface SecurityProviderReferenceModelAttributes {
     sourceType?: string;
 }
 
-export interface SecurityCacheListOptions {
+export interface SecurityCacheListOptions extends Paginated {
     from?: string;
     organisationId?: string;
-    page?: number;
-    perPage?: number;
     securityProviderId?: string;
     states?: SecurityCacheStateOptions;
     to?: string;
 }
 
-export interface SecurityCacheListRelationshipsOptions {
-    page?: number;
-    perPage?: number;
+export interface SecurityCacheListRelationshipsOptions extends Paginated {
     recursive?: boolean;
 }
 

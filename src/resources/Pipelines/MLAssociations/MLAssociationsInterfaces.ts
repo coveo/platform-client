@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {ModelTypes} from '../../Enums';
 
 /**
@@ -30,10 +31,7 @@ export interface MLAssociationModel {
     useAdvancedConfiguration?: boolean;
 }
 
-export interface ListAssociationsParams {
-    perPage?: number;
-    page?: number;
-}
+export interface ListAssociationsParams extends Paginated {}
 
 export interface CreateAssociation extends EditAssociation {
     modelId: string;
