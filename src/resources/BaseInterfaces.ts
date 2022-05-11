@@ -43,6 +43,7 @@ export interface GranularResource {
     apiKeysThatCanEdit?: IdAndDisplayNameModel[];
     groupsThatCanEdit?: IdAndDisplayNameModel[];
 }
+
 export interface Paginated {
     /**
      * The 0-based index number of the page of elements to retrieve.
