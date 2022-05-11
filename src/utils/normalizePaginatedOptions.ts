@@ -12,11 +12,13 @@ export const normalizePaginatedOptions = (options: Paginated | UnrecommendedPagi
 
 const isUnrecommendedPaginatedOptions = (options: any): options is UnrecommendedPaginated => {
     const keys = Object.keys(options);
-    const hasPerPage = keys.includes('perPage');
-    if (hasPerPage && keys.includes('pageSize')) {
+    if (!keys.includes('perPage')) {
+        return true;
+    }
+    if (keys.includes('pageSize')) {
         throw new Error(
             'The Pagination options are invalid: both pageSize and perPage have been set. Use only one of them.'
         );
     }
-    return !hasPerPage;
+    return false;
 };
