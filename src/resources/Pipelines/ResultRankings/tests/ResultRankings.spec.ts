@@ -7,7 +7,7 @@ import {
     ResultRankingsStatuses,
 } from '../../../Enums';
 import ResultRankings from '../ResultRankings';
-import {CopyResultRankingRequest, ListResultRankingParams, ResultRanking} from '../ResultRankingsInterfaces';
+import {CopyResultRankingRequest, ResultRanking} from '../ResultRankingsInterfaces';
 
 jest.mock('../../../../APICore');
 
