@@ -48,7 +48,7 @@
         "semantic-release": "^17.4.7",
         "ts-jest": "^27.1.4",
         "ts-loader": "^6.2.1",
-        "tsjs": "^3.0.1",
+        "tsjs": "^4.1.0",
         "tslib": "^2.3.0",
         "typescript": "^3.9.7"
     },
