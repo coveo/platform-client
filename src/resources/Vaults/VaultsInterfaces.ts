@@ -1,4 +1,6 @@
+import {Paginated} from '../BaseInterfaces';
 import {VaultValueType, VaultVisibilityType} from '../Enums';
+import {DeprecatedPaginated} from '../InternalBaseInterface';
 import {ResourceSnapshotType} from '../ResourceSnapshots';
 
 export interface MissingVaultModel {
@@ -28,3 +30,5 @@ export interface VaultEntryModel {
     valueType?: VaultValueType;
     vaultVisibilityType?: VaultVisibilityType;
 }
+
+export type VaultEntryListOptions = Paginated | DeprecatedPaginated;
