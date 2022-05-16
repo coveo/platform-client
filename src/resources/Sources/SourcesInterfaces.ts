@@ -1,4 +1,4 @@
-import {GranularResource} from '../BaseInterfaces';
+import {GranularResource, Paginated} from '../BaseInterfaces';
 import {
     FilterHostType,
     FilterLastOperationResultType,
@@ -17,10 +17,8 @@ import {MappingModel} from './SourcesMappings';
 
 export * from './SourcesSubInterfaces';
 
-interface ListParams {
+interface ListParams extends Paginated {
     filter?: string;
-    page?: number;
-    perPage?: number;
     sortingOrder?: SortingOrder;
     sortingType?: SortingType;
     writeAccessOnly?: boolean;

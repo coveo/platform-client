@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {
     FacetRuleKind,
     FacetRuleState,
@@ -45,12 +46,10 @@ export interface PredicateLocale {
     kind: PredicateLocaleKind;
 }
 
-export interface ListFacetStateRuleParams {
+export interface ListFacetStateRuleParams extends Paginated {
     isOrderAscending?: boolean;
     filter?: string;
     sortBy?: ListStatementSortBy;
-    page?: number;
-    perPage?: number;
     organizationId: string;
 }
 

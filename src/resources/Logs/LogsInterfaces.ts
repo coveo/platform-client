@@ -1,9 +1,7 @@
+import {Paginated} from '../BaseInterfaces';
 import {IndexingPipelineLogOperations, IndexingPipelineLogResults, IndexingPipelineLogTasks} from '../Enums';
 
-export interface GetLogsParams extends GetFacetsParams {
-    page?: number;
-    perPage?: number;
-}
+export interface GetLogsParams extends GetFacetsParams, Paginated {}
 
 export interface GetFacetsParams {
     from: string;

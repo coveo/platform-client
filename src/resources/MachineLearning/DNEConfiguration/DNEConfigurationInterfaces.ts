@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {IntervalUnit} from '../../Enums';
 
 export interface AutoSelectionFieldCandidateModel {
@@ -5,10 +6,8 @@ export interface AutoSelectionFieldCandidateModel {
     description?: string;
 }
 
-export interface ListCandidateFieldsParams {
+export interface ListCandidateFieldsParams extends Paginated {
     filter?: string;
-    page?: number;
-    perPage?: number;
 }
 
 export interface DocumentExtractionPreviewModel {
