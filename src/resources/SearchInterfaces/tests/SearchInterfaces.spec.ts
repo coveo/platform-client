@@ -1,5 +1,5 @@
 import API from '../../../APICore';
-import {New} from '../../../Entry';
+import {IManifestParameters, New} from '../../../Entry';
 import {SortingBy, SortingOrder} from '../../Enums';
 import SearchInterfaces from '../SearchInterfaces';
 import {IAccesses, ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
@@ -224,6 +224,26 @@ describe('SearchInterfaces', () => {
                 users: someUsers,
                 message,
             });
+        });
+    });
+
+    describe('manifest', () => {
+        it('makes a POST call (without a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+
+            searchInterfaces.manifest(id);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/manifest/v1`, undefined);
+        });
+
+        it('makes a POST call (with a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+            const options: IManifestParameters = {pagePlaceholders: {results: 'myresults'}};
+            searchInterfaces.manifest(id, options);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/${id}/manifest/v1`, options);
         });
     });
 });
