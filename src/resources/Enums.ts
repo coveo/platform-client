@@ -879,7 +879,7 @@ export enum SearchHubRawMetrics {
 
 export enum SearchHubLicenseMetrics {
     normalQueries = 'normalQueries',
-    recommendationQueries = 'recommendationQueries',
+    recommendationsQueries = 'recommendationsQueries',
     commerceProductListingQueries = 'commerceProductListingQueries',
     agents = 'agents',
     staticQueries = 'staticQueries',
@@ -1014,4 +1014,24 @@ export enum VaultFetchStrategy {
     allOrNothing = 'ALL_OR_NOTHING',
     onlyMissing = 'ONLY_MISSING',
     overwrite = 'OVERWRITE',
+}
+
+export enum DataShareStatus {
+    UNKNOWN = 'UNKNOWN',
+    PENDING = 'PENDING',
+    ACTIVE = 'ACTIVE',
+    INVALID = 'INVALID',
+}
+
+export enum VaultVisibilityType {
+    OBFUSCATED = 'OBFUSCATED',
+    PUBLIC = 'PUBLIC',
+    STRICT = 'STRICT',
+}
+
+export enum VaultValueType {
+    BOOLEAN = 'BOOLEAN',
+    FLOAT = 'FLOAT',
+    INTEGER = 'INTEGER',
+    STRING = 'STRING',
 }

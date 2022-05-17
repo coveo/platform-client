@@ -1,3 +1,5 @@
+import {Paginated} from '../BaseInterfaces';
+
 export enum DocumentSuggestionsStrategies {
     ITD = 'ITD',
 }
@@ -12,10 +14,7 @@ export enum CaseClassificationStrategies {
     Axon = 'Axon',
 }
 
-export interface CaseAssistConfigListOptions {
-    page?: number;
-    perPage?: number;
-}
+export interface CaseAssistConfigListOptions extends Paginated {}
 
 export interface ITDConfigurationModel {
     pipeline?: string;

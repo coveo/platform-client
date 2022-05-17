@@ -1,7 +1,9 @@
 import API from '../../APICore';
+import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions';
+import {PageModel, Paginated} from '../BaseInterfaces';
 import {VaultFetchStrategy} from '../Enums';
 import Resource from '../Resource';
-import {MissingVaultModel} from './VaultsInterfaces';
+import {MissingVaultModel, VaultEntryListOptions, VaultEntryModel} from './VaultsInterfaces';
 
 export default class Vaults extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/vaultentries`;
@@ -10,8 +12,6 @@ export default class Vaults extends Resource {
      * Find error vault keys for a given snapshot.
      *
      * @param {string} snapshotId The unique identifier of the target snapshot.
-     *
-     * @returns {MissingVaultModel}
      */
     findMissing(snapshotId: string) {
         return this.api.get<MissingVaultModel>(this.buildPath(`${Vaults.baseUrl}/missing`, {snapshotId}));
@@ -39,5 +39,24 @@ export default class Vaults extends Resource {
                 fetchStrategy,
             })
         );
+    }
+
+    /**
+     * Create a vault entry.
+     *
+     * @param {VaultEntryModel} model Vault entry model
+     */
+    create(model: VaultEntryModel) {
+        return this.api.post<VaultEntryModel>(Vaults.baseUrl, model);
+    }
+
+    /**
+     * Get all vault entries for an organization.
+     *
+     * @param {VaultEntryListOptions} options pagination options
+     */
+    list(options?: VaultEntryListOptions) {
+        const normalizedOptions = normalizePaginatedOptions(options);
+        return this.api.get<PageModel<VaultEntryModel>>(this.buildPath(Vaults.baseUrl, normalizedOptions));
     }
 }

@@ -1,3 +1,5 @@
+import {Paginated} from '../BaseInterfaces';
+
 export interface IndexStorageSpec {
     numberOfIops: number;
     sizeInGibibytes: number;
@@ -95,13 +97,11 @@ export interface IndexBackupsItems {
     organizationId: string;
 }
 
-export interface IndexBackupsOptions {
+export interface IndexBackupsOptions extends Paginated {
     backupId?: string;
     from?: number;
     indexId?: string;
     order?: string;
-    page?: number;
-    perPage?: number;
     sortBy?: string;
     to?: number;
 }

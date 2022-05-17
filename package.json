@@ -13,6 +13,7 @@
         "web"
     ],
     "scripts": {
+        "preinstall": "npx only-allow npm",
         "start": "tsc -p tsconfig.build.json --watch",
         "build": "eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.json",
         "test": "jest --clearCache && jest",
@@ -48,7 +49,7 @@
         "semantic-release": "^17.4.7",
         "ts-jest": "^27.1.4",
         "ts-loader": "^6.2.1",
-        "tsjs": "^3.0.1",
+        "tsjs": "^4.1.0",
         "tslib": "^2.3.0",
         "typescript": "^3.9.7"
     },

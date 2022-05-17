@@ -1,7 +1,6 @@
 import {DatasetType} from '../../..';
 import API from '../../../../APICore';
 import SourcesDatasets from '../SourcesDatasets';
-import {DatasetModel} from '../SourcesDatasetsInterfaces';
 
 jest.mock('../../../../APICore');
 

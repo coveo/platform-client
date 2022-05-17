@@ -1,3 +1,4 @@
+import {Paginated} from '../BaseInterfaces';
 import {FieldOrigin, FieldTypes, SortingOrder} from '../Enums';
 
 export interface FieldModel {
@@ -23,13 +24,11 @@ export interface FieldModel {
     useCacheForSort?: boolean;
 }
 
-export interface ListFieldsParams {
+export interface ListFieldsParams extends Paginated {
     facetsOnly?: boolean;
     filter?: string;
     order?: SortingOrder;
     origin?: FieldOrigin;
-    page?: number;
-    perPage?: number;
     sortBy?: string;
     type?: FieldTypes;
 }

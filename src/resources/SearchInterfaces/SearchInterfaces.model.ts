@@ -1,3 +1,4 @@
+import {Paginated} from '../BaseInterfaces';
 import {SortingBy, SortingOrder} from '../Enums';
 
 export interface IAccesses {
@@ -115,7 +116,7 @@ export interface ISearchInterfaceConfigurationResponse extends ISearchInterfaceC
     updatedBy: string;
 }
 
-export interface IListSearchInterfacesParameters {
+export interface IListSearchInterfacesParameters extends Paginated {
     /**
      * A substring that must appear in a search interface configuration name for this configuration to appear in results.
      */

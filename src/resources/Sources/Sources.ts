@@ -81,9 +81,9 @@ export default class Sources extends Resource {
         return this.api.post<{value: boolean}>(`${Sources.baseUrl}/${sourceId}/dump`);
     }
 
-    duplicate(sourceId: string, newSourceName: string, logicalIndex?: string) {
+    duplicate(sourceId: string, newSourceName: string, logicalIndexId?: string) {
         return this.api.post<SourceModel>(
-            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndex})
+            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId})
         );
     }
 

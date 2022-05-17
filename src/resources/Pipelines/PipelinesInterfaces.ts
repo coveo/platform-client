@@ -1,4 +1,4 @@
-import {GranularResource} from '../BaseInterfaces';
+import {GranularResource, Paginated} from '../BaseInterfaces';
 import {ConditionModel} from './Conditions';
 
 export interface PipelineBackendVersion {
@@ -31,12 +31,10 @@ export interface PipelineModel extends PipelineShared {
 export interface NewPipelineModel extends PipelineShared, GranularResource {}
 export interface UpdatePipelineModel extends PipelineModel, GranularResource {}
 
-export interface ListPipelinesOptions {
+export interface ListPipelinesOptions extends Paginated {
     isOrderAscending?: boolean;
     filter?: string;
     sortby?: string;
-    page?: number;
-    perPage?: number;
     feature?: string;
     organizationId?: string;
 }

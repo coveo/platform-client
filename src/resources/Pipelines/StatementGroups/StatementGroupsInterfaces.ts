@@ -1,3 +1,4 @@
+import {Paginated} from '../../BaseInterfaces';
 import {
     CampaignStatementGroupStatusType,
     ListStatementGroupStatusType,
@@ -157,7 +158,7 @@ export interface StatementGroupComposition {
     otherStatementCount: number;
 }
 
-export interface ListStatementGroupsOptions {
+export interface ListStatementGroupsOptions extends Paginated {
     /**
      * The 0-based number of the page of results to get.
      */
