@@ -101,6 +101,7 @@ export interface LicenseModel {
 export interface EntitlementModel {
     itemLimit: number;
     lrpmLimit: number;
+    id: string;
     name: string;
     qpmLimit: number;
     recommendationLimit: number;
