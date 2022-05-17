@@ -13,7 +13,6 @@
         "web"
     ],
     "scripts": {
-        "preinstall": "npx only-allow npm",
         "start": "tsc -p tsconfig.build.json --watch",
         "build": "eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.json",
         "test": "jest --clearCache && jest",
