@@ -7,8 +7,8 @@ import {
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
-    GenerateUrlOptions,
     ExportSnapshotContentOptions,
+    GenerateUrlOptions,
     GetSnapshotOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
@@ -19,6 +19,7 @@ import {
     ResourceSnapshotSupportedFileTypes,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
+    SnapshotDiffModel,
     SnapshotListParams,
     UpdateChildrenOptions,
     ValidateAccessOptions,
@@ -186,5 +187,15 @@ export default class ResourceSnapshots extends Resource {
             default:
                 throw new Error('The uploaded file must be either a ZIP or a JSON file.');
         }
+    }
+
+    /**
+     * @description Shows the diff report for the target snapshot and dry-run report
+     * @experimental
+     */
+    diff(snapshotId: string, relativeReportId: string) {
+        return this.api.get<SnapshotDiffModel>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {relativeReportId})
+        );
     }
 }

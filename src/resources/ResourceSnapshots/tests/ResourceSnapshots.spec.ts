@@ -432,4 +432,18 @@ describe('ResourceSnapshots', () => {
             );
         });
     });
+
+    describe('diff', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            const snapshotId = 'my-snapshot-id';
+            const reportId = 'my-report-id';
+
+            resourceSnapshots.diff(snapshotId, reportId);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}`
+            );
+        });
+    });
 });

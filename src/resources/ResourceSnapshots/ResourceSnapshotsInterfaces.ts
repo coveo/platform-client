@@ -34,6 +34,10 @@ export interface ResourceSnapshotsModel {
      */
     synchronizationReports?: ResourceSnapshotsSynchronizationReportModel[];
     /**
+     * The list of diff generation reports on the snapshot.
+     */
+    diffGenerationReports?: SnapshotDiffModel[];
+    /**
      * A summary of the contents of the snapshot.
      */
     contentSummary?: Record<string, number>;
@@ -300,4 +304,17 @@ export interface UpdateChildrenOptions {
     snapshotParentResourceName: string;
     parentResourceType: string;
     targetParentId: string;
+}
+
+export interface SnapshotDiffFileModel extends ResourceSnapshotUrlModel {
+    numberOfLines: number;
+}
+
+export interface SnapshotDiffModel {
+    id: string;
+    snapshotId: string;
+    relatedSnapshotId: string;
+    updatedDate: number;
+    status: ResourceSnapshotsReportStatus;
+    files: Record<ResourceSnapshotType, SnapshotDiffFileModel>;
 }
