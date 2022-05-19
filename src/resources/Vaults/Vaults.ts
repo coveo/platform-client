@@ -21,20 +21,13 @@ export default class Vaults extends Resource {
      * Import vault entries from the starting organization into the current organization.
      *
      * @param {string} currentSnapshotId The unique identifier of the current snapshot.
-     * @param {string} currentOrganizationId The unique identifier of the current organization.
      * @param {string} sourceOrganizationId The unique identifier of the source organization.
      * @param {VaultFetchStrategy} fetchStrategy Choosing the strategy to use when importing vault entries.
      */
-    import(
-        currentSnapshotId: string,
-        currentOrganizationId: string,
-        sourceOrganizationId: string,
-        fetchStrategy: VaultFetchStrategy
-    ) {
+    import(currentSnapshotId: string, sourceOrganizationId: string, fetchStrategy: VaultFetchStrategy) {
         return this.api.put(
             this.buildPath(`${Vaults.baseUrl}/fetch`, {
                 referenceSnapshotId: currentSnapshotId,
-                organizationId: currentOrganizationId,
                 sourceOrganizationId,
                 fetchStrategy,
             })
