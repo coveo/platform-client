@@ -11,6 +11,11 @@ export interface AllLimitsModel {
     [name: string]: LimitsModel;
 }
 
+export enum LimitType {
+    USAGE = 'USAGE',
+    TECHNICAL = 'TECHNICAL',
+}
+
 export interface LimitHistoryDataPointModel {
     /**
      * The date at which the limit value was set in number of milliseconds since UNIX epoch.
