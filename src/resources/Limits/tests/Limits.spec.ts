@@ -1,6 +1,7 @@
 import {LicenseSection} from '../..';
 import API from '../../../APICore';
 import Limits from '../Limits';
+import {LimitType} from '../LimitsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -37,6 +38,13 @@ describe('Limits', () => {
             limits.getHistoryLimit(LicenseSection.content, '123');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits/content/123/history`);
+        });
+    });
+    describe('getAllPerLimitType', () => {
+        it('should make a GET call to get all limits with specified limit type', () => {
+            limits.getAllPerLimitType(LimitType.TECHNICAL);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits?limitType=TECHNICAL`);
         });
     });
 });
