@@ -313,7 +313,7 @@ export interface SnapshotDiffFileModel extends ResourceSnapshotUrlModel {
 export interface SnapshotDiffModel {
     id: string;
     snapshotId: string;
-    relatedSnapshotId: string;
+    relativeReportId: string;
     updatedDate: number;
     status: ResourceSnapshotsReportStatus;
     files: Record<ResourceSnapshotType, SnapshotDiffFileModel>;
