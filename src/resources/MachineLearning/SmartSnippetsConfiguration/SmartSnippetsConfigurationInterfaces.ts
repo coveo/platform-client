@@ -1,3 +1,5 @@
+import {FilterConditions} from '../FilterConditions';
+
 export interface DocumentType {
     /**
      * The fields containing the content to use for smart snippets.
@@ -24,6 +26,10 @@ export interface SmartSnippetsConfigurationModel {
      */
     sources: string[];
     /**
+     * An array of filtering conditions.
+     */
+    contentFilterConditions: FilterConditions[];
+    /**
      * An array of css selectors to evaluate content to exclude.
      */
     cssSelectorsToExclude?: string[];
@@ -40,6 +46,10 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
      * The sources to consider.
      */
     sources: string[];
+    /**
+     * An array of filtering conditions.
+     */
+    contentFilterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsDocumentGroupPreview {
@@ -74,6 +84,10 @@ export interface SmartSnippetsContentFieldsParams {
      * The sources to consider.
      */
     sources: string[];
+    /**
+     * An array of filtering conditions.
+     */
+    contentFilterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsContentField {
@@ -99,6 +113,10 @@ export interface SmartSnippetsDocumentTypesParams {
      * The sources to consider.
      */
     sources: string[];
+    /**
+     * An array of filtering conditions.
+     */
+    contentFilterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsDocumentType {
