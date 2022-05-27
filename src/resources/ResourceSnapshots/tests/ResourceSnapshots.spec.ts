@@ -445,5 +445,18 @@ describe('ResourceSnapshots', () => {
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}`
             );
         });
+
+        it('should make a GET call to the specific Resource Snapshots url with "numberOfLinesMax" parameter', () => {
+            const snapshotId = 'my-snapshot-id';
+            const reportId = 'my-report-id';
+            const numberOfLinesMax = 10000;
+
+            resourceSnapshots.diff(snapshotId, reportId, numberOfLinesMax);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}&numberOfLinesMax=${numberOfLinesMax}`
+            );
+        });
     });
 });
