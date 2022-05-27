@@ -1,3 +1,16 @@
+import {Paginated} from '../../BaseInterfaces';
+
+export interface ListSearchHubs {
+    /**
+     * The array of search hubs
+     */
+    hubs: RestSearchHub[];
+
+    /**
+     * The number of search hub created on the organization
+     */
+    totalCount: number;
+}
 export interface RestSearchHub {
     /**
      * The name of the search hub
@@ -13,6 +26,27 @@ export interface RestSearchHub {
      * A description for the search hub
      */
     description?: string;
+}
+
+export interface ListSearchHubsParams extends Paginated {
+    /**
+     * The free-form string to filter the returned list based on the values of the search hub attributes
+     */
+    filter?: string;
+
+    /**
+     * The maximum number of search hubs to list per page
+     *
+     * @default `100`
+     */
+    perPage?: number;
+
+    /**
+     * The 0-based index number of page to list
+     *
+     * @default `0`
+     */
+    page?: number;
 }
 
 export interface SearchHubNameParams {

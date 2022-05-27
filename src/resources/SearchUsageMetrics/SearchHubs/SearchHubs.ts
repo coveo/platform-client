@@ -5,13 +5,17 @@ import {
     RestSearchHub,
     UpdateSearchHubParams,
     UpdateSearchHubBucketParams,
+    ListSearchHubsParams,
+    ListSearchHubs,
 } from './SearchHubsInterface';
 
 export default class SearchHubs extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/hubs/`;
 
-    list() {
-        return this.api.get<{hubs: RestSearchHub[]}>(SearchHubs.baseUrl);
+    list(params?: ListSearchHubsParams) {
+        return this.api.get<ListSearchHubs>(
+            this.buildPath(SearchHubs.baseUrl, {filter: params?.filter, pageSize: params?.perPage, page: params?.page})
+        );
     }
 
     create(params: RestSearchHub) {
