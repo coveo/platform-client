@@ -192,10 +192,17 @@ export default class ResourceSnapshots extends Resource {
     /**
      * @description Shows the diff report for the target snapshot and dry-run report
      * @experimental
+     *
+     * @param {string} snapshotId - The unique identifier of the target snapshot.
+     * @param {string} relativeReportId - The unique identifier of the dry-run operation report associated with the target diff report.
+     * @param {(number|undefined)} [numberOfLinesMax=undefined] - Maximum number of lines before the diff is downloaded to a file.
      */
-    diff(snapshotId: string, relativeReportId: string) {
+    diff(snapshotId: string, relativeReportId: string, numberOfLinesMax?: number) {
         return this.api.get<SnapshotDiffModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {relativeReportId})
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {
+                relativeReportId,
+                numberOfLinesMax,
+            })
         );
     }
 }
