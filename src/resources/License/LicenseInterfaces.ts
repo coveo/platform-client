@@ -102,7 +102,10 @@ export interface EntitlementModel {
     itemLimit: number;
     lrpmLimit: number;
     id: string;
-    name: string;
+    productId: string;
+    productName: string;
+    pricingUnit: string;
+    displayName: string;
     qpmLimit: number;
     recommendationLimit: number;
     status: string;
