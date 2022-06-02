@@ -8,7 +8,6 @@ describe('Endpoint', () => {
 
         describe.each([
             [Environment.dev, 'platformdev'],
-            [Environment.staging, 'platformqa'],
             [Environment.stg, 'platformstg'],
             [Environment.prod, 'platform'],
         ])('%s environment', (env: Environment, host: string) => {
@@ -56,21 +55,6 @@ describe('Endpoint', () => {
             it('should return the endpoint corresponding to each specified environment and region', () => {
                 expect(getEndpoint(Environment.dev, Region.EU, true)).toBe('https://apidev-eu.cloud.coveo.com');
                 expect(getEndpoint(Environment.dev, Region.AU, true)).toBe('https://apidev-au.cloud.coveo.com');
-            });
-        });
-
-        describe('staging environment', () => {
-            it('should return the development US endpoint when no region is specified', () => {
-                expect(getEndpoint(Environment.staging, undefined, true)).toBe('https://apiqa.cloud.coveo.com');
-            });
-
-            it('should not add a region suffix for the US region', () => {
-                expect(getEndpoint(Environment.staging, Region.US, true)).toBe('https://apiqa.cloud.coveo.com');
-            });
-
-            it('should return the endpoint corresponding to each specified environment and region', () => {
-                expect(getEndpoint(Environment.staging, Region.EU, true)).toBe('https://apiqa-eu.cloud.coveo.com');
-                expect(getEndpoint(Environment.staging, Region.AU, true)).toBe('https://apiqa-au.cloud.coveo.com');
             });
         });
 
