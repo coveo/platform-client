@@ -8,7 +8,6 @@ export enum Region {
 
 export enum Environment {
     dev = 'dev',
-    staging = 'staging',
     stg = 'stg',
     prod = 'production',
     hipaa = 'hipaa',
@@ -16,7 +15,6 @@ export enum Environment {
 
 const endpointTemplates: Record<Environment, string> = {
     [Environment.dev]: `https://platformdev${regionPlaceholder}.cloud.coveo.com`,
-    [Environment.staging]: `https://platformqa${regionPlaceholder}.cloud.coveo.com`,
     [Environment.stg]: `https://platformstg${regionPlaceholder}.cloud.coveo.com`,
     [Environment.prod]: `https://platform${regionPlaceholder}.cloud.coveo.com`,
     [Environment.hipaa]: 'https://platformhipaa.cloud.coveo.com',
@@ -24,7 +22,6 @@ const endpointTemplates: Record<Environment, string> = {
 
 const serverlessEndpointTemplates: Record<Environment, string> = {
     [Environment.dev]: `https://apidev${regionPlaceholder}.cloud.coveo.com`,
-    [Environment.staging]: `https://apiqa${regionPlaceholder}.cloud.coveo.com`,
     [Environment.stg]: `https://apistg${regionPlaceholder}.cloud.coveo.com`,
     [Environment.prod]: `https://api${regionPlaceholder}.cloud.coveo.com`,
     [Environment.hipaa]: 'https://apihipaa.cloud.coveo.com',
