@@ -15,6 +15,7 @@ import {
     SourceModel,
 } from './SourcesInterfaces';
 import SourcesMappings from './SourcesMappings/SourcesMappings';
+import SourcesMetadata from './SourcesMetadata/SourcesMetadata';
 
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
@@ -22,6 +23,7 @@ export default class Sources extends Resource {
     field: SourcesFields;
     mappings: SourcesMappings;
     datasets: SourcesDatasets;
+    metadata: SourcesMetadata;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -29,6 +31,7 @@ export default class Sources extends Resource {
         this.field = new SourcesFields(api, serverlessApi);
         this.mappings = new SourcesMappings(api, serverlessApi);
         this.datasets = new SourcesDatasets(api, serverlessApi);
+        this.metadata = new SourcesMetadata(api, serverlessApi);
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
