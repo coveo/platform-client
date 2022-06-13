@@ -6,7 +6,11 @@ import {Metadata} from './SourcesMetadataInterfaces';
 export default class SourcesMetadata extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
 
-    list(sourceId: string, params?: Paginated) {
+    generateReport(sourceId: string) {
+        return this.api.post(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`);
+    }
+
+    getReport(sourceId: string, params?: Paginated) {
         return this.api.get<PageModel<Metadata>>(
             this.buildPath(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`, params)
         );
