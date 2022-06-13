@@ -4,11 +4,11 @@ export interface Metadata {
      */
     key: string;
     /**
-     * The frequency at which this metadata has been seen on documents.
+     * The frequency in % at which this metadata has been seen on documents.
      */
     frequency: number;
     /**
-     * Subset of values for the metadata.
+     * Subset of sample values for the metadata.
      */
     values: any[];
     /**
