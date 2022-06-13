@@ -31,7 +31,9 @@ describe('SourcesMetadata', () => {
 
             metadata.generateReport(sourceId);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/sources/${sourceId}/metadata`);
+            expect(api.post).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata`
+            );
         });
     });
 });
