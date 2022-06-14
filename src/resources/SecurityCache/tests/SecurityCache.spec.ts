@@ -19,6 +19,7 @@ describe('securityCache', () => {
 
     describe('list', () => {
         const providerId = 'PROVIDER_ID';
+        const securityCacheFilters = {filteringTerm: 'test', filteringMode: 'PREFIX', providerIds: [providerId]};
 
         it('should make a GET call to the securityCache correct url with listMembers', () => {
             securityCache.listMembers(providerId);
@@ -32,6 +33,15 @@ describe('securityCache', () => {
             securityCache.listEntities(providerId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/${providerId}`);
+        });
+
+        it('should make a POST call to the securityCache correct url with listEntities with filters', () => {
+            securityCache.listFilteredEntities(securityCacheFilters);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/securitycache/entities/list`,
+                securityCacheFilters
+            );
         });
 
         it('should make a GET call to the securityProvider url with listProvider', () => {
