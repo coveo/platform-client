@@ -1,4 +1,4 @@
-import {ScheduleModel, SecurityCacheMemberModel, SecurityProviderModel} from '..';
+import {ScheduleModel, SecurityCacheIdentitiesFilters, SecurityCacheMemberModel, SecurityProviderModel} from '..';
 import API from '../../../APICore';
 import {PermissionIdentityType} from '../../Enums';
 import SecurityCache from '../SecurityCache';
@@ -19,7 +19,11 @@ describe('securityCache', () => {
 
     describe('list', () => {
         const providerId = 'PROVIDER_ID';
-        const securityCacheFilters = {filteringTerm: 'test', filteringMode: 'PREFIX', providerIds: [providerId]};
+        const securityCacheFiltersBody = {
+            filteringTerm: 'test',
+            identityTypes: [PermissionIdentityType.User],
+            providerIds: [providerId],
+        };
 
         it('should make a GET call to the securityCache correct url with listMembers', () => {
             securityCache.listMembers(providerId);
@@ -35,12 +39,24 @@ describe('securityCache', () => {
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/${providerId}`);
         });
 
-        it('should make a POST call to the securityCache correct url with listEntities with filters', () => {
-            securityCache.listFilteredEntities(securityCacheFilters);
+        it('should make a POST call to the securityCache correct url with listSecurityIdentities without filters', () => {
+            securityCache.listSecurityIdentities(providerId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/list`,
-                securityCacheFilters
+                {providerIds: [providerId]}
+            );
+        });
+
+        it('should make a POST call to the securityCache correct url with listSecurityIdentities with filters', () => {
+            securityCache.listSecurityIdentities(providerId, {
+                filteringTerm: securityCacheFiltersBody.filteringTerm,
+                identityTypes: securityCacheFiltersBody.identityTypes,
+            } as SecurityCacheIdentitiesFilters);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/securitycache/entities/list`,
+                securityCacheFiltersBody
             );
         });
 

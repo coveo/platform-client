@@ -11,7 +11,7 @@ import {
     SecurityCacheListRelationshipsOptions,
     SecurityCacheMemberModel,
     SecurityProviderModel,
-    SecurityCacheFilters,
+    SecurityCacheIdentitiesFilters,
 } from './SecurityCacheInterfaces';
 
 export default class SecurityCache extends Ressource {
@@ -35,10 +35,16 @@ export default class SecurityCache extends Ressource {
         );
     }
 
-    listFilteredEntities(filters: SecurityCacheFilters) {
+    listSecurityIdentities(providerId: string, filters?: SecurityCacheIdentitiesFilters) {
+        const {page, perPage, ...rest} = filters || {};
+        const filteringModel = {
+            filteringTerm: rest.filteringTerm,
+            identityTypes: rest.identityTypes,
+            providerIds: [providerId],
+        };
         return this.api.post<PageModel<SecurityCacheIdentityModel>>(
-            this.buildPath(`${SecurityCache.cacheUrl}/entities/list`, {page: filters.page, perPage: filters.perPage}),
-            filters
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/list`, {page, perPage}),
+            filteringModel
         );
     }
 
