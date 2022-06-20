@@ -40,7 +40,7 @@ describe('securityCache', () => {
         });
 
         it('should make a POST call to the securityCache correct url with listSecurityIdentities without filters', () => {
-            securityCache.listSecurityIdentities(providerId);
+            securityCache.listSecurityProviderIdentities(providerId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/list`,
@@ -49,7 +49,7 @@ describe('securityCache', () => {
         });
 
         it('should make a POST call to the securityCache correct url with listSecurityIdentities with filters', () => {
-            securityCache.listSecurityIdentities(providerId, {
+            securityCache.listSecurityProviderIdentities(providerId, {
                 filteringTerm: securityCacheFiltersBody.filteringTerm,
                 identityTypes: securityCacheFiltersBody.identityTypes,
             } as SecurityCacheIdentitiesFilters);
