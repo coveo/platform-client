@@ -1,4 +1,4 @@
-import {ScheduleModel, SecurityCacheIdentitiesFilters, SecurityCacheMemberModel, SecurityProviderModel} from '..';
+import {ScheduleModel, SecurityProviderIdentitiesFilters, SecurityCacheMemberModel, SecurityProviderModel} from '..';
 import API from '../../../APICore';
 import {PermissionIdentityType} from '../../Enums';
 import SecurityCache from '../SecurityCache';
@@ -52,7 +52,7 @@ describe('securityCache', () => {
             securityCache.listSecurityProviderIdentities(providerId, {
                 filteringTerm: securityCacheFiltersBody.filteringTerm,
                 identityTypes: securityCacheFiltersBody.identityTypes,
-            } as SecurityCacheIdentitiesFilters);
+            } as SecurityProviderIdentitiesFilters);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/list`,
