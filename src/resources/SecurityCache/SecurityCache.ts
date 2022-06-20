@@ -35,8 +35,7 @@ export default class SecurityCache extends Ressource {
         );
     }
 
-    listSecurityProviderIdentities(providerId: string, filters?: SecurityCacheIdentitiesFilters) {
-        const {page, perPage, ...rest} = filters || {};
+    listSecurityProviderIdentities(providerId: string, {page, perPage, ...rest}: SecurityCacheIdentitiesFilters = {}) {
         const filteringModel = {
             filteringTerm: rest.filteringTerm,
             identityTypes: rest.identityTypes,
