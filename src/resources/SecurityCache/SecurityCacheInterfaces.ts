@@ -129,6 +129,11 @@ export interface SecurityCacheListOptions extends Paginated {
     to?: string;
 }
 
+export interface SecurityProviderIdentitiesFilters extends Paginated {
+    filteringTerm?: string;
+    identityTypes?: PermissionIdentityType[];
+}
+
 export interface SecurityCacheListRelationshipsOptions extends Paginated {
     recursive?: boolean;
 }
