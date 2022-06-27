@@ -42,8 +42,8 @@ describe('SourcesMetadata', () => {
             const sourceId = 'ben&flo';
 
             metadata.getReportStatus(sourceId);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/${sourceId}/metadata/status`
             );
         });

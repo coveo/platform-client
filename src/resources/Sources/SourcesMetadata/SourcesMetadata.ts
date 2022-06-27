@@ -7,7 +7,7 @@ export default class SourcesMetadata extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
 
     generateReport(sourceId: string) {
-        return this.api.post<void>(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`, {});
+        return this.api.post<void>(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`);
     }
 
     getReport(sourceId: string, params?: Paginated) {
