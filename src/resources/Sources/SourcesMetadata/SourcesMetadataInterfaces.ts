@@ -16,3 +16,14 @@ export interface Metadata {
      */
     origin: string;
 }
+
+export interface MetadataReportStatus {
+    /**
+     * Indicate that a report is being generated.
+     */
+    reportGenerationInProgress: boolean;
+    /**
+     * Indicate if a report is available.
+     */
+    reportAvailable: boolean;
+}

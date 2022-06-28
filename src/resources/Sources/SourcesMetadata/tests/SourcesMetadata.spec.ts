@@ -36,4 +36,16 @@ describe('SourcesMetadata', () => {
             );
         });
     });
+
+    describe('getReportStatus', () => {
+        it('should make a GET call to the specific SourceMetadataStatus url', () => {
+            const sourceId = 'ben&flo';
+
+            metadata.getReportStatus(sourceId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata/status`
+            );
+        });
+    });
 });
