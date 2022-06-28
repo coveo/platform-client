@@ -19,6 +19,7 @@ import {
     SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
+    ApplyOptionsDeletionScope,
 } from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
@@ -328,13 +329,16 @@ describe('ResourceSnapshots', () => {
     describe('apply', () => {
         it('should make a PUT call to the specific Resource Snapshots url', () => {
             const snapshotId = '🤖';
-            const applyOptions: ApplyOptions = {deleteMissingResources: true};
+            const applyOptions: ApplyOptions = {
+                deleteMissingResources: true,
+                deletionScope: ApplyOptionsDeletionScope.OnlyTypesFromSnapshot,
+            };
 
             resourceSnapshots.apply(snapshotId, applyOptions);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true&deletionScope=ONLY_TYPES_FROM_SNAPSHOT`
             );
         });
     });
