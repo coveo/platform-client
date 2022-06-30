@@ -66,6 +66,10 @@ export interface SmartSnippetsDocumentGroupPreview {
      */
     numberOfDocuments: number;
     /**
+     * The number of documents matching the configured conditions.
+     */
+    numberOfDocumentsMatchingConditions: number;
+    /**
      * The number of documents that have a permanent id.
      */
     numberOfDocumentsWithPermanentId: number;
