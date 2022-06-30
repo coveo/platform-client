@@ -28,7 +28,7 @@ export interface SmartSnippetsConfigurationModel {
     /**
      * An array of filtering conditions.
      */
-    contentFilterConditions: FilterConditions[];
+    filterConditions: FilterConditions[];
     /**
      * An array of css selectors to evaluate content to exclude.
      */
@@ -49,7 +49,7 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
     /**
      * An array of filtering conditions.
      */
-    contentFilterConditions: FilterConditions[];
+    filterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsDocumentGroupPreview {
@@ -87,7 +87,7 @@ export interface SmartSnippetsContentFieldsParams {
     /**
      * An array of filtering conditions.
      */
-    contentFilterConditions: FilterConditions[];
+    filterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsContentField {
@@ -116,7 +116,7 @@ export interface SmartSnippetsDocumentTypesParams {
     /**
      * An array of filtering conditions.
      */
-    contentFilterConditions: FilterConditions[];
+    filterConditions: FilterConditions[];
 }
 
 export interface SmartSnippetsDocumentType {
