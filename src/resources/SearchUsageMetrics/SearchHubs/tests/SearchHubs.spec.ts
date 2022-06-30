@@ -1,5 +1,6 @@
 import API from '../../../../APICore';
 import SearchHubs from '../SearchHubs';
+import {ListSearchHubsParams} from '../SearchHubsInterface';
 
 jest.mock('../../../../APICore');
 
@@ -21,6 +22,28 @@ describe('SearchHubs', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(SearchHubs.baseUrl);
+        });
+
+        it('makes the call with parameters if it is set', () => {
+            const params: ListSearchHubsParams = {
+                filter: 'patate',
+                perPage: 25,
+                page: 1,
+            };
+            searchHubs.list(params);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}?filter=patate&pageSize=25&page=1`);
+        });
+
+        it('makes the call with parameters if it is partially set', () => {
+            const partialParams: ListSearchHubsParams = {
+                filter: 'patate',
+            };
+            searchHubs.list(partialParams);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}?filter=patate`);
         });
     });
 

@@ -292,8 +292,26 @@ export interface DryRunOptions {
     deleteMissingResources: boolean;
 }
 
+export enum ApplyOptionsDeletionScope {
+    AllManagedResources = 'ALL_MANAGED_RESOURCES',
+    OnlyTypesFromSnapshot = 'ONLY_TYPES_FROM_SNAPSHOT',
+}
+
 export interface ApplyOptions {
-    deleteMissingResources: boolean;
+    /**
+     * Whether to delete organization resources not present in the snapshot.
+     *
+     * @default false
+     */
+    deleteMissingResources?: boolean;
+    /**
+     * The scope of the resources on which to calculate deletions.
+     * **Note:** only applies when `deleteMissingResources` is set to `true`.
+     *
+     * @default ApplyOptionsDeletionScope.AllManagedResources
+     *
+     */
+    deletionScope?: ApplyOptionsDeletionScope;
 }
 
 export interface GenerateUrlOptions {

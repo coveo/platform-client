@@ -51,7 +51,7 @@ export default class ResourceSnapshots extends Resource {
      * @param {ExportSnapshotContentOptions} [options]
      * @returns {Promise<Blob>} A newly created Blob object which contains the zipped snapshot
      */
-    export(snapshotId: string, options?: ExportSnapshotContentOptions) {
+    export(snapshotId: string, options?: ExportSnapshotContentOptions): Promise<Blob> {
         return this.api.getFile(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
             headers: {accept: 'application/zip'},
         });
@@ -59,7 +59,7 @@ export default class ResourceSnapshots extends Resource {
 
     async getContent(snapshotId: string, options: GenerateUrlOptions) {
         const {url} = await this.generateUrl(snapshotId, options);
-        return await fetch(url, {method: 'get'});
+        return fetch(url, {method: 'get'});
     }
 
     /**
@@ -192,10 +192,17 @@ export default class ResourceSnapshots extends Resource {
     /**
      * @description Shows the diff report for the target snapshot and dry-run report
      * @experimental
+     *
+     * @param {string} snapshotId - The unique identifier of the target snapshot.
+     * @param {string} relativeReportId - The unique identifier of the dry-run operation report associated with the target diff report.
+     * @param {(number|undefined)} [numberOfLinesMax=undefined] - Maximum number of lines before the diff is downloaded to a file.
      */
-    diff(snapshotId: string, relativeReportId: string) {
+    diff(snapshotId: string, relativeReportId: string, numberOfLinesMax?: number) {
         return this.api.get<SnapshotDiffModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {relativeReportId})
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {
+                relativeReportId,
+                numberOfLinesMax,
+            })
         );
     }
 }

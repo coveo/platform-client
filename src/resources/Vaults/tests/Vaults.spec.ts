@@ -31,14 +31,13 @@ describe('Vaults', () => {
     describe('import', () => {
         it('should make a PUT call to the specific Vaults url', () => {
             const currentSnaphostId = 'current-snapshot-id';
-            const currentOrganizationId = 'current-organization-id';
             const sourceOrganizationId = 'source-organization-id';
 
-            vaults.import(currentSnaphostId, currentOrganizationId, sourceOrganizationId, VaultFetchStrategy.overwrite);
+            vaults.import(currentSnaphostId, sourceOrganizationId, VaultFetchStrategy.overwrite);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Vaults.baseUrl}/fetch?referenceSnapshotId=${currentSnaphostId}&organizationId=${currentOrganizationId}&sourceOrganizationId=${sourceOrganizationId}&fetchStrategy=${VaultFetchStrategy.overwrite}`
+                `${Vaults.baseUrl}/fetch?referenceSnapshotId=${currentSnaphostId}&sourceOrganizationId=${sourceOrganizationId}&fetchStrategy=${VaultFetchStrategy.overwrite}`
             );
         });
     });
