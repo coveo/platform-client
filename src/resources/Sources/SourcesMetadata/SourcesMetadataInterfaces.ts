@@ -1,3 +1,22 @@
+import {PageModel} from '../../BaseInterfaces';
+
+export interface MetadataPageModel extends PageModel {
+    items: Metadata[];
+    sampledDocumentCount: number;
+    documentErrorCount: number;
+}
+
+export interface MetadataValue {
+    /**
+     * The metadata value
+     */
+    metadataValue: any;
+    /**
+     * The number of time the value has been seen on documents
+     */
+    count: number;
+}
+
 export interface Metadata {
     /**
      * The key for a metadata.
@@ -10,7 +29,7 @@ export interface Metadata {
     /**
      * Subset of sample values for the metadata.
      */
-    values: any[];
+    values: MetadataValue[];
     /**
      * The origin of the metadata.
      */
