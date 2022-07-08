@@ -20,7 +20,7 @@ describe('securityCache', () => {
     describe('list', () => {
         const providerId = 'PROVIDER_ID';
         const securityCacheFiltersBody = {
-            filteringTerm: 'test',
+            filterTerm: 'test',
             identityTypes: [PermissionIdentityType.User],
             providerIds: [providerId],
         };
@@ -50,7 +50,7 @@ describe('securityCache', () => {
 
         it('should make a POST call to the securityCache correct url with listSecurityIdentities with filters', () => {
             securityCache.listSecurityProviderIdentities(providerId, {
-                filteringTerm: securityCacheFiltersBody.filteringTerm,
+                filterTerm: securityCacheFiltersBody.filterTerm,
                 identityTypes: securityCacheFiltersBody.identityTypes,
             } as SecurityProviderIdentitiesFilters);
             expect(api.post).toHaveBeenCalledTimes(1);
