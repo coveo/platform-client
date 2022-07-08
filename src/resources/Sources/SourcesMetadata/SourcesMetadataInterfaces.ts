@@ -38,11 +38,16 @@ export interface Metadata {
 
 export interface MetadataReportStatus {
     /**
-     * Indicate that a report is being generated.
+     * Indicates that a report is being generated.
      */
     reportGenerationInProgress: boolean;
     /**
-     * Indicate if a report is available.
+     * Indicates if a report is available.
      */
     reportAvailable: boolean;
+    /**
+     * Indicates if the source has documents sampled.
+     * If false, reports cannot be generated.
+     */
+    sampleAvailable: boolean;
 }
