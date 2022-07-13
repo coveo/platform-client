@@ -60,18 +60,6 @@ pipeline {
       }
     }
 
-    stage('Analyse Commits') {
-      steps {
-        script {
-          if (env.CHANGE_TARGET) {
-            sh "node_modules/.bin/commitlint --from `git rev-parse origin/${env.CHANGE_TARGET}` --to ${env.GIT_COMMIT}"
-          } else {
-            println "No commit analysis on branch master, proceeding with the build."
-          }
-        }
-      }
-    }
-
     stage('Build') {
       steps {
         script {
