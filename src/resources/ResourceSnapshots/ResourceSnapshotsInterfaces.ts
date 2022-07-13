@@ -334,5 +334,5 @@ export interface SnapshotDiffModel {
     relativeReportId: string;
     updatedDate: number;
     status: ResourceSnapshotsReportStatus;
-    files: Record<ResourceSnapshotType, SnapshotDiffFileModel>;
+    files: Partial<Record<ResourceSnapshotType, SnapshotDiffFileModel>>;
 }
