@@ -1,6 +1,9 @@
 import API from '../../../../APICore';
 import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration';
-import {SmartSnippetsConfigurationModel} from '../SmartSnippetsConfigurationInterfaces';
+import {
+    SmartSnippetsConfigurationModel,
+    SmartSnippetsContentFieldsParams,
+} from '../SmartSnippetsConfigurationInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -16,11 +19,13 @@ describe('SmartSnippetsConfiguration', () => {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            filterConditions: [],
         },
         {
             modelId: 'test-model-id',
             modelDisplayName: 'Model Name 1',
             sources: ['1st-source', '2nd-source'],
+            filterConditions: [],
             cssSelectorsToExclude: ['div.mock[id="this-is-a-test"]', '#wow'],
             documentTypes: [
                 {
@@ -84,9 +89,10 @@ describe('SmartSnippetsConfiguration', () => {
 
     describe('contentFields', () => {
         it('should make a POST call to retrieve valid content fields from the Smart Snippets Configuration contentfields url', () => {
-            const params = {
+            const params: SmartSnippetsContentFieldsParams = {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
+                filterConditions: [],
             };
             smartSnippetsConfig.contentFields(params);
 
@@ -97,8 +103,10 @@ describe('SmartSnippetsConfiguration', () => {
 
     describe('documentTypes', () => {
         it('should make a POST call to retrieve valid document types from the Smart Snippets Configuration documenttypes url', () => {
-            const params = {
+            const params: SmartSnippetsContentFieldsParams = {
+                documentType: 'test-type',
                 sources: ['source1', 'source2'],
+                filterConditions: [],
             };
             smartSnippetsConfig.documentTypes(params);
 
@@ -109,8 +117,10 @@ describe('SmartSnippetsConfiguration', () => {
 
     describe('preview', () => {
         it('should make a POST call to retrieve document group preview info from the Smart Snippets Configuration preview url', () => {
-            const params = {
+            const params: SmartSnippetsContentFieldsParams = {
+                documentType: 'test-type',
                 sources: ['source1', 'source2'],
+                filterConditions: [],
             };
             smartSnippetsConfig.preview(params);
 
