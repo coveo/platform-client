@@ -1,6 +1,9 @@
 import API from '../../../../APICore';
 import CaseClassificationConfiguration from '../CaseClassificationConfiguration';
-import {CaseClassificationConfigurationModel, Operator} from '../CaseClassificationConfigurationInterfaces';
+import {
+    CaseClassificationConfigurationModel,
+    CaseClassificationContentFieldsParams,
+} from '../CaseClassificationConfigurationInterfaces';
 
 jest.mock('../../../../APICore');
 
@@ -24,7 +27,7 @@ describe('CaseClassificationConfiguration', () => {
             caseFilterConditions: [
                 {
                     field: 'test-field',
-                    operator: Operator.Equals,
+                    operator: 'EQUALS',
                     value: 'test-value',
                 },
             ],
@@ -52,7 +55,7 @@ describe('CaseClassificationConfiguration', () => {
             caseFilterConditions: [
                 {
                     field: 'test-field',
-                    operator: Operator.NotEquals,
+                    operator: 'NOT_EQUALS',
                     value: 'test-value',
                 },
             ],
@@ -116,7 +119,7 @@ describe('CaseClassificationConfiguration', () => {
 
     describe('fields', () => {
         it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration', () => {
-            const params = {
+            const params: CaseClassificationContentFieldsParams = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
                 caseExtractionPeriod: {
@@ -126,7 +129,7 @@ describe('CaseClassificationConfiguration', () => {
                 caseFilterConditions: [
                     {
                         field: 'test-field',
-                        operator: Operator.Equals,
+                        operator: 'EQUALS',
                         value: 'test-value',
                     },
                 ],
@@ -140,7 +143,7 @@ describe('CaseClassificationConfiguration', () => {
 
     describe('preview', () => {
         it('should make a POST call to retrieve document group preview info from the Case Classification model configuration preview url', () => {
-            const params = {
+            const params: CaseClassificationContentFieldsParams = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
                 caseExtractionPeriod: {
@@ -150,7 +153,7 @@ describe('CaseClassificationConfiguration', () => {
                 caseFilterConditions: [
                     {
                         field: 'test-field',
-                        operator: Operator.Equals,
+                        operator: 'EQUALS',
                         value: 'test-value',
                     },
                 ],

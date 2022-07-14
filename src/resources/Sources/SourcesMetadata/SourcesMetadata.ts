@@ -1,7 +1,7 @@
 import Resource from '../../Resource';
 import API from '../../../APICore';
-import {PageModel, Paginated} from '../../BaseInterfaces';
-import {Metadata, MetadataReportStatus} from './SourcesMetadataInterfaces';
+import {Paginated} from '../../BaseInterfaces';
+import {MetadataPageModel, MetadataReportStatus} from './SourcesMetadataInterfaces';
 
 export default class SourcesMetadata extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;
@@ -11,7 +11,7 @@ export default class SourcesMetadata extends Resource {
     }
 
     getReport(sourceId: string, params?: Paginated) {
-        return this.api.get<PageModel<Metadata>>(
+        return this.api.get<MetadataPageModel>(
             this.buildPath(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`, params)
         );
     }

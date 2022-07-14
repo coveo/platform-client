@@ -39,14 +39,14 @@ export default class SecurityCache extends Ressource {
         providerId: string,
         {page, perPage, ...rest}: SecurityProviderIdentitiesFilters = {}
     ) {
-        const filteringModel = {
-            filteringTerm: rest.filteringTerm,
+        const filterModel = {
+            filterTerm: rest.filterTerm,
             identityTypes: rest.identityTypes,
             providerIds: [providerId],
         };
         return this.api.post<PageModel<SecurityCacheIdentityModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/list`, {page, perPage}),
-            filteringModel
+            filterModel
         );
     }
 
