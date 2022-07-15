@@ -61,7 +61,7 @@ export interface IPResultTemplateCondition {
     value?: string;
 }
 
-export interface IPResultTemplateDetails {
+export interface IPResultTemplateDetail {
     /**
      * The [field](https://docs.coveo.com/en/200) containing the metadata to display.
      */
@@ -99,7 +99,7 @@ export interface IPResultTemplate {
     /**
      * The metadata details to display.
      */
-    details: IPResultTemplateDetails[];
+    details: IPResultTemplateDetail[];
 
     /**
      * The available result actions.
