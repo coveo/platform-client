@@ -4,7 +4,7 @@ import Resource from '../Resource';
 import {IListIPInterfacesParameters, IPInterfaceConfiguration} from './InsightPanelInterface.model';
 
 export default class InsightPanelInterface extends Resource {
-    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightinterfaces/v1/interfaces`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightinterface/v1/interfaces`;
 
     list(options?: IListIPInterfacesParameters) {
         return this.api.get<PageModel<IPInterfaceConfiguration>>(

@@ -149,13 +149,13 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('update', () => {
-        it('should make a UPDATE call to the InsightPanelInterface base url', () => {
+        it('should make an UPDATE call to the InsightPanelInterface base url', () => {
             const id = 'IPInterface-id-to-update';
 
             insightPanelInterface.update({...config, id});
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`, {...config, id});
+            expect(api.put).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`, config);
         });
     });
 
