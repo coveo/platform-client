@@ -19,7 +19,7 @@ describe('InsightPanelInterface', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
     const config: New<IPInterfaceConfiguration> = {
-        name: 'some search page name',
+        name: 'some insight panel name',
         facets: [
             {
                 field: 'somefield',
