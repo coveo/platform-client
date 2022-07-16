@@ -48,6 +48,7 @@ describe('InsightPanelInterface', () => {
                     },
                 ],
                 badge: {
+                    field: 'documenttype',
                     label: 'Video',
                     color: '#cc0000',
                 },
@@ -61,7 +62,12 @@ describe('InsightPanelInterface', () => {
                 tags: [IPResultTag.ViewedByCustomer],
             },
         ],
-        tabs: [],
+        tabs: [
+            {
+                label: 'Articles',
+                condition: '@sfkbid',
+            },
+        ],
         settings: {
             createArticle: {
                 enabled: false,

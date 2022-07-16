@@ -27,9 +27,14 @@ export enum IPResultTemplateLayout {
 
 export interface IPResultTemplateBadge {
     /**
+     * The field who's value should be displayed in the badge.
+     */
+    field: string;
+
+    /**
      * The text to display in the badge.
      */
-    label: string;
+    label?: string;
 
     /**
      * The RGB HEX code for the color of the badge.
