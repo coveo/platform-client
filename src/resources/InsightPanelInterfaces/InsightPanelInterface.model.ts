@@ -54,11 +54,11 @@ export interface IPResultTemplateCondition {
     operator: IPConditionOperator;
 
     /**
-     * The value used as the right side operand when the `operator` is one of:
+     * The values used as the right side operand when the `operator` is one of:
      * - `'mustMatch'`
      * - `'mustNotMatch'`
      */
-    value?: string;
+    values?: string[];
 }
 
 export interface IPResultTemplateDetail {

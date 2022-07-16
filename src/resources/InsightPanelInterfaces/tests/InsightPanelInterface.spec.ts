@@ -40,7 +40,7 @@ describe('InsightPanelInterface', () => {
                     {
                         field: 'sourcetype',
                         operator: IPConditionOperator.MustMatch,
-                        value: 'youtube',
+                        values: ['youtube'],
                     },
                     {
                         field: 'ytlikecount',
