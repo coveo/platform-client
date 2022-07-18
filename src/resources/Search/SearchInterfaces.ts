@@ -1200,6 +1200,46 @@ export interface PostSearchBodyQueryParams {
     wildcards?: boolean;
 }
 
+/**
+ * Defines the body parameters of the query suggest request
+ */
+export interface PostSearchQuerySuggestBodyParams
+    extends Pick<
+            PostSearchBodyQueryParams,
+            | 'actionsHistory'
+            | 'analytics'
+            | 'context'
+            | 'debug'
+            | 'format'
+            | 'index'
+            | 'indexToken'
+            | 'indexType'
+            | 'isGuestUser'
+            | 'locale'
+            | 'logicalIndex'
+            | 'maximumAge'
+            | 'mlParameters'
+            | 'pipeline'
+            | 'q'
+            | 'recommendation'
+            | 'referrer'
+            | 'searchHub'
+            | 'tab'
+            | 'timezone'
+            | 'visitorId'
+        >,
+        Pick<ListFieldValuesBodyQueryParams, 'maximumTimeoutMs'> {
+    /**
+     * The desired number of query suggestions.
+     */
+    count?: number;
+
+    /**
+     * Whether to attempt to complete the last word of the current basic query expression (see the q parameter) and boost the ranking score of the resulting expression so that it is returned as the first query suggestion.
+     */
+    enableWordCompletion?: boolean;
+}
+
 export type RestFacetRequest =
     | RestSpecificFacetRequest
     | RestDateRangeFacetRequest
