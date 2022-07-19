@@ -1,19 +1,19 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {IListIPInterfacesParameters, IPInterfaceConfiguration} from './InsightPanelInterface.model';
+import {IListInsightPanelInterfacesParameters, InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model';
 
 export default class InsightPanelInterface extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightinterface/v1/interfaces`;
 
-    list(options?: IListIPInterfacesParameters) {
-        return this.api.get<PageModel<IPInterfaceConfiguration>>(
+    list(options?: IListInsightPanelInterfacesParameters) {
+        return this.api.get<PageModel<InsightPanelInterfaceConfiguration>>(
             this.buildPath(InsightPanelInterface.baseUrl, options)
         );
     }
 
-    create(ipInterfaceConfig: New<IPInterfaceConfiguration>) {
-        return this.api.post<IPInterfaceConfiguration>(InsightPanelInterface.baseUrl, ipInterfaceConfig);
+    create(ipInterfaceConfig: New<InsightPanelInterfaceConfiguration>) {
+        return this.api.post<InsightPanelInterfaceConfiguration>(InsightPanelInterface.baseUrl, ipInterfaceConfig);
     }
 
     delete(insightPanelInterfaceId: string) {
@@ -21,12 +21,14 @@ export default class InsightPanelInterface extends Resource {
     }
 
     get(insightPanelInterfaceId: string) {
-        return this.api.get<IPInterfaceConfiguration>(`${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}`);
+        return this.api.get<InsightPanelInterfaceConfiguration>(
+            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}`
+        );
     }
 
-    update(ipInterfaceConfig: IPInterfaceConfiguration) {
+    update(ipInterfaceConfig: InsightPanelInterfaceConfiguration) {
         const {id, ...body} = ipInterfaceConfig;
 
-        return this.api.put<IPInterfaceConfiguration>(`${InsightPanelInterface.baseUrl}/${id}`, body);
+        return this.api.put<InsightPanelInterfaceConfiguration>(`${InsightPanelInterface.baseUrl}/${id}`, body);
     }
 }

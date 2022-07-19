@@ -1,18 +1,18 @@
 import {Paginated} from '../BaseInterfaces';
 
-export enum IPConditionOperator {
+export enum InsightPanelConditionOperator {
     MustBeDefined = 'mustBeDefined',
     MustNotBeDefined = 'mustNotBeDefined',
     MustMatch = 'mustMatch',
     MustNotMatch = 'mustNotMatch',
 }
 
-export enum IPResultTag {
+export enum InsightPanelResultTag {
     Recommended = 'recommended',
     ViewedByCustomer = 'viewedByCustomer',
 }
 
-export enum IPResultAction {
+export enum InsightPanelResultAction {
     AttachToCase = 'attachToCase',
     CopyToClipboard = 'copyToClipboard',
     QuickView = 'quickView',
@@ -20,12 +20,12 @@ export enum IPResultAction {
     SendToFeed = 'sendToFeed',
 }
 
-export enum IPResultTemplateLayout {
+export enum InsightPanelResultTemplateLayout {
     Default = 'default',
     Thumbnail = 'thumbnail',
 }
 
-export interface IPResultTemplateBadge {
+export interface InsightPanelResultTemplateBadge {
     /**
      * The field who's value should be displayed in the badge.
      */
@@ -42,7 +42,7 @@ export interface IPResultTemplateBadge {
     color: string;
 }
 
-export interface IPResultTemplateCondition {
+export interface InsightPanelResultTemplateCondition {
     /**
      * The [field](https://docs.coveo.com/en/200) to evaluate.
      */
@@ -56,7 +56,7 @@ export interface IPResultTemplateCondition {
      * - `'mustMatch'`
      * - `'mustNotMatch'`
      */
-    operator: IPConditionOperator;
+    operator: InsightPanelConditionOperator;
 
     /**
      * The values used as the right side operand when the `operator` is one of:
@@ -66,7 +66,7 @@ export interface IPResultTemplateCondition {
     values?: string[];
 }
 
-export interface IPResultTemplateDetail {
+export interface InsightPanelResultTemplateDetail {
     /**
      * The [field](https://docs.coveo.com/en/200) containing the metadata to display.
      */
@@ -77,7 +77,7 @@ export interface IPResultTemplateDetail {
     label: string;
 }
 
-export interface IPResultTemplate {
+export interface InsightPanelResultTemplate {
     /**
      * The name of the result template.
      */
@@ -89,37 +89,37 @@ export interface IPResultTemplate {
      * - `'default'`
      * - `'thumbnail'`
      */
-    layout: IPResultTemplateLayout;
+    layout: InsightPanelResultTemplateLayout;
 
     /**
      * The conditions a result needs to meet to use the template.
      */
-    conditions: IPResultTemplateCondition[];
+    conditions: InsightPanelResultTemplateCondition[];
 
     /**
      * The badge to display.
      */
-    badge: IPResultTemplateBadge;
+    badge: InsightPanelResultTemplateBadge;
 
     /**
      * The metadata details to display.
      */
-    details: IPResultTemplateDetail[];
+    details: InsightPanelResultTemplateDetail[];
 
     /**
      * The available result actions.
      */
-    resultActions: IPResultAction[];
+    resultActions: InsightPanelResultAction[];
 
     /**
      * The tags allowed to be displayed.
      */
-    tags: IPResultTag[];
+    tags: InsightPanelResultTag[];
 }
 
 export type DisplayValueType = 'checkbox' | 'link';
 
-export interface IPFacet {
+export interface InsightPanelFacet {
     /**
      * The [field](https://docs.coveo.com/en/200) on which the facet is based.
      */
@@ -139,7 +139,7 @@ export interface IPFacet {
     displayValuesAs: DisplayValueType;
 }
 
-export interface IPTab {
+export interface InsightPanelTab {
     /**
      * The label to be displayed in the tab.
      */
@@ -155,7 +155,7 @@ export interface IPTab {
     condition: string;
 }
 
-interface IPOption {
+interface InsightPanelOption {
     enabled: boolean;
 }
 
@@ -167,33 +167,33 @@ export interface UserActionsOptions {
     /**
      * Whether to show documents recently clicked by the user.
      */
-    recentClickedDocuments: IPOption;
+    recentClickedDocuments: InsightPanelOption;
     /**
      * Whether to show recent queries performed by the user.
      */
-    recentQueries: IPOption;
+    recentQueries: InsightPanelOption;
     /**
      * Whether to show a timeline of the user's actions.
      */
-    timeline: IPOption;
+    timeline: InsightPanelOption;
 }
 
-export interface IPSettings {
+export interface InsightPanelSettings {
     /**
      * Display a button to create a knowledge article.
      */
-    createArticle: IPOption;
+    createArticle: InsightPanelOption;
     /**
      * Display a button to open a full search page.
      */
-    fullSearch: IPOption;
+    fullSearch: InsightPanelOption;
     /**
      * Options to configure a view of the actions taken by the user who submitted the case.
      */
     userActions: UserActionsOptions;
 }
 
-export interface IPInterfaceConfiguration {
+export interface InsightPanelInterfaceConfiguration {
     /**
      * The configuration identifier.
      */
@@ -207,25 +207,25 @@ export interface IPInterfaceConfiguration {
     /**
      * The list of result templates defined for the insight panel.
      */
-    resultTemplates: IPResultTemplate[];
+    resultTemplates: InsightPanelResultTemplate[];
 
     /**
      * The list of facets to display.
      */
-    facets: IPFacet[];
+    facets: InsightPanelFacet[];
 
     /**
      * The list of tabs to display.
      */
-    tabs: IPTab[];
+    tabs: InsightPanelTab[];
 
     /**
      * The insight panel settings.
      */
-    settings: IPSettings;
+    settings: InsightPanelSettings;
 }
 
-export interface IListIPInterfacesParameters extends Paginated {
+export interface IListInsightPanelInterfacesParameters extends Paginated {
     /**
      * A substring that must appear in an insight panel interface configuration name for this configuration to appear in results.
      */

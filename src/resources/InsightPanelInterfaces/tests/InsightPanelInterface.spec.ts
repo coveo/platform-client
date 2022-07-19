@@ -2,11 +2,11 @@ import API from '../../../APICore';
 import {New} from '../../../Entry';
 import InsightPanelInterface from '../InsightPanelInterface';
 import {
-    IPConditionOperator,
-    IPInterfaceConfiguration,
-    IPResultAction,
-    IPResultTag,
-    IPResultTemplateLayout,
+    InsightPanelConditionOperator,
+    InsightPanelInterfaceConfiguration,
+    InsightPanelResultAction,
+    InsightPanelResultTag,
+    InsightPanelResultTemplateLayout,
 } from '../InsightPanelInterface.model';
 
 jest.mock('../../../APICore');
@@ -18,7 +18,7 @@ describe('InsightPanelInterface', () => {
 
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
-    const config: New<IPInterfaceConfiguration> = {
+    const config: New<InsightPanelInterfaceConfiguration> = {
         name: 'some insight panel name',
         facets: [
             {
@@ -35,16 +35,16 @@ describe('InsightPanelInterface', () => {
         resultTemplates: [
             {
                 name: 'template',
-                layout: IPResultTemplateLayout.Default,
+                layout: InsightPanelResultTemplateLayout.Default,
                 conditions: [
                     {
                         field: 'sourcetype',
-                        operator: IPConditionOperator.MustMatch,
+                        operator: InsightPanelConditionOperator.MustMatch,
                         values: ['youtube'],
                     },
                     {
                         field: 'ytlikecount',
-                        operator: IPConditionOperator.MustBeDefined,
+                        operator: InsightPanelConditionOperator.MustBeDefined,
                     },
                 ],
                 badge: {
@@ -58,8 +58,8 @@ describe('InsightPanelInterface', () => {
                         label: 'Document Type',
                     },
                 ],
-                resultActions: [IPResultAction.QuickView],
-                tags: [IPResultTag.ViewedByCustomer],
+                resultActions: [InsightPanelResultAction.QuickView],
+                tags: [InsightPanelResultTag.ViewedByCustomer],
             },
         ],
         tabs: [
