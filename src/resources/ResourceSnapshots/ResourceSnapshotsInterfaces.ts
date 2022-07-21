@@ -148,7 +148,18 @@ export interface ResourceSnapshotsReportOperationModel {
     resourcesUpdated: number;
 }
 
-export type ResourceSnapshotsReportOperationResults = Record<string, string[]>;
+export interface ResourceSnapshotsReportOperationResult {
+    /**
+     * The code of the error that occured.
+     */
+    resultCode: string;
+    /**
+     * A human-friendly message about the error.
+     */
+    message: string;
+}
+
+export type ResourceSnapshotsReportOperationResults = Record<string, ResourceSnapshotsReportOperationResult[]>;
 
 export interface ResourceSnapshotsReportModel {
     /**
