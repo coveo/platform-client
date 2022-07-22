@@ -391,7 +391,7 @@ export interface ListFieldValuesBodyQueryParams {
      *
      * @default: `0`
      */
-    maximumTimeOutMs?: string;
+    maximumTimeoutMs?: string;
 
     /**
      * Contextual information about the user performing the request and the request itself.

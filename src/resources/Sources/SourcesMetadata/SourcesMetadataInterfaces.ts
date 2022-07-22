@@ -2,6 +2,8 @@ import {PageModel} from '../../BaseInterfaces';
 
 export interface MetadataPageModel extends PageModel {
     items: Metadata[];
+    creationDate: number;
+    expirationDate: number;
     sampledDocumentCount: number;
     documentErrorCount: number;
 }
