@@ -116,6 +116,15 @@ export interface InsightPanelConfigModel {
                  */
                 enabled: boolean;
             };
+            /**
+             * Information related to the Query Suggestions (QS) ML model.
+             */
+            qs: {
+                /**
+                 * Indicates whether a QS ML model is configured in the query pipeline.
+                 */
+                enabled: boolean;
+            };
         };
     };
     /**

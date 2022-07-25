@@ -1,5 +1,10 @@
 import {FilterConditions} from '../FilterConditions';
 
+export enum Operator {
+    Equals = 'EQUALS',
+    NotEquals = 'NOT_EQUALS',
+}
+
 export type CaseClassificationDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
 
 export interface DateField {
