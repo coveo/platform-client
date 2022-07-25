@@ -3,6 +3,7 @@ import CaseClassificationConfiguration from '../CaseClassificationConfiguration'
 import {
     CaseClassificationConfigurationModel,
     CaseClassificationContentFieldsParams,
+    Operator,
 } from '../CaseClassificationConfigurationInterfaces';
 
 jest.mock('../../../../APICore');
@@ -27,7 +28,7 @@ describe('CaseClassificationConfiguration', () => {
             caseFilterConditions: [
                 {
                     field: 'test-field',
-                    operator: 'EQUALS',
+                    operator: Operator.Equals,
                     value: 'test-value',
                 },
             ],
@@ -55,7 +56,7 @@ describe('CaseClassificationConfiguration', () => {
             caseFilterConditions: [
                 {
                     field: 'test-field',
-                    operator: 'NOT_EQUALS',
+                    operator: Operator.NotEquals,
                     value: 'test-value',
                 },
             ],
@@ -129,7 +130,7 @@ describe('CaseClassificationConfiguration', () => {
                 caseFilterConditions: [
                     {
                         field: 'test-field',
-                        operator: 'EQUALS',
+                        operator: Operator.Equals,
                         value: 'test-value',
                     },
                 ],
@@ -153,7 +154,7 @@ describe('CaseClassificationConfiguration', () => {
                 caseFilterConditions: [
                     {
                         field: 'test-field',
-                        operator: 'EQUALS',
+                        operator: Operator.Equals,
                         value: 'test-value',
                     },
                 ],
