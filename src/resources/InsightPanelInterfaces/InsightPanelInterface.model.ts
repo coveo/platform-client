@@ -1,28 +1,24 @@
 import {Paginated} from '../BaseInterfaces';
 
 export enum InsightPanelConditionOperator {
-    MustBeDefined = 'mustBeDefined',
-    MustNotBeDefined = 'mustNotBeDefined',
+    isDefined = 'isDefined',
+    isNotDefined = 'isNotDefined',
     MustMatch = 'mustMatch',
     MustNotMatch = 'mustNotMatch',
-}
-
-export enum InsightPanelResultTag {
-    Recommended = 'recommended',
-    ViewedByCustomer = 'viewedByCustomer',
-}
-
-export enum InsightPanelResultAction {
-    AttachToCase = 'attachToCase',
-    CopyToClipboard = 'copyToClipboard',
-    QuickView = 'quickView',
-    SendAsEmail = 'sendAsEmail',
-    SendToFeed = 'sendToFeed',
 }
 
 export enum InsightPanelResultTemplateLayout {
     Default = 'default',
     Thumbnail = 'thumbnail',
+}
+
+interface InsightPanelOption {
+    enabled: boolean;
+}
+
+interface InsightPanelResultTagOptions {
+    enabled: boolean;
+    color: string;
 }
 
 export interface InsightPanelResultTemplateBadge {
@@ -42,7 +38,7 @@ export interface InsightPanelResultTemplateBadge {
     color: string;
 }
 
-export interface InsightPanelResultTemplateCondition {
+export interface InsightPanelCondition {
     /**
      * The [field](https://docs.coveo.com/en/200) to evaluate.
      */
@@ -51,12 +47,12 @@ export interface InsightPanelResultTemplateCondition {
     /**
      * The operator used to evaluate the field condition.
      * Possible values are:
-     * - `'mustBeDefined'`
-     * - `'mustNotBeDefined'`
+     * - `'isDefined'`
+     * - `'isNotDefined'`
      * - `'mustMatch'`
      * - `'mustNotMatch'`
      */
-    operator: InsightPanelConditionOperator;
+    conditionType: InsightPanelConditionOperator;
 
     /**
      * The values used as the right side operand when the `operator` is one of:
@@ -77,6 +73,40 @@ export interface InsightPanelResultTemplateDetail {
     label: string;
 }
 
+export interface InsightPanelResultActions {
+    /**
+     * An option enabling the ability to attach a given result to a case record.
+     */
+    attachToCase?: InsightPanelOption;
+    /**
+     * An option enabling the ability to copy result metadata to the clipboard.
+     */
+    copyToClipboard?: InsightPanelOption;
+    /**
+     * An option enabling the ability to view the result document in a quick view modal.
+     */
+    quickView?: InsightPanelOption;
+    /**
+     * An option enabling the ability to send the result as an email.
+     */
+    sendAsEmail?: InsightPanelOption;
+    /**
+     * An option enabling the ability to send the result to the case feed.
+     */
+    sendToFeed?: InsightPanelOption;
+}
+
+export interface InsightPanelResultTags {
+    /**
+     * An option enabling a tag identifying results that have been viewed by the customer who submitted the case.
+     */
+    viewedByCustomer?: InsightPanelResultTagOptions;
+    /**
+     * An option enabling a tag identifying recommended results.
+     */
+    recommended?: InsightPanelResultTagOptions;
+}
+
 export interface InsightPanelResultTemplate {
     /**
      * The name of the result template.
@@ -94,7 +124,7 @@ export interface InsightPanelResultTemplate {
     /**
      * The conditions a result needs to meet to use the template.
      */
-    conditions: InsightPanelResultTemplateCondition[];
+    conditions: InsightPanelCondition[];
 
     /**
      * The badge to display.
@@ -109,12 +139,12 @@ export interface InsightPanelResultTemplate {
     /**
      * The available result actions.
      */
-    resultActions: InsightPanelResultAction[];
+    resultActions: InsightPanelResultActions;
 
     /**
      * The tags allowed to be displayed.
      */
-    tags: InsightPanelResultTag[];
+    tags: InsightPanelResultTags;
 }
 
 export type DisplayValueType = 'checkbox' | 'link';
@@ -152,11 +182,7 @@ export interface InsightPanelTab {
      *
      * `@objecttype==Message`
      */
-    condition: string;
-}
-
-interface InsightPanelOption {
-    enabled: boolean;
+    conditions: InsightPanelCondition[];
 }
 
 export interface UserActionsOptions {

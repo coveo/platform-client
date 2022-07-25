@@ -2,11 +2,9 @@ import API from '../../../APICore';
 import {New} from '../../../Entry';
 import InsightPanelInterface from '../InsightPanelInterface';
 import {
-    InsightPanelConditionOperator,
     InsightPanelInterfaceConfiguration,
-    InsightPanelResultAction,
-    InsightPanelResultTag,
     InsightPanelResultTemplateLayout,
+    InsightPanelConditionOperator,
 } from '../InsightPanelInterface.model';
 
 jest.mock('../../../APICore');
@@ -38,18 +36,17 @@ describe('InsightPanelInterface', () => {
                 layout: InsightPanelResultTemplateLayout.Default,
                 conditions: [
                     {
+                        conditionType: InsightPanelConditionOperator.MustMatch,
                         field: 'sourcetype',
-                        operator: InsightPanelConditionOperator.MustMatch,
                         values: ['youtube'],
                     },
                     {
+                        conditionType: InsightPanelConditionOperator.isDefined,
                         field: 'ytlikecount',
-                        operator: InsightPanelConditionOperator.MustBeDefined,
                     },
                 ],
                 badge: {
                     field: 'documenttype',
-                    label: 'Video',
                     color: '#cc0000',
                 },
                 details: [
@@ -58,14 +55,32 @@ describe('InsightPanelInterface', () => {
                         label: 'Document Type',
                     },
                 ],
-                resultActions: [InsightPanelResultAction.QuickView],
-                tags: [InsightPanelResultTag.ViewedByCustomer],
+                resultActions: {
+                    quickView: {
+                        enabled: true,
+                    },
+                },
+                tags: {
+                    viewedByCustomer: {
+                        enabled: true,
+                        color: '#cc0000',
+                    },
+                    recommended: {
+                        enabled: false,
+                        color: '#cc4000',
+                    },
+                },
             },
         ],
         tabs: [
             {
                 label: 'Articles',
-                condition: '@sfkbid',
+                conditions: [
+                    {
+                        field: '@sfkbid',
+                        conditionType: InsightPanelConditionOperator.isDefined,
+                    },
+                ],
             },
         ],
         settings: {
