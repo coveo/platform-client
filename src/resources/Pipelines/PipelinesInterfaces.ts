@@ -5,6 +5,32 @@ export interface PipelineBackendVersion {
     version: '1' | '2';
 }
 
+interface PipelineInterfaceUrl {
+    /**
+     * Url of the pages affected by this query pipeline.
+     * 
+     * string
+     * @example: 'www.acme.com'
+     */
+    url: string;
+}
+
+interface PipelineAduiConfigTooltipsDismissed {
+    /**
+     * The identifier of the tooltip that was dismissed.
+     * 
+     * string
+     */
+    id: string;
+}
+
+interface PipelineAduiConfig {
+    /**
+     * A list of tooltips that were dismissed by the user.
+     */
+    tooltipsDismissed?: Array<PipelineAduiConfigTooltipsDismissed>;
+}
+
 interface PipelineShared {
     /**
      * The name of this query pipeline.
@@ -88,6 +114,17 @@ interface PipelineShared {
      * @example: '@source==CommunityForum OR @source==CommunityDocumentation'
      */
     filter?: string;
+    /**
+     * The use case for which this query pipeline should apply. 
+     * This option allows you to categorize your query pipeline and enables Coveo 
+     * to provide better support and improve the tools we provide.
+     * 
+     * string
+     * @example: 'Service & Support'
+     */
+    useCase?: string,
+    interfaceUrls?: Array<PipelineInterfaceUrl>;
+    aduiConfig?: PipelineAduiConfig;
 }
 
 export interface PipelineModel extends PipelineShared {
