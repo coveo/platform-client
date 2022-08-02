@@ -116,13 +116,21 @@ export interface InsightPanelConfigModel {
                  */
                 enabled: boolean;
             };
+            /**
+             * Information related to the Query Suggestions (QS) ML model.
+             */
+            qs: {
+                /**
+                 * Indicates whether a QS ML model is configured in the query pipeline.
+                 */
+                enabled: boolean;
+            };
         };
     };
     /**
      * The search hub value affected to this Insight Panel configuration.
      */
     searchHub: string;
-
     /**
      * The context field mappings to use when performing queries. This mapping allows an Insight Panel integration to retrieve the context information from the CRM and pass it to the Coveo platform when executing Insight Panel queries.
      *
@@ -139,4 +147,8 @@ export interface InsightPanelConfigModel {
      * ```
      */
     contextFields: Record<string, string>;
+    /**
+     * A list of the associated interface configs.
+     */
+    interfaces: string[];
 }
