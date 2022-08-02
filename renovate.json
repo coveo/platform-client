@@ -1,6 +1,17 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "enabled": true,
+    "extends": [":semanticPrefixFixDepsChoreOthers", "helpers:pinGitHubActionDigests", "schedule:earlyMondays"],
+    "packageRules": [
+        {
+            "matchPackagePatterns": ["*"],
+            "groupName": "all dependencies",
+            "groupSlug": "all"
+        }
+    ],
+    "rangeStrategy": "auto",
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "automerge": true
 }
