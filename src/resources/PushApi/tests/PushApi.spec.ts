@@ -7,7 +7,7 @@ jest.mock('../../../APICore');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe(PushApi.name, () => {
+describe('PushAPI', () => {
     let pushApi: PushApi;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;

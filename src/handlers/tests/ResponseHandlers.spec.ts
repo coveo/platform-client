@@ -19,15 +19,11 @@ describe('ResponseHandlers', () => {
         expect(ret2).toEqual(data);
     });
 
-    it('should return a promise rejected with the response body when the status is not between 200 and 299 ', async () => {
+    it('should return a promise rejected with the response body when the status is not between 200 and 299', async () => {
         const error = {code: 'WRONG_UTENSIL', message: 'Use a spoon to eat the soup.'};
         const errorResponse = new Response(JSON.stringify(error), {status: 400});
 
-        await handleResponse(errorResponse).catch((err) => {
-            expect(err).toEqual(error);
-        });
-
-        expect.assertions(1);
+        await expect(() => handleResponse(errorResponse)).rejects.toStrictEqual(error);
     });
 
     it('should return a promise resolved with the response body as blob when using the successBlob handler and the status is between 200 and 299', async () => {

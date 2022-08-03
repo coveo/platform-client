@@ -75,7 +75,7 @@ describe('CaseClassificationConfiguration', () => {
         const newCCConfigModel = modelConfigs;
         newCCConfigModel.forEach((config) => {
             it('should make a POST call to the Case Classification Configuration base url', () => {
-                const {modelId, ...newConfig} = config;
+                const {modelId: _, ...newConfig} = config;
                 ccConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);

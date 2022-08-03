@@ -57,7 +57,7 @@ describe('DNEConfiguration', () => {
     });
 
     describe('createWithoutQuery', () => {
-        it('should make a POST call to get documentExtractionQueryModel, then use this param to create a new DNE model ', async () => {
+        it('should make a POST call to get documentExtractionQueryModel, then use this param to create a new DNE model', async () => {
             const newModel: DNENewConfigurationModel = {modelDisplayName: '🐩'};
             const documentExtractionQueryModel = await dneConfig.createWithoutQuery(newModel, {});
 
