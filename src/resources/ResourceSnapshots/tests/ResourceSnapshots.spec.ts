@@ -1,3 +1,4 @@
+import fetchMock from 'jest-fetch-mock';
 import API from '../../../APICore';
 import {SortingOrder, SnapshotSortingType} from '../../Enums';
 import ResourceSnapshots from '../ResourceSnapshots';
@@ -144,7 +145,7 @@ describe('ResourceSnapshots', () => {
             };
 
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
-            const fetchMock = global.fetch.mockResponseOnce(JSON.stringify({test: 'hello'}));
+            fetchMock.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
             await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
