@@ -1,3 +1,4 @@
+import fetchMock from 'jest-fetch-mock';
 import API from '../APICore';
 import {PlatformClientOptions} from '../ConfigurationInterfaces';
 import getEndpoint, {Environment, Region} from '../Endpoints';
@@ -20,7 +21,7 @@ describe('APICore', () => {
     describe('calling the right endpoint', () => {
         beforeEach(() => {
             jest.clearAllMocks();
-            global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+            fetchMock.mockResponseOnce(JSON.stringify(testData.response));
         });
 
         it('should call the default endpoint if no environment, region, and host is specified', async () => {
@@ -73,7 +74,7 @@ describe('APICore', () => {
         });
 
         it('should retry on throttle', async () => {
-            const fetchMock = global.fetch
+            fetchMock
                 .mockResponseOnce('too fast there cowboy!', {status: 429})
                 .mockResponseOnce(JSON.stringify(testData.response));
             await api.get(testData.route);
@@ -83,7 +84,7 @@ describe('APICore', () => {
 
         describe('get', () => {
             it('should do a simple GET request', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.get<typeof testData.response>(testData.route);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -96,22 +97,22 @@ describe('APICore', () => {
 
             it('should make the promise fail on a failed request', async () => {
                 const error = new Error('the request has failed');
-                global.fetch.mockRejectedValue(error);
+                fetchMock.mockRejectedValue(error);
 
                 await expect(api.get(testData.route)).rejects.toThrow(error);
             });
 
             it('should bind GET requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
-                expect(global.fetch.mock.calls[0][1].signal).toBeDefined();
-                expect(global.fetch.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
+                expect(fetchMock.mock.calls[0][1].signal).toBeDefined();
+                expect(fetchMock.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
             });
         });
 
         describe('getFile', () => {
             it('should do a GET request to the specified url and resolve with a blob', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const expectedResponse = await new Response(JSON.stringify(testData.response)).blob();
                 const response = await api.getFile(testData.route);
 
@@ -125,21 +126,21 @@ describe('APICore', () => {
 
             it('should make the promise fail on a failed request', async () => {
                 const error = new Error('the request has failed');
-                global.fetch.mockRejectedValue(error);
+                fetchMock.mockRejectedValue(error);
                 await expect(api.getFile(testData.route)).rejects.toThrow(error);
             });
 
             it('should bind GET requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.getFile(testData.route);
-                expect(global.fetch.mock.calls[0][1].signal).toBeDefined();
-                expect(global.fetch.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
+                expect(fetchMock.mock.calls[0][1].signal).toBeDefined();
+                expect(fetchMock.mock.calls[0][1].signal instanceof AbortSignal).toBe(true);
             });
         });
 
         describe('post', () => {
             it('should do a simple POST request', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.post(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -153,9 +154,9 @@ describe('APICore', () => {
             });
 
             it('should not bind POST requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.post(testData.route, testData.body);
-                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+                expect(fetchMock.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
@@ -163,7 +164,7 @@ describe('APICore', () => {
             const formMock: jest.Mocked<FormData> = jest.fn() as any;
 
             it('should do a simple POST request using form data', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.postForm(testData.route, formMock);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -177,15 +178,15 @@ describe('APICore', () => {
             });
 
             it('should not bind POST requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.postForm(testData.route, formMock);
-                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+                expect(fetchMock.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
         describe('put', () => {
             it('should do a simple PUT request', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.put(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -199,15 +200,15 @@ describe('APICore', () => {
             });
 
             it('should not bind PUT requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.put(testData.route, testData.body);
-                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+                expect(fetchMock.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
         describe('patch', () => {
             it('should do a simple PATCH request', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.patch(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -221,15 +222,15 @@ describe('APICore', () => {
             });
 
             it('should not bind PATCH requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.patch(testData.route, testData.body);
-                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+                expect(fetchMock.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
         describe('delete', () => {
             it('should do a simple DELETE request', async () => {
-                const fetchMock = global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.delete(testData.route);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -241,26 +242,26 @@ describe('APICore', () => {
             });
 
             it('should not bind DELETE requests to an abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.delete(testData.route);
-                expect(global.fetch.mock.calls[0][1].signal).toBeUndefined();
+                expect(fetchMock.mock.calls[0][1].signal).toBeUndefined();
             });
         });
 
         describe('when calling abortGetRequests', () => {
             it('should abort pending get requests', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
-                expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(false);
+                expect(fetchMock.mock.calls[0][1].signal.aborted).toBe(false);
                 await api.abortGetRequests();
-                expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(true);
+                expect(fetchMock.mock.calls[0][1].signal.aborted).toBe(true);
             });
 
             it('should not abort get requests that are being sent after the abort signal', async () => {
-                global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.abortGetRequests();
                 await api.get(testData.route);
-                expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(false);
+                expect(fetchMock.mock.calls[0][1].signal.aborted).toBe(false);
             });
 
             it('should not resolve nor reject the fetch promise', () => {
@@ -268,7 +269,7 @@ describe('APICore', () => {
                 const resolvedPromiseSpy = jest.fn().mockName('resolvedPromiseSpy');
                 const rejectedPromiseSpy = jest.fn().mockName('rejectedPromiseSpy');
 
-                global.fetch.mockImplementationOnce(
+                fetchMock.mockImplementationOnce(
                     () =>
                         new Promise((resolve) => {
                             setTimeout(() => {
@@ -296,7 +297,7 @@ describe('APICore', () => {
     });
 
     it('should give priority to custom response handlers when specified', async () => {
-        global.fetch.mockResponseOnce(JSON.stringify(testData.response));
+        fetchMock.mockResponseOnce(JSON.stringify(testData.response));
         const CustomResponseHandler: ResponseHandler = {
             canProcess: (response: Response): boolean => response.ok,
             process: jest.fn(),
@@ -370,14 +371,12 @@ describe('APICore', () => {
                 type: '🐟',
             };
 
-            global.fetch.mockImplementation(
-                (_url: string, config: RequestInit): Promise<Response> => {
-                    if (config.headers && config.headers['override']) {
-                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
-                    }
-                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            fetchMock.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
+                if (config.headers && config.headers['override']) {
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-            );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            });
 
             const api = new API({...testConfig, globalRequestSettings});
 
@@ -398,14 +397,12 @@ describe('APICore', () => {
 
             const overriddenValue = 'not-the-value';
 
-            global.fetch.mockImplementation(
-                (_url: string, config: RequestInit): Promise<Response> => {
-                    if (config.headers && config.headers['override'] === overriddenValue) {
-                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
-                    }
-                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            fetchMock.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
+                if (config.headers && config.headers['override'] === overriddenValue) {
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-            );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            });
 
             const api = new API({...testConfig, globalRequestSettings});
 
