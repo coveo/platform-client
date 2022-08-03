@@ -20,7 +20,7 @@
         "test:watch": "jest --watchAll",
         "release": "semantic-release",
         "commit-cli": "git-cz",
-        "lintfix": "prettier --write \"**/*.{ts,js,json,md}\" && eslint \"src/**.*\" --fix",
+        "lintfix": "prettier --write \"**/*.{ts,js,json,md}\" && eslint -c ./.eslintrc.js \"src/**.*\" --fix",
         "prepare": "husky install"
     },
     "devDependencies": {

@@ -92,7 +92,7 @@ export default class ResourceSnapshots extends Resource {
     createFromBuffer(file: Buffer, fileType: ResourceSnapshotSupportedFileTypes, options: CreateFromFileOptions) {
         const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: fileType};
         const form = getFormData();
-        ((form as unknown) as FormDataNode).append('file', file, `snapshot.${fileType.toString().toLowerCase()}`);
+        (form as unknown as FormDataNode).append('file', file, `snapshot.${fileType.toString().toLowerCase()}`);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),

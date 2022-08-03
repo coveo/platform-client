@@ -370,14 +370,12 @@ describe('APICore', () => {
                 type: '🐟',
             };
 
-            global.fetch.mockImplementation(
-                (_url: string, config: RequestInit): Promise<Response> => {
-                    if (config.headers && config.headers['override']) {
-                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
-                    }
-                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            global.fetch.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
+                if (config.headers && config.headers['override']) {
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-            );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            });
 
             const api = new API({...testConfig, globalRequestSettings});
 
@@ -398,14 +396,12 @@ describe('APICore', () => {
 
             const overriddenValue = 'not-the-value';
 
-            global.fetch.mockImplementation(
-                (_url: string, config: RequestInit): Promise<Response> => {
-                    if (config.headers && config.headers['override'] === overriddenValue) {
-                        return Promise.resolve(new Response(JSON.stringify(responseBody)));
-                    }
-                    return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            global.fetch.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
+                if (config.headers && config.headers['override'] === overriddenValue) {
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-            );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
+            });
 
             const api = new API({...testConfig, globalRequestSettings});
 
