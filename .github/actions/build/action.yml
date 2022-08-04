@@ -1,7 +1,7 @@
-name: "Build"
-description: "Build the project"
+name: 'Build'
+description: 'Build the project'
 runs:
-  using: composite
-  steps:
-    - run: npm run build
-      shell: bash
+    using: composite
+    steps:
+        - run: npm run build
+          shell: bash

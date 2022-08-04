@@ -1,22 +1,21 @@
 name: CI
 on:
-  pull_request:
-    branches: [master]
-    types: [opened, edited, synchronize, reopened]
-  push:
-    branches:
-      - "main"
+    pull_request:
+        branches: [master]
+        types: [opened, edited, synchronize, reopened]
+    push:
+        branches:
+            - 'main'
 jobs:
-  CI:
-    runs-on: ubuntu-latest
-    name: CI
-    steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Tests
-        run: npm test
-      - name: Build
-        uses: ./.github/actions/build
-        
+    CI:
+        runs-on: ubuntu-latest
+        name: CI
+        steps:
+            - name: Checkout
+              uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Tests
+              run: npm test
+            - name: Build
+              uses: ./.github/actions/build
