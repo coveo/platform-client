@@ -1,4 +1,4 @@
-import {ListFieldValuesBodyQueryParams, PostSearchBodyQueryParams} from '.';
+import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from '.';
 import API from '../../APICore';
 import Ressource from '../Resource';
 import {RestQueryParams, RestTokenParams, TokenModel} from './SearchInterfaces';
@@ -32,6 +32,15 @@ export default class Search extends Ressource {
                 viewAllContent: viewAllContent ? 1 : undefined,
             }),
             bodyParameters
+        );
+    }
+
+    querySuggestPost(restQuerySuggestParameters: PostSearchQuerySuggestBodyParams) {
+        return this.api.post<any>(
+            this.buildPath(`${Search.baseUrl}/querySuggest`, {
+                organizationId: this.api.organizationId,
+            }),
+            restQuerySuggestParameters
         );
     }
 }
