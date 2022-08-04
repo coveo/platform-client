@@ -113,4 +113,13 @@ describe('Search', () => {
             expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
         });
     });
+
+    describe('querySuggestPost', () => {
+        it('should make a post call to the querySuggest endpoint', () => {
+            const queryParams = {q: ''};
+            search.querySuggestPost(queryParams);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}/querySuggest`, queryParams);
+        });
+    });
 });
