@@ -84,7 +84,7 @@ describe('InsightPanelConfig', () => {
                     description: 'crm-description-field',
                 },
             };
-            const {id, ...insightPanelModelWithoutId} = insightPanelModel;
+            const {id: _, ...insightPanelModelWithoutId} = insightPanelModel;
 
             insightPanel.update(insightPanelModel);
 
