@@ -1,0 +1,7 @@
+name: 'Lint'
+description: 'Check files respect ESLint & Prettier rules'
+runs:
+    using: composite
+    steps:
+        - run: npm run prettier:check && npm run eslint:check
+          shell: bash
