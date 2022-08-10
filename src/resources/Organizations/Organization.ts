@@ -84,6 +84,19 @@ export default class Organization extends Resource {
         return this.api.get<any>(`${Organization.baseUrl}/${organizationId}/additionalinformation`);
     }
 
+    getExperimentalStatus(organizationId: string = API.orgPlaceholder) {
+        return this.api.get<boolean>(
+            `${Organization.baseUrl}/${organizationId}/machinelearning/orgconfiguration/servingExperimentAllowed`
+        );
+    }
+
+    updateExperimentalStatus(isAllowed: boolean = false) {
+        return this.api.put<boolean>(
+            `${Organization.baseUrl}/${API.orgPlaceholder}/machinelearning/orgconfiguration/servingExperimentAllowed`,
+            isAllowed
+        );
+    }
+
     listPrivileges() {
         return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges`);
     }
