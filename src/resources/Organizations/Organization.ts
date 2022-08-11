@@ -90,10 +90,9 @@ export default class Organization extends Resource {
         );
     }
 
-    updateExperimentalStatus(isAllowed: boolean = false) {
+    updateExperimentalStatus(organizationId: string = API.orgPlaceholder, isAllowed: boolean = false) {
         return this.api.put<boolean>(
-            `${Organization.baseUrl}/${API.orgPlaceholder}/machinelearning/orgconfiguration/servingExperimentAllowed`,
-            isAllowed
+            `${Organization.baseUrl}/${organizationId}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${isAllowed}`
         );
     }
 
