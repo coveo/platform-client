@@ -265,8 +265,9 @@ describe('Organization', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed`,
-                false
+                `${
+                    Organization.baseUrl
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${false}`
             );
         });
 
@@ -276,8 +277,9 @@ describe('Organization', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed`,
-                isAllowed
+                `${
+                    Organization.baseUrl
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${true}`
             );
         });
     });
