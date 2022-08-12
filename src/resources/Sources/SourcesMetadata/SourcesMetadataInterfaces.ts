@@ -36,6 +36,10 @@ export interface Metadata {
      * The origin of the metadata.
      */
     origin: string;
+    /**
+     * Whether the origin is mapped or not.
+     */
+    isMapped: boolean;
 }
 
 export interface MetadataReportStatus {
