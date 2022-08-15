@@ -30,6 +30,7 @@ import Logs from '../Logs/Logs';
 import Connectivity from '../Connectivity/Connectivity';
 import SearchInterfaces from '../SearchInterfaces/SearchInterfaces';
 import InProductExperiences from '../InProductExperiences/InProductExperiences';
+import ProductListing from '../Catalogs/ProductListing';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -63,6 +64,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.catalogConfiguration).toBeDefined();
             expect(platformResources.catalogConfiguration).toBeInstanceOf(CatalogConfiguration);
+        });
+
+        it('should register the productListing resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.productListing).toBeDefined();
+            expect(platformResources.productListing).toBeInstanceOf(ProductListing);
         });
 
         it('should register the cluster resource on the platform instance', () => {
