@@ -30,6 +30,11 @@ export interface QueryFilterModel {
     value: FieldValueModel;
 }
 
+export interface ProductListingMetricsModel {
+    lastNumberOfProducts?: number;
+    lastQueried: string;
+}
+
 export interface ProductListingModel {
     /**
      * The list of exclusion filters.
@@ -51,6 +56,10 @@ export interface ProductListingModel {
      * The list of URLs for the product listing.
      */
     urls: string[];
+    /**
+     * The list of usage metrics.
+     */
+    metrics?: ProductListingMetricsModel;
 }
 
 export interface CatalogProductListingsGroupModel {
