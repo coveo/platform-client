@@ -12,3 +12,8 @@ export interface LogRequest {
     resourceId: string;
     activityId: string;
 }
+
+export enum LogRequestResourceType {
+    SOURCE = 'SOURCE',
+    SECURITY_PROVIDER = 'SECURITY_PROVIDER',
+}
