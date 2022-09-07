@@ -39,7 +39,7 @@ export interface ProductListingModel {
     /**
      * The list of exclusion filters.
      */
-    exlusion?: QueryFilterModel[];
+    exclude?: QueryFilterModel[];
     /**
      * The unique identifier of this product listing.
      */
