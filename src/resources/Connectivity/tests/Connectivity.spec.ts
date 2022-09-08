@@ -24,7 +24,10 @@ describe('Connectivity Service', () => {
         it('should post a new new log request', () => {
             connectivity.requestLog({resourceId, activityId});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}`, {resourceId, activityId});
+            expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}?resourceType=SOURCE`, {
+                resourceId,
+                activityId,
+            });
         });
 
         it('should get the state of a log request', () => {

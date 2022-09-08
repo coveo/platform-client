@@ -5,9 +5,8 @@ import {LogRequest, LogRequestId, LogRequestResourceType, LogRequestResult} from
 export default class Connectivity extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/logrequests`;
 
-    requestLog(body: LogRequest, type?: LogRequestResourceType) {
-        const url = type ? this.buildPath(Connectivity.baseUrl, type) : Connectivity.baseUrl;
-        return this.api.post<LogRequestId>(url, body);
+    requestLog(body: LogRequest, type: LogRequestResourceType = LogRequestResourceType.SOURCE) {
+        return this.api.post<LogRequestId>(this.buildPath(Connectivity.baseUrl, {resourceType: type}), body);
     }
 
     getLogRequestState(logRequestId: string) {
