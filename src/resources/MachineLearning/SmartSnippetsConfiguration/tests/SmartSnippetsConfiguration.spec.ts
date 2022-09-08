@@ -44,7 +44,7 @@ describe('SmartSnippetsConfiguration', () => {
     describe('create', () => {
         modelConfigs.forEach((modelConfig, index) => {
             it(`should make a POST call to the Smart Snippets Configuration base url with config ${index}`, () => {
-                const {modelId, ...newConfig} = modelConfig;
+                const {modelId: _, ...newConfig} = modelConfig;
                 smartSnippetsConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);

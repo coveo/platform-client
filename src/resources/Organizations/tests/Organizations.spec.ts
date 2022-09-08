@@ -249,4 +249,38 @@ describe('Organization', () => {
             );
         });
     });
+
+    describe('experimental status', () => {
+        it('should make a GET call to the specific Organization url', () => {
+            const organizationToGetId = 'Organization-to-be-fetched';
+            organization.getExperimentalStatus(organizationToGetId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Organization.baseUrl}/${organizationToGetId}/machinelearning/orgconfiguration/servingExperimentAllowed`
+            );
+        });
+
+        it('should make a PUT call to update experimental status with default false', () => {
+            organization.updateExperimentalStatus();
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${
+                    Organization.baseUrl
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${false}`
+            );
+        });
+
+        it('should make a PUT call to update experimental status with passed value', () => {
+            const isAllowed = true;
+            organization.updateExperimentalStatus(isAllowed);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${
+                    Organization.baseUrl
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${true}`
+            );
+        });
+    });
 });

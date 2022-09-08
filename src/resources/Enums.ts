@@ -1035,3 +1035,21 @@ export enum VaultValueType {
     INTEGER = 'INTEGER',
     STRING = 'STRING',
 }
+
+export enum FieldOperatorType {
+    IS_ANY_OF = 'IS_ANY_OF',
+    IS_BETWEEN = 'IS_BETWEEN',
+    IS_EXACTLY = 'IS_EXACTLY',
+    IS_GREATER_THAN = 'IS_GREATER_THAN',
+    IS_GREATER_THAN_OR_EQUAL_TO = 'IS_GREATER_THAN_OR_EQUAL_TO',
+    IS_LESS_THAN = 'IS_LESS_THAN',
+    IS_LESS_THAN_OR_EQUAL_TO = 'IS_LESS_THAN_OR_EQUAL_TO',
+}
+
+export enum FieldValueType {
+    RANGE = 'RANGE',
+    STRING = 'STRING',
+    DECIMAL = 'DECIMAL',
+    ARRAY = 'ARRAY',
+    HIERARCHIC_MULTI_VALUE = 'HIERARCHIC_MULTI_VALUE',
+}

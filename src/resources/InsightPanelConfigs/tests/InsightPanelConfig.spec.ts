@@ -85,7 +85,7 @@ describe('InsightPanelConfig', () => {
                 },
                 interfaces: [],
             };
-            const {id, ...insightPanelModelWithoutId} = insightPanelModel;
+            const {id: _, ...insightPanelModelWithoutId} = insightPanelModel;
 
             insightPanel.update(insightPanelModel);
 

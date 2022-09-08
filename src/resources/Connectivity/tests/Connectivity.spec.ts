@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import Connectivity from '../Connectivity';
+import {LogRequestResourceType} from '../ConnectivityInterface';
 
 jest.mock('../../../APICore');
 
@@ -23,13 +24,25 @@ describe('Connectivity Service', () => {
         it('should post a new new log request', () => {
             connectivity.requestLog({resourceId, activityId});
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}`, {resourceId, activityId});
+            expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}?resourceType=SOURCE`, {
+                resourceId,
+                activityId,
+            });
         });
 
         it('should get the state of a log request', () => {
             connectivity.getLogRequestState(logRequestId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Connectivity.baseUrl}/${logRequestId}`);
+        });
+
+        it('should have the resource type if specified', () => {
+            connectivity.requestLog({resourceId, activityId}, LogRequestResourceType.SECURITY_PROVIDER);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}?resourceType=SECURITY_PROVIDER`, {
+                resourceId,
+                activityId,
+            });
         });
     });
 });
