@@ -1,3 +1,4 @@
+import {WithRequiredProperty} from '../../utils';
 import {Paginated} from '../BaseInterfaces';
 
 /**
@@ -68,6 +69,17 @@ export interface InsightPanelConfigCreationParams {
      * ```
      */
     contextFields?: Record<string, string>;
+}
+
+/**
+ * Defines the parameters required to update an Insight Panel configuration.
+ */
+export interface InsightPanelConfigUpdateParams
+    extends WithRequiredProperty<InsightPanelConfigCreationParams, 'contextFields'> {
+    /**
+     * A list of the associated interface configs.
+     */
+    interfaces?: string[];
 }
 
 /**
