@@ -1,3 +1,4 @@
+import {WithRequiredProperty} from '../../utils';
 import {Paginated} from '../BaseInterfaces';
 
 /**
@@ -73,39 +74,8 @@ export interface InsightPanelConfigCreationParams {
 /**
  * Defines the parameters required to update an Insight Panel configuration.
  */
-export interface InsightPanelConfigUpdateParams {
-    /**
-     * The ID of the config.
-     */
-    id: string;
-
-    /**
-     * The name of the Insight Panel configuration.
-     */
-    name: string;
-
-    /**
-     * The ID of the associated query pipeline.
-     */
-    pipeline: string;
-
-    /**
-     * The context field mappings to use when performing queries. This mapping allows an Insight Panel integration to retrieve the context information from the CRM and pass it to the Coveo platform when executing Insight Panel queries.
-     *
-     * The key is the context information such as `subject` or `description`.
-     *
-     * The value is a CRM reference allowing the Insight Panel integration to retrieve the context information from the CRM.
-     *
-     * @example
-     * ```json
-     * {
-     *   "subject": "Case_subject",
-     *   "description": "Case_description"
-     * }
-     * ```
-     */
-    contextFields: Record<string, string>;
-
+export interface InsightPanelConfigUpdateParams
+    extends WithRequiredProperty<InsightPanelConfigCreationParams, 'contextFields'> {
     /**
      * A list of the associated interface configs.
      */

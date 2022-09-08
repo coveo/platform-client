@@ -83,6 +83,7 @@ describe('InsightPanelConfig', () => {
                     subject: 'crm-subject-field',
                     description: 'crm-description-field',
                 },
+                interfaces: [],
             };
             const {id, ...insightPanelModelWithoutId} = insightPanelModel;
 
