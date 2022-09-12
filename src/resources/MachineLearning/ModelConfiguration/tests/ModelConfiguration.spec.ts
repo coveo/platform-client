@@ -31,7 +31,7 @@ describe('ModelConfiguration', () => {
             const modelConfigFileContents = JSON.stringify('{"💀": "🦴🦴🦴"}');
 
             modelConfig.updateAdvancedConfig(modelId, modelConfigFileContents);
-            expect(api.put).toBeCalledTimes(1);
+            expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ModelConfiguration.getBaseUrl(modelId)}/advanced`,
                 modelConfigFileContents,
