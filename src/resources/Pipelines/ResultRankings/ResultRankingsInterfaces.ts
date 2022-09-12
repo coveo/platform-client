@@ -153,11 +153,15 @@ export interface ResultRankingTargetUniqueId {
 }
 
 export interface ResultRankingTargetLocalizedContent {
+    localizedContent: ResultRankingLocalizedContent;
+}
+
+export interface ResultRankingLocalizedContent {
     /**
      * The ID of the knowledge article to show.
      */
     familyId: string;
-    locale: ResultRankingLocalizedContentLocale;
+    locale: ResultRankingLocalizedContentLocaleAuto | ResultRankingLocalizedContentLocaleSpecific;
     /**
      * Field that identifies the knowledge article.
      */
@@ -166,12 +170,6 @@ export interface ResultRankingTargetLocalizedContent {
      * Field that identifies the locale of the document.
      */
     localeField: string;
-}
-
-export interface ResultRankingLocalizedContentLocale {
-    ResultRankingLocalizedContentLocale:
-        | ResultRankingLocalizedContentLocaleAuto
-        | ResultRankingLocalizedContentLocaleSpecific;
 }
 
 export interface ResultRankingLocalizedContentLocaleAuto {
@@ -187,7 +185,7 @@ export interface ResultRankingLocalizedContentLocaleSpecific {
     /**
      * The locale code of the knowledge article to show.
      */
-    code: string;
+    specific: string;
 }
 
 export interface ResultRankingTargetQueryExpression {
