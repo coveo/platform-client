@@ -260,7 +260,7 @@ describe('ResourceSnapshots', () => {
             const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
             const file = new File([''], 'mock.zip', {type: 'application/zip'});
 
-            expect(() => resourceSnapshots.createFromFile(file, createFromFileOptions)).toThrowError(Error);
+            expect(() => resourceSnapshots.createFromFile(file, createFromFileOptions)).toThrow(Error);
         });
     });
 

@@ -31,7 +31,7 @@ describe('Administation', () => {
         it('should make a get call to the Administration base url + /strictValidationTest', () => {
             administation.getStrictValidationTest({from: 'yyyy-mm-dd', to: 'yyyy-mm-dd', d: 'allo'});
 
-            expect(api.get).toBeCalledTimes(1);
+            expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Administration.baseUrl}/account/strictValidationTest?from=yyyy-mm-dd&to=yyyy-mm-dd&d=allo`
             );
