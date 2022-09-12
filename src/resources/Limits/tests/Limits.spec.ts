@@ -39,6 +39,14 @@ describe('Limits', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits/content/123/history`);
         });
+
+        it('should make a GET call to get specific history limit to the specific part of the limit with specific date when defined', () => {
+            limits.getHistoryLimit(LicenseSection.content, '123', {from: '2020-05-06', to: '2021-10-05'});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/limits/content/123/history?from=2020-05-06&to=2021-10-05`
+            );
+        });
     });
     describe('getAllPerLimitType', () => {
         it('should make a GET call to get all limits with specified limit type', () => {

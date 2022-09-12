@@ -1,7 +1,13 @@
 import API from '../../APICore';
 import {LicenseSection} from '../Enums';
 import Resource from '../Resource';
-import {AllLimitsModel, LimitHistoryDataPointModel, LimitsModel, LimitType} from './LimitsInterfaces';
+import {
+    AllLimitsModel,
+    LimitHistoryDataPointModel,
+    LimitHistoryOptions,
+    LimitsModel,
+    LimitType,
+} from './LimitsInterfaces';
 
 export default class Limits extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/limits`;
@@ -21,7 +27,9 @@ export default class Limits extends Resource {
         return this.api.get<AllLimitsModel>(this.buildPath(Limits.getBaseUrl(), {limitType: limitType}));
     }
 
-    getHistoryLimit(sectionName: LicenseSection, limitKey: string) {
-        return this.api.get<LimitHistoryDataPointModel[]>(Limits.getWithSectionAndHistory(sectionName, limitKey));
+    getHistoryLimit(sectionName: LicenseSection, limitKey: string, options?: LimitHistoryOptions) {
+        return this.api.get<LimitHistoryDataPointModel[]>(
+            this.buildPath(Limits.getWithSectionAndHistory(sectionName, limitKey), options)
+        );
     }
 }

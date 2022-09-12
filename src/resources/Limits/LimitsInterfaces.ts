@@ -28,3 +28,16 @@ export interface LimitHistoryDataPointModel {
      */
     limitValue: number;
 }
+
+export interface LimitHistoryOptions {
+    /**
+     * The beginning of the date range for which to show limit history in ISO 8601 format.
+     * Example:2022-05-08T01:30:00.000-05:00
+     */
+    from?: string;
+    /**
+     * The ending of the date range for which to show limit history in ISO 8601 format.
+     * Example:2022-05-08T01:30:00.000-05:00
+     */
+    to?: string;
+}
