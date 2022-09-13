@@ -27,6 +27,7 @@ export * from './Organizations';
 export * from './Pipelines';
 export * from './PlatformResources';
 export * from './PrivilegeEvaluator';
+export * from './Products';
 export * from './PushApi';
 export * from './ResourceSnapshots';
 export * from './Saml';
