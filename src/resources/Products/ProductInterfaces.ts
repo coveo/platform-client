@@ -1,3 +1,5 @@
+import {ProductsSortCriteria, ProductsSortByType} from '../Enums';
+
 export interface AdvancedFiltersModel {
     queryFilter: string;
 }
@@ -56,7 +58,7 @@ export interface FacetRequestItem {
     /**
      * The criterion to use for sorting returned facet values.
      */
-    sortCriteria?: string;
+    sortCriteria?: ProductsSortCriteria;
 }
 
 export interface FacetsRequestModel {
@@ -85,7 +87,7 @@ export interface SortModel {
     /**
      * The name of the field to sort by.
      */
-    by: string;
+    by: ProductsSortByType;
 }
 
 export interface ProductsRequestModel {

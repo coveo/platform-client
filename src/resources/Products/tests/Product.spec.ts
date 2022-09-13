@@ -1,5 +1,6 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
+import {ProductsSortByType, ProductsSortCriteria} from '../../Enums';
 import Products from '../Product';
 import {ProductsRequestModel} from '../ProductInterfaces';
 
@@ -43,7 +44,7 @@ describe('Product', () => {
                         isFieldExpanded: true,
                         numberOfValues: 15,
                         preventAutoSelect: false,
-                        sortCriteria: 'relevance',
+                        sortCriteria: ProductsSortCriteria.alphanumeric,
                     },
                 },
                 pagination: {
@@ -51,7 +52,7 @@ describe('Product', () => {
                     numberOfValues: 100,
                 },
                 sort: {
-                    by: 'ec_price',
+                    by: ProductsSortByType.relevance,
                 },
                 url: 'https://fashion.coveodemo.com/browse/men/hats',
             };

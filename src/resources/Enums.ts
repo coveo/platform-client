@@ -1053,3 +1053,13 @@ export enum FieldValueType {
     ARRAY = 'ARRAY',
     HIERARCHIC_MULTI_VALUE = 'HIERARCHIC_MULTI_VALUE',
 }
+
+export enum ProductsSortCriteria {
+    alphanumeric = 'alphanumeric',
+    score = 'score',
+}
+
+export enum ProductsSortByType {
+    fields = 'fields',
+    relevance = 'relevance',
+}
