@@ -1054,7 +1054,7 @@ export enum FieldValueType {
     HIERARCHIC_MULTI_VALUE = 'HIERARCHIC_MULTI_VALUE',
 }
 
-export enum ProductsSortCriteria {
+export enum ProductsFacetRequestSortType {
     alphanumeric = 'alphanumeric',
     score = 'score',
 }

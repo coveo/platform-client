@@ -1,6 +1,6 @@
 import API from '../../../APICore';
 import {New} from '../../BaseInterfaces';
-import {ProductsSortByType, ProductsSortCriteria} from '../../Enums';
+import {ProductsSortByType, ProductsFacetRequestSortType, SortingOrder} from '../../Enums';
 import Products from '../Product';
 import {ProductsRequestModel} from '../ProductInterfaces';
 
@@ -36,16 +36,18 @@ describe('Product', () => {
                         enableIndexFacetOrdering: false,
                         freezeFacetOrder: false,
                     },
-                    requests: {
-                        currentValues: [],
-                        customOrder: [],
-                        facetId: '1234',
-                        field: 'ec_brand',
-                        isFieldExpanded: true,
-                        numberOfValues: 15,
-                        preventAutoSelect: false,
-                        sortCriteria: ProductsSortCriteria.alphanumeric,
-                    },
+                    requests: [
+                        {
+                            currentValues: [],
+                            customOrder: [],
+                            facetId: '1234',
+                            field: 'ec_brand',
+                            isFieldExpanded: true,
+                            numberOfValues: 15,
+                            preventAutoSelect: false,
+                            sortCriteria: ProductsFacetRequestSortType.alphanumeric,
+                        },
+                    ],
                 },
                 pagination: {
                     page: 0,
@@ -53,6 +55,12 @@ describe('Product', () => {
                 },
                 sort: {
                     by: ProductsSortByType.relevance,
+                    fields: [
+                        {
+                            name: 'ec_brand',
+                            direction: SortingOrder.ASC,
+                        },
+                    ],
                 },
                 url: 'https://fashion.coveodemo.com/browse/men/hats',
             };

@@ -1,4 +1,4 @@
-import {ProductsSortCriteria, ProductsSortByType} from '../Enums';
+import {ProductsFacetRequestSortType, ProductsSortByType, SortingOrder} from '../Enums';
 
 export interface AdvancedFiltersModel {
     queryFilter: string;
@@ -42,7 +42,7 @@ export interface FacetRequestItem {
     /**
      * The name of the field on which to base the facet request.
      */
-    field?: string;
+    field: string;
     /**
      * Whether the facet is expanded in the search interface at the moment of the request.
      */
@@ -58,7 +58,7 @@ export interface FacetRequestItem {
     /**
      * The criterion to use for sorting returned facet values.
      */
-    sortCriteria?: ProductsSortCriteria;
+    sortCriteria?: ProductsFacetRequestSortType;
 }
 
 export interface FacetsRequestModel {
@@ -69,7 +69,7 @@ export interface FacetsRequestModel {
     /**
      * The facet operations to perform on the products listings.
      */
-    requests: FacetRequestItem;
+    requests: FacetRequestItem[];
 }
 
 export interface PaginatedModel {
@@ -83,11 +83,26 @@ export interface PaginatedModel {
     page?: number;
 }
 
+export interface SortByFields {
+    /**
+     * The name of the field.
+     */
+    name: string;
+    /**
+     * The sorting direction.
+     */
+    direction: SortingOrder;
+}
+
 export interface SortModel {
     /**
      * The name of the field to sort by.
      */
     by: ProductsSortByType;
+    /**
+     * The fields to take into consideration when sorting.
+     */
+    fields?: SortByFields[];
 }
 
 export interface ProductsRequestModel {
