@@ -1,7 +1,8 @@
 import API from '../../../APICore';
+import {SortingOrder} from '../../Enums';
 import Indexes from '../../Indexes/Indexes';
 import Field from '../Fields';
-import {FieldModel, ListFieldsParams} from '../FieldsInterfaces';
+import {FieldListingOptions, FieldModel, ListFieldsParams} from '../FieldsInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -113,6 +114,24 @@ describe('Field', () => {
             field.list(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/page/fields?facetsOnly=true`);
+        });
+    });
+
+    describe('search', () => {
+        it('should make a POST call to the specific Field url', () => {
+            const params: FieldListingOptions = {};
+
+            field.search(params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search`);
+        });
+
+        it('should make a POST call to the specific Field url with the facetsOnly parameter set as true', () => {
+            const params: FieldListingOptions = {order: SortingOrder.ASC};
+
+            field.search(params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search?order=ASC`);
         });
     });
 });

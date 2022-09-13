@@ -39,6 +39,12 @@ export enum FieldOrigin {
     SYSTEM = 'SYSTEM',
 }
 
+export enum FacetOrSortStatus {
+    ALL = 'ALL',
+    TRUE_ONLY = 'TRUE_ONLY',
+    FALSE_ONLY = 'FALSE_ONLY',
+}
+
 export enum SortingOrder {
     ASC = 'ASC',
     DESC = 'DESC',
