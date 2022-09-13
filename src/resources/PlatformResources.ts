@@ -27,6 +27,7 @@ import Organization from './Organizations/Organization';
 import Pipelines from './Pipelines/Pipelines';
 import PrivilegeEvaluator from './PrivilegeEvaluator/PrivilegeEvaluator';
 import ProductListing from './Catalogs/ProductListing';
+import Products from './Products/Product';
 import PushApi from './PushApi/PushApi';
 import Resource from './Resource';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots';
@@ -72,6 +73,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'pipeline', resource: Pipelines},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'productListing', resource: ProductListing},
+    {key: 'products', resource: Products},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'saml', resource: Saml},
@@ -122,6 +124,7 @@ class PlatformResources {
     pipeline: Pipelines;
     privilegeEvaluator: PrivilegeEvaluator;
     productListing: ProductListing;
+    products: Products;
     pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;
     saml: Saml;
