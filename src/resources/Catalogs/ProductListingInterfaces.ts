@@ -60,6 +60,10 @@ export interface ProductListingModel {
      * The list of usage metrics.
      */
     metrics?: ProductListingMetricsModel;
+    /**
+     * The desired configuration
+     */
+    configuration?: Map<string, any>;
 }
 
 export interface CatalogProductListingsGroupModel {
