@@ -9,7 +9,7 @@ describe('Dimensions', () => {
         accountLocator: 'Soubane',
         snowflakeRegion: 'LOUBAME',
     };
-    const api = jest.mocked(new API(null, null), true);
+    const api = jest.mocked(new API(null, null));
     Object.defineProperty(api, 'organizationId', {get: () => 'someOrgId'});
     beforeEach(() => {
         jest.clearAllMocks();

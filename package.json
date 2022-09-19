@@ -26,7 +26,7 @@
     "devDependencies": {
         "@commitlint/cli": "17.1.2",
         "@commitlint/config-conventional": "17.1.0",
-        "@types/jest": "29.0.1",
+        "@types/jest": "29.0.3",
         "@typescript-eslint/eslint-plugin": "5.37.0",
         "@typescript-eslint/parser": "5.37.0",
         "abortcontroller-polyfill": "1.7.3",
@@ -43,7 +43,7 @@
         "lint-staged": "13.0.3",
         "prettier": "2.7.1",
         "semantic-release": "19.0.5",
-        "ts-jest": "29.0.0",
+        "ts-jest": "29.0.1",
         "tsjs": "4.2.1",
         "tslib": "2.4.0",
         "typescript": "4.8.3"
