@@ -2,7 +2,7 @@ import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
 import Indexes from '../Indexes/Indexes';
 import Resource from '../Resource';
-import {FieldModel, ListFieldsParams} from './FieldsInterfaces';
+import {FieldListingOptions, FieldModel, ListFieldsParams} from './FieldsInterfaces';
 
 export default class Field extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes/fields`;
@@ -39,7 +39,14 @@ export default class Field extends Resource {
         return this.api.put(`${Field.baseUrl}/${fieldId}`, options);
     }
 
+    /**
+     * @deprecated list(params?: ListFieldsParams) is kept for backward compatibility, you should now use `search(params?: FieldListingOptions)`.
+     */
     list(params?: ListFieldsParams) {
         return this.api.get<PageModel<FieldModel>>(this.buildPath(`${Indexes.baseUrl}/page/fields`, params));
+    }
+
+    search(params?: FieldListingOptions) {
+        return this.api.post<PageModel<FieldModel>>(this.buildPath(`${Field.baseUrl}/search`, params));
     }
 }
