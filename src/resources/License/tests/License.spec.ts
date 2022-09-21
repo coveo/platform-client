@@ -53,7 +53,7 @@ describe('License', () => {
 
     describe('updateAll', () => {
         it('should make a PUT call to the specific License url', () => {
-            license.updateLicense({value: 100} as unknown as LicenseModel);
+            license.updateLicense(({value: 100} as unknown) as LicenseModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith('/rest/organizations/{organizationName}/license', {
                 value: 100,
