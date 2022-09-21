@@ -39,7 +39,7 @@ export type UpdatePermissionsFilterResponse = CreatePermissionsFilterResponse;
 
 export interface ListFiltersResponse {
     /** A list of filters */
-    filters: FilterModel[];
+    filters: FilterResponse[];
 }
 
 export interface PermissionsFilterUser {
