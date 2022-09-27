@@ -17,6 +17,7 @@ import {
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationReportModel,
     ResourceSnapshotSupportedFileTypes,
+    ResourceSnapshotType,
     ResourceSnapshotUrlModel,
     SnapshotAccessModel,
     SnapshotDiffModel,
@@ -38,6 +39,16 @@ export default class ResourceSnapshots extends Resource {
         );
     }
 
+    /**
+     * Lists the resources that the authenticated user can leverage in snapshots in the target organization.
+     */
+    listResourceAccess() {
+        return this.api.get<ResourceSnapshotType[]>(`${ResourceSnapshots.baseUrl}/access/resource`);
+    }
+
+    /**
+     * Shows whether the authenticated user has the specified access level (i.e., read or write) to the content of the target snapshot.
+     */
     validateAccess(snapshotId: string, options: ValidateAccessOptions) {
         return this.api.get<SnapshotAccessModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access`, options)
