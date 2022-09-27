@@ -24,6 +24,7 @@ export * from './MachineLearning';
 export * from './ModifierTemplates';
 export * from './Notification';
 export * from './Organizations';
+export * from './OrganizationAccess';
 export * from './Pipelines';
 export * from './PlatformResources';
 export * from './PrivilegeEvaluator';
