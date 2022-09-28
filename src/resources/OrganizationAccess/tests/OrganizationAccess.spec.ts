@@ -1,5 +1,7 @@
 import API from '../../../APICore';
+import {AccessLevel} from '../../Enums';
 import Access from '../Access';
+import {AccessParams} from '../AccessInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -16,8 +18,8 @@ describe('OrganizationAccess', () => {
     });
 
     describe('getApiKeys', () => {
-        const params = {
-            accessLevel: ['CUSTOM'],
+        const params: AccessParams = {
+            accessLevel: [AccessLevel.CUSTOM],
             privilegeOwner: 'PLATFORM',
             privilegeTargetDomain: 'SOURCE',
         };

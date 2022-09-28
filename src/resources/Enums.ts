@@ -1,3 +1,15 @@
+export enum AccessLevel {
+    EDIT_ALL = 'EDIT_ALL',
+    CUSTOM = 'CUSTOM',
+    VIEW_ALL = 'VIEW_ALL',
+    NONE = 'NONE',
+}
+
+export enum PrivilegeholderType {
+    API_KEY = 'API_KEY',
+    GROUP = 'GROUP',
+}
+
 export enum AuthProvider {
     SALESFORCE = 'SALESFORCE',
     SALESFORCE_SANDBOX = 'SALESFORCE_SANDBOX',
