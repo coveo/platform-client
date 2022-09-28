@@ -1,4 +1,5 @@
-export interface AccessModel {
+import {AccessLevel, PrivilegeholderType} from '../Enums';
+export interface AccessParams {
     /*
      * The access level an API key must have to be included in the response.
      * Allowed values:
@@ -7,7 +8,7 @@ export interface AccessModel {
      *  - VIEW_ALL: API key can view the organization.
      *  - NONE: API key has no access to the organization.
      */
-    accessLevel: string[];
+    accessLevel: AccessLevel[];
     /*
      * The owner value an API key must have to be included in the response.
      * Example: 'PLATFORM'
@@ -18,4 +19,12 @@ export interface AccessModel {
      * Example: 'SOURCE'
      */
     privilegeTargetDomain: string;
+}
+
+export interface AccessModel {
+    accessLevel: AccessLevel[];
+    callerPartOf: boolean;
+    displayName: string;
+    id: string;
+    privilegeholderType: PrivilegeholderType[];
 }
