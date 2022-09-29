@@ -43,6 +43,7 @@ import UsageAnalytics from './UsageAnalytics/UsageAnalytics';
 import User from './Users/User';
 import Vaults from './Vaults/Vaults';
 import TableauService from './TableauService/TableauService';
+import Access from './OrganizationAccess/Access';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -70,6 +71,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'modifierTemplates', resource: ModifierTemplates},
     {key: 'notification', resource: Notifications},
     {key: 'organization', resource: Organization},
+    {key: 'organizationAccess', resource: Access},
     {key: 'pipeline', resource: Pipelines},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'productListing', resource: ProductListing},
@@ -121,6 +123,7 @@ class PlatformResources {
     modifierTemplates: ModifierTemplates;
     notification: Notifications;
     organization: Organization;
+    organizationAccess: Access;
     pipeline: Pipelines;
     privilegeEvaluator: PrivilegeEvaluator;
     productListing: ProductListing;

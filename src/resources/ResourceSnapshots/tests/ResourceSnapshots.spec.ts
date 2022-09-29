@@ -78,6 +78,29 @@ describe('ResourceSnapshots', () => {
         });
     });
 
+    describe('listResourceAccess', () => {
+        it('should make a GET call to the specific Resource Snapshots url', () => {
+            resourceSnapshots.listResourceAccess();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/access/resource`);
+        });
+
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', () => {
+            const snapshotToGetId = 'snapshot-to-be-fetched';
+            const options: ValidateAccessOptions = {
+                snapshotAccessType: SnapshotAccessType.Write,
+            };
+
+            resourceSnapshots.validateAccess(snapshotToGetId, options);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
+            );
+        });
+    });
+
     describe('validateAccess', () => {
         it('should make a GET call to the specific Resource Snapshots url and proper access type when READ', () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
