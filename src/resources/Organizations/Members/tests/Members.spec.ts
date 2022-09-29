@@ -32,4 +32,13 @@ describe('Members', () => {
             expect(api.delete).toHaveBeenCalledWith(`${Members.baseUrl}/Gael`);
         });
     });
+
+    describe('get', () => {
+        it('make a GET call to check a specific member in an Organization', () => {
+            members.get('Gael');
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Members.baseUrl}/Gael`);
+        });
+    });
 });
