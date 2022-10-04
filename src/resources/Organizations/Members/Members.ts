@@ -12,4 +12,8 @@ export default class Members extends Resource {
     delete(username: string) {
         return this.api.delete<void>(`${Members.baseUrl}/${username}`);
     }
+
+    get(username: string) {
+        return this.api.get<OrganizationMemberModel>(`${Members.baseUrl}/${username}`);
+    }
 }
