@@ -14,6 +14,6 @@ export default class Members extends Resource {
     }
 
     get(username: string) {
-        return this.api.get<OrganizationMemberModel[]>(`${Members.baseUrl}/${username}`);
+        return this.api.get<OrganizationMemberModel>(`${Members.baseUrl}/${username}`);
     }
 }
