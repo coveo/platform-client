@@ -3,7 +3,7 @@
 The main goal of this package is to provide an easy to configure and straightforward way of querying Coveo Cloud APIs using JavaScript.
 
 [![Build Status](https://img.shields.io/travis/coveo/platform-client.svg?style=flat-square)](https://travis-ci.org/coveo/platform-client)
-[![Npm total downloads badge](https://img.shields.io/npm/dt/@coveord/platform-client?style=flat-square)](https://www.npmjs.com/package/@coveord/platform-client)
+[![Npm total downloads badge](https://img.shields.io/npm/dt/@coveo/platform-client?style=flat-square)](https://www.npmjs.com/package/@coveo/platform-client)
 [![license](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)](LICENSE)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
@@ -20,7 +20,7 @@ npm run build
 ### Install
 
 ```bash
-npm install @coveord/platform-client
+npm install @coveo/platform-client
 # Typescript types are included in the package
 ```
 
@@ -28,13 +28,13 @@ npm install @coveord/platform-client
 
 ```js
 // using default import
-import PlatformClient from '@coveord/platform-client';
+import PlatformClient from '@coveo/platform-client';
 
 // using named import
-import {PlatformClient} from '@coveord/platform-client';
+import {PlatformClient} from '@coveo/platform-client';
 
 // using commonjs require
-const PlatformClient = require('@coveord/platform-client').default;
+const PlatformClient = require('@coveo/platform-client').default;
 ```
 
 ### Configure
@@ -80,7 +80,7 @@ The `platform-client` package is built on top of the `fetch` API and some relate
 ```js
 require('isomorphic-fetch');
 require('abortcontroller-polyfill');
-const PlatformClient = require('@coveord/platform-client').default;
+const PlatformClient = require('@coveo/platform-client').default;
 
 const coveoPlatform = new PlatformClient({
     /* options */
@@ -105,7 +105,7 @@ It is also possible to provide global request settings for all requests made by 
 ```js
 require('isomorphic-fetch');
 require('abortcontroller-polyfill');
-const PlatformClient = require('@coveord/platform-client').default;
+const PlatformClient = require('@coveo/platform-client').default;
 
 const coveoPlatform = new PlatformClient({
     globalRequestSettings: {
