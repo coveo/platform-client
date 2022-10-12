@@ -1,6 +1,11 @@
 import {PostSearchBodyQueryParams} from '../Search/SearchInterfaces';
 
 type RequestParameters = PostSearchBodyQueryParams;
+interface Result {
+    title: string;
+    rankingInfo: unknown;
+    fields: Record<string, string>;
+}
 
 interface ExecutionStep {
     type: string;
@@ -133,4 +138,6 @@ export interface ReplayAnalysis {
         >,
         IndexQuery
     ];
+    totalResultsCount: number;
+    results: Result[];
 }
