@@ -144,6 +144,7 @@ class PlatformResources {
     user: User;
     vault: Vaults;
     tableauService: TableauService;
+    searchAnalysis: SearchAnalysis;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {

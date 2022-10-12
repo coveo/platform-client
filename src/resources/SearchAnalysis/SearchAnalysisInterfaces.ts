@@ -134,26 +134,3 @@ export interface ReplayAnalysis {
         IndexQuery
     ];
 }
-
-const v: ReplayAnalysis = {
-    requestParameters: {},
-    execution: [
-        {
-            name: 'Pipeline selection',
-            type: 'pipelineSelection',
-            selectedPipeline: {id: 'asd', name: 'asd'},
-            selectionCause: {type: 'AUTHENTICATION_PIPELINE'},
-        },
-        {
-            type: 'art',
-            appliedCount: 1,
-            name: 'art',
-            applied: [{affectedResultsPosition: [], id: 'asd'}],
-        },
-        {
-            type: 'indexQuery',
-            name: 'sadf',
-            request: {},
-        },
-    ],
-};
