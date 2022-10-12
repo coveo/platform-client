@@ -2,23 +2,29 @@ import {Paginated} from '../BaseInterfaces';
 import {FacetOrSortStatus} from '../Enums';
 
 export interface ActivityModel {
+    content?: any;
+    createDate?: number;
+    duration?: number;
+    endDate?: number;
     id?: string;
     operation: string;
-    result: string;
-    errorCode?: string;
-    documentsProcessed?: number;
-    duration?: number;
-    isInitialBuild?: boolean;
-    startDate?: number;
-    endDate?: number;
-    createDate?: number;
-    state: string;
-    triggeredBy: TriggeredByAttributes;
-    content?: any;
     organizationId?: string;
+    progress?: number;
     resourceId?: string;
     resourceName?: string;
     resourceType?: string;
+    result: string;
+    section?: string;
+    startDate?: number;
+    state: string;
+    triggeredBy: TriggeredByAttributes;
+    errorCode?: string;
+    errorDetail?: string;
+    abortReason?: string;
+    abortedBy?: any;
+    snapShotId?: string;
+    documentsProcessed?: number;
+    isInitialBuild?: boolean;
     showOrgCol?: boolean;
 }
 
