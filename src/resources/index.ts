@@ -42,3 +42,4 @@ export * from './Sources';
 export * from './TableauService';
 export * from './UsageAnalytics';
 export * from './Vaults';
+export * from './SearchAnalysis';

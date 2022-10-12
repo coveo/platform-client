@@ -44,6 +44,7 @@ import User from './Users/User';
 import Vaults from './Vaults/Vaults';
 import TableauService from './TableauService/TableauService';
 import Access from './OrganizationAccess/Access';
+import SearchAnalysis from './SearchAnalysis/SearchAnalysis';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'apiKey', resource: ApiKey},
@@ -92,6 +93,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'notification', resource: Notifications},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'tableauService', resource: TableauService},
+    {key: 'searchAnalysis', resource: SearchAnalysis},
 ];
 
 class PlatformResources {
