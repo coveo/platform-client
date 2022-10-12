@@ -29,6 +29,7 @@ export interface ActivityModel {
 }
 
 export interface ListActivitiesParams extends Paginated {
+    /* The facet status of the activities to list */
     facetsOnly?: boolean;
 }
 
@@ -44,4 +45,13 @@ export interface TriggeredByAttributes {
     relatedActivity?: string;
     relatedActivityId?: string;
     relatedActivityResourceType?: string;
+}
+
+export interface ActivityFacetModel {
+    operations?: string[];
+    organizationIds?: string[];
+    resourceIds?: string[];
+    resourceTypes?: string[];
+    sections?: string[];
+    states?: string[];
 }

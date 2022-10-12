@@ -51,24 +51,6 @@ describe('Activity', () => {
         });
     });
 
-    describe('search', () => {
-        it('should make a POST call to the specific Activity url', () => {
-            const params: ListActivitiesParams = {};
-
-            activity.search(params);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public/search`);
-        });
-
-        it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
-            const params: ListActivitiesParams = {facetsOnly: true};
-
-            activity.searchFacets(params);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public/search?facetsOnly=true`);
-        });
-    });
-
     describe('cancelActivity', () => {
         it('should make a PUT call to the specific Activity url', () => {
             const activityId = 'gimli';
