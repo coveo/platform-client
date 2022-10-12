@@ -1,7 +1,7 @@
 import API from '../../../APICore';
 import Indexes from '../../Indexes/Indexes';
 import Activity from '../Activities';
-import {ActivityListingOptions, ActivityModel, ListActivitiesParams} from '../ActivitiesInterfaces';
+import {ActivityModel, ListActivitiesParams} from '../ActivitiesInterfaces';
 
 jest.mock('../../../APICore.ts');
 const APIMock: jest.Mock<API> = API as any;
@@ -19,38 +19,53 @@ describe('Activity', () => {
     describe('get', () => {
         it('should make a GET call to the specific Activity url', () => {
             const activityId = 'gandalf';
-
             activity.get(activityId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/${activityId}`);
         });
     });
 
-    describe('list', () => {
+    describe('getResourceTypes', () => {
         it('should make a GET call to the specific Activity url', () => {
+            activity.getResourceTypes();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/resourcetypes`);
+        });
+    });
+
+    describe('list', () => {
+        it('should make a POST call to the specific Activity url', () => {
             const params: ListActivitiesParams = {};
 
             activity.list(params);
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/page/activities`);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/public`);
         });
 
-        it('should make a GET call to the specific Activity url with the facetsOnly param set as true', () => {
+        it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
             const params: ListActivitiesParams = {facetsOnly: true};
 
             activity.list(params);
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Indexes.baseUrl}/page/activities?facetsOnly=true`);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/public?facetsOnly=true`);
         });
     });
-    // to fix
+
     describe('search', () => {
-        it.skip('should make a GET call to the specific Activity url', () => {
-            const params: ActivityListingOptions = {};
+        it('should make a POST call to the specific Activity url', () => {
+            const params: ListActivitiesParams = {};
 
             activity.search(params);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/search`);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public/search`);
+        });
+
+        it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
+            const params: ListActivitiesParams = {facetsOnly: true};
+
+            activity.searchFacets(params);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public/search?facetsOnly=true`);
         });
     });
 

@@ -31,13 +31,6 @@ export interface ActivityListingFilters {
     facet?: FacetOrSortStatus;
 }
 
-export interface ActivityListingOptions {
-    /**
-     * Filters to narrow down the returned fields.
-     */
-    filters?: ActivityListingFilters;
-}
-
 export interface TriggeredByAttributes {
     type: string;
     id?: string;
