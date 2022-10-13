@@ -1,9 +1,10 @@
 import fetchMock from 'jest-fetch-mock';
 import API from '../../../APICore';
-import {SortingOrder, SnapshotSortingType} from '../../Enums';
+import {SnapshotSortingType, SortingOrder} from '../../Enums';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
     ApplyOptions,
+    ApplyOptionsDeletionScope,
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
@@ -14,13 +15,12 @@ import {
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotSupportedFileTypes,
-    ResourceSnapshotUrlModel,
     ResourceSnapshotType,
+    ResourceSnapshotUrlModel,
     SnapshotAccessType,
     SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
-    ApplyOptionsDeletionScope,
 } from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
@@ -152,9 +152,7 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
 
             expect(api.getFile).toHaveBeenCalledTimes(1);
-            expect(
-                api.getFile
-            ).toHaveBeenCalledWith(
+            expect(api.getFile).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content?contentFormat=SPLIT_PER_TYPE`,
                 {headers: {accept: 'application/zip'}}
             );
@@ -302,9 +300,7 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(
-                api.post
-            ).toHaveBeenCalledWith(
+            expect(api.post).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&includeChildrenResources=false`,
                 {resourcesToExport: {EXTENSION: ['🤖'], FIELD: ['*']}}
             );
