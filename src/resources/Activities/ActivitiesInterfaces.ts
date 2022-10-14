@@ -28,14 +28,16 @@ export interface ActivityModel {
     showOrgCol?: boolean;
 }
 export interface ListActivitiesFacetsParams {
-    /* The facet status of the activities to list */
-    facetsOnly?: boolean;
     /* From which date in the dateRange */
     from?: string;
     /* To which date in the dateRange */
     to?: string;
 }
-export interface ListActivitiesParams extends Paginated, ListActivitiesFacetsParams {
+export interface ListActivitiesParams extends Paginated {
+    /* From which date in the dateRange */
+    from?: string;
+    /* To which date in the dateRange */
+    to?: string;
     /* Number of pages */
     page?: number;
     /* Number of activities per page */
