@@ -1,143 +1,158 @@
 import {PostSearchBodyQueryParams} from '../Search/SearchInterfaces';
-
-type RequestParameters = PostSearchBodyQueryParams;
+declare type RequestParameters = PostSearchBodyQueryParams;
 interface Result {
     title: string;
     rankingInfo: unknown;
     fields: Record<string, string>;
 }
 
-interface ExecutionStep {
-    type: string;
+export type AvailableExecutionStep =
+    | 'pipelineSelection'
+    | 'paramOverrides'
+    | 'thesaurus'
+    | 'stopWords'
+    | 'filters'
+    | 'rankingExpressions'
+    | 'featuredResults'
+    | 'rankingWeights'
+    | 'contentRecommendation'
+    | 'productRecommendation'
+    | 'art'
+    | 'dne'
+    | 'triggers'
+    | 'indexQuery';
+
+export type AvailablePipelineSelection =
+    | 'AUTHENTICATION_PIPELINE'
+    | 'AUTHENTICATION_SEARCH_HUB'
+    | 'ML_ROUTING'
+    | 'PARAMETER_PIPELINE'
+    | 'CONDITION_ROUTING'
+    | 'DEFAULT';
+
+export interface ExecutionStep<T extends AvailableExecutionStep> {
+    type: T;
     name: string;
 }
-
-interface Condition {
+export interface Condition {
     id: string;
 }
-
-interface AffectedRequestParameters {
-    affectedRequestParameters: Array<{name: string; value: unknown}>;
+export interface AffectedRequestParameters {
+    affectedRequestParameters: Array<{
+        name: string;
+        value: unknown;
+    }>;
 }
-
-interface AffectedResultsPosition {
+export interface AffectedResultsPosition {
     affectedResultsPosition: number[];
 }
 
-interface AppliedRules<Affected = Record<string, unknown>, OtherPropertiesApplied = Record<string, unknown>> {
+export type Applied = {id: string; condition?: Condition};
+
+export interface AppliedRules<Affected = Record<string, unknown>, OtherPropertiesApplied = Record<string, unknown>> {
     appliedCount: number;
-    applied: Array<
-        {
-            id: string;
-            condition?: Condition;
-        } & Affected &
-            OtherPropertiesApplied
-    >;
+    applied: Array<Applied & Affected & OtherPropertiesApplied>;
 }
 
-interface QueryPipelineSelection extends ExecutionStep {
-    type: 'pipelineSelection';
-    selectedPipeline: {
+export interface SelectedPipelineDefinitiion {
+    id: string;
+    name: string;
+    condition?: Condition;
+}
+
+export interface PipelineSelectionCauseABTest {
+    originalPipeline: {
         id: string;
         name: string;
         condition?: Condition;
     };
-    selectionCause: {
-        type:
-            | 'AUTHENTICATION_PIPELINE'
-            | 'AUTHENTICATION_SEARCH_HUB'
-            | 'ML_ROUTING'
-            | 'PARAMETER_PIPELINE'
-            | 'CONDITION_ROUTING'
-            | 'DEFAULT';
-        abTest?: {
-            originalPipeline: {
-                id: string;
-                name: string;
-                condition?: Condition;
-            };
-            targetPipeline: {
-                id: string;
-                name: string;
-                condition?: Condition;
-            };
-        };
+    targetPipeline: {
+        id: string;
+        name: string;
+        condition?: Condition;
     };
 }
 
-interface QueryParamOverrides extends ExecutionStep, AppliedRules<AffectedRequestParameters> {
-    type: 'paramOverrides';
+export interface PipelineSelectionCause {
+    type: AvailablePipelineSelection;
+    abTest?: PipelineSelectionCauseABTest;
 }
 
-interface Thesaurus extends ExecutionStep, AppliedRules<AffectedRequestParameters> {
-    type: 'thesaurus';
+export interface QueryPipelineSelection extends ExecutionStep<'pipelineSelection'> {
+    selectedPipeline: SelectedPipelineDefinitiion;
+    selectionCause: PipelineSelectionCause;
 }
 
-interface StopWords extends ExecutionStep, AppliedRules<AffectedRequestParameters> {
-    type: 'stopWords';
-}
+export type QueryParamOverrides = ExecutionStep<'paramOverrides'> & AppliedRules<AffectedRequestParameters>;
 
-interface Filters extends ExecutionStep, AppliedRules<AffectedRequestParameters> {
-    type: 'filters';
-}
+export type Thesaurus = ExecutionStep<'thesaurus'> & AppliedRules<AffectedRequestParameters>;
 
-interface RankingExpressions extends ExecutionStep, AppliedRules<AffectedResultsPosition, {boost: number}> {
-    type: 'rankingExpressions';
-}
+export type StopWords = ExecutionStep<'stopWords'> & AppliedRules<AffectedRequestParameters>;
 
-interface FeaturedResults extends ExecutionStep, AppliedRules<AffectedResultsPosition> {
-    type: 'featuredResults';
-}
+export type Filters = ExecutionStep<'filters'> & AppliedRules<AffectedRequestParameters>;
+export type RankingExpressions = ExecutionStep<'rankingExpressions'> &
+    AppliedRules<
+        AffectedResultsPosition,
+        {
+            boost: number;
+        }
+    >;
 
-interface RankingWeights extends ExecutionStep, AppliedRules {
-    type: 'rankingWeights';
-}
+export type FeaturedResults = ExecutionStep<'featuredResults'> & AppliedRules<AffectedResultsPosition>;
 
-interface ContentRecommendation extends ExecutionStep, AppliedRules<AffectedResultsPosition> {
-    type: 'contentRecommendation';
-}
+export type RankingWeights = ExecutionStep<'rankingWeights'> & AppliedRules;
 
-interface ProductRecommendation extends ExecutionStep, AppliedRules<AffectedResultsPosition> {
-    type: 'productRecommendation';
-}
+export type ContentRecommendation = ExecutionStep<'contentRecommendation'> & AppliedRules<AffectedResultsPosition>;
 
-interface AutomaticRelevanceTuning extends ExecutionStep, AppliedRules<AffectedResultsPosition> {
-    type: 'art';
-}
+export type ProductRecommendation = ExecutionStep<'productRecommendation'> & AppliedRules<AffectedResultsPosition>;
 
-interface DynamicNavigationExperience extends ExecutionStep, AppliedRules<AffectedResultsPosition> {
-    type: 'dne';
-}
+export interface AutomaticRelevanceTuning extends ExecutionStep<'art'>, AppliedRules<AffectedResultsPosition> {}
 
-interface Triggers extends ExecutionStep, AppliedRules {
-    type: 'triggers';
-}
+export interface DynamicNavigationExperience extends ExecutionStep<'dne'>, AppliedRules<AffectedResultsPosition> {}
 
-interface IndexQuery extends ExecutionStep {
-    type: 'indexQuery';
+export interface Triggers extends ExecutionStep<'triggers'>, AppliedRules {}
+
+export interface IndexQuery extends ExecutionStep<'indexQuery'> {
     request: Record<string, unknown>;
 }
 
+export type MappedExecutionSteps = {
+    [T in AvailableExecutionStep]: T extends 'pipelineSelection'
+        ? QueryPipelineSelection
+        : T extends 'paramOverrides'
+        ? QueryParamOverrides
+        : T extends 'thesaurus'
+        ? Thesaurus
+        : T extends 'stopWords'
+        ? StopWords
+        : T extends 'filters'
+        ? Filters
+        : T extends 'rankingExpressions'
+        ? RankingExpressions
+        : T extends 'featuredResults'
+        ? FeaturedResults
+        : T extends 'rankingWeights'
+        ? RankingWeights
+        : T extends 'contentRecommendation'
+        ? ContentRecommendation
+        : T extends 'productRecommendation'
+        ? ProductRecommendation
+        : T extends 'art'
+        ? AutomaticRelevanceTuning
+        : T extends 'dne'
+        ? DynamicNavigationExperience
+        : T extends 'triggers'
+        ? Triggers
+        : T extends 'indexQuery'
+        ? IndexQuery
+        : unknown;
+};
+
+export type ExecutionSteps = Array<MappedExecutionSteps[AvailableExecutionStep]>;
+
 export interface ReplayAnalysis {
     requestParameters: RequestParameters;
-    execution: [
-        QueryPipelineSelection,
-        ...Array<
-            | QueryParamOverrides
-            | Thesaurus
-            | StopWords
-            | Filters
-            | RankingExpressions
-            | FeaturedResults
-            | RankingWeights
-            | ContentRecommendation
-            | ProductRecommendation
-            | AutomaticRelevanceTuning
-            | DynamicNavigationExperience
-            | Triggers
-        >,
-        IndexQuery
-    ];
+    execution: ExecutionSteps;
     totalResultsCount: number;
     results: Result[];
 }
