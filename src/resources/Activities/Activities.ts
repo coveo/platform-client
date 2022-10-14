@@ -1,8 +1,7 @@
 import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
-import Indexes from '../Indexes/Indexes';
 import Resource from '../Resource';
-import {ActivityModel, ListActivitiesParams, ActivityFacetModel} from './ActivitiesInterfaces';
+import {ActivityModel, ListActivitiesParams, ActivityFacetModel, ActivityListingFilters} from './ActivitiesInterfaces';
 
 export default class Activity extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/activities`;
@@ -14,15 +13,24 @@ export default class Activity extends Resource {
         return this.api.get<string[]>(`${Activity.getBaseUrl()}/resourcetypes`);
     }
 
-    list(params?: ListActivitiesParams) {
-        return this.api.post<PageModel<ActivityModel>>(this.buildPath(`${Indexes.baseUrl}/public`, params));
+    list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
+        return this.api.post<PageModel<ActivityModel>>(
+            this.buildPath(`${Activity.getBaseUrl()}/public`, params),
+            activityFacet
+        );
     }
 
-    listFacets(params?: ListActivitiesParams) {
-        return this.api.post<ActivityFacetModel>(this.buildPath(`${Indexes.baseUrl}/facets/public`, params));
+    listFacets(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
+        return this.api.post<ActivityFacetModel>(
+            this.buildPath(`${Activity.getBaseUrl()}/facets/public`, params),
+            activityFacet
+        );
     }
 
-    cancelActivity(activityId: string, options: ActivityModel) {
-        return this.api.put(`${Activity.getBaseUrl()}/${activityId}`, options);
+    abortActivity(activityId: string, abortActivityModel: ActivityModel, params?: ListActivitiesParams) {
+        return this.api.post(
+            this.buildPath(`${Activity.getBaseUrl()}/${activityId}/abort`, params),
+            abortActivityModel
+        );
     }
 }

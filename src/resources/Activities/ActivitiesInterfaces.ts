@@ -31,6 +31,10 @@ export interface ActivityModel {
 export interface ListActivitiesParams extends Paginated {
     /* The facet status of the activities to list */
     facetsOnly?: boolean;
+    page?: number;
+    perPage?: number;
+    from?: string;
+    to?: string;
 }
 
 export interface ActivityListingFilters {
