@@ -1,6 +1,11 @@
 import API from '../../../APICore';
 import Activity from '../Activities';
-import {ActivityListingFilters, ActivityModel, ListActivitiesParams} from '../ActivitiesInterfaces';
+import {
+    ActivityListingFilters,
+    ActivityModel,
+    ListActivitiesParams,
+    ListActivitiesFacetsParams,
+} from '../ActivitiesInterfaces';
 
 jest.mock('../../../APICore.ts');
 const APIMock: jest.Mock<API> = API as any;
@@ -43,7 +48,7 @@ describe('Activity', () => {
         });
 
         it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
-            const params: ListActivitiesParams = {facetsOnly: true};
+            const params: ListActivitiesFacetsParams = {facetsOnly: true};
             const activityFacet: ActivityListingFilters = {};
 
             activity.listFacets(params, activityFacet);

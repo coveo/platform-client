@@ -1,7 +1,13 @@
 import API from '../../APICore';
 import {PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {ActivityModel, ListActivitiesParams, ActivityFacetModel, ActivityListingFilters} from './ActivitiesInterfaces';
+import {
+    ActivityModel,
+    ListActivitiesParams,
+    ListActivitiesFacetsParams,
+    ActivityFacetModel,
+    ActivityListingFilters,
+} from './ActivitiesInterfaces';
 
 export default class Activity extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/activities`;
@@ -20,7 +26,7 @@ export default class Activity extends Resource {
         );
     }
 
-    listFacets(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
+    listFacets(params?: ListActivitiesFacetsParams, activityFacet?: ActivityListingFilters) {
         return this.api.post<ActivityFacetModel>(
             this.buildPath(`${Activity.getBaseUrl()}/facets/public`, params),
             activityFacet

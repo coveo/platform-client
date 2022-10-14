@@ -27,19 +27,31 @@ export interface ActivityModel {
     isInitialBuild?: boolean;
     showOrgCol?: boolean;
 }
-
-export interface ListActivitiesParams extends Paginated {
+export interface ListActivitiesFacetsParams {
     /* The facet status of the activities to list */
     facetsOnly?: boolean;
-    page?: number;
-    perPage?: number;
+    /* From which date in the dateRange */
     from?: string;
+    /* To which date in the dateRange */
     to?: string;
+}
+export interface ListActivitiesParams extends Paginated, ListActivitiesFacetsParams {
+    /* Number of pages */
+    page?: number;
+    /* Number of activities per page */
+    perPage?: number;
 }
 
 export interface ActivityListingFilters {
     /* The facet status of the activities to list. */
     facet?: FacetOrSortStatus;
+    operations?: string;
+    organizationIds?: string;
+    resourceIds?: string;
+    resourceTypes?: string;
+    resultTypes?: string;
+    sections?: string;
+    states?: string;
 }
 
 export interface TriggeredByAttributes {
