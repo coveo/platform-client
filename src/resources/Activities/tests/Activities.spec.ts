@@ -48,15 +48,12 @@ describe('Activity', () => {
         });
 
         it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
-            const params: ListActivitiesFacetsParams = {facetsOnly: true};
+            const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
 
             activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(
-                `${Activity.getBaseUrl()}/facets/public?facetsOnly=true`,
-                activityFacet
-            );
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public`, activityFacet);
         });
     });
 
