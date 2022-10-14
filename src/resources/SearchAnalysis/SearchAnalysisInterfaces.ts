@@ -106,11 +106,11 @@ export type ContentRecommendation = ExecutionStep<'contentRecommendation'> & App
 
 export type ProductRecommendation = ExecutionStep<'productRecommendation'> & AppliedRules<AffectedResultsPosition>;
 
-export interface AutomaticRelevanceTuning extends ExecutionStep<'art'>, AppliedRules<AffectedResultsPosition> {}
+export type AutomaticRelevanceTuning = ExecutionStep<'art'> & AppliedRules<AffectedResultsPosition>;
 
-export interface DynamicNavigationExperience extends ExecutionStep<'dne'>, AppliedRules<AffectedResultsPosition> {}
+export type DynamicNavigationExperience = ExecutionStep<'dne'> & AppliedRules<AffectedResultsPosition>;
 
-export interface Triggers extends ExecutionStep<'triggers'>, AppliedRules {}
+export type Triggers = ExecutionStep<'triggers'> & AppliedRules;
 
 export interface IndexQuery extends ExecutionStep<'indexQuery'> {
     request: Record<string, unknown>;
