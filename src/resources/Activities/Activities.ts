@@ -27,10 +27,7 @@ export default class Activity extends Resource {
         );
     }
 
-    abortActivity(activityId: string, abortActivityModel: ActivityModel, params?: ListActivitiesParams) {
-        return this.api.post(
-            this.buildPath(`${Activity.getBaseUrl()}/${activityId}/abort`, params),
-            abortActivityModel
-        );
+    abortActivity(activityId: string, abortActivityModel: ActivityModel) {
+        return this.api.post(`${Activity.getBaseUrl()}/${activityId}/abort`, abortActivityModel);
     }
 }
