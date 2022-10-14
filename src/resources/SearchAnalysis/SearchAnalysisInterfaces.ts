@@ -54,7 +54,7 @@ export interface AppliedRules<Affected = Record<string, unknown>, OtherPropertie
     applied: Array<Applied & Affected & OtherPropertiesApplied>;
 }
 
-export interface SelectedPipelineDefinitiion {
+export interface SelectedPipelineDefinition {
     id: string;
     name: string;
     condition?: Condition;
@@ -79,7 +79,7 @@ export interface PipelineSelectionCause {
 }
 
 export interface QueryPipelineSelection extends ExecutionStep<'pipelineSelection'> {
-    selectedPipeline: SelectedPipelineDefinitiion;
+    selectedPipeline: SelectedPipelineDefinition;
     selectionCause: PipelineSelectionCause;
 }
 
