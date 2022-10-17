@@ -1,7 +1,11 @@
 import API from '../../../APICore';
-import Indexes from '../../Indexes/Indexes';
 import Activity from '../Activities';
-import {ActivityModel, ListActivitiesParams} from '../ActivitiesInterfaces';
+import {
+    ActivityListingFilters,
+    ActivityModel,
+    ListActivitiesParams,
+    ListActivitiesFacetsParams,
+} from '../ActivitiesInterfaces';
 
 jest.mock('../../../APICore.ts');
 const APIMock: jest.Mock<API> = API as any;
@@ -36,34 +40,41 @@ describe('Activity', () => {
     describe('list', () => {
         it('should make a POST call to the specific Activity url', () => {
             const params: ListActivitiesParams = {};
+            const activityFacet: ActivityListingFilters = {};
 
-            activity.list(params);
+            activity.list(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/public`);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public`, activityFacet);
         });
+    });
 
+    describe('listFacets', () => {
         it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
-            const params: ListActivitiesParams = {facetsOnly: true};
+            const params: ListActivitiesFacetsParams = {};
+            const activityFacet: ActivityListingFilters = {};
 
-            activity.list(params);
+            activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Indexes.baseUrl}/public?facetsOnly=true`);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public`, activityFacet);
         });
     });
 
     describe('cancelActivity', () => {
-        it('should make a PUT call to the specific Activity url', () => {
+        it('should make a POST call to the specific Activity url', () => {
             const activityId = 'gimli';
-            const activityModel: ActivityModel = {
+            const abortActivityModel: ActivityModel = {
                 operation: '',
                 result: '',
                 state: '',
                 triggeredBy: undefined,
+                abortReason: '',
+                resourceId: '',
+                resourceType: '',
             };
 
-            activity.cancelActivity(activityId, activityModel);
-            expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/${activityId}`, activityModel);
+            activity.abortActivity(activityId, abortActivityModel);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/${activityId}/abort`, abortActivityModel);
         });
     });
 });
