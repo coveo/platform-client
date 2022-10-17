@@ -1,3 +1,4 @@
+import Activity from './Activities/Activities';
 import API from '../APICore';
 import ApiKey from './ApiKeys/ApiKeys';
 import AWS from './AWS/AWS';
@@ -47,6 +48,7 @@ import Access from './OrganizationAccess/Access';
 import SearchAnalysis from './SearchAnalysis/SearchAnalysis';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
+    {key: 'activity', resource: Activity},
     {key: 'apiKey', resource: ApiKey},
     {key: 'aws', resource: AWS},
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
@@ -100,6 +102,7 @@ class PlatformResources {
     protected API: API;
     protected ServerlessAPI: API;
 
+    activity: Activity;
     apiKey: ApiKey;
     aws: AWS;
     caseAssistConfig: CaseAssistConfig;
