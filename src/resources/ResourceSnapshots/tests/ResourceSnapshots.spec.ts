@@ -1,9 +1,10 @@
 import fetchMock from 'jest-fetch-mock';
 import API from '../../../APICore';
-import {SortingOrder, SnapshotSortingType} from '../../Enums';
+import {SnapshotSortingType, SortingOrder} from '../../Enums';
 import ResourceSnapshots from '../ResourceSnapshots';
 import {
     ApplyOptions,
+    ApplyOptionsDeletionScope,
     CreateFromFileOptions,
     CreateFromOrganizationOptions,
     DryRunOptions,
@@ -14,13 +15,12 @@ import {
     ResourceSnapshotsSynchronizationPlanModel,
     ResourceSnapshotsSynchronizationPlanStatus,
     ResourceSnapshotSupportedFileTypes,
-    ResourceSnapshotUrlModel,
     ResourceSnapshotType,
+    ResourceSnapshotUrlModel,
     SnapshotAccessType,
     SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
-    ApplyOptionsDeletionScope,
 } from '../ResourceSnapshotsInterfaces';
 
 jest.mock('../../../APICore');
