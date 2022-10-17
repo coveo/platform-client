@@ -46,7 +46,9 @@ describe('Activity', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public`, activityFacet);
         });
+    });
 
+    describe('listFacets', () => {
         it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
