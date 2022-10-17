@@ -47,13 +47,13 @@ export interface ListActivitiesParams extends Paginated {
 export interface ActivityListingFilters {
     /* The facet status of the activities to list. */
     facet?: FacetOrSortStatus;
-    operations?: string;
-    organizationIds?: string;
-    resourceIds?: string;
-    resourceTypes?: string;
-    resultTypes?: string;
-    sections?: string;
-    states?: string;
+    operations?: string[];
+    organizationIds?: string[];
+    resourceIds?: string[];
+    resourceTypes?: string[];
+    resultTypes?: string[];
+    sections?: string[];
+    states?: string[];
 }
 
 export interface TriggeredByAttributes {
