@@ -59,7 +59,7 @@ describe('Activity', () => {
         });
     });
 
-    describe('cancelActivity', () => {
+    describe('abortActivity', () => {
         it('should make a POST call to the specific Activity url', () => {
             const activityId = 'gimli';
             const abortActivityModel: ActivityModel = {
