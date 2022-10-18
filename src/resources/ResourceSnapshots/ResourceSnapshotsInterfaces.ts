@@ -88,6 +88,7 @@ export enum ResourceSnapshotsReportResultCode {
     UnableToRetrieveResources = 'UNABLE_TO_RETRIEVE_RESOURCES',
     ResourceDependencyCyle = 'RESOURCE_DEPENDENCY_CYCLE',
     ExternalServiceCommunicationError = 'EXTERNAL_SERVICE_COMMUNICATION_ERROR',
+    AutoSynchronizationFailure = 'AUTO_SYNCHRONIZATION_FAILURE',
 }
 
 export enum ResourceSnapshotsReportStatus {
@@ -161,7 +162,34 @@ export interface ResourceSnapshotsReportOperationResult {
 
 export type ResourceSnapshotsReportOperationResults = Record<string, ResourceSnapshotsReportOperationResult[]>;
 
+export enum SnapshotsReportStages {
+    COMPUTING_OPERATIONS = 'COMPUTING_OPERATIONS',
+    CREATING_SNAPSHOT = 'CREATING_SNAPSHOT',
+    INITIAL_PROCESSING = 'INITIAL_PROCESSING',
+    PERFORMING_OPERATIONS = 'PERFORMING_OPERATIONS',
+    SYNCHRONIZING = 'SYNCHRONIZING',
+    VALIDATING_OPERATIONS = 'VALIDATING_OPERATIONS',
+}
+
 export interface ResourceSnapshotsReportModel {
+    /**
+     * Current stage of the report
+     */
+    currentStage?: {
+        /**
+         * The progress type of the current step
+         */
+        progressType: 'BINARY' | 'PERCENTAGE';
+        /**
+         * The progress value of the current step
+         * The value can be percentage type (from 0 to 100) binary type (0 or 1)
+         */
+        progressValue: number;
+        /**
+         * Current step name
+         */
+        stage: SnapshotsReportStages;
+    };
     /**
      * The unique identifier of the report.
      */
@@ -182,6 +210,14 @@ export interface ResourceSnapshotsReportModel {
      * The result code of the snapshot event, if applicable.
      */
     resultCode: ResourceSnapshotsReportResultCode;
+    /**
+     * The ordered stages the migration operation has to go through in order to complete.
+     */
+    stagesToExecute: SnapshotsReportStages[];
+    /**
+     * The start date ot the report in number of milliseconds since UNIX epoch.
+     */
+    startDate: number;
     /**
      * The status of the snapshot.
      */
