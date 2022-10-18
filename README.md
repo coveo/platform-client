@@ -226,6 +226,41 @@ const notifyOnError = (message) => (currentOptions) => ({
 platform.withFeatures(notifyOnSuccess('It worked!'), notifyOnError('It failed!')).field.delete('unwanted-field-id');
 ```
 
+### Extending the client
+
+In cases where you want to expand the standard capabilities of the platform client with internal or experimental resources, you can do so within the scope of your own project by extending the `PlatformClient` class.
+
+```ts
+import {API, PlatformClient, PlatformClientOptions, Resource} from '@coveo/platform-client';
+
+class Something extends Resource {
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/something`;
+
+    list() {
+        this.api.get(Something.baseUrl);
+    }
+}
+
+const experimentalResources: Array<{key: string; resource: typeof Resource}> = [
+    {key: 'something', resource: Something},
+];
+
+class ExperimentalPlatformClient extends PlatformClient {
+    something: Something;
+
+    constructor(options: PlatformClientOptions) {
+        super(options);
+
+        experimentalResources.forEach(({key, resource}) => {
+            this[key] = new resource(this.API, this.ServerlessAPI);
+        });
+    }
+}
+
+// usage
+ExperimentalPlatformClient.something.list();
+```
+
 ## Contributing
 
 ### Guidelines

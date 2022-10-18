@@ -1,3 +1,5 @@
+export {default as Resource} from './Resource';
+
 export * from './Activities';
 export * from './ApiKeys';
 export * from './AWS';
