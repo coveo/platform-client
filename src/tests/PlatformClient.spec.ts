@@ -1,6 +1,7 @@
 import API from '../APICore';
 import {Feature, PlatformClientOptions} from '../ConfigurationInterfaces';
 import PlatformClient from '../PlatformClient';
+import {Resource} from '../resources';
 import PlatformResources from '../resources/PlatformResources';
 
 jest.mock('../APICore');
@@ -100,6 +101,35 @@ describe('PlatformClient', () => {
 
             expect(feature1).toHaveBeenCalled();
             expect(feature2).toHaveBeenCalled();
+        });
+    });
+
+    describe('extending the client', () => {
+        it('allows extending the client with experimental features', () => {
+            const listSomethingSpy = jest.fn();
+            class Something extends Resource {
+                list() {
+                    listSomethingSpy();
+                }
+            }
+
+            const experimentalResources: Array<{key: string; resource: typeof Resource}> = [
+                {key: 'something', resource: Something},
+            ];
+
+            class ExperimentalPlatformClient extends PlatformClient {
+                something: Something;
+                constructor(options: PlatformClientOptions) {
+                    super(options);
+                    experimentalResources.forEach(({key, resource}) => {
+                        this[key] = new resource(this.API, this.ServerlessAPI);
+                    });
+                }
+            }
+
+            const experimentalClient = new ExperimentalPlatformClient(baseOptions);
+            experimentalClient.something.list();
+            expect(listSomethingSpy).toHaveBeenCalledTimes(1);
         });
     });
 });
