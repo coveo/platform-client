@@ -168,4 +168,15 @@ describe('Statements', () => {
             expect(mockedFormData.append).toHaveBeenCalledWith('file', content, 'raw-string');
         });
     });
+
+    describe('bulkGet', () => {
+        it('should make a POST call to the specific Statement url', () => {
+            const pipelineId = '🏐';
+            const ids = ['one', 'two', 'three'];
+
+            statements.bulkGet(pipelineId, {ids});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Statements.getBaseUrl(pipelineId)}/bulkGet`, {ids});
+        });
+    });
 });

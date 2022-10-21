@@ -144,3 +144,10 @@ export interface ExportStatementParams {
      */
     organizationId?: string;
 }
+
+export interface BulkGetStatementsParams extends ListStatementParams {
+    /*
+     * A set of parameters to customize the results.
+     */
+    ids: string[];
+}
