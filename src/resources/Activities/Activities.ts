@@ -36,7 +36,7 @@ export default class Activity extends Resource {
 
     listAll(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
         return this.api.post<PageModel<ActivityModel>>(
-            this.buildPath(`${Activity.getBaseUrlAllOrgs()}`, params),
+            this.buildPath(Activity.getBaseUrlAllOrgs(), params),
             activityFacet
         );
     }
