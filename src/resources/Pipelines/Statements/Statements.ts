@@ -2,6 +2,7 @@ import {getFormData} from '../../../utils/FormData';
 import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
+    BulkGetStatementsParams,
     CopyStatementModel,
     CreateStatementModel,
     ExportStatementParams,
@@ -90,6 +91,16 @@ export default class Statements extends Resource {
             this.buildPath(Statements.getStatementUrl(pipelineId, statementId), {
                 organizationId: this.api.organizationId,
             })
+        );
+    }
+
+    bulkGet(pipelineId: string, {ids, ...allQueryStringOptions}: BulkGetStatementsParams) {
+        return this.api.post<PageModel<StatementModel, 'statements'>>(
+            this.buildPath(`${Statements.getBaseUrl(pipelineId)}/bulkGet`, {
+                organizationId: this.api.organizationId,
+                ...allQueryStringOptions,
+            }),
+            {ids}
         );
     }
 }
