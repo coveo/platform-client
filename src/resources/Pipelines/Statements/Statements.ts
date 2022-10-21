@@ -94,8 +94,7 @@ export default class Statements extends Resource {
         );
     }
 
-    bulkGet(pipelineId: string, options: BulkGetStatementsParams) {
-        const {ids, ...allQueryStringOptions} = options;
+    bulkGet(pipelineId: string, {ids, ...allQueryStringOptions}: BulkGetStatementsParams) {
         return this.api.post<PageModel<StatementModel, 'statements'>>(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/bulkGet`, {
                 organizationId: this.api.organizationId,
