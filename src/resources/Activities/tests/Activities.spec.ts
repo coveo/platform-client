@@ -38,7 +38,7 @@ describe('Activity', () => {
     });
 
     describe('list', () => {
-        it('should make a POST call to the specific Activity url', () => {
+        it('should make a POST call to the specific Activity url to fetch activities of an organization', () => {
             const params: ListActivitiesParams = {};
             const activityFacet: ActivityListingFilters = {};
 
@@ -56,6 +56,17 @@ describe('Activity', () => {
             activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public`, activityFacet);
+        });
+    });
+
+    describe('listAll', () => {
+        it('should make a POST call to the specific Activity url to fetch activities of all organizations', () => {
+            const params: ListActivitiesFacetsParams = {};
+            const activityFacet: ActivityListingFilters = {};
+
+            activity.listAll(params, activityFacet);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(Activity.getBaseUrlAllOrgs(), activityFacet);
         });
     });
 
