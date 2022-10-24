@@ -180,11 +180,36 @@ export interface NewPipelineModel extends PipelineShared, GranularResource {}
 export interface UpdatePipelineModel extends PipelineModel, GranularResource {}
 
 export interface ListPipelinesOptions extends Paginated {
+    /**
+     * Whether to sort the results in ascending order.
+     */
     isOrderAscending?: boolean;
+    /**
+     * The query filter to match.
+     *
+     * This allows you to search within query pipeline statement definitions and descriptions.
+     *
+     * By default, results are not required to match a specific query filter.
+     */
     filter?: string;
-    sortby?: string;
+    /**
+     * The sort criteria to apply on the results.
+     *
+     * Allowed values: `definition`, `description`, and `position`.
+     *
+     * Default: `position`
+     */
+    sortby?: 'definition' | 'description' | 'position';
     feature?: string;
+    /**
+     * The unique identifier of the target Coveo Cloud organization.
+     *
+     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
+     */
     organizationId?: string;
+    /**
+     * Whether to enable pagination.
+     */
     enablePagination?: boolean;
 }
 
