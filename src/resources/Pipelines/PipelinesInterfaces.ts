@@ -1,4 +1,4 @@
-import {GranularResource, Paginated} from '../BaseInterfaces';
+import {GranularResource, PageModel, Paginated} from '../BaseInterfaces';
 import {ConditionModel} from './Conditions';
 
 export interface PipelineBackendVersion {
@@ -185,4 +185,11 @@ export interface ListPipelinesOptions extends Paginated {
     sortby?: string;
     feature?: string;
     organizationId?: string;
+    enablePagination?: boolean;
 }
+
+export type PaginatedListPipelinesModel = Omit<PageModel<PipelineModel>, 'totalPages'>;
+
+export type ListPipelinesReturnVariant<ListPipelineVariant> = ListPipelineVariant extends {enablePagination: true}
+    ? PaginatedListPipelinesModel
+    : PipelineModel[];

@@ -6,6 +6,7 @@ import FacetStateRules from './FacetStateRules/FacetStateRules';
 import MLAssociations from './MLAssociations/MLAssociations';
 import {
     ListPipelinesOptions,
+    ListPipelinesReturnVariant,
     NewPipelineModel,
     PipelineBackendVersion,
     PipelineModel,
@@ -43,8 +44,8 @@ export default class Pipelines extends Resource {
         );
     }
 
-    list(options?: ListPipelinesOptions) {
-        return this.api.get<PipelineModel[]>(
+    list<ListPipelinesVariant extends ListPipelinesOptions>(options?: ListPipelinesVariant) {
+        return this.api.get<ListPipelinesReturnVariant<ListPipelinesVariant>>(
             this.buildPath(Pipelines.searchUrlVersion1, {organizationId: this.api.organizationId, ...options})
         );
     }
