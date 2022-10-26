@@ -23,7 +23,7 @@ export default class Activity extends Resource {
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
         const isPublic = activityFacet.sections?.includes('INTERNAL');
         return this.api.post<PageModel<ActivityModel>>(
-            this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : `${Activity.getBaseUrl()}`, params),
+            this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : Activity.getBaseUrl(), params),
             activityFacet
         );
     }
