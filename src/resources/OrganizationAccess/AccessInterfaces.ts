@@ -26,5 +26,5 @@ export interface AccessModel {
     callerPartOf: boolean;
     displayName: string;
     id: string;
-    privilegeholderType: PrivilegeholderType[];
+    privilegeholderType: PrivilegeholderType;
 }
