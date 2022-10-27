@@ -1,5 +1,10 @@
 import API from '../../../APICore';
 import CrawlingModule from '../CrawlingModule';
+import {
+    CrawlingModuleLogRequestLogType,
+    CrawlingModuleLogRequestState,
+    CreateCrawlingModuleLogRequestModel,
+} from '../CrawlingModuleInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -9,6 +14,7 @@ describe('Crawling Module Calls', () => {
     let crawlingModule: CrawlingModule;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const crawlingModuleId = 'https://youtu.be/UYpWYIET1uE';
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -25,7 +31,6 @@ describe('Crawling Module Calls', () => {
 
     describe('getUpdateStatus', () => {
         it('should get the update status for a given crawling module', () => {
-            const crawlingModuleId = 'someCrawlingModule-1d3e4r5t';
             crawlingModule.getUpdateStatus(crawlingModuleId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}/update`);
@@ -71,5 +76,36 @@ describe('Crawling Module Calls', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/securityWorker`);
         });
+    });
+
+    it('should post a new new crawling module log request', () => {
+        const createModel: CreateCrawlingModuleLogRequestModel = {
+            instanceId: 'INSTANCE_ID',
+            logType: CrawlingModuleLogRequestLogType.MAESTRO,
+            operationId: 'OPERATION_ID',
+        };
+        crawlingModule.createLogRequest(crawlingModuleId, createModel);
+        expect(api.post).toHaveBeenCalledTimes(1);
+        expect(api.post).toHaveBeenCalledWith(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
+            createModel
+        );
+    });
+
+    it('should get the state of all log requests', () => {
+        crawlingModule.getLogRequests(crawlingModuleId, CrawlingModuleLogRequestState.SUCCESSFUL);
+        expect(api.get).toHaveBeenCalledTimes(1);
+        expect(api.get).toHaveBeenCalledWith(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests?state=SUCCESSFUL`
+        );
+    });
+
+    it('should get the download url', () => {
+        const logRequestId = 'LOGREQUEST_ID';
+        crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
+        expect(api.get).toHaveBeenCalledTimes(1);
+        expect(api.get).toHaveBeenCalledWith(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
+        );
     });
 });

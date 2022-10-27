@@ -1,9 +1,20 @@
 import API from '../../APICore';
 import Resource from '../Resource';
-import {ComponentVersion, CrawlingModuleEntity, MaestroVersionOptions, UpdateStatus} from './CrawlingModuleInterfaces';
+import {
+    ComponentVersion,
+    CrawlingModuleEntity,
+    CrawlingModuleLogRequestDownloadModel,
+    CrawlingModuleLogRequestModel,
+    CrawlingModuleLogRequestState,
+    CreateCrawlingModuleLogRequestModel,
+    MaestroVersionOptions,
+    UpdateStatus,
+} from './CrawlingModuleInterfaces';
+import {PageModel} from '../BaseInterfaces';
 
 export default class CrawlingModule extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/crawlingmodule`;
+    static connectivityBaseUrl = `/rest/organizations/${API.orgPlaceholder}/crawlingmodules`;
 
     list() {
         return this.api.get<CrawlingModuleEntity[]>(CrawlingModule.baseUrl);
@@ -27,5 +38,26 @@ export default class CrawlingModule extends Resource {
 
     listSecurityWorkerVersions() {
         return this.api.get<string[]>(`${CrawlingModule.baseUrl}/versions/securityWorker`);
+    }
+
+    getLogRequests(crawlingModuleId: string, requestState: CrawlingModuleLogRequestState) {
+        return this.api.get<PageModel<CrawlingModuleLogRequestModel>>(
+            this.buildPath(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`, {
+                state: requestState,
+            })
+        );
+    }
+
+    createLogRequest(crawlingModuleId: string, requestModel: CreateCrawlingModuleLogRequestModel) {
+        return this.api.post<CreateCrawlingModuleLogRequestModel>(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
+            requestModel
+        );
+    }
+
+    getLogRequestDownload(crawlingModuleId: string, logRequestId: string) {
+        return this.api.get<CrawlingModuleLogRequestDownloadModel>(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
+        );
     }
 }
