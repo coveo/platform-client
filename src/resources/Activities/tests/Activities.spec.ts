@@ -40,8 +40,15 @@ describe('Activity', () => {
     describe('list', () => {
         it('should make a POST call to the specific Activity url to fetch activities of an organization', () => {
             const params: ListActivitiesParams = {};
-            const activityFacet: ActivityListingFilters = {};
+            const activityFacet: ActivityListingFilters = {sections: ['INTERNAL']};
+            activity.list(params, activityFacet);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(Activity.getBaseUrl(), activityFacet);
+        });
 
+        it('should make a POST call to the specific Activity url to fetch public activities of an organization', () => {
+            const params: ListActivitiesParams = {};
+            const activityFacet: ActivityListingFilters = {};
             activity.list(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public`, activityFacet);
@@ -49,10 +56,17 @@ describe('Activity', () => {
     });
 
     describe('listFacets', () => {
-        it('should make a POST call to the specific Activity url with the facetsOnly param set as true', () => {
+        it('should make a POST call to the specific Activity url to fetch the facets', () => {
+            const params: ListActivitiesFacetsParams = {};
+            const activityFacet: ActivityListingFilters = {sections: ['INTERNAL']};
+            activity.listFacets(params, activityFacet);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets`, activityFacet);
+        });
+
+        it('should make a POST call to the specific Activity url to fetch the public facets', () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
-
             activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public`, activityFacet);
@@ -63,7 +77,6 @@ describe('Activity', () => {
         it('should make a POST call to the specific Activity url to fetch activities of all organizations', () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
-
             activity.listAll(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Activity.getBaseUrlAllOrgs(), activityFacet);
