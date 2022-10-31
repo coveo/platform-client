@@ -21,15 +21,20 @@ export default class Activity extends Resource {
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
+        const isPublic = !activityFacet.sections?.includes('INTERNAL');
         return this.api.post<PageModel<ActivityModel>>(
-            this.buildPath(`${Activity.getBaseUrl()}/public`, params),
+            this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : Activity.getBaseUrl(), params),
             activityFacet
         );
     }
 
     listFacets(params?: ListActivitiesFacetsParams, activityFacet?: ActivityListingFilters) {
+        const isPublic = !activityFacet.sections?.includes('INTERNAL');
         return this.api.post<ActivityFacetModel>(
-            this.buildPath(`${Activity.getBaseUrl()}/facets/public`, params),
+            this.buildPath(
+                isPublic ? `${Activity.getBaseUrl()}/facets/public` : `${Activity.getBaseUrl()}/facets`,
+                params
+            ),
             activityFacet
         );
     }
