@@ -6,7 +6,7 @@ import {ProductListingConfigurationModel} from './ProductListingConfigurationInt
 export default class ProductListingConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
 
-    list(catalogId: string, productlistingId: string) {
+    list(catalogId: string, productListingId: string) {
         return this.api.get(
             `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations`
         );
