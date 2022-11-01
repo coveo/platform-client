@@ -10,7 +10,7 @@ const APIMock: jest.Mock<API> = API as any;
 
 describe('ProductListingConfiguration', () => {
     const catalogId = 'catalogId';
-    const productlistingId = 'productlistingId';
+    const productListingId = 'productlistingId';
     let productListingConfiguration: ProductListingConfiguration;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
@@ -22,10 +22,10 @@ describe('ProductListingConfiguration', () => {
 
     describe('list', () => {
         it('should make a GET call to the product listing configuration base url', () => {
-            productListingConfiguration.list(catalogId, productlistingId);
+            productListingConfiguration.list(catalogId, productListingId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`
             );
         });
     });
@@ -67,10 +67,10 @@ describe('ProductListingConfiguration', () => {
                 ],
             };
 
-            productListingConfiguration.create(catalogId, productlistingId, productListingConfigurationModel);
+            productListingConfiguration.create(catalogId, productListingId, productListingConfigurationModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations`,
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`,
                 productListingConfigurationModel
             );
         });
@@ -79,10 +79,10 @@ describe('ProductListingConfiguration', () => {
     describe('delete', () => {
         it('should make a DELETE call to the specific product listing configuration url', () => {
             const productListingConfigurationToDeleteId = 'product-listing-configuration-to-be-deleted';
-            productListingConfiguration.delete(catalogId, productlistingId, productListingConfigurationToDeleteId);
+            productListingConfiguration.delete(catalogId, productListingId, productListingConfigurationToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationToDeleteId}`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToDeleteId}`
             );
         });
     });
@@ -90,10 +90,10 @@ describe('ProductListingConfiguration', () => {
     describe('get product listing for a catalog', () => {
         it('should make a GET call to the specific product listing configuration url', () => {
             const productListingConfigurationToGetId = 'product-listing-configuration-to-be-fetched';
-            productListingConfiguration.get(catalogId, productlistingId, productListingConfigurationToGetId);
+            productListingConfiguration.get(catalogId, productListingId, productListingConfigurationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationToGetId}`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToGetId}`
             );
         });
     });
@@ -139,13 +139,13 @@ describe('ProductListingConfiguration', () => {
 
             productListingConfiguration.update(
                 catalogId,
-                productlistingId,
+                productListingId,
                 productListingConfigurationToUpdateId,
                 productListingConfigurationModel
             );
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationToUpdateId}`,
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToUpdateId}`,
                 productListingConfigurationModel
             );
         });

@@ -8,36 +8,36 @@ export default class ProductListingConfiguration extends Resource {
 
     list(catalogId: string, productListingId: string) {
         return this.api.get(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations`
+            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`
         );
     }
-    create(catalogId: string, productlistingId: string, rankingConfiguration: New<ProductListingConfigurationModel>) {
+    create(catalogId: string, productListingId: string, rankingConfiguration: New<ProductListingConfigurationModel>) {
         return this.api.post(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations`,
+            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`,
             rankingConfiguration
         );
     }
 
-    delete(catalogId: string, productlistingId: string, productListingConfigurationId: string) {
+    delete(catalogId: string, productListingId: string, productListingConfigurationId: string) {
         return this.api.delete(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationId}`
+            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`
         );
     }
 
-    get(catalogId: string, productlistingId: string, productListingConfigurationId: string) {
+    get(catalogId: string, productListingId: string, productListingConfigurationId: string) {
         return this.api.get(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationId}`
+            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`
         );
     }
 
     update(
         catalogId: string,
-        productlistingId: string,
+        productListingId: string,
         productListingConfigurationId: string,
         rankingConfiguration: New<ProductListingConfigurationModel>
     ) {
         return this.api.put(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productlistingId}/configurations/${productListingConfigurationId}`,
+            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`,
             rankingConfiguration
         );
     }
