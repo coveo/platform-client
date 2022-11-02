@@ -55,7 +55,7 @@ describe('ProductListingConfiguration', () => {
                                 fieldName: 'ec_brand',
                                 operator: FieldOperatorType.IS_EXACTLY,
                                 value: {
-                                    type: 'string',
+                                    type: 'STRING',
                                     value: FieldValueType.STRING,
                                 },
                             },
@@ -108,10 +108,10 @@ describe('ProductListingConfiguration', () => {
                         include: [
                             {
                                 fieldName: 'ec_brand',
-                                operator: FieldOperatorType.IS_EXACTLY,
+                                operator: FieldOperatorType.IS_GREATER_THAN,
                                 value: {
-                                    type: 'STRING',
-                                    value: FieldValueType.STRING,
+                                    type: 'decimal',
+                                    value: FieldValueType.DECIMAL,
                                 },
                             },
                         ],
@@ -123,10 +123,10 @@ describe('ProductListingConfiguration', () => {
                         include: [
                             {
                                 fieldName: 'ec_brand',
-                                operator: FieldOperatorType.IS_EXACTLY,
+                                operator: FieldOperatorType.IS_LESS_THAN_OR_EQUAL_TO,
                                 value: {
-                                    type: 'string',
-                                    value: FieldValueType.STRING,
+                                    type: 'decimal',
+                                    value: FieldValueType.DECIMAL,
                                 },
                             },
                         ],
