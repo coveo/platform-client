@@ -1,3 +1,4 @@
+import {ProductListingConfigurationModel} from './ProductListingConfigurationInterfaces';
 import {Paginated} from '../BaseInterfaces';
 import {FieldOperatorType, FieldValueType} from '../Enums';
 import {DeprecatedPaginated} from '../InternalBaseInterface';
@@ -63,7 +64,7 @@ export interface ProductListingModel {
     /**
      * The desired configuration
      */
-    configuration?: Map<string, any>;
+    configuration?: ProductListingConfigurationModel;
 }
 
 export interface CatalogProductListingsGroupModel {
