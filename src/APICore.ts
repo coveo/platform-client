@@ -4,7 +4,6 @@ import getEndpoint, {Environment, Region} from './Endpoints';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
 import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
 import {UserModel} from './resources/Users';
-import {getFormData} from './utils/FormData';
 import retrieve from './utils/Retriever';
 
 export default class API {
@@ -89,7 +88,7 @@ export default class API {
     }
 
     async checkToken() {
-        const formData = getFormData();
+        const formData = new FormData();
         formData.append('token', this.accessToken);
         this.tokenInfo = await this.postForm<any>('/oauth/check_token', formData);
     }
