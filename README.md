@@ -71,7 +71,7 @@ doSometing(catalogs);
 ### Compatibility
 
 The `platform-client` package is built on top of the `fetch` API and is not entirely supported by all JavaScript runtime environments.
-Consequently, for Node, we recommend using Node 18 or `undici` to polyfill `fetch` globally
+Consequently, for Node, we recommend using Node 18 or [undici](https://github.com/nodejs/undici) to polyfill `fetch` globally
 
 #### Node.js example
 
