@@ -1,6 +1,4 @@
-import type FormDataNode from 'form-data';
 import API from '../../APICore';
-import {getFormData} from '../../utils/FormData';
 import Resource from '../Resource';
 import {
     ApplyOptions,
@@ -84,26 +82,8 @@ export default class ResourceSnapshots extends Resource {
             developerNotes: options.developerNotes,
             snapshotFileType: this.getSnapshotFileType(file),
         };
-        const form = getFormData();
+        const form = new FormData();
         form.append('file', file);
-
-        return this.api.postForm<ResourceSnapshotsModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
-            form
-        );
-    }
-
-    /**
-     * Creates a snapshot from a buffer containing the configuration.
-     *
-     * @param {Buffer} file The buffer containing the configuration.
-     * @param {ResourceSnapshotSupportedFileTypes} fileType The type of the file containing the configuration.
-     * @param {CreateFromFileOptions} options
-     */
-    createFromBuffer(file: Buffer, fileType: ResourceSnapshotSupportedFileTypes, options: CreateFromFileOptions) {
-        const computedOptions = {developerNotes: options.developerNotes, snapshotFileType: fileType};
-        const form = getFormData();
-        ((form as unknown) as FormDataNode).append('file', file, `snapshot.${fileType.toString().toLowerCase()}`);
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),

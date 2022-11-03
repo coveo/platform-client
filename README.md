@@ -70,16 +70,15 @@ doSometing(catalogs);
 
 ### Compatibility
 
-The `platform-client` package is built on top of the `fetch` API and some related features such as the `AbortController` which are not entirely supported by all JavaScript runtime environments. Consequently, we recommend including the following list of polyfills to your project before using it in production.
-
--   [Polyfill for `fetch`](https://github.com/matthew-andrews/isomorphic-fetch)
--   [Polyfill for `AbortController`](https://github.com/mo/abortcontroller-polyfill)
+The `platform-client` package is built on top of the `fetch` API and is not entirely supported by all JavaScript runtime environments.
+Consequently, for Node, we recommend using Node 18 or [undici](https://github.com/nodejs/undici) to polyfill `fetch` globally
 
 #### Node.js example
 
 ```js
-require('isomorphic-fetch');
-require('abortcontroller-polyfill');
+if (!global['fetch']) {
+    global['fetch'] = require('undici').fetch;
+}
 const PlatformClient = require('@coveo/platform-client').default;
 
 const coveoPlatform = new PlatformClient({
@@ -103,8 +102,9 @@ It is also possible to provide global request settings for all requests made by 
 #### Node.js example
 
 ```js
-require('isomorphic-fetch');
-require('abortcontroller-polyfill');
+if (!global['fetch']) {
+    global['fetch'] = require('undici').fetch;
+}
 const PlatformClient = require('@coveo/platform-client').default;
 
 const coveoPlatform = new PlatformClient({

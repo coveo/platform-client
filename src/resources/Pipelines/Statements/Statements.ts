@@ -1,4 +1,3 @@
-import {getFormData} from '../../../utils/FormData';
 import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
@@ -33,7 +32,7 @@ export default class Statements extends Resource {
 
     importCSV(pipelineId: string, csvFile: File | string, options?: ExportStatementParams) {
         const fileName = typeof csvFile === 'string' ? 'raw-string' : csvFile.name;
-        const formData = getFormData();
+        const formData = new FormData();
         formData.append('file', csvFile, fileName);
 
         return this.api.postForm(
