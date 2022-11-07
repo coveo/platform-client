@@ -9,6 +9,10 @@ export interface ProductListingConfigurationModel {
 
 export interface RankingConfiguration {
     /**
+     * The name of the RankingConfiguration.
+     */
+    name: string;
+    /**
      * The list of inclusion filters.
      */
     include: QueryFilterModel[];
