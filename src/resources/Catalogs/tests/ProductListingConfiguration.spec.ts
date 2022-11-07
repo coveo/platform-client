@@ -35,6 +35,7 @@ describe('ProductListingConfiguration', () => {
             const productListingConfigurationModel: New<ProductListingConfigurationModel> = {
                 rankingConfigurations: [
                     {
+                        name: 'Bury brand',
                         include: [
                             {
                                 fieldName: 'ec_brand',
@@ -50,6 +51,7 @@ describe('ProductListingConfiguration', () => {
                         value: 10,
                     },
                     {
+                        name: 'Boost brand',
                         include: [
                             {
                                 fieldName: 'ec_brand',
@@ -105,6 +107,7 @@ describe('ProductListingConfiguration', () => {
             const productListingConfigurationModel: ProductListingConfigurationModel = {
                 rankingConfigurations: [
                     {
+                        name: 'Bury brand',
                         include: [
                             {
                                 fieldName: 'ec_brand',
@@ -120,6 +123,7 @@ describe('ProductListingConfiguration', () => {
                         value: 100,
                     },
                     {
+                        name: 'Boost brand',
                         include: [
                             {
                                 fieldName: 'ec_brand',
