@@ -1,6 +1,14 @@
+import {Paginated} from '../BaseInterfaces';
+import {DeprecatedPaginated} from '../InternalBaseInterface';
 import {QueryFilterModel} from './ProductListingInterfaces';
 
+export type ProductListingConfigurationOptions = Paginated | DeprecatedPaginated;
+
 export interface ProductListingConfigurationModel {
+    /**
+     * The id of the ProductListingConfiguration.
+     */
+    id: string;
     /**
      * The list of RankingConfiguration.
      */

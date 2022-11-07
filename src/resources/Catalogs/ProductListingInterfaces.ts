@@ -1,20 +1,34 @@
-import {ProductListingConfigurationModel} from './ProductListingConfigurationInterfaces';
 import {Paginated} from '../BaseInterfaces';
 import {FieldOperatorType, FieldValueType} from '../Enums';
 import {DeprecatedPaginated} from '../InternalBaseInterface';
 
 export type ProductListingsListOptions = Paginated | DeprecatedPaginated;
 
-export interface FieldValueModel {
+interface FieldValueModelGeneric<T extends FieldValueType> {
     /**
-     * The field type.
+     * The type of the field.
      */
-    type: string;
+    type: T;
     /**
-     * The field value enum type.
+     * The value of the field.
      */
-    value: FieldValueType;
+    value: ValueTypeForFieldValueType[T];
 }
+
+interface ValueTypeForFieldValueType {
+    [FieldValueType.RANGE]: number[];
+    [FieldValueType.STRING]: string;
+    [FieldValueType.DECIMAL]: number;
+    [FieldValueType.ARRAY]: string[];
+    [FieldValueType.HIERARCHIC_MULTI_VALUE]: string[];
+}
+
+type FieldValueModel =
+    | FieldValueModelGeneric<FieldValueType.RANGE>
+    | FieldValueModelGeneric<FieldValueType.STRING>
+    | FieldValueModelGeneric<FieldValueType.DECIMAL>
+    | FieldValueModelGeneric<FieldValueType.ARRAY>
+    | FieldValueModelGeneric<FieldValueType.HIERARCHIC_MULTI_VALUE>;
 
 export interface QueryFilterModel {
     /**
@@ -61,10 +75,6 @@ export interface ProductListingModel {
      * The list of usage metrics.
      */
     metrics?: ProductListingMetricsModel;
-    /**
-     * The desired configuration
-     */
-    configuration?: ProductListingConfigurationModel;
 }
 
 export interface CatalogProductListingsGroupModel {
