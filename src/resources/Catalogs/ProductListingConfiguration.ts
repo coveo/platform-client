@@ -1,14 +1,22 @@
 import API from '../../APICore';
-import {New} from '../BaseInterfaces';
+import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions';
+import {New, PageModel} from '../BaseInterfaces';
 import Resource from '../Resource';
-import {ProductListingConfigurationModel} from './ProductListingConfigurationInterfaces';
+import {
+    ProductListingConfigurationModel,
+    ProductListingConfigurationOptions,
+} from './ProductListingConfigurationInterfaces';
 
 export default class ProductListingConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
 
-    list(catalogId: string, productListingId: string) {
-        return this.api.get(
-            `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`
+    list(catalogId: string, productListingId: string, options?: ProductListingConfigurationOptions) {
+        const normalizedOptions = normalizePaginatedOptions(options);
+        return this.api.get<PageModel<ProductListingConfigurationModel>>(
+            this.buildPath(
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`,
+                normalizedOptions
+            )
         );
     }
     create(catalogId: string, productListingId: string, rankingConfiguration: New<ProductListingConfigurationModel>) {
@@ -25,7 +33,7 @@ export default class ProductListingConfiguration extends Resource {
     }
 
     get(catalogId: string, productListingId: string, productListingConfigurationId: string) {
-        return this.api.get(
+        return this.api.get<ProductListingConfigurationModel>(
             `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`
         );
     }
