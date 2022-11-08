@@ -38,8 +38,8 @@ describe('ProductListings', () => {
                         fieldName: 'ec_brand',
                         operator: FieldOperatorType.IS_EXACTLY,
                         value: {
-                            type: FieldValueType.STRING,
-                            value: 'Adidas',
+                            type: 'STRING',
+                            value: FieldValueType.STRING,
                         },
                     },
                 ],
@@ -87,8 +87,8 @@ describe('ProductListings', () => {
                         fieldName: 'ec_brand',
                         operator: FieldOperatorType.IS_EXACTLY,
                         value: {
-                            type: FieldValueType.STRING,
-                            value: 'Nike',
+                            type: 'STRING',
+                            value: FieldValueType.STRING,
                         },
                     },
                 ],

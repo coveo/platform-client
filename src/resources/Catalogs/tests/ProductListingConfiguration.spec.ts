@@ -22,10 +22,10 @@ describe('ProductListingConfiguration', () => {
 
     describe('list', () => {
         it('should make a GET call to the product listing configuration base url', () => {
-            productListingConfiguration.list(catalogId, productListingId, {page: 2, perPage: 10});
+            productListingConfiguration.list(catalogId, productListingId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations?page=2&pageSize=10`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`
             );
         });
     });
@@ -41,8 +41,8 @@ describe('ProductListingConfiguration', () => {
                                 fieldName: 'ec_brand',
                                 operator: FieldOperatorType.IS_EXACTLY,
                                 value: {
-                                    type: FieldValueType.STRING,
-                                    value: 'New Balance',
+                                    type: 'STRING',
+                                    value: FieldValueType.STRING,
                                 },
                             },
                         ],
@@ -57,8 +57,8 @@ describe('ProductListingConfiguration', () => {
                                 fieldName: 'ec_brand',
                                 operator: FieldOperatorType.IS_EXACTLY,
                                 value: {
-                                    type: FieldValueType.STRING,
-                                    value: 'Puma',
+                                    type: 'STRING',
+                                    value: FieldValueType.STRING,
                                 },
                             },
                         ],
@@ -104,8 +104,7 @@ describe('ProductListingConfiguration', () => {
         const productListingConfigurationToUpdateId = 'product-listing-configuration-to-be-updated';
 
         it('should make a PUT call to the specific product listing configuration url', () => {
-            const productListingConfigurationModel = {
-                // id: 'testId',
+            const productListingConfigurationModel: ProductListingConfigurationModel = {
                 rankingConfigurations: [
                     {
                         name: 'Bury brand',
@@ -114,8 +113,8 @@ describe('ProductListingConfiguration', () => {
                                 fieldName: 'ec_brand',
                                 operator: FieldOperatorType.IS_GREATER_THAN,
                                 value: {
-                                    type: FieldValueType.DECIMAL,
-                                    value: 1,
+                                    type: 'decimal',
+                                    value: FieldValueType.DECIMAL,
                                 },
                             },
                         ],
@@ -130,8 +129,8 @@ describe('ProductListingConfiguration', () => {
                                 fieldName: 'ec_brand',
                                 operator: FieldOperatorType.IS_LESS_THAN_OR_EQUAL_TO,
                                 value: {
-                                    type: FieldValueType.DECIMAL,
-                                    value: 2,
+                                    type: 'decimal',
+                                    value: FieldValueType.DECIMAL,
                                 },
                             },
                         ],
@@ -140,7 +139,7 @@ describe('ProductListingConfiguration', () => {
                         value: 150,
                     },
                 ],
-            } as ProductListingConfigurationModel;
+            };
 
             productListingConfiguration.update(
                 catalogId,
