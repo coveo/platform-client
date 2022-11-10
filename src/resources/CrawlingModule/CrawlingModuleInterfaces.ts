@@ -57,7 +57,6 @@ export interface CreateCrawlingModuleLogRequestModel {
     instanceId: string;
     logType: CrawlingModuleLogRequestLogType;
     operationId: string;
-    id?: string;
 }
 
 export interface CrawlingModuleLogRequestDownloadModel {
