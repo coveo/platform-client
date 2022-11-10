@@ -49,7 +49,7 @@ export default class CrawlingModule extends Resource {
     }
 
     createLogRequest(crawlingModuleId: string, requestModel: CreateCrawlingModuleLogRequestModel) {
-        return this.api.post<CreateCrawlingModuleLogRequestModel>(
+        return this.api.post<CrawlingModuleLogRequestModel>(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
             requestModel
         );
