@@ -66,7 +66,18 @@ describe('Product', () => {
             };
             products.get(query);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing`, query);
+            expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing?refreshCache=false`, query);
+        });
+    });
+
+    describe('getProducts while force refreshing the product listings cache', () => {
+        it('should make a POST call to to retrieve filtered products', () => {
+            const query: New<ProductsRequestModel> = {
+                url: 'https://fashion.coveodemo.com/browse/men/hats',
+            };
+            products.get(query, true);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing?refreshCache=true`, query);
         });
     });
 });
