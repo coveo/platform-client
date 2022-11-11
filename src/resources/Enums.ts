@@ -1070,11 +1070,11 @@ export enum FieldOperatorType {
 }
 
 export enum FieldValueType {
-    RANGE = 'RANGE',
-    STRING = 'STRING',
-    DECIMAL = 'DECIMAL',
-    ARRAY = 'ARRAY',
-    HIERARCHIC_MULTI_VALUE = 'HIERARCHIC_MULTI_VALUE',
+    RANGE = 'range',
+    STRING = 'string',
+    DECIMAL = 'decimal',
+    ARRAY = 'array',
+    HIERARCHIC_MULTI_VALUE = 'hierarchicMultiValue',
 }
 
 export enum ProductsFacetRequestSortType {
