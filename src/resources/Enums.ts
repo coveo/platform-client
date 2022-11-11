@@ -1055,18 +1055,18 @@ export enum VaultValueType {
 }
 
 export enum FieldOperatorType {
-    IS_ANY_OF = 'IS_ANY_OF',
-    IS_BETWEEN = 'IS_BETWEEN',
-    IS_EXACTLY = 'IS_EXACTLY',
-    IS_EXACTLY_NOT = 'IS_EXACTLY_NOT',
-    IS_GREATER_THAN = 'IS_GREATER_THAN',
-    IS_GREATER_THAN_OR_EQUAL_TO = 'IS_GREATER_THAN_OR_EQUAL_TO',
-    IS_LESS_THAN = 'IS_LESS_THAN',
-    IS_LESS_THAN_OR_EQUAL_TO = 'IS_LESS_THAN_OR_EQUAL_TO',
-    CONTAINS = 'CONTAINS',
-    DOES_NOT_CONTAIN = 'DOES_NOT_CONTAIN',
-    IS_DEFINED = 'IS_DEFINED',
-    IS_NOT_DEFINED = 'IS_NOT_DEFINED',
+    IS_ANY_OF = 'isAnyOf',
+    IS_BETWEEN = 'isBetween',
+    IS_EXACTLY = 'isExactly',
+    IS_EXACTLY_NOT = 'isExactlyNot',
+    IS_GREATER_THAN = 'isGreaterThan',
+    IS_GREATER_THAN_OR_EQUAL_TO = 'isGreaterThanOrEqualTo',
+    IS_LESS_THAN = 'isLessThan',
+    IS_LESS_THAN_OR_EQUAL_TO = 'isLessThanOrEqualTo',
+    CONTAINS = 'contains',
+    DOES_NOT_CONTAIN = 'doesNotContain',
+    IS_DEFINED = 'isDefined',
+    IS_NOT_DEFINED = 'isNotDefined',
 }
 
 export enum FieldValueType {
