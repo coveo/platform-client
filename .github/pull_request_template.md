@@ -14,3 +14,6 @@ If a new Resource class was created in this PR, have you done the following?
 -   [ ] The proposed changes are covered by unit tests
 -   [ ] Commits containing breaking changes a properly identified as such
 -   [ ] [README.md](https://github.com/coveo/platform-client/blob/master/README.md) is adjusted to reflect the proposed changes (if relevant)
+-   [ ] My merge commit message will be conventional (See [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/))
+<!-- TODO November 29th: Remove this -->
+**BONUS:** For the duration of the Centraide Campain 2022, author of unconventional commit on master will be strongly invited to amend by making a donation to Centraide <3
