@@ -4,6 +4,15 @@ export interface MaestroVersionOptions {
     crawlingModuleVersion: string;
 }
 
+export interface CrawlingModuleStatus {
+    usingProxy: boolean;
+    autoUpdateEnable: boolean;
+    logRequestEnable: boolean;
+    autoUpdateFrequency: number;
+    numberOfCrawlerWorkers: number;
+    numberOfSecurityWorkers: number;
+}
+
 export interface CrawlingModuleEntity {
     createdDate: number;
     databaseVersion?: string;
@@ -17,6 +26,7 @@ export interface CrawlingModuleEntity {
     securityWorkerVersion?: string;
     updatedDate: number;
     workerVersion?: string;
+    status?: CrawlingModuleStatus;
 }
 
 export interface ComponentVersion {
@@ -28,7 +38,7 @@ export interface ComponentVersion {
 
 export interface UpdateStatus {
     updateAvailable: boolean;
-    updateCategory: UpdateStatusCategory;
+    updateCategory?: UpdateStatusCategory;
 }
 
 export enum CrawlingModuleLogRequestLogType {
