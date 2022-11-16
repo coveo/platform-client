@@ -6,28 +6,28 @@ export interface MaestroVersionOptions {
 
 export interface CrawlingModuleStatus {
     /**
-     * Whether the crawling module is using a proxy or not.
+     * Whether the Crawling Module is using a proxy or not.
      */
     usingProxy: boolean;
     /**
-     * Whether the auto update is enable or not.
+     * Whether auto-updates are enabled or not on this setup.
      */
     autoUpdateEnable: boolean;
     /**
-     * Whether the log request is enable or not.
+     * Whether remote log requests are enabled or not.
      * This enables the client to query logs directly from the platform.
      */
     logRequestEnable: boolean;
     /**
-     * Frequency at which the setup look for update.
+     * Frequency at which the setup polls for updates.
      */
     autoUpdateFrequency: number;
     /**
-     * The number for crawler set in the configuration of the crawling module.
+     * The number of crawler workers set in the configuration of the Crawling Module.
      */
     numberOfCrawlerWorkers: number;
     /**
-     * The number for security provider set in the configuration of the crawling module.
+     * The number of security provider set in the configuration of the Crawling Module.
      */
     numberOfSecurityWorkers: number;
 }
@@ -42,32 +42,32 @@ export interface CrawlingModuleEntity {
      */
     databaseVersion?: string;
     /**
-     * After a given period, a crawling module that doesn't report to the
-     * platform is going be disabled. It won't be able to process job.
+     * After a given period, a Crawling Module that doesn't report to the
+     * platform is going be disabled. It is considered unable to process job.
      */
     disabled: boolean;
     /**
-     * Id of the crawling module.
+     * Id of the Crawling Module.
      */
     id: string;
     /**
-     * The last time the crawling module report itself to the platform.
+     * The last time the Crawling Module sent its status to the platform.
      */
     lastHeartbeat: number;
     /**
-     * The latest date at which the crawling module update itself.
+     * The latest date at which the Crawling Module update itself.
      */
     lastVersionUpgrade: number;
     /**
-     * The version of the crawling module.
+     * The version of the Crawling Module.
      */
     maestroVersion: string;
     /**
-     * The name of the crawling module.
+     * The name of the Crawling Module.
      */
     name: string;
     /**
-     * Organization id on which the crawling module is linked.
+     * Organization id with which the Crawling Module is linked.
      */
     organizationId: string;
     /**
@@ -83,7 +83,7 @@ export interface CrawlingModuleEntity {
      */
     workerVersion?: string;
     /**
-     * Advance information about a crawling module, see @type {CrawlingModuleStatus}.
+     * Advanced information about a crawling module, see @type {CrawlingModuleStatus}.
      */
     status?: CrawlingModuleStatus;
 }
@@ -94,7 +94,7 @@ export interface ComponentVersion {
      */
     databaseVersion: string;
     /**
-     * The version of the crawling module.
+     * The version of the Crawling Module.
      */
     maestroVersion: string;
     /**
@@ -150,7 +150,7 @@ export interface CrawlingModuleLogRequestModel {
      */
     logType: CrawlingModuleLogRequestLogType;
     /**
-     * Operation on for which we want to get the logs.
+     * Operation for which we want to get the logs.
      */
     operationId: string;
     /**
@@ -169,14 +169,14 @@ export interface CreateCrawlingModuleLogRequestModel {
      */
     logType: CrawlingModuleLogRequestLogType;
     /**
-     * Operation on for which we want to get the logs.
+     * Operation for which we want to get the logs.
      */
     operationId: string;
 }
 
 export interface CrawlingModuleLogRequestDownloadModel {
     /**
-     * Information about the request, mostly error message.
+     * Information about the request. Typically contains error messages.
      */
     info: string;
     /**
