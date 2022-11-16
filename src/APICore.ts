@@ -9,19 +9,26 @@ import retrieve from './utils/Retriever';
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
-    private getRequestsController: AbortController;
+    private getRequestsController: WeakRef<AbortController>;
     private tokenInfo: Record<string, any>;
 
-    constructor(private config: PlatformClientOptions, private isServerlessHost?: boolean) {
-        this.getRequestsController = new AbortController();
-    }
+    constructor(private config: PlatformClientOptions, private isServerlessHost?: boolean) {}
 
     get organizationId(): string {
         return retrieve(this.config.organizationId);
     }
 
+    private get abortController(): AbortController {
+        let deref = this.getRequestsController?.deref();
+        if (!deref) {
+            deref = new AbortController();
+            this.getRequestsController = new WeakRef(deref);
+        }
+        return deref;
+    }
+
     async get<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
-        args.signal = args.signal || this.getRequestsController.signal;
+        args.signal = args.signal || this.abortController.signal;
         try {
             return await this.request<T>(url, args);
         } catch (error) {
@@ -34,7 +41,7 @@ export default class API {
     }
 
     async getFile(url: string, args: RequestInit = {method: 'get'}): Promise<Blob> {
-        args.signal = args.signal || this.getRequestsController.signal;
+        args.signal = args.signal || this.abortController.signal;
         try {
             return await this.requestFile(url, args);
         } catch (error) {
@@ -83,8 +90,8 @@ export default class API {
     }
 
     abortGetRequests(): void {
-        this.getRequestsController.abort();
-        this.getRequestsController = new AbortController();
+        this.abortController.abort();
+        this.getRequestsController = null;
     }
 
     async checkToken() {

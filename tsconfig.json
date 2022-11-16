@@ -6,6 +6,7 @@
         "sourceMap": true,
         "declaration": true,
         "target": "ES5",
+        "lib": ["ES2021.WeakRef", "DOM"],
         "declarationDir": "dist/definitions",
         "moduleResolution": "Node",
         "importHelpers": true,
