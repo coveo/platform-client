@@ -18,6 +18,12 @@ describe.only('LicenseMetrics', () => {
     });
 
     describe('list', () => {
+        it('should make a GET call to the assignable metrics for an organization', () => {
+            LicenseMetricsService.listAssignable();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${LicenseMetrics.baseUrl}/assignable`);
+        });
+
         it('should make a GET call to the in-use metrics for an organization', () => {
             LicenseMetricsService.listInUse();
             expect(api.get).toHaveBeenCalledTimes(1);
