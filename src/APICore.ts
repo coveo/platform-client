@@ -9,7 +9,7 @@ import retrieve from './utils/Retriever';
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
-    private getRequestsController: WeakRef<AbortController>;
+    private abortControllerList: AbortController[] = [];
     private tokenInfo: Record<string, any>;
 
     constructor(private config: PlatformClientOptions, private isServerlessHost?: boolean) {}
@@ -19,12 +19,9 @@ export default class API {
     }
 
     private get abortController(): AbortController {
-        let deref = this.getRequestsController?.deref();
-        if (!deref) {
-            deref = new AbortController();
-            this.getRequestsController = new WeakRef(deref);
-        }
-        return deref;
+        const controller = new AbortController();
+        this.abortControllerList.push(controller);
+        return controller;
     }
 
     async get<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
@@ -90,8 +87,7 @@ export default class API {
     }
 
     abortGetRequests(): void {
-        this.abortController.abort();
-        this.getRequestsController = null;
+        this.abortControllerList.forEach((controller) => controller.abort());
     }
 
     async checkToken() {
@@ -133,7 +129,8 @@ export default class API {
     }
 
     private getUrlFromRoute(route: string): string {
-        return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
+        // return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
+        return 'https://jsonplaceholder.typicode.com/todos/1';
     }
 
     private async request<T>(route: string, args: RequestInit): Promise<T> {
