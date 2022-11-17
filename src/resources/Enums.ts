@@ -899,7 +899,7 @@ export enum SearchHubLicenseMetrics {
     normalQueries = 'normalQueries',
     commerceProductListingQueries = 'commerceProductListingQueries',
     recommendationsQueries = 'recommendationsQueries',
-    agent = 'agents',
+    agents = 'agents',
     intranetUsers = 'intranetUsers',
     partnerUsers = 'partnerUsers',
     platformIntranetUsers = 'platformIntranetUsers',
