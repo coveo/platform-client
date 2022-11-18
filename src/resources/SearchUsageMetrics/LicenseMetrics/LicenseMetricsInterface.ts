@@ -14,6 +14,10 @@ export interface RestMetricsModel {
      * The display name of the metric
      */
     label?: string;
+    /**
+     * The sfProductId of the metric
+     */
+    productId?: string;
 }
 
 export interface RestListOfMetricValues {
