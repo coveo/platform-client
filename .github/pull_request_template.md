@@ -10,6 +10,7 @@ If a new Resource class was created in this PR, have you done the following?
 
 <!-- PRs that don't respect all of those criteria won't be merged. -->
 
+-   [ ] My API is publicly available and documented in production, i.e. on [Swagger](https://platform.cloud.coveo.com/docs)
 -   [ ] JSDoc annotates each property added in the exported interfaces
 -   [ ] The proposed changes are covered by unit tests
 -   [ ] Commits containing breaking changes a properly identified as such
