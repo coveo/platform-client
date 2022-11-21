@@ -2,7 +2,11 @@ import API from '../../../APICore';
 import {FieldOperatorType, FieldValueType} from '../../Enums';
 import {New} from '../../BaseInterfaces';
 import ProductListingConfiguration from '../ProductListingConfiguration';
-import {ProductListingConfigurationModel, RankingTypeEnum} from '../ProductListingConfigurationInterfaces';
+import {
+    ProductListingConfigurationModel,
+    RankingConfigurationModel,
+    RankingTypeEnum,
+} from '../ProductListingConfigurationInterfaces';
 
 jest.mock('../../../APICore');
 
@@ -32,7 +36,7 @@ describe('ProductListingConfiguration', () => {
 
     describe('create', () => {
         it('should make a POST call to the product listing configuration base url', () => {
-            const productListingConfigurationModel: New<ProductListingConfigurationModel> = {
+            const productListingConfigurationModel = {
                 rankingConfigurations: [
                     {
                         name: 'Bury brand',
@@ -49,7 +53,7 @@ describe('ProductListingConfiguration', () => {
                         exclude: [],
                         type: RankingTypeEnum.BURY,
                         value: 10,
-                    },
+                    } as RankingConfigurationModel,
                     {
                         name: 'Boost brand',
                         include: [
@@ -65,7 +69,7 @@ describe('ProductListingConfiguration', () => {
                         exclude: [],
                         type: RankingTypeEnum.BOOST,
                         value: 15,
-                    },
+                    } as RankingConfigurationModel,
                 ],
             };
 
@@ -104,10 +108,10 @@ describe('ProductListingConfiguration', () => {
         const productListingConfigurationToUpdateId = 'product-listing-configuration-to-be-updated';
 
         it('should make a PUT call to the specific product listing configuration url', () => {
-            const productListingConfigurationModel = {
-                // id: 'testId',
+            const productListingConfigurationModel: New<ProductListingConfigurationModel> = {
                 rankingConfigurations: [
                     {
+                        id: 'id1',
                         name: 'Bury brand',
                         include: [
                             {
@@ -124,6 +128,7 @@ describe('ProductListingConfiguration', () => {
                         value: 100,
                     },
                     {
+                        id: 'id2',
                         name: 'Boost brand',
                         include: [
                             {

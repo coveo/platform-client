@@ -12,10 +12,14 @@ export interface ProductListingConfigurationModel {
     /**
      * The list of RankingConfiguration.
      */
-    rankingConfigurations: RankingConfiguration[];
+    rankingConfigurations: RankingConfigurationModel[];
 }
 
-export interface RankingConfiguration {
+export interface RankingConfigurationModel {
+    /**
+     * The id of the RankingConfiguration.
+     */
+    id: string;
     /**
      * The name of the RankingConfiguration.
      */
@@ -42,4 +46,6 @@ export enum RankingTypeEnum {
     BOOST = 'BOOST',
     BURY = 'BURY',
     PIN = 'PIN',
+    INCLUDE = 'INCLUDE',
+    EXCLUDE = 'EXCLUDE',
 }
