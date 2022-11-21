@@ -181,27 +181,31 @@ describe('ResourceSnapshots', () => {
         const mockedFormData = {
             append: mockedAppendToFormData,
         };
-        const mockedFile = {
-            type: 'application/zip',
-        };
-
         beforeEach(() => {
             (global as any).FormData = jest.fn(() => mockedFormData);
-            (global as any).File = jest.fn(() => mockedFile);
         });
 
-        it('should make a post call to the specific Resource Snapshots url if zip file', () => {
-            const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
-            const file = new File([''], 'mock.zip', {type: 'application/zip'});
+        it.each(['application/zip', 'application/x-zip-compressed'])(
+            'should make a post call to the specific Resource Snapshots url if zip file',
+            (fileType: string) => {
+                const mockedFileZIP = {
+                    type: fileType,
+                } as unknown as File;
+                (global as any).File = jest.fn(() => mockedFileZIP);
+                const createFromFileOptions: CreateFromFileOptions = {
+                    developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
+                };
+                const file = new File([''], 'mock.zip', {type: fileType});
 
-            resourceSnapshots.createFromFile(file, createFromFileOptions);
+                resourceSnapshots.createFromFile(file, createFromFileOptions);
 
-            expect(api.postForm).toHaveBeenCalledTimes(1);
-            expect(api.postForm).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
-                mockedFormData
-            );
-        });
+                expect(api.postForm).toHaveBeenCalledTimes(1);
+                expect(api.postForm).toHaveBeenCalledWith(
+                    `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
+                    mockedFormData
+                );
+            }
+        );
 
         it('should make a post call to the specific Resource Snapshots url if json file', () => {
             const mockedFileJSON = {

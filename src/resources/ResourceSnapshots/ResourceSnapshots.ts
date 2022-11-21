@@ -171,6 +171,7 @@ export default class ResourceSnapshots extends Resource {
 
     private getSnapshotFileType(file: File) {
         switch (file.type) {
+            case 'application/x-zip-compressed':
             case 'application/zip':
                 return ResourceSnapshotSupportedFileTypes.ZIP;
             case 'application/json':

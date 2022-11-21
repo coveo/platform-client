@@ -5,6 +5,10 @@ import {ListLicenseMonthlyParams, RestListOfMetricsModel, RestListOfMetricValues
 export default class LicenseMetrics extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/license`;
 
+    listAssignable() {
+        return this.api.get<RestListOfMetricsModel>(`${LicenseMetrics.baseUrl}/assignable`);
+    }
+
     listInUse() {
         return this.api.get<RestListOfMetricsModel>(`${LicenseMetrics.baseUrl}/inUse`);
     }
