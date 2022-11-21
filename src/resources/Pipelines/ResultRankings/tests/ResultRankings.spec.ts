@@ -205,4 +205,15 @@ describe('Result Rankings', () => {
             });
         });
     });
+
+    describe('bulkGet', () => {
+        it('should make a GET call to the specific Result Rankings url', () => {
+            const pipelineId = '️a';
+            const ids = ['one', 'two', 'three'];
+
+            resultRankings.bulkGet(pipelineId, {ids});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${ResultRankings.getBaseUrl(pipelineId)}/bulkGet`, {ids});
+        });
+    });
 });

@@ -227,7 +227,7 @@ export interface ListResultRankingResponse {
     totalPages: number;
 }
 
-export interface ListResultRankingParams extends Paginated {
+interface CoreGetResultRankingParams extends Paginated {
     /**
      * Whether to sort the results in ascending order.
      */
@@ -238,7 +238,6 @@ export interface ListResultRankingParams extends Paginated {
      * By default, results are not required to match a specific query filter.
      */
     filter?: string;
-    sortBy?: ListStatementSortBy;
     /**
      * The 0-based number of the page of results to get.
      */
@@ -252,15 +251,19 @@ export interface ListResultRankingParams extends Paginated {
      */
     organizationId?: string;
     /**
-     * The group names to allow in the results.
-     */
-    associatedGroups?: Array<string | null>;
-
-    /**
      * @deprecated `ruleTypes` should be preferred over _kind_.
      * @see ruleTypes
      */
     kind?: ResultRankingsKind;
+}
+
+export interface ListResultRankingParams extends CoreGetResultRankingParams {
+    sortBy?: ListStatementSortBy;
+
+    /**
+     * The group names to allow in the results.
+     */
+    associatedGroups?: Array<string | null>;
 
     /**
      * Similar to `kind`, the _ruleTypes_ parameter allows to filter by result ranking rule type.
@@ -302,4 +305,21 @@ export interface CopyResultRankingResponse {
          */
         resultRanking: ResultRankingProps;
     }>;
+}
+
+export interface BulkGetResultRankingsParams extends CoreGetResultRankingParams {
+    /*
+     * A set of parameters to customize the results.
+     */
+    ids: string[];
+    /**
+     * The enabled status of result ranking rules to allow in the returned list.
+     * Set to true to only allow rules whose enabled property is set to true, and vice versa.
+     * By default, both enabled and disabled rules are allowed.
+     */
+    enabledStatus?: boolean;
+    /**
+     * The unique identifier of the statement group.
+     */
+    statementGroupId?: string;
 }
