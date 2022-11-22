@@ -18,6 +18,10 @@ export interface RestMetricsModel {
      * The sfProductId of the metric
      */
     productId?: string;
+    /**
+     * The sliding window, in months, of the metric
+     */
+    slidingWindowInMonths?: number;
 }
 
 export interface RestListOfMetricValues {
