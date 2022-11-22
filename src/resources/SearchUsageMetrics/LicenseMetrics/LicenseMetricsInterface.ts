@@ -21,7 +21,7 @@ export interface RestMetricsModel {
     /**
      * The sliding window, in months, of the metric
      */
-    slidingWindow?: number;
+    slidingWindowInMonths?: number;
 }
 
 export interface RestListOfMetricValues {
