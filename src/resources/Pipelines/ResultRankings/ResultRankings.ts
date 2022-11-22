@@ -1,5 +1,6 @@
 import Resource from '../../Resource';
 import {
+    BulkGetResultRankingsParams,
     CopyResultRankingRequest,
     CopyResultRankingResponse,
     ListResultRankingParams,
@@ -93,6 +94,16 @@ export default class ResultRankings extends Resource {
                 organizationId: this.api.organizationId,
             }),
             copyResultRankingRequest
+        );
+    }
+
+    bulkGet(pipelineId: string, {ids, ...allQueryStringOptions}: BulkGetResultRankingsParams) {
+        return this.api.post<ListResultRankingResponse>(
+            this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/bulkGet`, {
+                organizationId: this.api.organizationId,
+                ...allQueryStringOptions,
+            }),
+            {ids}
         );
     }
 }
