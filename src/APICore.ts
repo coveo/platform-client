@@ -39,6 +39,7 @@ export default class API {
             return await this.requestFile(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
+                // We don't want to resolve or reject the promise
                 return undefined as unknown as Blob;
             } else {
                 throw error;
