@@ -17,7 +17,7 @@ export default class API {
     }
 
     get organizationId(): string {
-        return retrieve(this.config.organizationId);
+        return retrieve(this.config.organizationId!); // Assuming that resources calling this method would have a defined organizationId
     }
 
     async get<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {
@@ -26,7 +26,7 @@ export default class API {
             return await this.request<T>(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
-                return; // We don't want to resolve or reject the promise
+                return undefined as T; // We don't want to resolve or reject the promise
             } else {
                 throw error;
             }
@@ -39,7 +39,7 @@ export default class API {
             return await this.requestFile(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
-                return; // We don't want to resolve or reject the promise
+                return undefined as unknown as Blob;
             } else {
                 throw error;
             }
