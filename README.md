@@ -263,6 +263,13 @@ ExperimentalPlatformClient.something.list();
 
 ## Contributing
 
+### Requirements
+
+-   Node LTS
+-   NPM
+
+> Tip: This repo support `corepack`. Just enable it `corepack enable` and this repo will warn you if you try to use another package manager.
+
 ### Guidelines
 
 -   Make sure your changes are fully tested (when applicable).
