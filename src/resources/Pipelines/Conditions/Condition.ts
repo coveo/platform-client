@@ -36,4 +36,17 @@ export default class Condition extends Resource {
             conditionModel
         );
     }
+
+    bulkGet(conditionIds: string[], params: ListConditionsOptions = {}) {
+        return this.api.post<PageModel<ConditionModel, 'statements'>>(
+            this.buildPath(`${Condition.baseUrl}/bulkGet`, {
+                feature: 'when',
+                organizationId: this.api.organizationId,
+                ...params,
+            }),
+            {
+                ids: conditionIds,
+            }
+        );
+    }
 }
