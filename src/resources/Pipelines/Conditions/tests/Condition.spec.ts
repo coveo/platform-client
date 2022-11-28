@@ -83,7 +83,7 @@ describe('Condition', () => {
         it('should make a POST call to the conditions bulkGet url', () => {
             conditions.bulkGet([]);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet?feature=when', {
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
                 ids: [],
             });
         });
@@ -92,7 +92,7 @@ describe('Condition', () => {
             conditions.bulkGet([], {perPage: 3, sortBy: ListStatementSortBy.Definition});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements/bulkGet?feature=when&perPage=3&sortBy=definition',
+                '/rest/search/v1/admin/pipelines/statements/bulkGet?perPage=3&sortBy=definition',
                 {
                     ids: [],
                 }
@@ -102,7 +102,7 @@ describe('Condition', () => {
         it('should include the conditionIds on the request body', () => {
             conditions.bulkGet(['hello', 'bonjour']);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet?feature=when', {
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
                 ids: ['hello', 'bonjour'],
             });
         });
