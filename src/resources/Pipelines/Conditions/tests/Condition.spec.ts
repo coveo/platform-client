@@ -1,4 +1,5 @@
 import API from '../../../../APICore';
+import {ListStatementSortBy} from '../../../Enums';
 import Condition from '../Condition';
 import {NewConditionModel} from '../ConditionInterfaces';
 
@@ -75,6 +76,35 @@ describe('Condition', () => {
             conditions.delete(conditionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🎽');
+        });
+    });
+
+    describe('bulkGet', () => {
+        it('should make a POST call to the conditions bulkGet url', () => {
+            conditions.bulkGet([]);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
+                ids: [],
+            });
+        });
+
+        it('should include the params on the url if passed', () => {
+            conditions.bulkGet([], {perPage: 3, sortBy: ListStatementSortBy.Definition});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                '/rest/search/v1/admin/pipelines/statements/bulkGet?perPage=3&sortBy=definition',
+                {
+                    ids: [],
+                }
+            );
+        });
+
+        it('should include the conditionIds on the request body', () => {
+            conditions.bulkGet(['hello', 'bonjour']);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
+                ids: ['hello', 'bonjour'],
+            });
         });
     });
 });
