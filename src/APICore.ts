@@ -17,7 +17,10 @@ export default class API {
     }
 
     get organizationId(): string {
-        return retrieve(this.config.organizationId!); // Assuming that resources calling this method would have a defined organizationId
+        if (this.config.organizationId === undefined) {
+            throw new Error('No organization ID found in the config.');
+        }
+        return retrieve(this.config.organizationId);
     }
 
     async get<T = Record<string, unknown>>(url: string, args: RequestInit = {method: 'get'}): Promise<T> {

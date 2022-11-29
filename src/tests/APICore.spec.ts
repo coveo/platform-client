@@ -314,6 +314,12 @@ describe('APICore', () => {
             expect(api.organizationId).toBe(testConfig.organizationId);
         });
 
+        it('should throw an error if organization is undefined', () => {
+            const api = new API({accessToken: 'my-token'});
+            const error = new Error('No organization ID found in the config.');
+            expect(() => api.organizationId).toThrow(error);
+        });
+
         it('should return call the organization id retriver function to get the organization id', () => {
             const api = new API({...testConfig, organizationId: () => 'another-org-id'});
             expect(api.organizationId).not.toBe(testConfig.organizationId);
