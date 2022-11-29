@@ -10,25 +10,25 @@ import Snowflake from './Read/Snowflake/Snowflake';
 import Statistics from './Read/Statistics/Statistics';
 
 export default class UsageAnalytics extends Resource {
-    statistics: Statistics;
+    administration: Administration;
+    dataShare: DataShare;
     dimensions: Dimensions;
     exports: Exports;
-    administration: Administration;
-    snowflake: Snowflake;
-    reports: Reports;
     filters: Filters;
-    dataShare: DataShare;
+    reports: Reports;
+    snowflake: Snowflake;
+    statistics: Statistics;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
 
+        this.administration = new Administration(api, serverlessApi);
+        this.dataShare = new DataShare(api, serverlessApi);
         this.dimensions = new Dimensions(api, serverlessApi);
         this.exports = new Exports(api, serverlessApi);
-        this.statistics = new Statistics(api, serverlessApi);
-        this.administration = new Administration(api, serverlessApi);
-        this.snowflake = new Snowflake(api, serverlessApi);
-        this.reports = new Reports(api, serverlessApi);
         this.filters = new Filters(api, serverlessApi);
-        this.dataShare = new DataShare(api, serverlessApi);
+        this.reports = new Reports(api, serverlessApi);
+        this.snowflake = new Snowflake(api, serverlessApi);
+        this.statistics = new Statistics(api, serverlessApi);
     }
 }

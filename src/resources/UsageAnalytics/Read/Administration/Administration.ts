@@ -1,5 +1,5 @@
 import {RedshiftEndpointStatus} from '../../../Enums';
-import Resource from '../../../Resource';
+import ReadServiceResource from '../ReadServiceResource';
 import {
     AccountInfoModelV15,
     AccountResponseV15,
@@ -7,20 +7,23 @@ import {
     StrictValidationTestResponseV15,
 } from './AdministrationInterfaces';
 
-export default class Administration extends Resource {
+export default class Administration extends ReadServiceResource {
     static baseUrl = '/rest/ua/v15/admin';
 
+    /**
+     * Get an account.
+     */
     getAccount() {
-        return this.api.get<AccountResponseV15>(
-            this.buildPath(`${Administration.baseUrl}/account`, {org: this.api.organizationId})
-        );
+        return this.api.get<AccountResponseV15>(this.buildPathWithOrg(`${Administration.baseUrl}/account`));
     }
 
+    /**
+     * Edit an account.
+     *
+     * @param model The account information.
+     */
     updateAccount(model: AccountInfoModelV15) {
-        return this.api.put<AccountResponseV15>(
-            this.buildPath(`${Administration.baseUrl}/account`, {org: this.api.organizationId}),
-            model
-        );
+        return this.api.put<AccountResponseV15>(this.buildPathWithOrg(`${Administration.baseUrl}/account`), model);
     }
 
     setRedshiftStatus(endpoint: string, status: RedshiftEndpointStatus) {
@@ -29,12 +32,12 @@ export default class Administration extends Resource {
         );
     }
 
+    /**
+     * Get example values that would be rejected by strict validation for the specified dimension.
+     */
     getStrictValidationTest(params: StrictValidationTestParams) {
         return this.api.get<StrictValidationTestResponseV15>(
-            this.buildPath(`${Administration.baseUrl}/account/strictValidationTest`, {
-                ...params,
-                org: this.api.organizationId,
-            })
+            this.buildPathWithOrg(`${Administration.baseUrl}/account/strictValidationTest`, params)
         );
     }
 }

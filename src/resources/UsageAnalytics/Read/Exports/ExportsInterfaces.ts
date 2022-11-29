@@ -1,4 +1,5 @@
 import {CSVFileFormat, DayOfWeek, ExportScheduleFrequency, ExportStatus, ExportTablesType} from '../../../Enums';
+import {ParamParts} from '../ReadServiceCommon';
 
 export interface ExportModel {
     id: string;
@@ -25,25 +26,20 @@ export interface ExportEstimateModel {
 
 export interface ExportDownloadLink {
     /**
-     * The export's unique identifier
+     * The export's unique identifier.
      */
     id: string;
     /**
-     * The export download link. Only appears when export is ready
+     * The export download link. Only appears when export is ready.
      */
     downloadLink?: string;
 }
-interface EstimateExportCommonParams {
-    from: string;
-    to: string;
-    /**
-     * The filter that will be applied to the events common dimensions (shared by all types of events).
-     * Multiple filter parameters are joined with the AND operator.
-     */
-    f?: string[];
-}
 
-export interface EstimateExportParams extends EstimateExportCommonParams {
+export interface EstimateExportParams extends ParamParts.TimeRange, ParamParts.EventDimensionsFilter {
+    /**
+     * The tables that will be included.
+     * If not provided, all tables will be included.
+     */
     tables?: ExportTablesType[];
     /**
      * The filter that will be applied to the click and search events dimensions.
@@ -57,34 +53,44 @@ export interface EstimateExportParams extends EstimateExportCommonParams {
     fc?: string[];
 }
 
-export interface EstimateVisitExportParams extends EstimateExportCommonParams {
-    hideEventFilters?: string[];
-    /**
-     * The filter that will be applied to dimensions to exclude events from the results.
-     * Multiple filter parameters are joined with the AND operator.
-     */
-    fn?: string[];
-}
+export interface EstimateVisitExportParams
+    extends ParamParts.TimeRange,
+        ParamParts.EventDimensionsFilter,
+        ParamParts.EventDimensionsExcludeFilter,
+        ParamParts.EventDimensionsHideEventsFilter {}
 
-interface GenerateExportCommonParams {
+export interface GenerateExportParams extends EstimateExportParams {
+    /**
+     * Can only contain US-ASCII characters. If not provided, it will be set to the export's id.
+     */
     filename?: string;
     /**
      * Export's description.
      */
     d?: string;
+    /**
+     * The dimensions that will be exported. If not provided, all dimensions will be exported.
+     */
     dimensions?: string[];
+    /**
+     * The format of the generated CSV files.
+     */
     format?: CSVFileFormat;
+    /**
+     * Whether to use the display names in the export's header. If false, the api names will be used.
+     */
     useDisplayNames?: boolean;
 }
 
-export type GenerateExportParams = EstimateExportParams & GenerateExportCommonParams;
+export interface GenerateVisitExportParams extends GenerateExportParams {
+    /**
+     * Whether to order the rows by datetime in the export.
+     * If the number of rows exported is too large, this parameter will be ignored and data will be unsorted.
+     */
+    ordered?: boolean;
+}
 
-export type GenerateVisitExportParams = EstimateVisitExportParams &
-    GenerateExportCommonParams & {
-        ordered?: boolean;
-    };
-
-interface ScheduleCommonProperties {
+interface ExportScheduleModelCommonProperties {
     frequency: ExportScheduleFrequency;
     dayOfWeek?: DayOfWeek;
     timezone: string;
@@ -93,7 +99,7 @@ interface ScheduleCommonProperties {
     notificationsEmails?: string[];
 }
 
-export interface ExportScheduleModel extends ScheduleCommonProperties {
+export interface ExportScheduleModel extends ExportScheduleModelCommonProperties {
     id: string;
     author: string;
     filters: Record<string, string>;
@@ -102,7 +108,7 @@ export interface ExportScheduleModel extends ScheduleCommonProperties {
     errorInfo?: Record<string, string>;
 }
 
-export interface CreateExportScheduleModel extends ScheduleCommonProperties {
+export interface CreateExportScheduleModel extends ExportScheduleModelCommonProperties {
     commonFilters?: string[];
     searchesFilters?: string[];
     customEventsFilters?: string[];
