@@ -167,3 +167,9 @@ export interface CreateSchemaSourceModel extends CreateSourceModel {
 }
 
 export interface CreateSchemaSourceOptions extends CreateSourceOptions {}
+
+export interface SlackTokenValidationResult {
+    valid: boolean;
+    workspace?: string;
+    reason?: string;
+}
