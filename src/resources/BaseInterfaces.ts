@@ -5,7 +5,7 @@ export type PageModel<T = any, TItemsKey extends string = 'items'> = {
     totalPages: number;
 };
 
-export type New<T, K extends string | number | symbol = null> = Omit<T, 'id' | K>;
+export type New<T, K extends keyof T | null = null> = Omit<T, 'id' | NonNullable<K>>;
 
 export interface IdAndDisplayNameModel {
     id: string;

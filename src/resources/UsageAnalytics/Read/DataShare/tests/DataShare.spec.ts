@@ -9,11 +9,12 @@ describe('Dimensions', () => {
         accountLocator: 'Soubane',
         snowflakeRegion: 'LOUBAME',
     };
-    const api = jest.mocked(new API(null, null));
+    const api = jest.mocked(new API({accessToken: '🔑'}));
+    const serverlessApi = jest.mocked(new API({accessToken: '🔑'}, true));
     Object.defineProperty(api, 'organizationId', {get: () => 'someOrgId'});
     beforeEach(() => {
         jest.clearAllMocks();
-        dataShare = new DataShare(api, null);
+        dataShare = new DataShare(api, serverlessApi);
     });
 
     describe('listSnowflakeAccount', () => {

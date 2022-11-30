@@ -21,7 +21,7 @@ export default class Activity extends Resource {
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
-        const isPublic = !activityFacet.sections?.includes('INTERNAL');
+        const isPublic = !Boolean(activityFacet?.sections?.includes('INTERNAL'));
         return this.api.post<PageModel<ActivityModel>>(
             this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : Activity.getBaseUrl(), params),
             activityFacet
@@ -29,7 +29,7 @@ export default class Activity extends Resource {
     }
 
     listFacets(params?: ListActivitiesFacetsParams, activityFacet?: ActivityListingFilters) {
-        const isPublic = !activityFacet.sections?.includes('INTERNAL');
+        const isPublic = !Boolean(activityFacet?.sections?.includes('INTERNAL'));
         return this.api.post<ActivityFacetModel>(
             this.buildPath(
                 isPublic ? `${Activity.getBaseUrl()}/facets/public` : `${Activity.getBaseUrl()}/facets`,

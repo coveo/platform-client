@@ -172,7 +172,7 @@ export interface PipelineModel extends PipelineShared {
     last_modified_by?: string;
     statementComposition?: {
         totalCount?: number;
-        [key: string]: number;
+        [key: string]: number | undefined;
     };
 }
 

@@ -105,7 +105,7 @@ describe('ProductListingConfiguration', () => {
 
         it('should make a PUT call to the specific product listing configuration url', () => {
             const productListingConfigurationModel = {
-                // id: 'testId',
+                id: 'testId',
                 rankingConfigurations: [
                     {
                         name: 'Bury brand',

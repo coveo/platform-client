@@ -5,6 +5,7 @@ import {
     ActivityModel,
     ListActivitiesParams,
     ListActivitiesFacetsParams,
+    TriggeredByAttributes,
 } from '../ActivitiesInterfaces';
 
 jest.mock('../../../APICore.ts');
@@ -86,11 +87,14 @@ describe('Activity', () => {
     describe('abortActivity', () => {
         it('should make a POST call to the specific Activity url', () => {
             const activityId = 'gimli';
+            const triggeredBy: TriggeredByAttributes = {
+                type: 'randomType',
+            };
             const abortActivityModel: ActivityModel = {
                 operation: '',
                 result: '',
                 state: '',
-                triggeredBy: undefined,
+                triggeredBy,
                 abortReason: '',
                 resourceId: '',
                 resourceType: '',

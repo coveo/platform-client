@@ -17,6 +17,9 @@ export default class API {
     }
 
     get organizationId(): string {
+        if (this.config.organizationId === undefined) {
+            throw new Error('No organization ID found in the config.');
+        }
         return retrieve(this.config.organizationId);
     }
 
@@ -26,7 +29,7 @@ export default class API {
             return await this.request<T>(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
-                return; // We don't want to resolve or reject the promise
+                return undefined as T; // We don't want to resolve or reject the promise
             } else {
                 throw error;
             }
@@ -39,7 +42,8 @@ export default class API {
             return await this.requestFile(url, args);
         } catch (error) {
             if (error.name === 'AbortError') {
-                return; // We don't want to resolve or reject the promise
+                // We don't want to resolve or reject the promise
+                return undefined as unknown as Blob;
             } else {
                 throw error;
             }
