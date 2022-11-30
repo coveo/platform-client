@@ -33,6 +33,13 @@ export interface MLAssociationModel {
 
 export interface ListAssociationsParams extends Paginated {}
 
+export interface BulkGetAssociationsParams extends Paginated {
+    /*
+     * A set of parameters to customize the results.
+     */
+    ids: string[];
+}
+
 export interface CreateAssociation extends EditAssociation {
     modelId: string;
 }
