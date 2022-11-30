@@ -18,4 +18,7 @@ module.exports = {
             extends: ['plugin:jest/recommended'],
         },
     ],
+    rules: {
+        'prettier/prettier': ['error', {endOfLine: 'auto'}],
+    },
 };
