@@ -27,14 +27,6 @@ describe('Statistics', () => {
         statistics = new Statistics(api, serverlessApi);
     });
 
-    describe('status', () => {
-        it('should make a GET call to the Statistics status url', () => {
-            statistics.status();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Statistics.baseUrl}/status`);
-        });
-    });
-
     describe('cancelQuery', () => {
         it('should make a DELETE call to the specific Statistics url', () => {
             const queryId = 'Jida';
@@ -44,14 +36,6 @@ describe('Statistics', () => {
             statistics.cancelQuery(queryId, options);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Statistics.baseUrl}/query/${queryId}?org=tuna-durgod`);
-        });
-    });
-
-    describe('get', () => {
-        it('should make a GET call to the specific Statistics url', () => {
-            statistics.getMonitoringHealth();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Statistics.baseUrl}/monitoring/health`);
         });
     });
 
@@ -201,6 +185,22 @@ describe('Statistics', () => {
             expect(api.get).toHaveBeenCalledWith(
                 `${Statistics.baseUrl}/visits?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
+        });
+    });
+
+    describe('checkHealth', () => {
+        it('should make a GET call to the specific Statistics url', () => {
+            statistics.checkHealth();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Statistics.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('checkStatus', () => {
+        it('should make a GET call to the Statistics status url', () => {
+            statistics.checkStatus();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Statistics.baseUrl}/status`);
         });
     });
 });

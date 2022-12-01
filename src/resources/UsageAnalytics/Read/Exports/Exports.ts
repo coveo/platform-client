@@ -1,3 +1,4 @@
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CreateExportScheduleModel,
@@ -11,7 +12,7 @@ import {
     GenerateVisitExportParams,
 } from './ExportsInterfaces';
 
-export default class Exports extends ReadServiceResource {
+export default class Exports extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/exports';
 
     /**
@@ -61,20 +62,6 @@ export default class Exports extends ReadServiceResource {
      */
     estimateRowsCount(params: EstimateExportParams) {
         return this.api.get<ExportEstimateModel>(this.buildPathWithOrg(`${Exports.baseUrl}/estimate`, params));
-    }
-
-    /**
-     * Get the exports service status.
-     */
-    getStatus() {
-        return this.api.get<Record<string, string>>(`${Exports.baseUrl}/status`);
-    }
-
-    /**
-     * Health check for the exports service.
-     */
-    checkHealth() {
-        return this.api.get<Record<string, string>>(`${Exports.baseUrl}/monitoring/health`);
     }
 
     /**
@@ -135,5 +122,13 @@ export default class Exports extends ReadServiceResource {
      */
     deleteSchedule(exportScheduleId: string) {
         return this.api.delete<void>(this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`));
+    }
+
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Exports.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Exports.baseUrl}/status`);
     }
 }

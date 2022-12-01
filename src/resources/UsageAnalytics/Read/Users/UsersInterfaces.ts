@@ -68,13 +68,6 @@ export interface UsersReportsModel {
     reports: UsersReportModel[];
 }
 
-export interface UsersStatusModel {
-    /**
-     * Service's status information
-     */
-    status: string;
-}
-
 export interface UserModel {
     /**
      * The user id

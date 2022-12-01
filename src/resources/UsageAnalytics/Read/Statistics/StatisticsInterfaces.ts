@@ -35,10 +35,6 @@ export interface BindOnLastSearchParamPart {
     bindOnLastSearch?: boolean;
 }
 
-export interface ServiceStatus {
-    status: string;
-}
-
 export interface MetricValue {
     value: number;
 }
@@ -234,10 +230,6 @@ export interface TopQueries {
     pageSize?: number;
     pageNumber?: number;
     org: string;
-}
-
-export interface MonitoringHealthModel {
-    status: string;
 }
 
 export interface VisitsStatisticsOptions

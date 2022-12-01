@@ -1,4 +1,5 @@
 import {DimensionEventTypes} from '../../../Enums';
+import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CreateCustomDimensionParams,
@@ -11,7 +12,7 @@ import {
     ListUncreatedDimensionsParams,
 } from './DimensionsInterfaces';
 
-export default class Dimensions extends ReadServiceResource {
+export default class Dimensions extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/dimensions';
 
     /**
@@ -46,20 +47,6 @@ export default class Dimensions extends ReadServiceResource {
         return this.api.get<DimensionValuesModel>(
             this.buildPathWithOrg(`${Dimensions.baseUrl}/${dimension}/values`, params)
         );
-    }
-
-    /**
-     * Get the dimensions service status.
-     */
-    getStatus() {
-        return this.api.get<Record<string, string>>(`${Dimensions.baseUrl}/status`);
-    }
-
-    /**
-     * Health check for the dimensions service.
-     */
-    checkHealth() {
-        return this.api.get<Record<string, string>>(`${Dimensions.baseUrl}/monitoring/health`);
     }
 
     /**
@@ -148,5 +135,13 @@ export default class Dimensions extends ReadServiceResource {
         return this.api.get<CustomDimensionSuggestionModel[]>(
             this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${event}/suggestions`, params)
         );
+    }
+
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Dimensions.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Dimensions.baseUrl}/status`);
     }
 }

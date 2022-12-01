@@ -1,3 +1,4 @@
+import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CreatePermissionsFilterModel,
@@ -5,8 +6,6 @@ import {
     CreateReportingFilterModel,
     CreateReportingFilterResponse,
     FilterResponse,
-    FilterServiceHealthResponse,
-    FilterServiceStatusResponse,
     FilterTargetsModel,
     FilterTargetsResponse,
     ListFiltersResponse,
@@ -17,7 +16,7 @@ import {
     UpdateReportingFilterResponse,
 } from './FiltersInterfaces';
 
-export default class Filters extends ReadServiceResource {
+export default class Filters extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/filters';
     static reportingBaseUrl = `${Filters.baseUrl}/reporting`;
     static permissionsBaseUrl = `${Filters.baseUrl}/permissions`;
@@ -147,17 +146,11 @@ export default class Filters extends ReadServiceResource {
         return this.api.put(this.buildPathWithOrg(`${Filters.permissionsBaseUrl}/${filterId}/targets`), targets);
     }
 
-    /**
-     * Health check for the filter service.
-     */
-    healthcheck() {
-        return this.api.get<FilterServiceHealthResponse>(`${Filters.baseUrl}/monitoring/health`);
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Filters.baseUrl}/monitoring/health`);
     }
 
-    /**
-     * Get the filter service status.
-     */
-    status() {
-        return this.api.get<FilterServiceStatusResponse>(`${Filters.baseUrl}/status`);
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Filters.baseUrl}/status`);
     }
 }

@@ -1,3 +1,4 @@
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CombinedDataModel,
@@ -9,8 +10,6 @@ import {
     IncoherentEventsModel,
     IncoherentEventsOptions,
     MetricsModel,
-    MonitoringHealthModel,
-    ServiceStatus,
     TrendsModel,
     TrendsOptions,
     VisitsGraphDataPointsOptions,
@@ -21,15 +20,8 @@ import {
     DeleteQueryOptions,
 } from './StatisticsInterfaces';
 
-export default class Statistics extends ReadServiceResource {
+export default class Statistics extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/stats';
-
-    /**
-     * Get the statistics service status.
-     */
-    status() {
-        return this.api.get<ServiceStatus>(`${Statistics.baseUrl}/status`);
-    }
 
     /**
      * Get the incoherent events for a date range.
@@ -116,13 +108,6 @@ export default class Statistics extends ReadServiceResource {
     }
 
     /**
-     * Health check for the statistics service.
-     */
-    getMonitoringHealth() {
-        return this.api.get<MonitoringHealthModel>(`${Statistics.baseUrl}/monitoring/health`);
-    }
-
-    /**
      * Get the details of the visits matching the specified criteria.
      */
     listVisits(options: VisitsStatisticsOptions) {
@@ -134,5 +119,13 @@ export default class Statistics extends ReadServiceResource {
      */
     updateVisitView(options: VisitViewOptions) {
         return this.api.post(this.buildPathWithOrg(`${Statistics.baseUrl}/visits`, options));
+    }
+
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Statistics.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Statistics.baseUrl}/status`);
     }
 }
