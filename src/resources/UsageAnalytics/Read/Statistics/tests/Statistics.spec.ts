@@ -35,7 +35,7 @@ describe('Statistics', () => {
         });
     });
 
-    describe('delete', () => {
+    describe('cancelQuery', () => {
         it('should make a DELETE call to the specific Statistics url', () => {
             const queryId = 'Jida';
             const options: CancelQueryOptions = {

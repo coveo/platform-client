@@ -8,5 +8,4 @@ export * from './Snowflake';
 export * from './Statistics';
 export * from './Users';
 
-export * from './ReadServiceCommon';
 export * from './ReadServiceResource';

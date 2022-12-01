@@ -1,5 +1,10 @@
 import {CSVFileFormat, DayOfWeek, ExportScheduleFrequency, ExportStatus, ExportTablesType} from '../../../Enums';
-import {ParamParts} from '../ReadServiceCommon';
+import {
+    EventDimensionsExcludeFilterParamParts,
+    EventDimensionsFilterParamParts,
+    EventDimensionsHideEventsFilterParamParts,
+    TimeRangeParamParts,
+} from '../CommonParamParts';
 
 export interface ExportModel {
     id: string;
@@ -35,7 +40,7 @@ export interface ExportDownloadLink {
     downloadLink?: string;
 }
 
-export interface EstimateExportParams extends ParamParts.TimeRange, ParamParts.EventDimensionsFilter {
+export interface EstimateExportParams extends TimeRangeParamParts, EventDimensionsFilterParamParts {
     /**
      * The tables that will be included.
      * If not provided, all tables will be included.
@@ -54,10 +59,10 @@ export interface EstimateExportParams extends ParamParts.TimeRange, ParamParts.E
 }
 
 export interface EstimateVisitExportParams
-    extends ParamParts.TimeRange,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.EventDimensionsExcludeFilter,
-        ParamParts.EventDimensionsHideEventsFilter {}
+    extends TimeRangeParamParts,
+        EventDimensionsFilterParamParts,
+        EventDimensionsExcludeFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts {}
 
 export interface GenerateExportParams extends EstimateExportParams {
     /**

@@ -1,4 +1,4 @@
-import {ParamParts} from '../ReadServiceCommon';
+import {DeprecatedShortPaginatedParamParts, OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts';
 
 export interface AccountInfoModelV15 {
     internalEventIps: string[];
@@ -17,9 +17,9 @@ export interface StrictValidationTestResponseV15 {
 }
 
 export interface StrictValidationTestParams
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.DeprecatedShortPaginated {
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        DeprecatedShortPaginatedParamParts {
     /**
      * The dimension to fetch.
      */

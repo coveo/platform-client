@@ -1,5 +1,5 @@
 import {ReportType} from '../../../Enums';
-import {ParamParts} from '../ReadServiceCommon';
+import {TimeZoneParamParts} from '../CommonParamParts';
 
 export interface ReportModel {
     /** The report id. */
@@ -21,7 +21,7 @@ export interface ReportModel {
 export type CreateReportModel = Omit<ReportModel, 'id' | 'account'>;
 export type CreateReportResponse = Pick<ReportModel, 'id'>;
 
-export interface GetReportOptions extends ParamParts.TimeZone {}
+export interface GetReportOptions extends TimeZoneParamParts {}
 
 export type UpdateReportModel = CreateReportModel;
 export type UpdateReportResponse = CreateReportResponse;

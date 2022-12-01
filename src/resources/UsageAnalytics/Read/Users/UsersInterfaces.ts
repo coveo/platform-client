@@ -1,4 +1,4 @@
-import {ParamParts} from '../ReadServiceCommon';
+import {OrganizationParamParts} from '../CommonParamParts';
 
 export interface UsersFilterModel {
     /**
@@ -94,7 +94,7 @@ export interface UserModel {
     reports: string[];
 }
 
-export interface ListUsersFiltersParams extends ParamParts.Organization {
+export interface ListUsersFiltersParams extends OrganizationParamParts {
     /**
      * Whether to include th values inherited from a user's groups in the response
      */
@@ -112,7 +112,7 @@ export interface FilterParams {
     id: boolean;
 }
 
-export interface ListUsersReportsParams extends ParamParts.Organization {
+export interface ListUsersReportsParams extends OrganizationParamParts {
     includeConfig?: boolean;
     includeGroups?: boolean;
 }

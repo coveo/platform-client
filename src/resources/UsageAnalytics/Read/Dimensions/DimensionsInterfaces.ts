@@ -1,5 +1,11 @@
 import {DimensionStatus, DimensionType} from '../../../Enums';
-import {ParamParts} from '../ReadServiceCommon';
+import {
+    DeprecatedShortPaginatedParamParts,
+    EventDimensionsFilterParamParts,
+    OrganizationParamParts,
+    TimeRangeParamParts,
+    TimeZoneParamParts,
+} from '../CommonParamParts';
 
 export interface DimensionModel {
     /**
@@ -65,7 +71,7 @@ export interface CustomDimensionModel {
     path?: string[];
 }
 
-export interface ListDimensionsParams extends ParamParts.Organization {
+export interface ListDimensionsParams extends OrganizationParamParts {
     /**
      * This will filter out dimensions which are covered by others.
      * Only parent/master dimensions will be output.
@@ -78,13 +84,13 @@ export interface ListDimensionsParams extends ParamParts.Organization {
 }
 
 export interface GetDimensionValuesParams
-    extends ParamParts.Organization,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.DeprecatedShortPaginated {}
+    extends OrganizationParamParts,
+        EventDimensionsFilterParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        DeprecatedShortPaginatedParamParts {}
 
-export interface CreateCustomDimensionParams extends ParamParts.Organization {
+export interface CreateCustomDimensionParams extends OrganizationParamParts {
     /**
      * The name of the custom dimension. It should start with the 'c_' prefix.
      * If not present, the prefix will be added automatically.
@@ -102,7 +108,7 @@ export interface CreateCustomDimensionParams extends ParamParts.Organization {
     updatePastEvents?: boolean;
 }
 
-export interface ListUncreatedDimensionsParams extends ParamParts.Organization, ParamParts.TimeRange {
+export interface ListUncreatedDimensionsParams extends OrganizationParamParts, TimeRangeParamParts {
     /**
      * Whether value samples should be included in the response.
      */

@@ -1,4 +1,16 @@
-import {ParamParts} from '../ReadServiceCommon';
+import {
+    DeprecatedShortPaginatedParamParts,
+    EventDimensionsExcludeFilterParamParts,
+    EventDimensionsFilterParamParts,
+    EventDimensionsHideEventsFilterParamParts,
+    EventDimensionsParamParts,
+    EventMetricsFilterParamParts,
+    EventMetricsIntervalParamParts,
+    EventMetricsParamParts,
+    OrganizationParamParts,
+    TimeRangeParamParts,
+    TimeZoneParamParts,
+} from '../CommonParamParts';
 
 export interface MetricsSortParamParts {
     /**
@@ -38,9 +50,9 @@ export interface MetricStats {
 }
 
 export interface IncoherentEventsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.DeprecatedShortPaginated,
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        DeprecatedShortPaginatedParamParts,
         Pick<MetricsSortParamParts, 'asc'>,
         MetadataParamParts {
     /**
@@ -72,13 +84,13 @@ export interface MetricsModel {
 }
 
 export interface GlobalDataOptions
-    extends ParamParts.Organization,
-        ParamParts.EventMetrics,
-        ParamParts.EventMetricsInterval,
-        // Partial<ParamParts.EventDimensions> omitted to document the special case.
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventDimensionsFilter,
+    extends OrganizationParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        // Partial<EventDimensionsParamParts> omitted to document the special case.
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventDimensionsFilterParamParts,
         BindOnLastSearchParamPart {
     /**
      * The dimensions to fetch.
@@ -97,14 +109,14 @@ export interface TrendsModel {
 }
 
 export interface TrendsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventMetrics,
-        ParamParts.EventMetricsFilter,
-        ParamParts.EventDimensions,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.DeprecatedShortPaginated,
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsFilterParamParts,
+        EventDimensionsParamParts,
+        EventDimensionsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
         MetricsSortParamParts,
         MetadataParamParts,
         BindOnLastSearchParamPart {
@@ -133,13 +145,13 @@ export interface TrendsOptions
 }
 
 export interface VisitsMetricsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventMetrics,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.EventDimensionsHideEventsFilter,
-        ParamParts.EventMetricsFilter {}
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventDimensionsFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts,
+        EventMetricsFilterParamParts {}
 
 export interface VisitMetricStats {
     sum: number;
@@ -149,16 +161,16 @@ export interface VisitMetricStats {
 }
 
 export interface VisitsGraphDataPointsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventMetrics,
-        ParamParts.EventMetricsInterval,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.EventDimensionsExcludeFilter,
-        ParamParts.EventDimensionsHideEventsFilter {}
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        EventDimensionsFilterParamParts,
+        EventDimensionsExcludeFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts {}
 
-export interface CancelQueryOptions extends ParamParts.Organization {}
+export interface CancelQueryOptions extends OrganizationParamParts {}
 // Alias for backwards compatibility.
 export type DeleteQueryOptions = CancelQueryOptions;
 
@@ -168,12 +180,12 @@ export interface DataPointModel {
 }
 
 export interface GraphDataPointsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventMetrics,
-        ParamParts.EventMetricsInterval,
-        ParamParts.EventDimensionsFilter,
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        EventDimensionsFilterParamParts,
         BindOnLastSearchParamPart {}
 
 export interface GraphDataPointsModel {
@@ -185,14 +197,14 @@ export interface GraphDataPointsModel {
 }
 
 export interface CombinedDataOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        ParamParts.EventMetrics,
-        ParamParts.EventMetricsFilter,
-        ParamParts.EventDimensions,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.DeprecatedShortPaginated,
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsFilterParamParts,
+        EventDimensionsParamParts,
+        EventDimensionsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
         MetricsSortParamParts,
         MetadataParamParts,
         BindOnLastSearchParamPart {
@@ -222,14 +234,14 @@ export interface MonitoringHealthModel {
 }
 
 export interface VisitsStatisticsOptions
-    extends ParamParts.Organization,
-        ParamParts.TimeRange,
-        ParamParts.TimeZone,
-        Partial<ParamParts.EventDimensions>,
-        ParamParts.EventDimensionsFilter,
-        ParamParts.EventDimensionsExcludeFilter,
-        ParamParts.EventDimensionsHideEventsFilter,
-        ParamParts.DeprecatedShortPaginated,
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        Partial<EventDimensionsParamParts>,
+        EventDimensionsFilterParamParts,
+        EventDimensionsExcludeFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
         MetricsSortParamParts,
         MetadataParamParts {}
 
@@ -244,4 +256,4 @@ export interface VisitsStatisticsModel {
     totalNumberOfVisits: number;
 }
 
-export interface VisitViewOptions extends ParamParts.Organization {}
+export interface VisitViewOptions extends OrganizationParamParts {}

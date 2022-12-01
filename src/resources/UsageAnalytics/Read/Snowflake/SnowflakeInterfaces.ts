@@ -1,5 +1,5 @@
 import {SnowflakeReaderAccountStatus} from '../../../Enums';
-import {ParamParts} from '../ReadServiceCommon';
+import {TimeRangeParamParts} from '../CommonParamParts';
 
 export interface SnowflakeUsersModel {
     snowflakeUsers: SnowflakeUserModel[];
@@ -26,7 +26,7 @@ export interface SnowflakeNetworkPolicyModel {
     blockedIpAddresses: string[];
 }
 
-export interface GetCreditUsageParams extends ParamParts.TimeRange {}
+export interface GetCreditUsageParams extends TimeRangeParamParts {}
 
 export interface SnowflakeCreditUsageModel {
     creditsUsed: number;
