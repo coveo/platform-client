@@ -1012,13 +1012,6 @@ export enum IndexingPipelineLogTasks {
     preindexing = 'PREINDEXING',
 }
 
-export enum RedshiftEndpointStatus {
-    online = 'ONLINE',
-    unavailable = 'UNAVAILABLE',
-    readOnly = 'READ_ONLY',
-    writeOnly = 'WRITE_ONLY',
-}
-
 export enum ExportStatus {
     available = 'AVAILABLE',
     pending = 'PENDING',
