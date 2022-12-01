@@ -1,3 +1,5 @@
+import { MetricsInterval } from "./ReadServiceCommon";
+
 /**
  * Almost all calls of the Read service have an optional `org` query parameter.
  * (Notable exceptions are service status monitoring calls).
@@ -67,9 +69,9 @@ export interface EventMetricsParamParts {
  */
 export interface EventMetricsIntervalParamParts {
     /**
-     * The metrics to fetch.
+     * The interval on which data will be grouped. Default value is 'DAY'.
      */
-    i?: string[];
+    i?: MetricsInterval;
 }
 
 /**

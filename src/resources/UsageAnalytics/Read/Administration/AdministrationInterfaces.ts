@@ -1,3 +1,4 @@
+import {AccountStatus} from '../../../Enums';
 import {DeprecatedShortPaginatedParamParts, OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts';
 
 export interface AccountInfoModelV15 {
@@ -8,7 +9,7 @@ export interface AccountInfoModelV15 {
 export interface AccountResponseV15 extends AccountInfoModelV15 {
     name: string;
     enabled: boolean;
-    status: any;
+    status: AccountStatus;
 }
 
 export interface StrictValidationTestResponseV15 {

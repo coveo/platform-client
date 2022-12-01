@@ -834,6 +834,12 @@ export enum DimensionType {
     DATETIME = 'DATETIME',
 }
 
+export enum AccountStatus {
+    AVAILABLE = 'AVAILABLE',
+    CREATING = 'CREATING',
+    DELETING = 'DELETING',
+}
+
 export enum DimensionStatus {
     AVAILABLE = 'AVAILABLE',
     UPDATING = 'UPDATING',

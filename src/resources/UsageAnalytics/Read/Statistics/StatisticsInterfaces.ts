@@ -12,6 +12,8 @@ import {
     TimeZoneParamParts,
 } from '../CommonParamParts';
 
+export type MetricsResponseFormat = 'JSON' | 'CSV';
+
 export interface MetricsSortParamParts {
     /**
      * The field to order the results by.
@@ -144,7 +146,7 @@ export interface TrendsOptions
     /**
      * The format of the response. Default is JSON.
      */
-    format?: string;
+    format?: MetricsResponseFormat;
 }
 
 export interface VisitsMetricsOptions
@@ -214,7 +216,7 @@ export interface CombinedDataOptions
     /**
      * The format of the response. Default is 'JSON'.
      */
-    format?: boolean;
+    format?: MetricsResponseFormat;
 }
 
 export interface CombinedDataModel {

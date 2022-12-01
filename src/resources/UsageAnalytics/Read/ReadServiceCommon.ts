@@ -37,3 +37,14 @@ export interface ReadServiceHealthApi {
      */
     checkStatus(): Promise<ReadServiceStatusResponse>;
 }
+
+/**
+ * Supported intervals for calls returning metrics over time.
+ */
+export enum MetricsInterval {
+    MINUTE = 'MINUTE',
+    HOUR = 'HOUR',
+    DAY = 'DAY',
+    WEEK = 'WEEK',
+    MONTH = 'MONTH',
+}
