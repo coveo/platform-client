@@ -79,7 +79,7 @@ export default class ResourceSnapshots extends Resource {
      */
     createFromFile(file: File, options?: CreateFromFileOptions) {
         const computedOptions = {
-            developerNotes: options.developerNotes,
+            developerNotes: options?.developerNotes,
             snapshotFileType: this.getSnapshotFileType(file),
         };
         const form = new FormData();

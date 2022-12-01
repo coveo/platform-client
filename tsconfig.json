@@ -9,6 +9,7 @@
         "declarationDir": "dist/definitions",
         "moduleResolution": "Node",
         "importHelpers": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "strictNullChecks": true
     }
 }

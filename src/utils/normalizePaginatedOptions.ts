@@ -1,11 +1,13 @@
 import {Paginated} from '../resources';
 import {DeprecatedPaginated} from '../resources/InternalBaseInterface';
 
-export const normalizePaginatedOptions = (options: Paginated | DeprecatedPaginated): DeprecatedPaginated => {
+export const normalizePaginatedOptions = (
+    options: Paginated | DeprecatedPaginated | undefined
+): DeprecatedPaginated => {
     if (isDeprecatedPaginated(options)) {
         return options;
     } else {
-        const {perPage: _, ...copiedOptions} = {...options, pageSize: options.perPage};
+        const {perPage: _, ...copiedOptions} = {...options, pageSize: options?.perPage};
         return copiedOptions;
     }
 };
