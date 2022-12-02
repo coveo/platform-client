@@ -1,4 +1,11 @@
 import {DimensionStatus, DimensionType} from '../../../Enums';
+import {
+    DeprecatedShortPaginatedParamParts,
+    EventDimensionsFilterParamParts,
+    OrganizationParamParts,
+    TimeRangeParamParts,
+    TimeZoneParamParts,
+} from '../CommonParamParts';
 
 export interface DimensionModel {
     /**
@@ -64,46 +71,50 @@ export interface CustomDimensionModel {
     path?: string[];
 }
 
-export interface ListDimensionsParams {
-    org?: string;
+export interface ListDimensionsParams extends OrganizationParamParts {
+    /**
+     * This will filter out dimensions which are covered by others.
+     * Only parent/master dimensions will be output.
+     */
     includeOnlyParents?: boolean;
+    /**
+     * Whether to include custom dimensions within the results.
+     */
     includeCustom?: boolean;
 }
 
-export interface GetDimensionValuesParams {
-    from: string;
-    to: string;
-    tz?: string;
-    org?: string;
-    f?: string[];
-    p?: number;
-    n?: number;
-}
+export interface GetDimensionValuesParams
+    extends OrganizationParamParts,
+        EventDimensionsFilterParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        DeprecatedShortPaginatedParamParts {}
 
-export interface CreateCustomDimensionParams {
+export interface CreateCustomDimensionParams extends OrganizationParamParts {
     /**
      * The name of the custom dimension. It should start with the 'c_' prefix.
      * If not present, the prefix will be added automatically.
      */
     name: string;
     /**
-     * The name of the organization (Coveo Cloud V2 only)
-     */
-    org?: string;
-    /**
      * The types of event where this dimension will be added.
      */
     event?: string[];
     /**
      * Whether to update the custom dimension in past events.
+     *
+     * @deprecated
      */
     updatePastEvents?: boolean;
 }
 
-export interface ListUncreatedDimensionsParams {
-    org?: string;
-    from?: string;
-    to?: string;
+export interface ListUncreatedDimensionsParams extends OrganizationParamParts, TimeRangeParamParts {
+    /**
+     * Whether value samples should be included in the response.
+     */
     includeValueSamples?: boolean;
+    /**
+     * The number of events to look at when getting suggestions. A larger depth means more suggestions but also slower performance.
+     */
     depth?: number;
 }

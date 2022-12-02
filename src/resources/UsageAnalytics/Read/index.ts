@@ -7,3 +7,5 @@ export * from './Reports';
 export * from './Snowflake';
 export * from './Statistics';
 export * from './Users';
+
+export * from './ReadServiceResource';

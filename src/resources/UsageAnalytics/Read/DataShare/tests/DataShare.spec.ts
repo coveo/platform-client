@@ -3,7 +3,7 @@ import DataShare from '../DataShare';
 
 jest.mock('../../../../../APICore');
 
-describe('Dimensions', () => {
+describe('DataShare', () => {
     let dataShare: DataShare;
     const dataShareParams = {
         accountLocator: 'Soubane',
@@ -38,7 +38,7 @@ describe('Dimensions', () => {
             dataShare.deleteSnowflakeAccount(dataShareParams);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${DataShare.baseUrl}/accounts?accountLocator=Soubane&snowflakeRegion=LOUBAME&org=someOrgId`
+                `${DataShare.baseUrl}/accounts?org=someOrgId&accountLocator=Soubane&snowflakeRegion=LOUBAME`
             );
         });
     });

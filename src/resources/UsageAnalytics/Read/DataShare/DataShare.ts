@@ -1,35 +1,42 @@
-import Resource from '../../../Resource';
+import ReadServiceResource from '../ReadServiceResource';
 import {
     SnowflakeAccountDataSharingParams,
     SnowflakeAccountDataSharingAccountModel,
     SnowflakeAccountDataSharingRegionsModel,
 } from './DataShareInterfaces';
 
-export default class DataShare extends Resource {
+export default class DataShare extends ReadServiceResource {
     static baseUrl = '/rest/ua/v15/admin/snowflake/securedatasharing';
 
+    /**
+     * Retrieve Snowflake accounts currently associated in Secure Data Sharing.
+     */
     listSnowflakeAccount() {
         return this.api.get<SnowflakeAccountDataSharingAccountModel[]>(
-            this.buildPath(`${DataShare.baseUrl}/accounts`, {org: this.api.organizationId})
+            this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`)
         );
     }
 
-    addSnowflakeAccount(snowflakeAccount: SnowflakeAccountDataSharingParams) {
-        return this.api.post<void>(
-            this.buildPath(`${DataShare.baseUrl}/accounts`, {org: this.api.organizationId}),
-            snowflakeAccount
-        );
+    /**
+     * Add a Snowflake account to Secure Data Sharing.
+     */
+    addSnowflakeAccount(params: SnowflakeAccountDataSharingParams) {
+        return this.api.post<void>(this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`), params);
     }
 
+    /**
+     * Removes a Snowflake account from Secure Data Sharing.
+     */
     deleteSnowflakeAccount(params: SnowflakeAccountDataSharingParams) {
-        return this.api.delete<void>(
-            this.buildPath(`${DataShare.baseUrl}/accounts`, {...params, org: this.api.organizationId})
-        );
+        return this.api.delete<void>(this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`, params));
     }
 
+    /**
+     * Retrieve allowed Snowflake regions for Secure Data Sharing.
+     */
     listAllowedSnowflakeRegions() {
         return this.api.get<SnowflakeAccountDataSharingRegionsModel>(
-            this.buildPath(`${DataShare.baseUrl}/regions`, {org: this.api.organizationId})
+            this.buildPathWithOrg(`${DataShare.baseUrl}/regions`)
         );
     }
 }
