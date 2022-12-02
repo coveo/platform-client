@@ -57,6 +57,13 @@ export interface IncoherentEventsOptions
         MetadataParamParts {
     /**
      * The error codes to fetch.
+     * Example values are:
+     * 'DUPLICATE_SEARCH_ID',
+     * 'DUPLICATE_CLICK_ID',
+     * 'DUPLICATE_CUSTOM_EVENT_ID',
+     * 'DUPLICATE_VIEW_EVENT_ID',
+     * 'CLICK_WITHOUT_ASSOCIATED_SEARCH',
+     * 'STRICT_VALIDATION_FAILURE'.
      */
     errorCodes?: string[];
     /**

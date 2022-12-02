@@ -103,16 +103,22 @@ export interface ListUsersFiltersParams extends OrganizationParamParts {
 
 export interface FilterParams {
     /**
-     * The value of the filter
+     * The id or value of the filter.
      */
     value: string;
     /**
-     * The id determining if the filters currently exists in the org's filters
+     * Whether the value is a persisted filter ID (`true`) or a filter value (`false`).
      */
     id: boolean;
 }
 
 export interface ListUsersReportsParams extends OrganizationParamParts {
+    /**
+     * Whether to include the detailed configuration of the report in the response.
+     */
     includeConfig?: boolean;
+    /**
+     * Whether to include the values inherited from a user's groups in the response.
+     */
     includeGroups?: boolean;
 }
