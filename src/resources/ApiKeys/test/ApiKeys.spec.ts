@@ -76,7 +76,6 @@ describe('ApiKey', () => {
         const apiKeyModel: ApiKeyModel = {
             id: 'ApiKey-to-be-toggled',
             organizationId: 'a-smol-org',
-            enabled: null,
         };
 
         it('should make a PUT call to disable the specific apiKey', () => {

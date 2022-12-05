@@ -1,3 +1,40 @@
+import {
+    DeprecatedShortPaginatedParamParts,
+    EventDimensionsExcludeFilterParamParts,
+    EventDimensionsFilterParamParts,
+    EventDimensionsHideEventsFilterParamParts,
+    EventDimensionsParamParts,
+    EventMetricsFilterParamParts,
+    EventMetricsIntervalParamParts,
+    EventMetricsParamParts,
+    OrganizationParamParts,
+    TimeRangeParamParts,
+    TimeZoneParamParts,
+} from '../CommonParamParts';
+
+export interface MetricsSortParamParts {
+    /**
+     * The field to order the results by.
+     * It must be a dimension, metric or custom dimension that was specified in the 'm' or the 'd' parameter.
+     */
+    s?: string;
+    /**
+     * Whether to sort by ascending order.
+     */
+    asc?: boolean;
+}
+
+export interface MetadataParamParts {
+    /**
+     * Whether to include metadata regarding the results (total count and unique counts, if applicable).
+     */
+    includeMetadata?: boolean;
+}
+
+export interface BindOnLastSearchParamPart {
+    bindOnLastSearch?: boolean;
+}
+
 export interface ServiceStatus {
     status: string;
 }
@@ -12,16 +49,27 @@ export interface MetricStats {
     peak: number;
 }
 
-export interface IncoherentEventsOptions {
-    from: string;
-    to: string;
+export interface IncoherentEventsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        DeprecatedShortPaginatedParamParts,
+        Pick<MetricsSortParamParts, 'asc'>,
+        MetadataParamParts {
+    /**
+     * The error codes to fetch.
+     * Example values are:
+     * 'DUPLICATE_SEARCH_ID',
+     * 'DUPLICATE_CLICK_ID',
+     * 'DUPLICATE_CUSTOM_EVENT_ID',
+     * 'DUPLICATE_VIEW_EVENT_ID',
+     * 'CLICK_WITHOUT_ASSOCIATED_SEARCH',
+     * 'STRICT_VALIDATION_FAILURE'.
+     */
     errorCodes?: string[];
-    p?: number;
-    n?: number;
-    asc?: boolean;
-    includeMetadata?: boolean;
+    /**
+     * Whether to include the incoherent events that have already been seen.
+     */
     seen?: boolean;
-    org: string;
 }
 
 export interface IncoherentEventModel {
@@ -42,16 +90,21 @@ export interface MetricsModel {
     cached: boolean;
 }
 
-export interface GlobalDataOptions {
-    m: string[];
-    from: string;
-    to: string;
-    tz?: string;
+export interface GlobalDataOptions
+    extends OrganizationParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        // Partial<EventDimensionsParamParts> omitted to document the special case.
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventDimensionsFilterParamParts,
+        BindOnLastSearchParamPart {
+    /**
+     * The dimensions to fetch.
+     * Required when the Activity metric is requested, as it has to be based on a dimension.
+     */
     d?: string[];
-    f?: string[];
-    i?: string;
     bindOnLastSearch?: boolean;
-    org: string;
 }
 
 export interface TrendsModel {
@@ -62,37 +115,50 @@ export interface TrendsModel {
     cached: boolean;
 }
 
-export interface TrendsOptions {
-    m: string[];
-    from: string;
-    to: string;
-    previousFrom?: string;
-    previousTo?: string;
-    tz?: string;
-    d: string[];
-    f?: string[];
-    fm?: string[];
-    s?: string;
-    p?: number;
-    n?: number;
-    asc?: boolean;
-    includeMetadata?: boolean;
-    format?: string;
-    bindOnLastSearch?: boolean;
+export interface TrendsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsFilterParamParts,
+        EventDimensionsParamParts,
+        EventDimensionsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
+        MetricsSortParamParts,
+        MetadataParamParts,
+        BindOnLastSearchParamPart {
+    /**
+     * The trends to caculate.
+     */
     t: string[];
-    org: string;
+    /**
+     * The beginning date of the previous date range, when reporting trends.
+     * If not specified, it will be the 'from' date minus the duration of the 'from'-'to' date range.
+     * The date/time should include an offset, or `Z` for UTC.
+     * Format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+     */
+    previousFrom?: string;
+    /**
+     * The end date of the previous date range, when reporting trends.
+     * If not specified, it will be the 'to' date minus the duration of the 'from'-'to' date range.
+     * The date/time should include an offset, or `Z` for UTC.
+     * Format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+     */
+    previousTo?: string;
+    /**
+     * The format of the response. Default is JSON.
+     */
+    format?: string;
 }
 
-export interface VisitsMetricsOptions {
-    m: string[];
-    from: string;
-    to: string;
-    tz?: string;
-    f?: string[];
-    hideEventFilters?: string[];
-    fn?: string[];
-    org: string;
-}
+export interface VisitsMetricsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventDimensionsFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts,
+        EventMetricsFilterParamParts {}
 
 export interface VisitMetricStats {
     sum: number;
@@ -101,37 +167,33 @@ export interface VisitMetricStats {
     max: number;
 }
 
-export interface VisitsGraphDataPointsOptions {
-    m: string[];
-    from: string;
-    to: string;
-    tz?: string;
-    f?: string[];
-    hideEventFilters?: string[];
-    fn?: string[];
-    i?: string;
-    org: string;
-}
+export interface VisitsGraphDataPointsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        EventDimensionsFilterParamParts,
+        EventDimensionsExcludeFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts {}
 
-export interface DeleteQueryOptions {
-    org: string;
-}
+export interface CancelQueryOptions extends OrganizationParamParts {}
+// Alias for backwards compatibility.
+export type DeleteQueryOptions = CancelQueryOptions;
 
 export interface DataPointModel {
     dateTime: number;
     datas: Record<string, number>;
 }
 
-export interface GraphDataPointsOptions {
-    m: string[];
-    from: string;
-    to: string;
-    tz?: string;
-    f?: string[];
-    i?: string[];
-    bindOnLastSearch?: boolean;
-    org: string;
-}
+export interface GraphDataPointsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsIntervalParamParts,
+        EventDimensionsFilterParamParts,
+        BindOnLastSearchParamPart {}
 
 export interface GraphDataPointsModel {
     dataPoints: DataPointModel[];
@@ -141,22 +203,22 @@ export interface GraphDataPointsModel {
     cached: boolean;
 }
 
-export interface CombinedDataOptions {
-    m: string[];
-    from: string;
-    to: string;
-    tz?: string;
-    d: string[];
-    f?: string[];
-    fm?: string[];
-    s?: string;
-    p?: number;
-    n?: number;
-    asc?: boolean;
-    includeMetadata?: boolean;
+export interface CombinedDataOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        EventMetricsParamParts,
+        EventMetricsFilterParamParts,
+        EventDimensionsParamParts,
+        EventDimensionsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
+        MetricsSortParamParts,
+        MetadataParamParts,
+        BindOnLastSearchParamPart {
+    /**
+     * The format of the response. Default is 'JSON'.
+     */
     format?: boolean;
-    bindOnLastSearch?: boolean;
-    org: string;
 }
 
 export interface CombinedDataModel {
@@ -178,21 +240,17 @@ export interface MonitoringHealthModel {
     status: string;
 }
 
-export interface VisitsStatisticsOptions {
-    from: string;
-    to: string;
-    tz?: string;
-    d?: string[];
-    f?: string[];
-    hideEventFilters?: string[];
-    fn?: string[];
-    s?: string;
-    p?: number;
-    n?: number;
-    asc?: boolean;
-    includeMetadata?: boolean;
-    org: string;
-}
+export interface VisitsStatisticsOptions
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        TimeZoneParamParts,
+        Partial<EventDimensionsParamParts>,
+        EventDimensionsFilterParamParts,
+        EventDimensionsExcludeFilterParamParts,
+        EventDimensionsHideEventsFilterParamParts,
+        DeprecatedShortPaginatedParamParts,
+        MetricsSortParamParts,
+        MetadataParamParts {}
 
 export interface VisitStatisticsModel {
     visitId: string;
@@ -205,6 +263,4 @@ export interface VisitsStatisticsModel {
     totalNumberOfVisits: number;
 }
 
-export interface VisitViewOptions {
-    org: string;
-}
+export interface VisitViewOptions extends OrganizationParamParts {}

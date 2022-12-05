@@ -3,17 +3,18 @@ import DataShare from '../DataShare';
 
 jest.mock('../../../../../APICore');
 
-describe('Dimensions', () => {
+describe('DataShare', () => {
     let dataShare: DataShare;
     const dataShareParams = {
         accountLocator: 'Soubane',
         snowflakeRegion: 'LOUBAME',
     };
-    const api = jest.mocked(new API(null, null));
+    const api = jest.mocked(new API({accessToken: '🔑'}));
+    const serverlessApi = jest.mocked(new API({accessToken: '🔑'}, true));
     Object.defineProperty(api, 'organizationId', {get: () => 'someOrgId'});
     beforeEach(() => {
         jest.clearAllMocks();
-        dataShare = new DataShare(api, null);
+        dataShare = new DataShare(api, serverlessApi);
     });
 
     describe('listSnowflakeAccount', () => {
@@ -37,7 +38,7 @@ describe('Dimensions', () => {
             dataShare.deleteSnowflakeAccount(dataShareParams);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${DataShare.baseUrl}/accounts?accountLocator=Soubane&snowflakeRegion=LOUBAME&org=someOrgId`
+                `${DataShare.baseUrl}/accounts?org=someOrgId&accountLocator=Soubane&snowflakeRegion=LOUBAME`
             );
         });
     });

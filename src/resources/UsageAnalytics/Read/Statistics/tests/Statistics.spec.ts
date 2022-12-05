@@ -2,7 +2,7 @@ import API from '../../../../../APICore';
 import Statistics from '../Statistics';
 import {
     CombinedDataOptions,
-    DeleteQueryOptions,
+    CancelQueryOptions,
     GlobalDataOptions,
     GraphDataPointsOptions,
     IncoherentEventsOptions,
@@ -35,13 +35,13 @@ describe('Statistics', () => {
         });
     });
 
-    describe('delete', () => {
+    describe('cancelQuery', () => {
         it('should make a DELETE call to the specific Statistics url', () => {
             const queryId = 'Jida';
-            const options: DeleteQueryOptions = {
+            const options: CancelQueryOptions = {
                 org: 'tuna-durgod',
             };
-            statistics.delete(queryId, options);
+            statistics.cancelQuery(queryId, options);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Statistics.baseUrl}/query/${queryId}?org=tuna-durgod`);
         });
@@ -77,7 +77,7 @@ describe('Statistics', () => {
             statistics.listIncoherentEvents(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/incoherentEvents?from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/incoherentEvents?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -93,7 +93,7 @@ describe('Statistics', () => {
             statistics.listGraphDataPoints(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/graphDataPoints?m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=no-thanks`
+                `${Statistics.baseUrl}/graphDataPoints?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -109,7 +109,7 @@ describe('Statistics', () => {
             statistics.listGlobalData(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/globalData?m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=no-thanks`
+                `${Statistics.baseUrl}/globalData?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -127,7 +127,7 @@ describe('Statistics', () => {
             statistics.listTrends(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/trends?m=UniqueVisit&d=HASCLICK&t=percent%28UniqueVisit%29&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/trends?org=yes&m=UniqueVisit&d=HASCLICK&t=percent%28UniqueVisit%29&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -143,7 +143,7 @@ describe('Statistics', () => {
             statistics.listVisitsMetrics(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visitsMetrics?m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/visitsMetrics?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -159,7 +159,7 @@ describe('Statistics', () => {
             statistics.listVisitsGraphDataPoints(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visitsGraphDataPoints?m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/visitsGraphDataPoints?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -176,7 +176,7 @@ describe('Statistics', () => {
             statistics.listCombinedData(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/combinedData?m=UniqueVisit&d=HASCLICK&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/combinedData?org=yes&m=UniqueVisit&d=HASCLICK&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
@@ -199,7 +199,7 @@ describe('Statistics', () => {
             statistics.listVisits(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visits?from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z&org=yes`
+                `${Statistics.baseUrl}/visits?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
             );
         });
     });
