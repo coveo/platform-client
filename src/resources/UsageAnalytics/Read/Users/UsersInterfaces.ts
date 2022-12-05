@@ -1,3 +1,5 @@
+import {OrganizationParamParts} from '../CommonParamParts';
+
 export interface UsersFilterModel {
     /**
      * The filter id
@@ -92,11 +94,7 @@ export interface UserModel {
     reports: string[];
 }
 
-export interface ListUsersFiltersParams {
-    /**
-     * The org id
-     */
-    org: string;
+export interface ListUsersFiltersParams extends OrganizationParamParts {
     /**
      * Whether to include th values inherited from a user's groups in the response
      */
@@ -105,17 +103,22 @@ export interface ListUsersFiltersParams {
 
 export interface FilterParams {
     /**
-     * The value of the filter
+     * The id or value of the filter.
      */
     value: string;
     /**
-     * The id determining if the filters currently exists in the org's filters
+     * Whether the value is a persisted filter ID (`true`) or a filter value (`false`).
      */
     id: boolean;
 }
 
-export interface ListUsersReportsParams {
-    org?: string;
+export interface ListUsersReportsParams extends OrganizationParamParts {
+    /**
+     * Whether to include the detailed configuration of the report in the response.
+     */
     includeConfig?: boolean;
+    /**
+     * Whether to include the values inherited from a user's groups in the response.
+     */
     includeGroups?: boolean;
 }

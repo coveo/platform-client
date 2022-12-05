@@ -1,3 +1,5 @@
+import {DeprecatedShortPaginatedParamParts, OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts';
+
 export interface AccountInfoModelV15 {
     internalEventIps: string[];
     useStrictFieldValidation: boolean;
@@ -14,11 +16,12 @@ export interface StrictValidationTestResponseV15 {
     validationTestResults: Array<Record<string, unknown>>;
 }
 
-export interface StrictValidationTestParams {
-    from: string;
-    to: string;
+export interface StrictValidationTestParams
+    extends OrganizationParamParts,
+        TimeRangeParamParts,
+        DeprecatedShortPaginatedParamParts {
+    /**
+     * The dimension to fetch.
+     */
     d: string;
-    p?: number;
-    n?: number;
-    org?: string;
 }

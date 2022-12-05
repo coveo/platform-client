@@ -1,11 +1,12 @@
 import {ReportType} from '../../../Enums';
+import {TimeZoneParamParts} from '../CommonParamParts';
 
 export interface ReportModel {
-    /** The report id */
+    /** The report id. */
     id: string;
-    /** The report account */
+    /** The report account. */
     account: string;
-    /** The display name of the report */
+    /** The display name of the report. */
     displayName: string;
     /** The type of the report. Must be either 'explorer' or 'dashboard'. */
     type: ReportType;
@@ -20,10 +21,7 @@ export interface ReportModel {
 export type CreateReportModel = Omit<ReportModel, 'id' | 'account'>;
 export type CreateReportResponse = Pick<ReportModel, 'id'>;
 
-export interface GetReportOptions {
-    /** Timezone used for calculations. */
-    tz?: string;
-}
+export interface GetReportOptions extends TimeZoneParamParts {}
 
 export type UpdateReportModel = CreateReportModel;
 export type UpdateReportResponse = CreateReportResponse;
@@ -36,7 +34,7 @@ export interface ListReportsOptions {
 }
 
 export interface ListReportsResponse {
-    /** A collection of report configurations */
+    /** A collection of report configurations. */
     reports: ReportModel[];
 }
 
@@ -46,7 +44,7 @@ export enum ReportAccessType {
 }
 
 export interface ReportAccessResponse {
-    /** The access type of the report. Can be PUBLIC or PRIVATE. */
+    /** The access type of the report. Can be 'PUBLIC' or 'PRIVATE'. */
     accessType: ReportAccessType;
     /** The users allowed to access the specified report. */
     allowedUsers: UserResponse[];
@@ -71,30 +69,30 @@ export interface ReportUsersResponse {
 }
 
 interface AccountMetaModel {
-    /** The filters that are applied to the user */
+    /** The filters that are applied to the user. */
     filters: string[];
     /** The reports the user can view. */
     reports: string[];
 }
 
 export interface UserResponse extends AccountMetaModel {
-    /** The user id */
+    /** The user id. */
     userId: string;
-    /** The user account */
+    /** The user account. */
     account: string;
 }
 
 export interface GroupResponse extends AccountMetaModel {
-    /** The group id */
+    /** The group id. */
     groupId: string;
-    /** The group account */
+    /** The group account. */
     account: string;
 }
 
 export type StatusResponse = Record<string, unknown>;
 
 export interface GetReportTemplateOptions {
-    /** Whether to include metadata about the report template */
+    /** Whether to include metadata about the report template. */
     includeMetadata?: boolean;
 }
 

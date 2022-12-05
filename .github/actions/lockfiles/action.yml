@@ -4,7 +4,7 @@ runs:
     using: composite
     steps:
         - name: Check lockfiles
-          uses: actions/github-script@v6
+          uses: actions/github-script@d556feaca394842dc55e4734bf3bb9f685482fa0 # v6
           with:          
             script: |
               const {existsSync} = require('fs');
