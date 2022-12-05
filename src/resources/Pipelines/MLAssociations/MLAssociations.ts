@@ -2,6 +2,7 @@ import {PageModel} from '../../BaseInterfaces';
 import Resource from '../../Resource';
 import {
     AssociatedPipelinesData,
+    BulkGetAssociationsParams,
     CreateAssociation,
     EditAssociation,
     ListAssociationsParams,
@@ -64,6 +65,16 @@ export default class MLAssociations extends Resource {
             this.buildPath('/rest/search/v2/admin/pipelines/ml/model/associations', {
                 organizationId: this.api.organizationId,
             })
+        );
+    }
+
+    bulkGet(pipelineId: string, {ids, ...allQueryStringOptions}: BulkGetAssociationsParams) {
+        return this.api.post<PageModel<MLAssociationModel, 'rules'>>(
+            this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/bulkGet`, {
+                organizationId: this.api.organizationId,
+                ...allQueryStringOptions,
+            }),
+            {ids}
         );
     }
 }

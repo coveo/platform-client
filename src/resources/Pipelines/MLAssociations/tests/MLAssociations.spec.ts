@@ -92,4 +92,20 @@ describe('MLAssociations', () => {
             expect(api.get).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/ml/model/associations');
         });
     });
+
+    describe('bulkGet', () => {
+        it('should make a POST call to the specific Associations url', () => {
+            const pipelineId = '🏐';
+            const ids = ['one', 'two', 'three'];
+            const page = 3;
+            const perPage = 10;
+
+            associations.bulkGet(pipelineId, {ids, page, perPage});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${MLAssociations.getBaseUrl(pipelineId)}/bulkGet?page=${page}&perPage=${perPage}`,
+                {ids}
+            );
+        });
+    });
 });
