@@ -54,3 +54,27 @@ export interface Paginated {
      */
     perPage?: number;
 }
+
+/**
+ * Pagination information about which page is included in the response,
+ * and what the full range of data is.
+ */
+export interface PaginationInformationModel {
+    /**
+     * Zero-based page index of the current page.
+     */
+    page: number;
+    /**
+     * The number of items for each page.
+     * Note that the actual number of items may be lower for the last page.
+     */
+    perPage: number;
+    /**
+     * Total number of items available (across all pages).
+     */
+    totalItems: number;
+    /**
+     * The number of pages available, based on `totalItems` and `perPage`.
+     */
+    totalPages: number;
+}

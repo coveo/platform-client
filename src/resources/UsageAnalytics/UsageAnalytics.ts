@@ -1,6 +1,7 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
 import Administration from './Read/Administration/Administration.js';
+import DataHealth from './Read/DataHealth/DataHealth.js';
 import DataShare from './Read/DataShare/DataShare.js';
 import Dimensions from './Read/Dimensions/Dimensions.js';
 import Exports from './Read/Exports/Exports.js';
@@ -11,6 +12,7 @@ import Statistics from './Read/Statistics/Statistics.js';
 
 export default class UsageAnalytics extends Resource {
     administration: Administration;
+    dataHealth: DataHealth;
     dataShare: DataShare;
     dimensions: Dimensions;
     exports: Exports;
@@ -23,6 +25,7 @@ export default class UsageAnalytics extends Resource {
         super(api, serverlessApi);
 
         this.administration = new Administration(api, serverlessApi);
+        this.dataHealth = new DataHealth(api, serverlessApi);
         this.dataShare = new DataShare(api, serverlessApi);
         this.dimensions = new Dimensions(api, serverlessApi);
         this.exports = new Exports(api, serverlessApi);
