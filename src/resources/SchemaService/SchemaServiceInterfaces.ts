@@ -167,3 +167,12 @@ export interface CreateSchemaSourceModel extends CreateSourceModel {
 }
 
 export interface CreateSchemaSourceOptions extends CreateSourceOptions {}
+
+/**
+ * Wraps whether or not a Slack token can validly be used with a Slack source
+ */
+export interface SlackTokenValidationResult {
+    valid: boolean;
+    workspace?: string;
+    reason?: string;
+}

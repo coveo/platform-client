@@ -150,4 +150,15 @@ describe('SchemaService', () => {
             expect(api.get).toHaveBeenCalledWith(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
         });
     });
+
+    describe('validateSlackToken', () => {
+        it('should make a POST call to the specific SchemaSources url', () => {
+            const someSlackToken = '🎄';
+            schemaService.validateSlackToken(someSlackToken);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${someSlackToken}`
+            );
+        });
+    });
 });

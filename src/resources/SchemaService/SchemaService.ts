@@ -12,6 +12,7 @@ import {
     SimpleSchemaEntity,
     GetEntitiesQueryParams,
     GetEntityQueryParams,
+    SlackTokenValidationResult,
 } from './SchemaServiceInterfaces';
 import {SourceType} from '../Enums';
 
@@ -114,5 +115,11 @@ export default class SchemaService extends Ressource {
      */
     getDefaultObjectsToGet(sourceType: string) {
         return this.api.get<ObjectsToGet>(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);
+    }
+
+    validateSlackToken(accessToken: string) {
+        return this.api.post<SlackTokenValidationResult>(
+            `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${accessToken}`
+        );
     }
 }
