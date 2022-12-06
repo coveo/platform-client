@@ -17,7 +17,6 @@ import {
     VisitsStatisticsModel,
     VisitsStatisticsOptions,
     VisitViewOptions,
-    DeleteQueryOptions,
 } from './StatisticsInterfaces';
 
 export default class Statistics extends ReadServiceResource implements ReadServiceHealthApi {
@@ -83,28 +82,10 @@ export default class Statistics extends ReadServiceResource implements ReadServi
     }
 
     /**
-     * Please use {@link cancelQuery} instead.
-     *
-     * @deprecated
-     */
-    delete(queryId: string, options: DeleteQueryOptions) {
-        return this.cancelQuery(queryId, options);
-    }
-
-    /**
      * Get metrics combined with dimensions for a date range.
      */
     listCombinedData(options: CombinedDataOptions) {
         return this.api.get<CombinedDataModel>(this.buildPathWithOrg(`${Statistics.baseUrl}/combinedData`, options));
-    }
-
-    /**
-     * This call no longer exists on the API, it will be removed.
-     *
-     * @deprecated
-     */
-    listTopQueries() {
-        return this.api.get<string[]>(`${Statistics.baseUrl}/topQueries`);
     }
 
     /**

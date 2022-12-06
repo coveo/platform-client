@@ -165,14 +165,6 @@ describe('Statistics', () => {
         });
     });
 
-    describe('listTopQueries', () => {
-        it('should make a GET call to /v15/stats/topQueries with specific options', () => {
-            statistics.listTopQueries();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Statistics.baseUrl}/topQueries`);
-        });
-    });
-
     describe('listVisits', () => {
         it('should make a GET call to /v15/stats/visits with specific options', () => {
             const options: VisitsStatisticsOptions = {

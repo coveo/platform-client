@@ -176,8 +176,6 @@ export interface VisitsGraphDataPointsOptions
         EventDimensionsHideEventsFilterParamParts {}
 
 export interface CancelQueryOptions extends OrganizationParamParts {}
-// Alias for backwards compatibility.
-export type DeleteQueryOptions = CancelQueryOptions;
 
 export interface DataPointModel {
     dateTime: number;
