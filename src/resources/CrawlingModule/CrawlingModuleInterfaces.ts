@@ -130,6 +130,7 @@ export enum CrawlingModuleLogRequestState {
     RUNNING = 'RUNNING',
     SUCCESSFUL = 'SUCCESSFUL',
     TIMEOUT = 'TIMEOUT',
+    EMPTY = 'EMPTY',
 }
 
 export interface CrawlingModuleLogRequestModel {
