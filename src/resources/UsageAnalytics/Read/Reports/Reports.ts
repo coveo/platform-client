@@ -1,4 +1,5 @@
 import {ReportType} from '../../../Enums';
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CreateReportModel,
@@ -12,12 +13,11 @@ import {
     ReportModel,
     TemplateResponse,
     ReportUsersResponse,
-    StatusResponse,
     TemplateMetadataResponse,
     UpdateReportModel,
 } from './ReportsInterfaces';
 
-export default class Reports extends ReadServiceResource {
+export default class Reports extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/reports';
 
     /**
@@ -98,13 +98,6 @@ export default class Reports extends ReadServiceResource {
     }
 
     /**
-     * Health check for the reports service
-     */
-    healthcheck() {
-        return this.api.get<StatusResponse>(`${Reports.baseUrl}/monitoring/health`);
-    }
-
-    /**
      * Get a report template.
      *
      * @param templateId The unique identifier of a template.
@@ -126,10 +119,11 @@ export default class Reports extends ReadServiceResource {
         );
     }
 
-    /**
-     * Get the reports service status.
-     */
-    getServiceStatus() {
-        return this.api.get<StatusResponse>(`${Reports.baseUrl}/status`);
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Reports.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Reports.baseUrl}/status`);
     }
 }

@@ -175,18 +175,18 @@ describe('Filters', () => {
         });
     });
 
-    describe('healthcheck', () => {
+    describe('checkHealth', () => {
         it('should make a GET call to the service healthcheck url', () => {
-            filters.healthcheck();
+            filters.checkHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Filters.baseUrl}/monitoring/health`);
         });
     });
 
-    describe('status', () => {
+    describe('checkStatus', () => {
         it('should make a GET call to the service status url', () => {
-            filters.status();
+            filters.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Filters.baseUrl}/status`);

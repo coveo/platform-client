@@ -12,6 +12,8 @@ import {
     TimeZoneParamParts,
 } from '../CommonParamParts';
 
+export type MetricsResponseFormat = 'JSON' | 'CSV';
+
 export interface MetricsSortParamParts {
     /**
      * The field to order the results by.
@@ -33,10 +35,6 @@ export interface MetadataParamParts {
 
 export interface BindOnLastSearchParamPart {
     bindOnLastSearch?: boolean;
-}
-
-export interface ServiceStatus {
-    status: string;
 }
 
 export interface MetricValue {
@@ -148,7 +146,7 @@ export interface TrendsOptions
     /**
      * The format of the response. Default is JSON.
      */
-    format?: string;
+    format?: MetricsResponseFormat;
 }
 
 export interface VisitsMetricsOptions
@@ -178,8 +176,6 @@ export interface VisitsGraphDataPointsOptions
         EventDimensionsHideEventsFilterParamParts {}
 
 export interface CancelQueryOptions extends OrganizationParamParts {}
-// Alias for backwards compatibility.
-export type DeleteQueryOptions = CancelQueryOptions;
 
 export interface DataPointModel {
     dateTime: number;
@@ -218,7 +214,7 @@ export interface CombinedDataOptions
     /**
      * The format of the response. Default is 'JSON'.
      */
-    format?: boolean;
+    format?: MetricsResponseFormat;
 }
 
 export interface CombinedDataModel {
@@ -234,10 +230,6 @@ export interface TopQueries {
     pageSize?: number;
     pageNumber?: number;
     org: string;
-}
-
-export interface MonitoringHealthModel {
-    status: string;
 }
 
 export interface VisitsStatisticsOptions

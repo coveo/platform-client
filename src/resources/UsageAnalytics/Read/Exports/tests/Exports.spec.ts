@@ -87,24 +87,6 @@ describe('Exports', () => {
         });
     });
 
-    describe('getStatus', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.getStatus();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/status`);
-        });
-    });
-
-    describe('checkHealth', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.checkHealth();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/monitoring/health`);
-        });
-    });
-
     describe('generateVisitExport', () => {
         it('makes a POST call to the specific Exports url', () => {
             const params: GenerateVisitExportParams = {
@@ -184,6 +166,24 @@ describe('Exports', () => {
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`);
+        });
+    });
+
+    describe('checkHealth', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            exports.checkHealth();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('checkStatus', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            exports.checkStatus();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/status`);
         });
     });
 });
