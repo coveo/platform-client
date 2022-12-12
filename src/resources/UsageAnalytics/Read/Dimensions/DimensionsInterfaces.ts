@@ -50,9 +50,24 @@ export interface DimensionValuesModel {
     values: Array<Record<string, string | number>>;
 }
 
+export interface CustomDimensionSuggestionsModel {
+    /**
+     * Suggestions of custom dimensions that could be created
+     */
+    suggestions: CustomDimensionSuggestionModel[];
+}
 export interface CustomDimensionSuggestionModel {
+    /**
+     * The event type of the custom dimension
+     */
     eventName?: string;
+    /**
+     * The api name of the custom dimension
+     */
     apiName?: string;
+    /**
+     * The existing values for the custom dimension
+     */
     values?: string[];
 }
 

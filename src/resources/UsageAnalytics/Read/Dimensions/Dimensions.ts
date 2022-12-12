@@ -4,7 +4,7 @@ import ReadServiceResource from '../ReadServiceResource';
 import {
     CreateCustomDimensionParams,
     CustomDimensionModel,
-    CustomDimensionSuggestionModel,
+    CustomDimensionSuggestionsModel,
     DimensionModel,
     DimensionValuesModel,
     GetDimensionValuesParams,
@@ -132,8 +132,11 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
      * @param event The type of event for which to look for suggestions.
      */
     listUncreatedDimensions(event: DimensionEventTypes, params?: ListUncreatedDimensionsParams) {
-        return this.api.get<CustomDimensionSuggestionModel[]>(
-            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${event}/suggestions`, params)
+        return this.api.get<CustomDimensionSuggestionsModel>(
+            this.buildPath(`${Dimensions.baseUrl}/custom/${event}/suggestions`, {
+                ...params,
+                org: this.api.organizationId,
+            })
         );
     }
 
