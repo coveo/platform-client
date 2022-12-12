@@ -1,3 +1,4 @@
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     FilterParams,
@@ -6,10 +7,9 @@ import {
     ListUsersReportsParams,
     UsersReportsModel,
     UserModel,
-    UsersStatusModel,
 } from './UsersInterfaces';
 
-export default class Users extends ReadServiceResource {
+export default class Users extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/users';
 
     /**
@@ -49,25 +49,19 @@ export default class Users extends ReadServiceResource {
     }
 
     /**
-     * Health check for the users service.
-     */
-    getUsersServiceHealth() {
-        return this.api.get<UsersStatusModel>(`${Users.baseUrl}/monitoring/health`);
-    }
-
-    /**
-     * Get the users service status.
-     */
-    getUsersServiceStatus() {
-        return this.api.get<UsersStatusModel>(`${Users.baseUrl}/status`);
-    }
-
-    /**
      * Get a user.
      *
      * @param userId The unique identifier of a user.
      */
     getUser(userId: string) {
         return this.api.get<UserModel>(this.buildPathWithOrg(`${Users.baseUrl}/${userId}`));
+    }
+
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Users.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Users.baseUrl}/status`);
     }
 }

@@ -66,28 +66,28 @@ describe('Statistics', () => {
         });
     });
 
-    describe('getUsersServiceHealth', () => {
-        it('should make a GET call to /v15/users/monitoring/health', () => {
-            users.getUsersServiceHealth();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/monitoring/health`);
-        });
-    });
-
-    describe('getUsersServiceStatus', () => {
-        it('should make a GET call to /v15/users/status with specific options', () => {
-            users.getUsersServiceStatus();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/status`);
-        });
-    });
-
     describe('getUser', () => {
         it('should make a GET call to /v15/users/:userId', () => {
             const userId = 'Jida';
             users.getUser(userId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/${userId}`);
+        });
+    });
+
+    describe('checkHealth', () => {
+        it('should make a GET call to /v15/users/monitoring/health', () => {
+            users.checkHealth();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('checkStatus', () => {
+        it('should make a GET call to /v15/users/status with specific options', () => {
+            users.checkStatus();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/status`);
         });
     });
 });

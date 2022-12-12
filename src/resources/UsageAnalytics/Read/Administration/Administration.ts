@@ -1,4 +1,3 @@
-import {RedshiftEndpointStatus} from '../../../Enums';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     AccountInfoModelV15,
@@ -24,12 +23,6 @@ export default class Administration extends ReadServiceResource {
      */
     updateAccount(model: AccountInfoModelV15) {
         return this.api.put<AccountResponseV15>(this.buildPathWithOrg(`${Administration.baseUrl}/account`), model);
-    }
-
-    setRedshiftStatus(endpoint: string, status: RedshiftEndpointStatus) {
-        return this.api.post<Record<string, unknown>>(
-            this.buildPath(`${Administration.baseUrl}/redshift/endpoint/status`, {endpointId: endpoint, status})
-        );
     }
 
     /**

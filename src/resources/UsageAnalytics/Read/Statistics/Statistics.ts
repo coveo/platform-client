@@ -1,3 +1,4 @@
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
 import ReadServiceResource from '../ReadServiceResource';
 import {
     CombinedDataModel,
@@ -9,8 +10,6 @@ import {
     IncoherentEventsModel,
     IncoherentEventsOptions,
     MetricsModel,
-    MonitoringHealthModel,
-    ServiceStatus,
     TrendsModel,
     TrendsOptions,
     VisitsGraphDataPointsOptions,
@@ -18,18 +17,10 @@ import {
     VisitsStatisticsModel,
     VisitsStatisticsOptions,
     VisitViewOptions,
-    DeleteQueryOptions,
 } from './StatisticsInterfaces';
 
-export default class Statistics extends ReadServiceResource {
+export default class Statistics extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/stats';
-
-    /**
-     * Get the statistics service status.
-     */
-    status() {
-        return this.api.get<ServiceStatus>(`${Statistics.baseUrl}/status`);
-    }
 
     /**
      * Get the incoherent events for a date range.
@@ -91,35 +82,10 @@ export default class Statistics extends ReadServiceResource {
     }
 
     /**
-     * Please use {@link cancelQuery} instead.
-     *
-     * @deprecated
-     */
-    delete(queryId: string, options: DeleteQueryOptions) {
-        return this.cancelQuery(queryId, options);
-    }
-
-    /**
      * Get metrics combined with dimensions for a date range.
      */
     listCombinedData(options: CombinedDataOptions) {
         return this.api.get<CombinedDataModel>(this.buildPathWithOrg(`${Statistics.baseUrl}/combinedData`, options));
-    }
-
-    /**
-     * This call no longer exists on the API, it will be removed.
-     *
-     * @deprecated
-     */
-    listTopQueries() {
-        return this.api.get<string[]>(`${Statistics.baseUrl}/topQueries`);
-    }
-
-    /**
-     * Health check for the statistics service.
-     */
-    getMonitoringHealth() {
-        return this.api.get<MonitoringHealthModel>(`${Statistics.baseUrl}/monitoring/health`);
     }
 
     /**
@@ -134,5 +100,13 @@ export default class Statistics extends ReadServiceResource {
      */
     updateVisitView(options: VisitViewOptions) {
         return this.api.post(this.buildPathWithOrg(`${Statistics.baseUrl}/visits`, options));
+    }
+
+    checkHealth() {
+        return this.api.get<ReadServiceHealthResponse>(`${Statistics.baseUrl}/monitoring/health`);
+    }
+
+    checkStatus() {
+        return this.api.get<ReadServiceStatusResponse>(`${Statistics.baseUrl}/status`);
     }
 }

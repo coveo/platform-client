@@ -834,6 +834,12 @@ export enum DimensionType {
     DATETIME = 'DATETIME',
 }
 
+export enum AccountStatus {
+    AVAILABLE = 'AVAILABLE',
+    CREATING = 'CREATING',
+    DELETING = 'DELETING',
+}
+
 export enum DimensionStatus {
     AVAILABLE = 'AVAILABLE',
     UPDATING = 'UPDATING',
@@ -1010,13 +1016,6 @@ export enum IndexingPipelineLogTasks {
     streaming = 'STREAMING',
     streamingBatch = 'STREAMING_BATCH',
     preindexing = 'PREINDEXING',
-}
-
-export enum RedshiftEndpointStatus {
-    online = 'ONLINE',
-    unavailable = 'UNAVAILABLE',
-    readOnly = 'READ_ONLY',
-    writeOnly = 'WRITE_ONLY',
 }
 
 export enum ExportStatus {

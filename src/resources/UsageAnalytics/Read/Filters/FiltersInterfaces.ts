@@ -79,13 +79,3 @@ export interface FilterTargetsResponse {
     /** The groups targeted by the filter. */
     targetedGroups: GroupResponse[];
 }
-
-export interface FilterServiceHealthResponse {
-    /** The health of the service */
-    status: 'UP' | 'DOWN';
-}
-
-export interface FilterServiceStatusResponse {
-    /** The status of the service */
-    status: 'online' | 'offline';
-}

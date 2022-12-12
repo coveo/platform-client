@@ -89,8 +89,6 @@ export interface GroupResponse extends AccountMetaModel {
     account: string;
 }
 
-export type StatusResponse = Record<string, unknown>;
-
 export interface GetReportTemplateOptions {
     /** Whether to include metadata about the report template. */
     includeMetadata?: boolean;

@@ -1,5 +1,4 @@
 import API from '../../../../../APICore';
-import {RedshiftEndpointStatus} from '../../../../Enums';
 
 import Administration from '../Administration';
 import {AccountInfoModelV15} from '../AdministrationInterfaces';
@@ -34,16 +33,6 @@ describe('Administation', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Administration.baseUrl}/account/strictValidationTest?from=yyyy-mm-dd&to=yyyy-mm-dd&d=allo`
-            );
-        });
-    });
-
-    describe('setRedshiftStatus', () => {
-        it('should make a post call to the Administration base url + /redshift/endpoint/status', () => {
-            administation.setRedshiftStatus('allo', RedshiftEndpointStatus.unavailable);
-
-            expect(api.post).toHaveBeenCalledWith(
-                `${Administration.baseUrl}/redshift/endpoint/status?endpointId=allo&status=UNAVAILABLE`
             );
         });
     });

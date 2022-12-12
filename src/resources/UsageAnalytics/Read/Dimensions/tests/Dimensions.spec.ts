@@ -55,24 +55,6 @@ describe('Dimensions', () => {
         });
     });
 
-    describe('getStatus', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.getStatus();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/status`);
-        });
-    });
-
-    describe('checkHealth', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.checkHealth();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/monitoring/health`);
-        });
-    });
-
     describe('listCustomDimensions', () => {
         it('should make a GET call to the specific Dimensions url', () => {
             dimensions.listCustomDimensions(true);
@@ -172,6 +154,24 @@ describe('Dimensions', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/${event}/suggestions`);
+        });
+    });
+
+    describe('checkHealth', () => {
+        it('should make a GET call to the specific Dimensions url', () => {
+            dimensions.checkHealth();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('checkStatus', () => {
+        it('should make a GET call to the specific Dimensions url', () => {
+            dimensions.checkStatus();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/status`);
         });
     });
 });

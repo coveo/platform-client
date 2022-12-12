@@ -124,15 +124,6 @@ describe('Reports', () => {
         });
     });
 
-    describe('healthcheck', () => {
-        it('should make a GET call to the specific report endpoint for healthchecks', () => {
-            reports.healthcheck();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/monitoring/health`);
-        });
-    });
-
     describe('getReportTemplate', () => {
         it('should make a GET call to the Reports base url for the specific template ID', () => {
             reports.getReportTemplate(testTemplateId);
@@ -151,9 +142,18 @@ describe('Reports', () => {
         });
     });
 
-    describe('status', () => {
+    describe('checkHealth', () => {
+        it('should make a GET call to the specific report endpoint for healthchecks', () => {
+            reports.checkHealth();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/monitoring/health`);
+        });
+    });
+
+    describe('checkStatus', () => {
         it('should make a GET call to the specific report endpoint for service status', () => {
-            reports.getServiceStatus();
+            reports.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/status`);
