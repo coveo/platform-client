@@ -70,7 +70,7 @@ export interface InsightPanelResultTemplateDetail {
     /**
      * The label to show describing the metadata.
      */
-    label: string;
+    label?: string;
 }
 
 export interface InsightPanelResultActions {
