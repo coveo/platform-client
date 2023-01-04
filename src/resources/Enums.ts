@@ -1022,6 +1022,7 @@ export enum ExportStatus {
     available = 'AVAILABLE',
     pending = 'PENDING',
     failed = 'FAILED',
+    expired = 'EXPIRED',
 }
 
 export enum ExportTablesType {
