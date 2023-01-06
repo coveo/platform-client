@@ -19,6 +19,7 @@ export * from './Indexes';
 export * from './InProductExperiences';
 export * from './InsightPanelConfigs';
 export * from './InsightPanelInterfaces';
+export * from './IPXInterfaces';
 export * from './License';
 export * from './Limits';
 export * from './Links';
