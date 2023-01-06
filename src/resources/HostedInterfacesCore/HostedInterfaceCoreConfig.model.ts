@@ -126,3 +126,55 @@ export interface IListHostedInterfacesParameters extends Paginated {
      */
     perPage?: number;
 }
+
+export interface HostedInterfaceResultTemplate {
+    /**
+     * The name of the result template.
+     */
+    name: string;
+
+    /**
+     * The template layout to use.
+     * Possible values are:
+     * - `'default'`
+     * - `'thumbnail'`
+     */
+    layout: HostedInterfaceResultTemplateLayout;
+
+    /**
+     * The conditions a result needs to meet to use the template.
+     */
+    conditions: HostedInterfaceCondition[];
+
+    /**
+     * The badge to display.
+     */
+    badge: HostedInterfaceResultTemplateBadge;
+
+    /**
+     * The metadata details to display.
+     */
+    details: HostedInterfaceResultTemplateDetail[];
+}
+
+export interface HostedInterfaceConfiguration {
+    /**
+     * The configuration identifier.
+     */
+    id: string;
+
+    /**
+     * The name of the insight panel interface configuration.
+     */
+    name: string;
+
+    /**
+     * The list of facets to display.
+     */
+    facets: HostedInterfaceFacet[];
+
+    /**
+     * The list of tabs to display.
+     */
+    tabs: HostedInterfaceTab[];
+}

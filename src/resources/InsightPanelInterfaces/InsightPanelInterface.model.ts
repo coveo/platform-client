@@ -1,4 +1,4 @@
-import { HostedInterfaceCondition, HostedInterfaceFacet, HostedInterfaceResultTemplateBadge, HostedInterfaceResultTemplateDetail, HostedInterfaceResultTemplateLayout, HostedInterfaceTab } from "../HostedInterfacesCore";
+import {HostedInterfaceConfiguration, HostedInterfaceResultTemplate} from '../HostedInterfacesCore';
 
 export enum InsightPanelConditionOperator {
     isDefined = 'isDefined',
@@ -50,35 +50,7 @@ export interface InsightPanelResultTags {
     recommended?: InsightPanelResultTagOptions;
 }
 
-export interface InsightPanelResultTemplate {
-    /**
-     * The name of the result template.
-     */
-    name: string;
-
-    /**
-     * The template layout to use.
-     * Possible values are:
-     * - `'default'`
-     * - `'thumbnail'`
-     */
-    layout: HostedInterfaceResultTemplateLayout;
-
-    /**
-     * The conditions a result needs to meet to use the template.
-     */
-    conditions: HostedInterfaceCondition[];
-
-    /**
-     * The badge to display.
-     */
-    badge: HostedInterfaceResultTemplateBadge;
-
-    /**
-     * The metadata details to display.
-     */
-    details: HostedInterfaceResultTemplateDetail[];
-
+export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplate {
     /**
      * The available result actions.
      */
@@ -91,7 +63,6 @@ export interface InsightPanelResultTemplate {
 }
 
 export type DisplayValueType = 'checkbox' | 'link';
-
 
 export interface UserActionsOptions {
     /**
@@ -127,31 +98,11 @@ export interface InsightPanelSettings {
     userActions: UserActionsOptions;
 }
 
-export interface InsightPanelInterfaceConfiguration {
-    /**
-     * The configuration identifier.
-     */
-    id: string;
-
-    /**
-     * The name of the insight panel interface configuration.
-     */
-    name: string;
-
+export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfiguration {
     /**
      * The list of result templates defined for the insight panel.
      */
     resultTemplates: InsightPanelResultTemplate[];
-
-    /**
-     * The list of facets to display.
-     */
-    facets: HostedInterfaceFacet[];
-
-    /**
-     * The list of tabs to display.
-     */
-    tabs: HostedInterfaceTab[];
 
     /**
      * The insight panel settings.
