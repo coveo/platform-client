@@ -1,15 +1,10 @@
-import {Paginated} from '../BaseInterfaces';
+import { HostedInterfaceCondition, HostedInterfaceFacet, HostedInterfaceResultTemplateBadge, HostedInterfaceResultTemplateDetail, HostedInterfaceResultTemplateLayout, HostedInterfaceTab } from "../HostedInterfacesCore";
 
 export enum InsightPanelConditionOperator {
     isDefined = 'isDefined',
     isNotDefined = 'isNotDefined',
     MustMatch = 'mustMatch',
     MustNotMatch = 'mustNotMatch',
-}
-
-export enum InsightPanelResultTemplateLayout {
-    Default = 'default',
-    Thumbnail = 'thumbnail',
 }
 
 interface InsightPanelOption {
@@ -19,58 +14,6 @@ interface InsightPanelOption {
 interface InsightPanelResultTagOptions {
     enabled: boolean;
     color: string;
-}
-
-export interface InsightPanelResultTemplateBadge {
-    /**
-     * The field who's value should be displayed in the badge.
-     */
-    field: string;
-
-    /**
-     * The text to display in the badge.
-     */
-    label?: string;
-
-    /**
-     * The RGB HEX code for the color of the badge.
-     */
-    color: string;
-}
-
-export interface InsightPanelCondition {
-    /**
-     * The [field](https://docs.coveo.com/en/200) to evaluate.
-     */
-    field: string;
-
-    /**
-     * The operator used to evaluate the field condition.
-     * Possible values are:
-     * - `'isDefined'`
-     * - `'isNotDefined'`
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    conditionType: InsightPanelConditionOperator;
-
-    /**
-     * The values used as the right side operand when the `operator` is one of:
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    values?: string[];
-}
-
-export interface InsightPanelResultTemplateDetail {
-    /**
-     * The [field](https://docs.coveo.com/en/200) containing the metadata to display.
-     */
-    field: string;
-    /**
-     * The label to show describing the metadata.
-     */
-    label: string;
 }
 
 export interface InsightPanelResultActions {
@@ -119,22 +62,22 @@ export interface InsightPanelResultTemplate {
      * - `'default'`
      * - `'thumbnail'`
      */
-    layout: InsightPanelResultTemplateLayout;
+    layout: HostedInterfaceResultTemplateLayout;
 
     /**
      * The conditions a result needs to meet to use the template.
      */
-    conditions: InsightPanelCondition[];
+    conditions: HostedInterfaceCondition[];
 
     /**
      * The badge to display.
      */
-    badge: InsightPanelResultTemplateBadge;
+    badge: HostedInterfaceResultTemplateBadge;
 
     /**
      * The metadata details to display.
      */
-    details: InsightPanelResultTemplateDetail[];
+    details: HostedInterfaceResultTemplateDetail[];
 
     /**
      * The available result actions.
@@ -149,41 +92,6 @@ export interface InsightPanelResultTemplate {
 
 export type DisplayValueType = 'checkbox' | 'link';
 
-export interface InsightPanelFacet {
-    /**
-     * The [field](https://docs.coveo.com/en/200) on which the facet is based.
-     */
-    field: string;
-
-    /**
-     * The label of the facet.
-     */
-    label: string;
-
-    /**
-     * Whether to display the facet values as checkboxes (multiple selection) or links (single selection).
-     * Possible values are:
-     * - `'checkbox'`
-     * - `'link'`
-     */
-    displayValuesAs: DisplayValueType;
-}
-
-export interface InsightPanelTab {
-    /**
-     * The label to be displayed in the tab.
-     */
-    label: string;
-
-    /**
-     * A constant query expression or filter that the Tab should add to any outgoing query.
-     *
-     * **Example:**
-     *
-     * `@objecttype==Message`
-     */
-    conditions: InsightPanelCondition[];
-}
 
 export interface UserActionsOptions {
     /**
@@ -238,40 +146,15 @@ export interface InsightPanelInterfaceConfiguration {
     /**
      * The list of facets to display.
      */
-    facets: InsightPanelFacet[];
+    facets: HostedInterfaceFacet[];
 
     /**
      * The list of tabs to display.
      */
-    tabs: InsightPanelTab[];
+    tabs: HostedInterfaceTab[];
 
     /**
      * The insight panel settings.
      */
     settings: InsightPanelSettings;
-}
-
-export interface IListInsightPanelInterfacesParameters extends Paginated {
-    /**
-     * A substring that must appear in an insight panel interface configuration name for this configuration to appear in results.
-     */
-    filter?: string;
-
-    /**
-     * The sort direction of the results.
-     * Possible values:
-     * - `'asc'`: ascending order
-     * - `'desc'`: descending order.
-     */
-    order?: 'desc' | 'asc';
-
-    /**
-     * The 0-based number of the page of configurations to list.
-     */
-    page?: number;
-
-    /**
-     * The maximum number of configurations to include per page.
-     */
-    perPage?: number;
 }

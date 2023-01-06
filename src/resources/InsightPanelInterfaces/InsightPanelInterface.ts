@@ -1,12 +1,13 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
+import { IListHostedInterfacesParameters } from '../HostedInterfacesCore';
 import Resource from '../Resource';
-import {IListInsightPanelInterfacesParameters, InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model';
+import {InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model';
 
 export default class InsightPanelInterface extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightinterface/v1/interfaces`;
 
-    list(options?: IListInsightPanelInterfacesParameters) {
+    list(options?: IListHostedInterfacesParameters) {
         return this.api.get<PageModel<InsightPanelInterfaceConfiguration>>(
             this.buildPath(InsightPanelInterface.baseUrl, options)
         );
