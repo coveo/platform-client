@@ -1,10 +1,24 @@
-import {HostedInterfaceConfiguration, HostedInterfaceResultTemplate} from '../HostedInterfacesCore';
+import {
+    HostedInterfaceCondition,
+    HostedInterfaceConfiguration,
+    HostedInterfaceFacet,
+    HostedInterfaceResultTemplate,
+    HostedInterfaceResultTemplateBadge,
+    HostedInterfaceResultTemplateDetail,
+    HostedInterfaceTab,
+    IListHostedInterfacesParameters,
+} from '../HostedInterfacesCore';
 
 export enum InsightPanelConditionOperator {
     isDefined = 'isDefined',
     isNotDefined = 'isNotDefined',
     MustMatch = 'mustMatch',
     MustNotMatch = 'mustNotMatch',
+}
+
+export enum InsightPanelResultTemplateLayout {
+    Default = 'default',
+    Thumbnail = 'thumbnail',
 }
 
 interface InsightPanelOption {
@@ -15,6 +29,22 @@ interface InsightPanelResultTagOptions {
     enabled: boolean;
     color: string;
 }
+
+export interface InsightPanelResultTemplateBadge extends HostedInterfaceResultTemplateBadge {}
+
+export interface InsightPanelCondition extends HostedInterfaceCondition {
+    /**
+     * The operator used to evaluate the field condition.
+     * Possible values are:
+     * - `'isDefined'`
+     * - `'isNotDefined'`
+     * - `'mustMatch'`
+     * - `'mustNotMatch'`
+     */
+    conditionType: InsightPanelConditionOperator;
+}
+
+export interface InsightPanelResultTemplateDetail extends HostedInterfaceResultTemplateDetail {}
 
 export interface InsightPanelResultActions {
     /**
@@ -52,6 +82,28 @@ export interface InsightPanelResultTags {
 
 export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplate {
     /**
+     * The template layout to use.
+     * Possible values are:
+     * - `'default'`
+     * - `'thumbnail'`
+     */
+    layout: InsightPanelResultTemplateLayout;
+
+    /**
+     * The conditions a result needs to meet to use the template.
+     */
+    conditions: InsightPanelCondition[];
+
+    /**
+     * The badge to display.
+     */
+    badge: InsightPanelResultTemplateBadge;
+
+    /**
+     * The metadata details to display.
+     */
+    details: InsightPanelResultTemplateDetail[];
+    /**
      * The available result actions.
      */
     resultActions: InsightPanelResultActions;
@@ -62,7 +114,18 @@ export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplat
     tags: InsightPanelResultTags;
 }
 
-export type DisplayValueType = 'checkbox' | 'link';
+export interface InsightPanelFacet extends HostedInterfaceFacet {}
+
+export interface InsightPanelTab extends HostedInterfaceTab {
+    /**
+     * A constant query expression or filter that the Tab should add to any outgoing query.
+     *
+     * **Example:**
+     *
+     * `@objecttype==Message`
+     */
+    conditions: InsightPanelCondition[];
+}
 
 export interface UserActionsOptions {
     /**
@@ -105,7 +168,19 @@ export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfi
     resultTemplates: InsightPanelResultTemplate[];
 
     /**
+     * The list of facets to display.
+     */
+    facets: InsightPanelFacet[];
+
+    /**
+     * The list of tabs to display.
+     */
+    tabs: InsightPanelTab[];
+
+    /**
      * The insight panel settings.
      */
     settings: InsightPanelSettings;
 }
+
+export interface IListInsightPanelInterfacesParameters extends IListHostedInterfacesParameters {}

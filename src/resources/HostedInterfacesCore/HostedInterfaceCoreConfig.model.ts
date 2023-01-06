@@ -1,17 +1,5 @@
 import {Paginated} from '../BaseInterfaces';
 
-export enum HostedInterfaceConditionOperator {
-    isDefined = 'isDefined',
-    isNotDefined = 'isNotDefined',
-    MustMatch = 'mustMatch',
-    MustNotMatch = 'mustNotMatch',
-}
-
-export enum HostedInterfaceResultTemplateLayout {
-    Default = 'default',
-    Thumbnail = 'thumbnail',
-}
-
 export interface HostedInterfaceResultTemplateBadge {
     /**
      * The field who's value should be displayed in the badge.
@@ -34,16 +22,6 @@ export interface HostedInterfaceCondition {
      * The [field](https://docs.coveo.com/en/200) to evaluate.
      */
     field: string;
-
-    /**
-     * The operator used to evaluate the field condition.
-     * Possible values are:
-     * - `'isDefined'`
-     * - `'isNotDefined'`
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    conditionType: HostedInterfaceConditionOperator;
 
     /**
      * The values used as the right side operand when the `operator` is one of:
@@ -132,14 +110,6 @@ export interface HostedInterfaceResultTemplate {
      * The name of the result template.
      */
     name: string;
-
-    /**
-     * The template layout to use.
-     * Possible values are:
-     * - `'default'`
-     * - `'thumbnail'`
-     */
-    layout: HostedInterfaceResultTemplateLayout;
 
     /**
      * The conditions a result needs to meet to use the template.

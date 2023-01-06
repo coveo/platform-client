@@ -1,8 +1,7 @@
 import API from '../../../APICore';
 import {New} from '../../../Entry';
-import {HostedInterfaceResultTemplateLayout, HostedInterfaceConditionOperator} from '../../HostedInterfacesCore';
 import IPXInterface from '../IPXInterface';
-import {IPXInterfaceConfiguration} from '../IPXInterface.model';
+import {IPXConditionOperator, IPXInterfaceConfiguration, IPXResultTemplateLayout} from '../IPXInterface.model';
 
 jest.mock('../../../APICore');
 
@@ -30,15 +29,15 @@ describe('IPXInterface', () => {
         resultTemplates: [
             {
                 name: 'template',
-                layout: HostedInterfaceResultTemplateLayout.Default,
+                layout: IPXResultTemplateLayout.Default,
                 conditions: [
                     {
-                        conditionType: HostedInterfaceConditionOperator.MustMatch,
+                        conditionType: IPXConditionOperator.MustMatch,
                         field: 'sourcetype',
                         values: ['youtube'],
                     },
                     {
-                        conditionType: HostedInterfaceConditionOperator.isDefined,
+                        conditionType: IPXConditionOperator.isDefined,
                         field: 'ytlikecount',
                     },
                 ],
@@ -60,7 +59,7 @@ describe('IPXInterface', () => {
                 conditions: [
                     {
                         field: '@sfkbid',
-                        conditionType: HostedInterfaceConditionOperator.isDefined,
+                        conditionType: IPXConditionOperator.isDefined,
                     },
                 ],
             },
