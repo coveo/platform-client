@@ -15,6 +15,7 @@ export * from './Fields';
 export * from './Global';
 export * from './GlobalGroups';
 export * from './Groups';
+export * from './HostedInterfacesCore';
 export * from './Indexes';
 export * from './InProductExperiences';
 export * from './InsightPanelConfigs';
