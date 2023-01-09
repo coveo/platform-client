@@ -9,8 +9,8 @@ import {
 } from '../HostedInterfacesCore';
 
 export enum IPXConditionOperator {
-    isDefined = 'isDefined',
-    isNotDefined = 'isNotDefined',
+    IsDefined = 'isDefined',
+    IsNotDefined = 'isNotDefined',
     MustMatch = 'mustMatch',
     MustNotMatch = 'mustNotMatch',
 }
