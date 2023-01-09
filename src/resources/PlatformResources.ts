@@ -18,7 +18,7 @@ import Index from './Indexes/Indexes';
 import InProductExperiences from './InProductExperiences/InProductExperiences';
 import InsightPanelConfig from './InsightPanelConfigs/InsightPanelConfig';
 import InsightPanelInterface from './InsightPanelInterfaces/InsightPanelInterface';
-import IPXInterface from './IPXInterfaces/ipxInterface';
+import IPXInterface from './IPXInterfaces/IPXInterface';
 import License from './License/License';
 import Limits from './Limits/Limits';
 import Links from './Links/Links';

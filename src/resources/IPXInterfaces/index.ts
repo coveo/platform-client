@@ -1,2 +1,2 @@
 export * from './IPXInterface.model';
-export * from './ipxInterface';
+export * from './IPXInterface';
