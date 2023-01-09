@@ -26,6 +26,8 @@ npm install @coveo/platform-client
 
 ### Import
 
+Note, this project is pure ESM, you may need some interop to
+
 ```js
 // using default import
 import PlatformClient from '@coveo/platform-client';
@@ -33,8 +35,8 @@ import PlatformClient from '@coveo/platform-client';
 // using named import
 import {PlatformClient} from '@coveo/platform-client';
 
-// using commonjs require
-const PlatformClient = require('@coveo/platform-client').default;
+// using dynamic import, works in CJS ⚠ requires an async context ⚠
+const {PlatformClient} = await import('@coveo/platform-client');
 ```
 
 ### Configure
