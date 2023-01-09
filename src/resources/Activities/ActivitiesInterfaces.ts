@@ -1,5 +1,5 @@
-import {Paginated} from '../BaseInterfaces';
-import {FacetOrSortStatus} from '../Enums';
+import {Paginated} from '../BaseInterfaces.js';
+import {FacetOrSortStatus} from '../Enums.js';
 
 export interface ActivityModel {
     content?: any;

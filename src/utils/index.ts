@@ -1,2 +1,2 @@
-export * from './Retriever';
-export * from './WithRequired';
+export * from './Retriever.js';
+export * from './WithRequired.js';

@@ -1,6 +1,6 @@
-import {FieldModel, ListFieldsParams} from '../../Fields';
-import {LightSourceModel} from '../SourcesInterfaces';
-import {MappingModel} from '../SourcesMappings';
+import {FieldModel, ListFieldsParams} from '../../Fields/index.js';
+import {LightSourceModel} from '../SourcesInterfaces.js';
+import {MappingModel} from '../SourcesMappings/index.js';
 
 export interface ListSourcesFieldsParams extends ListFieldsParams {
     includeMappings?: boolean;

@@ -1,1 +1,1 @@
-export * from './UserActionHistoryConfiguration';
+export * from './UserActionHistoryConfiguration.js';

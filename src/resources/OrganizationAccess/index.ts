@@ -1,2 +1,2 @@
-export * from './Access';
-export * from './AccessInterfaces';
+export * from './Access.js';
+export * from './AccessInterfaces.js';

@@ -1,5 +1,5 @@
-import API from '../../APICore';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
 import {
     ApplyOptions,
     CreateFromFileOptions,
@@ -22,7 +22,7 @@ import {
     SnapshotListParams,
     UpdateChildrenOptions,
     ValidateAccessOptions,
-} from './ResourceSnapshotsInterfaces';
+} from './ResourceSnapshotsInterfaces.js';
 
 export default class ResourceSnapshots extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/snapshots`;

@@ -1,7 +1,5 @@
-/* eslint-disable id-blacklist */
-
-import {RestTokenParams} from '../Search';
-import {CSSResourceModel, JavaScriptResourceModel} from '../SearchPages';
+import {RestTokenParams} from '../Search/index.js';
+import {CSSResourceModel, JavaScriptResourceModel} from '../SearchPages/index.js';
 
 export interface SharedInProductExperienceModel {
     /**
@@ -239,6 +237,7 @@ export enum ButtonPositionVerticalRequestModel {
 }
 
 export enum ButtonPositionHorizontalResponseModel {
+    // eslint-disable-next-line id-blacklist
     Undefined = 'Undefined',
     Left = 'Left',
     Center = 'Center',
@@ -246,6 +245,7 @@ export enum ButtonPositionHorizontalResponseModel {
 }
 
 export enum ButtonPositionVerticalResponseModel {
+    // eslint-disable-next-line id-blacklist
     Undefined = 'Undefined',
     Top = 'Top',
     Middle = 'Middle',

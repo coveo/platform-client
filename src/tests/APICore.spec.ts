@@ -1,10 +1,11 @@
-import fetchMock from 'jest-fetch-mock';
-import API from '../APICore';
-import {PlatformClientOptions} from '../ConfigurationInterfaces';
-import getEndpoint, {Environment, Region} from '../Endpoints';
-import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces';
+import jestFetchMock from 'jest-fetch-mock';
+const fetchMock = jestFetchMock.default;
+import API from '../APICore.js';
+import {PlatformClientOptions} from '../ConfigurationInterfaces.js';
+import getEndpoint, {Environment, Region} from '../Endpoints.js';
+import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces.js';
 
-jest.mock('../Endpoints');
+jest.mock('../Endpoints.js');
 
 describe('APICore', () => {
     const testConfig: PlatformClientOptions = {

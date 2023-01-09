@@ -1,10 +1,10 @@
-import API from '../../APICore';
-import {New, PrivilegeModel} from '../BaseInterfaces';
-import Resource from '../Resource';
-import {CreateGroupOptions, GroupModel, UpdateGroupOptions} from './GroupsInterfaces';
-import GroupInvite from './Invites/GroupInvite';
-import GroupMember from './Members/GroupMember';
-import GroupRealm from './Realms/GroupRealm';
+import API from '../../APICore.js';
+import {New, PrivilegeModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {CreateGroupOptions, GroupModel, UpdateGroupOptions} from './GroupsInterfaces.js';
+import GroupInvite from './Invites/GroupInvite.js';
+import GroupMember from './Members/GroupMember.js';
+import GroupRealm from './Realms/GroupRealm.js';
 
 export default class Group extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/groups`;

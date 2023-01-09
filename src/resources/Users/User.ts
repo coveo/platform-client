@@ -1,6 +1,6 @@
-import {RealmModel} from '../Groups';
-import Resource from '../Resource';
-import {UserModel} from './UserInterfaces';
+import {RealmModel} from '../Groups/index.js';
+import Resource from '../Resource.js';
+import {UserModel} from './UserInterfaces.js';
 
 export default class User extends Resource {
     static baseUrl = '/rest/users';

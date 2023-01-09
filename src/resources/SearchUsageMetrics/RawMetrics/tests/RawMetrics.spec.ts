@@ -1,8 +1,8 @@
-import {SearchHubRawMetrics} from '../../..';
-import API from '../../../../APICore';
-import RawMetrics from '../RawMetrics';
+import {SearchHubRawMetrics} from '../../../index.js';
+import API from '../../../../APICore.js';
+import RawMetrics from '../RawMetrics.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

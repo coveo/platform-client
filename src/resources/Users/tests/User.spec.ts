@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import User from '../User';
-import {UserModel} from '../UserInterfaces';
+import API from '../../../APICore.js';
+import User from '../User.js';
+import {UserModel} from '../UserInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

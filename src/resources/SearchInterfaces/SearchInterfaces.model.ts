@@ -1,5 +1,5 @@
-import {Paginated} from '../BaseInterfaces';
-import {SortingBy, SortingOrder} from '../Enums';
+import {Paginated} from '../BaseInterfaces.js';
+import {SortingBy, SortingOrder} from '../Enums.js';
 
 export interface IAccesses {
     /**

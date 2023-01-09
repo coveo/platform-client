@@ -1,9 +1,9 @@
-import API from '../../../../../APICore';
-import {ReportType} from '../../../../Enums';
-import Reports from '../Reports';
-import {CreateReportModel, ReportAccessRequest, ReportAccessType, UpdateReportModel} from '../ReportsInterfaces';
+import API from '../../../../../APICore.js';
+import {ReportType} from '../../../../Enums.js';
+import Reports from '../Reports.js';
+import {CreateReportModel, ReportAccessRequest, ReportAccessType, UpdateReportModel} from '../ReportsInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

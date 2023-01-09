@@ -1,5 +1,5 @@
-import API from '../../../../../APICore';
-import Statistics from '../Statistics';
+import API from '../../../../../APICore.js';
+import Statistics from '../Statistics.js';
 import {
     CombinedDataOptions,
     CancelQueryOptions,
@@ -11,9 +11,9 @@ import {
     VisitsMetricsOptions,
     VisitsStatisticsOptions,
     VisitViewOptions,
-} from '../StatisticsInterfaces';
+} from '../StatisticsInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

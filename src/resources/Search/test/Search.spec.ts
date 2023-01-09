@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import {RestUserIdType} from '../../Enums';
-import Search from '../Search';
+import API from '../../../APICore.js';
+import {RestUserIdType} from '../../Enums.js';
+import Search from '../Search.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

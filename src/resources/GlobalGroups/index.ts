@@ -1,2 +1,2 @@
-export * from './GlobalGroup';
-export * from './GlobalGroupInterfaces';
+export * from './GlobalGroup.js';
+export * from './GlobalGroupInterfaces.js';

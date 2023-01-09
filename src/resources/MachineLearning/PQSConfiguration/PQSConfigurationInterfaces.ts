@@ -1,4 +1,4 @@
-import {IntervalUnit} from '../../Enums';
+import {IntervalUnit} from '../../Enums.js';
 
 export interface PQSConfigurationModel {
     /**

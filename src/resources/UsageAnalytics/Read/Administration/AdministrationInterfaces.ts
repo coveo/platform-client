@@ -1,5 +1,5 @@
-import {AccountStatus} from '../../../Enums';
-import {DeprecatedShortPaginatedParamParts, OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts';
+import {AccountStatus} from '../../../Enums.js';
+import {DeprecatedShortPaginatedParamParts, OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts.js';
 
 export interface AccountInfoModelV15 {
     internalEventIps: string[];

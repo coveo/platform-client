@@ -1,14 +1,14 @@
-import API from '../../../../../APICore';
-import Filters from '../Filters';
+import API from '../../../../../APICore.js';
+import Filters from '../Filters.js';
 import {
     CreatePermissionsFilterModel,
     CreateReportingFilterModel,
     FilterTargetsModel,
     UpdatePermissionsFilterModel,
     UpdateReportingFilterModel,
-} from '../FiltersInterfaces';
+} from '../FiltersInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

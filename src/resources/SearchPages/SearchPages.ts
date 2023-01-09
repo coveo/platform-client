@@ -1,5 +1,5 @@
-import API from '../../APICore';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
 import {
     SearchPageModel,
     ListSearchPagesParams,
@@ -11,7 +11,7 @@ import {
     ReorderSearchPageHeadersModel,
     JavaScriptResourceModel,
     CSSResourceModel,
-} from './SearchPagesInterfaces';
+} from './SearchPagesInterfaces.js';
 
 export default class SearchPages extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/pages`;

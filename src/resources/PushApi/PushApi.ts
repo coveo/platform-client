@@ -1,5 +1,5 @@
-import API from '../../APICore';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
 import {
     SecurityIdentityAliasModel,
     SecurityIdentityBatchConfig,
@@ -7,7 +7,7 @@ import {
     SecurityIdentityDeleteOptions,
     SecurityIdentityModel,
     SecurityIdentityOptions,
-} from './PushApiInterfaces';
+} from './PushApiInterfaces.js';
 
 export default class PushApi extends Resource {
     static baseUrl = `/push/v1/organizations/${API.orgPlaceholder}/providers`;

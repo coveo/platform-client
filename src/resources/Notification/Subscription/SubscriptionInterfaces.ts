@@ -1,4 +1,4 @@
-import {SubscriptionFrequencyEnum, SubscriptionStatusHealthIndicatorEnum, SubscriptionTypeEnum} from '../../Enums';
+import {SubscriptionFrequencyEnum, SubscriptionStatusHealthIndicatorEnum, SubscriptionTypeEnum} from '../../Enums.js';
 
 export interface EditSubscriptionModel {
     description?: string;

@@ -1,2 +1,2 @@
-export * from './SourcesMappings';
-export * from './SourcesMappingsInterfaces';
+export * from './SourcesMappings.js';
+export * from './SourcesMappingsInterfaces.js';

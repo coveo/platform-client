@@ -1,8 +1,8 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import LicenseMetrics from './LicenseMetrics/LicenseMetrics';
-import RawMetrics from './RawMetrics/RawMetrics';
-import SearchHubs from './SearchHubs/SearchHubs';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import LicenseMetrics from './LicenseMetrics/LicenseMetrics.js';
+import RawMetrics from './RawMetrics/RawMetrics.js';
+import SearchHubs from './SearchHubs/SearchHubs.js';
 
 export default class SearchUsageMetrics extends Resource {
     licenseMetrics: LicenseMetrics;

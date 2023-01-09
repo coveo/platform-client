@@ -1,2 +1,2 @@
-export * from './Vaults';
-export * from './VaultsInterfaces';
+export * from './Vaults.js';
+export * from './VaultsInterfaces.js';

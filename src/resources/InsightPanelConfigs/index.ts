@@ -1,2 +1,2 @@
-export * from './InsightPanelConfig';
-export * from './InsightPanelConfigInterfaces';
+export * from './InsightPanelConfig.js';
+export * from './InsightPanelConfigInterfaces.js';

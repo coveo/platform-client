@@ -1,4 +1,4 @@
-import Resource from '../../Resource';
+import Resource from '../../Resource.js';
 
 /**
  * Extends Resource with a `buildPathWithOrg` method, that will fill in the optional `org` query parameter by default.

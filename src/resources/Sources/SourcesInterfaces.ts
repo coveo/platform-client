@@ -1,4 +1,4 @@
-import {GranularResource, Paginated} from '../BaseInterfaces';
+import {GranularResource, Paginated} from '../BaseInterfaces.js';
 import {
     FilterHostType,
     FilterLastOperationResultType,
@@ -10,12 +10,12 @@ import {
     SourceSecurityOption,
     SourceType,
     SourceVisibility,
-} from '../Enums';
-import {SecurityProvider, SecurityProviderModel} from '../SecurityCache/SecurityCacheInterfaces';
-import * as SourcesSubInterface from './SourcesSubInterfaces';
-import {MappingModel} from './SourcesMappings';
+} from '../Enums.js';
+import {SecurityProvider, SecurityProviderModel} from '../SecurityCache/SecurityCacheInterfaces.js';
+import * as SourcesSubInterface from './SourcesSubInterfaces/index.js';
+import {MappingModel} from './SourcesMappings/index.js';
 
-export * from './SourcesSubInterfaces';
+export * from './SourcesSubInterfaces/index.js';
 
 interface ListParams extends Paginated {
     filter?: string;

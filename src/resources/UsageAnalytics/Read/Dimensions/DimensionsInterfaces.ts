@@ -1,11 +1,11 @@
-import {DimensionStatus, DimensionType} from '../../../Enums';
+import {DimensionStatus, DimensionType} from '../../../Enums.js';
 import {
     DeprecatedShortPaginatedParamParts,
     EventDimensionsFilterParamParts,
     OrganizationParamParts,
     TimeRangeParamParts,
     TimeZoneParamParts,
-} from '../CommonParamParts';
+} from '../CommonParamParts.js';
 
 export interface DimensionModel {
     /**

@@ -1,4 +1,4 @@
-import {UpdateStatusCategory} from '../Enums';
+import {UpdateStatusCategory} from '../Enums.js';
 
 export interface MaestroVersionOptions {
     crawlingModuleVersion: string;

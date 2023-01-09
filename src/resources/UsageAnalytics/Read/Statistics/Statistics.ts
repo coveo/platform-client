@@ -1,5 +1,5 @@
-import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     CombinedDataModel,
     CombinedDataOptions,
@@ -17,7 +17,7 @@ import {
     VisitsStatisticsModel,
     VisitsStatisticsOptions,
     VisitViewOptions,
-} from './StatisticsInterfaces';
+} from './StatisticsInterfaces.js';
 
 export default class Statistics extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/stats';

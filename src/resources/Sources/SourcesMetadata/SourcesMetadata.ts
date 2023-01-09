@@ -1,7 +1,7 @@
-import Resource from '../../Resource';
-import API from '../../../APICore';
-import {Paginated} from '../../BaseInterfaces';
-import {MetadataPageModel, MetadataReportStatus} from './SourcesMetadataInterfaces';
+import Resource from '../../Resource.js';
+import API from '../../../APICore.js';
+import {Paginated} from '../../BaseInterfaces.js';
+import {MetadataPageModel, MetadataReportStatus} from './SourcesMetadataInterfaces.js';
 
 export default class SourcesMetadata extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;

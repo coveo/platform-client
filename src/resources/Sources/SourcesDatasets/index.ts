@@ -1,2 +1,2 @@
-export * from './SourcesDatasets';
-export * from './SourcesDatasetsInterfaces';
+export * from './SourcesDatasets.js';
+export * from './SourcesDatasetsInterfaces.js';

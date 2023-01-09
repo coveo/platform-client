@@ -1,4 +1,4 @@
-import {PatternType} from '../../Enums';
+import {PatternType} from '../../Enums.js';
 
 export interface AddressPattern {
     allowed?: boolean;

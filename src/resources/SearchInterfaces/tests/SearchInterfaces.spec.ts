@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import {IManifestParameters, New} from '../../../Entry';
-import {SortingBy, SortingOrder} from '../../Enums';
-import SearchInterfaces from '../SearchInterfaces';
-import {IAccesses, ISearchInterfaceConfiguration} from '../SearchInterfaces.model';
+import API from '../../../APICore.js';
+import {IManifestParameters, New} from '../../../Entry.js';
+import {SortingBy, SortingOrder} from '../../Enums.js';
+import SearchInterfaces from '../SearchInterfaces.js';
+import {IAccesses, ISearchInterfaceConfiguration} from '../SearchInterfaces.model.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

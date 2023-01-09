@@ -1,7 +1,7 @@
-import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from '.';
-import API from '../../APICore';
-import Ressource from '../Resource';
-import {RestQueryParams, RestTokenParams, TokenModel} from './SearchInterfaces';
+import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
+import API from '../../APICore.js';
+import Ressource from '../Resource.js';
+import {RestQueryParams, RestTokenParams, TokenModel} from './SearchInterfaces.js';
 
 export default class Search extends Ressource {
     static baseUrl = `/rest/search/v2`;

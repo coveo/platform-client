@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import SchemaService from '../SchemaService';
-import {SchemaServiceQueryParams, CreateSchemaSourceModel} from '../SchemaServiceInterfaces';
-import {SourceType} from '../../Enums';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import SchemaService from '../SchemaService.js';
+import {SchemaServiceQueryParams, CreateSchemaSourceModel} from '../SchemaServiceInterfaces.js';
+import {SourceType} from '../../Enums.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

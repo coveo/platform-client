@@ -1,5 +1,5 @@
-import {Paginated} from '../../BaseInterfaces';
-import {ListStatementSortBy} from '../../Enums';
+import {Paginated} from '../../BaseInterfaces.js';
+import {ListStatementSortBy} from '../../Enums.js';
 
 export interface ConditionModel {
     /**
@@ -79,6 +79,7 @@ export interface NewConditionModel {
 export interface ListConditionsOptions extends Paginated {
     /**
      * Whether to sort the results in ascending order.
+     *
      * @default true
      */
     isOrderAscending?: boolean;
@@ -92,6 +93,7 @@ export interface ListConditionsOptions extends Paginated {
 
     /**
      * The sort criteria to apply on the results.
+     *
      * @default ListStatementSortBy.Position
      */
     sortBy?: ListStatementSortBy;

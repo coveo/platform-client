@@ -1,4 +1,4 @@
-import {RestUserIdType} from '../Enums';
+import {RestUserIdType} from '../Enums.js';
 
 export interface RestTokenParams {
     userIds: RestUserId[];

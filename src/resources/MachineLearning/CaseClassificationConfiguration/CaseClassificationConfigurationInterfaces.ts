@@ -1,4 +1,4 @@
-import {FilterConditions} from '../FilterConditions';
+import {FilterConditions} from '../FilterConditions.js';
 
 export enum Operator {
     Equals = 'EQUALS',

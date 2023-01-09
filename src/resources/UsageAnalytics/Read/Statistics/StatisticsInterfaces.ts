@@ -10,7 +10,7 @@ import {
     OrganizationParamParts,
     TimeRangeParamParts,
     TimeZoneParamParts,
-} from '../CommonParamParts';
+} from '../CommonParamParts.js';
 
 export type MetricsResponseFormat = 'JSON' | 'CSV';
 

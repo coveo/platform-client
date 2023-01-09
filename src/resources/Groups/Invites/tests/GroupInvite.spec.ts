@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {New} from '../../../BaseInterfaces';
-import GroupInvite from '../GroupInvite';
-import {InviteModel} from '../GroupInviteInterfaces';
+import API from '../../../../APICore.js';
+import {New} from '../../../BaseInterfaces.js';
+import GroupInvite from '../GroupInvite.js';
+import {InviteModel} from '../GroupInviteInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

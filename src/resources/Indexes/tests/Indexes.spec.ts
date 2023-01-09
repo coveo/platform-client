@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Indexes from '../Indexes';
-import {CreateCoveoIndexModel} from '../IndexesInterface';
+import API from '../../../APICore.js';
+import Indexes from '../Indexes.js';
+import {CreateCoveoIndexModel} from '../IndexesInterface.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

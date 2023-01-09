@@ -1,13 +1,13 @@
-import API from '../../../../APICore';
-import {ListStatementGroupStatusType, StatementGroupType} from '../../../Enums';
-import StatementGroups from '../StatementGroups';
+import API from '../../../../APICore.js';
+import {ListStatementGroupStatusType, StatementGroupType} from '../../../Enums.js';
+import StatementGroups from '../StatementGroups.js';
 import {
     CreateStatementGroupModel,
     UpdateStatementGroupModel,
     StatementGroupRuleAssociationFeatureTypeEnum,
-} from '../StatementGroupsInterfaces';
+} from '../StatementGroupsInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

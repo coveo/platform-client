@@ -1,13 +1,13 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import SearchPages from '../SearchPages/SearchPages';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import SearchPages from '../SearchPages/SearchPages.js';
 import {
     InProductExperienceModel,
     CreateInProductExperienceModel,
     UpdateInProductExperienceModel,
     InProductExperienceLoader,
     CreateInProductExperienceResponse,
-} from './InProductExperiencesInterfaces';
+} from './InProductExperiencesInterfaces.js';
 
 /**
  * In-Product Experiences (also known as In App Widgets) Swagger documentation can

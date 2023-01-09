@@ -1,6 +1,6 @@
-import {DatasetImportProgressModel, DatasetModel, DatasetType} from './SourcesDatasetsInterfaces';
-import API from '../../../APICore';
-import Resource from '../../Resource';
+import {DatasetImportProgressModel, DatasetModel, DatasetType} from './SourcesDatasetsInterfaces.js';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
 
 export default class SourcesDatasets extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources/datasets`;

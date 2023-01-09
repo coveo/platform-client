@@ -1,2 +1,2 @@
-export * from './ContentQuery';
-export * from './ContentQueryInterfaces';
+export * from './ContentQuery.js';
+export * from './ContentQueryInterfaces.js';

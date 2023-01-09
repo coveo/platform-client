@@ -1,4 +1,4 @@
-import {ClusterNodeStatusModel} from '../ClusterInterfaces';
+import {ClusterNodeStatusModel} from '../ClusterInterfaces.js';
 
 export interface ClusterAgentModel {
     id: string;

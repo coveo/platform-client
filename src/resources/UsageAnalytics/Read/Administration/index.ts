@@ -1,2 +1,2 @@
-export * from './Administration';
-export * from './AdministrationInterfaces';
+export * from './Administration.js';
+export * from './AdministrationInterfaces.js';

@@ -1,6 +1,6 @@
-import {DimensionEventTypes} from '../../../Enums';
-import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {DimensionEventTypes} from '../../../Enums.js';
+import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     CreateCustomDimensionParams,
     CustomDimensionModel,
@@ -10,7 +10,7 @@ import {
     GetDimensionValuesParams,
     ListDimensionsParams,
     ListUncreatedDimensionsParams,
-} from './DimensionsInterfaces';
+} from './DimensionsInterfaces.js';
 
 export default class Dimensions extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/dimensions';

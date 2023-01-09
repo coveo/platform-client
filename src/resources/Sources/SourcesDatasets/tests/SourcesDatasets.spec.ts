@@ -1,8 +1,8 @@
-import {DatasetType} from '../../..';
-import API from '../../../../APICore';
-import SourcesDatasets from '../SourcesDatasets';
+import API from '../../../../APICore.js';
+import {DatasetType} from '../index.js';
+import SourcesDatasets from '../SourcesDatasets.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

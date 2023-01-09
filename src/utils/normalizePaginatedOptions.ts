@@ -1,5 +1,5 @@
-import {Paginated} from '../resources';
-import {DeprecatedPaginated} from '../resources/InternalBaseInterface';
+import {Paginated} from '../resources/index.js';
+import {DeprecatedPaginated} from '../resources/InternalBaseInterface.js';
 
 export const normalizePaginatedOptions = (
     options: Paginated | DeprecatedPaginated | undefined

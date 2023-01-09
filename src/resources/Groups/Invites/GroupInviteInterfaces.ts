@@ -1,4 +1,4 @@
-import {AuthProvider} from '../../Enums';
+import {AuthProvider} from '../../Enums.js';
 
 export interface InviteByEmail {
     id: string;

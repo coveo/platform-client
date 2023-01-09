@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Connectivity from '../Connectivity';
-import {LogRequestResourceType} from '../ConnectivityInterface';
+import API from '../../../APICore.js';
+import Connectivity from '../Connectivity.js';
+import {LogRequestResourceType} from '../ConnectivityInterface.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

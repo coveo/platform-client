@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import Vaults from '../Vaults';
-import {VaultFetchStrategy} from '../../Enums';
-import {VaultEntryModel} from '../VaultsInterfaces';
+import API from '../../../APICore.js';
+import Vaults from '../Vaults.js';
+import {VaultFetchStrategy} from '../../Enums.js';
+import {VaultEntryModel} from '../VaultsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

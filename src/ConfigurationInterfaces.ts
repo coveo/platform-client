@@ -1,6 +1,6 @@
-import {Environment, Region} from './Endpoints';
-import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
-import {Retrievable} from './utils/Retriever';
+import {Environment, Region} from './Endpoints.js';
+import {ResponseHandler} from './handlers/ResponseHandlerInterfaces.js';
+import {Retrievable} from './utils/Retriever.js';
 export type Feature = (currentOptions: PlatformClientOptions) => PlatformClientOptions;
 
 export interface PlatformClientOptions {

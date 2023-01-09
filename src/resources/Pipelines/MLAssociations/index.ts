@@ -1,2 +1,2 @@
-export * from './MLAssociations';
-export * from './MLAssociationsInterfaces';
+export * from './MLAssociations.js';
+export * from './MLAssociationsInterfaces.js';

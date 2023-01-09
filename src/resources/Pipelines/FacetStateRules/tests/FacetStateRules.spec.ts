@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {FacetRuleKind, FacetRuleState, PredicateKind, PredicateMatchOperator} from '../../../Enums';
-import FacetStateRules from '../FacetStateRules';
-import {FacetStateRule} from '../FacetStateRulesInterface';
+import API from '../../../../APICore.js';
+import {FacetRuleKind, FacetRuleState, PredicateKind, PredicateMatchOperator} from '../../../Enums.js';
+import FacetStateRules from '../FacetStateRules.js';
+import {FacetStateRule} from '../FacetStateRulesInterface.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

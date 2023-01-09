@@ -1,5 +1,5 @@
-import {SnowflakeReaderAccountStatus} from '../../../Enums';
-import {TimeRangeParamParts} from '../CommonParamParts';
+import {SnowflakeReaderAccountStatus} from '../../../Enums.js';
+import {TimeRangeParamParts} from '../CommonParamParts.js';
 
 export interface SnowflakeUsersModel {
     snowflakeUsers: SnowflakeUserModel[];

@@ -1,5 +1,5 @@
-import {PrivilegeModel} from '../BaseInterfaces';
-import {MemberModel, RealmModel} from '../Groups';
+import {PrivilegeModel} from '../BaseInterfaces.js';
+import {MemberModel, RealmModel} from '../Groups/index.js';
 
 export interface GlobalGroupModel {
     displayName: string;

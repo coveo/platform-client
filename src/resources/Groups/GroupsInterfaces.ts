@@ -1,7 +1,7 @@
-import {GranularResource, PrivilegeModel} from '../BaseInterfaces';
-import {InviteModel} from './Invites';
-import {MemberModel} from './Members';
-import {RealmModel} from './Realms';
+import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
+import {InviteModel} from './Invites/index.js';
+import {MemberModel} from './Members/index.js';
+import {RealmModel} from './Realms/index.js';
 
 export interface GroupModel extends GranularResource {
     id: string;

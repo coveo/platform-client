@@ -1,2 +1,2 @@
-export * from './SearchPages';
-export * from './SearchPagesInterfaces';
+export * from './SearchPages.js';
+export * from './SearchPagesInterfaces.js';

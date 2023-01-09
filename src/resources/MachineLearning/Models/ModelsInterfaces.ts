@@ -1,7 +1,7 @@
-import {GranularResource} from '../../BaseInterfaces';
-import {IntervalUnit, ModelActivenessState, ModelStatus} from '../../Enums';
-import {AssociatedPipelineModel} from '../../Pipelines';
-import {MLModelInfo, MLModelTypeInfo} from '../ModelInformation';
+import {GranularResource} from '../../BaseInterfaces.js';
+import {IntervalUnit, ModelActivenessState, ModelStatus} from '../../Enums.js';
+import {AssociatedPipelineModel} from '../../Pipelines/index.js';
+import {MLModelInfo, MLModelTypeInfo} from '../ModelInformation/index.js';
 
 export interface MLModel<T extends MLModelTypeInfo = never> extends MLModelInfo<T>, ModelAttributes, GranularResource {
     orgId: string;

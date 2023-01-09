@@ -1,2 +1,2 @@
-export * from './ClusterAgent';
-export * from './ClusterAgentInterfaces';
+export * from './ClusterAgent.js';
+export * from './ClusterAgentInterfaces.js';

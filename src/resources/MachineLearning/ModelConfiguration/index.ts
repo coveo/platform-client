@@ -1,2 +1,2 @@
-export * from './ModelConfiguration';
-export * from './ModelConfigurationInterfaces';
+export * from './ModelConfiguration.js';
+export * from './ModelConfigurationInterfaces.js';

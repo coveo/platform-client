@@ -1,4 +1,4 @@
-import {ResponseHandler} from './ResponseHandlerInterfaces';
+import {ResponseHandler} from './ResponseHandlerInterfaces.js';
 
 const noContent: ResponseHandler = {
     canProcess: (response: Response): boolean => response.status === 204,

@@ -1,2 +1,2 @@
-export * from './SearchHubs';
-export * from './SearchHubsInterface';
+export * from './SearchHubs.js';
+export * from './SearchHubsInterface.js';

@@ -1,2 +1,2 @@
-export * from './Read';
-export * from './UsageAnalytics';
+export * from './Read/index.js';
+export * from './UsageAnalytics.js';

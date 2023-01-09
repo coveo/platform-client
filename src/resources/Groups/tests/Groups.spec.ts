@@ -1,12 +1,12 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import Group from '../Groups';
-import {GroupModel} from '../GroupsInterfaces';
-import GroupInvite from '../Invites/GroupInvite';
-import GroupMember from '../Members/GroupMember';
-import GroupRealm from '../Realms/GroupRealm';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import Group from '../Groups.js';
+import {GroupModel} from '../GroupsInterfaces.js';
+import GroupInvite from '../Invites/GroupInvite.js';
+import GroupMember from '../Members/GroupMember.js';
+import GroupRealm from '../Realms/GroupRealm.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

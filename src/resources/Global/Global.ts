@@ -1,7 +1,7 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import OrganizationConfiguration from './OrganizationConfigurations/OrganizationConfiguration';
-import RegionConfiguration from './RegionConfigurations/RegionConfiguration';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import OrganizationConfiguration from './OrganizationConfigurations/OrganizationConfiguration.js';
+import RegionConfiguration from './RegionConfigurations/RegionConfiguration.js';
 
 export default class Global extends Resource {
     region: RegionConfiguration;

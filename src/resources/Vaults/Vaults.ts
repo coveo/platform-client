@@ -1,9 +1,9 @@
-import API from '../../APICore';
-import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions';
-import {PageModel, Paginated} from '../BaseInterfaces';
-import {VaultFetchStrategy} from '../Enums';
-import Resource from '../Resource';
-import {MissingVaultModel, VaultEntryListOptions, VaultEntryModel} from './VaultsInterfaces';
+import API from '../../APICore.js';
+import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions.js';
+import {PageModel} from '../BaseInterfaces.js';
+import {VaultFetchStrategy} from '../Enums.js';
+import Resource from '../Resource.js';
+import {MissingVaultModel, VaultEntryListOptions, VaultEntryModel} from './VaultsInterfaces.js';
 
 export default class Vaults extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/vaultentries`;

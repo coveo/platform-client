@@ -1,6 +1,6 @@
-import {New} from '../BaseInterfaces';
-import Resource from '../Resource';
-import {GlobalGroupModel} from './GlobalGroupInterfaces';
+import {New} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {GlobalGroupModel} from './GlobalGroupInterfaces.js';
 
 export default class GlobalGroup extends Resource {
     static baseUrl = '/rest/globalgroups';

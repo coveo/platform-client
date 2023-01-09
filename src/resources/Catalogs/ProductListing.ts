@@ -1,12 +1,12 @@
-import API from '../../APICore';
-import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions';
-import {New, PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {normalizePaginatedOptions} from '../../utils/normalizePaginatedOptions.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     ProductListingsListOptions,
     ProductListingModel,
     CatalogProductListingsGroupModel,
-} from './ProductListingInterfaces';
+} from './ProductListingInterfaces.js';
 
 export default class ProductListing extends Resource {
     static baseCatalogsUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;

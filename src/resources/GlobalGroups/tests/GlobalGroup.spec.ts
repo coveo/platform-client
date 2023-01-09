@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import GlobalGroup from '../GlobalGroup';
-import {GlobalGroupModel} from '../GlobalGroupInterfaces';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import GlobalGroup from '../GlobalGroup.js';
+import {GlobalGroupModel} from '../GlobalGroupInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

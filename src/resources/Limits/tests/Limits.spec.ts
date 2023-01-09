@@ -1,9 +1,9 @@
-import {LicenseSection} from '../..';
-import API from '../../../APICore';
-import Limits from '../Limits';
-import {LimitType} from '../LimitsInterfaces';
+import {LicenseSection} from '../../index.js';
+import API from '../../../APICore.js';
+import Limits from '../Limits.js';
+import {LimitType} from '../LimitsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import {PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     CreateCoveoIndexModel,
     IndexAttributes,
@@ -8,7 +8,7 @@ import {
     IndexBackupsOptions,
     IndexStatisticsModel,
     RawIndexConfig,
-} from './IndexesInterface';
+} from './IndexesInterface.js';
 
 export default class Indexes extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;

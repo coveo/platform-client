@@ -1,15 +1,15 @@
-import API from '../../../../../APICore';
-import {ExportScheduleFrequency} from '../../../../Enums';
-import Exports from '../Exports';
+import API from '../../../../../APICore.js';
+import {ExportScheduleFrequency} from '../../../../Enums.js';
+import Exports from '../Exports.js';
 import {
     CreateExportScheduleModel,
     EstimateExportParams,
     EstimateVisitExportParams,
     GenerateExportParams,
     GenerateVisitExportParams,
-} from '../ExportsInterfaces';
+} from '../ExportsInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

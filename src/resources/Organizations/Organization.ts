@@ -1,7 +1,7 @@
-import API from '../../APICore';
-import {PageModel, PrivilegeModel} from '../BaseInterfaces';
-import Resource from '../Resource';
-import Members from './Members/Members';
+import API from '../../APICore.js';
+import {PageModel, PrivilegeModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import Members from './Members/Members.js';
 import {
     CreateOrganizationOptions,
     DefinitionModel,
@@ -9,8 +9,8 @@ import {
     ListOrganizationOptions,
     OrganizationModel,
     OrganizationsStatusModel,
-} from './OrganizationInterfaces';
-import {AuthProvider} from '../Enums';
+} from './OrganizationInterfaces.js';
+import {AuthProvider} from '../Enums.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NoPagination = undefined | null;

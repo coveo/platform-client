@@ -1,5 +1,5 @@
-import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     CreateExportScheduleModel,
     EstimateExportParams,
@@ -10,7 +10,7 @@ import {
     ExportScheduleModel,
     GenerateExportParams,
     GenerateVisitExportParams,
-} from './ExportsInterfaces';
+} from './ExportsInterfaces.js';
 
 export default class Exports extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/exports';

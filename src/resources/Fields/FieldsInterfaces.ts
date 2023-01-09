@@ -1,5 +1,5 @@
-import {Paginated} from '../BaseInterfaces';
-import {FacetOrSortStatus, FieldOrigin, FieldTypes, SortingOrder} from '../Enums';
+import {Paginated} from '../BaseInterfaces.js';
+import {FacetOrSortStatus, FieldOrigin, FieldTypes, SortingOrder} from '../Enums.js';
 
 export interface FieldModel {
     dateFormat?: string;

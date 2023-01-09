@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import {ClusterNodeUpgradeDataModel} from '../../ClusterInterfaces';
-import ClusterAgent from '../ClusterAgent';
+import API from '../../../../APICore.js';
+import {ClusterNodeUpgradeDataModel} from '../../ClusterInterfaces.js';
+import ClusterAgent from '../ClusterAgent.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import Subscription from './Subscription/Subscription';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import Subscription from './Subscription/Subscription.js';
 
 export default class Notifications extends Resource {
     subscription: Subscription;
