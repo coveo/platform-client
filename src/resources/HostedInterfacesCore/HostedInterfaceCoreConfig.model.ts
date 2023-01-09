@@ -39,7 +39,7 @@ export interface HostedInterfaceResultTemplateDetail {
     /**
      * The label to show describing the metadata.
      */
-    label: string;
+    label?: string;
 }
 
 export type DisplayValueType = 'checkbox' | 'link';
