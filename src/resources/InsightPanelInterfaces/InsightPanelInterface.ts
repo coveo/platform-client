@@ -1,6 +1,6 @@
 import API from '../../APICore';
 import {New, PageModel} from '../BaseInterfaces';
-import { IListHostedInterfacesParameters } from '../HostedInterfacesCore';
+import {IListHostedInterfacesParameters} from '../HostedInterfacesCore';
 import Resource from '../Resource';
 import {InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model';
 
