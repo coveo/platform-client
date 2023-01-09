@@ -80,7 +80,7 @@ export interface HostedInterfaceTab {
     conditions: HostedInterfaceCondition[];
 }
 
-export interface IListHostedInterfacesParameters extends Paginated {
+export interface ListHostedInterfacesParams extends Paginated {
     /**
      * A substring that must appear in a hosted interface configuration name for this configuration to appear in results.
      */

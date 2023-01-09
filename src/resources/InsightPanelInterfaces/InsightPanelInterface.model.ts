@@ -6,7 +6,7 @@ import {
     HostedInterfaceResultTemplateBadge,
     HostedInterfaceResultTemplateDetail,
     HostedInterfaceTab,
-    IListHostedInterfacesParameters,
+    ListHostedInterfacesParams,
 } from '../HostedInterfacesCore';
 
 export enum InsightPanelConditionOperator {
@@ -183,4 +183,4 @@ export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfi
     settings: InsightPanelSettings;
 }
 
-export interface IListInsightPanelInterfacesParameters extends IListHostedInterfacesParameters {}
+export interface IListInsightPanelInterfacesParameters extends ListHostedInterfacesParams {}
