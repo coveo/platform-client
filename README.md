@@ -26,7 +26,7 @@ npm install @coveo/platform-client
 
 ### Import
 
-Note, this project is pure ESM, you may need some interop to
+Note, this project is pure ESM, `require` won't work and CommonJS support is limited.
 
 ```js
 // using default import
