@@ -1,2 +1,2 @@
-export * from './GroupInvite';
-export * from './GroupInviteInterfaces';
+export * from './GroupInvite.js';
+export * from './GroupInviteInterfaces.js';

@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import Global from '../Global';
-import OrganizationConfiguration from '../OrganizationConfigurations/OrganizationConfiguration';
-import RegionConfiguration from '../RegionConfigurations/RegionConfiguration';
+import API from '../../../APICore.js';
+import Global from '../Global.js';
+import OrganizationConfiguration from '../OrganizationConfigurations/OrganizationConfiguration.js';
+import RegionConfiguration from '../RegionConfigurations/RegionConfiguration.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

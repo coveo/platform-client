@@ -1,4 +1,4 @@
-import {RegionType} from '../../Enums';
+import {RegionType} from '../../Enums.js';
 
 export interface RegionConfigurationModel {
     apiEndpoint?: string;

@@ -1,2 +1,2 @@
-export * from './License';
-export * from './LicenseInterfaces';
+export * from './License.js';
+export * from './LicenseInterfaces.js';

@@ -1,5 +1,5 @@
-import Resource from '../Resource';
-import {ModifierModel, ModifierStatementDetailModel} from './ModifierTemplateInterfaces';
+import Resource from '../Resource.js';
+import {ModifierModel, ModifierStatementDetailModel} from './ModifierTemplateInterfaces.js';
 
 export default class ModifierTemplates extends Resource {
     static baseUrl = `/rest/modifiertemplates`;

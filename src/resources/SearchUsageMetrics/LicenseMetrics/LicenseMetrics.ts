@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {ListLicenseMonthlyParams, RestListOfMetricsModel, RestListOfMetricValues} from './LicenseMetricsInterface';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {ListLicenseMonthlyParams, RestListOfMetricsModel, RestListOfMetricValues} from './LicenseMetricsInterface.js';
 
 export default class LicenseMetrics extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/license`;

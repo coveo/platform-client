@@ -1,7 +1,7 @@
-import API from '../../../../APICore';
-import MLAssociations from '../MLAssociations';
+import API from '../../../../APICore.js';
+import MLAssociations from '../MLAssociations.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

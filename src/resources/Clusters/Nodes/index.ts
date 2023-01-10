@@ -1,2 +1,2 @@
-export * from './ClusterNode';
-export * from './ClusterNodeInterfaces';
+export * from './ClusterNode.js';
+export * from './ClusterNodeInterfaces.js';

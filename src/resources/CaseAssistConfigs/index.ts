@@ -1,3 +1,3 @@
-export * from './CaseAssistConfig';
-export * from './CaseAssistConfigInterfaces';
-export * from './CaseAssistPreviewInterfaces';
+export * from './CaseAssistConfig.js';
+export * from './CaseAssistConfigInterfaces.js';
+export * from './CaseAssistPreviewInterfaces.js';

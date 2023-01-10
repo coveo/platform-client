@@ -1,4 +1,4 @@
-import {GranularResource, PrivilegeModel} from '../BaseInterfaces';
+import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
 
 export interface ApiKeyModel extends GranularResource {
     /**

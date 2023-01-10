@@ -1,4 +1,4 @@
-import {PageModel} from '../../BaseInterfaces';
+import {PageModel} from '../../BaseInterfaces.js';
 
 export interface MetadataPageModel extends PageModel {
     items: Metadata[];

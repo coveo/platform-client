@@ -1,2 +1,2 @@
-export * from './Activities';
-export * from './ActivitiesInterfaces';
+export * from './Activities.js';
+export * from './ActivitiesInterfaces.js';

@@ -1,7 +1,7 @@
-import API from '../../../../APICore';
-import ContentQuery from '../ContentQuery';
+import API from '../../../../APICore.js';
+import ContentQuery from '../ContentQuery.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

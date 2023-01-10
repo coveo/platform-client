@@ -1,2 +1,2 @@
-export * from './DNEConfiguration';
-export * from './DNEConfigurationInterfaces';
+export * from './DNEConfiguration.js';
+export * from './DNEConfigurationInterfaces.js';

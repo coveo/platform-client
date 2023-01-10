@@ -1,5 +1,5 @@
-import {ReportType} from '../../../Enums';
-import {TimeZoneParamParts} from '../CommonParamParts';
+import {ReportType} from '../../../Enums.js';
+import {TimeZoneParamParts} from '../CommonParamParts.js';
 
 export interface ReportModel {
     /** The report id. */

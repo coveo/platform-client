@@ -1,12 +1,12 @@
-import API from '../../../../APICore';
-import DNEConfiguration from '../DNEConfiguration';
+import API from '../../../../APICore.js';
+import DNEConfiguration from '../DNEConfiguration.js';
 import {
     DNEConfigurationModel,
     DNENewConfigurationModel,
     DocumentExtractionQueryModel,
-} from '../DNEConfigurationInterfaces';
+} from '../DNEConfigurationInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

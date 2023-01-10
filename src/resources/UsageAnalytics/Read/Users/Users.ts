@@ -1,5 +1,5 @@
-import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     FilterParams,
     UsersFiltersModel,
@@ -7,7 +7,7 @@ import {
     ListUsersReportsParams,
     UsersReportsModel,
     UserModel,
-} from './UsersInterfaces';
+} from './UsersInterfaces.js';
 
 export default class Users extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/users';

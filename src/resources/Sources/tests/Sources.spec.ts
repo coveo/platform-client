@@ -1,13 +1,13 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import {ActivityOperation} from '../../Enums';
-import {ScheduleModel} from '../../SecurityCache';
-import Sources from '../Sources';
-import SourcesFields from '../SourcesFields/SourcesFields';
-import {CreateSourceModel, RawSourceConfig} from '../SourcesInterfaces';
-import SourcesMappings from '../SourcesMappings/SourcesMappings';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import {ActivityOperation} from '../../Enums.js';
+import {ScheduleModel} from '../../SecurityCache/index.js';
+import Sources from '../Sources.js';
+import SourcesFields from '../SourcesFields/SourcesFields.js';
+import {CreateSourceModel, RawSourceConfig} from '../SourcesInterfaces.js';
+import SourcesMappings from '../SourcesMappings/SourcesMappings.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import {AccessModel, AccessParams} from './AccessInterfaces';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import {AccessModel, AccessParams} from './AccessInterfaces.js';
 
 export default class Access extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/access`;

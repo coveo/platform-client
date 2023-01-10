@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import PQSConfiguration from '../PQSConfiguration';
-import {PQSConfigurationModel} from '../PQSConfigurationInterfaces';
+import API from '../../../../APICore.js';
+import PQSConfiguration from '../PQSConfiguration.js';
+import {PQSConfigurationModel} from '../PQSConfigurationInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

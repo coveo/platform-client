@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {RegistrationModel} from '../MachineLearningInterfaces';
-import {MLModelInfo, MLModelTypeInfo} from './ModelInformationInterfaces';
-import {MLModel} from '../Models';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {RegistrationModel} from '../MachineLearningInterfaces.js';
+import {MLModelInfo, MLModelTypeInfo} from './ModelInformationInterfaces.js';
+import {MLModel} from '../Models/index.js';
 
 export default class ModelInformation extends Resource {
     static getBaseUrl = (engineId: string, modelName: string) =>

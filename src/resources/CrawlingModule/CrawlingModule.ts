@@ -1,5 +1,5 @@
-import API from '../../APICore';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
 import {
     ComponentVersion,
     CrawlingModuleEntity,
@@ -9,8 +9,8 @@ import {
     CreateCrawlingModuleLogRequestModel,
     MaestroVersionOptions,
     UpdateStatus,
-} from './CrawlingModuleInterfaces';
-import {PageModel} from '../BaseInterfaces';
+} from './CrawlingModuleInterfaces.js';
+import {PageModel} from '../BaseInterfaces.js';
 
 export default class CrawlingModule extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/crawlingmodule`;

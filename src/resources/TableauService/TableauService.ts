@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import ContentQuery from './ContentQuery/ContentQuery';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import ContentQuery from './ContentQuery/ContentQuery.js';
 
 export default class TableauService extends Resource {
     contentQuery: ContentQuery;

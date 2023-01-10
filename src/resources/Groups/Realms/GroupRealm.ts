@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {RealmModel} from './GroupRealmInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {RealmModel} from './GroupRealmInterfaces.js';
 
 export default class GroupRealm extends Resource {
     static getBaseUrl = (id: string) => `/rest/organizations/${API.orgPlaceholder}/groups/${id}/realms`;

@@ -1,2 +1,2 @@
-export * from './Saml';
-export * from './SamlInterfaces';
+export * from './Saml.js';
+export * from './SamlInterfaces.js';

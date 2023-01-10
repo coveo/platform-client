@@ -1,13 +1,13 @@
-import API from '../../APICore';
-import {PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     ActivityModel,
     ListActivitiesParams,
     ListActivitiesFacetsParams,
     ActivityFacetModel,
     ActivityListingFilters,
-} from './ActivitiesInterfaces';
+} from './ActivitiesInterfaces.js';
 
 export default class Activity extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/activities`;

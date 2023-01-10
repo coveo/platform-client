@@ -1,7 +1,7 @@
-import API from '../../APICore';
-import {New} from '../BaseInterfaces';
-import Resource from '../Resource';
-import {ApiKeyModel, CreateApiKeyOptions} from './ApiKeysInterfaces';
+import API from '../../APICore.js';
+import {New} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {ApiKeyModel, CreateApiKeyOptions} from './ApiKeysInterfaces.js';
 
 export default class ApiKey extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/apikeys`;

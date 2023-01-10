@@ -1,2 +1,2 @@
-export * from './Members';
-export * from './MembersInterface';
+export * from './Members.js';
+export * from './MembersInterface.js';

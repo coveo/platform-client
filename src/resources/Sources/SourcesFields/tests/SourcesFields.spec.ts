@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import SourcesFields from '../SourcesFields';
-import {ListSourcesFieldsParams, SourceFieldModel} from '../SourcesFieldsInterfaces';
+import API from '../../../../APICore.js';
+import SourcesFields from '../SourcesFields.js';
+import {ListSourcesFieldsParams, SourceFieldModel} from '../SourcesFieldsInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

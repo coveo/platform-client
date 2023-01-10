@@ -1,8 +1,8 @@
-import API from './APICore';
-import {Feature, PlatformClientOptions} from './ConfigurationInterfaces';
-import {Environment} from './Endpoints';
-import {ResponseHandlers} from './handlers/ResponseHandlers';
-import PlatformResources from './resources/PlatformResources';
+import API from './APICore.js';
+import {Feature, PlatformClientOptions} from './ConfigurationInterfaces.js';
+import {Environment} from './Endpoints.js';
+import {ResponseHandlers} from './handlers/ResponseHandlers.js';
+import PlatformResources from './resources/PlatformResources.js';
 
 export class PlatformClient extends PlatformResources {
     static Handlers = ResponseHandlers;

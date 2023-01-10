@@ -1,11 +1,11 @@
-import API from '../../../../APICore';
-import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration';
+import API from '../../../../APICore.js';
+import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration.js';
 import {
     SmartSnippetsConfigurationModel,
     SmartSnippetsContentFieldsParams,
-} from '../SmartSnippetsConfigurationInterfaces';
+} from '../SmartSnippetsConfigurationInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

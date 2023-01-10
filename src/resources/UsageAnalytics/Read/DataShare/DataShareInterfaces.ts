@@ -1,4 +1,4 @@
-import {DataShareStatus} from '../../../Enums';
+import {DataShareStatus} from '../../../Enums.js';
 
 export interface SnowflakeAccountDataSharingAccountModel {
     /**

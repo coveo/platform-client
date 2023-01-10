@@ -1,4 +1,4 @@
-import {SourceExtensionActionOnError} from '../../Enums';
+import {SourceExtensionActionOnError} from '../../Enums.js';
 
 export interface SourceExtensionModel {
     actionOnError?: SourceExtensionActionOnError;

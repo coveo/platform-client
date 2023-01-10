@@ -1,13 +1,13 @@
-import API from '../../APICore';
-import {LicenseSection} from '../Enums';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {LicenseSection} from '../Enums.js';
+import Resource from '../Resource.js';
 import {
     AllLimitsModel,
     LimitHistoryDataPointModel,
     LimitHistoryOptions,
     LimitsModel,
     LimitType,
-} from './LimitsInterfaces';
+} from './LimitsInterfaces.js';
 
 export default class Limits extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/limits`;

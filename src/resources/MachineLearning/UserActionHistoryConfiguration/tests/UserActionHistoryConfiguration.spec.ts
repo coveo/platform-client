@@ -1,7 +1,7 @@
-import API from '../../../../APICore';
-import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration';
+import API from '../../../../APICore.js';
+import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

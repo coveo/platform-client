@@ -1,4 +1,4 @@
-import {SinglePermissionResult, SinglePermissionIdentityType} from '../Enums';
+import {SinglePermissionResult, SinglePermissionIdentityType} from '../Enums.js';
 
 export interface SecurityIdentityAliasModel extends SecurityIdentityBase {
     mappings: AliasMappings;

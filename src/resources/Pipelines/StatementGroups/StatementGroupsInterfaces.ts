@@ -1,10 +1,10 @@
-import {Paginated} from '../../BaseInterfaces';
+import {Paginated} from '../../BaseInterfaces.js';
 import {
     CampaignStatementGroupStatusType,
     ListStatementGroupStatusType,
     PermanentStatementGroupStatusType,
     StatementGroupType,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface StatementGroupList {
     groups: StatementGroupModel[];

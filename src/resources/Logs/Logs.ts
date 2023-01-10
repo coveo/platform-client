@@ -1,5 +1,5 @@
-import API from '../../APICore';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
 import {
     FacetsModel,
     FacetsWithCountsModel,
@@ -7,7 +7,7 @@ import {
     GetLogsOrFacetsRequestBodyModel,
     GetLogsParams,
     LogsModel,
-} from './LogsInterfaces';
+} from './LogsInterfaces.js';
 
 export default class Logs extends Resource {
     static baseUrl = `/logs/v1/organizations/${API.orgPlaceholder}`;

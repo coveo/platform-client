@@ -1,4 +1,4 @@
-import {GroupResponse, UserResponse} from '../Reports';
+import {GroupResponse, UserResponse} from '../Reports/index.js';
 
 export interface FilterModel {
     /** The display name of the filter. */

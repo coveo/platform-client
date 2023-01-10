@@ -1,5 +1,5 @@
-import Ressource from '../Resource';
-import {PrivilegeEvaluatorModel} from './PrivilegeEvaluatorInterfaces';
+import Ressource from '../Resource.js';
+import {PrivilegeEvaluatorModel} from './PrivilegeEvaluatorInterfaces.js';
 
 export default class PrivilegeEvaluator extends Ressource {
     static baseUrl = `/rest/privilege/evaluate`;

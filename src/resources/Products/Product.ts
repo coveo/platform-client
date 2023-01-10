@@ -1,7 +1,7 @@
-import API from '../../APICore';
-import {New} from '../BaseInterfaces';
-import Resource from '../Resource';
-import {ProductsRequestModel, ProductsResultModel} from './ProductInterfaces';
+import API from '../../APICore.js';
+import {New} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {ProductsRequestModel, ProductsResultModel} from './ProductInterfaces.js';
 
 export default class Products extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/commerce/v1/products`;

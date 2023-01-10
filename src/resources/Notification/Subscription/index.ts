@@ -1,2 +1,2 @@
-export * from './Subscription';
-export * from './SubscriptionInterfaces';
+export * from './Subscription.js';
+export * from './SubscriptionInterfaces.js';

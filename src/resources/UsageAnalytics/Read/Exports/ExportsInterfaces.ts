@@ -1,10 +1,10 @@
-import {CSVFileFormat, DayOfWeek, ExportScheduleFrequency, ExportStatus, ExportTablesType} from '../../../Enums';
+import {CSVFileFormat, DayOfWeek, ExportScheduleFrequency, ExportStatus, ExportTablesType} from '../../../Enums.js';
 import {
     EventDimensionsExcludeFilterParamParts,
     EventDimensionsFilterParamParts,
     EventDimensionsHideEventsFilterParamParts,
     TimeRangeParamParts,
-} from '../CommonParamParts';
+} from '../CommonParamParts.js';
 
 export interface ExportModel {
     id: string;

@@ -1,5 +1,5 @@
-import {Paginated} from '../../BaseInterfaces';
-import {IntervalUnit} from '../../Enums';
+import {Paginated} from '../../BaseInterfaces.js';
+import {IntervalUnit} from '../../Enums.js';
 
 export interface AutoSelectionFieldCandidateModel {
     name?: string;

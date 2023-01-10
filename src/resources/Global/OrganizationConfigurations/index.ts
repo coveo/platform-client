@@ -1,2 +1,2 @@
-export * from './OrganizationConfiguration';
-export * from './OrganizationConfigurationInterfaces';
+export * from './OrganizationConfiguration.js';
+export * from './OrganizationConfigurationInterfaces.js';

@@ -1,4 +1,4 @@
-import {Paginated} from '../../BaseInterfaces';
+import {Paginated} from '../../BaseInterfaces.js';
 import {
     FacetRuleKind,
     FacetRuleState,
@@ -6,7 +6,7 @@ import {
     PredicateKind,
     PredicateLocaleKind,
     PredicateMatchOperator,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface IdentifiedFacetStateRule {
     id: string;

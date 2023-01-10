@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import GroupMember from '../GroupMember';
-import {MemberModel} from '../GroupMemberInterfaces';
+import API from '../../../../APICore.js';
+import GroupMember from '../GroupMember.js';
+import {MemberModel} from '../GroupMemberInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

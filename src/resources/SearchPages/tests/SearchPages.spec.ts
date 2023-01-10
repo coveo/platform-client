@@ -1,5 +1,5 @@
-import API from '../../../APICore';
-import SearchPages from '../SearchPages';
+import API from '../../../APICore.js';
+import SearchPages from '../SearchPages.js';
 import {
     CreateSearchPageModel,
     UpdateSearchPageModel,
@@ -7,9 +7,9 @@ import {
     CSSResourceModel,
     ReorderSearchPageHeadersModel,
     JavaScriptResourceModel,
-} from '../SearchPagesInterfaces';
+} from '../SearchPagesInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

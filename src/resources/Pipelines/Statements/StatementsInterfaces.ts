@@ -1,6 +1,6 @@
-import {Paginated} from '../../BaseInterfaces';
-import {ListStatementSortBy, StatementsFeature} from '../../Enums';
-import {ConditionModel} from '../Conditions';
+import {Paginated} from '../../BaseInterfaces.js';
+import {ListStatementSortBy, StatementsFeature} from '../../Enums.js';
+import {ConditionModel} from '../Conditions/index.js';
 
 export interface StatementModel {
     /**

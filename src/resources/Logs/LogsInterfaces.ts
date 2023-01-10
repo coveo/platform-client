@@ -1,5 +1,5 @@
-import {Paginated} from '../BaseInterfaces';
-import {IndexingPipelineLogOperations, IndexingPipelineLogResults, IndexingPipelineLogTasks} from '../Enums';
+import {Paginated} from '../BaseInterfaces.js';
+import {IndexingPipelineLogOperations, IndexingPipelineLogResults, IndexingPipelineLogTasks} from '../Enums.js';
 
 export interface GetLogsParams extends GetFacetsParams, Paginated {}
 

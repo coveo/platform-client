@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import SearchPages from '../../SearchPages/SearchPages';
-import InProductExperiences from '../InProductExperiences';
-import {CreateInProductExperienceModel, UpdateInProductExperienceModel} from '../InProductExperiencesInterfaces';
+import API from '../../../APICore.js';
+import SearchPages from '../../SearchPages/SearchPages.js';
+import InProductExperiences from '../InProductExperiences.js';
+import {CreateInProductExperienceModel, UpdateInProductExperienceModel} from '../InProductExperiencesInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

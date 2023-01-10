@@ -1,2 +1,2 @@
-export * from './ResultRankings';
-export * from './ResultRankingsInterfaces';
+export * from './ResultRankings.js';
+export * from './ResultRankingsInterfaces.js';

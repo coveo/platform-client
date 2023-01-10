@@ -1,4 +1,4 @@
-import {ActivityOperation, OperationType, SourceStatusType, SourceStatusTypeWithTransition} from '../../Enums';
+import {ActivityOperation, OperationType, SourceStatusType, SourceStatusTypeWithTransition} from '../../Enums.js';
 
 export interface SourceCurrentOperation {
     itemsAdded?: number;

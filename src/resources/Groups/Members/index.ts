@@ -1,2 +1,2 @@
-export * from './GroupMember';
-export * from './GroupMemberInterfaces';
+export * from './GroupMember.js';
+export * from './GroupMemberInterfaces.js';

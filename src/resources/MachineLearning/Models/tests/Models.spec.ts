@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {IntervalUnit} from '../../../Enums';
-import {RegistrationModel} from '../../MachineLearningInterfaces';
-import Models from '../Models';
+import API from '../../../../APICore.js';
+import {IntervalUnit} from '../../../Enums.js';
+import {RegistrationModel} from '../../MachineLearningInterfaces.js';
+import Models from '../Models.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

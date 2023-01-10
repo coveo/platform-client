@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {RegistrationModel} from '../MachineLearningInterfaces';
-import {MLModel} from './ModelsInterfaces';
-import {MLModelTypeInfo} from '../ModelInformation';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {MLModelTypeInfo} from '../index.js';
+import {RegistrationModel} from '../MachineLearningInterfaces.js';
+import {MLModel} from './ModelsInterfaces.js';
 
 export default class Models extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/models`;

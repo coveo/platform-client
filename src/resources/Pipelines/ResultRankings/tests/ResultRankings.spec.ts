@@ -1,15 +1,15 @@
-import API from '../../../../APICore';
+import API from '../../../../APICore.js';
 import {
     PredicateKind,
     ResultRankingLocales,
     ResultRankingMatchOperators,
     ResultRankingsRuleTypes,
     ResultRankingsStatuses,
-} from '../../../Enums';
-import ResultRankings from '../ResultRankings';
-import {CopyResultRankingRequest, ResultRanking} from '../ResultRankingsInterfaces';
+} from '../../../Enums.js';
+import ResultRankings from '../ResultRankings.js';
+import {CopyResultRankingRequest, ResultRanking} from '../ResultRankingsInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

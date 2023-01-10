@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import {ProductsSortByType, ProductsFacetRequestSortType, SortingOrder} from '../../Enums';
-import Products from '../Product';
-import {ProductsRequestModel} from '../ProductInterfaces';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import {ProductsSortByType, ProductsFacetRequestSortType, SortingOrder} from '../../Enums.js';
+import Products from '../Product.js';
+import {ProductsRequestModel} from '../ProductInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

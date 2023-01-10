@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Pipelines from '../Pipelines';
-import {NewPipelineModel, UpdatePipelineModel} from '../PipelinesInterfaces';
+import API from '../../../APICore.js';
+import Pipelines from '../Pipelines.js';
+import {NewPipelineModel, UpdatePipelineModel} from '../PipelinesInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

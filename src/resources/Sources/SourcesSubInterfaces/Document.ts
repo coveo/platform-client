@@ -3,7 +3,7 @@ import {
     ExtensionSettingAction,
     ExtensionSettingActionOnError,
     ExtensionSettingConverter,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface DataFile {
     data?: string;

@@ -1,5 +1,5 @@
-import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {ReadServiceHealthResponse, ReadServiceHealthApi, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     CreatePermissionsFilterModel,
     CreatePermissionsFilterResponse,
@@ -14,7 +14,7 @@ import {
     UpdatePermissionsFilterResponse,
     UpdateReportingFilterModel,
     UpdateReportingFilterResponse,
-} from './FiltersInterfaces';
+} from './FiltersInterfaces.js';
 
 export default class Filters extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/filters';

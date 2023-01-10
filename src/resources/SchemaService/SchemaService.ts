@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import Ressource from '../Resource';
-import {New} from '../BaseInterfaces';
+import API from '../../APICore.js';
+import Ressource from '../Resource.js';
+import {New} from '../BaseInterfaces.js';
 import {
     SchemaEntities,
     SchemaServiceQueryParams,
@@ -13,8 +13,8 @@ import {
     GetEntitiesQueryParams,
     GetEntityQueryParams,
     SlackTokenValidationResult,
-} from './SchemaServiceInterfaces';
-import {SourceType} from '../Enums';
+} from './SchemaServiceInterfaces.js';
+import {SourceType} from '../Enums.js';
 
 export default class SchemaService extends Ressource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/schema/sources`;

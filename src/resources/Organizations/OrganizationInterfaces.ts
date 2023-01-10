@@ -1,6 +1,6 @@
-import {Paginated} from '../BaseInterfaces';
-import {LicenseModel} from '../License';
-import {ModifierModel, ModifierStatementModel} from '../ModifierTemplates/ModifierTemplateInterfaces';
+import {Paginated} from '../BaseInterfaces.js';
+import {LicenseModel} from '../License/index.js';
+import {ModifierModel, ModifierStatementModel} from '../ModifierTemplates/ModifierTemplateInterfaces.js';
 
 /**
  * Describes the status of an organization.

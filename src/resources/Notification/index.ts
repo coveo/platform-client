@@ -1,2 +1,2 @@
-export * from './Subscription';
-export * from './notification';
+export * from './Subscription/index.js';
+export * from './notification.js';

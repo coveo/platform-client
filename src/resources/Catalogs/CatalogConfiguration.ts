@@ -1,11 +1,11 @@
-import API from '../../APICore';
-import {New, PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     CatalogConfigurationModel,
     CreateCatalogConfigurationModel,
     CatalogConfigurationsListOptions,
-} from './CatalogInterfaces';
+} from './CatalogInterfaces.js';
 
 export default class CatalogConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogconfigurations`;

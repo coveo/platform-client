@@ -1,2 +1,2 @@
-export * from './ResponseHandlers';
-export * from './ResponseHandlerInterfaces';
+export * from './ResponseHandlers.js';
+export * from './ResponseHandlerInterfaces.js';

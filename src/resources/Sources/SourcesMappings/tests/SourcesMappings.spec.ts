@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import SourcesMappings from '../SourcesMappings';
-import {MappingsConfiguration} from '../SourcesMappingsInterfaces';
+import API from '../../../../APICore.js';
+import SourcesMappings from '../SourcesMappings.js';
+import {MappingsConfiguration} from '../SourcesMappingsInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

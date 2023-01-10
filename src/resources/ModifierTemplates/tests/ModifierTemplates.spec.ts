@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import ModifierTemplates from '../ModifierTemplates';
-import {} from '../ModifierTemplateInterfaces';
+import API from '../../../APICore.js';
+import ModifierTemplates from '../ModifierTemplates.js';
+import {} from '../ModifierTemplateInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

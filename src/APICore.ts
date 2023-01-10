@@ -1,10 +1,10 @@
 import {backOff} from 'exponential-backoff';
-import {PlatformClientOptions} from './ConfigurationInterfaces';
-import getEndpoint, {Environment, Region} from './Endpoints';
-import {ResponseHandler} from './handlers/ResponseHandlerInterfaces';
-import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers';
-import {UserModel} from './resources/Users';
-import retrieve from './utils/Retriever';
+import {PlatformClientOptions} from './ConfigurationInterfaces.js';
+import getEndpoint, {Environment, Region} from './Endpoints.js';
+import {ResponseHandler} from './handlers/ResponseHandlerInterfaces.js';
+import handleResponse, {defaultResponseHandlers, ResponseHandlers} from './handlers/ResponseHandlers.js';
+import {UserModel} from './resources/Users/index.js';
+import retrieve from './utils/Retriever.js';
 
 export default class API {
     static orgPlaceholder = '{organizationName}';

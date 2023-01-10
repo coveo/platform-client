@@ -1,2 +1,2 @@
-export * from './Product';
-export * from './ProductInterfaces';
+export * from './Product.js';
+export * from './ProductInterfaces.js';

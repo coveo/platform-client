@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import {SinglePermissionIdentityType} from '../../Enums';
-import PushApi from '../PushApi';
-import {SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces';
+import API from '../../../APICore.js';
+import {SinglePermissionIdentityType} from '../../Enums.js';
+import PushApi from '../PushApi.js';
+import {SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import {New, PageModel} from '../../Entry';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {New, PageModel} from '../../Entry.js';
+import Resource from '../Resource.js';
 import {
     IAccesses,
     IListSearchInterfacesParameters,
@@ -8,7 +8,7 @@ import {
     ISearchInterfaceConfigurationResponse,
     IManifestParameters,
     IManifestResponse,
-} from './SearchInterfaces.model';
+} from './SearchInterfaces.model.js';
 
 export default class SearchInterfaces extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchinterfaces`;

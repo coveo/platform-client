@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import {AccessLevel} from '../../Enums';
-import Access from '../Access';
-import {AccessParams} from '../AccessInterfaces';
+import API from '../../../APICore.js';
+import {AccessLevel} from '../../Enums.js';
+import Access from '../Access.js';
+import {AccessParams} from '../AccessInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

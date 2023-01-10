@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {AddGroupMemberOptions, MemberModel} from './GroupMemberInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {AddGroupMemberOptions, MemberModel} from './GroupMemberInterfaces.js';
 
 export default class GroupMember extends Resource {
     static getBaseUrl = (id: string) => `/rest/organizations/${API.orgPlaceholder}/groups/${id}/members`;

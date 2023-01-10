@@ -1,4 +1,4 @@
-import {IdAndDisplayNameModel} from '../BaseInterfaces';
+import {IdAndDisplayNameModel} from '../BaseInterfaces.js';
 
 export interface SamlIdentityProviderEnabledModel {
     organizationId: string;

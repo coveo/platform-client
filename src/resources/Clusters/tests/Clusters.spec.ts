@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import Cluster from '../Cluster';
+import API from '../../../APICore.js';
+import Cluster from '../Cluster.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

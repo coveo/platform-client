@@ -1,4 +1,4 @@
-import Resource from '../../Resource';
+import Resource from '../../Resource.js';
 import {
     BulkGetResultRankingsParams,
     CopyResultRankingRequest,
@@ -7,7 +7,7 @@ import {
     ListResultRankingResponse,
     ResultRanking,
     ResultRankingProps,
-} from './ResultRankingsInterfaces';
+} from './ResultRankingsInterfaces.js';
 
 export default class ResultRankings extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/resultRankings`;

@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Extension from '../Extensions';
-import {CreateExtension} from '../ExtensionsInterfaces';
+import API from '../../../APICore.js';
+import Extension from '../Extensions.js';
+import {CreateExtension} from '../ExtensionsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

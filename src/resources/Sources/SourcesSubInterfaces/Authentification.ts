@@ -3,7 +3,7 @@ import {
     AuthenticationInputType,
     FormAuthenticationFailedMethod,
     FormInputType,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface FormAuthenticationFailedConfiguration {
     method: FormAuthenticationFailedMethod;

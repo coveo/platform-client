@@ -1,2 +1,2 @@
-export * from './SmartSnippetsConfiguration';
-export * from './SmartSnippetsConfigurationInterfaces';
+export * from './SmartSnippetsConfiguration.js';
+export * from './SmartSnippetsConfigurationInterfaces.js';

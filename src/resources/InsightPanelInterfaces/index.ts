@@ -1,2 +1,2 @@
-export * from './InsightPanelInterface';
-export * from './InsightPanelInterface.model';
+export * from './InsightPanelInterface.js';
+export * from './InsightPanelInterface.model.js';

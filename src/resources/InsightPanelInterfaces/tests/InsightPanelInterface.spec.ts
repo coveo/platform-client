@@ -1,13 +1,13 @@
-import API from '../../../APICore';
-import {New} from '../../../Entry';
-import InsightPanelInterface from '../InsightPanelInterface';
+import API from '../../../APICore.js';
+import {New} from '../../../Entry.js';
+import InsightPanelInterface from '../InsightPanelInterface.js';
 import {
     InsightPanelInterfaceConfiguration,
     InsightPanelResultTemplateLayout,
     InsightPanelConditionOperator,
-} from '../InsightPanelInterface.model';
+} from '../InsightPanelInterface.model.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

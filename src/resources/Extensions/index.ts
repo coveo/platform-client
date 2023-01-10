@@ -1,2 +1,2 @@
-export * from './Extensions';
-export * from './ExtensionsInterfaces';
+export * from './Extensions.js';
+export * from './ExtensionsInterfaces.js';

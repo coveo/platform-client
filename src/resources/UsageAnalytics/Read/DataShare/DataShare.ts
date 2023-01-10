@@ -1,9 +1,9 @@
-import ReadServiceResource from '../ReadServiceResource';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     SnowflakeAccountDataSharingParams,
     SnowflakeAccountDataSharingAccountModel,
     SnowflakeAccountDataSharingRegionsModel,
-} from './DataShareInterfaces';
+} from './DataShareInterfaces.js';
 
 export default class DataShare extends ReadServiceResource {
     static baseUrl = '/rest/ua/v15/admin/snowflake/securedatasharing';

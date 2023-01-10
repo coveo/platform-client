@@ -1,2 +1,2 @@
-export * from './PQSConfiguration';
-export * from './PQSConfigurationInterfaces';
+export * from './PQSConfiguration.js';
+export * from './PQSConfigurationInterfaces.js';

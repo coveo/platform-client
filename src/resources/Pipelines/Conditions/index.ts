@@ -1,2 +1,2 @@
-export * from './Condition';
-export * from './ConditionInterfaces';
+export * from './Condition.js';
+export * from './ConditionInterfaces.js';

@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {ListStatementSortBy} from '../../../Enums';
-import Condition from '../Condition';
-import {NewConditionModel} from '../ConditionInterfaces';
+import API from '../../../../APICore.js';
+import {ListStatementSortBy} from '../../../Enums.js';
+import Condition from '../Condition.js';
+import {NewConditionModel} from '../ConditionInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

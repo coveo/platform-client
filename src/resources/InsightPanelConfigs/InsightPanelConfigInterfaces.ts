@@ -1,5 +1,5 @@
-import {WithRequiredProperty} from '../../utils';
-import {Paginated} from '../BaseInterfaces';
+import {WithRequiredProperty} from '../../utils/WithRequired.js';
+import {Paginated} from '../BaseInterfaces.js';
 
 /**
  * Defines the options to list Insight Panel configurations.

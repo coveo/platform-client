@@ -1,2 +1,2 @@
-export * from './SecurityCache';
-export * from './SecurityCacheInterfaces';
+export * from './SecurityCache.js';
+export * from './SecurityCacheInterfaces.js';

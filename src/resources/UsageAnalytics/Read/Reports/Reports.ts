@@ -1,6 +1,6 @@
-import {ReportType} from '../../../Enums';
-import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon';
-import ReadServiceResource from '../ReadServiceResource';
+import {ReportType} from '../../../Enums.js';
+import {ReadServiceHealthApi, ReadServiceHealthResponse, ReadServiceStatusResponse} from '../ReadServiceCommon.js';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     CreateReportModel,
     CreateReportResponse,
@@ -15,7 +15,7 @@ import {
     ReportUsersResponse,
     TemplateMetadataResponse,
     UpdateReportModel,
-} from './ReportsInterfaces';
+} from './ReportsInterfaces.js';
 
 export default class Reports extends ReadServiceResource implements ReadServiceHealthApi {
     static baseUrl = '/rest/ua/v15/reports';

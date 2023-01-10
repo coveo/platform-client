@@ -1,5 +1,5 @@
-import {GranularResource} from '../../Entry';
-import {DataStreamType, ExtensionLanguageType} from '../Enums';
+import {GranularResource} from '../../Entry.js';
+import {DataStreamType, ExtensionLanguageType} from '../Enums.js';
 
 type Version = 'v1' | 'v2';
 

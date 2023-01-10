@@ -1,4 +1,4 @@
-import {normalizePaginatedOptions} from '../normalizePaginatedOptions';
+import {normalizePaginatedOptions} from '../normalizePaginatedOptions.js';
 
 describe('normalizePaginatedOptions', () => {
     it('should throw if options has both perPage and pageSize in its keys', () => {

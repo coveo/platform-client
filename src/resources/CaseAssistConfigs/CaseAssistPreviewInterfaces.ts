@@ -1,5 +1,5 @@
-import {New} from '../BaseInterfaces';
-import {CaseAssistConfigModel, ContextFields} from './CaseAssistConfigInterfaces';
+import {New} from '../BaseInterfaces.js';
+import {CaseAssistConfigModel, ContextFields} from './CaseAssistConfigInterfaces.js';
 
 export interface Document {
     title: string;

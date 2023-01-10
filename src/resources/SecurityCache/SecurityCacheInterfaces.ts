@@ -1,12 +1,12 @@
-import {Paginated} from '../BaseInterfaces';
+import {Paginated} from '../BaseInterfaces.js';
 import {
     PermissionIdentityType,
     ScheduleType,
     SecurityCacheStateOptions,
     SecurityProviderReferenceType,
     SecurityProviderType,
-} from '../Enums';
-import {ParameterModel, UserIdentityModel} from '../Sources';
+} from '../Enums.js';
+import {ParameterModel, UserIdentityModel} from '../Sources/index.js';
 
 export interface ScheduleModel {
     enabled: boolean;

@@ -1,2 +1,2 @@
-export * from './ResourceSnapshots';
-export * from './ResourceSnapshotsInterfaces';
+export * from './ResourceSnapshots.js';
+export * from './ResourceSnapshotsInterfaces.js';

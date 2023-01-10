@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import {PageModel} from '../BaseInterfaces';
-import Ressource from '../Resource';
+import API from '../../APICore.js';
+import {PageModel} from '../BaseInterfaces.js';
+import Ressource from '../Resource.js';
 import {
     DetailedSecurityCacheMemberModel,
     ScheduleModel,
@@ -12,7 +12,7 @@ import {
     SecurityCacheMemberModel,
     SecurityProviderModel,
     SecurityProviderIdentitiesFilters,
-} from './SecurityCacheInterfaces';
+} from './SecurityCacheInterfaces.js';
 
 export default class SecurityCache extends Ressource {
     static baseUrl = `rest/organizations/${API.orgPlaceholder}`;

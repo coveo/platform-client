@@ -1,2 +1,2 @@
-export * from './Dimensions';
-export * from './DimensionsInterfaces';
+export * from './Dimensions.js';
+export * from './DimensionsInterfaces.js';

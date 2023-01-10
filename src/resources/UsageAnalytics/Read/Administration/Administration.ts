@@ -1,10 +1,10 @@
-import ReadServiceResource from '../ReadServiceResource';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     AccountInfoModelV15,
     AccountResponseV15,
     StrictValidationTestParams,
     StrictValidationTestResponseV15,
-} from './AdministrationInterfaces';
+} from './AdministrationInterfaces.js';
 
 export default class Administration extends ReadServiceResource {
     static baseUrl = '/rest/ua/v15/admin';

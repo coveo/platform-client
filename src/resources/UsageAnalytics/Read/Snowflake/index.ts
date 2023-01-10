@@ -1,2 +1,2 @@
-export * from './Snowflake';
-export * from './SnowflakeInterfaces';
+export * from './Snowflake.js';
+export * from './SnowflakeInterfaces.js';

@@ -1,8 +1,8 @@
-import API from '../../APICore';
-import {PageModel} from '../BaseInterfaces';
-import Indexes from '../Indexes/Indexes';
-import Resource from '../Resource';
-import {FieldListingOptions, FieldModel, ListFieldsParams} from './FieldsInterfaces';
+import API from '../../APICore.js';
+import {PageModel} from '../BaseInterfaces.js';
+import Indexes from '../Indexes/Indexes.js';
+import Resource from '../Resource.js';
+import {FieldListingOptions, FieldModel, ListFieldsParams} from './FieldsInterfaces.js';
 
 export default class Field extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes/fields`;

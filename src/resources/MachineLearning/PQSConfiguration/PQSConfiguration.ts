@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {PQSConfigurationModel} from './PQSConfigurationInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {PQSConfigurationModel} from './PQSConfigurationInterfaces.js';
 
 export default class PQSConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/pqs`;

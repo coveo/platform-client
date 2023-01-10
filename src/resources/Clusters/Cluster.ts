@@ -1,8 +1,8 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import ClusterAgent from './Agents/ClusterAgent';
-import {ClusterModel, ClusterStatusModel} from './ClusterInterfaces';
-import ClusterNode from './Nodes/ClusterNode';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import ClusterAgent from './Agents/ClusterAgent.js';
+import {ClusterModel, ClusterStatusModel} from './ClusterInterfaces.js';
+import ClusterNode from './Nodes/ClusterNode.js';
 
 export default class Cluster extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/clusters`;

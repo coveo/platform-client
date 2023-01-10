@@ -1,4 +1,4 @@
-import {Paginated} from '../../BaseInterfaces';
+import {Paginated} from '../../BaseInterfaces.js';
 import {
     CampaignStatementGroupStatusType,
     ListStatementSortBy,
@@ -8,7 +8,7 @@ import {
     ResultRankingsKind,
     ResultRankingsRuleTypes,
     ResultRankingsStatuses,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface ResultRanking {
     /**

@@ -1,4 +1,4 @@
-import {OrganizationParamParts} from '../CommonParamParts';
+import {OrganizationParamParts} from '../CommonParamParts.js';
 
 export interface UsersFilterModel {
     /**

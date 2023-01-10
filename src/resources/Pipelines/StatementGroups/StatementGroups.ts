@@ -1,4 +1,4 @@
-import Resource from '../../Resource';
+import Resource from '../../Resource.js';
 import {
     CreateStatementGroupModel,
     UpdateStatementGroupModel,
@@ -7,7 +7,7 @@ import {
     StatementGroupModel,
     UpdateStatementGroupRuleAssociationsRequest,
     UpdateStatementGroupRuleAssociationsResponse,
-} from './StatementGroupsInterfaces';
+} from './StatementGroupsInterfaces.js';
 
 export default class StatementGroups extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/statementGroups`;

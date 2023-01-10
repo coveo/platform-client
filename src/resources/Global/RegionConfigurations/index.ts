@@ -1,2 +1,2 @@
-export * from './RegionConfiguration';
-export * from './RegionConfigurationInterfaces';
+export * from './RegionConfiguration.js';
+export * from './RegionConfigurationInterfaces.js';

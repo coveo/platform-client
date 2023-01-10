@@ -1,5 +1,5 @@
-import Ressource from '../../Resource';
-import {EditSubscriptionModel, SubscriptionModel} from './SubscriptionInterfaces';
+import Ressource from '../../Resource.js';
+import {EditSubscriptionModel, SubscriptionModel} from './SubscriptionInterfaces.js';
 
 export default class Subscription extends Ressource {
     static getBaseUrl = (orgId: string) => `/rest/organizations/${orgId}/subscriptions`;

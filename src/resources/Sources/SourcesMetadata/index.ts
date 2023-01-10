@@ -1,2 +1,2 @@
-export * from './SourcesMetadata';
-export * from './SourcesMetadataInterfaces';
+export * from './SourcesMetadata.js';
+export * from './SourcesMetadataInterfaces.js';

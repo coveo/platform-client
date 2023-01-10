@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import AWS from '../AWS';
+import API from '../../../APICore.js';
+import AWS from '../AWS.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
