@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import PrivilegeEvaluator from '../PrivilegeEvaluator';
+import API from '../../../APICore.js';
+import PrivilegeEvaluator from '../PrivilegeEvaluator.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

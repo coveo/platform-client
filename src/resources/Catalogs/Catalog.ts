@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import {New, PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     CachedCatalogFieldsModel,
     CachedCatalogFieldStatsModel,
@@ -11,7 +11,7 @@ import {
     CreateCatalogModel,
     FieldsSuggestionsModel,
     FieldsSuggestionsQueryModel,
-} from './CatalogInterfaces';
+} from './CatalogInterfaces.js';
 
 export default class Catalog extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;

@@ -1,2 +1,2 @@
-export * from './RawMetrics';
-export * from './RawMetricsInterface';
+export * from './RawMetrics.js';
+export * from './RawMetricsInterface.js';

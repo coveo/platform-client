@@ -1,4 +1,4 @@
-import ReadServiceResource from '../ReadServiceResource';
+import ReadServiceResource from '../ReadServiceResource.js';
 import {
     GetCreditUsageParams,
     SnowflakeCreditUsageModel,
@@ -7,7 +7,7 @@ import {
     SnowflakeReaderAccountStatusModel,
     SnowflakeUserModel,
     SnowflakeUsersModel,
-} from './SnowflakeInterfaces';
+} from './SnowflakeInterfaces.js';
 
 export default class Snowflake extends ReadServiceResource {
     static baseUrl = '/rest/ua/v15/admin/snowflake';

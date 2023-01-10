@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {ClusterNodeUpgradeDataModel} from '../ClusterInterfaces';
-import {ClusterNodeUpgradeModel} from '../Nodes';
-import {ClusterAgentModel} from './ClusterAgentInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {ClusterNodeUpgradeDataModel} from '../ClusterInterfaces.js';
+import {ClusterNodeUpgradeModel} from '../Nodes/index.js';
+import {ClusterAgentModel} from './ClusterAgentInterfaces.js';
 
 export default class ClusterAgent extends Resource {
     static getBaseUrl = (id: string) => `/rest/organizations/${API.orgPlaceholder}/clusters/${id}/agents`;

@@ -1,4 +1,4 @@
-import {SourceModel, CreateSourceModel, CreateSourceOptions} from '../Sources/SourcesInterfaces';
+import {SourceModel, CreateSourceModel, CreateSourceOptions} from '../Sources/SourcesInterfaces.js';
 
 export interface SimpleSchemaEntity {
     /**

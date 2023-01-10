@@ -1,5 +1,5 @@
-import Resource from '../Resource';
-import API from '../../APICore';
+import Resource from '../Resource.js';
+import API from '../../APICore.js';
 
 export default class Links extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/links`;

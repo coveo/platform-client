@@ -1,13 +1,13 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import Resource from '../../Resource';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import Resource from '../../Resource.js';
 import {
     CaseClassificationConfigurationModel,
     CaseClassificationContentFields,
     CaseClassificationContentFieldsParams,
     CaseClassificationDocumentGroupPreview,
     CaseClassificationDocumentGroupPreviewParams,
-} from './CaseClassificationConfigurationInterfaces';
+} from './CaseClassificationConfigurationInterfaces.js';
 
 export default class CaseClassificationConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/caseclassif`;

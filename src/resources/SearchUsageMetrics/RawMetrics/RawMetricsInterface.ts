@@ -1,4 +1,4 @@
-import {SearchHubRawMetrics} from '../../Enums';
+import {SearchHubRawMetrics} from '../../Enums.js';
 
 export interface DailyRawMetricParameters extends CommonMetricParameters {
     /**

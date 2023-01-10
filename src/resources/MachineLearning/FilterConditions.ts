@@ -1,4 +1,4 @@
-import {Operator} from './CaseClassificationConfiguration';
+import {Operator} from './CaseClassificationConfiguration/index.js';
 
 export interface FilterConditions {
     /**

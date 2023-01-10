@@ -1,12 +1,12 @@
-import API from '../../../APICore';
-import CrawlingModule from '../CrawlingModule';
+import API from '../../../APICore.js';
+import CrawlingModule from '../CrawlingModule.js';
 import {
     CrawlingModuleLogRequestLogType,
     CrawlingModuleLogRequestState,
     CreateCrawlingModuleLogRequestModel,
-} from '../CrawlingModuleInterfaces';
+} from '../CrawlingModuleInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

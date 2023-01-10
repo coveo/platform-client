@@ -1,2 +1,2 @@
-export * from './CaseClassificationConfiguration';
-export * from './CaseClassificationConfigurationInterfaces';
+export * from './CaseClassificationConfiguration.js';
+export * from './CaseClassificationConfigurationInterfaces.js';

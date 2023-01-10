@@ -1,4 +1,4 @@
-import { MetricsInterval } from "./ReadServiceCommon";
+import {MetricsInterval} from './ReadServiceCommon.js';
 
 /**
  * Almost all calls of the Read service have an optional `org` query parameter.

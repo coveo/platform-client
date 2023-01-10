@@ -1,2 +1,2 @@
-export * from './ModifierTemplates';
-export * from './ModifierTemplateInterfaces';
+export * from './ModifierTemplates.js';
+export * from './ModifierTemplateInterfaces.js';

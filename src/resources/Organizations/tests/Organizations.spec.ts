@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import Members from '../Members/Members';
-import Organization from '../Organization';
-import {DefinitionModel, OrganizationCreationOrigin} from '../OrganizationInterfaces';
+import API from '../../../APICore.js';
+import Members from '../Members/Members.js';
+import Organization from '../Organization.js';
+import {DefinitionModel, OrganizationCreationOrigin} from '../OrganizationInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

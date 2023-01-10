@@ -1,4 +1,4 @@
-import {FieldTypes, MappingModelKind} from '../../Enums';
+import {FieldTypes, MappingModelKind} from '../../Enums.js';
 
 export interface MappingSettingsModel {
     /**

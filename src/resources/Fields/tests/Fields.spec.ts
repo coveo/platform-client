@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import {SortingOrder} from '../../Enums';
-import Indexes from '../../Indexes/Indexes';
-import Field from '../Fields';
-import {FieldListingOptions, FieldModel, ListFieldsParams} from '../FieldsInterfaces';
+import API from '../../../APICore.js';
+import {SortingOrder} from '../../Enums.js';
+import Indexes from '../../Indexes/Indexes.js';
+import Field from '../Fields.js';
+import {FieldListingOptions, FieldModel, ListFieldsParams} from '../FieldsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

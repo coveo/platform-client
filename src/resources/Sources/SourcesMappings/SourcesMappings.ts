@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {MappingsConfiguration, UpdateMappingsConfiguration} from './SourcesMappingsInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {MappingsConfiguration, UpdateMappingsConfiguration} from './SourcesMappingsInterfaces.js';
 
 export default class SourcesMappings extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;

@@ -1,4 +1,4 @@
-import {SortingOrder, SnapshotSortingType} from '../Enums';
+import {SortingOrder, SnapshotSortingType} from '../Enums.js';
 
 export interface ResourceSnapshotsModel {
     /**

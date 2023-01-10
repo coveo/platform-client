@@ -1,2 +1,2 @@
-export * from './StatementGroups';
-export * from './StatementGroupsInterfaces';
+export * from './StatementGroups.js';
+export * from './StatementGroupsInterfaces.js';

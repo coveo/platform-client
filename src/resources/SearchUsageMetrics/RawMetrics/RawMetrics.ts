@@ -1,5 +1,5 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
 import {
     DailyRawMetricParameters,
     MonthlyRawMetricParameters,
@@ -7,7 +7,7 @@ import {
     RestListOfRawMetrics,
     RestListOfRawMetricValues,
     RestListOfSearchHubRawMetrics,
-} from './RawMetricsInterface';
+} from './RawMetricsInterface.js';
 
 export default class RawMetrics extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/raw/`;

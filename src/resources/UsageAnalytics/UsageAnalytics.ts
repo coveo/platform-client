@@ -1,13 +1,13 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import Administration from './Read/Administration/Administration';
-import DataShare from './Read/DataShare/DataShare';
-import Dimensions from './Read/Dimensions/Dimensions';
-import Exports from './Read/Exports/Exports';
-import Filters from './Read/Filters/Filters';
-import Reports from './Read/Reports/Reports';
-import Snowflake from './Read/Snowflake/Snowflake';
-import Statistics from './Read/Statistics/Statistics';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import Administration from './Read/Administration/Administration.js';
+import DataShare from './Read/DataShare/DataShare.js';
+import Dimensions from './Read/Dimensions/Dimensions.js';
+import Exports from './Read/Exports/Exports.js';
+import Filters from './Read/Filters/Filters.js';
+import Reports from './Read/Reports/Reports.js';
+import Snowflake from './Read/Snowflake/Snowflake.js';
+import Statistics from './Read/Statistics/Statistics.js';
 
 export default class UsageAnalytics extends Resource {
     administration: Administration;

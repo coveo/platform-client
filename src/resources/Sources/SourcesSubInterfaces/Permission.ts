@@ -4,7 +4,7 @@ import {
     SinglePermissionIdentityType,
     SinglePermissionResult,
     SinglePermissionState,
-} from '../../Enums';
+} from '../../Enums.js';
 
 export interface SinglePermissionModel {
     additionalInfo?: any;

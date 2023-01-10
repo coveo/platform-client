@@ -1,2 +1,2 @@
-export * from './Statistics';
-export * from './StatisticsInterfaces';
+export * from './Statistics.js';
+export * from './StatisticsInterfaces.js';

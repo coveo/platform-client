@@ -1,7 +1,7 @@
-import {LicenseSection} from '../Enums';
-import Resource from '../Resource';
-import {LicenseExpirationDateOptions, LicenseModel, LicenseSourceTypeModel} from './LicenseInterfaces';
-import API from '../../APICore';
+import {LicenseSection} from '../Enums.js';
+import Resource from '../Resource.js';
+import {LicenseExpirationDateOptions, LicenseModel, LicenseSourceTypeModel} from './LicenseInterfaces.js';
+import API from '../../APICore.js';
 
 export default class License extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/license`;

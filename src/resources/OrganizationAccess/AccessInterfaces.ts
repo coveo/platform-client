@@ -1,4 +1,4 @@
-import {AccessLevel, PrivilegeholderType} from '../Enums';
+import {AccessLevel, PrivilegeholderType} from '../Enums.js';
 export interface AccessParams {
     /*
      * The access level an API key must have to be included in the response.

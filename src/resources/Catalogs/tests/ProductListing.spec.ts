@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import {FieldOperatorType, FieldValueType} from '../../Enums';
-import {New} from '../../BaseInterfaces';
-import ProductListing from '../ProductListing';
-import {ProductListingModel} from '../ProductListingInterfaces';
+import API from '../../../APICore.js';
+import {FieldOperatorType, FieldValueType} from '../../Enums.js';
+import {New} from '../../BaseInterfaces.js';
+import ProductListing from '../ProductListing.js';
+import {ProductListingModel} from '../ProductListingInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

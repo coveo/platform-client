@@ -1,13 +1,15 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "Node16",
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
         "sourceMap": true,
         "declaration": true,
-        "target": "ES5",
+        "target": "ESNext",
         "declarationDir": "dist/definitions",
-        "moduleResolution": "Node",
+        "lib": ["DOM", "ESNext"],
+        "moduleResolution": "Node16",
         "importHelpers": true,
         "outDir": "dist",
         "strictNullChecks": true

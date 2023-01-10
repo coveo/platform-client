@@ -1,7 +1,7 @@
 import fetchMock from 'jest-fetch-mock';
-import API from '../../../APICore';
-import {SnapshotSortingType, SortingOrder} from '../../Enums';
-import ResourceSnapshots from '../ResourceSnapshots';
+import API from '../../../APICore.js';
+import {SnapshotSortingType, SortingOrder} from '../../Enums.js';
+import ResourceSnapshots from '../ResourceSnapshots.js';
 import {
     ApplyOptions,
     ApplyOptionsDeletionScope,
@@ -20,9 +20,9 @@ import {
     SnapshotExportContentFormat,
     UpdateChildrenOptions,
     ValidateAccessOptions,
-} from '../ResourceSnapshotsInterfaces';
+} from '../ResourceSnapshotsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
@@ -167,7 +167,7 @@ describe('ResourceSnapshots', () => {
             };
 
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
-            fetchMock.mockResponseOnce(JSON.stringify({test: 'hello'}));
+            fetchMock.default.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
             await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 

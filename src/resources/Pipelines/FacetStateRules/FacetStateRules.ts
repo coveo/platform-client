@@ -1,5 +1,5 @@
-import Ressource from '../../Resource';
-import {FacetStateRule, ListFacetStateRuleParams, ListFacetStateRuleResponse} from './FacetStateRulesInterface';
+import Ressource from '../../Resource.js';
+import {FacetStateRule, ListFacetStateRuleParams, ListFacetStateRuleResponse} from './FacetStateRulesInterface.js';
 
 export default class FacetStateRules extends Ressource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/facetStateRules`;

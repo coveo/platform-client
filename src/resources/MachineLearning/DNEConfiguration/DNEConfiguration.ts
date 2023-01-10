@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import {PageModel} from '../../BaseInterfaces';
-import Resource from '../../Resource';
+import API from '../../../APICore.js';
+import {PageModel} from '../../BaseInterfaces.js';
+import Resource from '../../Resource.js';
 import {
     AutoSelectionFieldCandidateModel,
     DNEConfigurationModel,
@@ -9,7 +9,7 @@ import {
     DocumentExtractionPreviewParams,
     DocumentExtractionQueryModel,
     ListCandidateFieldsParams,
-} from './DNEConfigurationInterfaces';
+} from './DNEConfigurationInterfaces.js';
 
 export default class DNEConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/dne`;

@@ -1,4 +1,4 @@
-import retrieve, {Retrievable} from '../Retriever';
+import retrieve, {Retrievable} from '../Retriever.js';
 
 describe('Retriever', () => {
     it('should return the value directly if it is not a function', () => {

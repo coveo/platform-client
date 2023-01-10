@@ -1,2 +1,2 @@
-export * from './Connectivity';
-export * from './ConnectivityInterface';
+export * from './Connectivity.js';
+export * from './ConnectivityInterface.js';

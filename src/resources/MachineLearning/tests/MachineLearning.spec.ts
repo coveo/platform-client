@@ -1,16 +1,16 @@
-import API from '../../../APICore';
-import {IntervalUnit} from '../../Enums';
-import DNEConfiguration from '../DNEConfiguration/DNEConfiguration';
-import MachineLearning from '../MachineLearning';
-import {RegistrationModel} from '../MachineLearningInterfaces';
-import ModelConfiguration from '../ModelConfiguration/ModelConfiguration';
-import ModelInformation from '../ModelInformation/ModelInformation';
-import Models from '../Models/Models';
-import PQSConfiguration from '../PQSConfiguration/PQSConfiguration';
-import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration/SmartSnippetsConfiguration';
-import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration/UserActionHistoryConfiguration';
+import API from '../../../APICore.js';
+import {IntervalUnit} from '../../Enums.js';
+import DNEConfiguration from '../DNEConfiguration/DNEConfiguration.js';
+import MachineLearning from '../MachineLearning.js';
+import {RegistrationModel} from '../MachineLearningInterfaces.js';
+import ModelConfiguration from '../ModelConfiguration/ModelConfiguration.js';
+import ModelInformation from '../ModelInformation/ModelInformation.js';
+import Models from '../Models/Models.js';
+import PQSConfiguration from '../PQSConfiguration/PQSConfiguration.js';
+import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration/SmartSnippetsConfiguration.js';
+import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

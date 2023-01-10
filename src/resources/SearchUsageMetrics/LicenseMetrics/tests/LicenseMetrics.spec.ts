@@ -1,13 +1,12 @@
-import API from '../../../../APICore';
-import LicenseMetrics from '../LicenseMetrics';
-import {ListLicenseMonthlyParams} from '../LicenseMetricsInterface';
+import API from '../../../../APICore.js';
+import LicenseMetrics from '../LicenseMetrics.js';
+import {ListLicenseMonthlyParams} from '../LicenseMetricsInterface.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
-// eslint-disable-next-line jest/no-focused-tests
-describe.only('LicenseMetrics', () => {
+describe('LicenseMetrics', () => {
     let LicenseMetricsService: LicenseMetrics;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;

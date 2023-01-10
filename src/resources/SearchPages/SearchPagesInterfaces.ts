@@ -1,4 +1,4 @@
-import {GranularResource} from '../BaseInterfaces';
+import {GranularResource} from '../BaseInterfaces.js';
 
 export interface SearchPageModel extends GranularResource {
     id: string;

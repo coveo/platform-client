@@ -1,9 +1,9 @@
-import API from '../../APICore';
-import {GranularResource} from '../BaseInterfaces';
-import Resource from '../Resource';
-import Condition from './Conditions/Condition';
-import FacetStateRules from './FacetStateRules/FacetStateRules';
-import MLAssociations from './MLAssociations/MLAssociations';
+import API from '../../APICore.js';
+import {GranularResource} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import Condition from './Conditions/Condition.js';
+import FacetStateRules from './FacetStateRules/FacetStateRules.js';
+import MLAssociations from './MLAssociations/MLAssociations.js';
 import {
     ListPipelinesOptions,
     ListPipelinesReturnVariant,
@@ -11,10 +11,10 @@ import {
     PipelineBackendVersion,
     PipelineModel,
     UpdatePipelineModel,
-} from './PipelinesInterfaces';
-import ResultRankings from './ResultRankings/ResultRankings';
-import StatementGroups from './StatementGroups/StatementGroups';
-import Statements from './Statements/Statements';
+} from './PipelinesInterfaces.js';
+import ResultRankings from './ResultRankings/ResultRankings.js';
+import StatementGroups from './StatementGroups/StatementGroups.js';
+import Statements from './Statements/Statements.js';
 
 export default class Pipelines extends Resource {
     static searchUrlVersion2 = '/rest/search/v2/admin/pipelines';

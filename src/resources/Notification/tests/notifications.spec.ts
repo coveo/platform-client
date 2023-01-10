@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import Notification from '../notification';
+import API from '../../../APICore.js';
+import Notification from '../notification.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,5 +1,5 @@
-import {AuthProvider} from '../Enums';
-import {RealmModel} from '../Groups';
+import {AuthProvider} from '../Enums.js';
+import {RealmModel} from '../Groups/index.js';
 
 export interface UserModel {
     additionalInformation: Record<string, any>;

@@ -1,2 +1,2 @@
-export * from './SourcesFields';
-export * from './SourcesFieldsInterfaces';
+export * from './SourcesFields.js';
+export * from './SourcesFieldsInterfaces.js';

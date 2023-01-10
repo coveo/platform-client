@@ -1,14 +1,14 @@
-import API from '../../../APICore';
-import Activity from '../Activities';
+import API from '../../../APICore.js';
+import Activity from '../Activities.js';
 import {
     ActivityListingFilters,
     ActivityModel,
     ListActivitiesParams,
     ListActivitiesFacetsParams,
     TriggeredByAttributes,
-} from '../ActivitiesInterfaces';
+} from '../ActivitiesInterfaces.js';
 
-jest.mock('../../../APICore.ts');
+jest.mock('../../../APICore.ts.js');
 const APIMock: jest.Mock<API> = API as any;
 
 describe('Activity', () => {

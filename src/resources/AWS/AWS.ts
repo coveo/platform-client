@@ -1,5 +1,5 @@
-import Resource from '../Resource';
-import {AWSAgentInstanceModel} from './AWSInterfaces';
+import Resource from '../Resource.js';
+import {AWSAgentInstanceModel} from './AWSInterfaces.js';
 
 export interface AWSListOptions {
     organizationId: string;

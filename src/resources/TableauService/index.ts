@@ -1,2 +1,2 @@
-export * from './ContentQuery';
-export * from './TableauService';
+export * from './ContentQuery/index.js';
+export * from './TableauService.js';

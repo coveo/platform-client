@@ -3,6 +3,7 @@
     "version": "0.0.0-development",
     "description": "",
     "main": "dist/Entry.js",
+    "type": "module",
     "types": "dist/definitions/Entry.d.ts",
     "keywords": [
         "coveo",
@@ -20,7 +21,7 @@
         "test:watch": "jest --watchAll",
         "release": "semantic-release",
         "commit-cli": "git-cz",
-        "lintfix": "prettier --write \"**/*.{ts,js,json,md,yml}\" && eslint -c ./.eslintrc.js \"src/**.*\" --fix",
+        "lintfix": "prettier --write \"**/*.{ts,js,json,md,yml}\" && eslint -c ./.eslintrc.cjs \"src/**.*\" --fix",
         "prepare": "husky install"
     },
     "devDependencies": {
@@ -42,7 +43,7 @@
         "jest-runner-eslint": "1.1.0",
         "lint-staged": "13.1.0",
         "prettier": "2.8.2",
-        "semantic-release": "19.0.5",
+        "semantic-release": "20.0.2",
         "ts-jest": "29.0.3",
         "tsjs": "4.2.1",
         "tslib": "2.4.1",
@@ -52,7 +53,7 @@
     "lint-staged": {
         "**/*.{ts,js}": [
             "prettier --write",
-            "eslint -c ./.eslintrc.js --fix"
+            "eslint -c ./.eslintrc.cjs --fix"
         ],
         "**/*.{md,json,yml}": [
             "prettier --write"
@@ -75,8 +76,7 @@
     },
     "dependencies": {
         "exponential-backoff": "^3.1.0",
-        "form-data": "^4.0.0",
-        "query-string": "^7.0.0"
+        "query-string": "^8.0.0"
     },
     "publishConfig": {
         "access": "public"

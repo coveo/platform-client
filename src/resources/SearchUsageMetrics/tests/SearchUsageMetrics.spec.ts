@@ -1,10 +1,10 @@
-import API from '../../../APICore';
-import LicenseMetrics from '../LicenseMetrics/LicenseMetrics';
-import RawMetrics from '../RawMetrics/RawMetrics';
-import SearchHubs from '../SearchHubs/SearchHubs';
-import SearchUsageMetrics from '../SearchUsageMetrics';
+import API from '../../../APICore.js';
+import LicenseMetrics from '../LicenseMetrics/LicenseMetrics.js';
+import RawMetrics from '../RawMetrics/RawMetrics.js';
+import SearchHubs from '../SearchHubs/SearchHubs.js';
+import SearchUsageMetrics from '../SearchUsageMetrics.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

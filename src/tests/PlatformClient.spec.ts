@@ -1,10 +1,10 @@
-import API from '../APICore';
-import {Feature, PlatformClientOptions} from '../ConfigurationInterfaces';
-import PlatformClient from '../PlatformClient';
-import {Resource} from '../resources';
-import PlatformResources from '../resources/PlatformResources';
+import API from '../APICore.js';
+import {Feature, PlatformClientOptions} from '../ConfigurationInterfaces.js';
+import PlatformClient from '../PlatformClient.js';
+import {Resource} from '../resources/index.js';
+import PlatformResources from '../resources/PlatformResources.js';
 
-jest.mock('../APICore');
+jest.mock('../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,2 +1,2 @@
-export * from './CrawlingModule';
-export * from './CrawlingModuleInterfaces';
+export * from './CrawlingModule.js';
+export * from './CrawlingModuleInterfaces.js';

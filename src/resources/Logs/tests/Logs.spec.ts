@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import Logs from '../Logs';
-import {GetFacetsParams, GetLogsOrFacetsRequestBodyModel, GetLogsParams} from '../LogsInterfaces';
+import API from '../../../APICore.js';
+import Logs from '../Logs.js';
+import {GetFacetsParams, GetLogsOrFacetsRequestBodyModel, GetLogsParams} from '../LogsInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

@@ -1,5 +1,5 @@
-import Resource from '../../Resource';
-import {RegionConfigurationModel} from './RegionConfigurationInterfaces';
+import Resource from '../../Resource.js';
+import {RegionConfigurationModel} from './RegionConfigurationInterfaces.js';
 
 export default class RegionConfiguration extends Resource {
     static baseUrl = '/rest/global/regions';

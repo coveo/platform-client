@@ -1,4 +1,4 @@
-import handleResponse, {ResponseHandlers} from '../ResponseHandlers';
+import handleResponse, {ResponseHandlers} from '../ResponseHandlers.js';
 
 describe('ResponseHandlers', () => {
     it('should return a promise resolved with an empty object when the response status code is 204', async () => {

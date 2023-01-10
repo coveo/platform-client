@@ -1,8 +1,8 @@
-import API from '../../APICore';
-import {New} from '../BaseInterfaces';
-import {RealmModel} from '../Groups';
-import Resource from '../Resource';
-import {SamlIdentityProviderEnabledModel, SamlIdentityProviderModel} from './SamlInterfaces';
+import API from '../../APICore.js';
+import {New} from '../BaseInterfaces.js';
+import {RealmModel} from '../Groups/index.js';
+import Resource from '../Resource.js';
+import {SamlIdentityProviderEnabledModel, SamlIdentityProviderModel} from './SamlInterfaces.js';
 
 export default class Saml extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/saml`;

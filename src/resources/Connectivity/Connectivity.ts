@@ -1,6 +1,6 @@
-import Resource from '../Resource';
-import API from '../../APICore';
-import {LogRequest, LogRequestId, LogRequestResourceType, LogRequestResult} from './ConnectivityInterface';
+import Resource from '../Resource.js';
+import API from '../../APICore.js';
+import {LogRequest, LogRequestId, LogRequestResourceType, LogRequestResult} from './ConnectivityInterface.js';
 
 export default class Connectivity extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/logrequests`;

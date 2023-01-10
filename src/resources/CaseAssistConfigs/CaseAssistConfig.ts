@@ -1,8 +1,12 @@
-import API from '../../APICore';
-import {New, PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
-import {CaseAssistConfigListOptions, CaseAssistConfigModel, SuggestionRequestBody} from './CaseAssistConfigInterfaces';
-import {PreviewRequestBody, DocumentSuggestions, CaseClassifications} from './CaseAssistPreviewInterfaces';
+import API from '../../APICore.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {
+    CaseAssistConfigListOptions,
+    CaseAssistConfigModel,
+    SuggestionRequestBody,
+} from './CaseAssistConfigInterfaces.js';
+import {PreviewRequestBody, DocumentSuggestions, CaseClassifications} from './CaseAssistPreviewInterfaces.js';
 
 export default class CaseAssistConfig extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/caseassists`;

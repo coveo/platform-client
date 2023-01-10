@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {AuthProvider} from '../../../Enums';
-import GroupRealm from '../GroupRealm';
-import {RealmModel} from '../GroupRealmInterfaces';
+import API from '../../../../APICore.js';
+import {AuthProvider} from '../../../Enums.js';
+import GroupRealm from '../GroupRealm.js';
+import {RealmModel} from '../GroupRealmInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

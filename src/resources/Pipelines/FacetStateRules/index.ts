@@ -1,2 +1,2 @@
-export * from './FacetStateRules';
-export * from './FacetStateRulesInterface';
+export * from './FacetStateRules.js';
+export * from './FacetStateRulesInterface.js';

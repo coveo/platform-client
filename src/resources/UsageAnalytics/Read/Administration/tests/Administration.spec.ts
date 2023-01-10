@@ -1,9 +1,9 @@
-import API from '../../../../../APICore';
+import API from '../../../../../APICore.js';
 
-import Administration from '../Administration';
-import {AccountInfoModelV15} from '../AdministrationInterfaces';
+import Administration from '../Administration.js';
+import {AccountInfoModelV15} from '../AdministrationInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

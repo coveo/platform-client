@@ -1,11 +1,11 @@
-import Resource from '../../Resource';
+import Resource from '../../Resource.js';
 import {
     TableauDashboardParams,
     TableauDashboardResponse,
     TableauDashboardViewParams,
     TableauReportParams,
     TableauReportResponse,
-} from './ContentQueryInterfaces';
+} from './ContentQueryInterfaces.js';
 
 export default class ContentQuery extends Resource {
     static baseUrl = '/rest/organizations';

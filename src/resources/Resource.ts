@@ -1,6 +1,6 @@
-import * as queryString from 'query-string';
+import queryString from 'query-string';
 
-import API from '../APICore';
+import API from '../APICore.js';
 
 class Resource {
     static baseUrl: string;

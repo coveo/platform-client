@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import Catalog from '../Catalog';
-import {CreateCatalogModel, CatalogModel, FieldsSuggestionsQueryModel} from '../CatalogInterfaces';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import Catalog from '../Catalog.js';
+import {CreateCatalogModel, CatalogModel, FieldsSuggestionsQueryModel} from '../CatalogInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

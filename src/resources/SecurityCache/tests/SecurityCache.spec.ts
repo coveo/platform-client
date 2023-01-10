@@ -1,9 +1,14 @@
-import {ScheduleModel, SecurityProviderIdentitiesFilters, SecurityCacheMemberModel, SecurityProviderModel} from '..';
-import API from '../../../APICore';
-import {PermissionIdentityType} from '../../Enums';
-import SecurityCache from '../SecurityCache';
+import {
+    ScheduleModel,
+    SecurityProviderIdentitiesFilters,
+    SecurityCacheMemberModel,
+    SecurityProviderModel,
+} from '../index.js';
+import API from '../../../APICore.js';
+import {PermissionIdentityType} from '../../Enums.js';
+import SecurityCache from '../SecurityCache.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

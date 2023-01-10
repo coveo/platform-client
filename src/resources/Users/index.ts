@@ -1,2 +1,2 @@
-export * from './User';
-export * from './UserInterfaces';
+export * from './User.js';
+export * from './UserInterfaces.js';

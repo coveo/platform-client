@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {OrganizationMemberModel} from './MembersInterface';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {OrganizationMemberModel} from './MembersInterface.js';
 
 export default class Members extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/members`;

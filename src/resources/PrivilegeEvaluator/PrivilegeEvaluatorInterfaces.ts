@@ -1,4 +1,4 @@
-import {PrivilegeModel} from '../BaseInterfaces';
+import {PrivilegeModel} from '../BaseInterfaces.js';
 
 export interface PrivilegeEvaluatorModel {
     /**

@@ -1,7 +1,7 @@
-import {Paginated} from '../BaseInterfaces';
-import {VaultValueType, VaultVisibilityType} from '../Enums';
-import {DeprecatedPaginated} from '../InternalBaseInterface';
-import {ResourceSnapshotType} from '../ResourceSnapshots';
+import {Paginated} from '../BaseInterfaces.js';
+import {VaultValueType, VaultVisibilityType} from '../Enums.js';
+import {DeprecatedPaginated} from '../InternalBaseInterface.js';
+import {ResourceSnapshotType} from '../ResourceSnapshots/index.js';
 
 export interface MissingVaultModel {
     /**

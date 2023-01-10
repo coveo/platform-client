@@ -1,2 +1,2 @@
-export * from './DataShare';
-export * from './DataShareInterfaces';
+export * from './DataShare.js';
+export * from './DataShareInterfaces.js';

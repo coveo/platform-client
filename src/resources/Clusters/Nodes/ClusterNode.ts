@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
-import {ClusterNodeUpgradeDataModel} from '../ClusterInterfaces';
-import {ClusterNodeModel, ClusterNodeUpgradeModel} from './ClusterNodeInterfaces';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
+import {ClusterNodeUpgradeDataModel} from '../ClusterInterfaces.js';
+import {ClusterNodeModel, ClusterNodeUpgradeModel} from './ClusterNodeInterfaces.js';
 
 export default class ClusterNode extends Resource {
     static getBaseUrl = (id: string) => `/rest/organizations/${API.orgPlaceholder}/clusters/${id}/nodes`;

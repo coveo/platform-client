@@ -1,5 +1,5 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
 import {
     SearchHubNameParams,
     RestSearchHub,
@@ -7,7 +7,7 @@ import {
     UpdateSearchHubBucketParams,
     ListSearchHubsParams,
     ListSearchHubs,
-} from './SearchHubsInterface';
+} from './SearchHubsInterface.js';
 
 export default class SearchHubs extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/searchusagemetrics/hubs/`;

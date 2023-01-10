@@ -1,14 +1,14 @@
-import API from '../../../APICore';
-import Administration from '../Read/Administration/Administration';
-import Dimensions from '../Read/Dimensions/Dimensions';
-import Exports from '../Read/Exports/Exports';
-import Filters from '../Read/Filters/Filters';
-import Reports from '../Read/Reports/Reports';
-import Snowflake from '../Read/Snowflake/Snowflake';
-import Statistics from '../Read/Statistics/Statistics';
-import UsageAnalytics from '../UsageAnalytics';
+import API from '../../../APICore.js';
+import Administration from '../Read/Administration/Administration.js';
+import Dimensions from '../Read/Dimensions/Dimensions.js';
+import Exports from '../Read/Exports/Exports.js';
+import Filters from '../Read/Filters/Filters.js';
+import Reports from '../Read/Reports/Reports.js';
+import Snowflake from '../Read/Snowflake/Snowflake.js';
+import Statistics from '../Read/Statistics/Statistics.js';
+import UsageAnalytics from '../UsageAnalytics.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

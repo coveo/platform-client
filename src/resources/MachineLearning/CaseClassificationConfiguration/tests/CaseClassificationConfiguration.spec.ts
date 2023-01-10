@@ -1,12 +1,12 @@
-import API from '../../../../APICore';
-import CaseClassificationConfiguration from '../CaseClassificationConfiguration';
+import API from '../../../../APICore.js';
+import CaseClassificationConfiguration from '../CaseClassificationConfiguration.js';
 import {
     CaseClassificationConfigurationModel,
     CaseClassificationContentFieldsParams,
     Operator,
-} from '../CaseClassificationConfigurationInterfaces';
+} from '../CaseClassificationConfigurationInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

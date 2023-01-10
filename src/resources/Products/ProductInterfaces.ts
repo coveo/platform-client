@@ -1,4 +1,4 @@
-import {ProductsFacetRequestSortType, ProductsSortByType, SortingOrder} from '../Enums';
+import {ProductsFacetRequestSortType, ProductsSortByType, SortingOrder} from '../Enums.js';
 
 export interface AdvancedFiltersModel {
     queryFilter: string;

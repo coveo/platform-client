@@ -1,8 +1,8 @@
-import API from '../../../../../APICore';
-import Snowflake from '../Snowflake';
-import {GetCreditUsageParams, SnowflakeNetworkPolicyModel, SnowflakeUserModel} from '../SnowflakeInterfaces';
+import API from '../../../../../APICore.js';
+import Snowflake from '../Snowflake.js';
+import {GetCreditUsageParams, SnowflakeNetworkPolicyModel, SnowflakeUserModel} from '../SnowflakeInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

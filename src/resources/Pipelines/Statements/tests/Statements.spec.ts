@@ -1,14 +1,14 @@
-import API from '../../../../APICore';
-import {StatementsFeature} from '../../../Enums';
-import Statements from '../Statements';
+import API from '../../../../APICore.js';
+import {StatementsFeature} from '../../../Enums.js';
+import Statements from '../Statements.js';
 import {
     CopyStatementModel,
     CreateStatementModel,
     ExportStatementParams,
     MoveStatementModel,
-} from '../StatementsInterfaces';
+} from '../StatementsInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

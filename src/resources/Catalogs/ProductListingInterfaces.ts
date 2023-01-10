@@ -1,6 +1,6 @@
-import {Paginated} from '../BaseInterfaces';
-import {FieldOperatorType, FieldValueType} from '../Enums';
-import {DeprecatedPaginated} from '../InternalBaseInterface';
+import {Paginated} from '../BaseInterfaces.js';
+import {FieldOperatorType, FieldValueType} from '../Enums.js';
+import {DeprecatedPaginated} from '../InternalBaseInterface.js';
 
 export type ProductListingsListOptions = Paginated | DeprecatedPaginated;
 

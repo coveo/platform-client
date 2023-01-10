@@ -1,8 +1,8 @@
-import API from '../../../APICore';
-import ContentQuery from '../ContentQuery/ContentQuery';
-import TableauService from '../TableauService';
+import API from '../../../APICore.js';
+import ContentQuery from '../ContentQuery/ContentQuery.js';
+import TableauService from '../TableauService.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

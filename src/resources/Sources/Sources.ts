@@ -1,10 +1,10 @@
-import API from '../../APICore';
-import {New, PageModel} from '../BaseInterfaces';
-import {ActivityOperation} from '../Enums';
-import Resource from '../Resource';
-import {ScheduleModel} from '../SecurityCache';
-import SourcesDatasets from './SourcesDatasets/SourcesDatasets';
-import SourcesFields from './SourcesFields/SourcesFields';
+import API from '../../APICore.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import {ActivityOperation} from '../Enums.js';
+import Resource from '../Resource.js';
+import {ScheduleModel} from '../SecurityCache/index.js';
+import SourcesDatasets from './SourcesDatasets/SourcesDatasets.js';
+import SourcesFields from './SourcesFields/SourcesFields.js';
 import {
     CreateSourceModel,
     CreateSourceOptions,
@@ -13,9 +13,9 @@ import {
     ListSourcesParams,
     RawSourceConfig,
     SourceModel,
-} from './SourcesInterfaces';
-import SourcesMappings from './SourcesMappings/SourcesMappings';
-import SourcesMetadata from './SourcesMetadata/SourcesMetadata';
+} from './SourcesInterfaces.js';
+import SourcesMappings from './SourcesMappings/SourcesMappings.js';
+import SourcesMetadata from './SourcesMetadata/SourcesMetadata.js';
 
 export default class Sources extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;

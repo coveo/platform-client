@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import Saml from '../Saml';
-import {SamlIdentityProviderModel} from '../SamlInterfaces';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import Saml from '../Saml.js';
+import {SamlIdentityProviderModel} from '../SamlInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

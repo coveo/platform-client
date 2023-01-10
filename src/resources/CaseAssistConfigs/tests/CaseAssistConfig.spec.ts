@@ -1,6 +1,6 @@
-import API from '../../../APICore';
-import {New} from '../../BaseInterfaces';
-import CaseAssistConfig from '../CaseAssistConfig';
+import API from '../../../APICore.js';
+import {New} from '../../BaseInterfaces.js';
+import CaseAssistConfig from '../CaseAssistConfig.js';
 import {
     CaseAssistConfigModel,
     CaseClassificationStrategies,
@@ -8,10 +8,10 @@ import {
     DocumentSuggestionsStrategies,
     SuggestionRequestBody,
     TypingAidsStrategies,
-} from '../CaseAssistConfigInterfaces';
-import {PreviewRequestBody} from '../CaseAssistPreviewInterfaces';
+} from '../CaseAssistConfigInterfaces.js';
+import {PreviewRequestBody} from '../CaseAssistPreviewInterfaces.js';
 
-jest.mock('../../../APICore');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

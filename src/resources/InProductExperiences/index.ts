@@ -1,2 +1,2 @@
-export * from './InProductExperiences';
-export * from './InProductExperiencesInterfaces';
+export * from './InProductExperiences.js';
+export * from './InProductExperiencesInterfaces.js';

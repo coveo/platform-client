@@ -1,5 +1,5 @@
-import {PageModel} from '../../BaseInterfaces';
-import Resource from '../../Resource';
+import {PageModel} from '../../BaseInterfaces.js';
+import Resource from '../../Resource.js';
 import {
     AssociatedPipelinesData,
     BulkGetAssociationsParams,
@@ -7,7 +7,7 @@ import {
     EditAssociation,
     ListAssociationsParams,
     MLAssociationModel,
-} from './MLAssociationsInterfaces';
+} from './MLAssociationsInterfaces.js';
 
 export default class MLAssociations extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/ml/model/associations`;

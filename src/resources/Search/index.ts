@@ -1,2 +1,2 @@
-export * from './Search';
-export * from './SearchInterfaces';
+export * from './Search.js';
+export * from './SearchInterfaces.js';

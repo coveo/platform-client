@@ -2,7 +2,7 @@
     "extends": "./tsconfig",
     "compilerOptions": {
         "declarationDir": null,
-        "declaration": false
-    },
-    "include": ["src/**/*.spec.ts"]
+        "declaration": false,
+        "allowJs": true
+    }
 }

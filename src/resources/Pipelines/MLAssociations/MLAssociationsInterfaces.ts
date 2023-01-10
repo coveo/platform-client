@@ -1,5 +1,5 @@
-import {Paginated} from '../../BaseInterfaces';
-import {ModelTypes} from '../../Enums';
+import {Paginated} from '../../BaseInterfaces.js';
+import {ModelTypes} from '../../Enums.js';
 
 /**
  * @deprecated - Use `PageModel<MLAssociationModel, 'rules'>` instead.

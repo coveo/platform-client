@@ -1,9 +1,9 @@
-import API from '../../../../APICore';
-import {SubscriptionFrequencyEnum, SubscriptionTypeEnum} from '../../../Enums';
-import Subscription from '../Subscription';
-import {EditSubscriptionModel} from '../SubscriptionInterfaces';
+import API from '../../../../APICore.js';
+import {SubscriptionFrequencyEnum, SubscriptionTypeEnum} from '../../../Enums.js';
+import Subscription from '../Subscription.js';
+import {EditSubscriptionModel} from '../SubscriptionInterfaces.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

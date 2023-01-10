@@ -1,7 +1,7 @@
-import API from '../../../../APICore';
-import SourcesMetadata from '../SourcesMetadata';
+import API from '../../../../APICore.js';
+import SourcesMetadata from '../SourcesMetadata.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

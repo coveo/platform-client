@@ -1,12 +1,12 @@
-import API from '../../APICore';
-import {New, PageModel} from '../BaseInterfaces';
-import Resource from '../Resource';
+import API from '../../APICore.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
 import {
     InsightPanelConfigCreationParams,
     InsightPanelConfigListOptions,
     InsightPanelConfigModel,
     InsightPanelConfigUpdateParams,
-} from './InsightPanelConfigInterfaces';
+} from './InsightPanelConfigInterfaces.js';
 
 export default class InsightPanelConfig extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightconfig/v1/configs`;

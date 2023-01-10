@@ -1,2 +1,2 @@
-export * from './Indexes';
-export * from './IndexesInterface';
+export * from './Indexes.js';
+export * from './IndexesInterface.js';

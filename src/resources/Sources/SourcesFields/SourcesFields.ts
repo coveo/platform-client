@@ -1,7 +1,7 @@
-import API from '../../../APICore';
-import {PageModel} from '../../BaseInterfaces';
-import Resource from '../../Resource';
-import {ListSourcesFieldsParams, SourceFieldModel} from './SourcesFieldsInterfaces';
+import API from '../../../APICore.js';
+import {PageModel} from '../../BaseInterfaces.js';
+import Resource from '../../Resource.js';
+import {ListSourcesFieldsParams, SourceFieldModel} from './SourcesFieldsInterfaces.js';
 
 export default class SourcesFields extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/sources`;

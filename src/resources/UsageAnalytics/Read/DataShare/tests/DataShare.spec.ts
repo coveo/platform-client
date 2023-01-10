@@ -1,7 +1,7 @@
-import API from '../../../../../APICore';
-import DataShare from '../DataShare';
+import API from '../../../../../APICore.js';
+import DataShare from '../DataShare.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 describe('DataShare', () => {
     let dataShare: DataShare;

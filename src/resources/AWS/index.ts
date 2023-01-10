@@ -1,2 +1,2 @@
-export * from './AWS';
-export * from './AWSInterfaces';
+export * from './AWS.js';
+export * from './AWSInterfaces.js';

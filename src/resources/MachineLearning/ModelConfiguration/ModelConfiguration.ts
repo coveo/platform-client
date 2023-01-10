@@ -1,9 +1,9 @@
-import API from '../../../APICore';
-import Resource from '../../Resource';
+import API from '../../../APICore.js';
+import Resource from '../../Resource.js';
 import {
     AdvancedRegistrationConfigFile,
     AdvancedRegistrationConfigFileCreationResponse,
-} from './ModelConfigurationInterfaces';
+} from './ModelConfigurationInterfaces.js';
 
 export default class ModelConfiguration extends Resource {
     static getBaseUrl = (modelId: string) =>

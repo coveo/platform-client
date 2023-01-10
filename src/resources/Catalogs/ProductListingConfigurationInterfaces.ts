@@ -1,6 +1,6 @@
-import {Paginated} from '../BaseInterfaces';
-import {DeprecatedPaginated} from '../InternalBaseInterface';
-import {QueryFilterModel} from './ProductListingInterfaces';
+import {Paginated} from '../BaseInterfaces.js';
+import {DeprecatedPaginated} from '../InternalBaseInterface.js';
+import {QueryFilterModel} from './ProductListingInterfaces.js';
 
 export type ProductListingConfigurationOptions = Paginated | DeprecatedPaginated;
 

@@ -1,8 +1,8 @@
-import API from '../../../../APICore';
-import SearchHubs from '../SearchHubs';
-import {ListSearchHubsParams} from '../SearchHubsInterface';
+import API from '../../../../APICore.js';
+import SearchHubs from '../SearchHubs.js';
+import {ListSearchHubsParams} from '../SearchHubsInterface.js';
 
-jest.mock('../../../../APICore');
+jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

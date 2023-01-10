@@ -1,2 +1,2 @@
-export * from './PrivilegeEvaluator';
-export * from './PrivilegeEvaluatorInterfaces';
+export * from './PrivilegeEvaluator.js';
+export * from './PrivilegeEvaluatorInterfaces.js';

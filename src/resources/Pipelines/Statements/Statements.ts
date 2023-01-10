@@ -1,5 +1,5 @@
-import {PageModel} from '../../BaseInterfaces';
-import Resource from '../../Resource';
+import {PageModel} from '../../BaseInterfaces.js';
+import Resource from '../../Resource.js';
 import {
     BulkGetStatementsParams,
     CopyStatementModel,
@@ -8,7 +8,7 @@ import {
     ListStatementParams,
     MoveStatementModel,
     StatementModel,
-} from './StatementsInterfaces';
+} from './StatementsInterfaces.js';
 
 export default class Statements extends Resource {
     static getBaseUrl = (pipelineId: string) => `/rest/search/v2/admin/pipelines/${pipelineId}/statements`;

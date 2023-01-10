@@ -1,6 +1,6 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import {CreateExtension, ExtensionModel} from './ExtensionsInterfaces';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import {CreateExtension, ExtensionModel} from './ExtensionsInterfaces.js';
 
 export default class Extension extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/extensions`;

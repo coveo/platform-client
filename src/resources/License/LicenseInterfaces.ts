@@ -7,7 +7,7 @@ import {
     ScheduleType,
     SourceType,
     SourceVisibility,
-} from '../Enums';
+} from '../Enums.js';
 
 export interface LicenseConnectorScheduleModel {
     /**

@@ -1,4 +1,4 @@
-import getEndpoint, {Environment, Region} from '../Endpoints';
+import getEndpoint, {Environment, Region} from '../Endpoints.js';
 
 describe('Endpoint', () => {
     describe('platform endpoint', () => {

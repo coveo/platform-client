@@ -1,9 +1,9 @@
-import API from '../../../../../APICore';
-import {DimensionEventTypes, DimensionType} from '../../../../Enums';
-import Dimensions from '../Dimensions';
-import {CreateCustomDimensionParams, CustomDimensionModel} from '../DimensionsInterfaces';
+import API from '../../../../../APICore.js';
+import {DimensionEventTypes, DimensionType} from '../../../../Enums.js';
+import Dimensions from '../Dimensions.js';
+import {CreateCustomDimensionParams, CustomDimensionModel} from '../DimensionsInterfaces.js';
 
-jest.mock('../../../../../APICore');
+jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 

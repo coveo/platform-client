@@ -1,14 +1,14 @@
-import API from '../../APICore';
-import Resource from '../Resource';
-import CaseClassificationConfiguration from './CaseClassificationConfiguration/CaseClassificationConfiguration';
-import DNEConfiguration from './DNEConfiguration/DNEConfiguration';
-import SmartSnippetsConfiguration from './SmartSnippetsConfiguration/SmartSnippetsConfiguration';
-import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces';
-import ModelConfiguration from './ModelConfiguration/ModelConfiguration';
-import ModelInformation from './ModelInformation/ModelInformation';
-import Models from './Models/Models';
-import PQSConfiguration from './PQSConfiguration/PQSConfiguration';
-import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration';
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import CaseClassificationConfiguration from './CaseClassificationConfiguration/CaseClassificationConfiguration.js';
+import DNEConfiguration from './DNEConfiguration/DNEConfiguration.js';
+import SmartSnippetsConfiguration from './SmartSnippetsConfiguration/SmartSnippetsConfiguration.js';
+import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces.js';
+import ModelConfiguration from './ModelConfiguration/ModelConfiguration.js';
+import ModelInformation from './ModelInformation/ModelInformation.js';
+import Models from './Models/Models.js';
+import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
+import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
