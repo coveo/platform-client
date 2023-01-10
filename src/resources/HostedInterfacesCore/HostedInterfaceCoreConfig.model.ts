@@ -1,4 +1,4 @@
-import {Paginated} from '../BaseInterfaces';
+import {Paginated} from '../BaseInterfaces.js';
 
 export interface HostedInterfaceResultTemplateBadge {
     /**

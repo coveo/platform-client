@@ -6,7 +6,7 @@ import {
     HostedInterfaceResultTemplateBadge,
     HostedInterfaceResultTemplateDetail,
     HostedInterfaceTab,
-} from '../HostedInterfacesCore';
+} from '../HostedInterfacesCore/index.js';
 
 export enum IPXConditionOperator {
     IsDefined = 'isDefined',

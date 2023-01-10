@@ -7,7 +7,7 @@ import {
     HostedInterfaceResultTemplateDetail,
     HostedInterfaceTab,
     ListHostedInterfacesParams,
-} from '../HostedInterfacesCore.js';
+} from '../HostedInterfacesCore/index.js';
 
 export enum InsightPanelConditionOperator {
     isDefined = 'isDefined',

@@ -1,6 +1,6 @@
 import API from '../../APICore.js';
 import {New, PageModel} from '../BaseInterfaces.js';
-import {ListHostedInterfacesParams} from '../HostedInterfacesCore.js';
+import {ListHostedInterfacesParams} from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
 import {InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model.js';
 

@@ -1,1 +1,1 @@
-export * from './HostedInterfaceCoreConfig.model';
+export * from './HostedInterfaceCoreConfig.model.js';
