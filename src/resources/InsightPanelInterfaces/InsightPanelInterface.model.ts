@@ -1,11 +1,13 @@
-import {Paginated} from '../BaseInterfaces.js';
-
-export enum InsightPanelConditionOperator {
-    isDefined = 'isDefined',
-    isNotDefined = 'isNotDefined',
-    MustMatch = 'mustMatch',
-    MustNotMatch = 'mustNotMatch',
-}
+import {
+    HostedInterfaceCondition,
+    HostedInterfaceConfiguration,
+    HostedInterfaceFacet,
+    HostedInterfaceResultTemplate,
+    HostedInterfaceResultTemplateBadge,
+    HostedInterfaceResultTemplateDetail,
+    HostedInterfaceTab,
+    ListHostedInterfacesParams,
+} from '../HostedInterfacesCore/index.js';
 
 export enum InsightPanelResultTemplateLayout {
     Default = 'default',
@@ -21,57 +23,11 @@ interface InsightPanelResultTagOptions {
     color: string;
 }
 
-export interface InsightPanelResultTemplateBadge {
-    /**
-     * The field who's value should be displayed in the badge.
-     */
-    field: string;
+export interface InsightPanelResultTemplateBadge extends HostedInterfaceResultTemplateBadge {}
 
-    /**
-     * The text to display in the badge.
-     */
-    label?: string;
+export interface InsightPanelCondition extends HostedInterfaceCondition {}
 
-    /**
-     * The RGB HEX code for the color of the badge.
-     */
-    color: string;
-}
-
-export interface InsightPanelCondition {
-    /**
-     * The [field](https://docs.coveo.com/en/200) to evaluate.
-     */
-    field: string;
-
-    /**
-     * The operator used to evaluate the field condition.
-     * Possible values are:
-     * - `'isDefined'`
-     * - `'isNotDefined'`
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    conditionType: InsightPanelConditionOperator;
-
-    /**
-     * The values used as the right side operand when the `operator` is one of:
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    values?: string[];
-}
-
-export interface InsightPanelResultTemplateDetail {
-    /**
-     * The [field](https://docs.coveo.com/en/200) containing the metadata to display.
-     */
-    field: string;
-    /**
-     * The label to show describing the metadata.
-     */
-    label?: string;
-}
+export interface InsightPanelResultTemplateDetail extends HostedInterfaceResultTemplateDetail {}
 
 export interface InsightPanelResultActions {
     /**
@@ -107,12 +63,7 @@ export interface InsightPanelResultTags {
     recommended?: InsightPanelResultTagOptions;
 }
 
-export interface InsightPanelResultTemplate {
-    /**
-     * The name of the result template.
-     */
-    name: string;
-
+export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplate {
     /**
      * The template layout to use.
      * Possible values are:
@@ -135,7 +86,6 @@ export interface InsightPanelResultTemplate {
      * The metadata details to display.
      */
     details: InsightPanelResultTemplateDetail[];
-
     /**
      * The available result actions.
      */
@@ -147,34 +97,9 @@ export interface InsightPanelResultTemplate {
     tags: InsightPanelResultTags;
 }
 
-export type DisplayValueType = 'checkbox' | 'link';
+export interface InsightPanelFacet extends HostedInterfaceFacet {}
 
-export interface InsightPanelFacet {
-    /**
-     * The [field](https://docs.coveo.com/en/200) on which the facet is based.
-     */
-    field: string;
-
-    /**
-     * The label of the facet.
-     */
-    label: string;
-
-    /**
-     * Whether to display the facet values as checkboxes (multiple selection) or links (single selection).
-     * Possible values are:
-     * - `'checkbox'`
-     * - `'link'`
-     */
-    displayValuesAs: DisplayValueType;
-}
-
-export interface InsightPanelTab {
-    /**
-     * The label to be displayed in the tab.
-     */
-    label: string;
-
+export interface InsightPanelTab extends HostedInterfaceTab {
     /**
      * A constant query expression or filter that the Tab should add to any outgoing query.
      *
@@ -219,17 +144,7 @@ export interface InsightPanelSettings {
     userActions: UserActionsOptions;
 }
 
-export interface InsightPanelInterfaceConfiguration {
-    /**
-     * The configuration identifier.
-     */
-    id: string;
-
-    /**
-     * The name of the insight panel interface configuration.
-     */
-    name: string;
-
+export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfiguration {
     /**
      * The list of result templates defined for the insight panel.
      */
@@ -251,27 +166,4 @@ export interface InsightPanelInterfaceConfiguration {
     settings: InsightPanelSettings;
 }
 
-export interface IListInsightPanelInterfacesParameters extends Paginated {
-    /**
-     * A substring that must appear in an insight panel interface configuration name for this configuration to appear in results.
-     */
-    filter?: string;
-
-    /**
-     * The sort direction of the results.
-     * Possible values:
-     * - `'asc'`: ascending order
-     * - `'desc'`: descending order.
-     */
-    order?: 'desc' | 'asc';
-
-    /**
-     * The 0-based number of the page of configurations to list.
-     */
-    page?: number;
-
-    /**
-     * The maximum number of configurations to include per page.
-     */
-    perPage?: number;
-}
+export interface IListInsightPanelInterfacesParameters extends ListHostedInterfacesParams {}
