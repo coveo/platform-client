@@ -1,12 +1,8 @@
 import API from '../../../APICore.js';
 import {New} from '../../../Entry.js';
+import {HostedInferfaceConditionOperator} from '../../HostedInterfacesCore/index.js';
 import InsightPanelInterface from '../InsightPanelInterface.js';
-import {
-    InsightPanelInterfaceConfiguration,
-    InsightPanelResultTemplateLayout,
-    InsightPanelConditionOperator,
-} from '../InsightPanelInterface.model.js';
-
+import {InsightPanelInterfaceConfiguration, InsightPanelResultTemplateLayout} from '../InsightPanelInterface.model.js';
 jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
@@ -36,12 +32,12 @@ describe('InsightPanelInterface', () => {
                 layout: InsightPanelResultTemplateLayout.Default,
                 conditions: [
                     {
-                        conditionType: InsightPanelConditionOperator.MustMatch,
+                        conditionType: HostedInferfaceConditionOperator.MustMatch,
                         field: 'sourcetype',
                         values: ['youtube'],
                     },
                     {
-                        conditionType: InsightPanelConditionOperator.isDefined,
+                        conditionType: HostedInferfaceConditionOperator.IsDefined,
                         field: 'ytlikecount',
                     },
                 ],
@@ -78,7 +74,7 @@ describe('InsightPanelInterface', () => {
                 conditions: [
                     {
                         field: '@sfkbid',
-                        conditionType: InsightPanelConditionOperator.isDefined,
+                        conditionType: HostedInferfaceConditionOperator.IsDefined,
                     },
                 ],
             },

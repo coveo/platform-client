@@ -9,13 +9,6 @@ import {
     ListHostedInterfacesParams,
 } from '../HostedInterfacesCore/index.js';
 
-export enum InsightPanelConditionOperator {
-    isDefined = 'isDefined',
-    isNotDefined = 'isNotDefined',
-    MustMatch = 'mustMatch',
-    MustNotMatch = 'mustNotMatch',
-}
-
 export enum InsightPanelResultTemplateLayout {
     Default = 'default',
     Thumbnail = 'thumbnail',
@@ -32,17 +25,7 @@ interface InsightPanelResultTagOptions {
 
 export interface InsightPanelResultTemplateBadge extends HostedInterfaceResultTemplateBadge {}
 
-export interface InsightPanelCondition extends HostedInterfaceCondition {
-    /**
-     * The operator used to evaluate the field condition.
-     * Possible values are:
-     * - `'isDefined'`
-     * - `'isNotDefined'`
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    conditionType: InsightPanelConditionOperator;
-}
+export interface InsightPanelCondition extends HostedInterfaceCondition {}
 
 export interface InsightPanelResultTemplateDetail extends HostedInterfaceResultTemplateDetail {}
 

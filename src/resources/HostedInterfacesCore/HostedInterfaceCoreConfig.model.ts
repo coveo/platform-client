@@ -17,6 +17,13 @@ export interface HostedInterfaceResultTemplateBadge {
     color: string;
 }
 
+export enum HostedInferfaceConditionOperator {
+    IsDefined = 'isDefined',
+    IsNotDefined = 'isNotDefined',
+    MustMatch = 'mustMatch',
+    MustNotMatch = 'mustNotMatch',
+}
+
 export interface HostedInterfaceCondition {
     /**
      * The [field](https://docs.coveo.com/en/200) to evaluate.
@@ -29,6 +36,16 @@ export interface HostedInterfaceCondition {
      * - `'mustNotMatch'`
      */
     values?: string[];
+
+    /**
+     * The operator used to evaluate the field condition.
+     * Possible values are:
+     * - `'isDefined'`
+     * - `'isNotDefined'`
+     * - `'mustMatch'`
+     * - `'mustNotMatch'`
+     */
+    conditionType: HostedInferfaceConditionOperator;
 }
 
 export interface HostedInterfaceResultTemplateDetail {

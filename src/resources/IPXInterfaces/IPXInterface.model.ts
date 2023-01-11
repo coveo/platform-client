@@ -8,13 +8,6 @@ import {
     HostedInterfaceTab,
 } from '../HostedInterfacesCore/index.js';
 
-export enum IPXConditionOperator {
-    IsDefined = 'isDefined',
-    IsNotDefined = 'isNotDefined',
-    MustMatch = 'mustMatch',
-    MustNotMatch = 'mustNotMatch',
-}
-
 export enum IPXResultTemplateLayout {
     Default = 'default',
     Thumbnail = 'thumbnail',
@@ -22,17 +15,7 @@ export enum IPXResultTemplateLayout {
 
 export interface IPXFacet extends HostedInterfaceFacet {}
 
-export interface IPXCondition extends HostedInterfaceCondition {
-    /**
-     * The operator used to evaluate the field condition.
-     * Possible values are:
-     * - `'isDefined'`
-     * - `'isNotDefined'`
-     * - `'mustMatch'`
-     * - `'mustNotMatch'`
-     */
-    conditionType: IPXConditionOperator;
-}
+export interface IPXCondition extends HostedInterfaceCondition {}
 export interface IPXTab extends HostedInterfaceTab {
     /**
      * A constant query expression or filter that the Tab should add to any outgoing query.
