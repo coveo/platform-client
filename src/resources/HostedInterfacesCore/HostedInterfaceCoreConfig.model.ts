@@ -17,7 +17,7 @@ export interface HostedInterfaceResultTemplateBadge {
     color: string;
 }
 
-export enum HostedInferfaceConditionOperator {
+export enum HostedInterfaceConditionOperator {
     IsDefined = 'isDefined',
     IsNotDefined = 'isNotDefined',
     MustMatch = 'mustMatch',
@@ -45,7 +45,7 @@ export interface HostedInterfaceCondition {
      * - `'mustMatch'`
      * - `'mustNotMatch'`
      */
-    conditionType: HostedInferfaceConditionOperator;
+    conditionType: HostedInterfaceConditionOperator;
 }
 
 export interface HostedInterfaceResultTemplateDetail {
