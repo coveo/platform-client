@@ -1,6 +1,6 @@
 import API from '../../../APICore.js';
 import {New} from '../../../Entry.js';
-import {HostedInferfaceConditionOperator} from '../../HostedInterfacesCore/index.js';
+import {HostedInterfaceConditionOperator} from '../../HostedInterfacesCore/index.js';
 import InsightPanelInterface from '../InsightPanelInterface.js';
 import {InsightPanelInterfaceConfiguration, InsightPanelResultTemplateLayout} from '../InsightPanelInterface.model.js';
 jest.mock('../../../APICore.js');
@@ -32,12 +32,12 @@ describe('InsightPanelInterface', () => {
                 layout: InsightPanelResultTemplateLayout.Default,
                 conditions: [
                     {
-                        conditionType: HostedInferfaceConditionOperator.MustMatch,
+                        conditionType: HostedInterfaceConditionOperator.MustMatch,
                         field: 'sourcetype',
                         values: ['youtube'],
                     },
                     {
-                        conditionType: HostedInferfaceConditionOperator.IsDefined,
+                        conditionType: HostedInterfaceConditionOperator.IsDefined,
                         field: 'ytlikecount',
                     },
                 ],
@@ -74,7 +74,7 @@ describe('InsightPanelInterface', () => {
                 conditions: [
                     {
                         field: '@sfkbid',
-                        conditionType: HostedInferfaceConditionOperator.IsDefined,
+                        conditionType: HostedInterfaceConditionOperator.IsDefined,
                     },
                 ],
             },
