@@ -1,4 +1,4 @@
-const unmockedDependencies = ['query-string', 'decode-uri-component', 'split-on-first', 'filter-obj'];
+const unmockedDependencies = ['query-string-esm', 'decode-uri-component', 'split-on-first', 'filter-obj'];
 
 // /*
 //  * For a detailed explanation regarding each configuration property, visit:
@@ -19,6 +19,7 @@ export default {
             preset: 'ts-jest/presets/default-esm',
             moduleNameMapper: {
                 '^(\\.{1,2}/.*)\\.js$': '$1',
+                '^#query-string': 'query-string-esm',
             },
             globals: {'ts-jest': {tsconfig: '<rootDir>/../tsconfig.test.json', useESM: true}},
             transform: {
