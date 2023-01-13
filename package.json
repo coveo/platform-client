@@ -5,12 +5,12 @@
     "type": "module",
     "exports": {
         ".": {
-            "types": "./dist/definitions/Entry.d.ts",
+            "types": "./dist/types/Entry.d.ts",
             "import": "./dist/esm/Entry.js",
             "require": "./dist/cjs/Entry.js"
         }
     },
-    "types": "dist/definitions/Entry.d.ts",
+    "types": "dist/types/Entry.d.ts",
     "main": "dist/cjs/Entry.js",
     "keywords": [
         "coveo",
