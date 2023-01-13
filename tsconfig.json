@@ -7,7 +7,7 @@
         "sourceMap": true,
         "declaration": true,
         "target": "ESNext",
-        "declarationDir": "dist/definitions",
+        "declarationDir": "dist/types",
         "lib": ["DOM", "ESNext"],
         "moduleResolution": "Node16",
         "importHelpers": true,

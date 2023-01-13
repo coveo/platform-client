@@ -2,9 +2,16 @@
     "name": "@coveo/platform-client",
     "version": "0.0.0-development",
     "description": "",
-    "main": "dist/Entry.js",
     "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/definitions/Entry.d.ts",
+            "import": "./dist/esm/Entry.js",
+            "require": "./dist/cjs/Entry.js"
+        }
+    },
     "types": "dist/definitions/Entry.d.ts",
+    "main": "dist/cjs/Entry.js",
     "keywords": [
         "coveo",
         "api",
@@ -14,8 +21,8 @@
         "web"
     ],
     "scripts": {
-        "start": "tsc -p tsconfig.build.json --watch",
-        "build": "eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.json",
+        "start": "tsc -p tsconfig.build.esm.json --watch",
+        "build": "eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.cjs.json && tsc -p tsconfig.build.esm.json && node scripts/dualOutputCompat.js",
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
@@ -74,9 +81,16 @@
             "path": "./node_modules/cz-conventional-changelog"
         }
     },
+    "imports": {
+        "#query-string": {
+            "import": "query-string-esm",
+            "require": "query-string-cjs"
+        }
+    },
     "dependencies": {
         "exponential-backoff": "^3.1.0",
-        "query-string": "^8.0.0"
+        "query-string-esm": "npm:query-string@^8.0.0",
+        "query-string-cjs": "npm:query-string@^7.0.0"
     },
     "publishConfig": {
         "access": "public"
