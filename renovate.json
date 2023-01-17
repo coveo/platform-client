@@ -7,6 +7,11 @@
             "matchPackagePatterns": ["*"],
             "groupName": "all dependencies",
             "groupSlug": "all"
+        },
+        {
+            "matchPackageNames": ["query-string-cjs"],
+            "allowedVersions": "7.x",
+            "description": "8.x and above are ESM only. Remove this when we stop CJS support"
         }
     ],
     "rangeStrategy": "auto",
