@@ -1,0 +1,25 @@
+name: 'Renovate Config Validator'
+
+on:
+    push:
+        branches: [master]
+        paths:
+            - 'renovate.json'
+    pull_request:
+        branches: [master]
+        paths:
+            - 'renovate.json'
+
+jobs:
+    renovate-config:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+            - uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
+              with:
+                  cache: 'npm'
+                  node-version-file: '.nvmrc'
+            - name: Check Renovate config
+              run: |
+                  npm i renovate
+                  node_modules/.bin/renovate-config-validator
