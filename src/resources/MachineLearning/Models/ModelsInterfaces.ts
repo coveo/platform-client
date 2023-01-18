@@ -32,6 +32,7 @@ export interface MLModel<T extends MLModelTypeInfo = never> extends MLModelInfo<
     viewEventFilter?: string;
     modelSizeStatistic?: number;
     modelActivenessState?: ModelActivenessState;
+    daysUntilArchival?: number;
 }
 
 export interface ModelErrorDescription {
