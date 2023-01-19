@@ -106,4 +106,19 @@ export default class ResultRankings extends Resource {
             {ids}
         );
     }
+
+    /**
+     * Delete multiple result rankings rules in batch for a specific pipeline.
+     *
+     * @param pipelineId The unique identifier of the target query pipeline.
+     * @param ids A list of result ranking rule identifiers to delete. A maximum of 100 can be sent.
+     */
+    bulkDelete(pipelineId: string, ids: string[]) {
+        return this.api.post(
+            this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/bulkDelete`, {
+                organizationId: this.api.organizationId,
+            }),
+            {ids}
+        );
+    }
 }

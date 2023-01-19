@@ -216,4 +216,14 @@ describe('Result Rankings', () => {
             expect(api.post).toHaveBeenCalledWith(`${ResultRankings.getBaseUrl(pipelineId)}/bulkGet`, {ids});
         });
     });
+
+    describe('bulkDelete', () => {
+        it('sends a POST call to /bulkDelete with the provided ids', () => {
+            resultRankings.bulkDelete('🆔', ['rule-one', 'rule-two']);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🆔/resultRankings/bulkDelete', {
+                ids: ['rule-one', 'rule-two'],
+            });
+        });
+    });
 });
