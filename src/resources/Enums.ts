@@ -491,6 +491,8 @@ export enum ModelStatus {
 export enum ModelActivenessState {
     ACTIVE = 'ACTIVE',
     INACTIVE = 'INACTIVE',
+    ARCHIVED = 'ARCHIVED',
+    ARCHIVED_PENDING_REBUILD = 'ARCHIVED_PENDING_REBUILD',
 }
 
 export enum ModelConfigFileType {
