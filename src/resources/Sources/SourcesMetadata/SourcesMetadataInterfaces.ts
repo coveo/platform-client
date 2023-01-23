@@ -14,7 +14,7 @@ export interface MetadataValue {
      */
     metadataValue: any;
     /**
-     * The number of time the value has been seen on documents
+     * The number of times the value has been seen on documents
      */
     count: number;
 }
@@ -25,9 +25,9 @@ export interface Metadata {
      */
     key: string;
     /**
-     * The frequency in % at which this metadata has been seen on documents.
+     * The number of times the metadata has been seen in the sampled items.
      */
-    frequency: number;
+    count: number;
     /**
      * Subset of sample values for the metadata.
      */
