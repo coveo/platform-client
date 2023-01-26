@@ -47,7 +47,7 @@ export interface Metadata {
      */
     isMapped: boolean;
     /**
-     * Where is the metadata indexed
+     * How is the metadata indexed
      */
     indexedBy: MetadataIndexedBy;
 }
