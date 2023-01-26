@@ -1,5 +1,11 @@
 import {PageModel} from '../../BaseInterfaces.js';
 
+export enum MetadataIndexedBy {
+    NONE = 'NONE',
+    FIELD = 'FIELD',
+    MAPPING = 'MAPPING',
+}
+
 export interface MetadataPageModel extends PageModel {
     items: Metadata[];
     creationDate: number;
@@ -40,6 +46,10 @@ export interface Metadata {
      * Whether the origin is mapped or not.
      */
     isMapped: boolean;
+    /**
+     * Where is the metadata indexed
+     */
+    indexedBy: MetadataIndexedBy;
 }
 
 export interface MetadataReportStatus {
