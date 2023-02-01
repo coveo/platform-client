@@ -187,6 +187,20 @@ export interface ListStatementGroupsOptions extends Paginated {
      * If you leave this parameter <em>undefined</em> or pass an empty array, all group types will be allowed in the results.
      */
     types?: StatementGroupType[];
+
+    /**
+     * The sort criteria to apply on the results.
+     *
+     * @default position
+     */
+    sortBy?: 'position' | 'description' | 'definition' | 'name' | 'status';
+
+    /**
+     * Whether to sort by ascending order.
+     *
+     * @default true
+     */
+    isOrderAscending?: boolean;
 }
 
 export type CreateStatementGroupModel = CreatePermanentStatementGroupModel | CreateCampaignStatementGroupModel;
