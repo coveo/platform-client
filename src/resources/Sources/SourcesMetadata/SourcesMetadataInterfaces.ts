@@ -1,4 +1,5 @@
-import {PageModel} from '../../BaseInterfaces.js';
+import {PageModel, Paginated} from '../../BaseInterfaces.js';
+import {SortingOrder} from '../../Enums';
 
 export enum MetadataIndexedBy {
     NONE = 'NONE',
@@ -66,4 +67,21 @@ export interface MetadataReportStatus {
      * If false, reports cannot be generated.
      */
     sampleAvailable: boolean;
+}
+
+export interface MetadataParams extends Paginated {
+    /**
+     * Keyword that filter
+     */
+    filter?: string;
+
+    /**
+     * Indicate the sorting order, either ASC for ascending or DESC for descending
+     */
+    order?: SortingOrder;
+
+    /**
+     * Filed on which the table is sorted
+     */
+    sortBy?: string;
 }
