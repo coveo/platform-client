@@ -1,5 +1,5 @@
 import {PageModel, Paginated} from '../../BaseInterfaces.js';
-import {SortingOrder} from '../../Enums';
+import {SortingOrder} from '../../Enums.js';
 
 export enum MetadataIndexedBy {
     NONE = 'NONE',
