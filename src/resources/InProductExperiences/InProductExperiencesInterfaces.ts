@@ -377,6 +377,7 @@ export interface IPXButtonModel {
     /**
      * The button's CSS selector, which defines where the button is rendered.
      * If unset, it defaults to "" and renders outside of any other element.
-     */
+     * @default `""`
+    */
     buttonTargetSelector: string;
 }
