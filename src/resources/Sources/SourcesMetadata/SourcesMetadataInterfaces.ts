@@ -71,7 +71,7 @@ export interface MetadataReportStatus {
 
 export interface MetadataParams extends Paginated {
     /**
-     * Keyword that filter
+     * Filters applied to the returned metadata. Only applies to metadata names, not values or origins.
      */
     filter?: string;
 
