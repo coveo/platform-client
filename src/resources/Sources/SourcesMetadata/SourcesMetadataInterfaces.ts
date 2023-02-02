@@ -81,7 +81,7 @@ export interface MetadataParams extends Paginated {
     order?: SortingOrder;
 
     /**
-     * Filed on which the table is sorted
+     * Field on which the table is sorted
      */
     sortBy?: string;
 }
