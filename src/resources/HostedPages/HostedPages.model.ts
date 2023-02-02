@@ -29,11 +29,11 @@ export interface HostedPage {
      */
     html: string;
     /**
-     * JavaScript resource appended to the header of a specific hosted page in the target Coveo Cloud organization.
+     * The JavaScript resources appended to the header of a specific hosted page in the target Coveo Cloud organization.
      */
     javascript?: HostedPageJavascriptFile[];
     /**
-     * CSS resource appended in the header, pertaining to a specific hosted page in the target Coveo Cloud organization.
+     * The CSS resources appended in the header, pertaining to a specific hosted page in the target Coveo Cloud organization.
      */
     css?: HostedPageCssFile[];
 }
@@ -71,7 +71,7 @@ export interface HostedPageResponse extends Required<HostedPage> {
     created: string;
 
     /**
-     * The creator principal.
+     * The principal creator.
      */
     createdBy: string;
 
