@@ -374,4 +374,5 @@ export interface IPXButtonModel {
          */
         verticalPosition: ButtonPositionVerticalResponseModel;
     };
+    buttonTargetSelector: string;
 }
