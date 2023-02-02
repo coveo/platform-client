@@ -374,5 +374,9 @@ export interface IPXButtonModel {
          */
         verticalPosition: ButtonPositionVerticalResponseModel;
     };
+    /**
+     * The button's css selector, which defines where the button is rendered.
+     * If unset, it defaults to "" and renders outside of any other element.
+     */
     buttonTargetSelector: string;
 }
