@@ -71,7 +71,7 @@ export interface HostedPageResponse extends Required<HostedPage> {
     created: string;
 
     /**
-     * The principal creator.
+     * The [principal](https://en.wikipedia.org/wiki/Principal_(computer_security)) that created the hosted search page.
      */
     createdBy: string;
 
