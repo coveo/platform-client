@@ -81,7 +81,7 @@ export interface HostedPageResponse extends Required<HostedPage> {
     updated: string;
 
     /**
-     * The last updated principal.
+     * The principal that last updated the hosted search page.
      */
     updatedBy: string;
 }
