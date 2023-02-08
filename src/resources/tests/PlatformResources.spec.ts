@@ -31,6 +31,7 @@ import Connectivity from '../Connectivity/Connectivity.js';
 import SearchInterfaces from '../SearchInterfaces/SearchInterfaces.js';
 import InProductExperiences from '../InProductExperiences/InProductExperiences.js';
 import ProductListing from '../Catalogs/ProductListing.js';
+import HostedPages from '../HostedPages/HostedPages.js';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -288,6 +289,14 @@ describe('PlatformResources', () => {
 
             expect(platformResources.ipx).toBeDefined();
             expect(platformResources.ipx).toBeInstanceOf(InProductExperiences);
+        });
+
+        it('should register the Hosted Pages resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.hostedPages).toBeDefined();
+            expect(platformResources.hostedPages).toBeInstanceOf(HostedPages);
         });
     });
 });
