@@ -125,6 +125,9 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
         return this.api.delete<void>(this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`));
     }
 
+    /**
+     * Get the export row limit for this org.
+     */
     getRowLimit() {
         return this.api.get<RowLimitModel>(this.buildPathWithOrg(`${Exports.baseUrl}/rowLimit`));
     }

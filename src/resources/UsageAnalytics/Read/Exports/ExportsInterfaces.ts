@@ -123,5 +123,8 @@ export interface CreateExportScheduleModel extends ExportScheduleModelCommonProp
 }
 
 export interface RowLimitModel {
+    /**
+     * Exports row limit.
+     */
     exportRowCountLimit: number;
 }
