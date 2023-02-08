@@ -19,6 +19,14 @@ describe('HostedPages', () => {
                 isModule: true,
                 inlineContent: 'console.log("hello world")',
             },
+            {
+                isModule: false,
+                url: 'https://static.cloud.coveo.com/atomic/v2/atomic.esm.js',
+            },
+        ],
+        css: [
+            {inlineContent: 'body { margin: 10px;}'},
+            {url: 'https://static.cloud.coveo.com/atomic/v2/themes/coveo.css'},
         ],
     };
 

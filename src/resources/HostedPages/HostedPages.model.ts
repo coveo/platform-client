@@ -38,18 +38,25 @@ export interface HostedPage {
     css?: HostedPageCssFile[];
 }
 
-export interface HostedPageCssFile {
+export type HostedPageCssFile = HostedPageCssFileInliine | HostedPageCssFileUrl;
+
+export interface HostedPageCssFileInliine {
     /**
      * The content of the header `style` tag. If this property is defined, the `url` property should not be specified.
      */
-    inlineContent?: string;
+    inlineContent: string;
+}
+
+export interface HostedPageCssFileUrl {
     /**
      * The URL of CSS stylesheet. If this property is defined, the `inlineContent` property should not be specified.
      */
-    url?: string;
+    url: string;
 }
 
-export interface HostedPageJavascriptFile {
+export type HostedPageJavascriptFile = HostedPageJavascriptFileInline | HostedPageJavascriptFileUrl;
+
+export interface HostedPageJavascriptFileInline {
     /**
      * Whether the inline code should be treated as a JavaScript module. If this property is `true`, the `type` property will be set to `module` on the `script` tag.
      */
@@ -57,11 +64,18 @@ export interface HostedPageJavascriptFile {
     /**
      * The content of the header `script` tag. If this property is defined, the `url` property should not be specified.
      */
-    inlineContent?: string;
+    inlineContent: string;
+}
+
+export interface HostedPageJavascriptFileUrl {
+    /**
+     * Whether the inline code should be treated as a JavaScript module. If this property is `true`, the `type` property will be set to `module` on the `script` tag.
+     */
+    isModule: boolean;
     /**
      * The URL of the JavaScript source file. If this property is defined, the `inlineContent` property should not be specified.
      */
-    url?: string;
+    url: string;
 }
 
 export interface HostedPageResponse extends Required<HostedPage> {
