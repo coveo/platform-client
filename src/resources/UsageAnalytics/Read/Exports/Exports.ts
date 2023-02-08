@@ -10,6 +10,7 @@ import {
     ExportScheduleModel,
     GenerateExportParams,
     GenerateVisitExportParams,
+    RowLimitModel,
 } from './ExportsInterfaces.js';
 
 export default class Exports extends ReadServiceResource implements ReadServiceHealthApi {
@@ -122,6 +123,10 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      */
     deleteSchedule(exportScheduleId: string) {
         return this.api.delete<void>(this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`));
+    }
+
+    getRowLimit() {
+        return this.api.get<RowLimitModel>(this.buildPathWithOrg(`${Exports.baseUrl}/rowLimit`));
     }
 
     checkHealth() {

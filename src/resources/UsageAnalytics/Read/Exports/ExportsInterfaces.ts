@@ -121,3 +121,7 @@ export interface CreateExportScheduleModel extends ExportScheduleModelCommonProp
     tables?: ExportTablesType[];
     exportFormat?: CSVFileFormat;
 }
+
+export interface RowLimitModel {
+    exportRowCountLimit: number;
+}
