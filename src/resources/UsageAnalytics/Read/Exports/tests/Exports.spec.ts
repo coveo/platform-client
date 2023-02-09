@@ -169,6 +169,15 @@ describe('Exports', () => {
         });
     });
 
+    describe('getRowLimit', () => {
+        it('makes a GET call to the specific Exports url', () => {
+            exports.getRowLimit();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/rowLimit`);
+        });
+    });
+
     describe('checkHealth', () => {
         it('makes a GET call to the specific Exports url', () => {
             exports.checkHealth();
