@@ -38,9 +38,9 @@ export interface HostedPage {
     css?: HostedPageCssFile[];
 }
 
-export type HostedPageCssFile = HostedPageCssFileInliine | HostedPageCssFileUrl;
+export type HostedPageCssFile = HostedPageCssFileInline | HostedPageCssFileUrl;
 
-export interface HostedPageCssFileInliine {
+export interface HostedPageCssFileInline {
     /**
      * The content of the header `style` tag. If this property is defined, the `url` property should not be specified.
      */
