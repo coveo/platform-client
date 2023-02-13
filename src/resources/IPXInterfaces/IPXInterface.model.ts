@@ -50,7 +50,103 @@ export interface IPXResultTemplate extends HostedInterfaceResultTemplate {
 }
 
 export interface IPXButton {
-    label: string;
+    /**
+     * The label appearing on the IPX button.
+     */
+    label?: string;
+
+    /**
+     * The icon appearing on the IPX button when the IPX is open.
+     */
+    closeIcon?: string;
+
+    /**
+     * The icon appearing on the IPX button when the IPX is close.
+     */
+    openIcon?: string;
+}
+
+export interface IPXContainer {
+    /**
+     * Whether the IPX is using a target selector.
+     */
+    usesTargetSelector?: boolean;
+
+    /**
+     * The IPX button information.
+     */
+    button?: IPXButton;
+
+    /**
+     * The CSS selector used to target the host component of the IPX when usesTargetSelector is true.
+     */
+    targetSelector?: string;
+}
+
+export interface IPXColors {
+    /**
+     * Primary color.
+     */
+    primary: string;
+
+    /**
+     * The background color.
+     */
+    background: string;
+
+    /**
+     * The neutral color.
+     */
+    neutral: string;
+
+    /**
+     * The visited link color.
+     */
+    visitedLink: string;
+
+    /**
+     * The titles color.
+     */
+    titles: string;
+
+    /**
+     * The button color.
+     */
+    button: string;
+
+    /**
+     * The button label color.
+     */
+    buttonLabel: string;
+}
+
+export interface IPXStyle {
+    /**
+     * The colors of the IPX.
+     */
+    colors: IPXColors;
+
+    /**
+     * The font-family of the IPX.
+     */
+    fontFamily: string;
+}
+
+export interface IPXFooter {
+    /**
+     * The footer's label.
+     */
+    label?: string;
+
+    /**
+     * The footer's icon.
+     */
+    icon?: string;
+
+    /**
+     * The footer's link.
+     */
+    link?: string;
 }
 
 export interface IPXInterfaceConfiguration extends HostedInterfaceConfiguration {
@@ -63,16 +159,24 @@ export interface IPXInterfaceConfiguration extends HostedInterfaceConfiguration 
      * The list of tabs to display.
      */
     tabs: IPXTab[];
-    /**
-     * The list of result templates defined for the ipx.
-     */
+
     /**
      * The list of result templates defined for the ipx.
      */
     resultTemplates: IPXResultTemplate[];
 
     /**
-     * The button element of the ipx interface.
+     * The list of 0 to 3 footers to display.
      */
-    button: IPXButton;
+    footer: IPXFooter[];
+
+    /**
+     * The container information.
+     */
+    container: IPXContainer;
+
+    /**
+     * The style configuration.
+     */
+    style: IPXStyle;
 }
