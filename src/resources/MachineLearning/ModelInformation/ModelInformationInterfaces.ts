@@ -209,9 +209,39 @@ export interface BuildingStatsSS {
     headerCount: number;
     meanSnippetLength: number;
 }
+
+export interface SnippetsPerDocument {
+    min: number;
+    max: number;
+    mean: number;
+    median: number;
+    p95: number;
+}
+
+export interface StatsSS {
+    documentCount: number;
+    documentWithDuplicatedIdCount: number;
+    invalidHtmlDocumentCount: number;
+    documentWithSnippetCount: number;
+    documentWithoutIdCount: number;
+    documentWithSnippetRatio: number;
+    snippetCount: number;
+    snippetsPerDocument: SnippetsPerDocument;
+}
+
+export interface StatsPerSourceSS {
+    sourceA: StatsSS;
+    sourceB: StatsSS;
+}
+
+export interface PreparationStatsSS extends StatsSS {
+    statsPerSource: StatsPerSourceSS;
+}
+
 export interface ModelInformationSS {
     metaInfo: MetaInfoSS;
     modelBuildingStats: BuildingStatsSS;
+    preparationStats: PreparationStatsSS;
 }
 
 export interface DatasetFieldDetails {
