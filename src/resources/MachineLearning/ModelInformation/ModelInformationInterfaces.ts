@@ -210,6 +210,9 @@ export interface BuildingStatsSS {
     meanSnippetLength: number;
 }
 
+/**
+ * Snippet per doc details
+ */
 export interface SnippetsPerDocument {
     min: number;
     max: number;
@@ -218,24 +221,53 @@ export interface SnippetsPerDocument {
     p95: number;
 }
 
-export interface StatsSS {
+export interface StatsSmartSnippets {
+    /**
+     * Total valid documents
+     */
     documentCount: number;
+
+    /**
+     * Number of documents with duplicated ID
+     */
     documentWithDuplicatedIdCount: number;
+
+    /**
+     * Number of invalid HTML documents
+     */
     invalidHtmlDocumentCount: number;
+
+    /**
+     * Number of documents with snippets
+     */
     documentWithSnippetCount: number;
+
+    /**
+     * Number of documents without permanent ID
+     */
     documentWithoutIdCount: number;
+
+    /**
+     * Ratio of documents with at least 1 snippet / total valid documents
+     */
     documentWithSnippetRatio: number;
+
+    /**
+     * Number of available snippets
+     */
     snippetCount: number;
+
+    /**
+     * Snippets stats per doc
+     */
     snippetsPerDocument: SnippetsPerDocument;
 }
 
-export interface StatsPerSourceSS {
-    sourceA: StatsSS;
-    sourceB: StatsSS;
-}
-
-export interface PreparationStatsSS extends StatsSS {
-    statsPerSource: StatsPerSourceSS;
+export interface PreparationStatsSS extends StatsSmartSnippets {
+    /**
+     * Additional statistic per source
+     */
+    statsPerSource: Record<string, StatsSmartSnippets>;
 }
 
 export interface ModelInformationSS {
