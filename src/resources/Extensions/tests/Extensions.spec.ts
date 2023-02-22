@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
+import {ExtensionLanguageType} from '../../Enums.js';
 import Extension from '../Extensions.js';
-import {CreateExtension} from '../ExtensionsInterfaces.js';
+import {CreateExtension, ExtensionCompileCode} from '../ExtensionsInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -90,6 +91,18 @@ describe('Extension', () => {
             extension.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Extension.baseUrl);
+        });
+    });
+
+    describe('compileCode', () => {
+        it('should make a POST call to the specific Extension url', () => {
+            const testExtensionCode: ExtensionCompileCode = {
+                code: 'print("hello world")',
+                language: ExtensionLanguageType.PYTHON3,
+            };
+            extension.compileCode(testExtensionCode);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Extension.baseUrl}/test/compile`, testExtensionCode);
         });
     });
 });
