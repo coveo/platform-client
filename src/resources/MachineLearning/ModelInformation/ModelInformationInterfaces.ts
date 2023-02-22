@@ -211,7 +211,7 @@ export interface BuildingStatsSS {
 }
 
 /**
- * Snippet per doc details
+ * Snippet details per document
  */
 export interface SnippetsPerDocument {
     min: number;
@@ -223,7 +223,7 @@ export interface SnippetsPerDocument {
 
 export interface StatsSmartSnippets {
     /**
-     * Total valid documents
+     * Total number of valid documents
      */
     documentCount: number;
 
@@ -258,7 +258,7 @@ export interface StatsSmartSnippets {
     snippetCount: number;
 
     /**
-     * Snippets stats per doc
+     * Snippets stats per document
      */
     snippetsPerDocument: SnippetsPerDocument;
 }
