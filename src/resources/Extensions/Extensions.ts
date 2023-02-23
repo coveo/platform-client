@@ -34,11 +34,11 @@ export default class Extension extends Resource {
     }
 
     /**
-     * Compiles the extension's script
-     * 
+     * Validates the extension's script
+     *
      * @param {ExtensionCompileCode} extensionCode The code to compile
      */
-    compileCode(extensionCode: ExtensionCompileCode) {
+    validateCode(extensionCode: ExtensionCompileCode) {
         return this.api.post<ExtensionCompileCode>(`${Extension.baseUrl}/test/compile`, extensionCode);
     }
 }

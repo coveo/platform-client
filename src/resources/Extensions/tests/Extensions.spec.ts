@@ -94,13 +94,13 @@ describe('Extension', () => {
         });
     });
 
-    describe('compileCode', () => {
+    describe('validateCode', () => {
         it('should make a POST call to the specific Extension url', () => {
             const testExtensionCode: ExtensionCompileCode = {
                 code: 'print("hello world")',
                 language: ExtensionLanguageType.PYTHON3,
             };
-            extension.compileCode(testExtensionCode);
+            extension.validateCode(testExtensionCode);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Extension.baseUrl}/test/compile`, testExtensionCode);
         });
