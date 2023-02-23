@@ -22,6 +22,7 @@ describe('Endpoint', () => {
             it('should return the endpoint corresponding to each specified environment and region', () => {
                 expect(getEndpoint(env, Region.EU)).toBe(`https://${host}-eu.cloud.coveo.com`);
                 expect(getEndpoint(env, Region.AU)).toBe(`https://${host}-au.cloud.coveo.com`);
+                expect(getEndpoint(env, Region.CA)).toBe(`https://${host}-ca.cloud.coveo.com`);
             });
         });
 
@@ -34,6 +35,7 @@ describe('Endpoint', () => {
                 expect(getEndpoint(Environment.hipaa, Region.US)).toBe('https://platformhipaa.cloud.coveo.com');
                 expect(getEndpoint(Environment.hipaa, Region.EU)).toBe('https://platformhipaa.cloud.coveo.com');
                 expect(getEndpoint(Environment.hipaa, Region.AU)).toBe('https://platformhipaa.cloud.coveo.com');
+                expect(getEndpoint(Environment.hipaa, Region.CA)).toBe('https://platformhipaa.cloud.coveo.com');
             });
         });
     });
@@ -55,6 +57,7 @@ describe('Endpoint', () => {
             it('should return the endpoint corresponding to each specified environment and region', () => {
                 expect(getEndpoint(Environment.dev, Region.EU, true)).toBe('https://apidev-eu.cloud.coveo.com');
                 expect(getEndpoint(Environment.dev, Region.AU, true)).toBe('https://apidev-au.cloud.coveo.com');
+                expect(getEndpoint(Environment.dev, Region.CA, true)).toBe('https://apidev-ca.cloud.coveo.com');
             });
         });
 
@@ -70,6 +73,7 @@ describe('Endpoint', () => {
             it('should return the endpoint corresponding to each specified environment and region', () => {
                 expect(getEndpoint(Environment.prod, Region.EU, true)).toBe('https://api-eu.cloud.coveo.com');
                 expect(getEndpoint(Environment.prod, Region.AU, true)).toBe('https://api-au.cloud.coveo.com');
+                expect(getEndpoint(Environment.prod, Region.CA, true)).toBe('https://api-ca.cloud.coveo.com');
             });
         });
 
@@ -82,6 +86,7 @@ describe('Endpoint', () => {
                 expect(getEndpoint(Environment.hipaa, Region.US, true)).toBe('https://apihipaa.cloud.coveo.com');
                 expect(getEndpoint(Environment.hipaa, Region.EU, true)).toBe('https://apihipaa.cloud.coveo.com');
                 expect(getEndpoint(Environment.hipaa, Region.AU, true)).toBe('https://apihipaa.cloud.coveo.com');
+                expect(getEndpoint(Environment.hipaa, Region.CA, true)).toBe('https://apihipaa.cloud.coveo.com');
             });
         });
     });
