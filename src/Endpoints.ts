@@ -4,6 +4,7 @@ export enum Region {
     US = 'us',
     EU = 'eu',
     AU = 'au',
+    CA = 'ca',
 }
 
 export enum Environment {
