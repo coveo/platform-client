@@ -8,6 +8,7 @@ import {
     ActivityFacetModel,
     ActivityListingFilters,
 } from './ActivitiesInterfaces.js';
+import {ActivityOperation} from '../Enums.js';
 
 export default class Activity extends Resource {
     static getBaseUrl = () => `/rest/organizations/${API.orgPlaceholder}/activities`;
@@ -18,6 +19,17 @@ export default class Activity extends Resource {
     }
     getResourceTypes() {
         return this.api.get<string[]>(`${Activity.getBaseUrl()}/resourcetypes`);
+    }
+
+    /**
+     * Retrieves a list of ActivityOperation for a given organization.
+     *
+     * @param {boolean} includeInternal Whether or not to include internal operations.
+     * @returns {Promise<ActivityOperation[]>} A list of activity operations.
+     */
+    getOperationTypes(includeInternal = false) {
+        const operationTypesUrl = `${Activity.getBaseUrl()}/operationtypes`;
+        return this.api.get<ActivityOperation[]>(includeInternal ? `${operationTypesUrl}/all` : operationTypesUrl);
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {

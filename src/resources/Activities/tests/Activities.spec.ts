@@ -38,6 +38,20 @@ describe('Activity', () => {
         });
     });
 
+    describe('getOperationTypes', () => {
+        it('should make a GET call to return non internal operation types', () => {
+            activity.getOperationTypes();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/operationtypes`);
+        });
+
+        it('should make a GET call to return all operation types', () => {
+            activity.getOperationTypes(true);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/operationtypes/all`);
+        });
+    });
+
     describe('list', () => {
         it('should make a POST call to the specific Activity url to fetch activities of an organization', () => {
             const params: ListActivitiesParams = {};
