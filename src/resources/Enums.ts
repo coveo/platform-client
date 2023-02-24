@@ -5,7 +5,7 @@ export enum AccessLevel {
     NONE = 'NONE',
 }
 
-export enum PrivilegeholderType {
+export enum PrivilegeHolderType {
     API_KEY = 'API_KEY',
     GROUP = 'GROUP',
 }
