@@ -21,33 +21,58 @@ export interface AccessParams {
     privilegeTargetDomain: string;
 }
 
-export interface AccessModel {
+export type GroupAccessModel = {
     /*
-     * The access level for this privilege.
+     * The access level granted by the access model.
      */
     accessLevel: AccessLevel;
     /*
      * Whether the calling user is part of this group.
      */
-    callerPartOf?: boolean;
+    callerPartOf: boolean;
     /*
-     * The creation date of this privilege.
-     */
-    createdDate?: string;
-    /*
-     * The display name of this privilege.
+     * The display name of the group.
      */
     displayName: string;
     /*
-     * The id of this privilege.
+     * The id of the group.
      */
     id: string;
     /*
-     * The type of this privilege.
+     * Represent the group access model type.
      */
-    privilegeHolderType: PrivilegeHolderType;
+    privilegeHolderType: PrivilegeHolderType.GROUP;
     /*
-     * The list of sources id this privilege is applied to.
+     * The list of resources ids this access model has edit access level on.
      */
     resourceIdsWithEditLevel?: string[];
-}
+};
+
+export type ApiKeyAccessModel = {
+    /*
+     * The access level granted by the access model.
+     */
+    accessLevel: AccessLevel;
+    /*
+     * The creation date of the api key.
+     */
+    createdDate: string;
+    /*
+     * The display name of the api key.
+     */
+    displayName: string;
+    /*
+     * The id of the api key.
+     */
+    id: string;
+    /*
+     * Represent the api key access model type.
+     */
+    privilegeHolderType: PrivilegeHolderType.API_KEY;
+    /*
+     * The list of resources ids this access model has edit access level on.
+     */
+    resourceIdsWithEditLevel?: string[];
+};
+
+export type AccessModel = GroupAccessModel | ApiKeyAccessModel;

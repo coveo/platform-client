@@ -10,6 +10,14 @@ export enum PrivilegeHolderType {
     GROUP = 'GROUP',
 }
 
+/**
+ * @deprecated use `PrivilegeHolderType` instead.
+ */
+export enum PrivilegeholderType {
+    API_KEY = 'API_KEY',
+    GROUP = 'GROUP',
+}
+
 export enum AuthProvider {
     SALESFORCE = 'SALESFORCE',
     SALESFORCE_SANDBOX = 'SALESFORCE_SANDBOX',
