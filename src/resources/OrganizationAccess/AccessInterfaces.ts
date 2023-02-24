@@ -23,7 +23,7 @@ export interface AccessParams {
 
 export type GroupAccessModel = {
     /*
-     * The access level granted by the access model.
+     * The access level granted by this group.
      */
     accessLevel: AccessLevel;
     /*
@@ -31,7 +31,7 @@ export type GroupAccessModel = {
      */
     callerPartOf: boolean;
     /*
-     * The display name of the group.
+     * The display name of this group.
      */
     displayName: string;
     /*
@@ -43,34 +43,34 @@ export type GroupAccessModel = {
      */
     privilegeHolderType: PrivilegeHolderType.GROUP;
     /*
-     * The list of resources ids this access model has edit access level on.
+     * The list of resources ids this group has edit access level on.
      */
     resourceIdsWithEditLevel?: string[];
 };
 
 export type ApiKeyAccessModel = {
     /*
-     * The access level granted by the access model.
+     * The access level granted by this API key.
      */
     accessLevel: AccessLevel;
     /*
-     * The creation date of the api key.
+     * The creation date of this API key.
      */
     createdDate: string;
     /*
-     * The display name of the api key.
+     * The display name of this API key.
      */
     displayName: string;
     /*
-     * The id of the api key.
+     * The id of this API key.
      */
     id: string;
     /*
-     * Represent the api key access model type.
+     * Represent the API key access model type.
      */
     privilegeHolderType: PrivilegeHolderType.API_KEY;
     /*
-     * The list of resources ids this access model has edit access level on.
+     * The list of resources ids this API key has edit access level on.
      */
     resourceIdsWithEditLevel?: string[];
 };
