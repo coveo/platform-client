@@ -13,10 +13,7 @@ export enum PrivilegeHolderType {
 /**
  * @deprecated use `PrivilegeHolderType` instead.
  */
-export enum PrivilegeholderType {
-    API_KEY = 'API_KEY',
-    GROUP = 'GROUP',
-}
+export type PrivilegeholderType = PrivilegeHolderType;
 
 export enum AuthProvider {
     SALESFORCE = 'SALESFORCE',
