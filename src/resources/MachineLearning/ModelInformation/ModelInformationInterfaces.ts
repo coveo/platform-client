@@ -273,7 +273,7 @@ export interface BuildingStatsSS extends StatsSmartSnippets {
 
 export interface StatsPerSource extends StatsSmartSnippets {
     /**
-     * name of the source
+     * Name of the source
      */
     sourceName: string;
 }
