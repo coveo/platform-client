@@ -10,7 +10,7 @@ export type MLModelTypeInfo =
     | ModelInformationER
     | ModelInformationPR
     | ModelInformationQS
-    | ModelInformationSS;
+    | ModelInformationSmartSnippets;
 
 export interface MetaInfo {
     modelName: string;
@@ -197,7 +197,7 @@ export interface ModelInformationQS {
     [key: string]: any;
 }
 
-export interface MetaInfoSS extends MetaInfo {
+export interface MetaInfoSmartSnippets extends MetaInfo {
     modelId: string;
     engineName: string;
     modelSize: string;
@@ -254,7 +254,7 @@ export interface StatsSmartSnippets {
     snippetsPerDocument: SnippetsPerDocument;
 }
 
-export interface BuildingStatsSS extends StatsSmartSnippets {
+export interface BuildingStatsSmartSnippets extends StatsSmartSnippets {
     /**
      * Number of documents with HTML headers
      */
@@ -278,9 +278,9 @@ export interface StatsPerSource extends StatsSmartSnippets {
     sourceName: string;
 }
 
-export interface ModelInformationSS {
-    metaInfo: MetaInfoSS;
-    modelBuildingStats: BuildingStatsSS;
+export interface ModelInformationSmartSnippets {
+    metaInfo: MetaInfoSmartSnippets;
+    modelBuildingStats: BuildingStatsSmartSnippets;
 }
 
 export interface DatasetFieldDetails {
