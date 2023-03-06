@@ -40,9 +40,13 @@ describe('Catalog', () => {
         it('should be backward compatible with the legacy structure', () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
-                product: {
-                    idField: '@uri',
-                    objectType: 'product',
+                configuration: {
+                    id: 'configuration-to-update-id',
+                    name: 'New configuration',
+                    product: {
+                        idField: '@uri',
+                        objectType: 'product',
+                    },
                 },
             };
 
@@ -134,9 +138,13 @@ describe('Catalog', () => {
             const catalogModel: CreateCatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'Catalog to be updated',
-                product: {
-                    idField: '@uri',
-                    objectType: 'product',
+                configuration: {
+                    id: 'configuration-to-update-id',
+                    name: 'Configuration',
+                    product: {
+                        idField: '@uri',
+                        objectType: 'product',
+                    },
                 },
             };
 
