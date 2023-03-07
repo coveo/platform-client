@@ -10,7 +10,7 @@ export type MLModelTypeInfo =
     | ModelInformationER
     | ModelInformationPR
     | ModelInformationQS
-    | ModelInformationSS;
+    | ModelInformationSmartSnippets;
 
 export interface MetaInfo {
     modelName: string;
@@ -197,17 +197,10 @@ export interface ModelInformationQS {
     [key: string]: any;
 }
 
-export interface MetaInfoSS extends MetaInfo {
+export interface MetaInfoSmartSnippets extends MetaInfo {
     modelId: string;
     engineName: string;
     modelSize: string;
-}
-
-export interface BuildingStatsSS {
-    documentCount: number;
-    snippetCount: number;
-    headerCount: number;
-    meanSnippetLength: number;
 }
 
 /**
@@ -217,8 +210,6 @@ export interface SnippetsPerDocument {
     min: number;
     max: number;
     mean: number;
-    median: number;
-    p95: number;
 }
 
 export interface StatsSmartSnippets {
@@ -263,17 +254,33 @@ export interface StatsSmartSnippets {
     snippetsPerDocument: SnippetsPerDocument;
 }
 
-export interface PreparationStatsSS extends StatsSmartSnippets {
+export interface BuildingStatsSmartSnippets extends StatsSmartSnippets {
     /**
-     * Additional statistic per source
+     * Number of documents with HTML headers
      */
-    statsPerSource: Record<string, StatsSmartSnippets>;
+    headerCount: number;
+
+    /**
+     * Average number of words per snippet
+     */
+    meanSnippetLength: number;
+
+    /**
+     * Additional stats related to each source
+     */
+    statsPerSource: StatsPerSource[];
 }
 
-export interface ModelInformationSS {
-    metaInfo: MetaInfoSS;
-    modelBuildingStats: BuildingStatsSS;
-    preparationStats: PreparationStatsSS;
+export interface StatsPerSource extends StatsSmartSnippets {
+    /**
+     * Name of the source
+     */
+    sourceName: string;
+}
+
+export interface ModelInformationSmartSnippets {
+    metaInfo: MetaInfoSmartSnippets;
+    modelBuildingStats: BuildingStatsSmartSnippets;
 }
 
 export interface DatasetFieldDetails {
