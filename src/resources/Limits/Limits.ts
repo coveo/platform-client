@@ -37,7 +37,7 @@ export default class Limits extends Resource {
      * @param limitKey The unique identifier of the target limit status to show
      */
     getSpecificLimitStatus(sectionName: LicenseSection, limitKey: string) {
-        return this.api.get<LimitModel>(`${Limits.getSpecificLimit(sectionName, limitKey)}`);
+        return this.api.get<LimitModel>(Limits.getSpecificLimit(sectionName, limitKey));
     }
 
     getHistoryLimit(sectionName: LicenseSection, limitKey: string, options?: LimitHistoryOptions) {
