@@ -34,6 +34,8 @@ describe('CatalogConfiguration', () => {
                     objectType: 'ok',
                 },
                 fieldsMapping: {},
+                host: 'https://www.example.com',
+                locale: 'en-us-usd',
             };
 
             catalogConfiguration.create(catalogConfigurationModel);
@@ -70,6 +72,8 @@ describe('CatalogConfiguration', () => {
                     objectType: 'product',
                 },
                 fieldsMapping: {},
+                host: 'https://www.example.com',
+                locale: 'en-us-usd',
             };
 
             catalogConfiguration.update(catalogConfigurationModel);

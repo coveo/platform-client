@@ -54,6 +54,14 @@ export interface CreateCatalogConfigurationModel {
      * The configuration mapping of index fields to standard commerce fields
      */
     fieldsMapping?: CatalogFieldsMapping;
+    /**
+     * The host of the storefront to which the listing pages should be associated.
+     */
+    host?: string;
+    /**
+     * A concatenation of language, country and currency identifiers.
+     */
+    locale?: string;
 }
 
 export interface CatalogConfigurationModel {
@@ -85,6 +93,14 @@ export interface CatalogConfigurationModel {
      * Catalogs associated to the configuration
      */
     associatedCatalogs?: IAssociatedCatalogModel[];
+    /**
+     * The host of the storefront to which the listing pages should be associated.
+     */
+    host?: string;
+    /**
+     * A concatenation of language, country and currency identifiers.
+     */
+    locale?: string;
 }
 
 export interface IAssociatedCatalogModel {
