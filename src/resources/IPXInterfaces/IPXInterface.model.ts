@@ -179,4 +179,24 @@ export interface IPXInterfaceConfiguration extends HostedInterfaceConfiguration 
      * The style configuration.
      */
     style: IPXStyle;
+
+    /**
+     * The date of creation of the interface
+     */
+    created: string;
+
+    /**
+     * The original author of the interface
+     */
+    createdBy: string;
+
+    /**
+     * The date of the interface's latest update
+     */
+    updated: string;
+
+    /**
+     * The author of the interface's latest update
+     */
+    updatedBy: string;
 }
