@@ -18,7 +18,11 @@ const successBlob: ResponseHandler = {
 const error: ResponseHandler = {
     canProcess: () => true,
     process: async <T>(response: Response): Promise<T> => {
-        throw await response.json();
+        const responseJson = await response.json();
+        const platformError = new CoveoPlatformClientError();
+        Object.assign(platformError, responseJson);
+        platformError.requestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        throw platformError;
     },
 };
 
@@ -27,3 +31,7 @@ export const ResponseHandlers = {noContent, success, successBlob, error};
 
 export default <T>(response: Response, handlers = defaultResponseHandlers) =>
     handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);
+
+export class CoveoPlatformClientError extends Error {
+    requestId: string;
+}

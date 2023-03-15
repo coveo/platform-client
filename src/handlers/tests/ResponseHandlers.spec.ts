@@ -1,4 +1,4 @@
-import handleResponse, {ResponseHandlers} from '../ResponseHandlers.js';
+import handleResponse, {CoveoPlatformClientError, ResponseHandlers} from '../ResponseHandlers.js';
 
 describe('ResponseHandlers', () => {
     it('should return a promise resolved with an empty object when the response status code is 204', async () => {
@@ -20,10 +20,23 @@ describe('ResponseHandlers', () => {
     });
 
     it('should return a promise rejected with the response body when the status is not between 200 and 299', async () => {
-        const error = {code: 'WRONG_UTENSIL', message: 'Use a spoon to eat the soup.'};
-        const errorResponse = new Response(JSON.stringify(error), {status: 400});
+        const httpError = {code: 'WRONG_UTENSIL', message: 'Use a spoon to eat the soup.'};
+        const errorResponse = new Response(JSON.stringify(httpError), {
+            status: 400,
+            headers: {
+                'X-Request-ID': 'DidyoueverhearthetragedyofDarthPlagueisTheWise?',
+            },
+        });
+        let rejectedError: CoveoPlatformClientError | undefined;
+        try {
+            await handleResponse(errorResponse);
+        } catch (error) {
+            rejectedError = error;
+        }
 
-        await expect(() => handleResponse(errorResponse)).rejects.toStrictEqual(error);
+        expect(rejectedError).toMatchObject(httpError);
+        expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
+        expect(rejectedError?.requestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
     });
 
     it('should return a promise resolved with the response body as blob when using the successBlob handler and the status is between 200 and 299', async () => {
