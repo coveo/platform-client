@@ -21,7 +21,7 @@ const error: ResponseHandler = {
         const responseJson = await response.json();
         const platformError = new CoveoPlatformClientError();
         Object.assign(platformError, responseJson);
-        platformError.requestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
         throw platformError;
     },
 };
@@ -33,5 +33,9 @@ export default <T>(response: Response, handlers = defaultResponseHandlers) =>
     handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);
 
 export class CoveoPlatformClientError extends Error {
-    requestId: string;
+    /**
+     * The HTTP X-Request-ID request header is an optional and unofficial HTTP header, used to trace individual HTTP requests from the client to the server and back again.
+     * It allows the client and server to correlate each HTTP request.
+     */
+    xRequestId: string;
 }

@@ -36,7 +36,7 @@ describe('ResponseHandlers', () => {
 
         expect(rejectedError).toMatchObject(httpError);
         expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
-        expect(rejectedError?.requestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
+        expect(rejectedError?.xRequestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
     });
 
     it('should return a promise resolved with the response body as blob when using the successBlob handler and the status is between 200 and 299', async () => {
