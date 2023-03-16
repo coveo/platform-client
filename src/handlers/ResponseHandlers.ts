@@ -1,17 +1,23 @@
+import {Predicate} from '../utils/types.js';
 import {ResponseHandler} from './ResponseHandlerInterfaces.js';
 
+/** Check whether the response status is `204 No Content`. */
+export const isNoContent: Predicate<Response> = (response) => response.status === 204;
+/** Check whether the response is considered to have any "ok" status code (not just 200). */
+export const isAnyOkStatus: Predicate<Response> = (response) => response.ok;
+
 const noContent: ResponseHandler = {
-    canProcess: (response: Response): boolean => response.status === 204,
+    canProcess: isNoContent,
     process: async <T>(): Promise<T> => ({} as T),
 };
 
 const success: ResponseHandler = {
-    canProcess: (response: Response): boolean => response.ok,
+    canProcess: isAnyOkStatus,
     process: async <T>(response: Response): Promise<T> => await response.json(),
 };
 
 const successBlob: ResponseHandler = {
-    canProcess: (response: Response): boolean => response.ok,
+    canProcess: isAnyOkStatus,
     process: async <T>(response: Response): Promise<T> => await (response.blob() as any),
 };
 
@@ -26,11 +32,17 @@ const error: ResponseHandler = {
     },
 };
 
-export const defaultResponseHandlers = [noContent, success, error];
-export const ResponseHandlers = {noContent, success, successBlob, error};
+const defaultResponseHandlers = Object.freeze([noContent, success, error]);
+export const ResponseHandlers = Object.freeze({noContent, success, successBlob, error});
 
-export default <T>(response: Response, handlers = defaultResponseHandlers) =>
-    handlers.filter((handler) => handler.canProcess(response))[0].process<T>(response);
+export default async <T>(response: Response, customHandlers?: readonly ResponseHandler[] | null): Promise<T> => {
+    const handlers = customHandlers?.length ? customHandlers : defaultResponseHandlers;
+    const handler = handlers.find((candidate) => candidate.canProcess(response));
+    if (!handler) {
+        throw new Error('No suitable response handler found');
+    }
+    return await handler.process<T>(response);
+};
 
 export class CoveoPlatformClientError extends Error {
     /**

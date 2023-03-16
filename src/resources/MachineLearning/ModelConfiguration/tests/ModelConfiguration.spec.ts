@@ -32,11 +32,10 @@ describe('ModelConfiguration', () => {
 
             modelConfig.updateAdvancedConfig(modelId, modelConfigFileContents);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(
-                `${ModelConfiguration.getBaseUrl(modelId)}/advanced`,
-                modelConfigFileContents,
-                {method: 'put', body: modelConfigFileContents, headers: {'Content-Type': 'application/json'}}
-            );
+            expect(api.put).toHaveBeenCalledWith(`${ModelConfiguration.getBaseUrl(modelId)}/advanced`, undefined, {
+                body: modelConfigFileContents,
+                headers: {'Content-Type': 'application/json'},
+            });
         });
     });
 });
