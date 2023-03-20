@@ -22,8 +22,19 @@ const error: ResponseHandler = {
         const platformError = new CoveoPlatformClientError();
         Object.assign(platformError, responseJson);
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.errorCode = responseJson.errorCode ?? getErrorCodeFromAliases(responseJson) ?? 'unknown';
         throw platformError;
     },
+};
+
+const errorCodeAliases = ['type'];
+const getErrorCodeFromAliases = (responseJson: object): string | null => {
+    for (const alias of errorCodeAliases) {
+        if (alias in responseJson && typeof responseJson[alias] === 'string') {
+            return responseJson[alias];
+        }
+    }
+    return null;
 };
 
 export const defaultResponseHandlers = [noContent, success, error];
@@ -38,4 +49,5 @@ export class CoveoPlatformClientError extends Error {
      * It allows the client and server to correlate each HTTP request.
      */
     xRequestId: string;
+    errorCode: string;
 }
