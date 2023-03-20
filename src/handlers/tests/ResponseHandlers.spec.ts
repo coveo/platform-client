@@ -20,12 +20,7 @@ describe('ResponseHandlers', () => {
     });
 
     describe('when the status is not between 200 and 299', () => {
-        const buildResponseAndError = (bodyExtension: object = {}, headers: HeadersInit = {}) => {
-            const httpError = {
-                code: 'WRONG_UTENSIL',
-                message: 'Use a spoon to eat the soup.',
-                ...bodyExtension,
-            };
+        const buildResponseAndError = (httpError: object = {}, headers: HeadersInit = {}) => {
             const errorResponse = new Response(JSON.stringify(httpError), {
                 status: 400,
                 headers,
@@ -33,12 +28,8 @@ describe('ResponseHandlers', () => {
             return {errorResponse, httpError};
         };
 
-        const headersWithXRequestId = {
-            'X-Request-ID': 'DidyoueverhearthetragedyofDarthPlagueisTheWise?',
-        };
-
         it('should return a promise rejected with the response body', async () => {
-            const {errorResponse, httpError} = buildResponseAndError({}, headersWithXRequestId);
+            const {errorResponse, httpError} = buildResponseAndError();
 
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
@@ -49,11 +40,11 @@ describe('ResponseHandlers', () => {
 
             expect(rejectedError).toMatchObject(httpError);
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
-            expect(rejectedError?.xRequestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
         });
 
-        it('should fallback xRequestId to unknown as a string', async () => {
+        it('should include the HTTP status code in the error', async () => {
             const {errorResponse} = buildResponseAndError();
+
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
                 await handleResponse(errorResponse);
@@ -61,13 +52,15 @@ describe('ResponseHandlers', () => {
                 rejectedError = error;
             }
 
-            expect(rejectedError?.xRequestId).toBe('unknown');
+            expect(rejectedError?.status).toBe(400);
         });
 
-        it('should prefer `errorCode` over an alias', async () => {
+        it('should include the `xRequestId` in the error', async () => {
             const {errorResponse} = buildResponseAndError(
-                {errorCode: 'someErrorCode', type: 'someAliasedErrorCode'},
-                headersWithXRequestId
+                {},
+                {
+                    'X-Request-ID': 'DidyoueverhearthetragedyofDarthPlagueisTheWise?',
+                }
             );
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
@@ -76,11 +69,29 @@ describe('ResponseHandlers', () => {
                 rejectedError = error;
             }
 
-            expect(rejectedError?.errorCode).toBe('someErrorCode');
+            expect(rejectedError?.xRequestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
         });
 
-        it('should fallback to an errorCode alias', async () => {
-            const {errorResponse} = buildResponseAndError({type: 'someAliasedErrorCode'}, headersWithXRequestId);
+        it.each(['xRequestId', 'title', 'detail'])(
+            'should ultimately fallback `%s` to unknown as a string',
+            async (key) => {
+                const {errorResponse} = buildResponseAndError();
+                let rejectedError: CoveoPlatformClientError | undefined;
+                try {
+                    await handleResponse(errorResponse);
+                } catch (error) {
+                    rejectedError = error;
+                }
+
+                expect(rejectedError?.[key]).toBe('unknown');
+            }
+        );
+
+        it.each([
+            ['title', 'type'],
+            ['detail', 'message'],
+        ])('should prefer `%s` over an alias', async (key, altKey) => {
+            const {errorResponse} = buildResponseAndError({[key]: 'shouldBeThis', [altKey]: 'shouldNotBeThat'});
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
                 await handleResponse(errorResponse);
@@ -88,11 +99,14 @@ describe('ResponseHandlers', () => {
                 rejectedError = error;
             }
 
-            expect(rejectedError?.errorCode).toBe('someAliasedErrorCode');
+            expect(rejectedError?.[key]).toBe('shouldBeThis');
         });
 
-        it('should ultimately fallback errorCode to unknown as a string', async () => {
-            const {errorResponse} = buildResponseAndError();
+        it.each([
+            ['title', 'type'],
+            ['detail', 'message'],
+        ])('should fallback to a `%s` alias', async (key, altKey) => {
+            const {errorResponse} = buildResponseAndError({[altKey]: 'shouldBeAlias'});
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
                 await handleResponse(errorResponse);
@@ -100,7 +114,7 @@ describe('ResponseHandlers', () => {
                 rejectedError = error;
             }
 
-            expect(rejectedError?.errorCode).toBe('unknown');
+            expect(rejectedError?.[key]).toBe('shouldBeAlias');
         });
     });
 
