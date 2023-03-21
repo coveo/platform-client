@@ -1,4 +1,4 @@
-import {WithRequiredProperty} from '../../utils/WithRequired.js';
+import {WithRequiredProperty} from '../../utils/types.js';
 import {Paginated} from '../BaseInterfaces.js';
 
 /**
