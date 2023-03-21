@@ -105,8 +105,8 @@ describe('Result Rankings', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
-                json,
-                {method: 'put', body: json, headers: {'Content-Type': 'application/json'}}
+                undefined,
+                {body: json, headers: {'Content-Type': 'application/json'}}
             );
         });
     });
@@ -169,8 +169,7 @@ describe('Result Rankings', () => {
 
             resultRankings.createJSON(pipelineId, json);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), json, {
-                method: 'post',
+            expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), undefined, {
                 body: json,
                 headers: {'Content-Type': 'application/json'},
             });

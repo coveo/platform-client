@@ -68,7 +68,6 @@ describe('PushAPI', () => {
                 expect(serverlessApi.delete).toHaveBeenCalledWith(url, {
                     body: '{"identity":{"name":"Test Identity","additionalInfo":{},"type":"GROUP"}}',
                     headers: {'Content-Type': 'application/json'},
-                    method: 'delete',
                 });
             });
         });

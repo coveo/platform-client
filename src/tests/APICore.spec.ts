@@ -7,6 +7,50 @@ import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces.js';
 
 jest.mock('../Endpoints.js');
 
+/**
+ * Creates a method that can be passed to `fetchMock` to handle a request.
+ * It will delay completing the request, and handle abort like `fetch` would.
+ *
+ * @param result The value to resolve with after timeout, if the request is not aborted.
+ * @param timeout The delay to resolve with.
+ * @returns A functhion that can be passed to `fetchMock`.
+ */
+const delayedResponse =
+    <T>(result: T, timeout: number) =>
+    (_: string, init: RequestInit | undefined): Promise<T> =>
+        new Promise((resolve, reject) => {
+            const signal = init?.signal;
+            let tid: NodeJS.Timeout | null = null;
+
+            if (signal?.aborted) {
+                reject(signal.reason);
+                return;
+            }
+
+            function abort(this: AbortSignal) {
+                if (tid !== null) {
+                    clearTimeout(tid);
+                    tid = null;
+                }
+                if (signal) {
+                    signal.removeEventListener('abort', abort);
+                }
+                reject(this.reason);
+            }
+
+            if (signal) {
+                signal.addEventListener('abort', abort);
+            }
+
+            tid = setTimeout(() => {
+                tid = null;
+                if (signal) {
+                    signal.removeEventListener('abort', abort);
+                }
+                resolve(result);
+            }, timeout);
+        });
+
 describe('APICore', () => {
     const testConfig: PlatformClientOptions = {
         host: 'https://some.url/',
@@ -92,7 +136,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('get');
+                expect(options?.method).toBe('GET');
                 expect(response).toEqual(testData.response);
             });
 
@@ -106,8 +150,41 @@ describe('APICore', () => {
             it('should bind GET requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeDefined();
-                expect(fetchMock.mock.calls[0][1]?.signal instanceof AbortSignal).toBe(true);
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeInstanceOf(AbortSignal);
+            });
+
+            it('user arguments can set anything but the method', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                await api.get(testData.route, {
+                    window: null,
+                    credentials: 'include',
+                    headers: {Authorization: 'custom', 'Content-Type': 'text/plain'},
+                });
+
+                const init = fetchMock.mock.calls[0][1];
+                expect(init).toBeDefined();
+                expect(init).toHaveProperty('method', 'GET');
+                expect(init).toHaveProperty('credentials', 'include');
+                expect(init).toHaveProperty('window', null);
+                expect(init?.headers).toHaveProperty('Authorization', 'custom');
+                expect(init?.headers).toHaveProperty('Content-Type', 'text/plain');
+            });
+
+            it('user signal can abort', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                const userAbort = new AbortController();
+                await api.get(testData.route, {signal: userAbort.signal});
+
+                const init = fetchMock.mock.calls[0][1]!;
+                expect(init?.signal).toBeInstanceOf(AbortSignal);
+                // There is both the "get abort" signal, and the user abort signal,
+                // So the signal should be a combined one.
+                expect(init?.signal).not.toEqual(userAbort.signal);
+
+                expect(init?.signal?.aborted).toBe(false);
+                userAbort.abort();
+                expect(init?.signal?.aborted).toBe(true);
             });
         });
 
@@ -121,7 +198,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('get');
+                expect(options?.method).toBe('GET');
                 expect(response).toEqual(expectedResponse);
             });
 
@@ -134,8 +211,8 @@ describe('APICore', () => {
             it('should bind GET requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.getFile(testData.route);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeDefined();
-                expect(fetchMock.mock.calls[0][1]?.signal instanceof AbortSignal).toBe(true);
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeInstanceOf(AbortSignal);
             });
         });
 
@@ -148,7 +225,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('post');
+                expect(options?.method).toBe('POST');
                 expect(options?.body).toBe(JSON.stringify(testData.body));
                 expect(options?.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
                 expect(response).toEqual(testData.response);
@@ -157,7 +234,30 @@ describe('APICore', () => {
             it('should not bind POST requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.post(testData.route, testData.body);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeUndefined();
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeUndefined();
+            });
+
+            it('user arguments can set anything but the method', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                const userAbort = new AbortController();
+                const body: BodyInit = 'RAW STRING';
+
+                await api.post(testData.route, undefined, {
+                    body,
+                    credentials: 'include',
+                    signal: userAbort.signal,
+                    headers: {Authorization: 'custom'},
+                });
+
+                const init = fetchMock.mock.calls[0][1];
+                expect(init).toBeDefined();
+                expect(init).toHaveProperty('method', 'POST');
+                expect(init).toHaveProperty('credentials', 'include');
+                expect(init).toHaveProperty('body', body);
+                expect(init).toHaveProperty('signal', userAbort.signal);
+                expect(init?.headers).toHaveProperty('Authorization', 'custom');
+                expect(init?.headers).not.toHaveProperty('Content-Type');
             });
         });
 
@@ -172,7 +272,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('post');
+                expect(options?.method).toBe('POST');
                 expect(options?.body).toBe(formMock);
                 expect(options?.headers).not.toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
                 expect(response).toEqual(testData.response);
@@ -181,7 +281,8 @@ describe('APICore', () => {
             it('should not bind POST requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.postForm(testData.route, formMock);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeUndefined();
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeUndefined();
             });
         });
 
@@ -194,7 +295,7 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('put');
+                expect(options?.method).toBe('PUT');
                 expect(options?.body).toBe(JSON.stringify(testData.body));
                 expect(options?.headers).toEqual(expect.objectContaining({'Content-Type': 'application/json'}));
                 expect(response).toEqual(testData.response);
@@ -203,7 +304,30 @@ describe('APICore', () => {
             it('should not bind PUT requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.put(testData.route, testData.body);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeUndefined();
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeUndefined();
+            });
+
+            it('user arguments can set anything but the method', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                const userAbort = new AbortController();
+                const body: BodyInit = 'RAW STRING';
+
+                await api.put(testData.route, undefined, {
+                    body,
+                    credentials: 'include',
+                    signal: userAbort.signal,
+                    headers: {Authorization: 'custom'},
+                });
+
+                const init = fetchMock.mock.calls[0][1];
+                expect(init).toBeDefined();
+                expect(init).toHaveProperty('method', 'PUT');
+                expect(init).toHaveProperty('credentials', 'include');
+                expect(init).toHaveProperty('body', body);
+                expect(init).toHaveProperty('signal', userAbort.signal);
+                expect(init?.headers).toHaveProperty('Authorization', 'custom');
+                expect(init?.headers).not.toHaveProperty('Content-Type');
             });
         });
 
@@ -225,7 +349,30 @@ describe('APICore', () => {
             it('should not bind PATCH requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.patch(testData.route, testData.body);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeUndefined();
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeUndefined();
+            });
+
+            it('user arguments can set anything but the method', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                const userAbort = new AbortController();
+                const body: BodyInit = 'RAW STRING';
+
+                await api.patch(testData.route, undefined, {
+                    body,
+                    credentials: 'include',
+                    signal: userAbort.signal,
+                    headers: {Authorization: 'custom'},
+                });
+
+                const init = fetchMock.mock.calls[0][1];
+                expect(init).toBeDefined();
+                expect(init).toHaveProperty('method', 'PATCH');
+                expect(init).toHaveProperty('credentials', 'include');
+                expect(init).toHaveProperty('body', body);
+                expect(init).toHaveProperty('signal', userAbort.signal);
+                expect(init?.headers).toHaveProperty('Authorization', 'custom');
+                expect(init?.headers).not.toHaveProperty('Content-Type');
             });
         });
 
@@ -238,14 +385,32 @@ describe('APICore', () => {
                 const [url, options] = fetchMock.mock.calls[0];
 
                 expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('delete');
+                expect(options?.method).toBe('DELETE');
                 expect(response).toEqual(testData.response);
             });
 
             it('should not bind DELETE requests to an abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.delete(testData.route);
-                expect(fetchMock.mock.calls[0][1]?.signal).toBeUndefined();
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal).toBeUndefined();
+            });
+
+            it('user arguments can set anything but the method', async () => {
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                await api.delete(testData.route, {
+                    window: null,
+                    credentials: 'include',
+                    headers: {Authorization: 'custom', 'Content-Type': 'text/plain'},
+                });
+
+                const init = fetchMock.mock.calls[0][1];
+                expect(init).toBeDefined();
+                expect(init).toHaveProperty('method', 'DELETE');
+                expect(init).toHaveProperty('credentials', 'include');
+                expect(init).toHaveProperty('window', null);
+                expect(init?.headers).toHaveProperty('Authorization', 'custom');
+                expect(init?.headers).toHaveProperty('Content-Type', 'text/plain');
             });
         });
 
@@ -253,33 +418,46 @@ describe('APICore', () => {
             it('should abort pending get requests', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
-                expect(fetchMock.mock.calls[0][1]?.signal?.aborted).toBe(false);
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal?.aborted).toBe(false);
                 await api.abortGetRequests();
-                expect(fetchMock.mock.calls[0][1]?.signal?.aborted).toBe(true);
+                expect(init?.signal?.aborted).toBe(true);
+            });
+
+            it('should abort pending get requests even with user abort', async () => {
+                const userAbort = new AbortController();
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+                await api.get(testData.route, {signal: userAbort.signal});
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal?.aborted).toBe(false);
+                await api.abortGetRequests();
+                expect(init?.signal?.aborted).toBe(true);
+                expect(userAbort.signal.aborted).toBe(false);
             });
 
             it('should not abort get requests that are being sent after the abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.abortGetRequests();
                 await api.get(testData.route);
-                expect(fetchMock.mock.calls[0][1]?.signal?.aborted).toBe(false);
+                const init = fetchMock.mock.calls[0][1];
+                expect(init?.signal?.aborted).toBe(false);
             });
 
-            it('should not resolve nor reject the fetch promise', () => {
+            // Warning: the only reason the assertions in this test pass, is because a Promise
+            // never resolves in the same stack frame as it was created. You can test this for
+            // yourself by moving the `await subject;` statement before the expect calls,
+            // which will make the test fail.
+            it('should not resolve nor reject the fetch promise', async () => {
                 jest.useFakeTimers();
                 const resolvedPromiseSpy = jest.fn().mockName('resolvedPromiseSpy');
                 const rejectedPromiseSpy = jest.fn().mockName('rejectedPromiseSpy');
 
                 fetchMock.mockImplementationOnce(
-                    () =>
-                        new Promise((resolve) => {
-                            setTimeout(() => {
-                                resolve(new Response(JSON.stringify(testData.response), {status: 200}));
-                            }, 1000);
-                        })
+                    delayedResponse(new Response(JSON.stringify(testData.response), {status: 200}), 1000)
                 );
 
-                api.get(testData.route).then(resolvedPromiseSpy).catch(rejectedPromiseSpy);
+                const subject = api.get(testData.route);
+                subject.then(resolvedPromiseSpy, rejectedPromiseSpy);
 
                 jest.advanceTimersByTime(500);
                 api.abortGetRequests();
@@ -287,6 +465,8 @@ describe('APICore', () => {
 
                 expect(resolvedPromiseSpy).not.toHaveBeenCalled();
                 expect(rejectedPromiseSpy).not.toHaveBeenCalled();
+
+                await subject;
             });
         });
     });
