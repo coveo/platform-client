@@ -44,8 +44,8 @@ export default class ResultRankings extends Resource {
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
             }),
-            resultRanking,
-            {method: 'put', body: resultRanking, headers: {'Content-Type': 'application/json'}}
+            undefined,
+            {body: resultRanking, headers: {'Content-Type': 'application/json'}}
         );
     }
 
@@ -75,8 +75,8 @@ export default class ResultRankings extends Resource {
             this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
             }),
-            resultRanking,
-            {method: 'post', body: resultRanking, headers: {'Content-Type': 'application/json'}}
+            undefined,
+            {body: resultRanking, headers: {'Content-Type': 'application/json'}}
         );
     }
 
