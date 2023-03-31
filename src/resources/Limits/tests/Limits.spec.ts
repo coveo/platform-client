@@ -48,11 +48,20 @@ describe('Limits', () => {
             );
         });
     });
+
     describe('getAllPerLimitType', () => {
         it('should make a GET call to get all limits with specified limit type', () => {
             limits.getAllPerLimitType(LimitType.TECHNICAL);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits?limitType=TECHNICAL`);
+        });
+    });
+
+    describe('getSpecificLimitStatus', () => {
+        it('should make a GET call to get a specific limit status', () => {
+            limits.getSpecificLimitStatus(LicenseSection.content, '123');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/limits/content/123`);
         });
     });
 });

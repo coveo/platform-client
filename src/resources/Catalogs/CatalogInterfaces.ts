@@ -53,7 +53,15 @@ export interface CreateCatalogConfigurationModel {
     /**
      * The configuration mapping of index fields to standard commerce fields
      */
-    fieldsMapping: CatalogFieldsMapping;
+    fieldsMapping?: CatalogFieldsMapping;
+    /**
+     * The host of the storefront to which the listing pages should be associated.
+     */
+    host?: string;
+    /**
+     * A concatenation of language, country and currency identifiers.
+     */
+    locale?: string;
 }
 
 export interface CatalogConfigurationModel {
@@ -80,11 +88,19 @@ export interface CatalogConfigurationModel {
     /**
      * The configuration mapping of index fields to standard commerce fields
      */
-    fieldsMapping: CatalogFieldsMapping;
+    fieldsMapping?: CatalogFieldsMapping;
     /**
      * Catalogs associated to the configuration
      */
-    associatedCatalogs: IAssociatedCatalogModel[];
+    associatedCatalogs?: IAssociatedCatalogModel[];
+    /**
+     * The host of the storefront to which the listing pages should be associated.
+     */
+    host?: string;
+    /**
+     * A concatenation of language, country and currency identifiers.
+     */
+    locale?: string;
 }
 
 export interface IAssociatedCatalogModel {
@@ -203,16 +219,48 @@ export interface CatalogModel extends BaseCatalogModel {
 export type CreateCatalogModel = BaseCatalogModel &
     (
         | {
+              /**
+               * @deprecated use `configuration.product` instead.
+               */
               product?: CreateProductHierarchyModel;
+              /**
+               * @deprecated use `configuration.variant` instead.
+               */
               variant?: CreateVariantHierarchyModel;
+              /**
+               * @deprecated use `configuration.availability` instead.
+               */
               availability?: CreateAvailabilityHierarchyModel;
+              /**
+               * The related catalog configuration id
+               */
               catalogConfigurationId?: never;
+              /**
+               * The catalog configuration
+               */
+              configuration: CreateCatalogConfigurationModel;
           }
         | {
+              /**
+               * @deprecated use `configuration.product` instead.
+               */
               product?: never;
+              /**
+               * @deprecated use `configuration.variant` instead.
+               */
               variant?: never;
+              /**
+               * @deprecated use `configuration.availability` instead.
+               */
               availability?: never;
+              /**
+               * The related catalog configuration id
+               */
               catalogConfigurationId: string;
+              /**
+               * The catalog configuration
+               */
+              configuration?: never;
           }
     );
 

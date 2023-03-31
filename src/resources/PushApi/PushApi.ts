@@ -31,7 +31,6 @@ export default class PushApi extends Resource {
         return this.serverlessApi.delete<void>(
             this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions`, options),
             {
-                method: 'delete',
                 body: JSON.stringify(securityIdentity),
                 headers: {'Content-Type': 'application/json'},
             }

@@ -17,7 +17,7 @@ export interface CrawlingModuleStatus {
      * Whether remote log requests are enabled or not.
      * This enables the client to query logs directly from the platform.
      */
-    logRequestEnable: boolean;
+    logRequestsEnabled: boolean;
     /**
      * Frequency at which the setup polls for updates.
      */

@@ -47,3 +47,4 @@ export * from './Sources/index.js';
 export * from './TableauService/index.js';
 export * from './UsageAnalytics/index.js';
 export * from './Vaults/index.js';
+export * from './HostedPages/index.js';

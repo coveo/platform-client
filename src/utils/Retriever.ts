@@ -1,5 +1,7 @@
-export type Retrievable<T> = T | (() => T);
+import {Supplier} from './types.js';
 
-const isFunction = <T>(x: any): x is () => T => typeof x === 'function';
+export type Retrievable<T> = T | Supplier<T>;
 
-export default <T>(parameter: Retrievable<T>): T => (isFunction(parameter) ? parameter() : parameter);
+const isSupplier = <T>(x: unknown): x is Supplier<T> => typeof x === 'function';
+
+export default <T>(parameter: Retrievable<T>): T => (isSupplier(parameter) ? parameter() : parameter);

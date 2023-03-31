@@ -55,3 +55,42 @@ export interface CreateExtension extends GranularResource {
     language?: ExtensionLanguageType;
     requiredDataStreams?: DataStreamType[];
 }
+
+
+export interface ExtensionCompileCode {
+    /**
+     * The extension's code that is compiled.
+     */
+    code: string;
+    /**
+     * The langugage of the compiled code.
+     */
+    language: ExtensionLanguageType;
+}
+
+export interface ExtensionCompileResult {
+    error: ExtensionCompileError;
+    /**
+     * Whether the extension's script's compilation was successful.
+     */
+    successful: boolean;
+}
+
+export interface ExtensionCompileError {
+    /**
+     * The line number where the error occurred.
+     */
+    line: number;
+    /**
+     * The compilation error message.
+     */
+    message: string;
+    /**
+     * The specific offset in the line where the error occured.
+     */
+    offset: number;
+    /**
+     * The compilation error type.
+     */
+    type: string;
+}

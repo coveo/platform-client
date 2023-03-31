@@ -1,4 +1,4 @@
-import {AccessLevel, PrivilegeholderType} from '../Enums.js';
+import {AccessLevel, PrivilegeHolderType} from '../Enums.js';
 export interface AccessParams {
     /*
      * The access level an API key must have to be included in the response.
@@ -21,10 +21,58 @@ export interface AccessParams {
     privilegeTargetDomain: string;
 }
 
-export interface AccessModel {
-    accessLevel: AccessLevel[];
+export type GroupAccessModel = {
+    /*
+     * The access level granted by this group.
+     */
+    accessLevel: AccessLevel;
+    /*
+     * Whether the calling user is part of this group.
+     */
     callerPartOf: boolean;
+    /*
+     * The display name of this group.
+     */
     displayName: string;
+    /*
+     * The id of the group.
+     */
     id: string;
-    privilegeholderType: PrivilegeholderType;
-}
+    /*
+     * Represent the group access model type.
+     */
+    privilegeHolderType: PrivilegeHolderType.GROUP;
+    /*
+     * The list of resources ids this group has edit access level on.
+     */
+    resourceIdsWithEditLevel?: string[];
+};
+
+export type ApiKeyAccessModel = {
+    /*
+     * The access level granted by this API key.
+     */
+    accessLevel: AccessLevel;
+    /*
+     * The creation date of this API key.
+     */
+    createdDate: string;
+    /*
+     * The display name of this API key.
+     */
+    displayName: string;
+    /*
+     * The id of this API key.
+     */
+    id: string;
+    /*
+     * Represent the API key access model type.
+     */
+    privilegeHolderType: PrivilegeHolderType.API_KEY;
+    /*
+     * The list of resources ids this API key has edit access level on.
+     */
+    resourceIdsWithEditLevel?: string[];
+};
+
+export type AccessModel = GroupAccessModel | ApiKeyAccessModel;

@@ -10,7 +10,7 @@ export type MLModelTypeInfo =
     | ModelInformationER
     | ModelInformationPR
     | ModelInformationQS
-    | ModelInformationSS;
+    | ModelInformationSmartSnippets;
 
 export interface MetaInfo {
     modelName: string;
@@ -197,21 +197,90 @@ export interface ModelInformationQS {
     [key: string]: any;
 }
 
-export interface MetaInfoSS extends MetaInfo {
+export interface MetaInfoSmartSnippets extends MetaInfo {
     modelId: string;
     engineName: string;
     modelSize: string;
 }
 
-export interface BuildingStatsSS {
-    documentCount: number;
-    snippetCount: number;
-    headerCount: number;
-    meanSnippetLength: number;
+/**
+ * Snippet details per document
+ */
+export interface SnippetsPerDocument {
+    min: number;
+    max: number;
+    mean: number;
 }
-export interface ModelInformationSS {
-    metaInfo: MetaInfoSS;
-    modelBuildingStats: BuildingStatsSS;
+
+export interface StatsSmartSnippets {
+    /**
+     * Total number of valid documents
+     */
+    documentCount: number;
+
+    /**
+     * Number of documents with duplicated ID
+     */
+    documentWithDuplicatedIdCount: number;
+
+    /**
+     * Number of invalid HTML documents
+     */
+    invalidHtmlDocumentCount: number;
+
+    /**
+     * Number of documents with snippets
+     */
+    documentWithSnippetCount: number;
+
+    /**
+     * Number of documents without permanent ID
+     */
+    documentWithoutIdCount: number;
+
+    /**
+     * Ratio of documents with at least 1 snippet / total valid documents
+     */
+    documentWithSnippetRatio: number;
+
+    /**
+     * Number of available snippets
+     */
+    snippetCount: number;
+
+    /**
+     * Snippets stats per document
+     */
+    snippetsPerDocument: SnippetsPerDocument;
+}
+
+export interface BuildingStatsSmartSnippets extends StatsSmartSnippets {
+    /**
+     * Number of documents with HTML headers
+     */
+    headerCount: number;
+
+    /**
+     * Average number of words per snippet
+     */
+    meanSnippetLength: number;
+
+    /**
+     * Additional stats related to each source
+     */
+    statsPerSource: StatsPerSource[];
+}
+
+export interface StatsPerSource extends StatsSmartSnippets {
+    /**
+     * Name of the source
+     */
+    sourceName: string;
+}
+
+export interface ModelInformationSmartSnippets {
+    metaInfo: MetaInfoSmartSnippets;
+    modelBuildingStats: BuildingStatsSmartSnippets;
 }
 
 export interface DatasetFieldDetails {

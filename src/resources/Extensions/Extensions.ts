@@ -1,6 +1,6 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
-import {CreateExtension, ExtensionModel} from './ExtensionsInterfaces.js';
+import {CreateExtension, ExtensionCompileCode, ExtensionCompileResult, ExtensionModel} from './ExtensionsInterfaces.js';
 
 export default class Extension extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/extensions`;
@@ -31,5 +31,14 @@ export default class Extension extends Resource {
 
     list() {
         return this.api.get<ExtensionModel[]>(Extension.baseUrl);
+    }
+
+    /**
+     * Validates the extension's script
+     *
+     * @param {ExtensionCompileCode} extensionCode The code to compile
+     */
+    validateCode(extensionCode: ExtensionCompileCode) {
+        return this.api.post<ExtensionCompileResult>(`${Extension.baseUrl}/test/compile`, extensionCode);
     }
 }

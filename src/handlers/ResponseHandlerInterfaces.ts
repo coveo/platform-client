@@ -1,4 +1,6 @@
+import {Predicate} from '../utils/types.js';
+
 export interface ResponseHandler {
-    canProcess(response: Response): boolean;
+    canProcess: Predicate<Response>;
     process<T>(response: Response): Promise<T>;
 }

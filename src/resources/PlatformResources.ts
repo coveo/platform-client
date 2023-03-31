@@ -46,6 +46,7 @@ import UsageAnalytics from './UsageAnalytics/UsageAnalytics.js';
 import User from './Users/User.js';
 import Vaults from './Vaults/Vaults.js';
 import TableauService from './TableauService/TableauService.js';
+import HostedPages from './HostedPages/HostedPages.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
@@ -62,6 +63,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'global', resource: Global},
     {key: 'globalGroup', resource: GlobalGroup},
     {key: 'group', resource: Group},
+    {key: 'hostedPages', resource: HostedPages},
     {key: 'index', resource: Index},
     {key: 'insightPanelConfig', resource: InsightPanelConfig},
     {key: 'insightPanelInterface', resource: InsightPanelInterface},
@@ -116,6 +118,7 @@ class PlatformResources {
     global: Global;
     globalGroup: GlobalGroup;
     group: Group;
+    hostedPages: HostedPages;
     index: Index;
     insightPanelConfig: InsightPanelConfig;
     insightPanelInterface: InsightPanelInterface;
