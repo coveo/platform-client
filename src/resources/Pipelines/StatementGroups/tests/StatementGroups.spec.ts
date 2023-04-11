@@ -70,6 +70,22 @@ describe('StatementGroups', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
+
+        it('should make a GET call with a sort', () => {
+            const pipelineId = '️🍰';
+            groups.list(pipelineId, {sortBy: 'name', isOrderAscending: false});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=name&isOrderAscending=false'
+            );
+
+            groups.list(pipelineId, {sortBy: 'status', isOrderAscending: true});
+            expect(api.get).toHaveBeenCalledTimes(2);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=status&isOrderAscending=true'
+            );
+        });
     });
 
     describe('create', () => {
