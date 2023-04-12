@@ -5,7 +5,7 @@ import {
     SecurityProviderModel,
 } from '../index.js';
 import API from '../../../APICore.js';
-import {PermissionIdentityType} from '../../Enums.js';
+import {PermissionIdentityType, SecurityCacheFilteringMode} from '../../Enums.js';
 import SecurityCache from '../SecurityCache.js';
 
 jest.mock('../../../APICore.js');
@@ -24,11 +24,6 @@ describe('securityCache', () => {
 
     describe('list', () => {
         const providerId = 'PROVIDER_ID';
-        const securityCacheFiltersBody = {
-            filterTerm: 'test',
-            identityTypes: [PermissionIdentityType.User],
-            providerIds: [providerId],
-        };
 
         it('should make a GET call to the securityCache correct url with listMembers', () => {
             securityCache.listMembers(providerId);
@@ -55,13 +50,19 @@ describe('securityCache', () => {
 
         it('should make a POST call to the securityCache correct url with listSecurityIdentities with filters', () => {
             securityCache.listSecurityProviderIdentities(providerId, {
-                filterTerm: securityCacheFiltersBody.filterTerm,
-                identityTypes: securityCacheFiltersBody.identityTypes,
+                filteringMode: SecurityCacheFilteringMode.PREFIX,
+                filterTerm: 'test',
+                identityTypes: [PermissionIdentityType.User],
             } as SecurityProviderIdentitiesFilters);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/list`,
-                securityCacheFiltersBody
+                {
+                    filteringMode: 'PREFIX',
+                    filterTerm: 'test',
+                    identityTypes: ['User'],
+                    providerIds: ['PROVIDER_ID'],
+                }
             );
         });
 

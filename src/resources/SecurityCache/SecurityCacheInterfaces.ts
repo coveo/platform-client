@@ -2,6 +2,7 @@ import {Paginated} from '../BaseInterfaces.js';
 import {
     PermissionIdentityType,
     ScheduleType,
+    SecurityCacheFilteringMode,
     SecurityCacheStateOptions,
     SecurityProviderReferenceType,
     SecurityProviderType,
@@ -130,7 +131,20 @@ export interface SecurityCacheListOptions extends Paginated {
 }
 
 export interface SecurityProviderIdentitiesFilters extends Paginated {
+    /**
+     * filteringMode can take two values, SUBSTRING or PREFIX.
+     *
+     * SUBSTRING: If filterTerm is set, this mode specifies that identities that have the filterTerm at any position in their name will be returned.
+     * PREFIX: If filterTerm is set, this mode specifies that only identities that have the filterTerm at the beginning of their name will be returned.
+     */
+    filteringMode?: SecurityCacheFilteringMode;
+    /**
+     * If set, only identities that have this value in their name will be returned.
+     */
     filterTerm?: string;
+    /**
+     * If set, only identities for which their type is listed in this array will be returned.
+     */
     identityTypes?: PermissionIdentityType[];
 }
 

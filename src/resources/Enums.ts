@@ -467,6 +467,11 @@ export enum PermissionIdentityType {
     VirtualGroup = 'VirtualGroup',
 }
 
+export enum SecurityCacheFilteringMode {
+    PREFIX = 'PREFIX',
+    SUBSTRING = 'SUBSTRING',
+}
+
 export enum SecurityProviderReferenceType {
     SOURCE = 'SOURCE',
     SECURITY_PROVIDER = 'SECURITY_PROVIDER',
