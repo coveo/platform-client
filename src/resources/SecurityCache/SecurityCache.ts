@@ -40,6 +40,7 @@ export default class SecurityCache extends Ressource {
         {page, perPage, ...rest}: SecurityProviderIdentitiesFilters = {}
     ) {
         const filterModel = {
+            filteringMode: rest.filteringMode,
             filterTerm: rest.filterTerm,
             identityTypes: rest.identityTypes,
             providerIds: [providerId],
