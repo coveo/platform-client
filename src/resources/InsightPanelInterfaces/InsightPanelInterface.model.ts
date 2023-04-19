@@ -61,6 +61,10 @@ export interface InsightPanelResultTags {
      * An option enabling a tag identifying recommended results.
      */
     recommended?: InsightPanelResultTagOptions;
+    /**
+     * An option enabling a tag which would have featured results at the topof a results list.
+     */
+    featured?: InsightPanelResultTagOptions;
 }
 
 export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplate {
