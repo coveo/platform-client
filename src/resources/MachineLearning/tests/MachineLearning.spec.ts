@@ -3,7 +3,6 @@ import {IntervalUnit} from '../../Enums.js';
 import DNEConfiguration from '../DNEConfiguration/DNEConfiguration.js';
 import MachineLearning from '../MachineLearning.js';
 import {RegistrationModel} from '../MachineLearningInterfaces.js';
-import ModelConfiguration from '../ModelConfiguration/ModelConfiguration.js';
 import ModelInformation from '../ModelInformation/ModelInformation.js';
 import Models from '../Models/Models.js';
 import PQSConfiguration from '../PQSConfiguration/PQSConfiguration.js';
@@ -48,11 +47,6 @@ describe('MachineLearning', () => {
     it('should register the modelInfo resource', () => {
         expect(ml.modelInfo).toBeDefined();
         expect(ml.modelInfo).toBeInstanceOf(ModelInformation);
-    });
-
-    it('should register the modelConfig resource', () => {
-        expect(ml.modelConfig).toBeDefined();
-        expect(ml.modelConfig).toBeInstanceOf(ModelConfiguration);
     });
 
     it('should register the dneConfig resource', () => {
