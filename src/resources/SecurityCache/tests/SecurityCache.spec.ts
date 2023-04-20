@@ -39,6 +39,12 @@ describe('securityCache', () => {
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/${providerId}`);
         });
 
+        it('should make a GET call to the securityCache correct url with isListSecurityIdentitiesSupported', () => {
+            securityCache.isListSecurityIdentitiesSupported();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/list/is_supported`);
+        });
+
         it('should make a POST call to the securityCache correct url with listSecurityIdentities without filters', () => {
             securityCache.listSecurityProviderIdentities(providerId);
             expect(api.post).toHaveBeenCalledTimes(1);

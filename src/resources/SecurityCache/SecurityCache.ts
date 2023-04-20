@@ -35,6 +35,10 @@ export default class SecurityCache extends Ressource {
         );
     }
 
+    isListSecurityIdentitiesSupported() {
+        return this.api.get<boolean>(this.buildPath(`${SecurityCache.cacheUrl}/entities/list/is_supported`));
+    }
+
     listSecurityProviderIdentities(
         providerId: string,
         {page, perPage, ...rest}: SecurityProviderIdentitiesFilters = {}
