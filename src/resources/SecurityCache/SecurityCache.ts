@@ -35,7 +35,8 @@ export default class SecurityCache extends Ressource {
         );
     }
 
-    isListSecurityIdentitiesSupported() {
+    /** Checks if the organization supports filtering security identities by name and/or type. */
+    isListingSecurityIdentitiesSupported() {
         return this.api.get<boolean>(`${SecurityCache.cacheUrl}/entities/list/is_supported`);
     }
 

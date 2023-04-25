@@ -39,8 +39,8 @@ describe('securityCache', () => {
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/${providerId}`);
         });
 
-        it('should make a GET call to the securityCache correct url with isListSecurityIdentitiesSupported', () => {
-            securityCache.isListSecurityIdentitiesSupported();
+        it('should make a GET call to the securityCache correct url with isListingSecurityIdentitiesSupported', () => {
+            securityCache.isListingSecurityIdentitiesSupported();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/list/is_supported`);
         });
