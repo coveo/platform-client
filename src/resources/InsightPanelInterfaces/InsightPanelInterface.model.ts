@@ -62,7 +62,7 @@ export interface InsightPanelResultTags {
      */
     recommended?: InsightPanelResultTagOptions;
     /**
-     * An option enabling a tag which would have featured results at the topof a results list.
+     * An option enabling a tag identifying featured results.
      */
     featured?: InsightPanelResultTagOptions;
 }
