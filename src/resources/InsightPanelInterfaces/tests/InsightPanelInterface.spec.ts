@@ -65,6 +65,10 @@ describe('InsightPanelInterface', () => {
                         enabled: false,
                         color: '#cc4000',
                     },
+                    featured: {
+                        enabled: false,
+                        color: '#cc4000',
+                    },
                 },
             },
         ],
