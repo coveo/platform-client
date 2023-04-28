@@ -4,7 +4,6 @@ import CaseClassificationConfiguration from './CaseClassificationConfiguration/C
 import DNEConfiguration from './DNEConfiguration/DNEConfiguration.js';
 import SmartSnippetsConfiguration from './SmartSnippetsConfiguration/SmartSnippetsConfiguration.js';
 import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces.js';
-import ModelInformation from './ModelInformation/ModelInformation.js';
 import Models from './Models/Models.js';
 import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
 import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
@@ -13,7 +12,6 @@ export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
 
     models: Models;
-    modelInfo: ModelInformation;
     dneConfig: DNEConfiguration;
     caseClassificationConfig: CaseClassificationConfiguration;
     smartSnippetsConfig: SmartSnippetsConfiguration;
@@ -24,7 +22,6 @@ export default class MachineLearning extends Resource {
         super(api, serverlessApi);
 
         this.models = new Models(api, serverlessApi);
-        this.modelInfo = new ModelInformation(api, serverlessApi);
         this.dneConfig = new DNEConfiguration(api, serverlessApi);
         this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
         this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
