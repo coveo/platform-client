@@ -2,6 +2,7 @@ import API from '../../APICore.js';
 import Resource from '../Resource.js';
 import {
     ComponentVersion,
+    CrawlingModuleDeployment,
     CrawlingModuleEntity,
     CrawlingModuleLogRequestDownloadModel,
     CrawlingModuleLogRequestModel,
@@ -59,5 +60,13 @@ export default class CrawlingModule extends Resource {
         return this.api.get<CrawlingModuleLogRequestDownloadModel>(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
         );
+    }
+
+    reportDeployment(crawlingModuleId: string, options: CrawlingModuleDeployment) {
+        return this.api.put<CrawlingModuleEntity>(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`, options);
+    }
+
+    removeDeployment(crawlingModuleId: string) {
+        return this.api.delete(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
     }
 }

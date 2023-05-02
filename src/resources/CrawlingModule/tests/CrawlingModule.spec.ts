@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
 import CrawlingModule from '../CrawlingModule.js';
 import {
+    CrawlingModuleDeployment,
     CrawlingModuleLogRequestLogType,
     CrawlingModuleLogRequestState,
     CreateCrawlingModuleLogRequestModel,
@@ -98,6 +99,34 @@ describe('Crawling Module Calls', () => {
         expect(api.get).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests?state=SUCCESSFUL`
         );
+    });
+
+    it('should report the deployment', () => {
+        const options: CrawlingModuleDeployment = {
+            name: '',
+            status: {
+                usingProxy: false,
+                autoUpdateEnable: false,
+                logRequestsEnabled: false,
+                autoUpdateFrequency: 0,
+                numberOfCrawlerWorkers: 0,
+                numberOfSecurityWorkers: 0,
+            },
+            versions: {
+                maestroVersion: 'TO DO',
+            },
+        };
+        crawlingModule.reportDeployment(crawlingModuleId, options);
+        expect(api.get).toHaveBeenCalledTimes(1);
+        expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
+        // TODO some more validation?
+    });
+
+    it('should remove the deployment', () => {
+        crawlingModule.removeDeployment(crawlingModuleId);
+        expect(api.get).toHaveBeenCalledTimes(1);
+        expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
+        // TODO validate that something was removed?
     });
 
     it('should get the download url', () => {
