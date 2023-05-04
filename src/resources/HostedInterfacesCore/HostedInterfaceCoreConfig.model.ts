@@ -24,6 +24,10 @@ export enum HostedInterfaceConditionOperator {
     MustNotMatch = 'mustNotMatch',
 }
 
+export interface HostedInterfaceOption {
+    enabled: boolean;
+}
+
 export interface HostedInterfaceCondition {
     /**
      * The [field](https://docs.coveo.com/en/200) to evaluate.

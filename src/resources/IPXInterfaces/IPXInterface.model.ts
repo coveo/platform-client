@@ -2,6 +2,7 @@ import {
     HostedInterfaceCondition,
     HostedInterfaceConfiguration,
     HostedInterfaceFacet,
+    HostedInterfaceOption,
     HostedInterfaceResultTemplate,
     HostedInterfaceResultTemplateBadge,
     HostedInterfaceResultTemplateDetail,
@@ -149,6 +150,13 @@ export interface IPXFooter {
     link?: string;
 }
 
+export interface IPXSettings {
+    /**
+     * An option enabling the use of smart snippets.
+     */
+    smartSnippets: HostedInterfaceOption;
+}
+
 export interface IPXInterfaceConfiguration extends HostedInterfaceConfiguration {
     /**
      * The list of facets to display.
@@ -179,6 +187,11 @@ export interface IPXInterfaceConfiguration extends HostedInterfaceConfiguration 
      * The style configuration.
      */
     style: IPXStyle;
+
+    /**
+     * The settings configuration.
+     */
+    settings: IPXSettings;
 
     /**
      * The date of creation of the interface
