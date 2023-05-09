@@ -101,6 +101,15 @@ describe('Crawling Module Calls', () => {
         );
     });
 
+    it('should get the download url', () => {
+        const logRequestId = 'LOGREQUEST_ID';
+        crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
+        expect(api.get).toHaveBeenCalledTimes(1);
+        expect(api.get).toHaveBeenCalledWith(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
+        );
+    });
+
     it('should report the deployment', () => {
         const options: CrawlingModuleDeployment = {
             name: '',
@@ -127,14 +136,5 @@ describe('Crawling Module Calls', () => {
         expect(api.get).toHaveBeenCalledTimes(1);
         expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
         // TODO validate that something was removed?
-    });
-
-    it('should get the download url', () => {
-        const logRequestId = 'LOGREQUEST_ID';
-        crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
-        expect(api.get).toHaveBeenCalledTimes(1);
-        expect(api.get).toHaveBeenCalledWith(
-            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
-        );
     });
 });
