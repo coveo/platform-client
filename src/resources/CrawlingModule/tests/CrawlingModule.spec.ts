@@ -126,15 +126,15 @@ describe('Crawling Module Calls', () => {
             },
         };
         crawlingModule.reportDeployment(crawlingModuleId, options);
-        expect(api.get).toHaveBeenCalledTimes(1);
-        expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
+        expect(api.put).toHaveBeenCalledTimes(1);
+        expect(api.put).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
         // TODO some more validation?
     });
 
     it('should remove the deployment', () => {
         crawlingModule.removeDeployment(crawlingModuleId);
-        expect(api.get).toHaveBeenCalledTimes(1);
-        expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
+        expect(api.delete).toHaveBeenCalledTimes(1);
+        expect(api.delete).toHaveBeenCalledWith(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}`);
         // TODO validate that something was removed?
     });
 });
