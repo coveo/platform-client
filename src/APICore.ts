@@ -1,6 +1,6 @@
 import {backOff} from 'exponential-backoff';
 import {PlatformClientOptions} from './ConfigurationInterfaces.js';
-import getEndpoint, {Environment, Region} from './Endpoints.js';
+import {Environment, Region, getEndpoint} from './Endpoints.js';
 import {ResponseHandler} from './handlers/ResponseHandlerInterfaces.js';
 import handleResponse, {ResponseHandlers} from './handlers/ResponseHandlers.js';
 import {UserModel} from './resources/Users/index.js';

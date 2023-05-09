@@ -2,7 +2,7 @@ import jestFetchMock from 'jest-fetch-mock';
 const fetchMock = jestFetchMock.default;
 import API from '../APICore.js';
 import {PlatformClientOptions} from '../ConfigurationInterfaces.js';
-import getEndpoint, {Environment, Region} from '../Endpoints.js';
+import {Environment, Region, getEndpoint} from '../Endpoints.js';
 import {ResponseHandler} from '../handlers/ResponseHandlerInterfaces.js';
 
 jest.mock('../Endpoints.js');

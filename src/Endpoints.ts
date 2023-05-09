@@ -28,7 +28,7 @@ const serverlessEndpointTemplates: Record<Environment, string> = {
     [Environment.hipaa]: 'https://apihipaa.cloud.coveo.com',
 };
 
-export default (environment = Environment.prod, region = Region.US, isServerlessHost = false): string => {
+export const getEndpoint = (environment = Environment.prod, region = Region.US, isServerlessHost = false): string => {
     const regionSuffix = region === Region.US ? '' : `-${region}`;
     const matcher = new RegExp(regionPlaceholder, 'g');
 
