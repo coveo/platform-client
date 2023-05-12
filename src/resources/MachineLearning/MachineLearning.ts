@@ -7,6 +7,7 @@ import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces.js'
 import Models from './Models/Models.js';
 import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
 import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
+import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -17,6 +18,7 @@ export default class MachineLearning extends Resource {
     smartSnippetsConfig: SmartSnippetsConfiguration;
     userActionHistoryConfig: UserActionHistoryConfiguration;
     pqsConfig: PQSConfiguration;
+    iaprConfig: IAPRConfiguration;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
@@ -26,6 +28,7 @@ export default class MachineLearning extends Resource {
         this.caseClassificationConfig = new CaseClassificationConfiguration(api, serverlessApi);
         this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
         this.pqsConfig = new PQSConfiguration(api, serverlessApi);
+        this.iaprConfig = new IAPRConfiguration(api, serverlessApi);
         this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
     }
 

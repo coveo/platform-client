@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
 import {IntervalUnit} from '../../Enums.js';
 import DNEConfiguration from '../DNEConfiguration/DNEConfiguration.js';
+import IAPRConfiguration from '../IAPRConfiguration/IAPRConfiguration.js';
 import MachineLearning from '../MachineLearning.js';
 import {RegistrationModel} from '../MachineLearningInterfaces.js';
 import Models from '../Models/Models.js';
@@ -61,5 +62,10 @@ describe('MachineLearning', () => {
     it('should register the userActionHistory resource', () => {
         expect(ml.userActionHistoryConfig).toBeDefined();
         expect(ml.userActionHistoryConfig).toBeInstanceOf(UserActionHistoryConfiguration);
+    });
+
+    it('should register the iaprConfig resource', () => {
+        expect(ml.iaprConfig).toBeDefined();
+        expect(ml.iaprConfig).toBeInstanceOf(IAPRConfiguration);
     });
 });
