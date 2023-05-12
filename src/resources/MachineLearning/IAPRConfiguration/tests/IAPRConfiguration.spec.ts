@@ -20,8 +20,7 @@ describe('IAPRConfiguration', () => {
         it('should make a POST call to the specific IAPRConfiguration url', () => {
             const model: IAPRConfigurationModel = {
                 modelDisplayName: 'kiki soudane',
-                engineId: 'intentranking',
-                extraConfig: {catalogId: 'catalog_mock'},
+                catalogId: 'catalog_mock',
             };
             iaprConfig.create(model);
             expect(api.post).toHaveBeenCalledTimes(1);
