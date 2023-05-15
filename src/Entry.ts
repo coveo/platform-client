@@ -8,4 +8,5 @@ export * from './utils/index.js';
 export * from './Endpoints.js';
 
 export {default as API} from './APICore.js';
+export {default as getEndpoint} from './Endpoints.js';
 export default PlatformClient;
