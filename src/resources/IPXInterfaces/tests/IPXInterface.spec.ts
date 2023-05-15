@@ -92,6 +92,11 @@ describe('IPXInterface', () => {
             fontFamily:
                 '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif',
         },
+        settings: {
+            smartSnippets: {
+                enabled: false,
+            },
+        },
         created: '2023-05-09T15:58:44.000Z',
         createdBy: 'someone@something.com',
         updated: '2023-05-09T15:58:44.000Z',
