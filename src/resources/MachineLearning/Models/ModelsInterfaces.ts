@@ -2,6 +2,7 @@ import {GranularResource} from '../../BaseInterfaces.js';
 import {IntervalUnit, ModelActivenessState, ModelStatus} from '../../Enums.js';
 import {AssociatedPipelineModel} from '../../Pipelines/index.js';
 import {MLModelInfo, MLModelTypeInfo} from '../ModelInformation/index.js';
+import {ExtraConfig} from '../MachineLearningInterfaces.js';
 
 export interface MLModel<T extends MLModelTypeInfo = never> extends MLModelInfo<T>, ModelAttributes, GranularResource {
     orgId: string;
@@ -23,9 +24,7 @@ export interface MLModel<T extends MLModelTypeInfo = never> extends MLModelInfo<
     exportOffset?: string;
     status: ModelStatus;
     commandLineParameters?: string[];
-    extraConfig?: {
-        [key: string]: any;
-    };
+    extraConfig?: ExtraConfig;
     commonFilter?: string;
     customEventFilter?: string;
     searchEventFilter?: string;
