@@ -39,6 +39,7 @@ export interface ExtraConfig {
     recommendationStrategy?: string;
     urlReplacePatterns?: UrlReplacePatterns[];
     parsingMode?: string;
+    [key: string]: any;
 }
 
 export interface RegistrationModel extends GranularResource {
