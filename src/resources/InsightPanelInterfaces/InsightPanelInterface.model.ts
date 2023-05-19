@@ -2,6 +2,7 @@ import {
     HostedInterfaceCondition,
     HostedInterfaceConfiguration,
     HostedInterfaceFacet,
+    HostedInterfaceOption,
     HostedInterfaceResultTemplate,
     HostedInterfaceResultTemplateBadge,
     HostedInterfaceResultTemplateDetail,
@@ -14,9 +15,7 @@ export enum InsightPanelResultTemplateLayout {
     Thumbnail = 'thumbnail',
 }
 
-interface InsightPanelOption {
-    enabled: boolean;
-}
+interface InsightPanelOption extends HostedInterfaceOption {}
 
 interface InsightPanelResultTagOptions {
     enabled: boolean;
