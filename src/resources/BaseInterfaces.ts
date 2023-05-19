@@ -54,3 +54,9 @@ export interface Paginated {
      */
     perPage?: number;
 }
+
+export type WithRequired<Type, Key extends keyof Type> = Type & {
+    [Property in Key]-?: Type[Property];
+};
+
+export type WithOptional<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>> & Partial<Pick<T, K>>;

@@ -1,4 +1,4 @@
-import {WithOptional} from '../../Entry.js';
+import {WithOptional} from '../BaseInterfaces.js';
 import {
     HostedInterfaceCondition,
     HostedInterfaceConfiguration,
