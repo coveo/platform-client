@@ -1,5 +1,4 @@
-import {WithRequiredProperty} from '../../utils/types.js';
-import {Paginated} from '../BaseInterfaces.js';
+import {Paginated, WithRequired} from '../BaseInterfaces.js';
 
 /**
  * Defines the options to list Insight Panel configurations.
@@ -75,7 +74,7 @@ export interface InsightPanelConfigCreationParams {
  * Defines the parameters required to update an Insight Panel configuration.
  */
 export interface InsightPanelConfigUpdateParams
-    extends WithRequiredProperty<InsightPanelConfigCreationParams, 'contextFields'> {
+    extends WithRequired<InsightPanelConfigCreationParams, 'contextFields'> {
     /**
      * A list of the associated interface configs.
      */

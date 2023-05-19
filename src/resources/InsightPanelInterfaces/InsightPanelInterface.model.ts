@@ -1,3 +1,4 @@
+import {WithOptional} from '../BaseInterfaces.js';
 import {
     HostedInterfaceCondition,
     HostedInterfaceConfiguration,
@@ -145,6 +146,10 @@ export interface InsightPanelSettings {
      * Options to configure a view of the actions taken by the user who submitted the case.
      */
     userActions: UserActionsOptions;
+    /**
+     * An option enabling the use of smart snippets.
+     */
+    smartSnippets: InsightPanelOption;
 }
 
 export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfiguration {
@@ -170,3 +175,11 @@ export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfi
 }
 
 export interface IListInsightPanelInterfacesParameters extends ListHostedInterfacesParams {}
+
+export interface InsightPanelInterfaceConfigurationUpdateParams
+    extends Omit<InsightPanelInterfaceConfiguration, 'settings'> {
+    /**
+     * The insight panel settings.
+     */
+    settings: WithOptional<InsightPanelSettings, 'smartSnippets'>;
+}

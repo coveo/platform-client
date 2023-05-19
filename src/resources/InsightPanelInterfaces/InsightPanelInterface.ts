@@ -2,7 +2,10 @@ import API from '../../APICore.js';
 import {New, PageModel} from '../BaseInterfaces.js';
 import {ListHostedInterfacesParams} from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
-import {InsightPanelInterfaceConfiguration} from './InsightPanelInterface.model.js';
+import {
+    InsightPanelInterfaceConfiguration,
+    InsightPanelInterfaceConfigurationUpdateParams,
+} from './InsightPanelInterface.model.js';
 
 export default class InsightPanelInterface extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/insightinterface/v1/interfaces`;
@@ -13,7 +16,7 @@ export default class InsightPanelInterface extends Resource {
         );
     }
 
-    create(ipInterfaceConfig: New<InsightPanelInterfaceConfiguration>) {
+    create(ipInterfaceConfig: New<InsightPanelInterfaceConfigurationUpdateParams>) {
         return this.api.post<InsightPanelInterfaceConfiguration>(InsightPanelInterface.baseUrl, ipInterfaceConfig);
     }
 
@@ -27,9 +30,12 @@ export default class InsightPanelInterface extends Resource {
         );
     }
 
-    update(ipInterfaceConfig: InsightPanelInterfaceConfiguration) {
+    update(ipInterfaceConfig: InsightPanelInterfaceConfigurationUpdateParams) {
         const {id, ...body} = ipInterfaceConfig;
 
-        return this.api.put<InsightPanelInterfaceConfiguration>(`${InsightPanelInterface.baseUrl}/${id}`, body);
+        return this.api.put<InsightPanelInterfaceConfigurationUpdateParams>(
+            `${InsightPanelInterface.baseUrl}/${id}`,
+            body
+        );
     }
 }

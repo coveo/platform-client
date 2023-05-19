@@ -102,6 +102,9 @@ describe('InsightPanelInterface', () => {
                     enabled: true,
                 },
             },
+            smartSnippets: {
+                enabled: false,
+            },
         },
     };
 
