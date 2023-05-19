@@ -2,6 +2,46 @@ import {GranularResource} from '../BaseInterfaces.js';
 import {IntervalUnit} from '../Enums.js';
 import {MLModel} from './index.js';
 
+interface QueryReplacePatterns {
+    pattern: string;
+    ordering: string;
+}
+
+interface UrlReplacePatterns {
+    pattern: string;
+    replace: string;
+}
+
+interface PageViewFiltered {
+    contentType: {
+        Value: string[];
+    };
+}
+
+interface CommerceSupport {
+    enabled: boolean;
+}
+
+export interface ExtraConfig {
+    recommendedContentTypeFilter?: string[];
+    eventConfigsTemplates?: string[];
+    PageViewFiltered?: PageViewFiltered;
+    automaticContextDiscovery?: boolean;
+    blacklist?: string[];
+    commerceSupport?: CommerceSupport;
+    filterFields?: string[];
+    recommendProductGroup?: boolean;
+    testConfiguration?: boolean;
+    userContextFields?: string[];
+    whitelist?: string[];
+    blackList?: string[];
+    queryReplacePatterns?: QueryReplacePatterns[];
+    recommendationStrategy?: string;
+    urlReplacePatterns?: UrlReplacePatterns[];
+    parsingMode?: string;
+    [key: string]: any;
+}
+
 export interface RegistrationModel extends GranularResource {
     // The id of the engine
     engineId: string;
@@ -28,9 +68,7 @@ export interface RegistrationModel extends GranularResource {
     // The additional command line parameters that can be passed to the drill
     commandLineParameters?: string[];
     // The additional configuration that can be passed to the model
-    extraConfig?: {
-        [key: string]: any;
-    };
+    extraConfig?: ExtraConfig;
     /**
      * The filter to apply to the common event dimensions (shared by all event types) in the export.
      * Multiple filter parameters are joined with the AND operator
