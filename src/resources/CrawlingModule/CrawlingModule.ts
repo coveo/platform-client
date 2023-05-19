@@ -3,6 +3,7 @@ import Resource from '../Resource.js';
 import {
     ComponentVersion,
     CrawlingModuleEntity,
+    CrawlingModuleDeployment,
     CrawlingModuleLogRequestDownloadModel,
     CrawlingModuleLogRequestModel,
     CrawlingModuleLogRequestState,
@@ -59,5 +60,13 @@ export default class CrawlingModule extends Resource {
         return this.api.get<CrawlingModuleLogRequestDownloadModel>(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
         );
+    }
+
+    reportDeployment(crawlingModuleId: string, body: CrawlingModuleDeployment) {
+        return this.api.put<CrawlingModuleEntity>(`${CrawlingModule.baseUrl}/${crawlingModuleId}`, body);
+    }
+
+    removeDeployment(crawlingModuleId: string) {
+        return this.api.delete(`${CrawlingModule.baseUrl}/${crawlingModuleId}`);
     }
 }

@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
 import CrawlingModule from '../CrawlingModule.js';
 import {
+    CrawlingModuleDeployment,
     CrawlingModuleLogRequestLogType,
     CrawlingModuleLogRequestState,
     CreateCrawlingModuleLogRequestModel,
@@ -107,5 +108,27 @@ describe('Crawling Module Calls', () => {
         expect(api.get).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
         );
+    });
+
+    describe('reportDeployment', () => {
+        it('should add the deployment', () => {
+            const body: CrawlingModuleDeployment = {
+                name: 'test',
+                versions: {
+                    maestroVersion: '1.1.1',
+                },
+            };
+            crawlingModule.reportDeployment(crawlingModuleId, body);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}`, body);
+        });
+    });
+
+    describe('removeDeployment', () => {
+        it('should delete the deployment', () => {
+            crawlingModule.removeDeployment(crawlingModuleId);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}`);
+        });
     });
 });
