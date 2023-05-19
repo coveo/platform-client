@@ -92,7 +92,7 @@ export interface ComponentVersion {
     /**
      * @deprecated Should not be used.
      */
-    databaseVersion: string;
+    databaseVersion?: string;
     /**
      * The version of the Crawling Module.
      */
@@ -100,11 +100,11 @@ export interface ComponentVersion {
     /**
      * @deprecated Should not be used.
      */
-    securityWorkerVersion: string;
+    securityWorkerVersion?: string;
     /**
      * @deprecated Should not be used.
      */
-    workerVersion: string;
+    workerVersion?: string;
 }
 
 export interface UpdateStatus {
@@ -188,4 +188,23 @@ export interface CrawlingModuleLogRequestDownloadModel {
      * Url to download the log.
      */
     url: string;
+}
+
+export interface CrawlingModuleDeployment {
+    /**
+     * The name of the Crawling Module.
+     */
+    name: string;
+    /**
+     * The status of the Crawling Module
+     *
+     * @type {CrawlingModuleStatus}
+     */
+    status?: CrawlingModuleStatus;
+    /**
+     * The component versions of the Crawling Module
+     *
+     * @type {ComponentVersion}.
+     */
+    versions: ComponentVersion;
 }
