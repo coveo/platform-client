@@ -15,3 +15,5 @@ export interface Predicate<T> {
 }
 
 export interface CoveoPlatformClientRequestInit extends Omit<RequestInit, 'method'> {}
+
+export type WithOptional<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>> & Partial<Pick<T, K>>;
