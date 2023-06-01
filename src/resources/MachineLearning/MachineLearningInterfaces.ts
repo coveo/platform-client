@@ -1,4 +1,4 @@
-import {GranularResource} from '../BaseInterfaces.js';
+import {GranularResource, New} from '../BaseInterfaces.js';
 import {IntervalUnit} from '../Enums.js';
 import {MLModel} from './index.js';
 
@@ -96,7 +96,7 @@ export interface RegistrationModel extends GranularResource {
     versionMatcher?: string;
 }
 
-export interface MLModelCreated extends Omit<MLModel, 'id'> {
+export interface MLModelCreated extends New<MLModel> {
     // The unique identifier of the target model
     modelId: string;
     /**
