@@ -1,4 +1,4 @@
-import {GranularResource} from '../BaseInterfaces.js';
+import {GranularResource, New} from '../BaseInterfaces.js';
 import {IntervalUnit} from '../Enums.js';
 import {MLModel} from './index.js';
 
@@ -96,9 +96,9 @@ export interface RegistrationModel extends GranularResource {
     versionMatcher?: string;
 }
 
-export interface MLModelCreated extends MLModel {
+export interface MLModelCreated extends New<MLModel> {
     // The unique identifier of the target model
-    modelId?: string;
+    modelId: string;
     /**
      * The epoch date when the schedule will end.
      * If there is no end date, the schedule will last forever.
