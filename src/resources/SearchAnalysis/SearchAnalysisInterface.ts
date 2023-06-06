@@ -355,7 +355,7 @@ export interface WeightComposition {
  */
 export interface TermWeight {
     /**
-     * The dictionnary of term associated with ranking information
+     * The dictionary of term associated with ranking information
      */
     term: {[keyword: string]: Term};
     /**
@@ -373,7 +373,7 @@ export interface Term {
      */
     correlation: number;
     /**
-     * The TFID score
+     * The TFIDF score
      */
     idfScore: number;
 }
@@ -401,7 +401,7 @@ export interface RankingExpression {
 }
 
 /**
- * Deifne a ranking expression rule
+ * Define a ranking expression rule
  */
 export interface RankingExpressionRule {
     /**
