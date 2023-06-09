@@ -31,9 +31,12 @@ export default class Statements extends Resource {
     }
 
     importCSV(pipelineId: string, csvFile: File | string, options?: ExportStatementParams) {
-        const fileName = typeof csvFile === 'string' ? 'raw-string' : csvFile.name;
         const formData = new FormData();
-        formData.append('file', csvFile, fileName);
+        if (typeof csvFile === 'string') {
+            formData.append('file', csvFile);
+        } else {
+            formData.append('file', csvFile, csvFile.name);
+        }
 
         return this.api.postForm(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/import`, {
