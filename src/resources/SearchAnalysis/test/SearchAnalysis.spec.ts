@@ -16,21 +16,21 @@ describe('SearchAnalysis', () => {
     });
 
     describe('replay', () => {
-        it('should make a replay call to the searchAPI with a default date range', () => {
-            searchAnalysis.replay('some-search-id');
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(
-                `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
-                {id: 'some-search-id', dateRange: {from: expect.any(String)}}
-            );
-        });
-
-        it('should make a replay call to the searchAPI with a defined date range', () => {
+        it('should make a replay call to the searchAPI with a partially defined date range', () => {
             searchAnalysis.replay('some-search-id', '2023-01-01');
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
                 {id: 'some-search-id', dateRange: {from: '2023-01-01'}}
+            );
+        });
+
+        it('should make a replay call to the searchAPI with a complete defined date range', () => {
+            searchAnalysis.replay('some-search-id', '2023-01-01', '2023-02-01');
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
+                {id: 'some-search-id', dateRange: {from: '2023-01-01', to: '2023-02-01'}}
             );
         });
     });

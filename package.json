@@ -88,7 +88,6 @@
         }
     },
     "dependencies": {
-        "dayjs": "^1.11.8",
         "exponential-backoff": "^3.1.0",
         "query-string-cjs": "npm:query-string@^7.0.0",
         "query-string-esm": "npm:query-string@^8.0.0"
