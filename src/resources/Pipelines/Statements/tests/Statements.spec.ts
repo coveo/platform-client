@@ -165,7 +165,7 @@ describe('Statements', () => {
                 mockedFormData
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.append).toHaveBeenCalledWith('file', content, 'raw-string');
+            expect(mockedFormData.append).toHaveBeenCalledWith('file', content);
         });
     });
 
