@@ -2,24 +2,25 @@ import {GranularResource, New} from '../BaseInterfaces.js';
 import {IntervalUnit} from '../Enums.js';
 import {MLModel} from './index.js';
 
-interface QueryReplacePatterns {
+export interface QueryReplacePatterns {
     pattern: string;
     ordering: string;
 }
 
-interface UrlReplacePatterns {
+export interface UrlReplacePatterns {
     pattern: string;
     replace: string;
 }
 
-interface PageViewFiltered {
+export interface PageViewFiltered {
     contentType: {
         Value: string[];
     };
 }
 
-interface CommerceSupport {
+export interface CommerceSupport {
     enabled: boolean;
+    [key: string]: any;
 }
 
 export interface ExtraConfig {

@@ -47,6 +47,6 @@ export default class Field extends Resource {
     }
 
     search(params?: FieldListingOptions) {
-        return this.api.post<PageModel<FieldModel>>(this.buildPath(`${Field.baseUrl}/search`, params));
+        return this.api.post<PageModel<FieldModel>>(this.buildPath(`${Field.baseUrl}/search`), params);
     }
 }
