@@ -2,6 +2,7 @@ import {Paginated} from '../BaseInterfaces.js';
 import {FacetOrSortStatus, FieldOrigin, FieldTypes, SortingOrder} from '../Enums.js';
 
 export interface FieldModel {
+    automaticFacetsCandidate?: boolean;
     dateFormat?: string;
     description?: string;
     facet?: boolean;
@@ -10,6 +11,7 @@ export interface FieldModel {
     includeInResults?: boolean;
     keepAccentsDisplayValueFacet?: boolean;
     keyValue?: boolean;
+    label?: string;
     mergeWithLexicon?: boolean;
     multiValueFacet?: boolean;
     multiValueFacetTokenizers?: string;
