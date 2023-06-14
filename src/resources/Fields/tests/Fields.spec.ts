@@ -123,7 +123,7 @@ describe('Field', () => {
 
             field.search(params);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search`);
+            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search`, {});
         });
 
         it('should make a POST call to the specific Field url with the facetsOnly parameter set as true', () => {
@@ -131,7 +131,7 @@ describe('Field', () => {
 
             field.search(params);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search?order=ASC`);
+            expect(api.post).toHaveBeenCalledWith(`${Field.baseUrl}/search`, params);
         });
     });
 });

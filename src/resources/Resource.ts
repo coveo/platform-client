@@ -6,7 +6,7 @@ class Resource {
 
     constructor(protected api: API, protected serverlessApi: API) {}
 
-    protected buildPath(route: string, parameters: any): string {
+    protected buildPath(route: string, parameters?: any): string {
         return route + this.convertObjectToQueryString(parameters);
     }
 
