@@ -65,7 +65,7 @@ export interface NewProjectModel {
      *
      * @example: 'jdoe@email.com'
      */
-    createdBy: string;
+    createdBy?: string;
     /**
      * The resources associated to the project.
      *

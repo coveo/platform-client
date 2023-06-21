@@ -11,7 +11,7 @@ export default class Project extends Resource {
      *
      * @param {ListProjectParams} params
      */
-    list(params: ListProjectParams) {
+    list(params?: ListProjectParams) {
         return this.api.get<PageModel<ProjectModel>>(this.buildPath(Project.baseUrl, params));
     }
 
@@ -21,7 +21,7 @@ export default class Project extends Resource {
      * @param {ProjectModel} project
      */
     create(project: NewProjectModel) {
-        return this.api.post<ProjectModel>(this.buildPath(Project.baseUrl, project));
+        return this.api.post<ProjectModel>(this.buildPath(Project.baseUrl), project);
     }
 
     /**
@@ -31,7 +31,7 @@ export default class Project extends Resource {
      * @param {NewProjectModel} newProjectModel
      */
     update(projectId: string, newProjectModel: NewProjectModel) {
-        return this.api.put<ProjectModel>(this.buildPath(`${Project.baseUrl}/${projectId}`, newProjectModel));
+        return this.api.put<ProjectModel>(this.buildPath(`${Project.baseUrl}/${projectId}`), newProjectModel);
     }
 
     /**
