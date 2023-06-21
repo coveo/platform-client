@@ -37,11 +37,7 @@ export interface ProjectUseCase {
     metadata: ProjectMetadataItem[];
 }
 
-export interface ProjectModel {
-    /**
-     * The unique identitifier of the project.
-     */
-    id: string;
+export interface NewProjectModel {
     /**
      * The name of the project.
      */
@@ -53,7 +49,7 @@ export interface ProjectModel {
     /**
      * The id to track the project which is used for analytic purposes.
      */
-    trackingId?: string;
+    trackingId: string;
     /**
      * The use case of the project.
      */
@@ -69,27 +65,40 @@ export interface ProjectModel {
      *
      * @example: 'jdoe@email.com'
      */
-    createdBy?: string;
+    createdBy: string;
+    /**
+     * The resources associated to the project.
+     *
+     * @example: {'SOURCE': ['sourceId1', 'sourceId2']}
+     */
+    resources?: Record<string, string[]>;
+}
+
+export interface ProjectModel extends NewProjectModel {
+    /**
+     * The unique identitifier of the project.
+     */
+    id: string;
     /**
      * The date of the project's creation.
      * Note: ISO-8601 format
      *
      * @example: '2023-06-21T14:59:26.850Z'
      */
-    createdAt?: string;
+    createdDate: string;
     /**
      * The email of the user that last updated the project.
      *
      * @example: 'jdoes@email.com'
      */
-    updatedBy?: string;
+    updatedBy: string;
     /**
      * The date of the project's last update.
      * Note: ISO-8601 format
      *
      * @example: '2023-06-21T14:59:26.850Z'
      */
-    updatedDate?: string;
+    updatedDate: string;
 }
 
 export interface ListProjectParams extends Paginated {
@@ -111,4 +120,8 @@ export interface ListProjectParams extends Paginated {
      * @example: 'ASC'
      */
     order?: SortingOrder;
+    /**
+     * Whether to include resources when returning results.
+     */
+    includeResources?: boolean;
 }
