@@ -1,3 +1,4 @@
+import {PageModel} from '../../BaseInterfaces.js';
 import {
     DocumentPermissionState,
     PermissionIdentityType,
@@ -16,6 +17,10 @@ export interface SinglePermissionModel {
     lastUpdateResult?: SinglePermissionResult;
     securityProvider?: string;
     state?: SinglePermissionState;
+}
+
+export interface SinglePermissionPageModel extends PageModel {
+    anonymousAllowed?: boolean;
 }
 
 export interface PermissionSetModel {
