@@ -19,7 +19,7 @@ export interface SinglePermissionModel {
     state?: SinglePermissionState;
 }
 
-export interface SinglePermissionPageModel extends PageModel {
+export interface SinglePermissionPageModel extends PageModel<SinglePermissionModel> {
     anonymousAllowed?: boolean;
 }
 

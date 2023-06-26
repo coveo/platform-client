@@ -1,6 +1,7 @@
 import API from '../../APICore.js';
 import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
+import Document from './Documents/Document.js';
 import {
     CreateCoveoIndexModel,
     IndexAttributes,
@@ -13,6 +14,14 @@ import {
 export default class Indexes extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
     static indexBackupUrl = `/rest/organizations/${API.orgPlaceholder}/indexbackups/page`;
+
+    documents: Document;
+
+    constructor(protected api: API, protected serverlessApi: API) {
+        super(api, serverlessApi);
+
+        this.documents = new Document(api, serverlessApi);
+    }
 
     list() {
         return this.api.get<IndexAttributes[]>(Indexes.baseUrl);
