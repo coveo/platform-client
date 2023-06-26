@@ -1,13 +1,28 @@
 import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
 import API from '../../APICore.js';
 import Ressource from '../Resource.js';
-import {RestQueryParams, RestTokenParams, TokenModel} from './SearchInterfaces.js';
+import {
+    RestQueryParams,
+    RestTokenParams,
+    SearchListFieldsParams,
+    SearchListFieldsResponse,
+    TokenModel,
+} from './SearchInterfaces.js';
 
 export default class Search extends Ressource {
     static baseUrl = `/rest/search/v2`;
 
     createToken(tokenParams: RestTokenParams) {
         return this.api.post<TokenModel>(`${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`, tokenParams);
+    }
+
+    listFields(params?: SearchListFieldsParams) {
+        return this.api.get<SearchListFieldsResponse>(
+            this.buildPath(`${Search.baseUrl}/fields`, {
+                ...params,
+                organizationId: params?.organizationId ?? this.api.organizationId,
+            })
+        );
     }
 
     getFieldValues(fieldName: string, params?: ListFieldValuesBodyQueryParams) {
