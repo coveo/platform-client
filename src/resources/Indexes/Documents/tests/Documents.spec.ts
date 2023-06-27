@@ -1,5 +1,5 @@
 import API from '../../../../APICore.js';
-import {EffectivePermissionType, SinglePermissionState} from '../../../Enums.js';
+import {SinglePermissionState} from '../../../Enums.js';
 import Documents from '../Documents.js';
 
 jest.mock('../../../../APICore.js');
@@ -45,7 +45,7 @@ describe('Documents', () => {
                 perPage: 25,
                 from: '2023-6-26T19:57:09.714Z',
                 to: '2023-6-26T20:57:09.714Z',
-                includedEntities: EffectivePermissionType.Allowed,
+                includedEntities: 'ALLOWED',
             });
             expect(api.get).toHaveBeenCalledWith(
                 `${Documents.baseUrl}/${INDEX_ID}/documents/42.31537%2524file%253A%252F%252Fmovies%252Fthe-shining.txt/permissions/effective?states=OUT_OF_DATE&states=DISABLED&page=0&perPage=25&from=2023-6-26T19%3A57%3A09.714Z&to=2023-6-26T20%3A57%3A09.714Z&includedEntities=ALLOWED`

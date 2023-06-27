@@ -1151,9 +1151,3 @@ export enum ProductsSortByType {
     fields = 'fields',
     relevance = 'relevance',
 }
-
-export enum EffectivePermissionType {
-    All = 'ALL',
-    Allowed = 'ALLOWED',
-    Denied = 'DENIED',
-}
