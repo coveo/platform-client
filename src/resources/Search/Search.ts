@@ -2,6 +2,7 @@ import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from '
 import API from '../../APICore.js';
 import Ressource from '../Resource.js';
 import {
+    ItemPreviewHtmlParameters,
     RestQueryParams,
     RestTokenParams,
     SearchListFieldsParams,
@@ -56,6 +57,18 @@ export default class Search extends Ressource {
                 organizationId: this.api.organizationId,
             }),
             restQuerySuggestParameters
+        );
+    }
+
+    /**
+     * Get an item's preview in HTML format
+     */
+    previewHTML(params: ItemPreviewHtmlParameters) {
+        return this.api.get<string>(
+            this.buildPath(`${Search.baseUrl}/html`, {
+                ...params,
+                organizationId: params.organizationId ?? this.api.organizationId,
+            })
         );
     }
 }

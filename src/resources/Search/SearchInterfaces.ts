@@ -71,20 +71,21 @@ export interface TokenModel {
 export type RestQueryParams = PostSearchBodyQueryParams & PostSearchQueryStringParams;
 
 export interface PostSearchQueryStringParams {
+    /**
+     * The unique identifier of the target Coveo Cloud organization.
+     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
+     */
+    organizationId?: string;
+    /**
+     * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
+     */
     viewAllContent?: boolean | number;
 }
 
 /**
  * Defines the body parameters of the list field values request.
  */
-
-export interface ListFieldValuesBodyQueryParams {
-    /**
-     * The unique identifier of the target Coveo Cloud organization.
-     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
-     */
-    organizationId?: string;
-
+export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringParams {
     /**
      * Whether to treat accentuated characters as non-accentuated characters when retrieving field values (e.g., treat é, è, ê, etc., as e).
      *
@@ -2413,4 +2414,21 @@ export interface RestUserActionsParameters {
      * @example `c7ab60e2-e6b8-41e8-be6a-ad5c8edc662e`
      */
     tagViewsOfUser?: string;
+}
+
+export interface ItemPreviewHtmlParameters extends PostSearchQueryStringParams {
+    /**
+     * The unique ID of the document.
+     */
+    uniqueId: string;
+    enableNavigation?: boolean;
+    findNext?: number;
+    findPrevious?: number;
+    page?: number;
+    /**
+     * The approximate number of bytes to request in the HTML response.
+     *
+     * @default 0 // meaning that the entire HTML document is requested
+     */
+    requestedOutputSize?: number;
 }
