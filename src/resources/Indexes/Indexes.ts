@@ -1,7 +1,8 @@
 import API from '../../APICore.js';
 import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
-import Document from './Documents/Document.js';
+import Documents from './Documents/Documents.js';
+import Document from './Documents/Documents.js';
 import {
     CreateCoveoIndexModel,
     IndexAttributes,
@@ -15,7 +16,7 @@ export default class Indexes extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
     static indexBackupUrl = `/rest/organizations/${API.orgPlaceholder}/indexbackups/page`;
 
-    documents: Document;
+    documents: Documents;
 
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);

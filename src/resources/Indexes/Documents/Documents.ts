@@ -1,9 +1,9 @@
-import API from '../../../../APICore.js';
-import Resource from '../../../Resource.js';
-import {DocumentPermissionModel, SinglePermissionPageModel} from '../../../index.js';
-import {ListEffectivePermissionsOptions} from './PermissionsInterfaces.js';
+import API from '../../../APICore.js';
+import {DocumentPermissionModel, SinglePermissionPageModel} from '../../index.js';
+import Resource from '../../Resource.js';
+import {ListEffectivePermissionsOptions} from './DocumentsInterfaces.js';
 
-export default class Permissions extends Resource {
+export default class Documents extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
 
     /**
@@ -13,9 +13,9 @@ export default class Permissions extends Resource {
      * @param {string} documentId The unique identifier of the item whose permissions to list.
      *
      */
-    list(indexId: string, documentId: string) {
+    listPermissions(indexId: string, documentId: string) {
         return this.api.get<DocumentPermissionModel>(
-            `${Permissions.baseUrl}/${indexId}/documents/${encodeURIComponent(
+            `${Documents.baseUrl}/${indexId}/documents/${encodeURIComponent(
                 encodeURIComponent(documentId)
             )}/permissions`
         );
@@ -28,10 +28,10 @@ export default class Permissions extends Resource {
      * @param {string} documentId The unique identifier of the item whose permissions to list.
      * @param {ListEffectivePermissionsOptions} options
      */
-    listEffective(indexId: string, documentId: string, options: ListEffectivePermissionsOptions = {}) {
+    listEffectivePermissions(indexId: string, documentId: string, options: ListEffectivePermissionsOptions = {}) {
         return this.api.get<SinglePermissionPageModel>(
             this.buildPath(
-                `${Permissions.baseUrl}/${indexId}/documents/${encodeURIComponent(
+                `${Documents.baseUrl}/${indexId}/documents/${encodeURIComponent(
                     encodeURIComponent(documentId)
                 )}/permissions/effective`,
                 options

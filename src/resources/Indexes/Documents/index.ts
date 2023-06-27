@@ -1,2 +1,2 @@
-export * from './Permissions/index.js';
-export * from './Document.js';
+export * from './DocumentsInterfaces.js';
+export * from './Documents.js';

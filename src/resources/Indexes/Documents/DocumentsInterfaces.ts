@@ -1,5 +1,5 @@
-import {Paginated} from '../../../BaseInterfaces.js';
-import {EffectivePermissionType, SinglePermissionState} from '../../../Enums.js';
+import {Paginated} from '../../BaseInterfaces.js';
+import {EffectivePermissionType, SinglePermissionState} from '../../Enums.js';
 
 export interface ListEffectivePermissionsOptions extends Paginated {
     /**
