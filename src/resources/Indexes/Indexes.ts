@@ -2,7 +2,6 @@ import API from '../../APICore.js';
 import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
 import Documents from './Documents/Documents.js';
-import Document from './Documents/Documents.js';
 import {
     CreateCoveoIndexModel,
     IndexAttributes,
@@ -21,7 +20,7 @@ export default class Indexes extends Resource {
     constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
 
-        this.documents = new Document(api, serverlessApi);
+        this.documents = new Documents(api, serverlessApi);
     }
 
     list() {
