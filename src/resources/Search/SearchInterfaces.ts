@@ -1,5 +1,34 @@
 import {RestUserIdType} from '../Enums.js';
 
+export interface SearchListFieldsParams {
+    /**
+     * The unique identifier of the target Coveo Cloud organization.
+     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
+     */
+    organizationId?: string;
+    /**
+     * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
+     */
+    viewAllContent?: boolean;
+}
+
+export interface SearchListFieldsResponse {
+    fields: Array<{
+        type: string;
+        name: string;
+        nativeName: string;
+        description: string;
+        defaultValue: string;
+        fieldType: string;
+        fieldSourceType: string;
+        includeInQuery: boolean;
+        includeInResults: boolean;
+        groupByField: boolean;
+        splitGroupByField: boolean;
+        sortByField: boolean;
+    }>;
+}
+
 export interface RestTokenParams {
     userIds: RestUserId[];
     userGroups?: string[];

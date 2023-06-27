@@ -60,6 +60,28 @@ describe('Search', () => {
         });
     });
 
+    describe('listFields', () => {
+        it('makes a get call to v2 search with its params to fetch the list of fields', () => {
+            search.listFields({viewAllContent: true, organizationId: 'my-org'});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org`);
+        });
+
+        it('adds the organizationId query param from the config if missing in the arguments', () => {
+            const tempOrganizationId = api.organizationId;
+            // change the value of organizationId on the mock
+            Object.defineProperty(api, 'organizationId', {value: 'my-org', writable: true});
+
+            search.listFields({});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/fields?organizationId=my-org`);
+
+            // reset organizationId to old value
+            Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});
+        });
+    });
+
     describe('getFieldValue', () => {
         it('should make a get call to searchAPI correct url with its params to fetch the values of a field', () => {
             const params = {ignoreAccents: false};
