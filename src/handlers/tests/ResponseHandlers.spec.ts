@@ -7,14 +7,37 @@ describe('ResponseHandlers', () => {
         expect(ret).toEqual({});
     });
 
-    it('should return a promise resolved with the response body when the response status is between 200 and 299', async () => {
+    it('should return a promise resolved with the response body in JSON format when the response status is between 200 and 299 and the content-type is JSON', async () => {
         const data = {someData: 'thank you!'};
-
-        const okResponse = new Response(JSON.stringify(data), {status: 200});
+        const okResponse = new Response(JSON.stringify(data), {
+            status: 200,
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+        });
         const ret1 = await handleResponse(okResponse);
         expect(ret1).toEqual(data);
 
-        const stillOkResponse = new Response(JSON.stringify(data), {status: 299});
+        const stillOkResponse = new Response(JSON.stringify(data), {
+            status: 299,
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+        });
+        const ret2 = await handleResponse(stillOkResponse);
+        expect(ret2).toEqual(data);
+    });
+
+    it('returns a promise resolved with the response body in text format when the response status is between 200 and 299 the content-type is not JSON', async () => {
+        const data =
+            '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+        const okResponse = new Response(data, {
+            status: 200,
+            headers: {'Content-Type': 'text/html;charset=utf-8'},
+        });
+        const ret1 = await handleResponse(okResponse);
+        expect(ret1).toEqual(data);
+
+        const stillOkResponse = new Response(data, {
+            status: 299,
+            headers: {'Content-Type': 'text/html;charset=utf-8'},
+        });
         const ret2 = await handleResponse(stillOkResponse);
         expect(ret2).toEqual(data);
     });

@@ -13,12 +13,19 @@ const noContent: ResponseHandler = {
 
 const success: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async <T>(response: Response): Promise<T> => await response.json(),
+    process: async <T>(response: Response): Promise<T> => {
+        if (response.headers.get('Content-Type')?.includes('application/json')) {
+            return await response.json();
+        } else {
+            // We're assuming that T is going to be properly typed to `string` if the content type isn't json
+            return (await response.text()) as T;
+        }
+    },
 };
 
 const successBlob: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async <T>(response: Response): Promise<T> => await (response.blob() as any),
+    process: async <T>(response: Response): Promise<T> => (await response.blob()) as T,
 };
 
 const error: ResponseHandler = {
