@@ -1,8 +1,8 @@
 import {backOff} from 'exponential-backoff';
 import {PlatformClientOptions} from './ConfigurationInterfaces.js';
 import getEndpoint, {Environment, Region} from './Endpoints.js';
-import {ResponseHandler} from './handlers/ResponseHandlerInterfaces.js';
-import handleResponse, {ResponseHandlers} from './handlers/ResponseHandlers.js';
+import {ResponseBodyFormat} from './handlers/ResponseHandlerInterfaces.js';
+import handleResponse from './handlers/ResponseHandlers.js';
 import {UserModel} from './resources/Users/index.js';
 import {createFetcher} from './utils/createFetcher.js';
 import retrieve from './utils/Retriever.js';
@@ -14,11 +14,6 @@ interface TokenInfo {
 }
 
 const HEADERS_JSON_CONTENT_TYPE: HeadersInit = Object.freeze({'Content-Type': 'application/json'});
-const FILE_HANDLERS = Object.freeze<ResponseHandler[]>([
-    ResponseHandlers.noContent,
-    ResponseHandlers.successBlob,
-    ResponseHandlers.error,
-]);
 
 /** Check whether the response status is `429 Too Many Requests`. */
 const isTooManyRequests: Predicate<Response> = (response) => response.status === 429;
@@ -67,7 +62,7 @@ export default class API {
 
     async get<T = Record<string, unknown>>(url: string, args?: CoveoPlatformClientRequestInit): Promise<T> {
         try {
-            return await this.request<T>(url, this.buildRequestInit('GET', args));
+            return await this.request<T>(url, this.buildRequestInit('GET', args), args?.responseBodyFormat);
         } catch (error) {
             // Warning: the logic below does not do what the original author intended/mentions.
             // It will fullfil the promise with `undefined`, instead of keeping it pending.
@@ -79,9 +74,12 @@ export default class API {
         }
     }
 
+    /**
+     * @deprecated Use `get` with `{responseBodyFormat: 'blob'}` argument instead. Will be removed in version 45
+     */
     async getFile(url: string, args?: CoveoPlatformClientRequestInit): Promise<Blob> {
         try {
-            return await this.requestFile(url, this.buildRequestInit('GET', args));
+            return await this.request(url, this.buildRequestInit('GET', args), 'blob');
         } catch (error) {
             // Warning: the logic below does not do what the original author intended/mentions.
             // It will fullfil the promise with `undefined`, instead of keeping it pending.
@@ -109,7 +107,11 @@ export default class API {
         body: any = {},
         args?: CoveoPlatformClientRequestInit
     ): Promise<T> {
-        return await this.request<T>(url, this.buildRequestInit('POST', args, withBody(body, args)));
+        return await this.request<T>(
+            url,
+            this.buildRequestInit('POST', args, withBody(body, args)),
+            args?.responseBodyFormat
+        );
     }
 
     async postForm<T = Record<string, unknown>>(
@@ -117,7 +119,7 @@ export default class API {
         body: FormData,
         args?: Omit<CoveoPlatformClientRequestInit, 'body'>
     ): Promise<T> {
-        return await this.request<T>(url, this.buildRequestInit('POST', args, {body}));
+        return await this.request<T>(url, this.buildRequestInit('POST', args, {body}), args?.responseBodyFormat);
     }
 
     async put<T = Record<string, unknown>>(
@@ -135,7 +137,11 @@ export default class API {
         body: any = {},
         args?: CoveoPlatformClientRequestInit
     ): Promise<T> {
-        return await this.request<T>(url, this.buildRequestInit('PUT', args, withBody(body, args)));
+        return await this.request<T>(
+            url,
+            this.buildRequestInit('PUT', args, withBody(body, args)),
+            args?.responseBodyFormat
+        );
     }
 
     async patch<T = Record<string, unknown>>(
@@ -153,11 +159,15 @@ export default class API {
         body: any = {},
         args?: CoveoPlatformClientRequestInit
     ): Promise<T> {
-        return await this.request<T>(url, this.buildRequestInit('PATCH', args, withBody(body, args)));
+        return await this.request<T>(
+            url,
+            this.buildRequestInit('PATCH', args, withBody(body, args)),
+            args?.responseBodyFormat
+        );
     }
 
     async delete<T = Record<string, unknown>>(url: string, args?: CoveoPlatformClientRequestInit): Promise<T> {
-        return await this.request<T>(url, this.buildRequestInit('DELETE', args));
+        return await this.request<T>(url, this.buildRequestInit('DELETE', args), args?.responseBodyFormat);
     }
 
     abortGetRequests(): void {
@@ -200,21 +210,22 @@ export default class API {
 
     private buildRequestInit(
         method: string,
-        userArgs: CoveoPlatformClientRequestInit | undefined,
+        args: CoveoPlatformClientRequestInit | undefined,
         prefilled?: RequestInit
     ): RequestInit {
+        delete args?.responseBodyFormat;
         const globalRequestSettings = this.config.globalRequestSettings;
 
         const init: RequestInit = {
             ...prefilled,
             ...globalRequestSettings,
-            ...userArgs,
+            ...args,
             method,
             headers: {
                 Authorization: `Bearer ${this.accessToken}`,
                 ...prefilled?.headers,
                 ...globalRequestSettings?.headers,
-                ...userArgs?.headers,
+                ...args?.headers,
             },
         };
 
@@ -225,15 +236,9 @@ export default class API {
         return init;
     }
 
-    private async request<T>(route: string, init: RequestInit): Promise<T> {
+    private async request<T>(route: string, init: RequestInit, responseBodyFormat?: ResponseBodyFormat): Promise<T> {
         const fetcher = createFetcher(this.getUrlFromRoute(route), init, isTooManyRequests);
         const response = await backOff(fetcher, {retry: isTooManyRequests});
-        return handleResponse<T>(response, this.config.responseHandlers);
-    }
-
-    private async requestFile(route: string, init: RequestInit): Promise<Blob> {
-        const fetcher = createFetcher(this.getUrlFromRoute(route), init);
-        const response = await fetcher();
-        return handleResponse<Blob>(response, FILE_HANDLERS);
+        return handleResponse<T>(response, this.config.responseHandlers, responseBodyFormat);
     }
 }

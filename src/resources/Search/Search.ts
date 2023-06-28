@@ -68,7 +68,8 @@ export default class Search extends Ressource {
             this.buildPath(`${Search.baseUrl}/html`, {
                 ...params,
                 organizationId: params.organizationId ?? this.api.organizationId,
-            })
+            }),
+            {responseBodyFormat: 'text'}
         );
     }
 }

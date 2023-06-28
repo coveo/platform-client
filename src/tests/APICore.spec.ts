@@ -66,9 +66,7 @@ describe('APICore', () => {
     describe('calling the right endpoint', () => {
         beforeEach(() => {
             jest.clearAllMocks();
-            fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                headers: {'Content-Type': 'application/json'},
-            });
+            fetchMock.mockResponseOnce(JSON.stringify(testData.response));
         });
 
         it('should call the default endpoint if no environment, region, and host is specified', async () => {
@@ -123,9 +121,7 @@ describe('APICore', () => {
         it('should retry on throttle', async () => {
             fetchMock
                 .mockResponseOnce('too fast there cowboy!', {status: 429})
-                .mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                .mockResponseOnce(JSON.stringify(testData.response));
             await api.get(testData.route);
 
             expect(fetchMock).toHaveBeenCalledTimes(2);
@@ -133,9 +129,7 @@ describe('APICore', () => {
 
         describe('get', () => {
             it('should do a simple GET request', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.get<typeof testData.response>(testData.route);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -154,18 +148,14 @@ describe('APICore', () => {
             });
 
             it('should bind GET requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeInstanceOf(AbortSignal);
             });
 
             it('user arguments can set anything but the method', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route, {
                     window: null,
                     credentials: 'include',
@@ -182,9 +172,7 @@ describe('APICore', () => {
             });
 
             it('user signal can abort', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const userAbort = new AbortController();
                 await api.get(testData.route, {signal: userAbort.signal});
 
@@ -200,6 +188,9 @@ describe('APICore', () => {
             });
         });
 
+        /**
+         * @deprecated Will be removed in version 45
+         */
         describe('getFile', () => {
             it('should do a GET request to the specified url and resolve with a blob', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
@@ -230,9 +221,7 @@ describe('APICore', () => {
 
         describe('post', () => {
             it('should do a simple POST request', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.post(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -246,18 +235,14 @@ describe('APICore', () => {
             });
 
             it('should not bind POST requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.post(testData.route, testData.body);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeUndefined();
             });
 
             it('user arguments can set anything but the method', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const userAbort = new AbortController();
                 const body: BodyInit = 'RAW STRING';
 
@@ -283,9 +268,7 @@ describe('APICore', () => {
             const formMock: jest.Mocked<FormData> = jest.fn() as any;
 
             it('should do a simple POST request using form data', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.postForm(testData.route, formMock);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -299,9 +282,7 @@ describe('APICore', () => {
             });
 
             it('should not bind POST requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.postForm(testData.route, formMock);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeUndefined();
@@ -310,9 +291,7 @@ describe('APICore', () => {
 
         describe('put', () => {
             it('should do a simple PUT request', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.put(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -326,18 +305,14 @@ describe('APICore', () => {
             });
 
             it('should not bind PUT requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.put(testData.route, testData.body);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeUndefined();
             });
 
             it('user arguments can set anything but the method', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const userAbort = new AbortController();
                 const body: BodyInit = 'RAW STRING';
 
@@ -361,9 +336,7 @@ describe('APICore', () => {
 
         describe('patch', () => {
             it('should do a simple PATCH request', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.patch(testData.route, testData.body);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -377,18 +350,14 @@ describe('APICore', () => {
             });
 
             it('should not bind PATCH requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.patch(testData.route, testData.body);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeUndefined();
             });
 
             it('user arguments can set anything but the method', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const userAbort = new AbortController();
                 const body: BodyInit = 'RAW STRING';
 
@@ -412,9 +381,7 @@ describe('APICore', () => {
 
         describe('delete', () => {
             it('should do a simple DELETE request', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 const response = await api.delete(testData.route);
 
                 expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -426,18 +393,14 @@ describe('APICore', () => {
             });
 
             it('should not bind DELETE requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.delete(testData.route);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal).toBeUndefined();
             });
 
             it('user arguments can set anything but the method', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.delete(testData.route, {
                     window: null,
                     credentials: 'include',
@@ -456,9 +419,7 @@ describe('APICore', () => {
 
         describe('when calling abortGetRequests', () => {
             it('should abort pending get requests', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal?.aborted).toBe(false);
@@ -468,9 +429,7 @@ describe('APICore', () => {
 
             it('should abort pending get requests even with user abort', async () => {
                 const userAbort = new AbortController();
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.get(testData.route, {signal: userAbort.signal});
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal?.aborted).toBe(false);
@@ -480,9 +439,7 @@ describe('APICore', () => {
             });
 
             it('should not abort get requests that are being sent after the abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-                    headers: {'Content-Type': 'application/json'},
-                });
+                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
                 await api.abortGetRequests();
                 await api.get(testData.route);
                 const init = fetchMock.mock.calls[0][1];
@@ -524,9 +481,7 @@ describe('APICore', () => {
     });
 
     it('should give priority to custom response handlers when specified', async () => {
-        fetchMock.mockResponseOnce(JSON.stringify(testData.response), {
-            headers: {'Content-Type': 'application/json'},
-        });
+        fetchMock.mockResponseOnce(JSON.stringify(testData.response));
         const CustomResponseHandler: ResponseHandler = {
             canProcess: (response: Response): boolean => response.ok,
             process: jest.fn(),
@@ -608,17 +563,9 @@ describe('APICore', () => {
 
             fetchMock.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
                 if (config.headers && config.headers['override']) {
-                    return Promise.resolve(
-                        new Response(JSON.stringify(responseBody), {
-                            headers: {'Content-Type': 'application/json'},
-                        })
-                    );
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-                return Promise.resolve(
-                    new Response(JSON.stringify(testData.response), {
-                        headers: {'Content-Type': 'application/json'},
-                    })
-                );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
             });
 
             const api = new API({...testConfig, globalRequestSettings});
@@ -642,17 +589,9 @@ describe('APICore', () => {
 
             fetchMock.mockImplementation((_url: string, config: RequestInit): Promise<Response> => {
                 if (config.headers && config.headers['override'] === overriddenValue) {
-                    return Promise.resolve(
-                        new Response(JSON.stringify(responseBody), {
-                            headers: {'Content-Type': 'application/json'},
-                        })
-                    );
+                    return Promise.resolve(new Response(JSON.stringify(responseBody)));
                 }
-                return Promise.resolve(
-                    new Response(JSON.stringify(testData.response), {
-                        headers: {'Content-Type': 'application/json'},
-                    })
-                );
+                return Promise.resolve(new Response(JSON.stringify(testData.response)));
             });
 
             const api = new API({...testConfig, globalRequestSettings});

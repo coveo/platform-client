@@ -136,9 +136,10 @@ describe('ResourceSnapshots', () => {
 
             resourceSnapshots.export(snapshotToGetId);
 
-            expect(api.getFile).toHaveBeenCalledTimes(1);
-            expect(api.getFile).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content`, {
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content`, {
                 headers: {accept: 'application/zip'},
+                responseBodyFormat: 'blob',
             });
         });
 
@@ -150,10 +151,10 @@ describe('ResourceSnapshots', () => {
 
             resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
 
-            expect(api.getFile).toHaveBeenCalledTimes(1);
-            expect(api.getFile).toHaveBeenCalledWith(
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content?contentFormat=SPLIT_PER_TYPE`,
-                {headers: {accept: 'application/zip'}}
+                {headers: {accept: 'application/zip'}, responseBodyFormat: 'blob'}
             );
         });
     });

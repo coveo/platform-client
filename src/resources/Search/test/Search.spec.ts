@@ -149,7 +149,9 @@ describe('Search', () => {
         it('makes a GET call to the /html endpoint', () => {
             search.previewHTML({uniqueId: 'document-id'});
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/html?uniqueId=document-id`);
+            expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/html?uniqueId=document-id`, {
+                responseBodyFormat: 'text',
+            });
         });
     });
 });
