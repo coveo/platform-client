@@ -40,9 +40,10 @@ describe('Statements', () => {
             };
 
             statements.exportCSV(pipelineId, options);
-            expect(api.getFile).toHaveBeenCalledTimes(1);
-            expect(api.getFile).toHaveBeenCalledWith(
-                `${Statements.getBaseUrl(pipelineId)}/export?feature=${options.feature}`
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Statements.getBaseUrl(pipelineId)}/export?feature=${options.feature}`,
+                {responseBodyFormat: 'blob'}
             );
         });
     });

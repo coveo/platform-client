@@ -1,22 +1,36 @@
 import handleResponse, {CoveoPlatformClientError, ResponseHandlers} from '../ResponseHandlers.js';
 
 describe('ResponseHandlers', () => {
-    it('should return a promise resolved with an empty object when the response status code is 204', async () => {
-        const noContentResponse = new Response(null, {status: 204});
-        const ret = await handleResponse(noContentResponse);
-        expect(ret).toEqual({});
+    describe('no content', () => {
+        it('returns a promise resolved with an empty object when the response status code is 204', async () => {
+            const noContentResponse = new Response(null, {status: 204});
+            const ret = await handleResponse(noContentResponse);
+            expect(ret).toEqual({});
+        });
     });
 
-    it('should return a promise resolved with the response body when the response status is between 200 and 299', async () => {
-        const data = {someData: 'thank you!'};
+    describe.each([200, 299])('when the response status code is between 200 and 299 (success)', (status) => {
+        it(`${status} returns a promise resolved with the response body in JSON format`, async () => {
+            const data = {someData: 'thank you!'};
+            const okResponse = new Response(JSON.stringify(data), {status});
+            const result = await handleResponse(okResponse);
+            expect(result).toEqual(data);
+        });
 
-        const okResponse = new Response(JSON.stringify(data), {status: 200});
-        const ret1 = await handleResponse(okResponse);
-        expect(ret1).toEqual(data);
+        it(`${status} returns a promise resolved with the response body in text format if responseBodyFormat = "text"`, async () => {
+            const data =
+                '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+            const okResponse = new Response(data, {status});
+            const result = await handleResponse(okResponse, null, 'text');
+            expect(result).toEqual(data);
+        });
 
-        const stillOkResponse = new Response(JSON.stringify(data), {status: 299});
-        const ret2 = await handleResponse(stillOkResponse);
-        expect(ret2).toEqual(data);
+        it(`${status} returns a promise resolved with the response body in blob format if responseBodyFormat = "blob"`, async () => {
+            const okResponse = new Response('some content', {status});
+            const expectedResult = await okResponse.clone().blob();
+            const result = await handleResponse(okResponse, null, 'blob');
+            expect(result).toEqual(expectedResult);
+        });
     });
 
     describe('when the status is not between 200 and 299', () => {

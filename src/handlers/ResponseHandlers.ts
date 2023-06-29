@@ -1,5 +1,5 @@
 import {Predicate} from '../utils/types.js';
-import {ResponseHandler} from './ResponseHandlerInterfaces.js';
+import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
 
 /** Check whether the response status is `204 No Content`. */
 export const isNoContent: Predicate<Response> = (response) => response.status === 204;
@@ -13,12 +13,15 @@ const noContent: ResponseHandler = {
 
 const success: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async <T>(response: Response): Promise<T> => await response.json(),
+    process: async (response, responseBodyFormat = 'json') => response[responseBodyFormat](),
 };
 
+/**
+ * @deprecated Use `success` handler with `responseBodyFormat` `'blob'` instead. Will be removed in version 45
+ */
 const successBlob: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async <T>(response: Response): Promise<T> => await (response.blob() as any),
+    process: async <T>(response: Response): Promise<T> => (await response.blob()) as T,
 };
 
 const error: ResponseHandler = {
@@ -52,13 +55,17 @@ const getErrorPropsFromAliases = (responseJson: object, aliasList: string[]): st
 const defaultResponseHandlers = Object.freeze([noContent, success, error]);
 export const ResponseHandlers = Object.freeze({noContent, success, successBlob, error});
 
-export default async <T>(response: Response, customHandlers?: readonly ResponseHandler[] | null): Promise<T> => {
+export default async <T>(
+    response: Response,
+    customHandlers?: readonly ResponseHandler[] | null,
+    responseBodyFormat?: ResponseBodyFormat
+): Promise<T> => {
     const handlers = customHandlers?.length ? customHandlers : defaultResponseHandlers;
     const handler = handlers.find((candidate) => candidate.canProcess(response));
     if (!handler) {
         throw new Error('No suitable response handler found');
     }
-    return await handler.process<T>(response);
+    return await handler.process<T>(response, responseBodyFormat);
 };
 
 /**

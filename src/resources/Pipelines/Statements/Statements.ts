@@ -22,11 +22,12 @@ export default class Statements extends Resource {
     }
 
     exportCSV(pipelineId: string, options?: ExportStatementParams) {
-        return this.api.getFile(
+        return this.api.get(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/export`, {
                 organizationId: this.api.organizationId,
                 ...options,
-            })
+            }),
+            {responseBodyFormat: 'blob'}
         );
     }
 

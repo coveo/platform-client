@@ -61,8 +61,9 @@ export default class ResourceSnapshots extends Resource {
      * @returns {Promise<Blob>} A newly created Blob object which contains the zipped snapshot
      */
     export(snapshotId: string, options?: ExportSnapshotContentOptions): Promise<Blob> {
-        return this.api.getFile(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
+        return this.api.get(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
             headers: {accept: 'application/zip'},
+            responseBodyFormat: 'blob',
         });
     }
 

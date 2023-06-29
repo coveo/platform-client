@@ -188,6 +188,9 @@ describe('APICore', () => {
             });
         });
 
+        /**
+         * @deprecated Will be removed in version 45
+         */
         describe('getFile', () => {
             it('should do a GET request to the specified url and resolve with a blob', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
