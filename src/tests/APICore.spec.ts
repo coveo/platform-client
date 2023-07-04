@@ -480,16 +480,30 @@ describe('APICore', () => {
         }).not.toThrow();
     });
 
-    it('should give priority to custom response handlers when specified', async () => {
-        fetchMock.mockResponseOnce(JSON.stringify(testData.response));
-        const CustomResponseHandler: ResponseHandler = {
-            canProcess: (response: Response): boolean => response.ok,
-            process: jest.fn(),
-        };
-        const apiWithCustomResponseHandler = new API({...testConfig, responseHandlers: [CustomResponseHandler]});
-        await apiWithCustomResponseHandler.get('some/resource');
+    describe('response handling', () => {
+        it('should give priority to custom response handlers when specified', async () => {
+            fetchMock.mockResponseOnce(JSON.stringify(testData.response));
+            const CustomResponseHandler: ResponseHandler = {
+                canProcess: (response: Response): boolean => response.ok,
+                process: jest.fn(),
+            };
+            const apiWithCustomResponseHandler = new API({...testConfig, responseHandlers: [CustomResponseHandler]});
+            await apiWithCustomResponseHandler.get('some/resource');
 
-        expect(CustomResponseHandler.process).toHaveBeenCalledTimes(1);
+            expect(CustomResponseHandler.process).toHaveBeenCalledTimes(1);
+        });
+
+        it('forwards responseBodyFormat argument to the response handlers', async () => {
+            fetchMock.mockResponseOnce('the response');
+            const handlerSpy = jest.fn();
+            const CustomResponseHandler: ResponseHandler = {
+                canProcess: (response: Response): boolean => response.ok,
+                process: handlerSpy,
+            };
+            const apiWithCustomResponseHandler = new API({...testConfig, responseHandlers: [CustomResponseHandler]});
+            await apiWithCustomResponseHandler.get('some/resource', {responseBodyFormat: 'text'});
+            expect(CustomResponseHandler.process).toHaveBeenCalledWith(expect.anything(), 'text');
+        });
     });
 
     describe('organizationId', () => {
