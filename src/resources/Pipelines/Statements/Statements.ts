@@ -21,7 +21,7 @@ export default class Statements extends Resource {
         );
     }
 
-    exportCSV(pipelineId: string, options?: ExportStatementParams) {
+    exportCSV(pipelineId: string, options?: ExportStatementParams): Promise<Blob> {
         return this.api.get(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/export`, {
                 organizationId: this.api.organizationId,
