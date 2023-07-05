@@ -213,19 +213,19 @@ export default class API {
         args: CoveoPlatformClientRequestInit | undefined,
         prefilled?: RequestInit
     ): RequestInit {
-        delete args?.responseBodyFormat;
+        const {responseBodyFormat, ...requestArgs} = args ?? {};
         const globalRequestSettings = this.config.globalRequestSettings;
 
         const init: RequestInit = {
             ...prefilled,
             ...globalRequestSettings,
-            ...args,
+            ...requestArgs,
             method,
             headers: {
                 Authorization: `Bearer ${this.accessToken}`,
                 ...prefilled?.headers,
                 ...globalRequestSettings?.headers,
-                ...args?.headers,
+                ...requestArgs?.headers,
             },
         };
 
