@@ -192,6 +192,8 @@ export interface ProductModel {
     ec_rating: number;
     ec_shortdesc: string;
     ec_thumbnails: string[];
+    ec_listing: string[];
+    ec_product_id: string;
     permanentid: string;
     totalNumberOfChildResults: number;
 }
