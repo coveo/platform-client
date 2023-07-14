@@ -1,5 +1,6 @@
 import API from '../../../../APICore.js';
-import {SinglePermissionState} from '../../../Enums.js';
+import {PermissionIdentityType, SinglePermissionState} from '../../../Enums.js';
+import {DocumentSecurityIdentityModel} from '../../../index.js';
 import Documents from '../Documents.js';
 
 jest.mock('../../../../APICore.js');
@@ -17,6 +18,28 @@ describe('Documents', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         documents = new Documents(api, serverlessApi);
+    });
+
+    describe('getIdentityPermissions', () => {
+        it('should make a POST call to the specific Documents url', () => {
+            const identity: DocumentSecurityIdentityModel = {
+                type: PermissionIdentityType.User,
+                provider: 'Email Security Provider',
+                name: 'test@test.coveo.com',
+                infos: [
+                    {
+                        key: 'key',
+                        value: 'value',
+                    },
+                ],
+            };
+            documents.getIdentityPermissions(INDEX_ID, DOCUMENT_ID, identity);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${Documents.baseUrl}/${INDEX_ID}/documents/42.31537%2524file%253A%252F%252Fmovies%252Fthe-shining.txt/permissions/identity`,
+                identity
+            );
+        });
     });
 
     describe('listPermissions', () => {

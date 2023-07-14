@@ -40,6 +40,57 @@ export interface DocumentPermissionModel {
     state?: DocumentPermissionState;
 }
 
+export interface SecurityIdentityInfoModel {
+    key?: string;
+    value?: string;
+}
+
+export interface DetailedSecurityIdentityModel {
+    name?: string;
+    provider?: string;
+    type?: string;
+    infos?: SecurityIdentityInfoModel[];
+    declaration?: string;
+    state?: SinglePermissionState;
+    createdDate?: number;
+    lastEnabledDate?: number;
+    lastUpdateDate?: number;
+    lastSuccessfulUpdateDate?: number;
+    lastStoredDate?: number;
+    orderingID?: number;
+    lastUpdateResult?: SinglePermissionResult;
+    lastUpdateErrorDetail?: string;
+}
+
+export interface DocumentSecurityIdentityModel {
+    name?: string;
+    provider?: string;
+    type?: PermissionIdentityType;
+    infos?: SecurityIdentityInfoModel[];
+}
+
+export interface PermissionSetForIdentityModel {
+    identityIsAllowed?: boolean;
+    identityIsDenied?: boolean;
+    allowAnonymous?: boolean;
+    allowedIdentitiesPaths?: DetailedSecurityIdentityModel[];
+    deniedIdentitiesPaths?: DetailedSecurityIdentityModel[];
+    name?: string;
+}
+
+export interface PermissionLevelForIdentityModel {
+    permissionSetsForIdentity?: PermissionSetForIdentityModel[];
+    name?: string;
+    identityIsAllowed?: boolean;
+    identityIsDenied?: boolean;
+}
+
+export interface DocumentPermissionForIdentityModel {
+    permissionLevelsForIdentity: PermissionLevelForIdentityModel[];
+    identityIsAllowed?: boolean;
+    identityIsDenied?: boolean;
+}
+
 export interface Permission {
     additionalInfo?: any;
     identity?: string;

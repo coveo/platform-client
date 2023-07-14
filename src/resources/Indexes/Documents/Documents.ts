@@ -1,10 +1,32 @@
 import API from '../../../APICore.js';
-import {DocumentPermissionModel, SinglePermissionPageModel} from '../../index.js';
+import {
+    DocumentPermissionForIdentityModel,
+    DocumentPermissionModel,
+    DocumentSecurityIdentityModel,
+    SinglePermissionPageModel,
+} from '../../index.js';
 import Resource from '../../Resource.js';
 import {ListEffectivePermissionsOptions} from './DocumentsInterfaces.js';
 
 export default class Documents extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/indexes`;
+
+    /**
+     * Get the document permission model information for a security identity.
+     *
+     * @param {string} indexId The unique identifier of the target index.
+     * @param {string} documentId The unique identifier of the item whose permissions to list.
+     * @param {DocumentSecurityIdentityModel} the security identity for which we want the permissions from.
+     *
+     */
+    getIdentityPermissions(indexId: string, documentId: string, identity: DocumentSecurityIdentityModel) {
+        return this.api.post<DocumentPermissionForIdentityModel>(
+            `${Documents.baseUrl}/${indexId}/documents/${encodeURIComponent(
+                encodeURIComponent(documentId)
+            )}/permissions/identity`,
+            identity
+        );
+    }
 
     /**
      * Lists the [permissions](https://docs.coveo.com/en/223/glossary/permission) of an [item](https://docs.coveo.com/en/210/glossary/item) in a Coveo Cloud organization index.
