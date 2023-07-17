@@ -48,7 +48,7 @@ export interface SecurityIdentityInfoModel {
 export interface DetailedSecurityIdentityModel {
     name?: string;
     provider?: string;
-    type?: string;
+    type?: PermissionIdentityType;
     infos?: SecurityIdentityInfoModel[];
     declaration?: string;
     state?: SinglePermissionState;
