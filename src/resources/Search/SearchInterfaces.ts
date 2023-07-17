@@ -2915,3 +2915,10 @@ export interface SearchResponse {
      */
     [key: string]: unknown;
 }
+
+export interface SingleItemParameters extends PostSearchQueryStringParams {
+    /**
+     * The unique ID of the document.
+     */
+    uniqueId: string;
+}

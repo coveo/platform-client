@@ -2,8 +2,10 @@ import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from '
 import API from '../../APICore.js';
 import Ressource from '../Resource.js';
 import {
+    SingleItemParameters,
     ItemPreviewHtmlParameters,
     RestQueryParams,
+    RestQueryResult,
     RestTokenParams,
     SearchListFieldsParams,
     SearchListFieldsResponse,
@@ -71,6 +73,18 @@ export default class Search extends Ressource {
                 organizationId: params.organizationId ?? this.api.organizationId,
             }),
             {responseBodyFormat: 'text'}
+        );
+    }
+
+    /**
+     * Get item in JSON format
+     */
+    getDocument(params: SingleItemParameters) {
+        return this.api.get<RestQueryResult>(
+            this.buildPath(`${Search.baseUrl}/document`, {
+                ...params,
+                organizationId: params.organizationId ?? this.api.organizationId,
+            })
         );
     }
 }
