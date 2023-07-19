@@ -2432,3 +2432,486 @@ export interface ItemPreviewHtmlParameters extends PostSearchQueryStringParams {
      */
     requestedOutputSize?: number;
 }
+
+export interface RestCategoryFacetValue {
+    numberOfResults?: number[];
+    value?: string;
+}
+
+export interface RestCategoryFacetResponse {
+    field?: string;
+    parentValues?: RestCategoryFacetValue[];
+    values?: RestCategoryFacetValue[];
+}
+
+export interface RestHierarchicalFacetResponseValue {
+    /**
+     * The number of query results that can be expected if the facet value is selected in the search interface.
+     *
+     * Note: This property only gets populated when the facet currently has no selected or excluded values.
+     */
+    numberOfResults: number;
+    path: string[];
+    /**
+     * The current facet value state in the search interface.
+     *
+     * @default 'idle'
+     */
+    state: 'idle' | 'selected' | 'excluded';
+    /**
+     * The facet value name.
+     *
+     * Note: In the case of a hierarchical facet value, this represents a single path segment.
+     */
+    value: string;
+    /**
+     * The children of this hierarchical facet value.
+     *
+     * Each child is a full-fledged hierarchical facet value that may in turn have its own children and so forth, up to a maximum depth of 50 levels.
+     */
+    children?: RestHierarchicalFacetResponseValue[];
+    /**
+     * Whether the facet value was automatically selected by Coveo ML.
+     */
+    isAutoSelected?: boolean;
+    /**
+     * Whether the hierarchical value is a childless node.
+     */
+    isLeafValue?: boolean;
+    /**
+     * Whether additional values are available for the facet.
+     */
+    moreValuesAvailable?: boolean;
+}
+
+export interface RestFacetResultValue extends RestHierarchicalFacetResponseValue {
+    /**
+     * The end of the range.
+     */
+    end?: string | number;
+    /**
+     * Whether to include the `end` value in the range.
+     *
+     * @default false
+     */
+    endInclusive?: boolean;
+    isSuggested?: boolean;
+    /**
+     * The start of the range.
+     */
+    start?: string | number;
+}
+
+export interface RestFacetResult {
+    /**
+     * The name of the field on which the facet is based.
+     *
+     * @example 'author'
+     */
+    field: string;
+    /**
+     * The ranking score computed by the index for this facet.
+     */
+    indexScore: number;
+    /**
+     * Whether additional values are available for the facet.
+     */
+    moreValuesAvailable: boolean;
+    /**
+     * The returned facet values
+     */
+    values: RestFacetResultValue[];
+    /**
+     * Whether the facet was recommended by Coveo ML.
+     */
+    isFromAutoSelect?: boolean;
+    /**
+     * The ranking score computed by Coveo ML DNE for this facet.
+     */
+    mlScore?: number;
+}
+
+export interface RestGroupByValue {
+    /**
+     * The results of the computed fields (see the computedFields Group By parameter).
+     */
+    computedFieldResults: number[];
+    /**
+     * The number of query result items having this field value.
+     */
+    numberOfResults: number;
+    /**
+     * The Group By value score, computed from the numberOfResults value as well as from the position of the items having this value in the ranked query result set.
+     */
+    score: number;
+    /**
+     * The Group By value name.
+     */
+    value: string;
+    /**
+     * The type of Group By value.
+     */
+    valueType: string;
+}
+
+export interface RestGroupByResult {
+    /**
+     * The field on which the Group By operation was executed.
+     */
+    field: string;
+    /**
+     * The global computed fields that were processed by the index.
+     */
+    globalComputedFieldResults: number[];
+    /**
+     * The resulting Group By values.
+     */
+    values: RestGroupByValue[];
+}
+
+export interface RestWordCorrection {
+    /**
+     * The suggested word correction.
+     */
+    correctedWord: string;
+    /**
+     * The length (in number of characters) of the corrected word.
+     */
+    length: number;
+    /**
+     * The offset (in number of characters) of the corrected word, from the beginning of the resulting query expression correction suggestion.
+     */
+    offset: number;
+    /**
+     * The original, un-corrected word.
+     */
+    originalWord: string;
+}
+
+export interface RestQueryCorrection {
+    /**
+     * The resulting query expression correction suggestion.
+     */
+    correctedQuery: string;
+    /**
+     * The word correction suggestions.
+     */
+    wordCorrections: RestWordCorrection[];
+}
+
+export interface RestHighlightResponse {
+    /**
+     * The length (in number of characters) of the word to highlight.
+     */
+    length: number;
+    /**
+     * The 0-based index position of the first character of the word to highlight in the string.
+     */
+    offset: number;
+}
+
+export interface RestQueryResult {
+    /**
+     * The basic query expression terms which this query result item does not match.
+     *
+     * Note: This property is populated by terms from the query pipeline-processed `q` value (not from the original `q` value).
+     */
+    absentTerms: string[];
+    /**
+     * An array of references to the children of this item, if result folding was applied (see the `filterField` query parameter). The query results contained in this field will have both their parent and child results set to `null`.
+     */
+    childResults: RestQueryResult[];
+    /**
+     * The hyperlinkable item URI.
+     *
+     * Notes:
+     * - Use the `clickUri` value when you want to create hyperlinks to the item, rather than the `uri` or `printableUri` value.
+     * - The `clickUri` value is not necessarily unique for each item.
+     */
+    clickUri: string;
+    /**
+     * The contextual excerpt generated for the item (see the excerptLength query parameter).
+     */
+    excerpt: string;
+    /**
+     * The length and offset of each word to highlight in the item `excerpt` string.
+     */
+    excerptHighlights: RestHighlightResponse[];
+    /**
+     * The first sentences retrieved from the item (see the `retrieveFirstSentences` query parameter).
+     */
+    firstSentences: string;
+    /**
+     * The length and offset of each word to highlight in the item `firstSentences` string.
+     */
+    firstSentencesHighlights: RestHighlightResponse[];
+    /**
+     * The flags that are set on the item by the index. Distinct values are separated by semicolons.
+     */
+    flags: string;
+    /**
+     * Whether the index contains an HTML version of this item.
+     */
+    hasHtmlVersion: boolean;
+    /**
+     * Whether the index contains a mobile HTML version of this item.
+     */
+    hasMobileHtmlVersion: boolean;
+    /**
+     * Whether the item score was boosted as a Coveo ML recommendation.
+     */
+    isRecommendation: boolean;
+    /**
+     * Whether the item score was boosted by a featured result rule in the query pipeline.
+     */
+    isTopResult: boolean;
+    /**
+     * Whether the item score was boosted as a Coveo ML recommendation.
+     */
+    isUserActionView: boolean;
+    parentResult: RestQueryResult;
+    /**
+     * The item ranking score expressed as a percentage (see the `sortCriteria` and `rankingFunctions` query parameters).
+     */
+    percentScore: number;
+    /**
+     * The human readable item URI.
+     *
+     * Note: Avoid using the `printableUri` value to create hyperlinks to the item. Use the `clickUri` value instead.
+     */
+    printableUri: string;
+    /**
+     * The length and offset of each word to highlight in the item printableUri string.
+     */
+    printableUriHighlights: RestHighlightResponse[];
+    /**
+     * The raw debug information generated by the index to detail how the item was ranked. This property is `null` unless the `debug` query parameter is set to `true`.
+     */
+    rankingInfo: string;
+    /**
+     * The item rating (see the enableCollaborativeRating query parameter).
+     *
+     * Note: Unless collaborative rating is enabled for your index, the value of this property is always 3.
+     */
+    rating: number;
+    /**
+     * The values of the fields which were retrieved for this item (see the fieldsToInclude and fieldsToExclude query parameters).
+     */
+    raw: Record<string, any>;
+    /**
+     * The total ranking score computed for the item (see the `sortCriteria` and `rankingFunctions` query parameters).
+     */
+    score: number;
+    /**
+     * The item summary (see the `summaryLength` query parameter).
+     */
+    summary: string;
+    /**
+     * The length and offset of each word to highlight in the item `summary` string.
+     */
+    summaryHighlights: RestHighlightResponse[];
+    /**
+     * The item title.
+     *
+     * Note: When logging a **Click** usage analytics event for an opened query result item, the `documentTitle` field of that event should be set to the `title` value of the opened query result item.
+     */
+    title: string;
+    /**
+     * The length and offset of each word to highlight in the item title string.
+     */
+    titleHighlights: RestHighlightResponse[];
+    /**
+     * The total number of children available in the index for this item, if result folding was applied (see the `filterField` query parameter).
+     */
+    totalNumberOfChildResults: number;
+    /**
+     * The unique item identifier. You should consider the `uniqueId` value as an opaque string.
+     */
+    uniqueId: string;
+    /**
+     * The item URI.
+     *
+     * Notes:
+     * - Avoid using the `uri` value to create hyperlinks to the item. Use the `clickUri` value instead.
+     * - When logging a **Click** usage analytics event for an opened query result item, the `documentUrl` field of that event should be set to the `uri` value of the opened query result item.
+     */
+    uri: string;
+    /**
+     * Additional undocumented or deprecated properties that might be sent by the Search API
+     */
+    [key: string]: unknown;
+}
+
+export interface RestSuggestedFacetValue {
+    /**
+     * A DNE facet value suggestion.
+     *
+     * @example 'Alice Smith'
+     */
+    value: string;
+    /**
+     * The path to the suggested facet value (only applies to hierarchical facet value suggestions).
+     *
+     * If the suggested hierarchical facet value is `'Parrot'`, the returned path could be `["Animals", "Birds", "Parrot"]`.
+     */
+    path: string[];
+}
+
+export interface RestSuggestedFacet {
+    /**
+     * The name of the field on which the DNE facet suggestion is based.
+     *
+     * @example 'author'
+     */
+    field: string;
+    values: RestSuggestedFacetValue[];
+}
+
+export interface RestTriggerResponse {
+    content: Record<string, unknown>;
+    /**
+     * The type of Coveo Cloud query pipeline **Trigger** statement (see [Managing Query Pipeline Triggers](https://docs.coveo.com/en/1550/)).
+     */
+    type: 'notify' | 'execute' | 'query' | 'redirect';
+}
+
+export interface RestContentId {
+    contentIdKey: string;
+    contentIdValue: string;
+}
+
+export interface RestQuestion {
+    answerSnippet: string;
+    documentId: RestContentId;
+    question: string;
+    score: number;
+}
+
+export interface RestQuestionAnswer extends RestQuestion {
+    allContentIds: RestContentId[];
+    answerFound: boolean;
+    answerId: string;
+    relatedQuestions: RestQuestion[];
+    raw: Record<string, any>;
+}
+
+export interface SearchResponse {
+    /**
+     * The version of the Search API that sent the query.
+     */
+    apiVersion: number;
+    /**
+     * Hierarchical data results corresponding the to hierarchical data in the query.
+     */
+    categoryFacets: RestCategoryFacetResponse[];
+    /**
+     * The `requestDuration` added to the computing time (in milliseconds) that was required by the Search API.
+     */
+    duration: number;
+    /**
+     * The facet results returned by the query. These results are included in the order they were requested in the facets query parameter.
+     */
+    facets: RestFacetResult[];
+    /**
+     * The Group By results returned by the query. These results are included in the order they were requested in the groupBy query parameter.
+     */
+    groupByResults: RestGroupByResult[];
+    /**
+     * The identifier of the index mirror against which the query was executed (see the indexToken query parameter).
+     */
+    index: string;
+    /**
+     * The time (in milliseconds) that was required by the index to find the query items.
+     */
+    indexDuration: number;
+    /**
+     * The phrases to highlight in each query result item. This property is populated when the basic query expression (see the `q` query parameter) contains one or several exact phrase match requests (terms between double quote characters).
+     */
+    phrasesToHighlight: Record<string, Record<string, string[]>>;
+    /**
+     * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
+     *
+     * You can pass an empty `pipeline` value to use an empty query pipeline (i.e., `?pipeline=` or `"pipeline": ""`).
+     *
+     * If a query does not contain the `pipeline` parameter, the first query pipeline whose conditions are met by the request is used (query pipelines without conditions are not evaluated). Should the request fail to meet the conditions of each evaluated query pipeline, the default query pipeline of the target Coveo Cloud organization is used (bypassing its conditions, if it has any).
+     *
+     * Notes:
+     * - This parameter will be overridden if the search request is authenticated by a [search token](https://docs.coveo.com/en/56/) that enforces a specific `pipeline`, or a `searchHub` that routes queries to a specific `pipeline` via a query pipeline condition.
+     * - For reporting purposes, when logging a **Search** usage analytics event for a query, the `queryPipeline` field of that event should be set to the `pipeline` value of the query (or to the `"default"` string, if no `pipeline` value was specified in the query).
+     *
+     * See also [Managing Query Pipelines](https://docs.coveo.com/en/1450/).
+     */
+    pipeline: string;
+    /**
+     * The query corrections suggested by the index, if the `enableDidYouMean` query parameter was set to `true`.
+     */
+    queryCorrections: RestQueryCorrection[];
+    /**
+     * The refined keywords used by the Coveo ML automatic relevance tuning model.
+     */
+    refinedKeywords: string[];
+    /**
+     * The indexDuration added to the time (in milliseconds) that was required to establish a connection between the Search API server and the index server.
+     */
+    requestDuration: number;
+    /**
+     * The items returned for the query.
+     */
+    results: RestQueryResult[];
+    /**
+     * The query [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Each query sent to the Search API has its own randomly generated `searchUid`.
+     *
+     * Note: When logging a **Search** or **Custom* usage analytics event for a query, or a **Click** usage analytics event for an opened query result item, the `searchQueryUid` field of that event should be set to the `searchUid` value of the query response.
+     */
+    searchUid: string;
+    /**
+     * A DNE facet suggestion.
+     */
+    suggestedFacets: RestSuggestedFacet[];
+    /**
+     * The terms to highlight in each query result item. Includes all basic query expression keywords, as well as any word stemmed from a basic query expression keyword (see the `q` query parameter), unless this keyword was preceded by the no stemming Coveo Cloud query syntax operator (`+`).
+     */
+    termsToHighlight: Record<string, string[]>;
+    /**
+     * The total number of items matching the query for the current user (security trimming applied).
+     *
+     * Note: When logging a **Search** usage analytics event for a query, the `numberOfResults` field of that event should be set to the `totalCount` value of the query (for reporting purposes).
+     */
+    totalCount: number;
+    /**
+     * The total number of items matching the query for the current user (security trimming applied) after duplicate filtering has been applied (see the `duplicateFiltering` query parameter).
+     */
+    totalCountFiltered: number;
+    /**
+     * The actions to perform by the client based on the Trigger statements defined in query pipelines (see the pipeline query parameter).
+     *
+     * Note: A Trigger statement must have a condition. Otherwise, the Search API ignores it and does not include it in the `triggers` array of the query response (see [Managing Query Pipeline Triggers](http://www.coveo.com/go?dest=cloudhelp&lcid=9&context=146)).
+     */
+    triggers: RestTriggerResponse[];
+    /**
+     * The errors that critically changed the query behaviour. These should be addressed right away to prevent future errors.
+     */
+    errors?: string[];
+    exception?: {code: string; context?: string};
+    /**
+     * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
+     *
+     * If you do not specify an `indexToken` (or `index`) value, any index mirror could be used.
+     *
+     * Note: Passing an `indexToken` (or `index`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
+     */
+    indexToken?: string;
+    /**
+     * Whether the admin session ID was allowed and used by the Coveo for Salesforce search engine. The value will be set to `true` when it is the case, and might be absent or set to `false` otherwise.
+     */
+    isFallbackToAdmin?: boolean;
+    questionAnswer?: RestQuestionAnswer;
+    /**
+     * The errors that did not make the query fail, but should be addressed. They might be security issues, deprecated behaviors, or any other kind of concern.
+     */
+    warnings?: string[];
+    /**
+     * Additional undocumented or deprecated properties that might be sent by the Search API
+     */
+    [key: string]: unknown;
+}
