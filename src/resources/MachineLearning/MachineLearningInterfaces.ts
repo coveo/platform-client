@@ -14,13 +14,22 @@ export interface UrlReplacePatterns {
 
 export interface PageViewFiltered {
     contentType: {
-        Value: string[];
+        values: string[];
     };
 }
 
 export interface CommerceSupport {
     enabled: boolean;
     [key: string]: any;
+}
+
+export interface IndexExport {
+    query: string;
+}
+
+export interface DocumentContentSource {
+    objectType: string;
+    sourceLocations: [string];
 }
 
 export interface ExtraConfig {
@@ -40,6 +49,8 @@ export interface ExtraConfig {
     recommendationStrategy?: string;
     urlReplacePatterns?: UrlReplacePatterns[];
     parsingMode?: string;
+    documentContentSources?: DocumentContentSource[];
+    indexExport?: IndexExport;
     [key: string]: any;
 }
 
