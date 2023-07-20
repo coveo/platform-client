@@ -29,7 +29,7 @@ export interface IndexExport {
 
 export interface DocumentContentSource {
     objectType: string;
-    sourceLocations: [string];
+    sourceLocations: string[];
 }
 
 export interface ExtraConfig {
