@@ -53,7 +53,7 @@ export interface ListSearchHubsParams extends Paginated {
      * 
      * @default '1'
      */
-    minimumQueries?: number;
+    minimumQueries?: string;
 }
 
 export interface SearchHubNameParams {
