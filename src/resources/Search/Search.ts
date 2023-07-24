@@ -52,6 +52,25 @@ export default class Search extends Ressource {
         );
     }
 
+    /**
+     * Exports search results to a Microsoft Excel™ spreadsheet
+     *
+     * @param restQueryParameters Parameters of the query
+     * @returns A .xlsx file containing the search results of the specified query
+     */
+    exportQuery(restQueryParameters: RestQueryParams) {
+        const {viewAllContent, ...bodyParameters} = restQueryParameters;
+
+        return this.api.post<Blob>(
+            this.buildPath(Search.baseUrl, {
+                organizationId: this.api.organizationId,
+                viewAllContent: viewAllContent ? 1 : undefined,
+            }),
+            {...bodyParameters, format: 'xlsx'},
+            {responseBodyFormat: 'blob'}
+        );
+    }
+
     querySuggestPost(restQuerySuggestParameters: PostSearchQuerySuggestBodyParams) {
         return this.api.post<any>(
             this.buildPath(`${Search.baseUrl}/querySuggest`, {

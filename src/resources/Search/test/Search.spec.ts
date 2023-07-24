@@ -136,6 +136,19 @@ describe('Search', () => {
         });
     });
 
+    describe('exportQuery', () => {
+        it('makes a post call to the query endpoint with xlsx format', () => {
+            const queryParams = {q: ''};
+            search.exportQuery(queryParams);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                Search.baseUrl,
+                {q: '', format: 'xlsx'},
+                {responseBodyFormat: 'blob'}
+            );
+        });
+    });
+
     describe('querySuggestPost', () => {
         it('should make a post call to the querySuggest endpoint', () => {
             const queryParams = {q: ''};
