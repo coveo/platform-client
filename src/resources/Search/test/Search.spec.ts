@@ -167,4 +167,12 @@ describe('Search', () => {
             });
         });
     });
+
+    describe('getDocument', () => {
+        it('makes a GET call to the /document endpoint', () => {
+            search.getDocument({uniqueId: 'document-id'});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/document?uniqueId=document-id`);
+        });
+    });
 });
