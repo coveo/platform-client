@@ -179,6 +179,10 @@ export interface OverrideModel {
      * List of statements to apply when computing the resulting license
      */
     statements: ModifierStatementModel[];
+    /**
+     * Determines if the override model is read only
+     */
+    readOnly: boolean;
 }
 
 /*
