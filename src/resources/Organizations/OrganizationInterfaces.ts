@@ -182,7 +182,7 @@ export interface OverrideModel {
     /**
      * Determines if the override model is read only
      */
-    readOnly: boolean;
+    readOnly?: boolean;
 }
 
 /*
