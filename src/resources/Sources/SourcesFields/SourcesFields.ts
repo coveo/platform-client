@@ -8,13 +8,13 @@ export default class SourcesFields extends Resource {
 
     list(params?: ListSourcesFieldsParams) {
         return this.api.get<PageModel<SourceFieldModel>>(
-            this.buildPath(`${SourcesFields.baseUrl}/page/fields`, params)
+            this.buildPath(`${SourcesFields.baseUrl}/page/fields`, params),
         );
     }
 
     get(fieldId: string, includeMappings = true) {
         return this.api.get<SourceFieldModel>(
-            this.buildPath(`${SourcesFields.baseUrl}/fields/${fieldId}`, {includeMappings})
+            this.buildPath(`${SourcesFields.baseUrl}/fields/${fieldId}`, {includeMappings}),
         );
     }
 

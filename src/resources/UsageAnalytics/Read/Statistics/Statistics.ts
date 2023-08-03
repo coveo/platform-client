@@ -27,7 +27,7 @@ export default class Statistics extends ReadServiceResource implements ReadServi
      */
     listIncoherentEvents(options: IncoherentEventsOptions) {
         return this.api.get<IncoherentEventsModel>(
-            this.buildPathWithOrg(`${Statistics.baseUrl}/incoherentEvents`, options)
+            this.buildPathWithOrg(`${Statistics.baseUrl}/incoherentEvents`, options),
         );
     }
 
@@ -36,7 +36,7 @@ export default class Statistics extends ReadServiceResource implements ReadServi
      */
     listGraphDataPoints(options: GraphDataPointsOptions) {
         return this.api.get<GraphDataPointsModel>(
-            this.buildPathWithOrg(`${Statistics.baseUrl}/graphDataPoints`, options)
+            this.buildPathWithOrg(`${Statistics.baseUrl}/graphDataPoints`, options),
         );
     }
 
@@ -66,7 +66,7 @@ export default class Statistics extends ReadServiceResource implements ReadServi
      */
     listVisitsGraphDataPoints(options: VisitsGraphDataPointsOptions) {
         return this.api.get<GraphDataPointsModel>(
-            this.buildPathWithOrg(`${Statistics.baseUrl}/visitsGraphDataPoints`, options)
+            this.buildPathWithOrg(`${Statistics.baseUrl}/visitsGraphDataPoints`, options),
         );
     }
 

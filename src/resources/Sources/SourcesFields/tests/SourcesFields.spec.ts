@@ -33,7 +33,7 @@ describe('SourcesFields', () => {
             field.get(fieldId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/{organizationName}/sources/fields/${fieldId}?includeMappings=true`
+                `/rest/organizations/{organizationName}/sources/fields/${fieldId}?includeMappings=true`,
             );
         });
     });
@@ -57,7 +57,7 @@ describe('SourcesFields', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/fields/${fieldId}`,
-                fieldModel
+                fieldModel,
             );
         });
     });

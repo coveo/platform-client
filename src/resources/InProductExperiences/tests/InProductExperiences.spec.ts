@@ -80,7 +80,7 @@ describe('InProductExperiences', () => {
             ipxService.getLoader(ipxId, accessToken);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${InProductExperiences.baseUrl}/${ipxId}/inappwidget/loader?access_token=${accessToken}`
+                `${InProductExperiences.baseUrl}/${ipxId}/inappwidget/loader?access_token=${accessToken}`,
             );
         });
     });

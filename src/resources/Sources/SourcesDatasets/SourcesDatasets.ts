@@ -15,7 +15,7 @@ export default class SourcesDatasets extends Resource {
                 datasetName,
                 withContent,
             }),
-            {}
+            {},
         );
     }
 
@@ -24,7 +24,7 @@ export default class SourcesDatasets extends Resource {
             this.buildPath(`${SourcesDatasets.baseUrl}/import/progress`, {
                 requestId,
             }),
-            {}
+            {},
         );
     }
 }

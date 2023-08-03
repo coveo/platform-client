@@ -13,7 +13,7 @@ export default class CaseAssistConfig extends Resource {
 
     list(options?: CaseAssistConfigListOptions) {
         return this.api.get<PageModel<CaseAssistConfigModel, 'configurations'>>(
-            this.buildPath(CaseAssistConfig.baseUrl, options)
+            this.buildPath(CaseAssistConfig.baseUrl, options),
         );
     }
 
@@ -32,7 +32,7 @@ export default class CaseAssistConfig extends Resource {
     update(caseAssistConfig: CaseAssistConfigModel) {
         return this.api.put<CaseAssistConfigModel>(
             `${CaseAssistConfig.baseUrl}/${caseAssistConfig.id}`,
-            caseAssistConfig
+            caseAssistConfig,
         );
     }
 
@@ -43,7 +43,7 @@ export default class CaseAssistConfig extends Resource {
     suggestDocuments(caseAssistConfigId: string, body: SuggestionRequestBody) {
         return this.api.post<DocumentSuggestions>(
             `${CaseAssistConfig.baseUrl}/${caseAssistConfigId}/documents/suggest`,
-            body
+            body,
         );
     }
 

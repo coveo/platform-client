@@ -15,7 +15,7 @@ export default class LicenseMetrics extends Resource {
 
     listMonthly(metric: string, params: ListLicenseMonthlyParams) {
         return this.api.get<RestListOfMetricValues>(
-            this.buildPath(`${LicenseMetrics.baseUrl}/monthly/${metric}`, {...params})
+            this.buildPath(`${LicenseMetrics.baseUrl}/monthly/${metric}`, {...params}),
         );
     }
 }

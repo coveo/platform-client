@@ -16,13 +16,13 @@ export default class DNEConfiguration extends Resource {
 
     listFields(params?: ListCandidateFieldsParams) {
         return this.api.get<PageModel<AutoSelectionFieldCandidateModel>>(
-            this.buildPath(`${DNEConfiguration.baseUrl}/autoselectionfieldcandidates`, params)
+            this.buildPath(`${DNEConfiguration.baseUrl}/autoselectionfieldcandidates`, params),
         );
     }
 
     getDocumentExtractionPreview(params?: DocumentExtractionPreviewParams) {
         return this.api.get<DocumentExtractionPreviewModel>(
-            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionpreview`, params)
+            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionpreview`, params),
         );
     }
 
@@ -32,13 +32,13 @@ export default class DNEConfiguration extends Resource {
 
     parseDocumentExtractionQuery(query: string) {
         return this.api.get<DocumentExtractionQueryModel>(
-            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionquerymodel`, {query})
+            this.buildPath(`${DNEConfiguration.baseUrl}/documentextractionquerymodel`, {query}),
         );
     }
 
     async createWithoutQuery(
         newModel: DNENewConfigurationModel,
-        documentExtractionQueryModel: DocumentExtractionQueryModel
+        documentExtractionQueryModel: DocumentExtractionQueryModel,
     ) {
         const documentExtractionQuery = await this.getDocumentExtractionQuery(documentExtractionQueryModel);
 

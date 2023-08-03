@@ -44,7 +44,7 @@ describe('Limits', () => {
             limits.getHistoryLimit(LicenseSection.content, '123', {from: '2020-05-06', to: '2021-10-05'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/{organizationName}/limits/content/123/history?from=2020-05-06&to=2021-10-05`
+                `/rest/organizations/{organizationName}/limits/content/123/history?from=2020-05-06&to=2021-10-05`,
             );
         });
     });

@@ -10,7 +10,10 @@ export default class Cluster extends Resource {
     nodes: ClusterNode;
     agents: ClusterAgent;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.nodes = new ClusterNode(api, serverlessApi);

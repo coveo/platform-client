@@ -28,7 +28,7 @@ describe('PlatformClient', () => {
         expect(APIMock).toHaveBeenCalledWith(
             expect.objectContaining({
                 organizationId: baseOptions.organizationId,
-            })
+            }),
         );
     });
 
@@ -37,7 +37,7 @@ describe('PlatformClient', () => {
         expect(APIMock).toHaveBeenCalledWith(
             expect.objectContaining({
                 accessToken: baseOptions.accessToken,
-            })
+            }),
         );
     });
 
@@ -113,9 +113,7 @@ describe('PlatformClient', () => {
                 }
             }
 
-            const experimentalResources: Array<{key: string; resource: typeof Resource}> = [
-                {key: 'something', resource: Something},
-            ];
+            const experimentalResources: any[] = [{key: 'something', resource: Something}];
 
             class ExperimentalPlatformClient extends PlatformClient {
                 something: Something;

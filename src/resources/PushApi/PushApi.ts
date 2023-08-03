@@ -15,48 +15,48 @@ export default class PushApi extends Resource {
     createOrUpdateSecurityIdentityAlias(
         securityProviderId: string,
         alias: SecurityIdentityAliasModel,
-        options?: SecurityIdentityOptions
+        options?: SecurityIdentityOptions,
     ) {
         return this.serverlessApi.put<void>(
             this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/mappings`, options),
-            alias
+            alias,
         );
     }
 
     deleteSecurityIdentity(
         securityProviderId: string,
         securityIdentity: SecurityIdentityDelete,
-        options?: SecurityIdentityOptions
+        options?: SecurityIdentityOptions,
     ) {
         return this.serverlessApi.delete<void>(
             this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions`, options),
             {
                 body: JSON.stringify(securityIdentity),
                 headers: {'Content-Type': 'application/json'},
-            }
+            },
         );
     }
 
     createOrUpdateSecurityIdentity(
         securityProviderId: string,
         securityIdentity: SecurityIdentityModel,
-        options?: SecurityIdentityOptions
+        options?: SecurityIdentityOptions,
     ) {
         return this.serverlessApi.put<void>(
             this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions`, options),
-            securityIdentity
+            securityIdentity,
         );
     }
 
     manageSecurityIdentities(securityProviderId: string, batchConfig: SecurityIdentityBatchConfig) {
         return this.serverlessApi.put<void>(
-            this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions/batch`, batchConfig)
+            this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions/batch`, batchConfig),
         );
     }
 
     deleteOldSecurityIdentities(securityProviderId: string, batchDelete: SecurityIdentityDeleteOptions) {
         return this.serverlessApi.delete<void>(
-            this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions/olderthan`, batchDelete)
+            this.buildPath(`${PushApi.baseUrl}/${securityProviderId}/permissions/olderthan`, batchDelete),
         );
     }
 }

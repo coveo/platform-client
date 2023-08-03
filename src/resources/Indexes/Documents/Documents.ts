@@ -16,8 +16,8 @@ export default class Documents extends Resource {
     listPermissions(indexId: string, documentId: string) {
         return this.api.get<DocumentPermissionModel>(
             `${Documents.baseUrl}/${indexId}/documents/${encodeURIComponent(
-                encodeURIComponent(documentId)
-            )}/permissions`
+                encodeURIComponent(documentId),
+            )}/permissions`,
         );
     }
 
@@ -32,10 +32,10 @@ export default class Documents extends Resource {
         return this.api.get<SinglePermissionPageModel>(
             this.buildPath(
                 `${Documents.baseUrl}/${indexId}/documents/${encodeURIComponent(
-                    encodeURIComponent(documentId)
+                    encodeURIComponent(documentId),
                 )}/permissions/effective`,
-                options
-            )
+                options,
+            ),
         );
     }
 }

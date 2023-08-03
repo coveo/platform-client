@@ -20,7 +20,10 @@ export default class MachineLearning extends Resource {
     pqsConfig: PQSConfiguration;
     iaprConfig: IAPRConfiguration;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.models = new Models(api, serverlessApi);

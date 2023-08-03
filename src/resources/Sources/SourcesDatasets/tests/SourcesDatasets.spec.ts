@@ -31,7 +31,7 @@ describe('SourcesDatasets', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/sources/datasets/import?datasetName=WEB&withContent=true',
-                {}
+                {},
             );
         });
     });
@@ -43,7 +43,7 @@ describe('SourcesDatasets', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/sources/datasets/import/progress?requestId=randomId',
-                {}
+                {},
             );
         });
     });

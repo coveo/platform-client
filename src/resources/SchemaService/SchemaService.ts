@@ -19,7 +19,10 @@ import {SourceType} from '../Enums.js';
 export default class SchemaService extends Ressource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/schema/sources`;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
     }
 
@@ -34,7 +37,7 @@ export default class SchemaService extends Ressource {
      */
     getEntities(sourceType: SourceType, parameters?: GetEntitiesQueryParams) {
         return this.api.get<SchemaEntities>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities`, parameters)
+            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities`, parameters),
         );
     }
 
@@ -49,7 +52,7 @@ export default class SchemaService extends Ressource {
      */
     getEntity(sourceType: SourceType, entityId: string, parameters?: GetEntityQueryParams) {
         return this.api.get<SimpleSchemaEntity>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}`, parameters)
+            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}`, parameters),
         );
     }
 
@@ -64,7 +67,7 @@ export default class SchemaService extends Ressource {
      */
     getFields(sourceType: SourceType, entityId: string, parameters?: SchemaServiceQueryParams) {
         return this.api.get<SchemaEntityFields>(
-            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}/fields`, parameters)
+            this.buildPath(`${SchemaService.baseUrl}/${sourceType}/entities/${entityId}/fields`, parameters),
         );
     }
 
@@ -91,18 +94,18 @@ export default class SchemaService extends Ressource {
     translateToSpecificObjectsToGetWithFields(
         sourceType: SourceType,
         genericObjectsToGet: ObjectsToGet,
-        parameters?: SchemaServiceQueryParams
+        parameters?: SchemaServiceQueryParams,
     ) {
         return this.api.post<any>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/specificWithFields`, parameters),
-            genericObjectsToGet
+            genericObjectsToGet,
         );
     }
 
     translateToGenericObjectsToGet(sourceType: SourceType, specificObjectsToGet: any) {
         return this.api.post<ObjectsToGet>(
             `${SchemaService.baseUrl}/${sourceType}/translate/generic`,
-            specificObjectsToGet
+            specificObjectsToGet,
         );
     }
 
@@ -119,7 +122,7 @@ export default class SchemaService extends Ressource {
 
     validateSlackToken(accessToken: string) {
         return this.api.post<SlackTokenValidationResult>(
-            `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${accessToken}`
+            `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${accessToken}`,
         );
     }
 }

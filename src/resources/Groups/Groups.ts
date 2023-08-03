@@ -13,7 +13,10 @@ export default class Group extends Resource {
     member: GroupMember;
     invite: GroupInvite;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.realm = new GroupRealm(api, serverlessApi);

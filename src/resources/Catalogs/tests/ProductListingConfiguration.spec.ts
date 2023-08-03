@@ -25,7 +25,7 @@ describe('ProductListingConfiguration', () => {
             productListingConfiguration.list(catalogId, productListingId, {page: 2, perPage: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations?page=2&pageSize=10`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations?page=2&pageSize=10`,
             );
         });
     });
@@ -73,7 +73,7 @@ describe('ProductListingConfiguration', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`,
-                productListingConfigurationModel
+                productListingConfigurationModel,
             );
         });
     });
@@ -84,7 +84,7 @@ describe('ProductListingConfiguration', () => {
             productListingConfiguration.delete(catalogId, productListingId, productListingConfigurationToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToDeleteId}`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToDeleteId}`,
             );
         });
     });
@@ -95,7 +95,7 @@ describe('ProductListingConfiguration', () => {
             productListingConfiguration.get(catalogId, productListingId, productListingConfigurationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToGetId}`
+                `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToGetId}`,
             );
         });
     });
@@ -146,12 +146,12 @@ describe('ProductListingConfiguration', () => {
                 catalogId,
                 productListingId,
                 productListingConfigurationToUpdateId,
-                productListingConfigurationModel
+                productListingConfigurationModel,
             );
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationToUpdateId}`,
-                productListingConfigurationModel
+                productListingConfigurationModel,
             );
         });
     });

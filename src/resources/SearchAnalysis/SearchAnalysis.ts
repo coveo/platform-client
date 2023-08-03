@@ -16,7 +16,7 @@ export default class SearchAnalysis extends Resource {
     replay(id: string, from: string, to?: string) {
         return this.api.post<ReplayAnalysis>(
             `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
-            {id, dateRange: {from, to}}
+            {id, dateRange: {from, to}},
         );
     }
 }

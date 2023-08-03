@@ -33,7 +33,7 @@ export default class SmartSnippetsConfiguration extends Resource {
     update(configModel: SmartSnippetsConfigurationModel) {
         return this.api.put<SmartSnippetsConfigurationModel>(
             `${SmartSnippetsConfiguration.modelUrl}/${configModel.modelId}`,
-            configModel
+            configModel,
         );
     }
 

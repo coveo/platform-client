@@ -45,7 +45,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
      */
     getValues(dimension: string, params?: GetDimensionValuesParams) {
         return this.api.get<DimensionValuesModel>(
-            this.buildPathWithOrg(`${Dimensions.baseUrl}/${dimension}/values`, params)
+            this.buildPathWithOrg(`${Dimensions.baseUrl}/${dimension}/values`, params),
         );
     }
 
@@ -57,7 +57,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
      */
     listCustomDimensions(includeOnlyParents = false) {
         return this.api.get<DimensionModel[]>(
-            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom`, {includeOnlyParents})
+            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom`, {includeOnlyParents}),
         );
     }
 
@@ -75,7 +75,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
      */
     getCustomDimension(apiName: string) {
         return this.api.get<DimensionModel>(
-            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${apiName}`, {org: this.api.organizationId})
+            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${apiName}`, {org: this.api.organizationId}),
         );
     }
 
@@ -86,7 +86,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
      */
     getCustomDimensionValues(dimension: string, params?: GetDimensionValuesParams) {
         return this.api.get<DimensionValuesModel>(
-            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${dimension}/values`, params)
+            this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${dimension}/values`, params),
         );
     }
 
@@ -99,7 +99,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
     updateCustomDimension(apiName: string, model: CustomDimensionModel, updatePastEvents = false) {
         return this.api.put<DimensionModel>(
             this.buildPathWithOrg(`${Dimensions.baseUrl}/custom/${apiName}`, {updatePastEvents}),
-            model
+            model,
         );
     }
 
@@ -136,7 +136,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
             this.buildPath(`${Dimensions.baseUrl}/custom/${event}/suggestions`, {
                 ...params,
                 org: this.api.organizationId,
-            })
+            }),
         );
     }
 

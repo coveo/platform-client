@@ -30,7 +30,7 @@ export default class Vaults extends Resource {
                 referenceSnapshotId: currentSnapshotId,
                 sourceOrganizationId,
                 fetchStrategy,
-            })
+            }),
         );
     }
 

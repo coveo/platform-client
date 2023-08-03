@@ -17,7 +17,7 @@ export default class Statements extends Resource {
 
     list(pipelineId: string, options?: ListStatementParams) {
         return this.api.get<PageModel<StatementModel, 'statements'>>(
-            this.buildPath(Statements.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options})
+            this.buildPath(Statements.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options}),
         );
     }
 
@@ -27,7 +27,7 @@ export default class Statements extends Resource {
                 organizationId: this.api.organizationId,
                 ...options,
             }),
-            {responseBodyFormat: 'blob'}
+            {responseBodyFormat: 'blob'},
         );
     }
 
@@ -45,14 +45,14 @@ export default class Statements extends Resource {
                 organizationId: this.api.organizationId,
                 ...options,
             }),
-            formData
+            formData,
         );
     }
 
     create(pipelineId: string, model: CreateStatementModel) {
         return this.api.post<StatementModel>(
             this.buildPath(Statements.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
-            model
+            model,
         );
     }
 
@@ -61,14 +61,14 @@ export default class Statements extends Resource {
             this.buildPath(Statements.getStatementUrl(pipelineId, statementId), {
                 organizationId: this.api.organizationId,
             }),
-            model
+            model,
         );
     }
 
     copy(pipelineId: string, model: CopyStatementModel) {
         return this.api.post<PageModel<StatementModel, 'statements'>>(
             this.buildPath(`${Statements.getBaseUrl(pipelineId)}/copy`, {organizationId: this.api.organizationId}),
-            model
+            model,
         );
     }
 
@@ -76,7 +76,7 @@ export default class Statements extends Resource {
         return this.api.get<StatementModel>(
             this.buildPath(Statements.getStatementUrl(pipelineId, statementId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -85,7 +85,7 @@ export default class Statements extends Resource {
             this.buildPath(`${Statements.getStatementUrl(pipelineId, statementId)}/move`, {
                 organizationId: this.api.organizationId,
             }),
-            model
+            model,
         );
     }
 
@@ -93,7 +93,7 @@ export default class Statements extends Resource {
         return this.api.delete(
             this.buildPath(Statements.getStatementUrl(pipelineId, statementId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -103,7 +103,7 @@ export default class Statements extends Resource {
                 organizationId: this.api.organizationId,
                 ...allQueryStringOptions,
             }),
-            {ids}
+            {ids},
         );
     }
 }

@@ -21,17 +21,20 @@ export default class SecurityCache extends Ressource {
 
     listMembers(
         providerId: string,
-        options: SecurityCacheListOptions = {}
+        options: SecurityCacheListOptions = {},
     ): Promise<PageModel<DetailedSecurityCacheMemberModel>> {
         // TODO: SECCACHE-710 remove `usePageModel` once API has removed this parameter
         return this.api.get<PageModel<DetailedSecurityCacheMemberModel>>(
-            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members`, {...options, usePageModel: true})
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members`, {
+                ...options,
+                usePageModel: true,
+            }),
         );
     }
 
     listEntities(providerId: string, options?: SecurityCacheListOptions) {
         return this.api.get<PageModel<SecurityCacheIdentityModel>>(
-            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}`, options)
+            this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}`, options),
         );
     }
 
@@ -42,7 +45,7 @@ export default class SecurityCache extends Ressource {
 
     listSecurityProviderIdentities(
         providerId: string,
-        {page, perPage, ...rest}: SecurityProviderIdentitiesFilters = {}
+        {page, perPage, ...rest}: SecurityProviderIdentitiesFilters = {},
     ) {
         const filterModel = {
             filteringMode: rest.filteringMode,
@@ -52,25 +55,25 @@ export default class SecurityCache extends Ressource {
         };
         return this.api.post<PageModel<SecurityCacheIdentityModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/list`, {page, perPage}),
-            filterModel
+            filterModel,
         );
     }
 
     listChildren(
         providerId: string,
         member: SecurityCacheMemberModel,
-        options?: SecurityCacheListRelationshipsOptions
+        options?: SecurityCacheListRelationshipsOptions,
     ) {
         return this.api.post<PageModel<DetailedSecurityCacheMemberModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members/children`, options),
-            member
+            member,
         );
     }
 
     listParents(providerId: string, member: SecurityCacheMemberModel, options?: SecurityCacheListRelationshipsOptions) {
         return this.api.post<PageModel<DetailedSecurityCacheMemberModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/${providerId}/members/parents`, options),
-            member
+            member,
         );
     }
 
@@ -105,7 +108,7 @@ export default class SecurityCache extends Ressource {
     createOrUpdateProvider(securityProvider: SecurityProviderModel) {
         return this.api.put<SecurityProviderModelWithStatus>(
             `${SecurityCache.providersUrl}/${securityProvider.id}`,
-            securityProvider
+            securityProvider,
         );
     }
 
@@ -120,14 +123,14 @@ export default class SecurityCache extends Ressource {
     updateSchedule(securityProviderId: string, schedule: ScheduleModel) {
         return this.api.put<ScheduleModel>(
             `${SecurityCache.providersUrl}/${securityProviderId}/schedules/${schedule.id}`,
-            schedule
+            schedule,
         );
     }
 
     getProviderEntity(providerId: string, member: SecurityCacheMemberModel) {
         return this.api.post<DetailedSecurityCacheMemberModel>(
             `${SecurityCache.cacheUrl}/entities/${providerId}/entity`,
-            member
+            member,
         );
     }
 

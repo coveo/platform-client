@@ -38,7 +38,7 @@ describe('LicenseMetrics', () => {
             LicenseMetricsService.listMonthly(metric, listMonthlyParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${LicenseMetrics.baseUrl}/monthly/HEEEYYYOOOOO?to=Coulili&from=Zazou`
+                `${LicenseMetrics.baseUrl}/monthly/HEEEYYYOOOOO?to=Coulili&from=Zazou`,
             );
         });
     });

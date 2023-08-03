@@ -70,7 +70,7 @@ describe('Subscriptions', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}`,
-                subscriptionModelMock
+                subscriptionModelMock,
             );
         });
     });
@@ -80,7 +80,7 @@ describe('Subscriptions', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me`,
-                subscriptionModelMock
+                subscriptionModelMock,
             );
         });
     });
@@ -91,7 +91,7 @@ describe('Subscriptions', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}`,
-                subscriptionModelMock
+                subscriptionModelMock,
             );
         });
     });
@@ -102,7 +102,7 @@ describe('Subscriptions', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`,
-                subscriptionModelMock
+                subscriptionModelMock,
             );
         });
     });
@@ -120,7 +120,7 @@ describe('Subscriptions', () => {
             subscription.deleteCurrent(subscriptionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`
+                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`,
             );
         });
     });
@@ -130,7 +130,7 @@ describe('Subscriptions', () => {
             subscription.enable(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/enable`
+                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/enable`,
             );
         });
     });
@@ -140,7 +140,7 @@ describe('Subscriptions', () => {
             subscription.enableCurrent(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/enable`
+                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/enable`,
             );
         });
     });
@@ -150,7 +150,7 @@ describe('Subscriptions', () => {
             subscription.disable(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/disable`
+                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/disable`,
             );
         });
     });
@@ -160,7 +160,7 @@ describe('Subscriptions', () => {
             subscription.disableCurrent(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/disable`
+                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/disable`,
             );
         });
     });
@@ -170,7 +170,7 @@ describe('Subscriptions', () => {
             subscription.test(subscriptionId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/test`
+                `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/test`,
             );
         });
     });
@@ -180,7 +180,7 @@ describe('Subscriptions', () => {
             subscription.testCurrent(subscriptionId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/test`
+                `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/test`,
             );
         });
     });

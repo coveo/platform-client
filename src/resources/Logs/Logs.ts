@@ -23,7 +23,7 @@ export default class Logs extends Resource {
     getFacetsStats(params: GetFacetsParams, options: GetLogsOrFacetsRequestBodyModel) {
         return this.serverlessApi.post<FacetsWithCountsModel>(
             this.buildPath(`${Logs.baseUrl}/facetsStats`, params),
-            options
+            options,
         );
     }
 }

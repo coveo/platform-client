@@ -37,7 +37,7 @@ describe('groupInvite', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/groups/💎/invites?sendEmail=true',
-                inviteModel
+                inviteModel,
             );
         });
 
@@ -50,7 +50,7 @@ describe('groupInvite', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/groups/💎/invites?sendEmail=false',
-                inviteModel
+                inviteModel,
             );
         });
     });

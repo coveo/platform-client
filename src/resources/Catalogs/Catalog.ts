@@ -37,7 +37,7 @@ export default class Catalog extends Resource {
      */
     getFields(catalogId: string, options?: CatalogFieldsOptions) {
         return this.api.get<CachedCatalogFieldsModel>(
-            this.buildPath(`${Catalog.baseUrl}/${catalogId}/fields`, options)
+            this.buildPath(`${Catalog.baseUrl}/${catalogId}/fields`, options),
         );
     }
 
@@ -58,7 +58,7 @@ export default class Catalog extends Resource {
 
     getFieldStats(catalogId: string, options?: CatalogFieldStatsOptions) {
         return this.api.get<CachedCatalogFieldStatsModel>(
-            this.buildPath(`${Catalog.baseUrl}/${catalogId}/fieldStats`, options)
+            this.buildPath(`${Catalog.baseUrl}/${catalogId}/fieldStats`, options),
         );
     }
 }

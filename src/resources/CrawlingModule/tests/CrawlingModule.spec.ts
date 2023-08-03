@@ -89,7 +89,7 @@ describe('Crawling Module Calls', () => {
         expect(api.post).toHaveBeenCalledTimes(1);
         expect(api.post).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
-            createModel
+            createModel,
         );
     });
 
@@ -97,7 +97,7 @@ describe('Crawling Module Calls', () => {
         crawlingModule.getLogRequests(crawlingModuleId, CrawlingModuleLogRequestState.SUCCESSFUL);
         expect(api.get).toHaveBeenCalledTimes(1);
         expect(api.get).toHaveBeenCalledWith(
-            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests?state=SUCCESSFUL`
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests?state=SUCCESSFUL`,
         );
     });
 
@@ -106,7 +106,7 @@ describe('Crawling Module Calls', () => {
         crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
         expect(api.get).toHaveBeenCalledTimes(1);
         expect(api.get).toHaveBeenCalledWith(
-            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`,
         );
     });
 

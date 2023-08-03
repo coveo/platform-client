@@ -41,7 +41,7 @@ describe('HostedPages', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${HostedPages.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`
+                `${HostedPages.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`,
             );
         });
 

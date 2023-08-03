@@ -18,7 +18,7 @@ export default class ResultRankings extends Resource {
         return this.api.delete<ResultRanking>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -26,7 +26,7 @@ export default class ResultRankings extends Resource {
         return this.api.get<ResultRankingProps>(
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -35,7 +35,7 @@ export default class ResultRankings extends Resource {
             this.buildPath(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingsId), {
                 organizationId: this.api.organizationId,
             }),
-            resultRanking
+            resultRanking,
         );
     }
 
@@ -45,7 +45,7 @@ export default class ResultRankings extends Resource {
                 organizationId: this.api.organizationId,
             }),
             undefined,
-            {body: resultRanking, headers: {'Content-Type': 'application/json'}}
+            {body: resultRanking, headers: {'Content-Type': 'application/json'}},
         );
     }
 
@@ -57,7 +57,7 @@ export default class ResultRankings extends Resource {
                 associatedGroups: JSON.stringify(params?.associatedGroups),
                 ruleStatuses: JSON.stringify(params?.ruleStatuses),
                 ruleTypes: JSON.stringify(params?.ruleTypes),
-            })
+            }),
         );
     }
 
@@ -66,7 +66,7 @@ export default class ResultRankings extends Resource {
             this.buildPath(ResultRankings.getBaseUrl(pipelineId), {
                 organizationId: this.api.organizationId,
             }),
-            resultRanking
+            resultRanking,
         );
     }
 
@@ -76,7 +76,7 @@ export default class ResultRankings extends Resource {
                 organizationId: this.api.organizationId,
             }),
             undefined,
-            {body: resultRanking, headers: {'Content-Type': 'application/json'}}
+            {body: resultRanking, headers: {'Content-Type': 'application/json'}},
         );
     }
 
@@ -84,7 +84,7 @@ export default class ResultRankings extends Resource {
         return this.api.post<ResultRanking>(
             this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRankingsId}`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -93,7 +93,7 @@ export default class ResultRankings extends Resource {
             this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/copy`, {
                 organizationId: this.api.organizationId,
             }),
-            copyResultRankingRequest
+            copyResultRankingRequest,
         );
     }
 
@@ -103,7 +103,7 @@ export default class ResultRankings extends Resource {
                 organizationId: this.api.organizationId,
                 ...allQueryStringOptions,
             }),
-            {ids}
+            {ids},
         );
     }
 
@@ -118,7 +118,7 @@ export default class ResultRankings extends Resource {
             this.buildPath(`${ResultRankings.getBaseUrl(pipelineId)}/bulkDelete`, {
                 organizationId: this.api.organizationId,
             }),
-            {ids}
+            {ids},
         );
     }
 }

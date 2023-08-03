@@ -114,7 +114,7 @@ describe('Dimensions', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Dimensions.baseUrl}/custom/${apiName}?updatePastEvents=false`,
-                model
+                model,
             );
         });
     });

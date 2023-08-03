@@ -6,7 +6,10 @@ export default class FacetStateRules extends Ressource {
 
     list(pipelineId: string, params?: ListFacetStateRuleParams) {
         return this.api.get<ListFacetStateRuleResponse>(
-            this.buildPath(FacetStateRules.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...params})
+            this.buildPath(FacetStateRules.getBaseUrl(pipelineId), {
+                organizationId: this.api.organizationId,
+                ...params,
+            }),
         );
     }
 
@@ -14,14 +17,14 @@ export default class FacetStateRules extends Ressource {
         return this.api.get<FacetStateRule>(
             this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
     create(pipelineId: string, facetStateRule: FacetStateRule) {
         return this.api.post<FacetStateRule>(
             this.buildPath(FacetStateRules.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
-            facetStateRule
+            facetStateRule,
         );
     }
 
@@ -30,7 +33,7 @@ export default class FacetStateRules extends Ressource {
             this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}`, {
                 organizationId: this.api.organizationId,
             }),
-            facetStateRule
+            facetStateRule,
         );
     }
 
@@ -38,7 +41,7 @@ export default class FacetStateRules extends Ressource {
         return this.api.delete<void>(
             this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -47,7 +50,7 @@ export default class FacetStateRules extends Ressource {
             this.buildPath(`${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}/position`, {
                 organizationId: this.api.organizationId,
             }),
-            {position}
+            {position},
         );
     }
 }

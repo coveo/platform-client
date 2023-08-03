@@ -71,7 +71,7 @@ describe('Saml', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/saml/identityprovider',
-                provider
+                provider,
             );
         });
     });
@@ -91,7 +91,7 @@ describe('Saml', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/saml/identityprovider',
-                provider
+                provider,
             );
         });
     });

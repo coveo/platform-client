@@ -12,7 +12,7 @@ export default class InsightPanelInterface extends Resource {
 
     list(options?: ListHostedInterfacesParams) {
         return this.api.get<PageModel<InsightPanelInterfaceConfiguration>>(
-            this.buildPath(InsightPanelInterface.baseUrl, options)
+            this.buildPath(InsightPanelInterface.baseUrl, options),
         );
     }
 
@@ -26,7 +26,7 @@ export default class InsightPanelInterface extends Resource {
 
     get(insightPanelInterfaceId: string) {
         return this.api.get<InsightPanelInterfaceConfiguration>(
-            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}`
+            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}`,
         );
     }
 
@@ -35,7 +35,7 @@ export default class InsightPanelInterface extends Resource {
 
         return this.api.put<InsightPanelInterfaceConfigurationUpdateParams>(
             `${InsightPanelInterface.baseUrl}/${id}`,
-            body
+            body,
         );
     }
 }

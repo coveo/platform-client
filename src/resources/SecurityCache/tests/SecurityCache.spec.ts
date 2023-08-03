@@ -29,7 +29,7 @@ describe('securityCache', () => {
             securityCache.listMembers(providerId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${SecurityCache.cacheUrl}/entities/${providerId}/members?usePageModel=true`
+                `${SecurityCache.cacheUrl}/entities/${providerId}/members?usePageModel=true`,
             );
         });
 
@@ -50,7 +50,7 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/list`,
-                {providerIds: [providerId]}
+                {providerIds: [providerId]},
             );
         });
 
@@ -68,7 +68,7 @@ describe('securityCache', () => {
                     filterTerm: 'test',
                     identityTypes: ['User'],
                     providerIds: ['PROVIDER_ID'],
-                }
+                },
             );
         });
 
@@ -92,7 +92,7 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/🌶/members/children`,
-                memberModel
+                memberModel,
             );
         });
 
@@ -101,7 +101,7 @@ describe('securityCache', () => {
 
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/🌶/members/children?page=1&perPage=20&recursive=true`,
-                expect.anything()
+                expect.anything(),
             );
         });
     });
@@ -119,7 +119,7 @@ describe('securityCache', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/🌶/members/parents`,
-                memberModel
+                memberModel,
             );
         });
 
@@ -128,7 +128,7 @@ describe('securityCache', () => {
 
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/securitycache/entities/🌶/members/parents?page=1&perPage=20&recursive=true`,
-                expect.anything()
+                expect.anything(),
             );
         });
     });
@@ -154,7 +154,7 @@ describe('securityCache', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${SecurityCache.providersUrl}/${securityProviderId}/schedules/${scheduleId}`,
-                scheduleConfig
+                scheduleConfig,
             );
         });
     });

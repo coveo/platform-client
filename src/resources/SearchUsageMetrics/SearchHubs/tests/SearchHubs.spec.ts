@@ -86,7 +86,7 @@ describe('SearchHubs', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${SearchHubs.baseUrl}${updateSearchHub.hubName}`,
-                updateSearchHubParams
+                updateSearchHubParams,
             );
         });
     });
@@ -98,7 +98,7 @@ describe('SearchHubs', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${SearchHubs.baseUrl}${updateBucketSearchHub.hubName}/bucket?bucket=${updateBucketSearchHub.bucket}`
+                `${SearchHubs.baseUrl}${updateBucketSearchHub.hubName}/bucket?bucket=${updateBucketSearchHub.bucket}`,
             );
         });
     });

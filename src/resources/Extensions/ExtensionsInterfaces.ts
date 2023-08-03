@@ -42,7 +42,7 @@ export interface ExtensionModel {
         {
             sourceId: string;
             sourceName: string;
-        }
+        },
     ];
     versionId: string;
 }
@@ -55,7 +55,6 @@ export interface CreateExtension extends GranularResource {
     language?: ExtensionLanguageType;
     requiredDataStreams?: DataStreamType[];
 }
-
 
 export interface ExtensionCompileCode {
     /**

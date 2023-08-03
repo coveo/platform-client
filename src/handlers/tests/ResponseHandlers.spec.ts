@@ -74,7 +74,7 @@ describe('ResponseHandlers', () => {
                 {},
                 {
                     'X-Request-ID': 'DidyoueverhearthetragedyofDarthPlagueisTheWise?',
-                }
+                },
             );
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
@@ -98,7 +98,7 @@ describe('ResponseHandlers', () => {
                 }
 
                 expect(rejectedError?.[key]).toBe('unknown');
-            }
+            },
         );
 
         it.each([

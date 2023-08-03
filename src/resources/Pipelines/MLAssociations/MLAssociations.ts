@@ -14,14 +14,17 @@ export default class MLAssociations extends Resource {
 
     list(pipelineId: string, options?: ListAssociationsParams) {
         return this.api.get<PageModel<MLAssociationModel, 'rules'>>(
-            this.buildPath(MLAssociations.getBaseUrl(pipelineId), {organizationId: this.api.organizationId, ...options})
+            this.buildPath(MLAssociations.getBaseUrl(pipelineId), {
+                organizationId: this.api.organizationId,
+                ...options,
+            }),
         );
     }
 
     associate(pipelineId: string, options: CreateAssociation) {
         return this.api.post(
             this.buildPath(MLAssociations.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
-            options
+            options,
         );
     }
 
@@ -29,7 +32,7 @@ export default class MLAssociations extends Resource {
         return this.api.get<MLAssociationModel>(
             this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -37,7 +40,7 @@ export default class MLAssociations extends Resource {
         return this.api.delete(
             this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -46,7 +49,7 @@ export default class MLAssociations extends Resource {
             this.buildPath(`${MLAssociations.getBaseUrl(pipelineId)}/${associationId}`, {
                 organizationId: this.api.organizationId,
             }),
-            options
+            options,
         );
     }
 
@@ -56,7 +59,7 @@ export default class MLAssociations extends Resource {
                 position,
                 organizationId: this.api.organizationId,
             }),
-            {}
+            {},
         );
     }
 
@@ -64,7 +67,7 @@ export default class MLAssociations extends Resource {
         return this.api.get<AssociatedPipelinesData[]>(
             this.buildPath('/rest/search/v2/admin/pipelines/ml/model/associations', {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -74,7 +77,7 @@ export default class MLAssociations extends Resource {
                 organizationId: this.api.organizationId,
                 ...allQueryStringOptions,
             }),
-            {ids}
+            {ids},
         );
     }
 }

@@ -50,7 +50,7 @@ describe('Statistics', () => {
             users.listUsersReports(userId, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Users.baseUrl}/${userId}/reports?includeConfig=false&includeGroups=false`
+                `${Users.baseUrl}/${userId}/reports?includeConfig=false&includeGroups=false`,
             );
         });
     });

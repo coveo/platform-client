@@ -9,7 +9,7 @@ export default class Products extends Resource {
     get(productsRequest: New<ProductsRequestModel>, refreshCache = false) {
         return this.api.post<ProductsResultModel>(
             this.buildPath(`${Products.baseUrl}/listing`, {refreshCache: refreshCache}),
-            productsRequest
+            productsRequest,
         );
     }
 }

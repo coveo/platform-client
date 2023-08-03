@@ -36,7 +36,7 @@ describe('StatementGroups', () => {
             groups.list(pipelineId, {filter});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?filter=nameOfCondition'
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?filter=nameOfCondition',
             );
         });
 
@@ -77,13 +77,13 @@ describe('StatementGroups', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=name&isOrderAscending=false'
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=name&isOrderAscending=false',
             );
 
             groups.list(pipelineId, {sortBy: 'status', isOrderAscending: true});
             expect(api.get).toHaveBeenCalledTimes(2);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=status&isOrderAscending=true'
+                '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=status&isOrderAscending=true',
             );
         });
     });
@@ -198,7 +198,7 @@ describe('StatementGroups', () => {
                             featureType: 'resultRankings',
                         },
                     ],
-                }
+                },
             );
         });
     });

@@ -80,7 +80,7 @@ describe('MLAssociations', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${MLAssociations.getBaseUrl(pipelineId)}/${associationId}/position?position=${position}`,
-                {}
+                {},
             );
         });
     });
@@ -104,7 +104,7 @@ describe('MLAssociations', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${MLAssociations.getBaseUrl(pipelineId)}/bulkGet?page=${page}&perPage=${perPage}`,
-                {ids}
+                {ids},
             );
         });
     });

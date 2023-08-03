@@ -43,7 +43,7 @@ describe('Statements', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Statements.getBaseUrl(pipelineId)}/export?feature=${options.feature}`,
-                {responseBodyFormat: 'blob'}
+                {responseBodyFormat: 'blob'},
             );
         });
     });
@@ -149,7 +149,7 @@ describe('Statements', () => {
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
                 '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=stop',
-                mockedFormData
+                mockedFormData,
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
             expect(mockedFormData.append).toHaveBeenCalledWith('file', myCSVFile, myCSVFile.name);
@@ -163,7 +163,7 @@ describe('Statements', () => {
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
                 '/rest/search/v2/admin/pipelines/🥚/statements/import?mode=overwrite&feature=thesaurus',
-                mockedFormData
+                mockedFormData,
             );
             expect(mockedFormData.append).toHaveBeenCalledTimes(1);
             expect(mockedFormData.append).toHaveBeenCalledWith('file', content);

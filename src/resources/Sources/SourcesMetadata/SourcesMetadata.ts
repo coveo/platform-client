@@ -11,7 +11,7 @@ export default class SourcesMetadata extends Resource {
 
     getReport(sourceId: string, params?: MetadataParams) {
         return this.api.get<MetadataPageModel>(
-            this.buildPath(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`, params)
+            this.buildPath(`${SourcesMetadata.baseUrl}/${sourceId}/metadata`, params),
         );
     }
 

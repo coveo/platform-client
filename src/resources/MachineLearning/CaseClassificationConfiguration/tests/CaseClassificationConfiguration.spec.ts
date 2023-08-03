@@ -112,7 +112,7 @@ describe('CaseClassificationConfiguration', () => {
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
                     `${CaseClassificationConfiguration.modelUrl}/${config.modelId}`,
-                    config
+                    config,
                 );
             });
         });

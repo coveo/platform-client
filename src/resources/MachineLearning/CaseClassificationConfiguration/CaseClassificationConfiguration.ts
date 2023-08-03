@@ -18,7 +18,7 @@ export default class CaseClassificationConfiguration extends Resource {
     create(configModel: New<CaseClassificationConfigurationModel, 'modelId'>) {
         return this.api.post<CaseClassificationConfigurationModel>(
             CaseClassificationConfiguration.modelUrl,
-            configModel
+            configModel,
         );
     }
 
@@ -28,14 +28,14 @@ export default class CaseClassificationConfiguration extends Resource {
 
     get(modelId: string) {
         return this.api.get<CaseClassificationConfigurationModel>(
-            `${CaseClassificationConfiguration.modelUrl}/${modelId}`
+            `${CaseClassificationConfiguration.modelUrl}/${modelId}`,
         );
     }
 
     update(configModel: CaseClassificationConfigurationModel) {
         return this.api.put<CaseClassificationConfigurationModel>(
             `${CaseClassificationConfiguration.modelUrl}/${configModel.modelId}`,
-            configModel
+            configModel,
         );
     }
 
@@ -46,7 +46,7 @@ export default class CaseClassificationConfiguration extends Resource {
     preview(params: CaseClassificationDocumentGroupPreviewParams) {
         return this.api.post<CaseClassificationDocumentGroupPreview>(
             CaseClassificationConfiguration.previewUrl,
-            params
+            params,
         );
     }
 }

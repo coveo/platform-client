@@ -90,7 +90,7 @@ describe('Result Rankings', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
-                resultRanking.resultRanking
+                resultRanking.resultRanking,
             );
         });
     });
@@ -106,7 +106,7 @@ describe('Result Rankings', () => {
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
                 undefined,
-                {body: json, headers: {'Content-Type': 'application/json'}}
+                {body: json, headers: {'Content-Type': 'application/json'}},
             );
         });
     });
@@ -183,7 +183,7 @@ describe('Result Rankings', () => {
             resultRankings.duplicate(pipelineId, resultRanking.id);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRanking.id}`
+                `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRanking.id}`,
             );
         });
     });

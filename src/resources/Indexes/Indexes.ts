@@ -17,7 +17,10 @@ export default class Indexes extends Resource {
 
     documents: Documents;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.documents = new Documents(api, serverlessApi);

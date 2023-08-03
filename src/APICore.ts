@@ -23,7 +23,7 @@ const isGet: Predicate<string | undefined> = RegExp.prototype.test.bind(/^GET$/i
 /** "Logical OR" two optional abort signals. */
 const abortOnEither = (
     signal1: AbortSignal | null | undefined,
-    signal2: AbortSignal | null | undefined
+    signal2: AbortSignal | null | undefined,
 ): AbortSignal | null | undefined => {
     if (signal1 && signal2) {
         const joined = new AbortController();
@@ -39,7 +39,7 @@ const abortOnEither = (
 
 const withBody = (
     body: any,
-    userArgs: CoveoPlatformClientRequestInit | undefined
+    userArgs: CoveoPlatformClientRequestInit | undefined,
 ): CoveoPlatformClientRequestInit | undefined =>
     userArgs?.body ? undefined : {headers: HEADERS_JSON_CONTENT_TYPE, body: JSON.stringify(body)};
 
@@ -49,7 +49,10 @@ export default class API {
     private getRequestsController: AbortController;
     private tokenInfo: TokenInfo;
 
-    constructor(private config: PlatformClientOptions, private isServerlessHost?: boolean) {
+    constructor(
+        private config: PlatformClientOptions,
+        private isServerlessHost?: boolean,
+    ) {
         this.getRequestsController = new AbortController();
     }
 
@@ -95,29 +98,29 @@ export default class API {
     async post<T = Record<string, unknown>>(
         url: string,
         body: undefined,
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T>;
     async post<T = Record<string, unknown>>(
         url: string,
         body?: any,
-        args?: Omit<CoveoPlatformClientRequestInit, 'body'>
+        args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async post<T = Record<string, unknown>>(
         url: string,
         body: any = {},
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(
             url,
             this.buildRequestInit('POST', args, withBody(body, args)),
-            args?.responseBodyFormat
+            args?.responseBodyFormat,
         );
     }
 
     async postForm<T = Record<string, unknown>>(
         url: string,
         body: FormData,
-        args?: Omit<CoveoPlatformClientRequestInit, 'body'>
+        args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T> {
         return await this.request<T>(url, this.buildRequestInit('POST', args, {body}), args?.responseBodyFormat);
     }
@@ -125,44 +128,44 @@ export default class API {
     async put<T = Record<string, unknown>>(
         url: string,
         body: undefined,
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T>;
     async put<T = Record<string, unknown>>(
         url: string,
         body?: any,
-        args?: Omit<CoveoPlatformClientRequestInit, 'body'>
+        args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async put<T = Record<string, unknown>>(
         url: string,
         body: any = {},
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(
             url,
             this.buildRequestInit('PUT', args, withBody(body, args)),
-            args?.responseBodyFormat
+            args?.responseBodyFormat,
         );
     }
 
     async patch<T = Record<string, unknown>>(
         url: string,
         body: undefined,
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T>;
     async patch<T = Record<string, unknown>>(
         url: string,
         body?: any,
-        args?: Omit<CoveoPlatformClientRequestInit, 'body'>
+        args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async patch<T = Record<string, unknown>>(
         url: string,
         body: any = {},
-        args?: CoveoPlatformClientRequestInit
+        args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(
             url,
             this.buildRequestInit('PATCH', args, withBody(body, args)),
-            args?.responseBodyFormat
+            args?.responseBodyFormat,
         );
     }
 
@@ -211,11 +214,10 @@ export default class API {
     private buildRequestInit(
         method: string,
         args: CoveoPlatformClientRequestInit | undefined,
-        prefilled?: RequestInit
+        prefilled?: RequestInit,
     ): RequestInit {
-        const {responseBodyFormat, ...requestArgs} = args ?? {};
+        const {responseBodyFormat: _, ...requestArgs} = args ?? {};
         const globalRequestSettings = this.config.globalRequestSettings;
-
         const init: RequestInit = {
             ...prefilled,
             ...globalRequestSettings,

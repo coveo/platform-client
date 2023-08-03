@@ -93,7 +93,7 @@ describe('APICore', () => {
         it('should call the serverless endpoint if it is serverless host', async () => {
             const api = new API(
                 {accessToken: 'my-token', organizationId: 'some-org', environment: Environment.dev},
-                true
+                true,
             );
             await api.get('this/that');
             expect(getEndpoint).toHaveBeenCalledTimes(1);
@@ -456,7 +456,7 @@ describe('APICore', () => {
                 const rejectedPromiseSpy = jest.fn().mockName('rejectedPromiseSpy');
 
                 fetchMock.mockImplementationOnce(
-                    delayedResponse(new Response(JSON.stringify(testData.response), {status: 200}), 1000)
+                    delayedResponse(new Response(JSON.stringify(testData.response), {status: 200}), 1000),
                 );
 
                 const subject = api.get(testData.route);

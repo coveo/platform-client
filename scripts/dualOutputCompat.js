@@ -5,7 +5,7 @@ writeFileSync(
     'dist/cjs/package.json',
     JSON.stringify({
         type: 'commonjs',
-    })
+    }),
 );
 
 // Ensure NodeJS resolves dist/esm/**/*.js as dist/esm/**/*.mjs
@@ -13,7 +13,7 @@ writeFileSync(
     'dist/esm/package.json',
     JSON.stringify({
         type: 'module',
-    })
+    }),
 );
 
 // Replace #query-string by the proper query-string version.

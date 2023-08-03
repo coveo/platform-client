@@ -104,7 +104,7 @@ export default class Reports extends ReadServiceResource implements ReadServiceH
      */
     getReportTemplate(templateId: string, options?: GetReportTemplateOptions) {
         return this.api.get<TemplateResponse[]>(
-            this.buildPathWithOrg(`${Reports.baseUrl}/templates/${templateId}`, options)
+            this.buildPathWithOrg(`${Reports.baseUrl}/templates/${templateId}`, options),
         );
     }
 
@@ -115,7 +115,7 @@ export default class Reports extends ReadServiceResource implements ReadServiceH
      */
     listReportTemplates(type: ReportType, options?: GetReportTemplateOptions) {
         return this.api.get<TemplateMetadataResponse[]>(
-            this.buildPathWithOrg(`${Reports.baseUrl}/templates`, {type, ...options})
+            this.buildPathWithOrg(`${Reports.baseUrl}/templates`, {type, ...options}),
         );
     }
 

@@ -30,7 +30,7 @@ export default class Administration extends ReadServiceResource {
      */
     getStrictValidationTest(params: StrictValidationTestParams) {
         return this.api.get<StrictValidationTestResponseV15>(
-            this.buildPathWithOrg(`${Administration.baseUrl}/account/strictValidationTest`, params)
+            this.buildPathWithOrg(`${Administration.baseUrl}/account/strictValidationTest`, params),
         );
     }
 }

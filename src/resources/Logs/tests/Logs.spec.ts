@@ -47,7 +47,7 @@ describe('Logs', () => {
             expect(serverlessApi.post).toHaveBeenCalledTimes(1);
             expect(serverlessApi.post).toHaveBeenCalledWith(
                 '/logs/v1/organizations/{organizationName}/facetsStats',
-                {}
+                {},
             );
         });
     });

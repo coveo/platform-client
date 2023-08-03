@@ -94,7 +94,7 @@ describe('Cluster', () => {
             indexes.getBackups(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Indexes.indexBackupUrl}?backupId=backupId&from=0&indexId=indexId&order=asc&page=100&perPage=10&sortBy=name&to=20`
+                `${Indexes.indexBackupUrl}?backupId=backupId&from=0&indexId=indexId&order=asc&page=100&perPage=10&sortBy=name&to=20`,
             );
         });
     });

@@ -45,7 +45,7 @@ describe('Field', () => {
             field.deleteFields(fieldIds);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${Field.baseUrl}/batch/delete?fields=%F0%9F%A7%80&fields=%F0%9F%A5%93`
+                `${Field.baseUrl}/batch/delete?fields=%F0%9F%A7%80&fields=%F0%9F%A5%93`,
             );
         });
     });

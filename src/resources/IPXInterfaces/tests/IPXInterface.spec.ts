@@ -114,7 +114,7 @@ describe('IPXInterface', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${IPXInterface.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`
+                `${IPXInterface.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`,
             );
         });
 
