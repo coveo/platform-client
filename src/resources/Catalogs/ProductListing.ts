@@ -15,14 +15,14 @@ export default class ProductListing extends Resource {
     list(catalogId: string, options?: ProductListingsListOptions) {
         const normalizedOptions = normalizePaginatedOptions(options);
         return this.api.get<PageModel<ProductListingModel>>(
-            this.buildPath(`${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`, normalizedOptions)
+            this.buildPath(`${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`, normalizedOptions),
         );
     }
 
     create(catalogId: string, model: New<ProductListingModel>) {
         return this.api.post<ProductListingModel>(
             `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`,
-            model
+            model,
         );
     }
 
@@ -32,20 +32,20 @@ export default class ProductListing extends Resource {
 
     get(catalogId: string, productListingId: string) {
         return this.api.get<ProductListingModel>(
-            `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingId}`
+            `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingId}`,
         );
     }
 
     update(catalogId: string, model: ProductListingModel) {
         return this.api.put<ProductListingModel>(
             `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${model.id}`,
-            model
+            model,
         );
     }
 
     getByCatalog() {
         return this.api.get<PageModel<CatalogProductListingsGroupModel>>(
-            `${ProductListing.baseProductListingsUrl}/catalogs`
+            `${ProductListing.baseProductListingsUrl}/catalogs`,
         );
     }
 

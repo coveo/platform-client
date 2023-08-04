@@ -68,7 +68,7 @@ describe('License', () => {
             license.updateExpirationDate({expirationDate: now.getTime()});
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `/rest/organizations/{organizationName}/license/expiration?expirationDate=${now.getTime()}`
+                `/rest/organizations/{organizationName}/license/expiration?expirationDate=${now.getTime()}`,
             );
         });
     });

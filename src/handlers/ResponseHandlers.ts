@@ -8,7 +8,7 @@ export const isAnyOkStatus: Predicate<Response> = (response) => response.ok;
 
 const noContent: ResponseHandler = {
     canProcess: isNoContent,
-    process: async <T>(): Promise<T> => ({} as T),
+    process: async <T>(): Promise<T> => ({}) as T,
 };
 
 const success: ResponseHandler = {
@@ -58,7 +58,7 @@ export const ResponseHandlers = Object.freeze({noContent, success, successBlob, 
 export default async <T>(
     response: Response,
     customHandlers?: readonly ResponseHandler[] | null,
-    responseBodyFormat?: ResponseBodyFormat
+    responseBodyFormat?: ResponseBodyFormat,
 ): Promise<T> => {
     const handlers = customHandlers?.length ? customHandlers : defaultResponseHandlers;
     const handler = handlers.find((candidate) => candidate.canProcess(response));

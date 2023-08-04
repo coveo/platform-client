@@ -38,7 +38,7 @@ describe('groupmember', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/groups/💎/members?sendEmailOnInvite=true',
-                member
+                member,
             );
         });
 
@@ -48,7 +48,7 @@ describe('groupmember', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/organizations/{organizationName}/groups/💎/members?sendEmailOnInvite=false',
-                member
+                member,
             );
         });
     });

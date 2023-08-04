@@ -52,7 +52,7 @@ export default class Filters extends ReadServiceResource implements ReadServiceH
     updateReportFilter(filterId: string, filter: UpdateReportingFilterModel) {
         return this.api.put<UpdateReportingFilterResponse>(
             this.buildPathWithOrg(`${Filters.reportingBaseUrl}/${filterId}`),
-            filter
+            filter,
         );
     }
 
@@ -85,7 +85,7 @@ export default class Filters extends ReadServiceResource implements ReadServiceH
     createPermissionFilter(filter: CreatePermissionsFilterModel) {
         return this.api.post<CreatePermissionsFilterResponse>(
             this.buildPathWithOrg(Filters.permissionsBaseUrl),
-            filter
+            filter,
         );
     }
 
@@ -97,7 +97,7 @@ export default class Filters extends ReadServiceResource implements ReadServiceH
     updatePermissionFilter(filterId: string, filter: UpdatePermissionsFilterModel) {
         return this.api.put<UpdatePermissionsFilterResponse>(
             this.buildPathWithOrg(`${Filters.permissionsBaseUrl}/${filterId}`),
-            filter
+            filter,
         );
     }
 

@@ -61,7 +61,7 @@ describe('PushAPI', () => {
                             type: SinglePermissionIdentityType.GROUP,
                         },
                     },
-                    options
+                    options,
                 );
 
                 expect(serverlessApi.delete).toHaveBeenCalledTimes(1);
@@ -89,7 +89,7 @@ describe('PushAPI', () => {
                             type: SinglePermissionIdentityType.GROUP,
                         },
                     },
-                    options
+                    options,
                 );
 
                 expect(serverlessApi.put).toHaveBeenCalledTimes(1);
@@ -104,7 +104,7 @@ describe('PushAPI', () => {
                 pushApi.manageSecurityIdentities(securityProviderId, {fileId: 'testId'});
                 expect(serverlessApi.put).toHaveBeenCalledTimes(1);
                 expect(serverlessApi.put).toHaveBeenCalledWith(
-                    `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/batch?fileId=testId`
+                    `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/batch?fileId=testId`,
                 );
             });
         });
@@ -114,7 +114,7 @@ describe('PushAPI', () => {
                 pushApi.deleteOldSecurityIdentities(securityProviderId, {orderingId: 123456789});
                 expect(serverlessApi.delete).toHaveBeenCalledTimes(1);
                 expect(serverlessApi.delete).toHaveBeenCalledWith(
-                    `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/olderthan?orderingId=123456789`
+                    `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/olderthan?orderingId=123456789`,
                 );
             });
         });

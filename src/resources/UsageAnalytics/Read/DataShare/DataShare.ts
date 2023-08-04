@@ -13,7 +13,7 @@ export default class DataShare extends ReadServiceResource {
      */
     listSnowflakeAccount() {
         return this.api.get<SnowflakeAccountDataSharingAccountModel[]>(
-            this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`)
+            this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`),
         );
     }
 
@@ -36,7 +36,7 @@ export default class DataShare extends ReadServiceResource {
      */
     listAllowedSnowflakeRegions() {
         return this.api.get<SnowflakeAccountDataSharingRegionsModel>(
-            this.buildPathWithOrg(`${DataShare.baseUrl}/regions`)
+            this.buildPathWithOrg(`${DataShare.baseUrl}/regions`),
         );
     }
 }

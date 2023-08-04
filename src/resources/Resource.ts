@@ -4,7 +4,10 @@ import queryString from '#query-string';
 class Resource {
     static baseUrl: string;
 
-    constructor(protected api: API, protected serverlessApi: API) {}
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {}
 
     protected buildPath(route: string, parameters?: any): string {
         return route + this.convertObjectToQueryString(parameters);

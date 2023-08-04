@@ -21,14 +21,14 @@ export default class StatementGroups extends Resource {
                 ...options,
                 status: JSON.stringify(options?.status),
                 types: JSON.stringify(options?.types),
-            })
+            }),
         );
     }
 
     create(pipelineId: string, model: CreateStatementGroupModel) {
         return this.api.post<StatementGroupModel>(
             this.buildPath(StatementGroups.getBaseUrl(pipelineId), {organizationId: this.api.organizationId}),
-            model
+            model,
         );
     }
 
@@ -36,7 +36,7 @@ export default class StatementGroups extends Resource {
         return this.api.get<StatementGroupModel>(
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -45,7 +45,7 @@ export default class StatementGroups extends Resource {
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
             }),
-            groupModel
+            groupModel,
         );
     }
 
@@ -53,7 +53,7 @@ export default class StatementGroups extends Resource {
         return this.api.delete<void>(
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -62,20 +62,20 @@ export default class StatementGroups extends Resource {
             this.buildPath(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 organizationId: this.api.organizationId,
             }),
-            {isActive}
+            {isActive},
         );
     }
 
     bulkUpdateRuleAssociations(
         pipelineId: string,
         groupId: string,
-        request: UpdateStatementGroupRuleAssociationsRequest
+        request: UpdateStatementGroupRuleAssociationsRequest,
     ) {
         return this.api.put<UpdateStatementGroupRuleAssociationsResponse>(
             this.buildPath(`${StatementGroups.getStatementGroupUrl(pipelineId, groupId)}/associations`, {
                 organizationId: this.api.organizationId,
             }),
-            request
+            request,
         );
     }
 }

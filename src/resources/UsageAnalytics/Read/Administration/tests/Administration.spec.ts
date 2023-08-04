@@ -32,7 +32,7 @@ describe('Administation', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Administration.baseUrl}/account/strictValidationTest?from=yyyy-mm-dd&to=yyyy-mm-dd&d=allo`
+                `${Administration.baseUrl}/account/strictValidationTest?from=yyyy-mm-dd&to=yyyy-mm-dd&d=allo`,
             );
         });
     });

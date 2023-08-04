@@ -100,7 +100,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      */
     getSchedule(exportScheduleId: string) {
         return this.api.get<ExportScheduleModel>(
-            this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`)
+            this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`),
         );
     }
 
@@ -112,7 +112,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     updateSchedule(exportScheduleId: string, model: CreateExportScheduleModel) {
         return this.api.put<ExportScheduleModel>(
             this.buildPathWithOrg(`${Exports.baseUrl}/schedules/${exportScheduleId}`),
-            model
+            model,
         );
     }
 

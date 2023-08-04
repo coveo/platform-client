@@ -28,7 +28,7 @@ describe('OrganizationAccess', () => {
             organizationAccess.getApiKeys(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Access.baseUrl}/apikeys?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`
+                `${Access.baseUrl}/apikeys?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`,
             );
         });
 
@@ -36,7 +36,7 @@ describe('OrganizationAccess', () => {
             organizationAccess.getGroups(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Access.baseUrl}/groups?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`
+                `${Access.baseUrl}/groups?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`,
             );
         });
     });

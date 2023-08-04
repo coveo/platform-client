@@ -24,7 +24,7 @@ describe('Organization', () => {
             organization.updateSupportActivated(organizationToBeUpdated, supportActivated);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`
+                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`,
             );
         });
 
@@ -34,7 +34,7 @@ describe('Organization', () => {
             organization.updateSupportActivated(organizationToBeUpdated, supportActivated);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`
+                `${Organization.baseUrl}/${organizationToBeUpdated}/support?activate=${supportActivated}`,
             );
         });
     });
@@ -61,7 +61,7 @@ describe('Organization', () => {
             organization.create({name, creationOrigin});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Organization.baseUrl}?name=${name}&creationOrigin=${creationOrigin}`
+                `${Organization.baseUrl}?name=${name}&creationOrigin=${creationOrigin}`,
             );
         });
     });
@@ -90,7 +90,7 @@ describe('Organization', () => {
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status`
+                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status`,
             );
         });
 
@@ -101,7 +101,7 @@ describe('Organization', () => {
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status&additionalFields=license`
+                `${Organization.baseUrl}/${organizationToGetId}?additionalFields=status&additionalFields=license`,
             );
         });
     });
@@ -199,7 +199,7 @@ describe('Organization', () => {
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
                     `/rest/organizations/{organizationName}/definition`,
-                    definitionModel
+                    definitionModel,
                 );
             });
         });
@@ -231,7 +231,7 @@ describe('Organization', () => {
             organization.getAdditionalInformation(organizationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}/additionalinformation`
+                `${Organization.baseUrl}/${organizationToGetId}/additionalinformation`,
             );
         });
         it('should make a PUT call to put data in additional information', () => {
@@ -245,7 +245,7 @@ describe('Organization', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Organization.baseUrl}/{organizationName}/additionalinformation`,
-                additionalInformationObj
+                additionalInformationObj,
             );
         });
     });
@@ -256,7 +256,7 @@ describe('Organization', () => {
             organization.getExperimentalStatus(organizationToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}/machinelearning/orgconfiguration/servingExperimentAllowed`
+                `${Organization.baseUrl}/${organizationToGetId}/machinelearning/orgconfiguration/servingExperimentAllowed`,
             );
         });
 
@@ -267,7 +267,7 @@ describe('Organization', () => {
             expect(api.put).toHaveBeenCalledWith(
                 `${
                     Organization.baseUrl
-                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${false}`
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${false}`,
             );
         });
 
@@ -279,7 +279,7 @@ describe('Organization', () => {
             expect(api.put).toHaveBeenCalledWith(
                 `${
                     Organization.baseUrl
-                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${true}`
+                }/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${true}`,
             );
         });
     });

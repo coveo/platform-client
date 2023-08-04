@@ -19,7 +19,10 @@ export default class Organization extends Resource {
     static baseUrl = '/rest/organizations';
     members: Members;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.members = new Members(api, serverlessApi);
@@ -27,7 +30,7 @@ export default class Organization extends Resource {
 
     list(noPagination?: NoPagination): Promise<OrganizationModel[]>;
     list<T extends ListOrganizationOptions>(
-        options: T
+        options: T,
     ): keyof T extends never ? Promise<OrganizationModel[]> : Promise<PageModel<OrganizationModel>>;
     list(options?: NoPagination | ListOrganizationOptions) {
         return this.api.get<unknown>(options ? this.buildPath(Organization.baseUrl, options) : Organization.baseUrl);
@@ -76,7 +79,7 @@ export default class Organization extends Resource {
     updateAdditionalInformation(additionalInformationObj: Record<string, unknown>) {
         return this.api.put<Record<string, unknown>>(
             `${Organization.baseUrl}/${API.orgPlaceholder}/additionalinformation`,
-            additionalInformationObj
+            additionalInformationObj,
         );
     }
 
@@ -86,7 +89,7 @@ export default class Organization extends Resource {
 
     getExperimentalStatus(organizationId: string = API.orgPlaceholder) {
         return this.api.get<boolean>(
-            `${Organization.baseUrl}/${organizationId}/machinelearning/orgconfiguration/servingExperimentAllowed`
+            `${Organization.baseUrl}/${organizationId}/machinelearning/orgconfiguration/servingExperimentAllowed`,
         );
     }
 
@@ -94,8 +97,8 @@ export default class Organization extends Resource {
         return this.api.put<boolean>(
             this.buildPath(
                 `${Organization.baseUrl}/${API.orgPlaceholder}/machinelearning/orgconfiguration/servingExperimentAllowed`,
-                {isAllowed}
-            )
+                {isAllowed},
+            ),
         );
     }
 
@@ -118,7 +121,7 @@ export default class Organization extends Resource {
     updateDefinition(organizationDefinition: DefinitionModel) {
         return this.api.put<DefinitionModel>(
             `${Organization.baseUrl}/${API.orgPlaceholder}/definition`,
-            organizationDefinition
+            organizationDefinition,
         );
     }
 

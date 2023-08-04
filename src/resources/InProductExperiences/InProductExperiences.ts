@@ -46,7 +46,7 @@ export default class InProductExperiences extends Resource {
 
     getLoader(ipxId: string, access_token?: string) {
         return this.api.get<InProductExperienceLoader>(
-            this.buildPath(`${InProductExperiences.baseUrl}/${ipxId}/inappwidget/loader`, {access_token})
+            this.buildPath(`${InProductExperiences.baseUrl}/${ipxId}/inappwidget/loader`, {access_token}),
         );
     }
 

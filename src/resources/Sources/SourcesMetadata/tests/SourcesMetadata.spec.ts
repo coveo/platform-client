@@ -32,7 +32,7 @@ describe('SourcesMetadata', () => {
             metadata.generateReport(sourceId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata`
+                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata`,
             );
         });
     });
@@ -44,7 +44,7 @@ describe('SourcesMetadata', () => {
             metadata.getReportStatus(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata/status`
+                `/rest/organizations/{organizationName}/sources/${sourceId}/metadata/status`,
             );
         });
     });

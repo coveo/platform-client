@@ -12,7 +12,7 @@ export default class SourcesMappings extends Resource {
     update(sourceId: string, mappingsConfiguration: UpdateMappingsConfiguration, rebuild = false) {
         return this.api.put(
             this.buildPath(`${SourcesMappings.baseUrl}/${sourceId}/mappings`, {rebuild}),
-            mappingsConfiguration
+            mappingsConfiguration,
         );
     }
 }

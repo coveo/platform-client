@@ -2,7 +2,7 @@ import {Paginated} from '../resources/index.js';
 import {DeprecatedPaginated} from '../resources/InternalBaseInterface.js';
 
 export const normalizePaginatedOptions = (
-    options: Paginated | DeprecatedPaginated | undefined
+    options: Paginated | DeprecatedPaginated | undefined,
 ): DeprecatedPaginated => {
     if (isDeprecatedPaginated(options)) {
         return options;
@@ -19,7 +19,7 @@ const isDeprecatedPaginated = (options: any): options is DeprecatedPaginated => 
     }
     if (keys.includes('pageSize')) {
         throw new Error(
-            'The Pagination options are invalid: both pageSize and perPage have been set. Use only one of them.'
+            'The Pagination options are invalid: both pageSize and perPage have been set. Use only one of them.',
         );
     }
     return false;

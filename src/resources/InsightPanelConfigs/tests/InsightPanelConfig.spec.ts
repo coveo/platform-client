@@ -21,7 +21,7 @@ describe('InsightPanelConfig', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${InsightPanelConfig.baseUrl}?page=2&perPage=10&filter=anything&order=desc`
+                `${InsightPanelConfig.baseUrl}?page=2&perPage=10&filter=anything&order=desc`,
             );
         });
 
@@ -92,7 +92,7 @@ describe('InsightPanelConfig', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${InsightPanelConfig.baseUrl}/${insightPanelModel.id}`,
-                insightPanelModelWithoutId
+                insightPanelModelWithoutId,
             );
         });
     });

@@ -59,7 +59,7 @@ export default class SearchPages extends Resource {
     updateCssResource(pageId: string, resourceName: string, resource: CSSResourceModel) {
         return this.api.put<SearchPageHeadersModel>(
             `${SearchPages.baseUrl}/${pageId}/header/css/${resourceName}`,
-            resource
+            resource,
         );
     }
 
@@ -74,7 +74,7 @@ export default class SearchPages extends Resource {
     updateJsResource(pageId: string, resourceName: string, resource: JavaScriptResourceModel) {
         return this.api.put<SearchPageHeadersModel>(
             `${SearchPages.baseUrl}/${pageId}/header/javascript/${resourceName}`,
-            resource
+            resource,
         );
     }
 

@@ -60,7 +60,7 @@ describe('SearchInterfaces', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${SearchInterfaces.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`
+                `${SearchInterfaces.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`,
             );
         });
 

@@ -33,7 +33,7 @@ export default class ResourceSnapshots extends Resource {
 
     get(snapshotId: string, options?: GetSnapshotOptions) {
         return this.api.get<ResourceSnapshotsModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}`, options)
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}`, options),
         );
     }
 
@@ -49,7 +49,7 @@ export default class ResourceSnapshots extends Resource {
      */
     validateAccess(snapshotId: string, options: ValidateAccessOptions) {
         return this.api.get<SnapshotAccessModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access`, options)
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access`, options),
         );
     }
 
@@ -88,35 +88,35 @@ export default class ResourceSnapshots extends Resource {
 
         return this.api.postForm<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/file`, computedOptions),
-            form
+            form,
         );
     }
 
     createFromOrganization(
         exportConfigurationModel: ResourceSnapshotExportConfigurationModel,
-        options: CreateFromOrganizationOptions
+        options: CreateFromOrganizationOptions,
     ) {
         return this.api.post<ResourceSnapshotsModel>(
             this.buildPath(`${ResourceSnapshots.baseUrl}/self`, options),
-            exportConfigurationModel
+            exportConfigurationModel,
         );
     }
 
     generateUrl(snapshotId: string, options: GenerateUrlOptions) {
         return this.api.get<ResourceSnapshotUrlModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`, options)
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/url`, options),
         );
     }
 
     dryRun(snapshotId: string, options: DryRunOptions) {
         return this.api.put<ResourceSnapshotsReportModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun`, options)
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun`, options),
         );
     }
 
     apply(snapshotId: string, options: ApplyOptions) {
         return this.api.put<ResourceSnapshotsReportModel>(
-            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/apply`, options)
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/apply`, options),
         );
     }
 
@@ -130,43 +130,43 @@ export default class ResourceSnapshots extends Resource {
 
     createSynchronizationPlan(snapshotId: string) {
         return this.api.post<ResourceSnapshotsSynchronizationPlanModel>(
-            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`,
         );
     }
 
     getSynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
         return this.api.get<ResourceSnapshotsSynchronizationPlanModel>(
-            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
         );
     }
 
     updateSynchronizationPlan(
         snapshotId: string,
         synchronizationPlanId: string,
-        synchronizationPlanModel: ResourceSnapshotsSynchronizationPlanModel
+        synchronizationPlanModel: ResourceSnapshotsSynchronizationPlanModel,
     ) {
         return this.api.put<ResourceSnapshotsSynchronizationPlanModel>(
             `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
-            synchronizationPlanModel
+            synchronizationPlanModel,
         );
     }
 
     applySynchronizationPlan(snapshotId: string, synchronizationPlanId: string) {
         return this.api.put<ResourceSnapshotsSynchronizationReportModel>(
-            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+            `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`,
         );
     }
 
     updateSynchronizationPlanForChildren(
         snapshotId: string,
         synchronizationPlanId: string,
-        options: UpdateChildrenOptions
+        options: UpdateChildrenOptions,
     ) {
         return this.api.put<ResourceSnapshotsSynchronizationPlanModel>(
             this.buildPath(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children`,
-                options
-            )
+                options,
+            ),
         );
     }
 
@@ -195,7 +195,7 @@ export default class ResourceSnapshots extends Resource {
             this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/diff`, {
                 relativeReportId,
                 numberOfLinesMax,
-            })
+            }),
         );
     }
 }

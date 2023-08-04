@@ -72,7 +72,7 @@ export default class Snowflake extends ReadServiceResource {
      */
     getCreditUsage(params: GetCreditUsageParams) {
         return this.api.get<SnowflakeCreditUsageModel>(
-            this.buildPathWithOrg(`${Snowflake.baseUrl}/creditusage`, params)
+            this.buildPathWithOrg(`${Snowflake.baseUrl}/creditusage`, params),
         );
     }
 
@@ -81,7 +81,7 @@ export default class Snowflake extends ReadServiceResource {
      */
     getSnowflakeReaderAccount() {
         return this.api.get<SnowflakeReaderAccountStatusModel>(
-            this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccount`)
+            this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccount`),
         );
     }
 
@@ -90,7 +90,7 @@ export default class Snowflake extends ReadServiceResource {
      */
     getSnowflakeReaderAccountEndpoint() {
         return this.api.get<SnowflakeReaderAccountEndpointModel>(
-            this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccount/endpoint`)
+            this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccount/endpoint`),
         );
     }
 

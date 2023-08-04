@@ -19,7 +19,10 @@ export default class UsageAnalytics extends Resource {
     snowflake: Snowflake;
     statistics: Statistics;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.administration = new Administration(api, serverlessApi);

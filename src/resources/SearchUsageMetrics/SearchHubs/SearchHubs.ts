@@ -14,7 +14,12 @@ export default class SearchHubs extends Resource {
 
     list(params?: ListSearchHubsParams) {
         return this.api.get<ListSearchHubs>(
-            this.buildPath(SearchHubs.baseUrl, {filter: params?.filter, pageSize: params?.perPage, page: params?.page, minimumQueries: params?.minimumQueries})
+            this.buildPath(SearchHubs.baseUrl, {
+                filter: params?.filter,
+                pageSize: params?.perPage,
+                page: params?.page,
+                minimumQueries: params?.minimumQueries,
+            }),
         );
     }
 
@@ -38,7 +43,7 @@ export default class SearchHubs extends Resource {
         return this.api.put<void>(
             this.buildPath(`${SearchHubs.baseUrl}${hubName}/bucket`, {
                 bucket,
-            })
+            }),
         );
     }
 }

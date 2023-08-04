@@ -61,7 +61,7 @@ describe('Statistics', () => {
             statistics.listIncoherentEvents(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/incoherentEvents?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/incoherentEvents?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -77,7 +77,7 @@ describe('Statistics', () => {
             statistics.listGraphDataPoints(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/graphDataPoints?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/graphDataPoints?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -93,7 +93,7 @@ describe('Statistics', () => {
             statistics.listGlobalData(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/globalData?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/globalData?org=no-thanks&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -111,7 +111,7 @@ describe('Statistics', () => {
             statistics.listTrends(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/trends?org=yes&m=UniqueVisit&d=HASCLICK&t=percent%28UniqueVisit%29&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/trends?org=yes&m=UniqueVisit&d=HASCLICK&t=percent%28UniqueVisit%29&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -127,7 +127,7 @@ describe('Statistics', () => {
             statistics.listVisitsMetrics(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visitsMetrics?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/visitsMetrics?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -143,7 +143,7 @@ describe('Statistics', () => {
             statistics.listVisitsGraphDataPoints(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visitsGraphDataPoints?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/visitsGraphDataPoints?org=yes&m=UniqueVisit&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -160,7 +160,7 @@ describe('Statistics', () => {
             statistics.listCombinedData(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/combinedData?org=yes&m=UniqueVisit&d=HASCLICK&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/combinedData?org=yes&m=UniqueVisit&d=HASCLICK&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });
@@ -175,7 +175,7 @@ describe('Statistics', () => {
             statistics.listVisits(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Statistics.baseUrl}/visits?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`
+                `${Statistics.baseUrl}/visits?org=yes&from=2020-05-12T00%3A00%3A00.000Z&to=2020-05-14T00%3A00%3A00.000Z`,
             );
         });
     });

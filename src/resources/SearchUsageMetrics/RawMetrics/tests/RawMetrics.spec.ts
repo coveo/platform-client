@@ -42,7 +42,7 @@ describe('RawMetrics', () => {
             RawMetricsService.listMonthly({month, minimumQueries});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${RawMetrics.baseUrl}monthly?month=${expectedMonthFormat}&minimumQueries=${minimumQueries}`
+                `${RawMetrics.baseUrl}monthly?month=${expectedMonthFormat}&minimumQueries=${minimumQueries}`,
             );
         });
     });
@@ -60,7 +60,7 @@ describe('RawMetrics', () => {
             RawMetricsService.getDaily({metric, searchHub, to, from});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${RawMetrics.baseUrl}searchhubs/${searchHub}/daily/${metric}?to=${expectedToDate}&from=${expectedFromDate}`
+                `${RawMetrics.baseUrl}searchhubs/${searchHub}/daily/${metric}?to=${expectedToDate}&from=${expectedFromDate}`,
             );
         });
     });
@@ -78,7 +78,7 @@ describe('RawMetrics', () => {
             RawMetricsService.getMonthly({metric, searchHub, to, from});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${RawMetrics.baseUrl}searchhubs/${searchHub}/monthly/${metric}?to=${expectedToDate}&from=${expectedFromDate}`
+                `${RawMetrics.baseUrl}searchhubs/${searchHub}/monthly/${metric}?to=${expectedToDate}&from=${expectedFromDate}`,
             );
         });
     });

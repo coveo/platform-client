@@ -27,7 +27,7 @@ describe('Condition', () => {
         it('should use the passed options in the query parameters', () => {
             conditions.list({filter: 'cat', page: 2});
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2'
+                '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2',
             );
         });
     });
@@ -95,7 +95,7 @@ describe('Condition', () => {
                 '/rest/search/v1/admin/pipelines/statements/bulkGet?perPage=3&sortBy=definition',
                 {
                     ids: [],
-                }
+                },
             );
         });
 

@@ -21,7 +21,7 @@ describe('SearchAnalysis', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
-                {id: 'some-search-id', dateRange: {from: '2023-01-01'}}
+                {id: 'some-search-id', dateRange: {from: '2023-01-01'}},
             );
         });
 
@@ -30,7 +30,7 @@ describe('SearchAnalysis', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
-                {id: 'some-search-id', dateRange: {from: '2023-01-01', to: '2023-02-01'}}
+                {id: 'some-search-id', dateRange: {from: '2023-01-01', to: '2023-02-01'}},
             );
         });
     });

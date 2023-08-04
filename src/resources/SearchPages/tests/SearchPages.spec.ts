@@ -90,7 +90,7 @@ describe('SearchPages', () => {
             searchPageService.updateVersion(searchPageId, versionOptions);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${SearchPages.baseUrl}/${searchPageId}/searchui?major=${versionOptions.major}&minor=${versionOptions.minor}`
+                `${SearchPages.baseUrl}/${searchPageId}/searchui?major=${versionOptions.major}&minor=${versionOptions.minor}`,
             );
         });
     });
@@ -117,7 +117,7 @@ describe('SearchPages', () => {
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header`,
-                        reorderHeaderModel
+                        reorderHeaderModel,
                     );
                 });
             });
@@ -135,7 +135,7 @@ describe('SearchPages', () => {
                     expect(api.post).toHaveBeenCalledTimes(1);
                     expect(api.post).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/css`,
-                        cssResourceModel
+                        cssResourceModel,
                     );
                 });
             });
@@ -146,7 +146,7 @@ describe('SearchPages', () => {
                     searchPageService.deleteCssResource(searchPageId, resourceName);
                     expect(api.delete).toHaveBeenCalledTimes(1);
                     expect(api.delete).toHaveBeenCalledWith(
-                        `${SearchPages.baseUrl}/${searchPageId}/header/css/${resourceName}`
+                        `${SearchPages.baseUrl}/${searchPageId}/header/css/${resourceName}`,
                     );
                 });
             });
@@ -164,7 +164,7 @@ describe('SearchPages', () => {
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/css/${resourceName}`,
-                        cssResourceModel
+                        cssResourceModel,
                     );
                 });
             });
@@ -182,7 +182,7 @@ describe('SearchPages', () => {
                     expect(api.post).toHaveBeenCalledTimes(1);
                     expect(api.post).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/javascript`,
-                        jsResourceModel
+                        jsResourceModel,
                     );
                 });
             });
@@ -193,7 +193,7 @@ describe('SearchPages', () => {
                     searchPageService.deleteJsResource(searchPageId, resourceName);
                     expect(api.delete).toHaveBeenCalledTimes(1);
                     expect(api.delete).toHaveBeenCalledWith(
-                        `${SearchPages.baseUrl}/${searchPageId}/header/javascript/${resourceName}`
+                        `${SearchPages.baseUrl}/${searchPageId}/header/javascript/${resourceName}`,
                     );
                 });
             });
@@ -211,7 +211,7 @@ describe('SearchPages', () => {
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/javascript/${resourceName}`,
-                        jsResourceModel
+                        jsResourceModel,
                     );
                 });
             });

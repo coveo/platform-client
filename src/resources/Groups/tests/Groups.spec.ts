@@ -77,7 +77,7 @@ describe('Group', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/organizations/{organizationName}/groups/💎/privileges/exclusive/me'
+                '/rest/organizations/{organizationName}/groups/💎/privileges/exclusive/me',
             );
         });
     });

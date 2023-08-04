@@ -40,7 +40,7 @@ describe('SourcesMappings', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/${sourceId}/mappings?rebuild=false`,
-                mappingsConfiguration
+                mappingsConfiguration,
             );
         });
 
@@ -57,7 +57,7 @@ describe('SourcesMappings', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/${sourceId}/mappings?rebuild=true`,
-                mappingsConfiguration
+                mappingsConfiguration,
             );
         });
     });

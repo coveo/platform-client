@@ -45,20 +45,20 @@ export default class CrawlingModule extends Resource {
         return this.api.get<PageModel<CrawlingModuleLogRequestModel>>(
             this.buildPath(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`, {
                 state: requestState,
-            })
+            }),
         );
     }
 
     createLogRequest(crawlingModuleId: string, requestModel: CreateCrawlingModuleLogRequestModel) {
         return this.api.post<CrawlingModuleLogRequestModel>(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
-            requestModel
+            requestModel,
         );
     }
 
     getLogRequestDownload(crawlingModuleId: string, logRequestId: string) {
         return this.api.get<CrawlingModuleLogRequestDownloadModel>(
-            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`,
         );
     }
 

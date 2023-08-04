@@ -53,7 +53,7 @@ export default class SearchInterfaces extends Resource {
         const body = message ? {users, message} : {users};
         return this.api.post(
             `${SearchInterfaces.baseUrl}/${interfaceId}/accesses/users${notify ? '?notify=1' : ''}`,
-            body
+            body,
         );
     }
 

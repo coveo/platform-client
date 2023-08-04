@@ -50,7 +50,7 @@ describe('User', () => {
                     additionalInformation: {happy: true},
                     displayName: 'carrot',
                     username: '🥕',
-                })
+                }),
             );
         });
     });

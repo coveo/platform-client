@@ -12,7 +12,7 @@ export default class ContentQuery extends Resource {
 
     listTableauReports(params: TableauReportParams) {
         return this.api.get<TableauReportResponse[]>(
-            this.buildPath(`${ContentQuery.baseUrl}/${params.organizationId}/tableau/${params.contentType}`, {})
+            this.buildPath(`${ContentQuery.baseUrl}/${params.organizationId}/tableau/${params.contentType}`, {}),
         );
     }
 
@@ -20,8 +20,8 @@ export default class ContentQuery extends Resource {
         return this.api.get<TableauDashboardResponse>(
             this.buildPath(
                 `${ContentQuery.baseUrl}/${params.organizationId}/tableau/${params.contentType}/${params.dashboardContentUrl}`,
-                {}
-            )
+                {},
+            ),
         );
     }
 
@@ -29,8 +29,8 @@ export default class ContentQuery extends Resource {
         return this.api.get<TableauDashboardResponse>(
             this.buildPath(
                 `${ContentQuery.baseUrl}/${params.organizationId}/tableau/${params.contentType}/${params.dashboardContentUrl}/${params.viewContentUrl}`,
-                {}
-            )
+                {},
+            ),
         );
     }
 }

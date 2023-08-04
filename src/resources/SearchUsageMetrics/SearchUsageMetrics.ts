@@ -9,7 +9,10 @@ export default class SearchUsageMetrics extends Resource {
     searchHubs: SearchHubs;
     rawMetrics: RawMetrics;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.licenseMetrics = new LicenseMetrics(api, serverlessApi);

@@ -168,7 +168,7 @@ describe('Filters', () => {
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${Filters.permissionsBaseUrl}/${testFilterId}/targets`,
-                        filterTargets
+                        filterTargets,
                     );
                 });
             });

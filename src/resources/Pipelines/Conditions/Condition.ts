@@ -12,7 +12,7 @@ export default class Condition extends Resource {
      */
     list(options: ListConditionsOptions = {}) {
         return this.api.get<PageModel<ConditionModel, 'statements'>>(
-            this.buildPath(Condition.baseUrl, {feature: 'when', organizationId: this.api.organizationId, ...options})
+            this.buildPath(Condition.baseUrl, {feature: 'when', organizationId: this.api.organizationId, ...options}),
         );
     }
 
@@ -24,7 +24,7 @@ export default class Condition extends Resource {
     create(conditionModel: NewConditionModel) {
         return this.api.post<ConditionModel>(
             this.buildPath(Condition.baseUrl, {organizationId: this.api.organizationId}),
-            conditionModel
+            conditionModel,
         );
     }
 
@@ -35,7 +35,7 @@ export default class Condition extends Resource {
      */
     delete(conditionId: string) {
         return this.api.delete(
-            this.buildPath(`${Condition.baseUrl}/${conditionId}`, {organizationId: this.api.organizationId})
+            this.buildPath(`${Condition.baseUrl}/${conditionId}`, {organizationId: this.api.organizationId}),
         );
     }
 
@@ -46,7 +46,7 @@ export default class Condition extends Resource {
      */
     get(conditionId: string) {
         return this.api.get<ConditionModel>(
-            this.buildPath(`${Condition.baseUrl}/${conditionId}`, {organizationId: this.api.organizationId})
+            this.buildPath(`${Condition.baseUrl}/${conditionId}`, {organizationId: this.api.organizationId}),
         );
     }
 
@@ -59,7 +59,7 @@ export default class Condition extends Resource {
     update(conditionId: string, conditionModel: ConditionModel | NewConditionModel) {
         return this.api.put<ConditionModel>(
             this.buildPath(`${Condition.baseUrl}/${conditionId}`, {organizationId: this.api.organizationId}),
-            conditionModel
+            conditionModel,
         );
     }
 
@@ -78,7 +78,7 @@ export default class Condition extends Resource {
             }),
             {
                 ids: conditionIds,
-            }
+            },
         );
     }
 }

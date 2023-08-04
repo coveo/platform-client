@@ -42,7 +42,7 @@ export default class Limits extends Resource {
 
     getHistoryLimit(sectionName: LicenseSection, limitKey: string, options?: LimitHistoryOptions) {
         return this.api.get<LimitHistoryDataPointModel[]>(
-            this.buildPath(Limits.getWithSectionAndHistory(sectionName, limitKey), options)
+            this.buildPath(Limits.getWithSectionAndHistory(sectionName, limitKey), options),
         );
     }
 }

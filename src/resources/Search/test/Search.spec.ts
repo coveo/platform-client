@@ -55,7 +55,7 @@ describe('Search', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`,
-                tokenParams
+                tokenParams,
             );
         });
     });
@@ -144,7 +144,7 @@ describe('Search', () => {
             expect(api.post).toHaveBeenCalledWith(
                 Search.baseUrl,
                 {q: '', format: 'xlsx'},
-                {responseBodyFormat: 'blob'}
+                {responseBodyFormat: 'blob'},
             );
         });
     });

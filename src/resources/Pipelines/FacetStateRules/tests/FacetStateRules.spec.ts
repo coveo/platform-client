@@ -73,7 +73,7 @@ describe('FacetStateRule', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${FacetStateRules.getBaseUrl(pipelineId)}/${facetStateRuleId}`,
-                facetStateRuleMock
+                facetStateRuleMock,
             );
         });
     });

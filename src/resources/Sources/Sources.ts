@@ -25,7 +25,10 @@ export default class Sources extends Resource {
     datasets: SourcesDatasets;
     metadata: SourcesMetadata;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.field = new SourcesFields(api, serverlessApi);
@@ -48,7 +51,7 @@ export default class Sources extends Resource {
      */
     listOperationalStatus(params?: ListOperationalStatusSourcesParams) {
         return this.api.get<PageModel<SourceModel, 'sourceModels'>>(
-            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus`, params)
+            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus`, params),
         );
     }
 
@@ -86,7 +89,7 @@ export default class Sources extends Resource {
 
     duplicate(sourceId: string, newSourceName: string, logicalIndexId?: string) {
         return this.api.post<SourceModel>(
-            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId})
+            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId}),
         );
     }
 
@@ -125,7 +128,7 @@ export default class Sources extends Resource {
     updateRawSource(sourceId: string, platformSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
         return this.api.put<{id: string}>(
             this.buildPath(`${Sources.baseUrl}/${sourceId}/raw`, options),
-            platformSourceConfig
+            platformSourceConfig,
         );
     }
 

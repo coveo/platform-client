@@ -12,7 +12,7 @@ export default class CatalogConfiguration extends Resource {
 
     list(options?: CatalogConfigurationsListOptions) {
         return this.api.get<PageModel<CatalogConfigurationModel>>(
-            this.buildPath(CatalogConfiguration.baseUrl, options)
+            this.buildPath(CatalogConfiguration.baseUrl, options),
         );
     }
 
@@ -31,7 +31,7 @@ export default class CatalogConfiguration extends Resource {
     update(configuration: CreateCatalogConfigurationModel) {
         return this.api.put<CatalogConfigurationModel>(
             `${CatalogConfiguration.baseUrl}/${configuration.id}`,
-            configuration
+            configuration,
         );
     }
 }

@@ -24,7 +24,7 @@ describe('ProductListings', () => {
             productListing.list(catalogId, {page: 2, perPage: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings?page=2&pageSize=10`
+                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings?page=2&pageSize=10`,
             );
         });
     });
@@ -50,7 +50,7 @@ describe('ProductListings', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`,
-                productListingModel
+                productListingModel,
             );
         });
     });
@@ -61,7 +61,7 @@ describe('ProductListings', () => {
             productListing.delete(catalogId, productListingToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToDeleteId}`
+                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToDeleteId}`,
             );
         });
     });
@@ -72,7 +72,7 @@ describe('ProductListings', () => {
             productListing.get(catalogId, productListingToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToGetId}`
+                `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToGetId}`,
             );
         });
     });
@@ -99,7 +99,7 @@ describe('ProductListings', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingModel.id}`,
-                productListingModel
+                productListingModel,
             );
         });
     });

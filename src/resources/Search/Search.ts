@@ -25,7 +25,7 @@ export default class Search extends Ressource {
             this.buildPath(`${Search.baseUrl}/fields`, {
                 ...params,
                 organizationId: params?.organizationId ?? this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -35,7 +35,7 @@ export default class Search extends Ressource {
                 field: encodeURI(`${fieldName}`),
                 ...params,
                 organizationId: params?.organizationId ?? this.api.organizationId,
-            })
+            }),
         );
     }
 
@@ -50,7 +50,7 @@ export default class Search extends Ressource {
                 organizationId: this.api.organizationId,
                 viewAllContent: viewAllContent ? 1 : undefined,
             }),
-            bodyParameters
+            bodyParameters,
         );
     }
 
@@ -69,7 +69,7 @@ export default class Search extends Ressource {
                 viewAllContent: viewAllContent ? 1 : undefined,
             }),
             {...bodyParameters, format: 'xlsx'},
-            {responseBodyFormat: 'blob'}
+            {responseBodyFormat: 'blob'},
         );
     }
 
@@ -78,7 +78,7 @@ export default class Search extends Ressource {
             this.buildPath(`${Search.baseUrl}/querySuggest`, {
                 organizationId: this.api.organizationId,
             }),
-            restQuerySuggestParameters
+            restQuerySuggestParameters,
         );
     }
 
@@ -91,7 +91,7 @@ export default class Search extends Ressource {
                 ...params,
                 organizationId: params.organizationId ?? this.api.organizationId,
             }),
-            {responseBodyFormat: 'text'}
+            {responseBodyFormat: 'text'},
         );
     }
 
@@ -103,7 +103,7 @@ export default class Search extends Ressource {
             this.buildPath(`${Search.baseUrl}/document`, {
                 ...params,
                 organizationId: params.organizationId ?? this.api.organizationId,
-            })
+            }),
         );
     }
 }

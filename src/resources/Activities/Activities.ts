@@ -36,7 +36,7 @@ export default class Activity extends Resource {
         const isPublic = !Boolean(activityFacet?.sections?.includes('INTERNAL'));
         return this.api.post<PageModel<ActivityModel>>(
             this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : Activity.getBaseUrl(), params),
-            activityFacet
+            activityFacet,
         );
     }
 
@@ -45,16 +45,16 @@ export default class Activity extends Resource {
         return this.api.post<ActivityFacetModel>(
             this.buildPath(
                 isPublic ? `${Activity.getBaseUrl()}/facets/public` : `${Activity.getBaseUrl()}/facets`,
-                params
+                params,
             ),
-            activityFacet
+            activityFacet,
         );
     }
 
     listAll(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
         return this.api.post<PageModel<ActivityModel>>(
             this.buildPath(Activity.getBaseUrlAllOrgs(), params),
-            activityFacet
+            activityFacet,
         );
     }
 

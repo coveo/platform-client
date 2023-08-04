@@ -38,7 +38,7 @@ describe('DataShare', () => {
             dataShare.deleteSnowflakeAccount(dataShareParams);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
-                `${DataShare.baseUrl}/accounts?org=someOrgId&accountLocator=Soubane&snowflakeRegion=LOUBAME`
+                `${DataShare.baseUrl}/accounts?org=someOrgId&accountLocator=Soubane&snowflakeRegion=LOUBAME`,
             );
         });
     });

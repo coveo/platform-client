@@ -113,7 +113,7 @@ describe('Catalog', () => {
             catalog.getFields(catalogOfFieldsToGetId, {bypassCache: true});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields?bypassCache=true`
+                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields?bypassCache=true`,
             );
         });
     });
@@ -206,7 +206,7 @@ describe('Catalog', () => {
             catalog.getFieldStats(catalogOfFieldsToGetId, {forceRefresh: true});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats?forceRefresh=true`
+                `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats?forceRefresh=true`,
             );
         });
     });

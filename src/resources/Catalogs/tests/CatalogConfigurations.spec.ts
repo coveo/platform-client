@@ -80,7 +80,7 @@ describe('CatalogConfiguration', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${CatalogConfiguration.baseUrl}/${catalogConfigurationModel.id}`,
-                catalogConfigurationModel
+                catalogConfigurationModel,
             );
         });
     });

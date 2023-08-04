@@ -18,35 +18,35 @@ export default class Subscription extends Ressource {
 
     showCurrent(subscriptionId: string) {
         return this.api.get<SubscriptionModel>(
-            `${Subscription.getBaseUrl(this.api.organizationId)}/me/${subscriptionId}`
+            `${Subscription.getBaseUrl(this.api.organizationId)}/me/${subscriptionId}`,
         );
     }
 
     create(editSubscriptionModel: EditSubscriptionModel) {
         return this.api.post<SubscriptionModel>(
             `${Subscription.getBaseUrl(this.api.organizationId)}`,
-            editSubscriptionModel
+            editSubscriptionModel,
         );
     }
 
     createCurrent(editSubscriptionModel: EditSubscriptionModel) {
         return this.api.post<SubscriptionModel>(
             `${Subscription.getBaseUrl(this.api.organizationId)}/me`,
-            editSubscriptionModel
+            editSubscriptionModel,
         );
     }
 
     edit(subscriptionId: string, editSubscriptionModel: EditSubscriptionModel) {
         return this.api.put<SubscriptionModel>(
             `${Subscription.getBaseUrl(this.api.organizationId)}/${subscriptionId}`,
-            editSubscriptionModel
+            editSubscriptionModel,
         );
     }
 
     editCurrent(subscriptionId: string, editSubscriptionModel: EditSubscriptionModel) {
         return this.api.put<SubscriptionModel>(
             `${Subscription.getBaseUrl(this.api.organizationId)}/me/${subscriptionId}`,
-            editSubscriptionModel
+            editSubscriptionModel,
         );
     }
 

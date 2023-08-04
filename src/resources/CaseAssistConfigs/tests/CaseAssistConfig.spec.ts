@@ -1,5 +1,4 @@
 import API from '../../../APICore.js';
-import {New} from '../../BaseInterfaces.js';
 import CaseAssistConfig from '../CaseAssistConfig.js';
 import {
     CaseAssistConfigModel,
@@ -93,7 +92,7 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('create', () => {
-        const newCaseAssistModels: Array<New<CaseAssistConfigModel>> = caseAssistModels;
+        const newCaseAssistModels: any[] = caseAssistModels;
         newCaseAssistModels.forEach((caseAssistModel) => {
             it('should make a POST call to the CaseAssistConfig base url', () => {
                 caseAssist.create(caseAssistModel);
@@ -132,7 +131,7 @@ describe('CaseAssistConfig', () => {
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
                     `${CaseAssistConfig.baseUrl}/${caseAssistModel.id}`,
-                    caseAssistModel
+                    caseAssistModel,
                 );
             });
         });
@@ -184,7 +183,7 @@ describe('CaseAssistConfig', () => {
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
                     `${CaseAssistConfig.baseUrl}/preview/documents/suggest`,
-                    testBody
+                    testBody,
                 );
             });
         });

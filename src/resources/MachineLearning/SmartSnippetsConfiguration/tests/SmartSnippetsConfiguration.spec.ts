@@ -81,7 +81,7 @@ describe('SmartSnippetsConfiguration', () => {
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
                     `${SmartSnippetsConfiguration.modelUrl}/${modelConfig.modelId}`,
-                    modelConfig
+                    modelConfig,
                 );
             });
         });

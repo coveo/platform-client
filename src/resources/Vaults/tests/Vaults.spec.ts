@@ -37,7 +37,7 @@ describe('Vaults', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Vaults.baseUrl}/fetch?referenceSnapshotId=${currentSnaphostId}&sourceOrganizationId=${sourceOrganizationId}&fetchStrategy=${VaultFetchStrategy.overwrite}`
+                `${Vaults.baseUrl}/fetch?referenceSnapshotId=${currentSnaphostId}&sourceOrganizationId=${sourceOrganizationId}&fetchStrategy=${VaultFetchStrategy.overwrite}`,
             );
         });
     });

@@ -52,7 +52,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}?filter=${filter}&sortingOrder=${sortingOrder}&sortingType=${sortingType}`
+                `${ResourceSnapshots.baseUrl}?filter=${filter}&sortingOrder=${sortingOrder}&sortingType=${sortingType}`,
             );
         });
     });
@@ -95,7 +95,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`,
             );
         });
     });
@@ -111,7 +111,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=READ`
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=READ`,
             );
         });
 
@@ -125,7 +125,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`
+                `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/access?snapshotAccessType=WRITE`,
             );
         });
     });
@@ -154,7 +154,7 @@ describe('ResourceSnapshots', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content?contentFormat=SPLIT_PER_TYPE`,
-                {headers: {accept: 'application/zip'}, responseBodyFormat: 'blob'}
+                {headers: {accept: 'application/zip'}, responseBodyFormat: 'blob'},
             );
         });
     });
@@ -203,9 +203,9 @@ describe('ResourceSnapshots', () => {
                 expect(api.postForm).toHaveBeenCalledTimes(1);
                 expect(api.postForm).toHaveBeenCalledWith(
                     `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=ZIP`,
-                    mockedFormData
+                    mockedFormData,
                 );
-            }
+            },
         );
 
         it('should make a post call to the specific Resource Snapshots url if json file', () => {
@@ -222,7 +222,7 @@ describe('ResourceSnapshots', () => {
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/file?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&snapshotFileType=JSON`,
-                mockedFormData
+                mockedFormData,
             );
         });
 
@@ -254,7 +254,7 @@ describe('ResourceSnapshots', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/self?developerNotes=Cut%20my%20life%20into%20pieces%21%20%F0%9F%8E%B5%F0%9F%8E%B5%F0%9F%8E%B5&includeChildrenResources=false`,
-                {resourcesToExport: {EXTENSION: ['🤖'], FIELD: ['*']}}
+                {resourcesToExport: {EXTENSION: ['🤖'], FIELD: ['*']}},
             );
         });
     });
@@ -279,7 +279,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetOrganizationId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/push?targetOrganizationId=%F0%9F%8E%AF&developerNotes=%F0%9F%A7%98`,
             );
         });
     });
@@ -293,7 +293,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun?deleteMissingResources=true`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/dryrun?deleteMissingResources=true`,
             );
         });
     });
@@ -310,7 +310,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true&deletionScope=ONLY_TYPES_FROM_SNAPSHOT`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/apply?deleteMissingResources=true&deletionScope=ONLY_TYPES_FROM_SNAPSHOT`,
             );
         });
     });
@@ -335,7 +335,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
             );
         });
     });
@@ -367,7 +367,7 @@ describe('ResourceSnapshots', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}`,
-                synchronizationPlan
+                synchronizationPlan,
             );
         });
     });
@@ -381,7 +381,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/apply`,
             );
         });
     });
@@ -399,12 +399,12 @@ describe('ResourceSnapshots', () => {
             resourceSnapshots.updateSynchronizationPlanForChildren(
                 snapshotId,
                 synchronizationPlanId,
-                updateChildrenOptions
+                updateChildrenOptions,
             );
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC&parentResourceType=FEATURED_RESULT`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization/${synchronizationPlanId}/children?snapshotParentResourceName=GME&targetParentId=AMC&parentResourceType=FEATURED_RESULT`,
             );
         });
     });
@@ -418,7 +418,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}`,
             );
         });
 
@@ -431,7 +431,7 @@ describe('ResourceSnapshots', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}&numberOfLinesMax=${numberOfLinesMax}`
+                `${ResourceSnapshots.baseUrl}/${snapshotId}/diff?relativeReportId=${reportId}&numberOfLinesMax=${numberOfLinesMax}`,
             );
         });
     });

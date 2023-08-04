@@ -43,7 +43,7 @@ describe('SchemaService', () => {
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100&query=toTheMoon&entityIds=sys_dictionary%2Csys_user`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&offset=100&limit=100&query=toTheMoon&entityIds=sys_dictionary%2Csys_user`,
             );
         });
     });
@@ -54,7 +54,7 @@ describe('SchemaService', () => {
             schemaService.getEntity(sourceType, entityId, {...params, filter: 'filter'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&filter=filter`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}&filter=filter`,
             );
         });
     });
@@ -65,7 +65,7 @@ describe('SchemaService', () => {
             schemaService.getFields(sourceType, entityId, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}/fields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`
+                `/rest/organizations/${API.orgPlaceholder}/schema/sources/${sourceType}/entities/${entityId}/fields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
             );
         });
     });
@@ -117,7 +117,7 @@ describe('SchemaService', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SchemaService.baseUrl}/${sourceType}/translate/specific`,
-                genericObjectsToGet
+                genericObjectsToGet,
             );
         });
     });
@@ -128,7 +128,7 @@ describe('SchemaService', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SchemaService.baseUrl}/${sourceType}/translate/specificWithFields?clientId=${params.clientId}&instanceUrl=${params.instanceUrl}&clientSecretGuid=${params.clientSecretGuid}&oauthRefreshTokenGuid=${params.oauthRefreshTokenGuid}`,
-                genericObjectsToGet
+                genericObjectsToGet,
             );
         });
     });
@@ -157,7 +157,7 @@ describe('SchemaService', () => {
             schemaService.validateSlackToken(someSlackToken);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${someSlackToken}`
+                `${SchemaService.baseUrl}/SLACK/validateToken?accessToken=${someSlackToken}`,
             );
         });
     });
