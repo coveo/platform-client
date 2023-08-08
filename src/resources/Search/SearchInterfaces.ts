@@ -1285,7 +1285,7 @@ export type RestHierarchicalFacetSortCriteria = 'score' | 'alphanumeric' | 'occu
 
 export type RestRangeFacetSortCriteria = 'score' | 'alphanumeric' | 'ascending' | 'descending';
 
-export type RestSpecificFacetSortCriteria = 'score' | 'alphanumeric';
+export type RestSpecificFacetSortCriteria = 'score' | 'alphanumeric' | 'occurrences';
 
 export type RestFormat = 'json' | 'opensearch-atom' | 'opensearch-rss' | 'xlsx';
 
