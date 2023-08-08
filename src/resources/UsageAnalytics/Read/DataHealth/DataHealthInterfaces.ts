@@ -1,58 +1,5 @@
-import {Paginated} from '../../../BaseInterfaces.js';
-
-/**
- * Pagination information about which page is included in the response,
- * and what the full range of data is.
- */
-export interface PaginationInformationModel {
-    /**
-     * Zero-based page index of the current page.
-     */
-    page: number;
-    /**
-     * The number of items for each page.
-     * Note that the actual number of items may be lower for the last page.
-     */
-    perPage: number;
-    /**
-     * Total number of items available (across all pages).
-     */
-    totalItems: number;
-    /**
-     * The number of pages available, based on `totalItems` and `perPage`.
-     */
-    totalPages: number;
-}
-
-/**
- * Almost all calls of the Read service have an optional `org` query parameter.
- * (Notable exceptions are service status monitoring calls).
- */
-interface OrganizationParamParts {
-    /**
-     * The name of the organization (Coveo Cloud V2 only)
-     */
-    org?: string;
-}
-
-/**
- * Required `from` and `to` parameters, encoding a time range.
- */
-interface TimeRangeParamParts {
-    /**
-     * The beginning date of the date range for the request, as an ISO-8601 encoded string.
-     * The date/time should include an offset, or `Z` for UTC.
-     * Format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-     */
-    from: string;
-
-    /**
-     * The end date of the date range for the request, as an ISO-8601 encoded string.
-     * The date/time should include an offset, or `Z` for UTC.
-     * Format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-     */
-    to: string;
-}
+import {Paginated, PaginatedResponse} from '../../../BaseInterfaces.js';
+import {OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts.js';
 
 /**
  * Common parameters for Data Health calls that filter events.
@@ -173,13 +120,6 @@ export interface DataHealthEventsListItemModel {
     validationErrors: DataHealthValidationErrorModel[];
 }
 
-interface PaginatedResponse {
-    /**
-     * Pagination information.
-     */
-    pagination: PaginationInformationModel;
-}
-
 export interface DataHealthListEventsResponse extends PaginatedResponse {
     /**
      * The listing of events in the current page.
@@ -241,7 +181,7 @@ export interface DataHealthGetOverviewResponse {
 }
 
 export type Severity = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
-Object.freeze<Severity[]>(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
+
 export interface DataHealthGetGroupListingParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
      * The category to filter by when getting groups listing.
