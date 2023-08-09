@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
 import {RestUserIdType} from '../../Enums.js';
 import Search from '../Search.js';
+import {RestFacetSearchParameters} from '../SearchInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -173,6 +174,46 @@ describe('Search', () => {
             search.getDocument({uniqueId: 'document-id'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/document?uniqueId=document-id`);
+        });
+    });
+
+    describe('searchFacet', () => {
+        const searchFacetRequest: RestFacetSearchParameters = {
+            field: 'field',
+            type: 'hierarchical',
+            ignoreValues: ['ignored_value'],
+            numberOfValues: 15,
+            query: 'query',
+            captions: {'all;electronics;laptops": "Laptops"': 'caption1'},
+            searchContext: {},
+            ignorePaths: ['ignored_path'],
+            filterFacetCount: false,
+            delimitingCharacter: ';',
+            basePath: ['base_path'],
+        };
+        it('makes a post call to the search facet endpoint', () => {
+            search.searchFacet({...searchFacetRequest, organizationId: 'specific-org-id', viewAllContent: true});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenLastCalledWith(
+                `/rest/search/v2/facet?organizationId=specific-org-id&viewAllContent=true`,
+                searchFacetRequest,
+            );
+        });
+        it('adds the organizationId query param from the config if missing in the arguments', () => {
+            const tempOrganizationId = api.organizationId;
+            // change the value of organizationId on the mock
+            Object.defineProperty(api, 'organizationId', {value: 'my-org', writable: true});
+
+            search.searchFacet(searchFacetRequest);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenLastCalledWith(
+                `/rest/search/v2/facet?organizationId=my-org`,
+                searchFacetRequest,
+            );
+
+            // reset organizationId to old value
+            Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});
         });
     });
 });
