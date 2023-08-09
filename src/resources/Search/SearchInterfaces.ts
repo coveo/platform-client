@@ -1611,6 +1611,7 @@ export interface RestSpecificFacetRequest {
      * **Allowed values:**
      * - `score`: Sort values in descending score order. On a Coveo index, facet value scores are based on number of occurrences and position in the ranked query result set. On an Elasticsearch index, score values are based on number of occurrences only.
      * - `alphanumeric`: Sort values in ascending alphanumeric order.
+     * - `occurrences`: Sort by number of occurrences, with field values having the highest number of occurrences appearing first.
      *
      * **Notes:**
      * - The Coveo ML DNE feature only works with the `score` sort criterion.
