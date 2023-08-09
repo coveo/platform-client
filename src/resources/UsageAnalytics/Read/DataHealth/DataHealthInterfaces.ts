@@ -136,7 +136,7 @@ export interface DataHealthListFacetValueParams
     facet: string;
 }
 
-export interface DataHealthFacetValue<TValue = string> {
+export interface DataHealthFacetValue<TValue extends string = string> {
     /**
      * The value of the facet.
      */
@@ -181,6 +181,7 @@ export interface DataHealthGetOverviewResponse {
 }
 
 export type Severity = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+export const SeverityConstant = Object.freeze<Severity[]>(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
 
 export interface DataHealthGetGroupListingParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
