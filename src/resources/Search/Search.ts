@@ -11,6 +11,8 @@ import {
     SearchListFieldsResponse,
     SearchResponse,
     TokenModel,
+    RestFacetSearchParameters,
+    RestFacetSearchResponse,
 } from './SearchInterfaces.js';
 
 export default class Search extends Ressource {
@@ -104,6 +106,21 @@ export default class Search extends Ressource {
                 ...params,
                 organizationId: params.organizationId ?? this.api.organizationId,
             }),
+        );
+    }
+
+    /**
+     * Executes a facet search request.
+     */
+    searchFacet(params: RestFacetSearchParameters) {
+        const {viewAllContent, organizationId, ...bodyParameters} = params;
+
+        return this.api.post<RestFacetSearchResponse>(
+            this.buildPath(`${Search.baseUrl}/facet`, {
+                organizationId: organizationId ?? this.api.organizationId,
+                viewAllContent,
+            }),
+            bodyParameters,
         );
     }
 }

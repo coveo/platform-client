@@ -2923,3 +2923,114 @@ export interface SingleItemParameters extends PostSearchQueryStringParams {
      */
     uniqueId: string;
 }
+
+export interface RestFacetSearchParameters extends PostSearchQueryStringParams {
+    /**
+     * The name of the field against which to execute the facet search request.
+     */
+    field: string;
+    /**
+     * The kind of facet against which the search request is being made.
+     *
+     * **Allowed values:**
+     * - `specific`
+     * - `hierarchical`
+     *
+     * Default: `specific`
+     */
+    type?: 'specific' | 'hierarchical';
+    /**
+     * A list of index field values to filter out from the facet search results.
+     */
+    ignoreValues?: string[];
+    /**
+     * The maximum number of values to fetch.
+     *
+     * Default: 10
+     */
+    numberOfValues?: number;
+    /**
+     * The string to match.
+     *
+     * Note: Typically, this should be set to the text entered by the end-user in the facet search box, to which one or more wildcard characters (*) may be added.
+     */
+    query?: string;
+    /**
+     * A dictionary that maps index field values to facet value display names.
+     *
+     * Note: When specifying display captions for hierarchical facet values, you can use full values (e.g., all;electronics;laptops), and/or for "leaf" values (e.g., laptops) as keys. If a hierchical facet value can be mapped to two different display captions, the most specific mapping (i.e., the one whose key is the full value) applies.
+     *
+     * Examples:
+     * - Specific (i.e., scalar) facet values: `{"#FF8000": "Orange", "#8000FF": "Purple"}`
+     * - Hierarchical facet values:`{"all;electronics;laptops": "Laptops", "smartphones": "Smart Phones"}`
+     */
+    captions?: Record<string, string>;
+    /**
+     * Search context.
+     */
+    searchContext?: RestQueryParams;
+    /**
+     * A list of paths to filter out from the hierarchical facet search results.
+     */
+    ignorePaths?: string[];
+    /**
+     * Whether to exclude folded result parents when estimating the result count for each facet value.
+     *
+     * Note: The target folding field must be a facet field with the Use cache for nested queries options enabled (see [Add or Edit a Field](https://docs.coveo.com/en/1982/index-content/add-or-edit-a-field)).
+     *
+     * Default: `false`
+     */
+    filterFacetCount?: boolean;
+    /**
+     * The character to use to split field values into a hierarchical sequence.
+     *
+     * Example:
+     *
+     * For a multi-value field containing the following values:
+     *
+     * `c; c>folder2; c>folder2>folder3;`
+     *
+     * The delimiting character is `>`.
+     *
+     * For a hierarchical field containing the following values:
+     *
+     * `c;folder2;folder3;`
+     *
+     * The delimiting character is `;`.
+     */
+    delimitingCharacter?: string;
+    /**
+     * The base path shared by all values for the facet against which the search request is being made. This parameter is only taken into account when the specified facet `type` is `hiearchical`.
+     *
+     * If a `basePath` is specified, the search request will be executed against hierarchical values that begin with that base path only (i.e., other hierarchical values will be filtered out).
+     *
+     * Note: This parameter has no effect unless the facet `type` is `hierarchical`.
+     */
+    basePath?: string[];
+}
+
+export interface RestFacetSearchResultValue {
+    /**
+     * The custom facet value display name, as specified in the `captions` argument of the facet search request.
+     */
+    displayValue: string;
+    /**
+     * The original facet value, as retrieved from the field in the index.
+     */
+    rawValue: string;
+    /**
+     * An estimate number of result items matching both the current query and the filter expression that would get generated if the facet value were selected.
+     */
+    count: number;
+}
+
+export interface RestFacetSearchResponse {
+    /**
+     * The returned facet values.
+     */
+    values: RestFacetSearchResultValue[];
+    /**
+     * Whether additional facet values matching the request are available.
+     */
+    moreValuesAvailable: boolean;
+}
