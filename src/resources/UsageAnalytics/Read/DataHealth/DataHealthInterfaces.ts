@@ -1,6 +1,9 @@
 import {Paginated, PaginatedResponse} from '../../../BaseInterfaces.js';
 import {OrganizationParamParts, TimeRangeParamParts} from '../CommonParamParts.js';
 
+export type Severity = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+export const SeverityConstant = Object.freeze<Severity[]>(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
+
 /**
  * Common parameters for Data Health calls that filter events.
  */
@@ -126,6 +129,7 @@ export interface DataHealthListEventsResponse extends PaginatedResponse {
      */
     events: DataHealthEventsListItemModel[];
 }
+
 export interface DataHealthListFacetValueParams
     extends OrganizationParamParts,
         TimeRangeParamParts,
@@ -136,11 +140,11 @@ export interface DataHealthListFacetValueParams
     facet: string;
 }
 
-export interface DataHealthFacetValue<TValue extends string = string> {
+export interface DataHealthFacetValue {
     /**
      * The value of the facet.
      */
-    value: TValue;
+    value: string;
     /**
      * The count of records that matched the facet in the current range.
      */
@@ -151,7 +155,7 @@ export interface DataHealthListFacetsResponse {
     /**
      * The values for this facet.
      */
-    values: any[];
+    values: DataHealthFacetValue[];
 }
 
 export interface DataHealthGetOverviewParams extends OrganizationParamParts, TimeRangeParamParts {
@@ -179,9 +183,6 @@ export interface DataHealthGetOverviewResponse {
      */
     failedValidations: number;
 }
-
-export type Severity = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
-export const SeverityConstant = Object.freeze<Severity[]>(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
 
 export interface DataHealthGetGroupListingParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
