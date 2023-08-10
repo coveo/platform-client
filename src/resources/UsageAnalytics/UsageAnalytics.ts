@@ -8,9 +8,11 @@ import Filters from './Read/Filters/Filters.js';
 import Reports from './Read/Reports/Reports.js';
 import Snowflake from './Read/Snowflake/Snowflake.js';
 import Statistics from './Read/Statistics/Statistics.js';
+import DataHealth from './Read/DataHealth/DataHealth.js';
 
 export default class UsageAnalytics extends Resource {
     administration: Administration;
+    dataHealth: DataHealth;
     dataShare: DataShare;
     dimensions: Dimensions;
     exports: Exports;
@@ -26,6 +28,7 @@ export default class UsageAnalytics extends Resource {
         super(api, serverlessApi);
 
         this.administration = new Administration(api, serverlessApi);
+        this.dataHealth = new DataHealth(api, serverlessApi);
         this.dataShare = new DataShare(api, serverlessApi);
         this.dimensions = new Dimensions(api, serverlessApi);
         this.exports = new Exports(api, serverlessApi);
