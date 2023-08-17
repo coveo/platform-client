@@ -3,6 +3,7 @@ import {New, PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
 import {
     InsightPanelConfigCreationParams,
+    InsightPanelConfigDuplicateParams,
     InsightPanelConfigListOptions,
     InsightPanelConfigModel,
     InsightPanelConfigUpdateParams,
@@ -31,5 +32,11 @@ export default class InsightPanelConfig extends Resource {
         const {id, ...body} = insightPanelConfig;
 
         return this.api.put<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, body);
+    }
+
+    duplicate(duplicationParams: InsightPanelConfigDuplicateParams) {
+        const {id, name} = duplicationParams;
+
+        return this.api.post<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, name);
     }
 }

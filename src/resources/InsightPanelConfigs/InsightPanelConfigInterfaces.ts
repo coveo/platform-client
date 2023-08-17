@@ -82,6 +82,20 @@ export interface InsightPanelConfigUpdateParams
 }
 
 /**
+ * Defines the parameters required to duplicate an Insight Panel configuration.
+ */
+export interface InsightPanelConfigDuplicateParams {
+    /**
+     * The Insight Panel configuration ID.
+     */
+    id: string;
+    /**
+     * The duplicated Insight Panel configuration name.
+     */
+    name: string;
+}
+
+/**
  * Defines an Insight Panel configuration.
  */
 export interface InsightPanelConfigModel {
