@@ -86,7 +86,7 @@ export interface InsightPanelConfigUpdateParams
  */
 export interface InsightPanelConfigDuplicateParams {
     /**
-     * The Insight Panel configuration ID.
+     * The ID of the Insight Panel configuration to duplicate.
      */
     id: string;
     /**
