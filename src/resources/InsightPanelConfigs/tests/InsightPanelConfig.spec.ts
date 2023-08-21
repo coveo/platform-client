@@ -106,4 +106,19 @@ describe('InsightPanelConfig', () => {
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${insightPanelConfigId}`);
         });
     });
+
+    describe('duplicate', () => {
+        it('should make a POST call to the specific InsightPanelConfig URL', () => {
+            const duplicateInsightPanelParams = {
+                name: 'my duplicated insight panel',
+                id: 'some-insight-panel-config',
+            };
+            const {id, name} = duplicateInsightPanelParams;
+
+            insightPanel.duplicate(duplicateInsightPanelParams);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${id}`, name);
+        });
+    });
 });
