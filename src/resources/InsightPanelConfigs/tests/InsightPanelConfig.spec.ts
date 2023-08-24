@@ -118,7 +118,7 @@ describe('InsightPanelConfig', () => {
             insightPanel.duplicate(duplicateInsightPanelParams);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${id}`, name);
+            expect(api.post).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${id}`, {name});
         });
     });
 });

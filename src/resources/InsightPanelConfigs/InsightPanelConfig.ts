@@ -37,6 +37,6 @@ export default class InsightPanelConfig extends Resource {
     duplicate(duplicationParams: InsightPanelConfigDuplicateParams) {
         const {id, name} = duplicationParams;
 
-        return this.api.post<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, name);
+        return this.api.post<InsightPanelConfigModel>(`${InsightPanelConfig.baseUrl}/${id}`, {name});
     }
 }
