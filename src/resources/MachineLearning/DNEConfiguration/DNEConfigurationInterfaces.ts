@@ -32,7 +32,6 @@ export interface DocumentExtractionQueryModel {
 }
 
 export interface DNEConfigurationModel extends DNENewConfigurationModel {
-    documentGroupId?: string;
     modelId?: string;
 }
 
