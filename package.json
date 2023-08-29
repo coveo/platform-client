@@ -22,7 +22,7 @@
     ],
     "scripts": {
         "start": "tsc -p tsconfig.build.esm.json --watch",
-        "build": "eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.cjs.json && tsc -p tsconfig.build.esm.json && node scripts/dualOutputCompat.js",
+        "build": "rm src/package.json && eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.esm.json && node scripts/prepareCJSOutput.js && tsc -p tsconfig.build.cjs.json && node scripts/dualOutputCompat.js",
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",

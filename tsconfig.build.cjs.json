@@ -3,7 +3,8 @@
     "include": ["src/*"],
     "exclude": ["node_modules"],
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "outDir": "dist/cjs"
     }
 }
