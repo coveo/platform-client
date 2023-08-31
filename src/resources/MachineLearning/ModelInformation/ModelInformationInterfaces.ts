@@ -310,7 +310,6 @@ export interface FacetDetails {
 }
 
 export interface PreparationConfigCC {
-    documentGroupId: number;
     caseIdColumn: string;
     facetFields: string[];
     contextFields: string[];
