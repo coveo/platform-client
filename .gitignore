@@ -59,3 +59,5 @@ typings/
 # custom
 .idea
 dist
+
+src/package.json
