@@ -53,7 +53,7 @@ describe('Activity', () => {
     });
 
     describe('getListOfResourcesAndOperations', () => {
-        it('should make a GET call to return all resources and their operation types ', () => {
+        it('should make a GET call to return all resources and their operation types', () => {
             activity.getListOfResourcesAndOperations();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/resourcesandoperations`);
