@@ -52,6 +52,14 @@ describe('Activity', () => {
         });
     });
 
+    describe('getListOfResourcesAndOperations', () => {
+        it('should make a GET call to return all resources and their operation types ', () => {
+            activity.getListOfResourcesAndOperations();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/resourcesandoperations`);
+        });
+    });
+
     describe('list', () => {
         it('should make a POST call to the specific Activity url to fetch activities of an organization', () => {
             const params: ListActivitiesParams = {};
