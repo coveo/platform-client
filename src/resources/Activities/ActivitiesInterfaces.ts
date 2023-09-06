@@ -1,5 +1,5 @@
 import {Paginated} from '../BaseInterfaces.js';
-import {FacetOrSortStatus} from '../Enums.js';
+import {ActivityOperation, FacetOrSortStatus} from '../Enums.js';
 
 export interface ActivityModel {
     content?: any;
@@ -72,4 +72,8 @@ export interface ActivityFacetModel {
     resourceTypes?: string[];
     sections?: string[];
     states?: string[];
+}
+
+export interface ActivitiesResourceAndOperations {
+    [key:string]: ActivityOperation[]
 }
