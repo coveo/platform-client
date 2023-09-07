@@ -7,6 +7,7 @@ import {
     ListActivitiesFacetsParams,
     ActivityFacetModel,
     ActivityListingFilters,
+    ActivitiesResourceAndOperations,
 } from './ActivitiesInterfaces.js';
 import {ActivityOperation} from '../Enums.js';
 
@@ -30,6 +31,10 @@ export default class Activity extends Resource {
     getOperationTypes(includeInternal = false) {
         const operationTypesUrl = `${Activity.getBaseUrl()}/operationtypes`;
         return this.api.get<ActivityOperation[]>(includeInternal ? `${operationTypesUrl}/all` : operationTypesUrl);
+    }
+
+    getListOfResourcesAndOperations() {
+        return this.api.get<ActivitiesResourceAndOperations[]>(`${Activity.getBaseUrl()}/resourcesandoperations`);
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
