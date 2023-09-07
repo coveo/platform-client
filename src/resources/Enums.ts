@@ -901,8 +901,8 @@ export enum FormInputType {
 
 export enum ModelTypes {
     TopClicks = 'topclicks',
-    QuerySuggest = 'querysuggest',
     PredictiveQuerySuggest = 'predictivequerysuggest',
+    QuerySuggest = 'querysuggest',
     PQSForCommerce = 'pqsforcommerce',
     EventRecommendation = 'eventrecommendation',
     FacetSense = 'facetsense',
