@@ -34,7 +34,7 @@ export default class Activity extends Resource {
     }
 
     getListOfResourcesAndOperations() {
-        return this.api.get<ActivitiesResourceAndOperations[]>(`${Activity.getBaseUrl()}/resourcesandoperations`);
+        return this.api.get<ActivitiesResourceAndOperations>(`${Activity.getBaseUrl()}/resourcesandoperations`);
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
