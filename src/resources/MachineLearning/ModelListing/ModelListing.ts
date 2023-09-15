@@ -3,7 +3,7 @@ import Resource from '../../Resource.js';
 import {MLListingModel} from './ModelListingConfiguration.js';
 
 export default class ModelListing extends Resource {
-    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/modelslisting`;
+    static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/modellisting`;
 
     list(engineIds?: string[]) {
         const requestUrl = engineIds?.length
