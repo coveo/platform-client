@@ -183,6 +183,10 @@ export interface OverrideModel {
      * Determines if the override model is read only
      */
     readOnly?: boolean;
+    /**
+     * Determines the expiration date of this override model
+     */
+    expirationDate?: string;
 }
 
 /*
