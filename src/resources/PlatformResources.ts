@@ -49,6 +49,8 @@ import Vaults from './Vaults/Vaults.js';
 import TableauService from './TableauService/TableauService.js';
 import HostedPages from './HostedPages/HostedPages.js';
 import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
+import Project from './Projects/Project.js';
+import Resources from './Resources/Resources.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
@@ -102,6 +104,8 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'tableauService', resource: TableauService},
     {key: 'searchAnalysis', resource: SearchAnalysis},
+    {key: 'project', resource: Project},
+    {key: 'resources', resource: Resources},
 ];
 
 class PlatformResources {
@@ -156,6 +160,8 @@ class PlatformResources {
     user: User;
     vault: Vaults;
     tableauService: TableauService;
+    project: Project;
+    resources: Resources;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
