@@ -7,7 +7,7 @@ export default class ModelListing extends Resource {
 
     list(engineIds?: string[]) {
         const requestUrl = engineIds?.length
-            ? `${ModelListing.baseUrl}?${engineIds.map((id) => `engineId=${encodeURI(id)}`).join('&')}`
+            ? `${ModelListing.baseUrl}?${engineIds.map((id) => `engineIds=${encodeURI(id)}`).join('&')}`
             : ModelListing.baseUrl;
         return this.api.get<MLListingModel[]>(requestUrl);
     }

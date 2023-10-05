@@ -13,7 +13,7 @@ export interface MLListingModel {
 
 export interface MLModelStatusInfo {
     modelStatus: string;
-    daysUntilArchival: number;
+    daysUntilArchival?: number;
 }
 
 export interface MLModelAssociation {
