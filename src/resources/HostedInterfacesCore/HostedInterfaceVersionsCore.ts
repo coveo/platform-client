@@ -1,4 +1,4 @@
-import {Paginated} from '..';
+import {Paginated} from '../BaseInterfaces';
 
 export interface HostedInterfaceChangeInfo {
     /**
@@ -67,7 +67,7 @@ export interface HostedInterfaceVersion<T> {
      */
     isPublished: boolean;
     /**
-     * Interface of this version.
+     * This version's interface config.
      */
     configuration: T;
     /**
@@ -112,7 +112,7 @@ export interface ListHostedInterfaceVersionsParams extends Paginated {
 
 export interface UpdateVersionedHostedInterfaceExtraParams {
     /**
-     * The label to describe this particular interface version.
+     * The label to describe this particular interface version being created.
      */
     versionLabel?: string;
 }
