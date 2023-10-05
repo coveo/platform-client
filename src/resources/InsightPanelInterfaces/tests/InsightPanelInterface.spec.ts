@@ -105,6 +105,9 @@ describe('InsightPanelInterface', () => {
             smartSnippets: {
                 enabled: false,
             },
+            disableDynamicNavigation: {
+                enabled: false,
+            },
         },
     };
 
@@ -191,6 +194,93 @@ describe('InsightPanelInterface', () => {
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`);
+        });
+    });
+
+    describe('listVersions', () => {
+        const id = 'IPInterface-id-to-get';
+
+        it('should make a GET call with all parameters', () => {
+            insightPanelInterface.listVersions(id, {page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${InsightPanelInterface.baseUrl}/${id}/versions?page=2&perPage=10&filter=Accounting&order=asc`,
+            );
+        });
+
+        it('should make a GET call with page', () => {
+            insightPanelInterface.listVersions(id, {page: 2});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?page=2`);
+        });
+
+        it('should make a GET call with perPage', () => {
+            insightPanelInterface.listVersions(id, {perPage: 10});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?perPage=10`);
+        });
+
+        it('should make a GET call with filter', () => {
+            insightPanelInterface.listVersions(id, {filter: 'Accounting'});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?filter=Accounting`);
+        });
+
+        it('should make a GET call with order', () => {
+            insightPanelInterface.listVersions(id, {order: 'asc'});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?order=asc`);
+        });
+    });
+
+    describe('getVersion', () => {
+        it('should make a GET call to the InsightPanelInterface version url', () => {
+            const id = 'IPInterface-id-to-get';
+            const versionNumber = 'version-number-to-get';
+
+            insightPanelInterface.getVersion(id, versionNumber);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions/${versionNumber}`);
+        });
+    });
+
+    describe('restoreVersion', () => {
+        it('should make a POST call to the InsightPanelInterface version restore url', () => {
+            const id = 'IPInterface-id-to-get';
+            const versionNumber = 'version-number-to-get';
+
+            insightPanelInterface.restoreVersion(id, versionNumber);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${InsightPanelInterface.baseUrl}/${id}/versions/${versionNumber}/restore`,
+            );
+        });
+    });
+
+    describe('updateVersionLabel', () => {
+        it('should make a PUT call to the InsightPanelInterface version label url', () => {
+            const id = 'IPInterface-id-to-get';
+            const versionNumber = 'version-number-to-get';
+            const label = 'some-label';
+
+            insightPanelInterface.updateVersionLabel(id, versionNumber, {
+                label,
+            });
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${InsightPanelInterface.baseUrl}/${id}/versions/${versionNumber}/label`,
+                {
+                    label,
+                },
+            );
         });
     });
 });

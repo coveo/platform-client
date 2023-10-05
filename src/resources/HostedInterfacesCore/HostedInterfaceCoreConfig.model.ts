@@ -155,7 +155,7 @@ export interface HostedInterfaceConfiguration {
     id: string;
 
     /**
-     * The name of the insight panel interface configuration.
+     * The name of the interface configuration.
      */
     name: string;
 

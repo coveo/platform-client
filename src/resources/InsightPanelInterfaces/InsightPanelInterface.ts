@@ -1,10 +1,15 @@
 import API from '../../APICore.js';
 import {New, PageModel} from '../BaseInterfaces.js';
-import {ListHostedInterfacesParams} from '../HostedInterfacesCore/index.js';
+import {
+    ListHostedInterfaceVersionsParams,
+    ListHostedInterfacesParams,
+    UpdateInterfaceVersionLabelParams,
+} from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
 import {
     InsightPanelInterfaceConfiguration,
     InsightPanelInterfaceConfigurationUpdateParams,
+    InsightPanelInterfaceVersion,
 } from './InsightPanelInterface.model.js';
 
 export default class InsightPanelInterface extends Resource {
@@ -35,6 +40,35 @@ export default class InsightPanelInterface extends Resource {
 
         return this.api.put<InsightPanelInterfaceConfigurationUpdateParams>(
             `${InsightPanelInterface.baseUrl}/${id}`,
+            body,
+        );
+    }
+
+    listVersions(insightPanelInterfaceId: string, options: ListHostedInterfaceVersionsParams) {
+        return this.api.get<PageModel<InsightPanelInterfaceVersion>>(
+            this.buildPath(`${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions`, options),
+        );
+    }
+
+    getVersion(insightPanelInterfaceId: string, versionNumber: string) {
+        return this.api.get<InsightPanelInterfaceVersion>(
+            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}`,
+        );
+    }
+
+    restoreVersion(insightPanelInterfaceId: string, versionNumber: string) {
+        return this.api.post<InsightPanelInterfaceConfiguration>(
+            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}/restore`,
+        );
+    }
+
+    updateVersionLabel(
+        insightPanelInterfaceId: string,
+        versionNumber: string,
+        body: UpdateInterfaceVersionLabelParams,
+    ) {
+        return this.api.put<InsightPanelInterfaceConfiguration>(
+            `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}/label`,
             body,
         );
     }
