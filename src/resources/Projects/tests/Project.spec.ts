@@ -1,6 +1,6 @@
 import API from '../../../APICore.js';
 import Project from '../Project.js';
-import {BaseProjectModel, ProjectModel, SolutionType} from '../ProjectInterfaces.js';
+import {BaseProjectModel, ProjectModel, ProjectType} from '../ProjectInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -16,14 +16,14 @@ describe('Project', () => {
     const mockNewProject: BaseProjectModel = {
         name: 'Pokemon Project',
         description: 'Project about pokemons',
-        solutionType: SolutionType.Commerce,
+        type: ProjectType.Commerce,
     };
 
     const mockProject: ProjectModel = {
         id: mockProjectId,
         name: 'Pokemon Project',
         description: 'Project about pokemons',
-        solutionType: SolutionType.Commerce,
+        type: ProjectType.Commerce,
         createdBy: 'jdoe@example.com',
         updatedBy: 'jdoe@example.com',
         createdDate: '2023-07-19T02:37:23.399Z',
@@ -57,7 +57,7 @@ describe('Project', () => {
             expect(api.post).toHaveBeenCalledWith(Project.baseUrl, {
                 name: 'Pokemon Project',
                 description: 'Project about pokemons',
-                solutionType: SolutionType.Commerce,
+                type: ProjectType.Commerce,
             });
         });
     });
@@ -70,7 +70,7 @@ describe('Project', () => {
                 id: mockProjectId,
                 name: 'Pokemon Project',
                 description: 'Project about pokemons',
-                solutionType: SolutionType.Commerce,
+                type: ProjectType.Commerce,
                 createdBy: 'jdoe@example.com',
                 updatedBy: 'jdoe@example.com',
                 createdDate: '2023-07-19T02:37:23.399Z',
