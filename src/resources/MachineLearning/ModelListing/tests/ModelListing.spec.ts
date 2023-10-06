@@ -32,7 +32,7 @@ describe('ModelListing', () => {
 
         it('should make a GET call to the ModelListing base url with provided list of engineIds', () => {
             const engines = ['first', 'second'];
-            const expectedUrl = `${ModelListing.baseUrl}?engineId=${engines[0]}&engineId=${engines[1]}`;
+            const expectedUrl = `${ModelListing.baseUrl}?engineIds=${engines[0]}&engineIds=${engines[1]}`;
             modelListing.list(engines);
 
             expect(api.get).toHaveBeenCalledTimes(1);
