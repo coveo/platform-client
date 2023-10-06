@@ -194,7 +194,7 @@ export interface InsightPanelInterfaceConfigurationUpdateParams
     /**
      * The insight panel settings.
      */
-    settings: WithOptional<InsightPanelSettings, 'smartSnippets'>;
+    settings: WithOptional<InsightPanelSettings, 'smartSnippets' | 'disableDynamicNavigation'>;
 }
 
 export interface InsightPanelInterfaceVersion extends HostedInterfaceVersion<InsightPanelInterfaceConfiguration> {}
