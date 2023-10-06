@@ -49,3 +49,5 @@ export * from './UsageAnalytics/index.js';
 export * from './Vaults/index.js';
 export * from './HostedPages/index.js';
 export * from './SearchAnalysis/index.js';
+export * from './Projects/index.js';
+export * from './Resources/index.js';
