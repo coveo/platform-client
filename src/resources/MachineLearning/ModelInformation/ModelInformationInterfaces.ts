@@ -197,6 +197,10 @@ export interface ModelInformationQS {
     [key: string]: any;
 }
 
+export interface ModelInformationPQS extends ModelInformationQS {
+    catalogIdOpt: string;
+}
+
 export interface MetaInfoSmartSnippets extends MetaInfo {
     modelId: string;
     engineName: string;
