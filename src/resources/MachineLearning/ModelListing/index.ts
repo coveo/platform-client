@@ -1,2 +1,2 @@
 export * from './ModelListing.js';
-export * from './ModelListingConfiguration.js';
+export * from './ModelListingInterfaces.js';
