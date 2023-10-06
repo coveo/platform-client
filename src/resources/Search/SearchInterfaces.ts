@@ -1,6 +1,6 @@
 import {RestUserIdType} from '../Enums.js';
 
-export interface SearchListFieldsParams {
+interface SharedSearchParams {
     /**
      * The unique identifier of the target Coveo Cloud organization.
      * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
@@ -9,8 +9,70 @@ export interface SearchListFieldsParams {
     /**
      * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
      */
-    viewAllContent?: boolean;
+    viewAllContent?: boolean | number;
+    /**
+     * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
+     *
+     * You can pass an empty `pipeline` value to use an empty query pipeline (i.e., `?pipeline=` or `"pipeline": ""`).
+     *
+     * If a query does not contain the `pipeline` parameter, the first query pipeline whose conditions are met by the request is used (query pipelines without conditions are not evaluated). Should the request fail to meet the conditions of each evaluated query pipeline, the default query pipeline of the target Coveo Cloud organization is used (bypassing its conditions, if it has any).
+     *
+     * **Notes:**
+     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `pipeline`, or a `searchHub` that routes queries to a specific `pipeline` via a query pipeline condition.
+     * - For reporting purposes, when logging a **Search** usage analytics event for a query, the `queryPipeline` field of that event should be set to the `pipeline` value of the query (or to the `"default"` string, if no `pipeline` value was specified in the query).
+     *
+     * See also [Managing Query Pipelines](https://docs.coveo.com/en/1450/).
+     *
+     * @example `CustomerQueryPipeline`
+     */
+    pipeline?: string;
+    /**
+     * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output.
+     *
+     * **Notes:**
+     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `searchHub`.
+     * - When logging a **Search** usage analytics event for a query, the `originLevel1` field of that event should be set to the value of the `searchHub` search request parameter.
+     *
+     * See also the `tab` parameter.
+     *
+     * @example `CustomerPortal`
+     */
+    searchHub?: string;
+    /**
+     * The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) identifier of the time zone to use to correctly interpret dates in the query expression and result items.
+     *
+     * If not specified, the default time zone of the server hosting the index is used.
+     *
+     * **Note:** While no Coveo Machine Learning model uses this information, it can nevertheless affect the ranking scores (and thus, potentially the order) of result items, as ranking expressions may be based on time constants.
+     *
+     * @example `America/New_York`
+     */
+    timezone?: string;
+    /**
+     * Whether to force a successful response to include debug information.
+     *
+     * **Notes:**
+     * - Debug information can only appear in responses in the JSON format (see the `format` parameter).
+     * - Avoid setting this parameter to `true` in production, as it has a negative impact on query performance.
+     *
+     * @default `false`
+     */
+    debug?: boolean;
+    /**
+     * The identifier of the index mirror to forward the request to. See also the `indexToken` parameter.
+     *
+     * If you do not specify an `index` (or `indexToken`) value, any index mirror could be used.
+     *
+     * **Note:** Passing an `index` (or `indexToken`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
+     *
+     * @example `myorg-nvoqun-Indexer1-pbi2nbuw`
+     */
+    index?: string;
 }
+
+export interface SearchListFieldsParams extends Pick<SharedSearchParams, 'organizationId' | 'viewAllContent'> {}
 
 export interface SearchListFieldsResponse {
     fields: Array<{
@@ -29,14 +91,12 @@ export interface SearchListFieldsResponse {
     }>;
 }
 
-export interface RestTokenParams {
+export interface RestTokenParams extends Pick<SharedSearchParams, 'searchHub' | 'pipeline'> {
     userIds: RestUserId[];
     userGroups?: string[];
     userDisplayName?: string;
     canSeeUserProfileOf?: string[];
-    pipeline?: string;
     filter?: string;
-    searchHub?: string;
     salesforceOrganizationId?: string;
     validFor?: number;
     salesforceUser?: string;
@@ -68,24 +128,14 @@ export interface TokenModel {
     token: string;
 }
 
-export type RestQueryParams = PostSearchBodyQueryParams & PostSearchQueryStringParams;
+export type RestQueryParams = PostSearchBodyQueryParams;
 
-export interface PostSearchQueryStringParams {
-    /**
-     * The unique identifier of the target Coveo Cloud organization.
-     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
-     */
-    organizationId?: string;
-    /**
-     * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
-     */
-    viewAllContent?: boolean | number;
-}
+export interface PostSearchQueryStringParams extends Pick<SharedSearchParams, 'organizationId' | 'viewAllContent'> {}
 
 /**
  * Defines the body parameters of the list field values request.
  */
-export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringParams {
+export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
     /**
      * Whether to treat accentuated characters as non-accentuated characters when retrieving field values (e.g., treat é, è, ê, etc., as e).
      *
@@ -172,23 +222,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
     dictionaryFieldContext?: RestDictionaryFieldContextRequest;
 
     /**
-     * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
-     *
-     * You can pass an empty `pipeline` value to use an empty query pipeline (i.e., `?pipeline=` or `"pipeline": ""`).
-     *
-     * If a query does not contain the `pipeline` parameter, the first query pipeline whose conditions are met by the request is used (query pipelines without conditions are not evaluated). Should the request fail to meet the conditions of each evaluated query pipeline, the default query pipeline of the target Coveo Cloud organization is used (bypassing its conditions, if it has any).
-     *
-     * **Notes:**
-     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `pipeline`, or a `searchHub` that routes queries to a specific `pipeline` via a query pipeline condition.
-     * - For reporting purposes, when logging a **Search** usage analytics event for a query, the `queryPipeline` field of that event should be set to the `pipeline` value of the query (or to the `"default"` string, if no `pipeline` value was specified in the query).
-     *
-     * See also [Managing Query Pipelines](https://docs.coveo.com/en/1450/).
-     *
-     * @example `CustomerQueryPipeline`
-     */
-    pipeline?: string;
-
-    /**
      * The maximum age of cached results, in milliseconds.
      *
      * If the results of a specific request are available in the cache, and if those results are no older than the `maximumAge` value, the service returns those results rather than forwarding a new query to the index.
@@ -198,21 +231,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
      * @default `-1` (which corresponds to the internal default value (15 minutes))
      */
     maximumAge?: number;
-
-    /**
-     * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
-     *
-     * Coveo Machine Learning models use this information to provide contextually relevant output.
-     *
-     * **Notes:**
-     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `searchHub`.
-     * - When logging a **Search** usage analytics event for a query, the `originLevel1` field of that event should be set to the value of the `searchHub` search request parameter.
-     *
-     * See also the `tab` parameter.
-     *
-     * @example `CustomerPortal`
-     */
-    searchHub?: string;
 
     /**
      * The second level of origin of the request, typically the identifier of the selected tab in the graphical search interface from which the request originates.
@@ -290,17 +308,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
     locale?: string;
 
     /**
-     * The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) identifier of the time zone to use to correctly interpret dates in the query expression and result items.
-     *
-     * If not specified, the default time zone of the server hosting the index is used.
-     *
-     * **Note:** While no Coveo Machine Learning model uses this information, it can nevertheless affect the ranking scores (and thus, potentially the order) of result items, as ranking expressions may be based on time constants.
-     *
-     * @example `America/New_York`
-     */
-    timezone?: string;
-
-    /**
      * The format of a successful response.
      *
      * - Use `json` to get the response in the JSON format.
@@ -312,17 +319,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
      * @default `json`
      */
     format?: RestFormat;
-
-    /**
-     * Whether to force a successful response to include debug information.
-     *
-     * **Notes:**
-     * - Debug information can only appear in responses in the JSON format (see the `format` parameter).
-     * - Avoid setting this parameter to `true` in production, as it has a negative impact on query performance.
-     *
-     * @default `false`
-     */
-    debug?: boolean;
 
     /**
      * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
@@ -396,17 +392,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
     indexType?: string;
 
     /**
-     * The identifier of the index mirror to forward the request to. See also the `indexToken` parameter.
-     *
-     * If you do not specify an `index` (or `indexToken`) value, any index mirror could be used.
-     *
-     * **Note:** Passing an `index` (or `indexToken`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
-     *
-     * @example `myorg-nvoqun-Indexer1-pbi2nbuw`
-     */
-    index?: string;
-
-    /**
      * The identifier for a logical group of indexes that have been configured to include documents form the same sources.
      *
      * If you do not specify a `logicalIndex` value, the `default` grouping will be used, typically including all indexes.
@@ -458,11 +443,6 @@ export interface ListFieldValuesBodyQueryParams extends PostSearchQueryStringPar
      * ```
      */
     analytics?: RestAnalyticsRequest;
-
-    /**
-     * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
-     */
-    viewAllContent?: boolean;
 }
 
 /**
@@ -942,7 +922,7 @@ export interface PostSearchBodyQueryParams extends PostSearchBodyCommonParams {
     wildcards?: boolean;
 }
 
-interface PostSearchBodyCommonParams {
+interface PostSearchBodyCommonParams extends SharedSearchParams {
     /**
      * The query and page view actions previously made by the current user.
      *
@@ -1009,17 +989,6 @@ interface PostSearchBodyCommonParams {
     context?: RestContextRequest;
 
     /**
-     * Whether to force a successful response to include debug information.
-     *
-     * **Notes:**
-     * - Debug information can only appear in responses in the JSON format (see the `format` parameter).
-     * - Avoid setting this parameter to `true` in production, as it has a negative impact on query performance.
-     *
-     * @default `false`
-     */
-    debug?: boolean;
-
-    /**
      * The format of a successful response.
      *
      * - Use `json` to get the response in the JSON format.
@@ -1031,17 +1000,6 @@ interface PostSearchBodyCommonParams {
      * @default `json`
      */
     format?: RestFormat;
-
-    /**
-     * The identifier of the index mirror to forward the request to. See also the `indexToken` parameter.
-     *
-     * If you do not specify an `index` (or `indexToken`) value, any index mirror could be used.
-     *
-     * **Note:** Passing an `index` (or `indexToken`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
-     *
-     * @example `myorg-nvoqun-Indexer1-pbi2nbuw`
-     */
-    index?: string;
 
     /**
      * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
@@ -1137,23 +1095,6 @@ interface PostSearchBodyCommonParams {
     mlParameters?: Record<string, any>;
 
     /**
-     * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
-     *
-     * You can pass an empty `pipeline` value to use an empty query pipeline (i.e., `?pipeline=` or `"pipeline": ""`).
-     *
-     * If a query does not contain the `pipeline` parameter, the first query pipeline whose conditions are met by the request is used (query pipelines without conditions are not evaluated). Should the request fail to meet the conditions of each evaluated query pipeline, the default query pipeline of the target Coveo Cloud organization is used (bypassing its conditions, if it has any).
-     *
-     * **Notes:**
-     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `pipeline`, or a `searchHub` that routes queries to a specific `pipeline` via a query pipeline condition.
-     * - For reporting purposes, when logging a **Search** usage analytics event for a query, the `queryPipeline` field of that event should be set to the `pipeline` value of the query (or to the `"default"` string, if no `pipeline` value was specified in the query).
-     *
-     * See also [Managing Query Pipelines](https://docs.coveo.com/en/1450/).
-     *
-     * @example `CustomerQueryPipeline`
-     */
-    pipeline?: string;
-
-    /**
      * The basic query expression, typically the keywords entered by the end user in a query box.
      *
      * **Note:** When logging a **Search** usage analytics event for a query, the `queryText` field of that event should be set to the `q` value of the corresponding query.
@@ -1183,21 +1124,6 @@ interface PostSearchBodyCommonParams {
      * @example `http://www.example.com`
      */
     referrer?: string;
-
-    /**
-     * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
-     *
-     * Coveo Machine Learning models use this information to provide contextually relevant output.
-     *
-     * **Notes:**
-     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific `searchHub`.
-     * - When logging a **Search** usage analytics event for a query, the `originLevel1` field of that event should be set to the value of the `searchHub` search request parameter.
-     *
-     * See also the `tab` parameter.
-     *
-     * @example `CustomerPortal`
-     */
-    searchHub?: string;
 
     /**
      * The criteria to use for sorting the query results.
@@ -1232,17 +1158,6 @@ interface PostSearchBodyCommonParams {
      * @example `ForumTab`
      */
     tab?: string;
-
-    /**
-     * The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) identifier of the time zone to use to correctly interpret dates in the query expression and result items.
-     *
-     * If not specified, the default time zone of the server hosting the index is used.
-     *
-     * **Note:** While no Coveo Machine Learning model uses this information, it can nevertheless affect the ranking scores (and thus, potentially the order) of result items, as ranking expressions may be based on time constants.
-     *
-     * @example `America/New_York`
-     */
-    timezone?: string;
 
     /**
      * A GUID representing the current user, who can be authenticated or anonymous. This GUID is normally generated by the usage analytics service and stored in a non-expiring browser cookie.
@@ -2417,7 +2332,7 @@ export interface RestUserActionsParameters {
     tagViewsOfUser?: string;
 }
 
-export interface ItemPreviewHtmlParameters extends PostSearchQueryStringParams {
+export interface ItemPreviewHtmlParameters extends RestQueryParams {
     /**
      * The unique ID of the document.
      */
@@ -2917,14 +2832,14 @@ export interface SearchResponse {
     [key: string]: unknown;
 }
 
-export interface SingleItemParameters extends PostSearchQueryStringParams {
+export interface SingleItemParameters extends SharedSearchParams {
     /**
      * The unique ID of the document.
      */
     uniqueId: string;
 }
 
-export interface RestFacetSearchParameters extends PostSearchQueryStringParams {
+export interface RestFacetSearchParameters extends Pick<SharedSearchParams, 'organizationId' | 'viewAllContent'> {
     /**
      * The name of the field against which to execute the facet search request.
      */

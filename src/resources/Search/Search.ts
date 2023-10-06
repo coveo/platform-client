@@ -1,19 +1,19 @@
-import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
 import API from '../../APICore.js';
 import Ressource from '../Resource.js';
 import {
-    SingleItemParameters,
     ItemPreviewHtmlParameters,
+    RestFacetSearchParameters,
+    RestFacetSearchResponse,
     RestQueryParams,
     RestQueryResult,
     RestTokenParams,
     SearchListFieldsParams,
     SearchListFieldsResponse,
     SearchResponse,
+    SingleItemParameters,
     TokenModel,
-    RestFacetSearchParameters,
-    RestFacetSearchResponse,
 } from './SearchInterfaces.js';
+import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
 
 export default class Search extends Ressource {
     static baseUrl = `/rest/search/v2`;
@@ -87,12 +87,29 @@ export default class Search extends Ressource {
     /**
      * Get an item's preview in HTML format
      */
-    previewHTML(params: ItemPreviewHtmlParameters) {
-        return this.api.get<string>(
+    previewHTML({
+        enableNavigation,
+        findNext,
+        findPrevious,
+        organizationId,
+        page,
+        requestedOutputSize,
+        uniqueId,
+        viewAllContent,
+        ...body
+    }: ItemPreviewHtmlParameters) {
+        return this.api.post<string>(
             this.buildPath(`${Search.baseUrl}/html`, {
-                ...params,
-                organizationId: params.organizationId ?? this.api.organizationId,
+                enableNavigation,
+                findNext,
+                findPrevious,
+                page,
+                requestedOutputSize,
+                uniqueId,
+                viewAllContent,
+                organizationId: organizationId ?? this.api.organizationId,
             }),
+            body,
             {responseBodyFormat: 'text'},
         );
     }
@@ -102,10 +119,14 @@ export default class Search extends Ressource {
      */
     getDocument(params: SingleItemParameters) {
         return this.api.get<RestQueryResult>(
-            this.buildPath(`${Search.baseUrl}/document`, {
-                ...params,
-                organizationId: params.organizationId ?? this.api.organizationId,
-            }),
+            this.buildPath(
+                `${Search.baseUrl}/document`,
+                {
+                    ...params,
+                    organizationId: params.organizationId ?? this.api.organizationId,
+                },
+                {skipEmptyString: false}, // otherwise we cannot use the empty pipeline (`pipeline=`)
+            ),
         );
     }
 

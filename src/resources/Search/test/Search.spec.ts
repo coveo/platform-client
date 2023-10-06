@@ -161,11 +161,15 @@ describe('Search', () => {
 
     describe('previewHTML', () => {
         it('makes a GET call to the /html endpoint', () => {
-            search.previewHTML({uniqueId: 'document-id'});
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/html?uniqueId=document-id`, {
-                responseBodyFormat: 'text',
-            });
+            search.previewHTML({uniqueId: 'document-id', pipeline: ''});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `/rest/search/v2/html?uniqueId=document-id`,
+                {pipeline: ''},
+                {
+                    responseBodyFormat: 'text',
+                },
+            );
         });
     });
 
@@ -174,6 +178,12 @@ describe('Search', () => {
             search.getDocument({uniqueId: 'document-id'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/document?uniqueId=document-id`);
+        });
+
+        it('allows specifying the empty pipeline', () => {
+            search.getDocument({uniqueId: 'document-id', pipeline: ''});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/search/v2/document?uniqueId=document-id&pipeline=`);
         });
     });
 
