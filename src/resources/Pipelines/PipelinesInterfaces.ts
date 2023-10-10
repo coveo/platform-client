@@ -1,10 +1,5 @@
 import {GranularResource, PageModel, Paginated} from '../BaseInterfaces.js';
 import {ConditionModel} from './Conditions/index.js';
-
-export interface PipelineBackendVersion {
-    version: '1' | '2';
-}
-
 interface PipelineInterfaceUrl {
     /**
      * Url of the pages affected by this query pipeline.

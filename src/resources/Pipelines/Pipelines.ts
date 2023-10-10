@@ -8,7 +8,6 @@ import {
     ListPipelinesOptions,
     ListPipelinesReturnVariant,
     NewPipelineModel,
-    PipelineBackendVersion,
     PipelineModel,
     UpdatePipelineModel,
 } from './PipelinesInterfaces.js';
@@ -27,10 +26,7 @@ export default class Pipelines extends Resource {
     groups: StatementGroups;
     facetRules: FacetStateRules;
 
-    constructor(
-        protected api: API,
-        protected serverlessApi: API,
-    ) {
+    constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
 
         this.associations = new MLAssociations(api, serverlessApi);
@@ -41,15 +37,9 @@ export default class Pipelines extends Resource {
         this.facetRules = new FacetStateRules(api, serverlessApi);
     }
 
-    getMLVersion() {
-        return this.api.get<PipelineBackendVersion>(
-            this.buildPath(`${Pipelines.searchUrlVersion2}/ml/version`, {organizationId: this.api.organizationId}),
-        );
-    }
-
     list<ListPipelinesVariant extends ListPipelinesOptions>(options?: ListPipelinesVariant) {
         return this.api.get<ListPipelinesReturnVariant<ListPipelinesVariant>>(
-            this.buildPath(Pipelines.searchUrlVersion1, {organizationId: this.api.organizationId, ...options}),
+            this.buildPath(Pipelines.searchUrlVersion1, {organizationId: this.api.organizationId, ...options})
         );
     }
 
@@ -57,7 +47,7 @@ export default class Pipelines extends Resource {
         return this.api.get<PipelineModel>(
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}`, {
                 organizationId: this.api.organizationId,
-            }),
+            })
         );
     }
 
@@ -65,7 +55,7 @@ export default class Pipelines extends Resource {
         return this.api.delete(
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}`, {
                 organizationId: this.api.organizationId,
-            }),
+            })
         );
     }
 
@@ -74,7 +64,7 @@ export default class Pipelines extends Resource {
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipeline.id}`, {
                 organizationId: this.api.organizationId,
             }),
-            pipeline,
+            pipeline
         );
     }
 
@@ -83,7 +73,7 @@ export default class Pipelines extends Resource {
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}/duplicate`, {
                 organizationId: this.api.organizationId,
             }),
-            granularResource,
+            granularResource
         );
     }
 
@@ -92,7 +82,7 @@ export default class Pipelines extends Resource {
             this.buildPath(Pipelines.searchUrlVersion1, {
                 organizationId: this.api.organizationId,
             }),
-            pipeline,
+            pipeline
         );
     }
 }
