@@ -44,8 +44,6 @@ export interface MLListingModel {
     readyForAssociation: boolean;
     /**
      * The current status of the model
-     *
-     * @Example `ACTIVE`
      */
     modelStatusInfo: MLModelStatusInfo;
     /**
