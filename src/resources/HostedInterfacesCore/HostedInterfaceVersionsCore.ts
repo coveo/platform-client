@@ -76,10 +76,6 @@ export interface HostedInterfaceVersion<T> {
     restoredFromVersion?: number;
 }
 
-export interface UpdateInterfaceVersionLabelParams {
-    label: string;
-}
-
 export interface ListHostedInterfaceVersionsParams extends Paginated {
     /**
      * The zero-based page to retrieve.
@@ -115,4 +111,18 @@ export interface UpdateVersionedHostedInterfaceExtraParams {
      * The label to describe this particular interface version being created.
      */
     versionLabel?: string;
+}
+
+export interface UpdateInterfaceVersionLabelParams {
+    /**
+     * The optional version label.
+     */
+    label?: string;
+}
+
+export interface RestoreInterfaceVersionParams {
+    /**
+     * The optional version label.
+     */
+    label?: string;
 }

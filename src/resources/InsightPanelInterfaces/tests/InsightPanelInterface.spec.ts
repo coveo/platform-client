@@ -241,7 +241,7 @@ describe('InsightPanelInterface', () => {
     describe('getVersion', () => {
         it('should make a GET call to the InsightPanelInterface version url', () => {
             const id = 'IPInterface-id-to-get';
-            const versionNumber = 'version-number-to-get';
+            const versionNumber = 1;
 
             insightPanelInterface.getVersion(id, versionNumber);
 
@@ -253,13 +253,19 @@ describe('InsightPanelInterface', () => {
     describe('restoreVersion', () => {
         it('should make a POST call to the InsightPanelInterface version restore url', () => {
             const id = 'IPInterface-id-to-get';
-            const versionNumber = 'version-number-to-get';
+            const versionNumber = 2;
+            const label = 'Some version label';
 
-            insightPanelInterface.restoreVersion(id, versionNumber);
+            insightPanelInterface.restoreVersion(id, versionNumber, {
+                label,
+            });
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${InsightPanelInterface.baseUrl}/${id}/versions/${versionNumber}/restore`,
+                {
+                    label,
+                },
             );
         });
     });
@@ -267,7 +273,7 @@ describe('InsightPanelInterface', () => {
     describe('updateVersionLabel', () => {
         it('should make a PUT call to the InsightPanelInterface version label url', () => {
             const id = 'IPInterface-id-to-get';
-            const versionNumber = 'version-number-to-get';
+            const versionNumber = 3;
             const label = 'some-label';
 
             insightPanelInterface.updateVersionLabel(id, versionNumber, {

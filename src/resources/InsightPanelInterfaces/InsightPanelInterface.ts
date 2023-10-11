@@ -3,6 +3,7 @@ import {New, PageModel} from '../BaseInterfaces.js';
 import {
     ListHostedInterfaceVersionsParams,
     ListHostedInterfacesParams,
+    RestoreInterfaceVersionParams,
     UpdateInterfaceVersionLabelParams,
 } from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
@@ -50,21 +51,22 @@ export default class InsightPanelInterface extends Resource {
         );
     }
 
-    getVersion(insightPanelInterfaceId: string, versionNumber: string) {
+    getVersion(insightPanelInterfaceId: string, versionNumber: number) {
         return this.api.get<InsightPanelInterfaceVersion>(
             `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}`,
         );
     }
 
-    restoreVersion(insightPanelInterfaceId: string, versionNumber: string) {
+    restoreVersion(insightPanelInterfaceId: string, versionNumber: number, params: RestoreInterfaceVersionParams) {
         return this.api.post<InsightPanelInterfaceConfiguration>(
             `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}/restore`,
+            params,
         );
     }
 
     updateVersionLabel(
         insightPanelInterfaceId: string,
-        versionNumber: string,
+        versionNumber: number,
         body: UpdateInterfaceVersionLabelParams,
     ) {
         return this.api.put<InsightPanelInterfaceConfiguration>(
