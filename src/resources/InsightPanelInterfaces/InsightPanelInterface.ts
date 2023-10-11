@@ -57,10 +57,10 @@ export default class InsightPanelInterface extends Resource {
         );
     }
 
-    restoreVersion(insightPanelInterfaceId: string, versionNumber: number, params: RestoreInterfaceVersionParams) {
+    restoreVersion(insightPanelInterfaceId: string, versionNumber: number, body: RestoreInterfaceVersionParams) {
         return this.api.post<InsightPanelInterfaceConfiguration>(
             `${InsightPanelInterface.baseUrl}/${insightPanelInterfaceId}/versions/${versionNumber}/restore`,
-            params,
+            body,
         );
     }
 
