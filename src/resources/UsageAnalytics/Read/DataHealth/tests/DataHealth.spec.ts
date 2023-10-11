@@ -71,11 +71,13 @@ describe('DataHealth', () => {
         it('should make a GET call to the data health get overview url', () => {
             const dataHealthGetOverviewParams: DataHealthGetOverviewParams = {
                 ...baseParams,
+                category: 'unicorns',
+                trackingId: ['PetShop'],
             };
             dataHealth.getOverview(dataHealthGetOverviewParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${DataHealth.baseUrl}/overview?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z`,
+                `${DataHealth.baseUrl}/overview?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
             );
         });
     });
@@ -85,11 +87,12 @@ describe('DataHealth', () => {
             const dataHealthGetGroupListingParams: DataHealthGetGroupListingParams = {
                 ...baseParams,
                 category: 'unicorns',
+                trackingId: ['PetShop'],
             };
             dataHealth.getGroupListing(dataHealthGetGroupListingParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${DataHealth.baseUrl}/groups?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns`,
+                `${DataHealth.baseUrl}/groups?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
             );
         });
     });
@@ -100,11 +103,12 @@ describe('DataHealth', () => {
                 ...baseParams,
                 category: 'unicorns',
                 group: 'horned',
+                trackingId: ['PetShop'],
             };
             dataHealth.getGroupDetail(dataHealthGetGroupDetailParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${DataHealth.baseUrl}/groups/detail?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&group=horned`,
+                `${DataHealth.baseUrl}/groups/detail?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&group=horned&trackingId=PetShop`,
             );
         });
     });
