@@ -163,6 +163,14 @@ export interface DataHealthGetOverviewParams extends OrganizationParamParts, Tim
      * The category to filter by when getting the overview.
      */
     category?: string;
+    /**
+     * The tracking id to filter by when getting groups listing.
+     */
+    trackingId?: string[];
+    /**
+     * Whether to include beta rules when getting details.
+     */
+    showBetaRules?: boolean;
 }
 
 export interface DataHealthGetOverviewResponse {
@@ -197,6 +205,10 @@ export interface DataHealthGetGroupListingParams extends OrganizationParamParts,
      * Whether to show groups with no validated entity or not.
      */
     showEmptyGroups?: boolean;
+    /**
+     * Whether to show groups with only beta rules.
+     */
+    showBetaRules?: boolean;
 }
 
 export interface DataHealthGetGroupListingResponse extends PaginatedResponse {
@@ -234,6 +246,14 @@ export interface DataHealthGetGroupDetailParams extends OrganizationParamParts, 
      * The category to filter by when getting details on a group.
      */
     category: string;
+    /**
+     * The tracking id to filter by when getting groups listing.
+     */
+    trackingId?: string[];
+    /**
+     * Whether to include beta rules when getting details.
+     */
+    showBetaRules?: boolean;
     /**
      * The group to filter by when getting details.
      */
