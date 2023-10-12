@@ -8,7 +8,9 @@ import {
     HostedInterfaceResultTemplateBadge,
     HostedInterfaceResultTemplateDetail,
     HostedInterfaceTab,
+    HostedInterfaceVersion,
     ListHostedInterfacesParams,
+    UpdateVersionedHostedInterfaceExtraParams,
 } from '../HostedInterfacesCore/index.js';
 
 export enum InsightPanelResultTemplateLayout {
@@ -150,6 +152,10 @@ export interface InsightPanelSettings {
      * An option enabling the use of smart snippets.
      */
     smartSnippets: InsightPanelOption;
+    /**
+     * Indicates whether dynamic facet navigation is disabled.
+     */
+    disableDynamicNavigation: InsightPanelOption;
 }
 
 export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfiguration {
@@ -172,14 +178,23 @@ export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfi
      * The insight panel settings.
      */
     settings: InsightPanelSettings;
+
+    /**
+     * This config's published version.
+     * This is usually the latest version.
+     */
+    publishedVersion?: number;
 }
 
 export interface IListInsightPanelInterfacesParameters extends ListHostedInterfacesParams {}
 
 export interface InsightPanelInterfaceConfigurationUpdateParams
-    extends Omit<InsightPanelInterfaceConfiguration, 'settings'> {
+    extends Omit<InsightPanelInterfaceConfiguration, 'settings' | 'publishedVersion'>,
+        UpdateVersionedHostedInterfaceExtraParams {
     /**
      * The insight panel settings.
      */
-    settings: WithOptional<InsightPanelSettings, 'smartSnippets'>;
+    settings: WithOptional<InsightPanelSettings, 'smartSnippets' | 'disableDynamicNavigation'>;
 }
+
+export interface InsightPanelInterfaceVersion extends HostedInterfaceVersion<InsightPanelInterfaceConfiguration> {}
