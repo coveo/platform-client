@@ -27,7 +27,7 @@ export const projectResourceTypes = [
 
 export type ProjectResourceType = (typeof projectResourceTypes)[number];
 
-export enum SolutionType {
+export enum ProjectType {
     Commerce = 'COMMERCE',
     Other = 'OTHER',
     Service = 'SERVICE',
@@ -45,9 +45,9 @@ export interface BaseProjectModel {
      */
     description: string;
     /**
-     * The solution type of the project.
+     * The type of the project.
      */
-    solutionType: SolutionType;
+    type: ProjectType;
     /**
      * The list of usernames that will be points of contact for the project.
      *
@@ -64,7 +64,7 @@ export interface BaseProjectModel {
 
 export interface ProjectModel extends BaseProjectModel {
     /**
-     * The unique identitifier of the project.
+     * The unique identifier of the project.
      */
     id: string;
     /**
@@ -114,8 +114,4 @@ export interface ListProjectParams extends Paginated {
      * @example: 'ASC'
      */
     order?: SortingOrder;
-    /**
-     * Whether to include resources when returning results.
-     */
-    includeResources?: boolean;
 }

@@ -24,14 +24,6 @@ describe('Pipelines', () => {
         });
     });
 
-    describe('getBackendVersion', () => {
-        it('should make a GET call to the specific Pipelines url', () => {
-            pipelines.getMLVersion();
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Pipelines.searchUrlVersion2}/ml/version`);
-        });
-    });
-
     describe('get', () => {
         it('should make a GET call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.get('🔥');
