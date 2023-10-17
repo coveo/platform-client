@@ -1,7 +1,7 @@
 import API from '../../APICore.js';
 import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
-import {ResourceModel, ResourceParams} from '../Resources/index.js';
+import {ResourceModel, ResourceParams, ResourceStatus} from '../Resources/index.js';
 import {ListProjectParams, ProjectModel, BaseProjectModel, ProjectResourceType} from './ProjectInterfaces.js';
 
 export default class Project extends Resource {
@@ -58,10 +58,22 @@ export default class Project extends Resource {
     }
 
     /**
+     * Returns resource IDs grouped by resource status, for a given project.
+     *
+     * @param {string} projectId
+     * @returns {Promise<Record<ResourceStatus, Record<ProjectResourceType, string[]>>>} A series of resource IDs grouped by their status and resource type.
+     */
+    listResourcesByStatus(projectId: string): Promise<Record<ResourceStatus, Record<ProjectResourceType, string[]>>> {
+        return this.api.get<Record<ResourceStatus, Record<ProjectResourceType, string[]>>>(
+            this.buildPath(`${Project.baseUrl}/${projectId}/resources`),
+        );
+    }
+
+    /**
      * Returns a paginated list of resources associated to a project.
      *
-     * @param projectId
-     * @param resourceType
+     * @param {string} projectId
+     * @param {ProjectResourceType} resourceType
      * @param {ResourceParams} params
      * @returns {Promise<PageModel<ResourceModel>>} A paginated list of resources associated to a project.
      */

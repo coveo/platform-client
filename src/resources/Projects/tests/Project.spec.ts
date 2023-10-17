@@ -95,6 +95,14 @@ describe('Project', () => {
         });
     });
 
+    describe('listResourcesByType', () => {
+        it('should make a GET call to the correct Project URL', () => {
+            project.listResourcesByStatus(mockProjectId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Project.baseUrl}/${mockProjectId}/resources`);
+        });
+    });
+
     describe('listResources', () => {
         it('should make a GET call to the correct Project URL', () => {
             project.listResources(mockProjectId, mockRandomResourceType);
