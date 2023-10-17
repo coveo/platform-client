@@ -1,5 +1,7 @@
 import {Paginated} from '../BaseInterfaces.js';
 
+export type ResourceStatus = 'existingResources' | 'deletedResources';
+
 export interface ResourceModel {
     /**
      * The unique identifier of a resource within a project
