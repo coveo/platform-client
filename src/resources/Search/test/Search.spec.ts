@@ -63,9 +63,11 @@ describe('Search', () => {
 
     describe('listFields', () => {
         it('makes a get call to v2 search with its params to fetch the list of fields', () => {
-            search.listFields({viewAllContent: true, organizationId: 'my-org'});
+            search.listFields({viewAllContent: true, organizationId: 'my-org', pipeline: 'pipeline'});
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org`);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org&pipeline=pipeline`,
+            );
         });
 
         it('adds the organizationId query param from the config if missing in the arguments', () => {
