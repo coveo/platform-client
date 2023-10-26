@@ -6,10 +6,12 @@ interface SharedSearchParams {
      * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
      */
     organizationId?: string;
+
     /**
      * Whether to bypass document permissions. Only effective if the access token grants the Search - View all content privilege.
      */
     viewAllContent?: boolean | number;
+
     /**
      * The name of the query pipeline to use for this request (bypassing its conditions, if it has any).
      *
@@ -26,6 +28,7 @@ interface SharedSearchParams {
      * @example `CustomerQueryPipeline`
      */
     pipeline?: string;
+
     /**
      * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
      *
@@ -40,6 +43,7 @@ interface SharedSearchParams {
      * @example `CustomerPortal`
      */
     searchHub?: string;
+
     /**
      * The [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) identifier of the time zone to use to correctly interpret dates in the query expression and result items.
      *
@@ -50,6 +54,7 @@ interface SharedSearchParams {
      * @example `America/New_York`
      */
     timezone?: string;
+
     /**
      * Whether to force a successful response to include debug information.
      *
@@ -60,6 +65,7 @@ interface SharedSearchParams {
      * @default `false`
      */
     debug?: boolean;
+
     /**
      * The identifier of the index mirror to forward the request to. See also the `indexToken` parameter.
      *
@@ -72,7 +78,86 @@ interface SharedSearchParams {
     index?: string;
 }
 
-export interface SearchListFieldsParams extends Pick<SharedSearchParams, 'organizationId' | 'viewAllContent'> {}
+export interface SharedFieldsParams extends SharedSearchParams {
+    /**
+     * The second level of origin of the request, typically the identifier of the selected tab in the graphical search interface from which the request originates.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output.
+     *
+     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel2` field of that event should be set to the `tab` value of the query (or to the `"default"` string, if no `tab` value was specified in the query).
+     *
+     * See also the `searchHub` parameter.
+     *
+     * @example `ForumTab`
+     */
+    tab?: string;
+
+    /**
+     * The third level of origin of the request, typically the URL of the page that linked to the search interface from which the request originates (e.g., in JavaScript, this would correspond to the `document.referrer` value).
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output.
+     *
+     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel3` field of that event should be set to the `referrer` value of the query, if specified.
+     *
+     * See also the `context` parameter.
+     *
+     * @example `http://www.example.com`
+     */
+    referrer?: string;
+
+    /**
+     * The custom context information to send along with the request. Must be a dictionary of key-value pairs (JSON) where each key is a string, and each value is either a string or an array of strings.
+     *
+     * Coveo Machine Learning models may use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$context` object.
+     *
+     * **Note:**
+     * When logging a **Search** usage analytics event for a query, the `customData` field of that event should include the same data as the `context` parameter of the query. However, each `context` key included in `customData` must be prefixed by `context_` (e.g., the `userRoles` key in `context` becomes `context_userRoles` in `customData`).
+     *
+     * See also the `referrer` parameter.
+     *
+     * @example
+     * ```json
+     * {
+     *   "userAgeRange":"25-35",
+     *   "userRoles": ["PremiumCustomer", "ProductReviewer"]
+     * }
+     * ```
+     */
+    context?: RestContextRequest;
+
+    /**
+     * The locale of the current user. Must comply with IETF’s [BCP 47](http://www.rfc-editor.org/rfc/bcp/bcp47.txt) definition.
+     *
+     * Coveo Machine Learning models use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$locale` object.
+     *
+     * **Note:** When logging a **Search** usage analytics event, the language field of that event should match the language part of the `locale` value of the query (e.g., `en-US` in `locale` becomes `en` in `language`).
+     *
+     * @example `en-US`
+     */
+    locale?: string;
+
+    /**
+     * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
+     *
+     * If you do not specify an `indexToken` (or `index`) value, any index mirror could be used.
+     *
+     * **Note:** Passing an `indexToken` (or `index`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
+     *
+     * @example `ZXhhbXBsZWluZGV4bWlycm9yLS4uLg==`
+     */
+    indexToken?: string;
+
+    /**
+     * The identifier for a logical group of indexes that have been configured to include documents form the same sources.
+     *
+     * If you do not specify a `logicalIndex` value, the `default` grouping will be used, typically including all indexes.
+     *
+     * @example `webcontentonly`
+     */
+    logicalIndex?: string;
+}
+
+export interface SearchListFieldsParams extends SharedFieldsParams {}
 
 export interface SearchListFieldsResponse {
     fields: Array<{
@@ -135,7 +220,7 @@ export interface PostSearchQueryStringParams extends Pick<SharedSearchParams, 'o
 /**
  * Defines the body parameters of the list field values request.
  */
-export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
+export interface ListFieldValuesBodyQueryParams extends SharedFieldsParams {
     /**
      * Whether to treat accentuated characters as non-accentuated characters when retrieving field values (e.g., treat é, è, ê, etc., as e).
      *
@@ -233,52 +318,6 @@ export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
     maximumAge?: number;
 
     /**
-     * The second level of origin of the request, typically the identifier of the selected tab in the graphical search interface from which the request originates.
-     *
-     * Coveo Machine Learning models use this information to provide contextually relevant output.
-     *
-     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel2` field of that event should be set to the `tab` value of the query (or to the `"default"` string, if no `tab` value was specified in the query).
-     *
-     * See also the `searchHub` parameter.
-     *
-     * @example `ForumTab`
-     */
-    tab?: string;
-
-    /**
-     * The third level of origin of the request, typically the URL of the page that linked to the search interface from which the request originates (e.g., in JavaScript, this would correspond to the `document.referrer` value).
-     *
-     * Coveo Machine Learning models may use this information to provide contextually relevant output.
-     *
-     * **Note:** When logging a **Search** usage analytics event for a query, the `originLevel3` field of that event should be set to the `referrer` value of the query, if specified.
-     *
-     * See also the `context` parameter.
-     *
-     * @example `http://www.example.com`
-     */
-    referrer?: string;
-
-    /**
-     * The custom context information to send along with the request. Must be a dictionary of key-value pairs (JSON) where each key is a string, and each value is either a string or an array of strings.
-     *
-     * Coveo Machine Learning models may use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$context` object.
-     *
-     * **Note:**
-     * When logging a **Search** usage analytics event for a query, the `customData` field of that event should include the same data as the `context` parameter of the query. However, each `context` key included in `customData` must be prefixed by `context_` (e.g., the `userRoles` key in `context` becomes `context_userRoles` in `customData`).
-     *
-     * See also the `referrer` parameter.
-     *
-     * @example
-     * ```json
-     * {
-     *   "userAgeRange":"25-35",
-     *   "userRoles": ["PremiumCustomer", "ProductReviewer"]
-     * }
-     * ```
-     */
-    context?: RestContextRequest;
-
-    /**
      * The query and page view actions previously made by the current user.
      *
      * Coveo Machine Learning content recommendations models use this information to provide contextually relevant output.
@@ -297,17 +336,6 @@ export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
     recommendation?: string;
 
     /**
-     * The locale of the current user. Must comply with IETF’s [BCP 47](http://www.rfc-editor.org/rfc/bcp/bcp47.txt) definition.
-     *
-     * Coveo Machine Learning models use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the `$locale` object.
-     *
-     * **Note:** When logging a **Search** usage analytics event, the language field of that event should match the language part of the `locale` value of the query (e.g., `en-US` in `locale` becomes `en` in `language`).
-     *
-     * @example `en-US`
-     */
-    locale?: string;
-
-    /**
      * The format of a successful response.
      *
      * - Use `json` to get the response in the JSON format.
@@ -319,17 +347,6 @@ export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
      * @default `json`
      */
     format?: RestFormat;
-
-    /**
-     * The Base64 encoded identifier of the index mirror to forward the request to. See also the `index` parameter.
-     *
-     * If you do not specify an `indexToken` (or `index`) value, any index mirror could be used.
-     *
-     * **Note:** Passing an `indexToken` (or `index`) value has no effect when the results of a specific request can be returned from cache (see the `maximumAge` parameter).
-     *
-     * @example `ZXhhbXBsZWluZGV4bWlycm9yLS4uLg==`
-     */
-    indexToken?: string;
 
     /**
      * A GUID representing the current user, who can be authenticated or anonymous. This GUID is normally generated by the usage analytics service and stored in a non-expiring browser cookie.
@@ -390,15 +407,6 @@ export interface ListFieldValuesBodyQueryParams extends SharedSearchParams {
      * @default `coveo`
      */
     indexType?: string;
-
-    /**
-     * The identifier for a logical group of indexes that have been configured to include documents form the same sources.
-     *
-     * If you do not specify a `logicalIndex` value, the `default` grouping will be used, typically including all indexes.
-     *
-     * @example `webcontentonly`
-     */
-    logicalIndex?: string;
 
     /**
      * The maximum number of milliseconds to allow the request to last before timing out. Maximum: 16000
