@@ -133,3 +133,9 @@ export interface CreateSourceOptions {
     rebuild?: boolean;
     updateSecurityProviders?: boolean;
 }
+
+export interface BasicSourceModel {
+    id?: string;
+    name?: string;
+    sourceType?: SourceType;
+}

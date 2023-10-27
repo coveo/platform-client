@@ -207,7 +207,7 @@ describe('Sources', () => {
             source.setPushRefreshStatus(sourceId, activityOperation);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Sources.baseUrl}/${sourceId}/pushRefresh?activityOperation=REBUILD`,
+                `${Sources.baseUrl}/${sourceId}/pushRefresh?activityOperation=REBUILD`
             );
         });
     });
@@ -219,6 +219,14 @@ describe('Sources', () => {
             source.getRawSource(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/${sourceId}/raw`);
+        });
+    });
+
+    describe('getBasicSources', () => {
+        it('should make a GET call to the specific Sources url', () => {
+            source.getBasicSources();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/basic/all`);
         });
     });
 
@@ -305,7 +313,7 @@ describe('Sources', () => {
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Sources.baseUrl}/${sourceId}/schedules/${scheduleId}`,
-                sourceSchedule,
+                sourceSchedule
             );
         });
     });
@@ -338,7 +346,7 @@ describe('Sources', () => {
             source.abortTaskForActivity(sourceId, activityId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Sources.baseUrl}/${sourceId}/tasks/abort?activityId=not-enough-emoji`,
+                `${Sources.baseUrl}/${sourceId}/tasks/abort?activityId=not-enough-emoji`
             );
         });
     });

@@ -6,6 +6,7 @@ import {ScheduleModel} from '../SecurityCache/index.js';
 import SourcesDatasets from './SourcesDatasets/SourcesDatasets.js';
 import SourcesFields from './SourcesFields/SourcesFields.js';
 import {
+    BasicSourceModel,
     CreateSourceModel,
     CreateSourceOptions,
     LightSourceModel,
@@ -25,10 +26,7 @@ export default class Sources extends Resource {
     datasets: SourcesDatasets;
     metadata: SourcesMetadata;
 
-    constructor(
-        protected api: API,
-        protected serverlessApi: API,
-    ) {
+    constructor(protected api: API, protected serverlessApi: API) {
         super(api, serverlessApi);
 
         this.field = new SourcesFields(api, serverlessApi);
@@ -51,7 +49,7 @@ export default class Sources extends Resource {
      */
     listOperationalStatus(params?: ListOperationalStatusSourcesParams) {
         return this.api.get<PageModel<SourceModel, 'sourceModels'>>(
-            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus`, params),
+            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus`, params)
         );
     }
 
@@ -89,7 +87,7 @@ export default class Sources extends Resource {
 
     duplicate(sourceId: string, newSourceName: string, logicalIndexId?: string) {
         return this.api.post<SourceModel>(
-            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId}),
+            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId})
         );
     }
 
@@ -125,10 +123,14 @@ export default class Sources extends Resource {
         return this.api.get<RawSourceConfig>(`${Sources.baseUrl}/${sourceId}/raw`);
     }
 
+    getBasicSources() {
+        return this.api.get<BasicSourceModel[]>(`${Sources.baseUrl}/basic/all`);
+    }
+
     updateRawSource(sourceId: string, platformSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
         return this.api.put<{id: string}>(
             this.buildPath(`${Sources.baseUrl}/${sourceId}/raw`, options),
-            platformSourceConfig,
+            platformSourceConfig
         );
     }
 
