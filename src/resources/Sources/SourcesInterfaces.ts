@@ -137,5 +137,8 @@ export interface CreateSourceOptions {
 export interface BasicSourceModel {
     id?: string;
     name?: string;
+    /**
+     * @Example `YOUTUBE`
+     */
     sourceType?: SourceType;
 }
