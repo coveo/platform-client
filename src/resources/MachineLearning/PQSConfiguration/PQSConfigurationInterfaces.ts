@@ -38,4 +38,10 @@ export interface PQSConfigurationModel {
      * The filter to apply to the 'Click' and 'Search' event dimensions of the UA data to learn from when rebuilding the model.
      */
     searchEventFilter?: string;
+    /**
+     * The trackingIds that usage analytics events must contain for the model to use those events in its learning process. The model will use an event if it contains at least one of the specified IDs
+     *
+     * @Example: [ "sport" ]
+     */
+    trackingIds: string[];
 }
