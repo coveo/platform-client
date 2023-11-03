@@ -910,6 +910,9 @@ export enum ModelTypes {
     CaseClassification = 'caseclassification',
     SmartSnippets = 'mlquestionanswering',
     UserActionHistory = 'useractionhistory',
+    IntentAwareProductRanking = 'intentranking',
+    RelevanceGenerativeAnswering = 'genqa',
+    SemanticSearch = 'embeddings',
 }
 
 export enum LicenseSection {
