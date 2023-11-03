@@ -70,6 +70,14 @@ describe('Search', () => {
             );
         });
 
+        it('makes a get call to v2 search with its params to fetch the list of fields with an empty pipeline', () => {
+            search.listFields({viewAllContent: true, organizationId: 'my-org', pipeline: ''});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org&pipeline=`,
+            );
+        });
+
         it('adds the organizationId query param from the config if missing in the arguments', () => {
             const tempOrganizationId = api.organizationId;
             // change the value of organizationId on the mock
