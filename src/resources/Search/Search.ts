@@ -24,10 +24,14 @@ export default class Search extends Ressource {
 
     listFields(params?: SearchListFieldsParams) {
         return this.api.get<SearchListFieldsResponse>(
-            this.buildPath(`${Search.baseUrl}/fields`, {
-                ...params,
-                organizationId: params?.organizationId ?? this.api.organizationId,
-            }),
+            this.buildPath(
+                `${Search.baseUrl}/fields`,
+                {
+                    ...params,
+                    organizationId: params?.organizationId ?? this.api.organizationId,
+                },
+                {skipEmptyString: false}, // otherwise we cannot use the empty pipeline (`pipeline=`)
+            ),
         );
     }
 
