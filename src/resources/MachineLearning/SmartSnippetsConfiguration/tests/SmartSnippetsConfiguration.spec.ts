@@ -81,7 +81,7 @@ describe('SmartSnippetsConfiguration', () => {
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
                     `${SmartSnippetsConfiguration.modelUrl}/${modelConfig.modelId}`,
-                    modelConfig,
+                    modelConfig
                 );
             });
         });
@@ -93,6 +93,7 @@ describe('SmartSnippetsConfiguration', () => {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
                 filterConditions: [],
+                advancedQuery: '',
             };
             smartSnippetsConfig.contentFields(params);
 
@@ -107,6 +108,7 @@ describe('SmartSnippetsConfiguration', () => {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
                 filterConditions: [],
+                advancedQuery: '',
             };
             smartSnippetsConfig.documentTypes(params);
 
@@ -121,6 +123,7 @@ describe('SmartSnippetsConfiguration', () => {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
                 filterConditions: [],
+                advancedQuery: '',
             };
             smartSnippetsConfig.preview(params);
 
