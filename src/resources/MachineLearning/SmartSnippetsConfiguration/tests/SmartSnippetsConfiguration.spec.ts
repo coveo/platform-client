@@ -120,8 +120,8 @@ describe('SmartSnippetsConfiguration', () => {
     describe('preview', () => {
         it('should make a POST call to retrieve document group preview info from the Smart Snippets Configuration preview url', () => {
             const params: SmartSnippetsContentFieldsParams = {
-                documentType: 'test-type',
                 sources: ['source1', 'source2'],
+                documentType: 'test-type',
                 filterConditions: [],
                 advancedQuery: '',
             };
