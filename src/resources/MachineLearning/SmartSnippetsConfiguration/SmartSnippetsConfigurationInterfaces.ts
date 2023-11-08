@@ -50,6 +50,10 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsDocumentGroupPreview {
@@ -92,6 +96,10 @@ export interface SmartSnippetsContentFieldsParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsContentField {
@@ -121,6 +129,10 @@ export interface SmartSnippetsDocumentTypesParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsDocumentType {
