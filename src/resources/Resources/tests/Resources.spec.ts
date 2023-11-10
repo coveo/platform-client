@@ -25,7 +25,7 @@ describe('Resources', () => {
             expect(api.get).toHaveBeenCalledWith(`${Resources.baseUrl}/SOURCE`);
         });
 
-        it('should use the passed parameters as its query paramaters', () => {
+        it('should use the passed parameters as its query parameters', () => {
             resource.list(randomResourceType, {page: 1, perPage: 50});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Resources.baseUrl}/SOURCE?page=1&perPage=50`);
