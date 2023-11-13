@@ -18,7 +18,11 @@ describe('PQSConfiguration', () => {
 
     describe('createPQSModel', () => {
         it('should make a POST call to the specific PQSConfiguration url', () => {
-            const model: PQSConfigurationModel = {modelDisplayName: 'kiki soudane', catalogId: 'sekia'};
+            const model: PQSConfigurationModel = {
+                modelDisplayName: 'kiki soudane',
+                catalogId: 'sekia',
+                trackingIds: ['sport'],
+            };
             pqsConfig.createPQSModel(model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${PQSConfiguration.baseUrl}/model`, model);

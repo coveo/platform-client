@@ -21,6 +21,7 @@ describe('IAPRConfiguration', () => {
             const model: IAPRConfigurationModel = {
                 modelDisplayName: 'kiki soudane',
                 catalogId: 'catalog_mock',
+                trackingIds: ['sport'],
             };
             iaprConfig.create(model);
             expect(api.post).toHaveBeenCalledTimes(1);
