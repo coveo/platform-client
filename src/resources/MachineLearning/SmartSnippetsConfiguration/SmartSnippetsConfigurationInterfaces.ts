@@ -39,7 +39,7 @@ export interface SmartSnippetsConfigurationModel {
     documentTypes?: DocumentType[];
 }
 
-export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
+export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS' | 'NB_OF_DOCUMENTS_OVER_LIMIT';
 
 export interface SmartSnippetsDocumentGroupPreviewParams {
     /**
@@ -50,33 +50,51 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
+     *
+     * @Example @source==("Salesforce Notifier")
      */
     query: string;
     /**
-     * Status indicating whether there are enough candidates for learning.
+     * The total number of documents in the selected sources.
      */
-    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
+    numberOfDocuments: string;
     /**
-     * The total number of documents in all sources.
+     * The total number of documents in the selected sources.
      */
-    numberOfDocuments: number;
-    /**
-     * The number of documents that match the conditions.
-     */
-    numberOfDocumentsMatchingConditions: number;
-    /**
-     * The number of documents that match the conditions and have a permanent id.
-     */
-    numberOfDocumentsWithPermanentId: number;
+    numberOfDocumentsInSources: number;
     /**
      * The number of documents that are candidates for learning.
      */
     numberOfValidDocuments: number;
+    /**
+     * The number of documents in the selected sources that match the conditions.
+     */
+    numberOfDocumentsMatchingConditions: number;
+    /**
+     * The number of documents in the selected sources that match the conditions.
+     */
+    numberOfDocumentsInSourcesMatchingFilters: number;
+    /**
+     * The number of documents in the selected sources that match the conditions and have a permanentid.
+     */
+    numberOfDocumentsWithPermanentId: number;
+    /**
+     * The number of documents in the selected sources that match the conditions and have a permanentid
+     */
+    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
+    /**
+     * Status for the number of required documents to build the model.
+     */
+    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
 }
 
 export interface SmartSnippetsContentFieldsParams {
@@ -92,6 +110,10 @@ export interface SmartSnippetsContentFieldsParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsContentField {
@@ -121,6 +143,10 @@ export interface SmartSnippetsDocumentTypesParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
+    /**
+     * The query that determines the documents to extract
+     */
+    advancedQuery: string;
 }
 
 export interface SmartSnippetsDocumentType {
