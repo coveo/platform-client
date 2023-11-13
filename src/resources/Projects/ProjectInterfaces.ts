@@ -7,6 +7,7 @@ export enum ProjectSortBy {
     createdDate = 'CREATED_DATE',
     updatedBy = 'UPDATED_BY',
     updatedDate = 'UPDATED_DATE',
+    pointOfContact = 'POINT_OF_CONTACT',
 }
 
 export const projectResourceTypes = [
