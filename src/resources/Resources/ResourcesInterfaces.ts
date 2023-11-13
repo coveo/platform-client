@@ -1,6 +1,6 @@
 import {Paginated} from '../BaseInterfaces.js';
 
-export type ResourceStatus = 'existingResources' | 'deletedResources';
+export type ResourceStatus = 'existingResources' | 'noAccessResources' | 'deletedResources';
 
 export interface ResourceModel {
     /**
@@ -8,7 +8,7 @@ export interface ResourceModel {
      */
     id: string;
     /**
-     * The name of the resouce
+     * The name of the resource
      */
     name: string;
     /**
