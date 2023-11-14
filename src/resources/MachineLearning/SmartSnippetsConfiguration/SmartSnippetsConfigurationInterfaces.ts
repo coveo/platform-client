@@ -64,7 +64,7 @@ export interface SmartSnippetsDocumentGroupPreview {
      */
     query: string;
     /**
-     * The total number of documents in the selected sources.
+     * @Deprecated use `numberOfDocumentsInSources` instead
      */
     numberOfDocuments: number;
     /**
@@ -76,7 +76,7 @@ export interface SmartSnippetsDocumentGroupPreview {
      */
     numberOfValidDocuments: number;
     /**
-     * The number of documents in the selected sources that match the conditions.
+     * @Deprecated use `numberOfDocumentsInSourcesMatchingFilters` instead
      */
     numberOfDocumentsMatchingConditions: number;
     /**
@@ -84,7 +84,7 @@ export interface SmartSnippetsDocumentGroupPreview {
      */
     numberOfDocumentsInSourcesMatchingFilters: number;
     /**
-     * The number of documents in the selected sources that match the conditions and have a permanentid.
+     * @Deprecated use `numberOfDocumentsInSourcesMatchingFiltersWithPermanentId` instead
      */
     numberOfDocumentsWithPermanentId: number;
     /**
