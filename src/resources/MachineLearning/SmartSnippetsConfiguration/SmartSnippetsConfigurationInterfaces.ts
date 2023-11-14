@@ -66,7 +66,7 @@ export interface SmartSnippetsDocumentGroupPreview {
     /**
      * The total number of documents in the selected sources.
      */
-    numberOfDocuments: string;
+    numberOfDocuments: number;
     /**
      * The total number of documents in the selected sources.
      */
