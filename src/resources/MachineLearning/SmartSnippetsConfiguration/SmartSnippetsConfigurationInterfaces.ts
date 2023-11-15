@@ -39,7 +39,7 @@ export interface SmartSnippetsConfigurationModel {
     documentTypes?: DocumentType[];
 }
 
-export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS';
+export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS' | 'NB_OF_DOCUMENTS_OVER_LIMIT';
 
 export interface SmartSnippetsDocumentGroupPreviewParams {
     /**
@@ -59,28 +59,42 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
 export interface SmartSnippetsDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
+     *
+     * @Example @source==("Salesforce Notifier")
      */
     query: string;
     /**
-     * Status indicating whether there are enough candidates for learning.
-     */
-    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
-    /**
-     * The total number of documents in all sources.
+     * @Deprecated use `numberOfDocumentsInSources` instead
      */
     numberOfDocuments: number;
     /**
-     * The number of documents that match the conditions.
+     * The total number of documents in the selected sources.
      */
-    numberOfDocumentsMatchingConditions: number;
-    /**
-     * The number of documents that match the conditions and have a permanent id.
-     */
-    numberOfDocumentsWithPermanentId: number;
+    numberOfDocumentsInSources: number;
     /**
      * The number of documents that are candidates for learning.
      */
     numberOfValidDocuments: number;
+    /**
+     * @Deprecated use `numberOfDocumentsInSourcesMatchingFilters` instead
+     */
+    numberOfDocumentsMatchingConditions: number;
+    /**
+     * The number of documents in the selected sources that match the conditions.
+     */
+    numberOfDocumentsInSourcesMatchingFilters: number;
+    /**
+     * @Deprecated use `numberOfDocumentsInSourcesMatchingFiltersWithPermanentId` instead
+     */
+    numberOfDocumentsWithPermanentId: number;
+    /**
+     * The number of documents in the selected sources that match the conditions and have a permanentid
+     */
+    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
+    /**
+     * Status for the number of required documents to build the model.
+     */
+    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
 }
 
 export interface SmartSnippetsContentFieldsParams {
