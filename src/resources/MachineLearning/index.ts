@@ -8,5 +8,6 @@ export * from './DNEConfiguration/index.js';
 export * from './CaseClassificationConfiguration/index.js';
 export * from './SmartSnippetsConfiguration/index.js';
 export * from './PQSConfiguration/index.js';
+export * from './SESConfiguration/index.js';
 export * from './IAPRConfiguration/index.js';
 export * from './UserActionHistoryConfiguration/index.js';
