@@ -1,4 +1,4 @@
-import {GranularResource, Paginated} from '../BaseInterfaces.js';
+import { GranularResource, Paginated } from '../BaseInterfaces.js';
 import {
     FilterHostType,
     FilterLastOperationResultType,
@@ -10,10 +10,11 @@ import {
     SourceSecurityOption,
     SourceType,
     SourceVisibility,
+    StringFilterType,
 } from '../Enums.js';
-import {SecurityProvider, SecurityProviderModel} from '../SecurityCache/SecurityCacheInterfaces.js';
+import { SecurityProvider, SecurityProviderModel } from '../SecurityCache/SecurityCacheInterfaces.js';
+import { MappingModel } from './SourcesMappings/index.js';
 import * as SourcesSubInterface from './SourcesSubInterfaces/index.js';
-import {MappingModel} from './SourcesMappings/index.js';
 
 export * from './SourcesSubInterfaces/index.js';
 
@@ -33,6 +34,7 @@ export interface ListSourcesParams extends ListParams {
     filterLastOperationResultType?: FilterLastOperationResultType;
     filterLastOperationType?: FilterLastOperationType;
     filterStatusType?: FilterStatusType;
+    stringFilterType?: StringFilterType;
 }
 
 export interface ExtendedConfig {
