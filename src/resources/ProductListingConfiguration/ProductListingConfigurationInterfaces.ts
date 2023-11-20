@@ -1,5 +1,5 @@
-import { DeprecatedPaginated } from "../InternalBaseInterface.js";
-import { FacetRequestOptions, FieldOperatorType, FieldValueType, RestFacetRequest } from "../index.js";
+import {DeprecatedPaginated} from '../InternalBaseInterface.js';
+import {FacetRequestOptions, FieldOperatorType, FieldValueType, RestFacetRequest} from '../index.js';
 
 export const isRankingTypeEnum = (value: unknown): value is RankingTypeEnum =>
     value === RankingTypeEnum.BOOST || value === RankingTypeEnum.BURY;

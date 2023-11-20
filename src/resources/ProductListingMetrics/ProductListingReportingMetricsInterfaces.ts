@@ -1,4 +1,4 @@
-import { ProductListingMetricsModel } from "./ProductListingMetricsInterfaces.js";
+import {ProductListingMetricsModel} from './ProductListingMetricsInterfaces.js';
 
 export interface ProductListingReportingMetricsModel extends ProductListingMetricsModel {
     revenue: number;

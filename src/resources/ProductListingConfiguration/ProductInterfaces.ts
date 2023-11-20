@@ -1,6 +1,5 @@
-import { Paginated } from "../BaseInterfaces.js";
-import { MatchingConfigurationModel, RulesModel, RankingTypeEnum } from "./ProductListingConfigurationInterfaces.js";
-
+import {Paginated} from '../BaseInterfaces.js';
+import {MatchingConfigurationModel, RulesModel, RankingTypeEnum} from './ProductListingConfigurationInterfaces.js';
 
 export interface ListingPreviewRequestModel {
     /**
