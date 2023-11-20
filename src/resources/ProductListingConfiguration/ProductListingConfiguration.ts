@@ -1,14 +1,14 @@
-import API from "../../APICore.js";
-import { PageModel, New } from "../BaseInterfaces.js";
-import Resource from "../Resource.js";
-import { ListingConfigurationModel, ProductListingsListOptions } from "./ProductListingConfigurationInterfaces.js";
+import API from '../../APICore.js';
+import {PageModel, New} from '../BaseInterfaces.js';
+import Resource from '../Resource.js';
+import {ListingConfigurationModel, ProductListingsListOptions} from './ProductListingConfigurationInterfaces.js';
 
-export class ProductListingConfiguration extends Resource {
+export default class ProductListingConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/commerce/v2/configurations/listings`;
 
     list(options?: ProductListingsListOptions) {
         return this.api.get<PageModel<ListingConfigurationModel>>(
-            this.buildPath(ProductListingConfiguration.baseUrl, options)
+            this.buildPath(ProductListingConfiguration.baseUrl, options),
         );
     }
 
@@ -27,7 +27,7 @@ export class ProductListingConfiguration extends Resource {
     update(configurationId: string, model: ListingConfigurationModel) {
         return this.api.put<ListingConfigurationModel>(
             `${ProductListingConfiguration.baseUrl}/${configurationId}`,
-            model
+            model,
         );
     }
 

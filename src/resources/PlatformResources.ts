@@ -29,9 +29,10 @@ import Notifications from './Notification/notification.js';
 import Organization from './Organizations/Organization.js';
 import Pipelines from './Pipelines/Pipelines.js';
 import PrivilegeEvaluator from './PrivilegeEvaluator/PrivilegeEvaluator.js';
-import ProductListing from './Catalogs/ProductListing.js';
-import ProductListingConfiguration from './Catalogs/ProductListingConfiguration.js';
 import Products from './Products/Product.js';
+import ProductListingConfiguration from './ProductListingConfiguration/ProductListingConfiguration.js';
+import ProductListingMetrics from './ProductListingMetrics/ProductListingMetrics.js';
+import ProductListingReportingMetrics from './ProductListingMetrics/ProductListingReportingMetrics.js';
 import PushApi from './PushApi/PushApi.js';
 import Resource from './Resource.js';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots.js';
@@ -84,8 +85,9 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'organizationAccess', resource: Access},
     {key: 'pipeline', resource: Pipelines},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
-    {key: 'productListing', resource: ProductListing},
     {key: 'productListingConfiguration', resource: ProductListingConfiguration},
+    {key: 'ProductListingReportingMetrics', resource: ProductListingReportingMetrics},
+    {key: 'ProductListingReportingMetrics', resource: ProductListingMetrics},
     {key: 'products', resource: Products},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
@@ -143,8 +145,9 @@ class PlatformResources {
     organizationAccess: Access;
     pipeline: Pipelines;
     privilegeEvaluator: PrivilegeEvaluator;
-    productListing: ProductListing;
     productListingConfiguration: ProductListingConfiguration;
+    productListingReportingMetrics: ProductListingReportingMetrics;
+    productListingMetrics: ProductListingMetrics;
     products: Products;
     pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;
