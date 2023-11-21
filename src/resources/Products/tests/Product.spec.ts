@@ -2,7 +2,7 @@ import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
 import {ProductsSortByType, ProductsFacetRequestSortType, SortingOrder} from '../../Enums.js';
 import Products from '../Product.js';
-import {ProductsRequestModel} from '../ProductInterfaces.js';
+import {ListingPreviewRequestModel, ProductsRequestModel} from '../ProductInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -71,13 +71,42 @@ describe('Product', () => {
     });
 
     describe('getProducts while force refreshing the product listings cache', () => {
-        it('should make a POST call to to retrieve filtered products', () => {
+        it('should make a POST call to retrieve filtered products', () => {
             const query: New<ProductsRequestModel> = {
                 url: 'https://fashion.coveodemo.com/browse/men/hats',
             };
             products.get(query, true);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing?refreshCache=true`, query);
+        });
+    });
+
+    describe('preview', () => {
+        it('should make a POST call to retrieve listing page preview', () => {
+            const listingPreviewRequestModel: ListingPreviewRequestModel = {
+                matching: {
+                    url: 'https://sports-dev.barca.group/browse/promotions/accessories/towels',
+                },
+                rules: {
+                    id: '',
+                    listingConfigurationId: '',
+                    rankingRules: [],
+                    filterRules: [],
+                    pinRules: [],
+                },
+                pagination: {
+                    page: 0,
+                    perPage: 10,
+                },
+            };
+
+            const trackingId = 'tracking-id';
+            products.preview(trackingId, listingPreviewRequestModel);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${Products.baseUrl}/trackings/${trackingId}/commerce/v2/preview`,
+                listingPreviewRequestModel,
+            );
         });
     });
 });

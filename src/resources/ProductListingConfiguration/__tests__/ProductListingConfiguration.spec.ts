@@ -1,8 +1,8 @@
 import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
-import {FieldOperatorType, FieldValueType} from '../../Enums.js';
+import {FieldOperatorType, FieldValueType, FilterTypeEnum} from '../../Enums.js';
 import ProductListingConfiguration from '../ProductListingConfiguration.js';
-import {FilterTypeEnum, ListingConfigurationModel} from '../ProductListingConfigurationInterfaces.js';
+import {ListingConfigurationModel} from '../ProductListingConfigurationInterfaces.js';
 
 jest.mock('../../../APICore.js');
 

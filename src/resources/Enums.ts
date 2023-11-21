@@ -1155,3 +1155,13 @@ export enum ProductsSortByType {
     fields = 'fields',
     relevance = 'relevance',
 }
+
+export enum RankingTypeEnum {
+    BOOST = 'boost',
+    BURY = 'bury',
+}
+
+export enum FilterTypeEnum {
+    INCLUDE = 'include',
+    EXCLUDE = 'exclude',
+}

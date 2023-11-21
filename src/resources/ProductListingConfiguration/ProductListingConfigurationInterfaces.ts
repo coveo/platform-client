@@ -1,21 +1,18 @@
 import {DeprecatedPaginated} from '../InternalBaseInterface.js';
-import {FacetRequestOptions, FieldOperatorType, FieldValueType, RestFacetRequest} from '../index.js';
+import {
+    FacetRequestOptions,
+    FieldOperatorType,
+    FieldValueType,
+    FilterTypeEnum,
+    RankingTypeEnum,
+    RestFacetRequest,
+} from '../index.js';
 
 export const isRankingTypeEnum = (value: unknown): value is RankingTypeEnum =>
     value === RankingTypeEnum.BOOST || value === RankingTypeEnum.BURY;
 
-export enum RankingTypeEnum {
-    BOOST = 'boost',
-    BURY = 'bury',
-}
-
 export const isFilterTypeEnum = (value: unknown): value is FilterTypeEnum =>
     value === FilterTypeEnum.INCLUDE || value === FilterTypeEnum.EXCLUDE;
-
-export enum FilterTypeEnum {
-    INCLUDE = 'include',
-    EXCLUDE = 'exclude',
-}
 
 export enum SortOrderEnum {
     ASC = 'ASC',

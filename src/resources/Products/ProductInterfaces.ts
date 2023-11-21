@@ -1,4 +1,9 @@
-import {ProductsFacetRequestSortType, ProductsSortByType, SortingOrder} from '../Enums.js';
+import {Paginated} from '../BaseInterfaces.js';
+import {ProductsFacetRequestSortType, ProductsSortByType, RankingTypeEnum, SortingOrder} from '../Enums.js';
+import {
+    MatchingConfigurationModel,
+    RulesModel,
+} from '../ProductListingConfiguration/ProductListingConfigurationInterfaces.js';
 
 export interface AdvancedFiltersModel {
     queryFilter: string;
@@ -221,4 +226,55 @@ export interface ProductsResultModel {
      * The response unique id.
      */
     responseId: string;
+}
+
+export interface PreviewProductModel extends ProductModel {
+    positionDifference: number;
+    score: number;
+    scoreDifference: number;
+    scoreDetails: ScoreDetailsModel;
+}
+
+export interface ScoreDetailsModel {
+    advancedRelevanceModelScore: number;
+    rankingRules: RankingRuleModel[];
+}
+
+export interface RankingRuleModel {
+    expression: string;
+    score: number;
+    type: RankingTypeEnum;
+}
+
+export interface PreviewResultModel {
+    /**
+     * The subset of products returned by the query.
+     */
+    products: PreviewProductModel[];
+    /**
+     * The number of total elements returned.
+     */
+    pagination: PaginationResultModel;
+}
+
+export interface ListingPreviewRequestModel {
+    /**
+     * Possible pattern matching values associated to a listing configuration.
+     */
+    matching: MatchingConfigurationModel;
+    /**
+     * Listing rules to apply at query time.
+     */
+    rules: RulesModel;
+    /**
+     * Contextual pagination information about the query.
+     */
+    pagination: Paginated;
+    /**
+     * Temporary way to specify catalog; overrides trackingId. TODO: use trackingId.
+     */
+    catalog?: {
+        id: string;
+        sourceName: string;
+    };
 }
