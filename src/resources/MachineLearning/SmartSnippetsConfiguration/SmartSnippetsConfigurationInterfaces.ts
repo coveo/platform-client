@@ -1,4 +1,4 @@
-import {DocumentRequirementStatus} from '../Document.js';
+import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
 
 export interface DocumentType {

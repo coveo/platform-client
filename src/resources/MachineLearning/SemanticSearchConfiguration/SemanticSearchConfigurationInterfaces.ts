@@ -1,24 +1,24 @@
-import {DocumentRequirementStatus} from '../Document.js';
+import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
 
-export interface SESDocumentGroupPreviewParams {
+export interface SemanticSearchDocumentGroupPreviewParams {
     /**
      * The names of the sources containing the items that the model should use to extract chunks.
      */
-    sources: string[];
+    sources?: string[];
     /**
      * The custom filter conditions to target specific documents.
      */
-    filterConditions: FilterConditions[];
+    filterConditions?: FilterConditions[];
     /**
      * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
      *
      * @Example @source==("My source") AND @permanentid AND @language="English";
      */
-    advancedQuery: string;
+    advancedQuery?: string;
 }
 
-export interface SESDocumentGroupPreview {
+export interface SemanticSearchDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
      *
