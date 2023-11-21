@@ -47,6 +47,8 @@ export interface SemanticSearchDocumentGroupPreview {
     documentLimit: number;
     /**
      * Status for the number of required documents to build the model.
+     *
+     * @Example OK
      */
     documentRequirementStatus: DocumentRequirementStatus;
 }
