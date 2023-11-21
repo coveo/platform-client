@@ -1,6 +1,7 @@
 export * from './MachineLearning.js';
 export * from './MachineLearningInterfaces.js';
 export * from './FilterConditions.js';
+export * from './Document.js';
 export * from './Models/index.js';
 export * from './ModelInformation/index.js';
 export * from './ModelListing/index.js';
