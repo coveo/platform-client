@@ -10,7 +10,6 @@ import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/Use
 import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 import ModelListing from './ModelListing/ModelListing.js';
 import RGAConfiguration from './RGAConfiguration/RGAConfiguration.js';
-import SESConfiguration from './SESConfiguration/SESConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -24,7 +23,6 @@ export default class MachineLearning extends Resource {
     iaprConfig: IAPRConfiguration;
     modelListing: ModelListing;
     rgaConfig: RGAConfiguration;
-    sesConfig: SESConfiguration;
 
     constructor(
         protected api: API,
@@ -41,7 +39,6 @@ export default class MachineLearning extends Resource {
         this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
         this.modelListing = new ModelListing(api, serverlessApi);
         this.rgaConfig = new RGAConfiguration(api, serverlessApi);
-        this.sesConfig = new SESConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

@@ -10,3 +10,4 @@ export * from './SmartSnippetsConfiguration/index.js';
 export * from './PQSConfiguration/index.js';
 export * from './IAPRConfiguration/index.js';
 export * from './UserActionHistoryConfiguration/index.js';
+export * from './RGAConfiguration/index.js';

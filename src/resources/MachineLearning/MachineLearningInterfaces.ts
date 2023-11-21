@@ -123,5 +123,3 @@ export interface MLModelCreated extends New<MLModel> {
     startTime?: number;
     resourceId?: string;
 }
-
-export type DocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS' | 'NB_OF_DOCUMENTS_OVER_LIMIT';

@@ -93,6 +93,8 @@ export interface SmartSnippetsDocumentGroupPreview {
     numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
     /**
      * Status for the number of required documents to build the model.
+     *
+     * @Example OK
      */
     documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
 }
