@@ -1,3 +1,4 @@
+import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
 
 export interface DocumentType {
@@ -38,8 +39,6 @@ export interface SmartSnippetsConfigurationModel {
      */
     documentTypes?: DocumentType[];
 }
-
-export type SmartSnippetsDocumentRequirementStatus = 'OK' | 'INSUFFICIENT_DOCUMENTS' | 'NB_OF_DOCUMENTS_OVER_LIMIT';
 
 export interface SmartSnippetsDocumentGroupPreviewParams {
     /**
@@ -94,7 +93,7 @@ export interface SmartSnippetsDocumentGroupPreview {
     /**
      * Status for the number of required documents to build the model.
      */
-    documentRequirementStatus: SmartSnippetsDocumentRequirementStatus;
+    documentRequirementStatus: DocumentRequirementStatus;
 }
 
 export interface SmartSnippetsContentFieldsParams {
