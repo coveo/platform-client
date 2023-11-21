@@ -9,6 +9,8 @@ import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
 import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
 import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 import ModelListing from './ModelListing/ModelListing.js';
+import RGAConfiguration from './RGAConfiguration/RGAConfiguration.js';
+import SESConfiguration from './SESConfiguration/SESConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -21,8 +23,13 @@ export default class MachineLearning extends Resource {
     pqsConfig: PQSConfiguration;
     iaprConfig: IAPRConfiguration;
     modelListing: ModelListing;
+    rgaConfig: RGAConfiguration;
+    sesConfig: SESConfiguration;
 
-    constructor(protected api: API, protected serverlessApi: API) {
+    constructor(
+        protected api: API,
+        protected serverlessApi: API,
+    ) {
         super(api, serverlessApi);
 
         this.models = new Models(api, serverlessApi);
@@ -33,6 +40,8 @@ export default class MachineLearning extends Resource {
         this.iaprConfig = new IAPRConfiguration(api, serverlessApi);
         this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
         this.modelListing = new ModelListing(api, serverlessApi);
+        this.rgaConfig = new RGAConfiguration(api, serverlessApi);
+        this.sesConfig = new SESConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {
