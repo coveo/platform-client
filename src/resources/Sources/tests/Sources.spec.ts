@@ -52,7 +52,9 @@ describe('Sources', () => {
             } as ListSourcesParams;
             source.list(params);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/pages`, params);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/pages`, {
+                stringFilterType: 'EXACTMATCH',
+            });
         });
     });
 
