@@ -231,11 +231,6 @@ export enum FilterStatusType {
     ERROR = 'ERROR',
 }
 
-export enum StringFilterType {
-    WILDCARD = 'WILDCARD',
-    EXACTMATCH = 'EXACTMATCH'
-}
-
 export enum UpdateStatusCategory {
     MINOR = 'MINOR',
     CRITICAL = 'CRITICAL',

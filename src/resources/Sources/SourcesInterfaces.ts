@@ -9,8 +9,7 @@ import {
     SourceOperationalStatus,
     SourceSecurityOption,
     SourceType,
-    SourceVisibility,
-    StringFilterType,
+    SourceVisibility
 } from '../Enums.js';
 import { SecurityProvider, SecurityProviderModel } from '../SecurityCache/SecurityCacheInterfaces.js';
 import { MappingModel } from './SourcesMappings/index.js';
@@ -34,7 +33,7 @@ export interface ListSourcesParams extends ListParams {
     filterLastOperationResultType?: FilterLastOperationResultType;
     filterLastOperationType?: FilterLastOperationType;
     filterStatusType?: FilterStatusType;
-    stringFilterType?: StringFilterType;
+    stringFilterType?: "WILDCARD" | "EXACTMATCH";
 }
 
 export interface ExtendedConfig {
