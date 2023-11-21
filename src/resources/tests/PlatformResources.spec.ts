@@ -30,8 +30,10 @@ import Logs from '../Logs/Logs.js';
 import Connectivity from '../Connectivity/Connectivity.js';
 import SearchInterfaces from '../SearchInterfaces/SearchInterfaces.js';
 import InProductExperiences from '../InProductExperiences/InProductExperiences.js';
-import ProductListing from '../Catalogs/ProductListing.js';
 import HostedPages from '../HostedPages/HostedPages.js';
+import ProductListingConfiguration from '../ProductListingConfiguration/ProductListingConfiguration.js';
+import ProductListingMetrics from '../ProductListingMetrics/ProductListingMetrics.js';
+import ProductListingReportingMetrics from '../ProductListingMetrics/ProductListingReportingMetrics.js';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -71,10 +73,23 @@ describe('PlatformResources', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 
-            expect(platformResources.productListing).toBeDefined();
-            expect(platformResources.productListing).toBeInstanceOf(ProductListing);
+            expect(platformResources.productListingMetrics).toBeDefined();
+            expect(platformResources.productListingMetrics).toBeInstanceOf(ProductListingMetrics);
         });
+        it('should register the productListingConfiguration resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
 
+            expect(platformResources.productListingConfiguration).toBeDefined();
+            expect(platformResources.productListingConfiguration).toBeInstanceOf(ProductListingConfiguration);
+        });
+        it('should register the productListingReportingMetrics resource on the platform instance', () => {
+            const platformResources = new PlatformResources();
+            platformResources.registerAll();
+
+            expect(platformResources.productListingReportingMetrics).toBeDefined();
+            expect(platformResources.productListingReportingMetrics).toBeInstanceOf(ProductListingReportingMetrics);
+        });
         it('should register the cluster resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
