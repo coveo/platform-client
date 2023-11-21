@@ -69,7 +69,7 @@ describe('PlatformResources', () => {
             expect(platformResources.catalogConfiguration).toBeInstanceOf(CatalogConfiguration);
         });
 
-        it('should register the productListing resource on the platform instance', () => {
+        it('should register the productListingMetrics resource on the platform instance', () => {
             const platformResources = new PlatformResources();
             platformResources.registerAll();
 

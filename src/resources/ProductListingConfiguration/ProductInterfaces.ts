@@ -92,5 +92,3 @@ export interface PreviewResultModel {
      */
     pagination: PaginationResultModel;
 }
-
-export type PinnableProduct = Pick<PreviewProductModel, 'permanentid' | 'ec_name' | 'ec_images'>;

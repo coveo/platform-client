@@ -27,8 +27,8 @@ export enum SortPropertyEnum {
 }
 
 export enum RuleVariantEnum {
-    BASELINE = 'BASELINE',
-    CAMPAIGN = 'CAMPAIGN',
+    BASELINE = 'baseline',
+    CAMPAIGN = 'campaign',
 }
 
 export type ProductListingsListOptions = DeprecatedPaginated;

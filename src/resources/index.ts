@@ -33,6 +33,8 @@ export * from './OrganizationAccess/index.js';
 export * from './Pipelines/index.js';
 export * from './PlatformResources.js';
 export * from './PrivilegeEvaluator/index.js';
+export * from './ProductListingConfiguration/index.js';
+export * from './ProductListingMetrics/index.js';
 export * from './Products/index.js';
 export * from './PushApi/index.js';
 export * from './ResourceSnapshots/index.js';
