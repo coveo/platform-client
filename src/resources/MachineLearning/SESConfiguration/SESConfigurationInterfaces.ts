@@ -3,15 +3,17 @@ import {FilterConditions} from '../FilterConditions.js';
 
 export interface SESDocumentGroupPreviewParams {
     /**
-     * The sources to consider.
+     * The names of the sources containing the items that the model should use to extract chunks.
      */
     sources: string[];
     /**
-     * An array of filtering conditions.
+     * The custom filter conditions to target specific documents.
      */
     filterConditions: FilterConditions[];
     /**
-     * The query that determines the documents to extract
+     * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
+     *
+     * @Example @source==("My source") AND @permanentid AND @language="English";
      */
     advancedQuery: string;
 }
@@ -36,11 +38,11 @@ export interface SESDocumentGroupPreview {
      */
     numberOfDocumentsInSourcesMatchingFilters: number;
     /**
-     * The number of documents in the selected sources that match the conditions and have a permanentid
+     * The number of documents in the selected sources that match the conditions and have a `permanentid`.
      */
     numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
     /**
-     * The limit of documents that are candidates for learning.
+     * The maximum number of documents allowed to learn from.
      */
     documentLimit: number;
     /**
