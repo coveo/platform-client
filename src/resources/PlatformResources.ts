@@ -87,7 +87,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
     {key: 'productListingConfiguration', resource: ProductListingConfiguration},
     {key: 'ProductListingReportingMetrics', resource: ProductListingReportingMetrics},
-    {key: 'ProductListingReportingMetrics', resource: ProductListingMetrics},
+    {key: 'ProductListingMetrics', resource: ProductListingMetrics},
     {key: 'products', resource: Products},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
