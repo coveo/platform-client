@@ -1,22 +1,32 @@
 import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
 
-export interface SemanticSearchDocumentGroupPreviewParams {
-    /**
-     * The names of the sources containing the items that the model should use to extract chunks.
-     */
-    sources?: string[];
-    /**
-     * The custom filter conditions to target specific documents.
-     */
-    filterConditions?: FilterConditions[];
+export interface SemanticSearchPreviewParamsAdvanced {
+    sources?: never;
+    filterConditions?: never;
     /**
      * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
      *
      * @Example @source==("My source") AND @permanentid AND @language="English";
      */
-    advancedQuery?: string;
+    advancedQuery: string;
 }
+
+export interface SemanticSearchPreviewParamsSources {
+    /**
+     * The sources to consider.
+     */
+    sources: string[];
+    /**
+     * An array of filtering conditions.
+     */
+    filterConditions: FilterConditions[];
+    advancedQuery?: never;
+}
+
+export type SemanticSearchDocumentGroupPreviewParams =
+    | SemanticSearchPreviewParamsSources
+    | SemanticSearchPreviewParamsAdvanced;
 
 export interface SemanticSearchDocumentGroupPreview {
     /**
