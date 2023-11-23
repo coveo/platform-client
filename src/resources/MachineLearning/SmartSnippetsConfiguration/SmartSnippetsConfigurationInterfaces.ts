@@ -40,7 +40,18 @@ export interface SmartSnippetsConfigurationModel {
     documentTypes?: DocumentType[];
 }
 
-export interface SmartSnippetsDocumentGroupPreviewParams {
+export interface SmartSnippetsPreviewParamsAdvanced {
+    sources?: never;
+    filterConditions?: never;
+    /**
+     * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
+     *
+     * @Example @source==("My source") AND @permanentid AND @language="English";
+     */
+    advancedQuery: string;
+}
+
+export interface SmartSnippetsPreviewParamsSources {
     /**
      * The sources to consider.
      */
@@ -49,11 +60,12 @@ export interface SmartSnippetsDocumentGroupPreviewParams {
      * An array of filtering conditions.
      */
     filterConditions: FilterConditions[];
-    /**
-     * The query that determines the documents to extract
-     */
-    advancedQuery: string;
+    advancedQuery?: never;
 }
+
+export type SmartSnippetsDocumentGroupPreviewParams =
+    | SmartSnippetsPreviewParamsSources
+    | SmartSnippetsPreviewParamsAdvanced;
 
 export interface SmartSnippetsDocumentGroupPreview {
     /**
