@@ -1,7 +1,7 @@
-import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
+import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 
-export interface SemanticSearchPreviewParamsAdvanced {
+export interface RelevanceGenerativeAnsweringPreviewParamsAdvanced {
     sources?: never;
     filterConditions?: never;
     /**
@@ -12,7 +12,7 @@ export interface SemanticSearchPreviewParamsAdvanced {
     advancedQuery: string;
 }
 
-export interface SemanticSearchPreviewParamsSources {
+export interface RelevanceGenerativeAnsweringPreviewParamsSources {
     /**
      * The sources to consider.
      */
@@ -24,11 +24,11 @@ export interface SemanticSearchPreviewParamsSources {
     advancedQuery?: never;
 }
 
-export type SemanticSearchDocumentGroupPreviewParams =
-    | SemanticSearchPreviewParamsSources
-    | SemanticSearchPreviewParamsAdvanced;
+export type RelevanceGenerativeAnsweringPreviewParams =
+    | RelevanceGenerativeAnsweringPreviewParamsSources
+    | RelevanceGenerativeAnsweringPreviewParamsAdvanced;
 
-export interface SemanticSearchDocumentGroupPreview {
+export interface RelevanceGenerativeAnsweringDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
      *
@@ -48,7 +48,7 @@ export interface SemanticSearchDocumentGroupPreview {
      */
     numberOfDocumentsInSourcesMatchingFilters: number;
     /**
-     * The number of documents in the selected sources that match the conditions and have a `permanentid`.
+     * The number of documents in the selected sources that match the conditions and have a `permanentid`
      */
     numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
     /**

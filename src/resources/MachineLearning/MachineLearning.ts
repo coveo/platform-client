@@ -9,6 +9,7 @@ import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
 import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
 import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 import ModelListing from './ModelListing/ModelListing.js';
+import RelevanceGenerativeAnsweringConfiguration from './RGAConfiguration/RelevanceGenerativeAnsweringConfiguration.js';
 import SemanticSearchConfiguration from './SemanticSearchConfiguration/SemanticSearchConfiguration.js';
 
 export default class MachineLearning extends Resource {
@@ -22,6 +23,7 @@ export default class MachineLearning extends Resource {
     pqsConfig: PQSConfiguration;
     iaprConfig: IAPRConfiguration;
     modelListing: ModelListing;
+    relevanceGenerativeAnsweringConfig: RelevanceGenerativeAnsweringConfiguration;
     semanticSearchConfig: SemanticSearchConfiguration;
 
     constructor(
@@ -38,6 +40,7 @@ export default class MachineLearning extends Resource {
         this.iaprConfig = new IAPRConfiguration(api, serverlessApi);
         this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
         this.modelListing = new ModelListing(api, serverlessApi);
+        this.relevanceGenerativeAnsweringConfig = new RelevanceGenerativeAnsweringConfiguration(api, serverlessApi);
         this.semanticSearchConfig = new SemanticSearchConfiguration(api, serverlessApi);
     }
 
