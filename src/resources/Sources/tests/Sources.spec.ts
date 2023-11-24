@@ -4,7 +4,7 @@ import {ActivityOperation} from '../../Enums.js';
 import {ScheduleModel} from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
 import SourcesFields from '../SourcesFields/SourcesFields.js';
-import {CreateSourceModel, RawSourceConfig} from '../SourcesInterfaces.js';
+import {CreateSourceModel, ListSourcesParams, RawSourceConfig} from '../SourcesInterfaces.js';
 import SourcesMappings from '../SourcesMappings/SourcesMappings.js';
 
 jest.mock('../../../APICore.js');
@@ -44,6 +44,15 @@ describe('Sources', () => {
             source.listOperationalStatus();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/sourceoperationalstatus`);
+        });
+
+        it('should make a GET call with the correct stringFilterType', () => {
+            const params = {
+                stringFilterType: 'EXACTMATCH',
+            } as ListSourcesParams;
+            source.list(params);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/pages?stringFilterType=EXACTMATCH`);
         });
     });
 
