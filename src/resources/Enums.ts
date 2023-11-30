@@ -912,7 +912,7 @@ export enum ModelTypes {
     UserActionHistory = 'useractionhistory',
     IntentAwareProductRanking = 'intentranking',
     RelevanceGenerativeAnswering = 'genqa',
-    SemanticSearch = 'embeddings',
+    SemanticEncoder = 'embeddings',
 }
 
 export enum LicenseSection {

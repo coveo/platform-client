@@ -10,7 +10,7 @@ import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/Use
 import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 import ModelListing from './ModelListing/ModelListing.js';
 import RelevanceGenerativeAnsweringConfiguration from './RGAConfiguration/RelevanceGenerativeAnsweringConfiguration.js';
-import SemanticSearchConfiguration from './SemanticSearchConfiguration/SemanticSearchConfiguration.js';
+import SemanticEncoderConfiguration from './SemanticEncoderConfiguration/SemanticEncoderConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -24,7 +24,7 @@ export default class MachineLearning extends Resource {
     iaprConfig: IAPRConfiguration;
     modelListing: ModelListing;
     relevanceGenerativeAnsweringConfig: RelevanceGenerativeAnsweringConfiguration;
-    semanticSearchConfig: SemanticSearchConfiguration;
+    semanticEncoderConfig: SemanticEncoderConfiguration;
 
     constructor(
         protected api: API,
@@ -41,7 +41,7 @@ export default class MachineLearning extends Resource {
         this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
         this.modelListing = new ModelListing(api, serverlessApi);
         this.relevanceGenerativeAnsweringConfig = new RelevanceGenerativeAnsweringConfiguration(api, serverlessApi);
-        this.semanticSearchConfig = new SemanticSearchConfiguration(api, serverlessApi);
+        this.semanticEncoderConfig = new SemanticEncoderConfiguration(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {

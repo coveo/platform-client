@@ -1,7 +1,7 @@
 import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 import {FilterConditions} from '../FilterConditions.js';
 
-export interface SemanticSearchPreviewParamsAdvanced {
+export interface SemanticEncoderPreviewParamsAdvanced {
     sources?: never;
     filterConditions?: never;
     /**
@@ -12,7 +12,7 @@ export interface SemanticSearchPreviewParamsAdvanced {
     advancedQuery: string;
 }
 
-export interface SemanticSearchPreviewParamsSources {
+export interface SemanticEncoderPreviewParamsSources {
     /**
      * The sources to consider.
      */
@@ -24,11 +24,11 @@ export interface SemanticSearchPreviewParamsSources {
     advancedQuery?: never;
 }
 
-export type SemanticSearchDocumentGroupPreviewParams =
-    | SemanticSearchPreviewParamsSources
-    | SemanticSearchPreviewParamsAdvanced;
+export type SemanticEncoderDocumentGroupPreviewParams =
+    | SemanticEncoderPreviewParamsSources
+    | SemanticEncoderPreviewParamsAdvanced;
 
-export interface SemanticSearchDocumentGroupPreview {
+export interface SemanticEncoderDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
      *
@@ -38,7 +38,7 @@ export interface SemanticSearchDocumentGroupPreview {
     /**
      * The total number of documents in the selected sources.
      */
-    numberOfDocumentsInSources: number;
+    numberOfDocumentsInSources?: number;
     /**
      * The number of documents that are candidates for learning.
      */
@@ -46,11 +46,11 @@ export interface SemanticSearchDocumentGroupPreview {
     /**
      * The number of documents in the selected sources that match the conditions.
      */
-    numberOfDocumentsInSourcesMatchingFilters: number;
+    numberOfDocumentsInSourcesMatchingFilters?: number;
     /**
      * The number of documents in the selected sources that match the conditions and have a `permanentid`.
      */
-    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
+    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId?: number;
     /**
      * The maximum number of documents allowed to learn from.
      */
