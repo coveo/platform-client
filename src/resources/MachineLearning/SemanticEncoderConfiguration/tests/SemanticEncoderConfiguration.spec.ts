@@ -1,6 +1,6 @@
 import API from '../../../../APICore.js';
+import {DocumentGroupPreviewParams} from '../../DocumentInterfaces.js';
 import SemanticEncoderConfiguration from '../SemanticEncoderConfiguration.js';
-import {SemanticEncoderDocumentGroupPreviewParams} from '../SemanticEncoderConfigurationInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
@@ -18,7 +18,7 @@ describe('SemanticEncoderConfiguration', () => {
 
     describe('preview', () => {
         it('should make a POST call with sources to retrieve SE preview', () => {
-            const params: SemanticEncoderDocumentGroupPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 sources: ['source1', 'source2'],
                 filterConditions: [],
             };
@@ -29,7 +29,7 @@ describe('SemanticEncoderConfiguration', () => {
         });
 
         it('should make a POST call with advanced query to retrieve SE preview', () => {
-            const params: SemanticEncoderDocumentGroupPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 advancedQuery: 'some advanced query @ test',
             };
             semConfig.preview(params);

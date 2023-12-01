@@ -1,9 +1,9 @@
 import API from '../../../../APICore.js';
+import {DocumentGroupPreviewParams} from '../../DocumentInterfaces.js';
 import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration.js';
 import {
     SmartSnippetsConfigurationModel,
     SmartSnippetsContentFieldsParams,
-    SmartSnippetsDocumentGroupPreviewParams,
 } from '../SmartSnippetsConfigurationInterfaces.js';
 
 jest.mock('../../../../APICore.js');
@@ -120,7 +120,7 @@ describe('SmartSnippetsConfiguration', () => {
 
     describe('preview', () => {
         it('should make a POST call with sources to retrieve Smart Snippets Configuration preview', () => {
-            const params: SmartSnippetsDocumentGroupPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 sources: ['source1', 'source2'],
                 filterConditions: [],
             };
@@ -131,7 +131,7 @@ describe('SmartSnippetsConfiguration', () => {
         });
 
         it('should make a POST call with advanced query to retrieve Smart Snippets Configuration preview', () => {
-            const params: SmartSnippetsDocumentGroupPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 advancedQuery: 'some advanced query @ test',
             };
             smartSnippetsConfig.preview(params);

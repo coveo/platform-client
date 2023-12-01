@@ -1,6 +1,6 @@
 import API from '../../../../APICore.js';
+import {DocumentGroupPreviewParams} from '../../DocumentInterfaces.js';
 import RelevanceGenerativeAnsweringConfiguration from '../RelevanceGenerativeAnsweringConfiguration.js';
-import {RelevanceGenerativeAnsweringPreviewParams} from '../RelevanceGenerativeAnsweringConfigurationInterface.js';
 
 jest.mock('../../../../APICore.js');
 
@@ -18,7 +18,7 @@ describe('RGAConfiguration', () => {
 
     describe('preview', () => {
         it('should make a POST call with sources to retrieve RGA preview', () => {
-            const params: RelevanceGenerativeAnsweringPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 sources: ['source1', 'source2'],
                 filterConditions: [],
             };
@@ -29,7 +29,7 @@ describe('RGAConfiguration', () => {
         });
 
         it('should make a POST call with advanced query to retrieve RGA preview', () => {
-            const params: RelevanceGenerativeAnsweringPreviewParams = {
+            const params: DocumentGroupPreviewParams = {
                 advancedQuery: 'some advanced query @ test',
             };
             rgaConfig.preview(params);
