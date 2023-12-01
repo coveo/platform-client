@@ -453,6 +453,16 @@ export interface ListFieldValuesBodyQueryParams extends SharedFieldsParams {
     analytics?: RestAnalyticsRequest;
 }
 
+export interface ListFieldValuesItem {
+    value: string;
+    lookupValue: string;
+    numberOfResults: number;
+}
+
+export interface ListFieldValuesResponse {
+    values: ListFieldValuesItem[];
+}
+
 /**
  * Defines the body parameters of the search request.
  */
