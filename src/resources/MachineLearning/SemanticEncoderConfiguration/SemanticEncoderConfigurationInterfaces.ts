@@ -1,6 +1,6 @@
 import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 
-export interface RelevanceGenerativeAnsweringDocumentGroupPreview {
+export interface SemanticEncoderDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
      *
@@ -10,7 +10,7 @@ export interface RelevanceGenerativeAnsweringDocumentGroupPreview {
     /**
      * The total number of documents in the selected sources.
      */
-    numberOfDocumentsInSources: number;
+    numberOfDocumentsInSources?: number;
     /**
      * The number of documents that are candidates for learning.
      */
@@ -18,11 +18,11 @@ export interface RelevanceGenerativeAnsweringDocumentGroupPreview {
     /**
      * The number of documents in the selected sources that match the conditions.
      */
-    numberOfDocumentsInSourcesMatchingFilters: number;
+    numberOfDocumentsInSourcesMatchingFilters?: number;
     /**
-     * The number of documents in the selected sources that match the conditions and have a `permanentid`
+     * The number of documents in the selected sources that match the conditions and have a `permanentid`.
      */
-    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId: number;
+    numberOfDocumentsInSourcesMatchingFiltersWithPermanentId?: number;
     /**
      * The maximum number of documents allowed to learn from.
      */
