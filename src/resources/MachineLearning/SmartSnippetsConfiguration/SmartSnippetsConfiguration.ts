@@ -1,12 +1,12 @@
 import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
 import Resource from '../../Resource.js';
+import {DocumentGroupPreviewParams} from '../DocumentInterfaces.js';
 import {
     SmartSnippetsConfigurationModel,
     SmartSnippetsContentFields,
     SmartSnippetsContentFieldsParams,
     SmartSnippetsDocumentGroupPreview,
-    SmartSnippetsDocumentGroupPreviewParams,
     SmartSnippetsDocumentTypes,
     SmartSnippetsDocumentTypesParams,
 } from './SmartSnippetsConfigurationInterfaces.js';
@@ -45,7 +45,7 @@ export default class SmartSnippetsConfiguration extends Resource {
         return this.api.post<SmartSnippetsDocumentTypes>(SmartSnippetsConfiguration.documentTypesUrl, params);
     }
 
-    preview(params: SmartSnippetsDocumentGroupPreviewParams) {
+    preview(params: DocumentGroupPreviewParams) {
         return this.api.post<SmartSnippetsDocumentGroupPreview>(SmartSnippetsConfiguration.previewUrl, params);
     }
 }

@@ -1,32 +1,4 @@
 import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
-import {FilterConditions} from '../FilterConditions.js';
-
-export interface SemanticEncoderPreviewParamsAdvanced {
-    sources?: never;
-    filterConditions?: never;
-    /**
-     * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
-     *
-     * @Example @source==("My source") AND @permanentid AND @language="English";
-     */
-    advancedQuery: string;
-}
-
-export interface SemanticEncoderPreviewParamsSources {
-    /**
-     * The sources to consider.
-     */
-    sources: string[];
-    /**
-     * An array of filtering conditions.
-     */
-    filterConditions: FilterConditions[];
-    advancedQuery?: never;
-}
-
-export type SemanticEncoderDocumentGroupPreviewParams =
-    | SemanticEncoderPreviewParamsSources
-    | SemanticEncoderPreviewParamsAdvanced;
 
 export interface SemanticEncoderDocumentGroupPreview {
     /**

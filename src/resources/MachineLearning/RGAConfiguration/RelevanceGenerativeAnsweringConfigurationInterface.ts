@@ -1,32 +1,4 @@
-import {FilterConditions} from '../FilterConditions.js';
 import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
-
-export interface RelevanceGenerativeAnsweringPreviewParamsAdvanced {
-    sources?: never;
-    filterConditions?: never;
-    /**
-     * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
-     *
-     * @Example @source==("My source") AND @permanentid AND @language="English";
-     */
-    advancedQuery: string;
-}
-
-export interface RelevanceGenerativeAnsweringPreviewParamsSources {
-    /**
-     * The sources to consider.
-     */
-    sources: string[];
-    /**
-     * An array of filtering conditions.
-     */
-    filterConditions: FilterConditions[];
-    advancedQuery?: never;
-}
-
-export type RelevanceGenerativeAnsweringPreviewParams =
-    | RelevanceGenerativeAnsweringPreviewParamsSources
-    | RelevanceGenerativeAnsweringPreviewParamsAdvanced;
 
 export interface RelevanceGenerativeAnsweringDocumentGroupPreview {
     /**
