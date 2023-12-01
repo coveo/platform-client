@@ -1,7 +1,8 @@
 import API from '../../APICore.js';
-import Ressource from '../Resource.js';
+import Resource from '../Resource.js';
 import {
     ItemPreviewHtmlParameters,
+    ListFieldValuesResponse,
     RestFacetSearchParameters,
     RestFacetSearchResponse,
     RestQueryParams,
@@ -15,7 +16,7 @@ import {
 } from './SearchInterfaces.js';
 import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
 
-export default class Search extends Ressource {
+export default class Search extends Resource {
     static baseUrl = `/rest/search/v2`;
 
     createToken(tokenParams: RestTokenParams) {
@@ -36,7 +37,7 @@ export default class Search extends Ressource {
     }
 
     getFieldValues(fieldName: string, params?: ListFieldValuesBodyQueryParams) {
-        return this.api.get<any>(
+        return this.api.get<ListFieldValuesResponse>(
             this.buildPath(`${Search.baseUrl}/values`, {
                 field: encodeURI(`${fieldName}`),
                 ...params,
