@@ -174,7 +174,7 @@ describe('IPXInterface', () => {
             ipxInterface.update({...config, id});
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, config);
+            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, {...config, id});
         });
     });
 
@@ -207,7 +207,7 @@ describe('IPXInterface', () => {
             ipxInterface.generatePreview({...config, id});
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, config);
+            expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, {...config, id});
         });
     });
 
