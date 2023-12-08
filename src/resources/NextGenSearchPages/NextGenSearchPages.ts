@@ -3,75 +3,75 @@ import Resource from "../Resource.js";
 import { IAccesses, ListHostedInterfacesParams, New, PageModel } from "../index.js";
 import { SearchPageInterfaceConfiguration } from "./NextGenSearchPages.model.js";
 
-export class NextGenSearchPageResource extends Resource {
+export default class NextGenSearchPages extends Resource {
     static getBaseUrl = `/rest/organizations/${API.orgPlaceholder}/searchpage/v1/interfaces`;
 
     list(options?: ListHostedInterfacesParams): Promise<PageModel<SearchPageInterfaceConfiguration>> {
-        return this.api.get<PageModel<SearchPageInterfaceConfiguration>>(this.buildPath(NextGenSearchPageResource.getBaseUrl, options));
+        return this.api.get<PageModel<SearchPageInterfaceConfiguration>>(this.buildPath(NextGenSearchPages.getBaseUrl, options));
     }
     
     create(searchPageConfiguration: New<SearchPageInterfaceConfiguration>): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.post<SearchPageInterfaceConfiguration>(NextGenSearchPageResource.getBaseUrl, searchPageConfiguration);
+        return this.api.post<SearchPageInterfaceConfiguration>(NextGenSearchPages.getBaseUrl, searchPageConfiguration);
     }
 
     delete(searchPageId: string): Promise<void> {
-        return this.api.delete(`${NextGenSearchPageResource.baseUrl}/${searchPageId}`);
+        return this.api.delete(`${NextGenSearchPages.baseUrl}/${searchPageId}`);
     }    
     
     get(searchPageId: string): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.get<SearchPageInterfaceConfiguration>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}`);
+        return this.api.get<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}`);
     }
 
     update(searchPageConfiguration: SearchPageInterfaceConfiguration): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageConfiguration.id}`, searchPageConfiguration);
+        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}`, searchPageConfiguration);
     }
 
     generatePreview(searchPageConfiguration: SearchPageInterfaceConfiguration): Promise<string> {
-        return this.api.post<string>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageConfiguration.id}/preview`, searchPageConfiguration);
+        return this.api.post<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}/preview`, searchPageConfiguration);
     }
 
     getView(searchPageId: string): Promise<string> {
-        return this.api.get<string>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/preview`);
+        return this.api.get<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/preview`);
     }
 
     getToken(searchPageId: string): Promise<{token: string}> {
-        return this.api.get<{token: string}>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/token`);
+        return this.api.get<{token: string}>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/token`);
     }
 
     getEditInterface(searchPageId: string): Promise<string> {
-        return this.api.get<string>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/edit`);
+        return this.api.get<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/edit`);
     }
 
     getLoader(searchPageId: string): Promise<string> {
-        return this.api.get<string>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/loader`);
+        return this.api.get<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/loader`);
     }
 
     getLoginPage(searchPageId: string): Promise<string> {
-        return this.api.get<string>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/login`);
+        return this.api.get<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/login`);
     }
 
     getAccesses(searchPageId: string): Promise<IAccesses> {
-        return this.api.get<IAccesses>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses`);
+        return this.api.get<IAccesses>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses`);
     }
 
     updateAccesses(searchPageId: string, accesses: IAccesses): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses`, accesses);
+        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses`, accesses);
     }
 
     getAccessesUsers(searchPageId: string): Promise<string[]> {
-        return this.api.get<string[]>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses/users`);
+        return this.api.get<string[]>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users`);
     }
 
     updateAccessesUsers(searchPageId: string, users: string[]): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses/users`, users);
+        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users`, users);
     }
 
     addAccessesUsers(searchPageId: string, users: string[], notify?: boolean, message?: string): Promise<SearchPageInterfaceConfiguration> {
         const body = message ? {users, message} : {users};
-        return this.api.post<SearchPageInterfaceConfiguration>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses/users${notify ? '?notify=1' : ''}`, body);
+        return this.api.post<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users${notify ? '?notify=1' : ''}`, body);
     }
 
     requestAccess(searchPageId: string): Promise<void> {
-        return this.api.post<void>(`${NextGenSearchPageResource.getBaseUrl}/${searchPageId}/accesses/request`);
+        return this.api.post<void>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/request`);
     }
 }
