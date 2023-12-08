@@ -1,33 +1,44 @@
-import API from "../../APICore.js";
-import Resource from "../Resource.js";
-import { IAccesses, ListHostedInterfacesParams, New, PageModel } from "../index.js";
-import { SearchPageInterfaceConfiguration } from "./NextGenSearchPages.model.js";
+import API from '../../APICore.js';
+import Resource from '../Resource.js';
+import {IAccesses, ListHostedInterfacesParams, PageModel} from '../index.js';
+import {NewSearchPageInterfaceConfiguration, SearchPageInterfaceConfiguration} from './NextGenSearchPages.model.js';
 
 export default class NextGenSearchPages extends Resource {
     static getBaseUrl = `/rest/organizations/${API.orgPlaceholder}/searchpage/v1/interfaces`;
 
     list(options?: ListHostedInterfacesParams): Promise<PageModel<SearchPageInterfaceConfiguration>> {
-        return this.api.get<PageModel<SearchPageInterfaceConfiguration>>(this.buildPath(NextGenSearchPages.getBaseUrl, options));
+        return this.api.get<PageModel<SearchPageInterfaceConfiguration>>(
+            this.buildPath(NextGenSearchPages.getBaseUrl, options),
+        );
     }
-    
-    create(searchPageConfiguration: New<SearchPageInterfaceConfiguration>): Promise<SearchPageInterfaceConfiguration> {
+
+    create(searchPageConfiguration: NewSearchPageInterfaceConfiguration): Promise<SearchPageInterfaceConfiguration> {
         return this.api.post<SearchPageInterfaceConfiguration>(NextGenSearchPages.getBaseUrl, searchPageConfiguration);
     }
 
     delete(searchPageId: string): Promise<void> {
         return this.api.delete(`${NextGenSearchPages.baseUrl}/${searchPageId}`);
-    }    
-    
+    }
+
     get(searchPageId: string): Promise<SearchPageInterfaceConfiguration> {
         return this.api.get<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}`);
     }
 
-    update(searchPageConfiguration: SearchPageInterfaceConfiguration): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}`, searchPageConfiguration);
+    update(
+        searchPageId: string,
+        searchPageConfiguration: NewSearchPageInterfaceConfiguration,
+    ): Promise<SearchPageInterfaceConfiguration> {
+        return this.api.put<SearchPageInterfaceConfiguration>(
+            `${NextGenSearchPages.getBaseUrl}/${searchPageId}`,
+            searchPageConfiguration,
+        );
     }
 
-    generatePreview(searchPageConfiguration: SearchPageInterfaceConfiguration): Promise<string> {
-        return this.api.post<string>(`${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}/preview`, searchPageConfiguration);
+    generatePreview(searchPageConfiguration: NewSearchPageInterfaceConfiguration & {id: string}): Promise<string> {
+        return this.api.post<string>(
+            `${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}/preview`,
+            searchPageConfiguration,
+        );
     }
 
     getView(searchPageId: string): Promise<string> {
@@ -55,7 +66,10 @@ export default class NextGenSearchPages extends Resource {
     }
 
     updateAccesses(searchPageId: string, accesses: IAccesses): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses`, accesses);
+        return this.api.put<SearchPageInterfaceConfiguration>(
+            `${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses`,
+            accesses,
+        );
     }
 
     getAccessesUsers(searchPageId: string): Promise<string[]> {
@@ -63,12 +77,23 @@ export default class NextGenSearchPages extends Resource {
     }
 
     updateAccessesUsers(searchPageId: string, users: string[]): Promise<SearchPageInterfaceConfiguration> {
-        return this.api.put<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users`, users);
+        return this.api.put<SearchPageInterfaceConfiguration>(
+            `${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users`,
+            users,
+        );
     }
 
-    addAccessesUsers(searchPageId: string, users: string[], notify?: boolean, message?: string): Promise<SearchPageInterfaceConfiguration> {
+    addAccessesUsers(
+        searchPageId: string,
+        users: string[],
+        notify?: boolean,
+        message?: string,
+    ): Promise<SearchPageInterfaceConfiguration> {
         const body = message ? {users, message} : {users};
-        return this.api.post<SearchPageInterfaceConfiguration>(`${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users${notify ? '?notify=1' : ''}`, body);
+        return this.api.post<SearchPageInterfaceConfiguration>(
+            `${NextGenSearchPages.getBaseUrl}/${searchPageId}/accesses/users${notify ? '?notify=1' : ''}`,
+            body,
+        );
     }
 
     requestAccess(searchPageId: string): Promise<void> {

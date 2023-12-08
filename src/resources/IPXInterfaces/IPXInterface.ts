@@ -24,9 +24,10 @@ export default class IPXInterface extends Resource {
     }
 
     update(ipxInterfaceConfig: IPXInterfaceConfiguration) {
-        const {id, ...body} = ipxInterfaceConfig;
-
-        return this.api.put<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${id}`, body);
+        return this.api.put<IPXInterfaceConfiguration>(
+            `${IPXInterface.baseUrl}/${ipxInterfaceConfig.id}`,
+            ipxInterfaceConfig,
+        );
     }
 
     getLoader(ipxInterfaceId: string) {

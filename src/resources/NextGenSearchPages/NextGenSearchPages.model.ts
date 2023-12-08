@@ -1,4 +1,12 @@
-import { HostedInterfaceConfiguration, HostedInterfaceOption, HostedInterfaceResultTemplate, HostedInterfaceResultTemplateBadge, IAccesses, ISortCriteria } from "../index.js";
+import {
+    HostedInterfaceConfiguration,
+    HostedInterfaceOption,
+    HostedInterfaceResultTemplate,
+    HostedInterfaceResultTemplateBadge,
+    IAccesses,
+    ISortCriteria,
+    New,
+} from '../index.js';
 
 export enum SearchPageResultActions {
     copyToClipboard = 'copyToClipboard',
@@ -147,3 +155,8 @@ export interface SearchPageInterfaceConfiguration extends Omit<HostedInterfaceCo
      */
     updatedBy: string;
 }
+
+export type NewSearchPageInterfaceConfiguration = Omit<
+    New<SearchPageInterfaceConfiguration>,
+    'created' | 'createdBy' | 'updated' | 'updatedBy'
+>;
