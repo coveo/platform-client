@@ -51,7 +51,7 @@ export enum ResourceSnapshotType {
     featuredResult = 'FEATURED_RESULT',
     field = 'FIELD',
     filter = 'FILTER',
-    insightPanelConfig = 'INSIGHT_PANEL_CONFIGURATION',
+    insightPanelConfiguration = 'INSIGHT_PANEL_CONFIGURATION',
     insightPanelInterface = 'INSIGHT_PANEL_INTERFACE',
     mapping = 'MAPPING',
     mlModel = 'ML_MODEL',
