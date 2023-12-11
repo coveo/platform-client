@@ -174,7 +174,7 @@ describe('IPXInterface', () => {
             ipxInterface.update({...config, id});
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, config);
+            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, {...config, id});
         });
     });
 
@@ -193,10 +193,54 @@ describe('IPXInterface', () => {
         it('should make a GET call to the IPXInterface base url appended with /loader', () => {
             const id = 'IPInterface-id-to-get';
 
-            ipxInterface.loader(id);
+            ipxInterface.getLoader(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/loader`);
+        });
+    });
+
+    describe('generatePreview', () => {
+        it('should make a POST call to the IPXInterface base url appended with /preview', () => {
+            const id = 'IPInterface-id-to-preview';
+
+            ipxInterface.generatePreview({...config, id});
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, {...config, id});
+        });
+    });
+
+    describe('getEditInterface', () => {
+        it('should make a GET call to the IPXInterface base url appended with /edit', () => {
+            const id = 'IPInterface-id-to-edit';
+
+            ipxInterface.getEditInterface(id);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/edit`);
+        });
+    });
+
+    describe('getLoginPage', () => {
+        it('should make a GET call to the IPXInterface base url appended with /login', () => {
+            const id = 'IPInterface-id-to-login';
+
+            ipxInterface.getLoginPage(id);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/login`);
+        });
+    });
+
+    describe('getToken', () => {
+        it('should make a GET call to the IPXInterface base url appended with /token', () => {
+            const id = 'IPInterface-id-to-get-token';
+
+            ipxInterface.getToken(id);
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/token`);
         });
     });
 });
