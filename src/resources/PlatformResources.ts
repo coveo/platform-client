@@ -40,6 +40,7 @@ import SchemaService from './SchemaService/SchemaService.js';
 import Search from './Search/Search.js';
 import SearchInterfaces from './SearchInterfaces/SearchInterfaces.js';
 import SearchPages from './SearchPages/SearchPages.js';
+import NextGenSearchPages from './NextGenSearchPages/NextGenSearchPages.js';
 import SearchUsageMetrics from './SearchUsageMetrics/SearchUsageMetrics.js';
 import SecurityCache from './SecurityCache/SecurityCache.js';
 import Sources from './Sources/Sources.js';
@@ -94,6 +95,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'search', resource: Search},
     {key: 'searchInterfaces', resource: SearchInterfaces},
     {key: 'searchPages', resource: SearchPages},
+    {key: 'nextGenSearchPages', resource: NextGenSearchPages},
     {key: 'searchUsageMetrics', resource: SearchUsageMetrics},
     {key: 'securityCache', resource: SecurityCache},
     {key: 'source', resource: Sources},
@@ -153,6 +155,7 @@ class PlatformResources {
     search: Search;
     searchInterfaces: SearchInterfaces;
     searchPages: SearchPages;
+    nextGenSearchPages: NextGenSearchPages;
     searchUsageMetrics: SearchUsageMetrics;
     securityCache: SecurityCache;
     source: Sources;

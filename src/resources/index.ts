@@ -41,6 +41,7 @@ export * from './SchemaService/index.js';
 export * from './Search/index.js';
 export * from './SearchInterfaces/index.js';
 export * from './SearchPages/index.js';
+export * from './NextGenSearchPages/index.js';
 export * from './SearchUsageMetrics/index.js';
 export * from './SecurityCache/index.js';
 export * from './Sources/index.js';
