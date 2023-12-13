@@ -1,19 +1,19 @@
 import API from '../../../../../APICore.js';
-import Users from '../Users.js';
-import {FilterParams, ListUsersReportsParams} from '../UsersInterfaces.js';
+import UAUsers from '../UAUsers.js';
+import {UAUserFilterParams, ListUAUsersReportsParams} from '../UAUsersInterfaces.js';
 
 jest.mock('../../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
 describe('Statistics', () => {
-    let users: Users;
+    let users: UAUsers;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        users = new Users(api, serverlessApi);
+        users = new UAUsers(api, serverlessApi);
     });
 
     describe('ListUserFilters', () => {
@@ -21,14 +21,14 @@ describe('Statistics', () => {
             const userId = 'CouliliZazou';
             users.listUserFilters('CouliliZazou');
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/${userId}/filters`);
+            expect(api.get).toHaveBeenCalledWith(`${UAUsers.baseUrl}/${userId}/filters`);
         });
     });
 
     describe('UpdateUserFilters', () => {
         it('should make a PUT call to the specific user filters url', () => {
             const userId = 'Jida';
-            const filters: FilterParams[] = [
+            const filters: UAUserFilterParams[] = [
                 {
                     value: 'tuna-durgod',
                     id: true,
@@ -36,21 +36,21 @@ describe('Statistics', () => {
             ];
             users.updateUserFilters(userId, filters);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Users.baseUrl}/${userId}/filters`, filters);
+            expect(api.put).toHaveBeenCalledWith(`${UAUsers.baseUrl}/${userId}/filters`, filters);
         });
     });
 
     describe('ListUsersReports', () => {
         it('should make a GET call to the specific Users url', () => {
             const userId = 'Jida';
-            const params: ListUsersReportsParams = {
+            const params: ListUAUsersReportsParams = {
                 includeConfig: false,
                 includeGroups: false,
             };
             users.listUsersReports(userId, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Users.baseUrl}/${userId}/reports?includeConfig=false&includeGroups=false`,
+                `${UAUsers.baseUrl}/${userId}/reports?includeConfig=false&includeGroups=false`,
             );
         });
     });
@@ -62,7 +62,7 @@ describe('Statistics', () => {
 
             users.updateUsersReports(userId, reportsIds);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Users.baseUrl}/${userId}/reports`, reportsIds);
+            expect(api.put).toHaveBeenCalledWith(`${UAUsers.baseUrl}/${userId}/reports`, reportsIds);
         });
     });
 
@@ -71,7 +71,7 @@ describe('Statistics', () => {
             const userId = 'Jida';
             users.getUser(userId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/${userId}`);
+            expect(api.get).toHaveBeenCalledWith(`${UAUsers.baseUrl}/${userId}`);
         });
     });
 
@@ -79,7 +79,7 @@ describe('Statistics', () => {
         it('should make a GET call to /v15/users/monitoring/health', () => {
             users.checkHealth();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/monitoring/health`);
+            expect(api.get).toHaveBeenCalledWith(`${UAUsers.baseUrl}/monitoring/health`);
         });
     });
 
@@ -87,7 +87,7 @@ describe('Statistics', () => {
         it('should make a GET call to /v15/users/status with specific options', () => {
             users.checkStatus();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Users.baseUrl}/status`);
+            expect(api.get).toHaveBeenCalledWith(`${UAUsers.baseUrl}/status`);
         });
     });
 });
