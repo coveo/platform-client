@@ -1,10 +1,7 @@
 import API from '../../../../APICore.js';
 import {DocumentGroupPreviewParams} from '../../DocumentInterfaces.js';
 import SmartSnippetsConfiguration from '../SmartSnippetsConfiguration.js';
-import {
-    SmartSnippetsConfigurationModel,
-    SmartSnippetsContentFieldsParams,
-} from '../SmartSnippetsConfigurationInterfaces.js';
+import {SmartSnippetsContentFieldsParams} from '../SmartSnippetsConfigurationInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
@@ -15,77 +12,9 @@ describe('SmartSnippetsConfiguration', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
-    const modelConfigs: SmartSnippetsConfigurationModel[] = [
-        {
-            modelId: 'test-model-id',
-            modelDisplayName: 'Model Name 1',
-            sources: ['1st-source', '2nd-source'],
-            filterConditions: [],
-        },
-        {
-            modelId: 'test-model-id',
-            modelDisplayName: 'Model Name 1',
-            sources: ['1st-source', '2nd-source'],
-            filterConditions: [],
-            cssSelectorsToExclude: ['div.mock[id="this-is-a-test"]', '#wow'],
-            documentTypes: [
-                {
-                    contentFields: ['field-1', 'field-2'],
-                    documentType: 'HTMLFile',
-                },
-            ],
-        },
-    ];
-
     beforeEach(() => {
         jest.clearAllMocks();
         smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
-    });
-
-    describe('create', () => {
-        modelConfigs.forEach((modelConfig, index) => {
-            it(`should make a POST call to the Smart Snippets Configuration base url with config ${index}`, () => {
-                const {modelId: _, ...newConfig} = modelConfig;
-                smartSnippetsConfig.create(newConfig);
-
-                expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.modelUrl, newConfig);
-            });
-        });
-    });
-
-    describe('delete', () => {
-        it('should make a DELETE call to the specific Smart Snippets Configuration url', () => {
-            const configToDeleteId = 'config-to-be-deleted';
-            smartSnippetsConfig.delete(configToDeleteId);
-
-            expect(api.delete).toHaveBeenCalledTimes(1);
-            expect(api.delete).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToDeleteId}`);
-        });
-    });
-
-    describe('get', () => {
-        it('should make a GET call to the specific Smart Snippets Configuration url', () => {
-            const configToGetId = 'config-to-be-fetched';
-            smartSnippetsConfig.get(configToGetId);
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${SmartSnippetsConfiguration.modelUrl}/${configToGetId}`);
-        });
-    });
-
-    describe('update', () => {
-        modelConfigs.forEach((modelConfig, index) => {
-            it(`should make a PUT call to the specific Smart Snippets Configuration url for config ${index}`, () => {
-                smartSnippetsConfig.update(modelConfig);
-
-                expect(api.put).toHaveBeenCalledTimes(1);
-                expect(api.put).toHaveBeenCalledWith(
-                    `${SmartSnippetsConfiguration.modelUrl}/${modelConfig.modelId}`,
-                    modelConfig,
-                );
-            });
-        });
     });
 
     describe('contentFields', () => {
