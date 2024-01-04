@@ -27,13 +27,18 @@ const successBlob: ResponseHandler = {
 const error: ResponseHandler = {
     canProcess: () => true,
     process: async <T>(response: Response): Promise<T> => {
-        const responseJson = await response.json();
+        let responseBody: any = await response.text();
         const platformError = new CoveoPlatformClientError();
-        Object.assign(platformError, responseJson);
-        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        platformError.title = responseJson.title ?? getErrorTypeFromAliases(responseJson) ?? 'unknown';
-        platformError.detail = responseJson.detail ?? getErrorDetailFromAliases(responseJson) ?? 'unknown';
         platformError.status = response.status;
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        try {
+            responseBody = JSON.parse(responseBody);
+            Object.assign(platformError, responseBody);
+            platformError.title = responseBody.title ?? getErrorTypeFromAliases(responseBody) ?? 'unknown';
+            platformError.detail = responseBody.detail ?? getErrorDetailFromAliases(responseBody) ?? 'unknown';
+        } catch {
+            throw platformError;
+        }
         throw platformError;
     },
 };

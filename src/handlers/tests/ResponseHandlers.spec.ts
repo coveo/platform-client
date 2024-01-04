@@ -56,6 +56,21 @@ describe('ResponseHandlers', () => {
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
 
+        it('should handle HTML error response with correct HTTP code', async () => {
+            const data =
+                '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+            const errorResponse = new Response(data, {status: 403});
+
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(errorResponse);
+            } catch (error) {
+                rejectedError = error;
+            }
+
+            expect(rejectedError?.status).toBe(403);
+        });
+
         it('should include the HTTP status code in the error', async () => {
             const {errorResponse} = buildResponseAndError();
 
