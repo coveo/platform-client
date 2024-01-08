@@ -15,21 +15,38 @@ export default class IPXInterface extends Resource {
         return this.api.post<IPXInterfaceConfiguration>(IPXInterface.baseUrl, ipxInterfaceConfig);
     }
 
-    delete(IPXInterfaceId: string) {
-        return this.api.delete(`${IPXInterface.baseUrl}/${IPXInterfaceId}`);
+    delete(ipxInterfaceId: string) {
+        return this.api.delete(`${IPXInterface.baseUrl}/${ipxInterfaceId}`);
     }
 
-    get(IPXInterfaceId: string) {
-        return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${IPXInterfaceId}`);
+    get(ipxInterfaceId: string) {
+        return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${ipxInterfaceId}`);
     }
 
     update(ipxInterfaceConfig: IPXInterfaceConfiguration) {
-        const {id, ...body} = ipxInterfaceConfig;
-
-        return this.api.put<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${id}`, body);
+        return this.api.put<IPXInterfaceConfiguration>(
+            `${IPXInterface.baseUrl}/${ipxInterfaceConfig.id}`,
+            ipxInterfaceConfig,
+        );
     }
 
-    loader(IPXInterfaceId: string) {
-        return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${IPXInterfaceId}/loader`);
+    getLoader(ipxInterfaceId: string) {
+        return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${ipxInterfaceId}/loader`);
+    }
+
+    generatePreview(ipxInterfaceConfig: IPXInterfaceConfiguration) {
+        return this.api.post<string>(`${IPXInterface.baseUrl}/${ipxInterfaceConfig.id}/preview`, ipxInterfaceConfig);
+    }
+
+    getEditInterface(ipxInterfaceId: string) {
+        return this.api.get<string>(`${IPXInterface.baseUrl}/${ipxInterfaceId}/edit`);
+    }
+
+    getLoginPage(ipxInterfaceId: string) {
+        return this.api.get<string>(`${IPXInterface.baseUrl}/${ipxInterfaceId}/login`);
+    }
+
+    getToken(ipxInterfaceId: string) {
+        return this.api.get<{token: string}>(`${IPXInterface.baseUrl}/${ipxInterfaceId}/token`);
     }
 }

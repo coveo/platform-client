@@ -9,6 +9,7 @@ import Reports from './Read/Reports/Reports.js';
 import Snowflake from './Read/Snowflake/Snowflake.js';
 import Statistics from './Read/Statistics/Statistics.js';
 import DataHealth from './Read/DataHealth/DataHealth.js';
+import UAUsers from './Read/UAUsers/UAUsers.js';
 
 export default class UsageAnalytics extends Resource {
     administration: Administration;
@@ -20,6 +21,7 @@ export default class UsageAnalytics extends Resource {
     reports: Reports;
     snowflake: Snowflake;
     statistics: Statistics;
+    users: UAUsers;
 
     constructor(
         protected api: API,
@@ -36,5 +38,6 @@ export default class UsageAnalytics extends Resource {
         this.reports = new Reports(api, serverlessApi);
         this.snowflake = new Snowflake(api, serverlessApi);
         this.statistics = new Statistics(api, serverlessApi);
+        this.users = new UAUsers(api, serverlessApi);
     }
 }

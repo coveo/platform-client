@@ -12,34 +12,6 @@ export interface DocumentType {
     documentType: string;
 }
 
-export interface SmartSnippetsConfigurationModel {
-    /**
-     * The unique ID of the model.
-     */
-    modelId: string;
-    /**
-     * The model name to display.
-     * Example: My First Model
-     */
-    modelDisplayName: string;
-    /**
-     * The sources to consider.
-     */
-    sources: string[];
-    /**
-     * An array of filtering conditions.
-     */
-    filterConditions: FilterConditions[];
-    /**
-     * An array of css selectors to evaluate content to exclude.
-     */
-    cssSelectorsToExclude?: string[];
-    /**
-     * The document type for which content is in custom index fields.
-     */
-    documentTypes?: DocumentType[];
-}
-
 export interface SmartSnippetsDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
