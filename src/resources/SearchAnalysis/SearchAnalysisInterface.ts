@@ -241,32 +241,32 @@ export type MappedExecutionSteps = {
     [T in AvailableExecutionStep]: T extends 'pipelineSelection'
         ? QueryPipelineSelection
         : T extends 'paramOverrides'
-        ? QueryParamOverrides
-        : T extends 'thesaurus'
-        ? Thesaurus
-        : T extends 'stopWords'
-        ? StopWords
-        : T extends 'filters'
-        ? Filters
-        : T extends 'rankingExpressions'
-        ? RankingExpressions
-        : T extends 'featuredResults'
-        ? FeaturedResults
-        : T extends 'rankingWeights'
-        ? RankingWeights
-        : T extends 'contentRecommendation'
-        ? ContentRecommendation
-        : T extends 'productRecommendation'
-        ? ProductRecommendation
-        : T extends 'art'
-        ? AutomaticRelevanceTuning
-        : T extends 'dne'
-        ? DynamicNavigationExperience
-        : T extends 'triggers'
-        ? Triggers
-        : T extends 'indexQuery'
-        ? IndexQuery
-        : unknown;
+          ? QueryParamOverrides
+          : T extends 'thesaurus'
+            ? Thesaurus
+            : T extends 'stopWords'
+              ? StopWords
+              : T extends 'filters'
+                ? Filters
+                : T extends 'rankingExpressions'
+                  ? RankingExpressions
+                  : T extends 'featuredResults'
+                    ? FeaturedResults
+                    : T extends 'rankingWeights'
+                      ? RankingWeights
+                      : T extends 'contentRecommendation'
+                        ? ContentRecommendation
+                        : T extends 'productRecommendation'
+                          ? ProductRecommendation
+                          : T extends 'art'
+                            ? AutomaticRelevanceTuning
+                            : T extends 'dne'
+                              ? DynamicNavigationExperience
+                              : T extends 'triggers'
+                                ? Triggers
+                                : T extends 'indexQuery'
+                                  ? IndexQuery
+                                  : unknown;
 };
 
 /**
