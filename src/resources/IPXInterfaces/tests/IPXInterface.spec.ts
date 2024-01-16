@@ -171,10 +171,10 @@ describe('IPXInterface', () => {
         it('should make an UPDATE call to the IPXInterface base url', () => {
             const id = 'IPInterface-id-to-update';
 
-            ipxInterface.update({...config, id});
+            ipxInterface.update(id, config);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, {...config, id});
+            expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, config);
         });
     });
 
@@ -204,10 +204,10 @@ describe('IPXInterface', () => {
         it('should make a POST call to the IPXInterface base url appended with /preview', () => {
             const id = 'IPInterface-id-to-preview';
 
-            ipxInterface.generatePreview({...config, id});
+            ipxInterface.generatePreview(id, config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, {...config, id});
+            expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, config);
         });
     });
 

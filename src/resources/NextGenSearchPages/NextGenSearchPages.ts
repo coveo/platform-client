@@ -1,7 +1,13 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
-import {IAccesses, ListHostedInterfacesParams, PageModel} from '../index.js';
-import {NewSearchPageInterfaceConfiguration, SearchPageInterfaceConfiguration} from './NextGenSearchPages.model.js';
+import {
+    ExistingHostedInterface,
+    IAccesses,
+    ListHostedInterfacesParams,
+    NewHostedInterface,
+    PageModel,
+} from '../index.js';
+import {SearchPageInterfaceConfiguration} from './NextGenSearchPages.model.js';
 
 export default class NextGenSearchPages extends Resource {
     static getBaseUrl = `/rest/organizations/${API.orgPlaceholder}/searchpage/v1/interfaces`;
@@ -12,7 +18,9 @@ export default class NextGenSearchPages extends Resource {
         );
     }
 
-    create(searchPageConfiguration: NewSearchPageInterfaceConfiguration): Promise<SearchPageInterfaceConfiguration> {
+    create(
+        searchPageConfiguration: NewHostedInterface<SearchPageInterfaceConfiguration>,
+    ): Promise<SearchPageInterfaceConfiguration> {
         return this.api.post<SearchPageInterfaceConfiguration>(NextGenSearchPages.getBaseUrl, searchPageConfiguration);
     }
 
@@ -26,7 +34,7 @@ export default class NextGenSearchPages extends Resource {
 
     update(
         searchPageId: string,
-        searchPageConfiguration: NewSearchPageInterfaceConfiguration,
+        searchPageConfiguration: NewHostedInterface<SearchPageInterfaceConfiguration>,
     ): Promise<SearchPageInterfaceConfiguration> {
         return this.api.put<SearchPageInterfaceConfiguration>(
             `${NextGenSearchPages.getBaseUrl}/${searchPageId}`,
@@ -34,9 +42,12 @@ export default class NextGenSearchPages extends Resource {
         );
     }
 
-    generatePreview(searchPageConfiguration: NewSearchPageInterfaceConfiguration & {id: string}): Promise<string> {
+    generatePreview(
+        searchPageId: string,
+        searchPageConfiguration: ExistingHostedInterface<SearchPageInterfaceConfiguration>,
+    ): Promise<string> {
         return this.api.post<string>(
-            `${NextGenSearchPages.getBaseUrl}/${searchPageConfiguration.id}/preview`,
+            `${NextGenSearchPages.getBaseUrl}/${searchPageId}/preview`,
             searchPageConfiguration,
         );
     }

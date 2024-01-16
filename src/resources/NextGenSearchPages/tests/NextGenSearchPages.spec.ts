@@ -1,7 +1,8 @@
 import API from '../../../APICore.js';
 import {
+    ExistingHostedInterface,
     HostedInterfaceConditionOperator,
-    NewSearchPageInterfaceConfiguration,
+    SearchPageInterfaceConfiguration,
     SearchPageLayout,
     SortingBy,
 } from '../../../Entry.js';
@@ -15,7 +16,7 @@ describe('NextGenSearchPages', () => {
 
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
-    const config: NewSearchPageInterfaceConfiguration = {
+    const config: ExistingHostedInterface<SearchPageInterfaceConfiguration> = {
         name: 'some search page name',
         facets: [
             {
@@ -194,10 +195,10 @@ describe('NextGenSearchPages', () => {
         it('should make a POST call to the NextGenSearchPages base url appended with /preview', () => {
             const id = 'NextGenSearchPages-id-to-preview';
 
-            nextGenSearchPages.generatePreview({...config, id});
+            nextGenSearchPages.generatePreview(id, config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/preview`, {...config, id});
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/preview`, config);
         });
     });
 
