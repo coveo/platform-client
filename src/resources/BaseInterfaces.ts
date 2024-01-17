@@ -7,6 +7,15 @@ export type PageModel<T = any, TItemsKey extends string = 'items'> = {
 
 export type New<T, K extends keyof T | null = null> = Omit<T, 'id' | NonNullable<K>>;
 
+export type NewHostedInterface<T, K extends keyof T | null = null> = Omit<
+    Partial<T> & {name: string},
+    'id' | 'created' | 'createdBy' | 'updated' | 'updatedBy' | NonNullable<K>
+>;
+export type ExistingHostedInterface<T, K extends keyof T | null = null> = Omit<
+    T,
+    'id' | 'created' | 'createdBy' | 'updated' | 'updatedBy' | NonNullable<K>
+>;
+
 export interface IdAndDisplayNameModel {
     id: string;
     displayName?: string;
