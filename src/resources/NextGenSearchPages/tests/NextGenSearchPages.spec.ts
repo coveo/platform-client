@@ -116,7 +116,7 @@ describe('NextGenSearchPages', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${NextGenSearchPages.getBaseUrl}?page=2&perPage=10&filter=Accounting&order=asc`,
+                `${NextGenSearchPages.baseUrl}?page=2&perPage=10&filter=Accounting&order=asc`,
             );
         });
 
@@ -124,28 +124,28 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.list({page: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}?page=2`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?page=2`);
         });
 
         it('should make a GET call with perPage', () => {
             nextGenSearchPages.list({perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}?perPage=10`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?perPage=10`);
         });
 
         it('should make a GET call with filter', () => {
             nextGenSearchPages.list({filter: 'Accounting'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}?filter=Accounting`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?filter=Accounting`);
         });
 
         it('should make a GET call with order', () => {
             nextGenSearchPages.list({order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}?order=asc`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?order=asc`);
         });
     });
 
@@ -154,7 +154,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.create(config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(NextGenSearchPages.getBaseUrl, config);
+            expect(api.post).toHaveBeenCalledWith(NextGenSearchPages.baseUrl, config);
         });
     });
 
@@ -176,7 +176,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.get(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}`);
         });
     });
 
@@ -187,7 +187,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.update(id, config);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}`, config);
+            expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}`, config);
         });
     });
 
@@ -198,7 +198,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.generatePreview(id, config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/preview`, config);
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/preview`, config);
         });
     });
 
@@ -209,7 +209,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getView(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/preview`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/preview`);
         });
     });
 
@@ -220,7 +220,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getToken(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/token`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/token`);
         });
     });
 
@@ -231,7 +231,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getEditInterface(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/edit`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/edit`);
         });
     });
 
@@ -242,7 +242,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getLoader(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/loader`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/loader`);
         });
     });
 
@@ -253,7 +253,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getLoginPage(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/login`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/login`);
         });
     });
 
@@ -264,7 +264,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getAccesses(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/accesses`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses`);
         });
     });
 
@@ -275,7 +275,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.updateAccesses(id, config.accesses);
 
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/accesses`, config.accesses);
+            expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses`, config.accesses);
         });
     });
 
@@ -286,7 +286,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.getAccessesUsers(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/accesses/users`);
+            expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/users`);
         });
     });
 
@@ -298,7 +298,7 @@ describe('NextGenSearchPages', () => {
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${NextGenSearchPages.getBaseUrl}/${id}/accesses/users`,
+                `${NextGenSearchPages.baseUrl}/${id}/accesses/users`,
                 config.accesses.users,
             );
         });
@@ -311,7 +311,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.addAccessesUsers(id, config.accesses.users);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/accesses/users`, {
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/users`, {
                 users: config.accesses.users,
             });
         });
@@ -324,7 +324,7 @@ describe('NextGenSearchPages', () => {
             nextGenSearchPages.requestAccess(id);
 
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.getBaseUrl}/${id}/accesses/request`);
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/request`);
         });
     });
 });
