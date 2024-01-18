@@ -3,6 +3,7 @@ import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.j
 
 /** Check whether the response status is `204 No Content`. */
 export const isNoContent: Predicate<Response> = (response) => response.status === 204;
+
 /** Check whether the response is considered to have any "ok" status code (not just 200). */
 export const isAnyOkStatus: Predicate<Response> = (response) => response.ok;
 
@@ -27,18 +28,49 @@ const successBlob: ResponseHandler = {
 const error: ResponseHandler = {
     canProcess: () => true,
     process: async <T>(response: Response): Promise<T> => {
-        let responseBody: any = await response.text();
+        const responseJson = await response.json();
         const platformError = new CoveoPlatformClientError();
-        platformError.status = response.status;
+        Object.assign(platformError, responseJson);
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        try {
-            responseBody = JSON.parse(responseBody);
-            Object.assign(platformError, responseBody);
-            platformError.title = responseBody.title ?? getErrorTypeFromAliases(responseBody) ?? 'unknown';
-            platformError.detail = responseBody.detail ?? getErrorDetailFromAliases(responseBody) ?? 'unknown';
-        } catch {
-            throw platformError;
-        }
+        platformError.title = responseJson.title ?? getErrorTypeFromAliases(responseJson) ?? 'unknown';
+        platformError.detail = responseJson.detail ?? getErrorDetailFromAliases(responseJson) ?? 'unknown';
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
+const blockedByWAFHandler: ResponseHandler = {
+    canProcess: (response) => response.headers.get('x-coveo-waf-action') === 'block',
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title = 'Blocked for security reason'; // TODO: technical writer
+        platformError.detail = 'The web application firewall deemed that request to be dangerous so it was blocked'; // TODO: technical writer
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
+const badGatewayHandler: ResponseHandler = {
+    canProcess: (response) => response.status === 502,
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title = 'The endpoint is not reachable ...'; // TODO: technical writer
+        platformError.detail = 'Probably because bad gateway'; // TODO: technical writer
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
+const genericHTMLErrorHandler: ResponseHandler = {
+    canProcess: (response) => response.headers.get('content-type') === 'text/html',
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title = 'There is some issue with the endpoint and we cant parse the error'; // TODO: technical writer
+        platformError.detail = '...'; // TODO: technical writer
+        platformError.status = response.status;
         throw platformError;
     },
 };
@@ -57,8 +89,24 @@ const getErrorPropsFromAliases = (responseJson: object, aliasList: string[]): st
     return null;
 };
 
-const defaultResponseHandlers = Object.freeze([noContent, success, error]);
-export const ResponseHandlers = Object.freeze({noContent, success, successBlob, error});
+const defaultResponseHandlers = Object.freeze([
+    noContent,
+    success,
+    blockedByWAFHandler,
+    badGatewayHandler,
+    genericHTMLErrorHandler,
+    error,
+]);
+
+export const ResponseHandlers = Object.freeze({
+    noContent,
+    success,
+    successBlob,
+    blockedByWAFHandler,
+    badGatewayHandler,
+    genericHTMLErrorHandler,
+    error,
+});
 
 export default async <T>(
     response: Response,

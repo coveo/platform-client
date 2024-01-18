@@ -56,19 +56,60 @@ describe('ResponseHandlers', () => {
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
 
-        it('should handle HTML error response with correct HTTP code', async () => {
+        it('should handle WAF error response with a 403 error response', async () => {
             const data =
                 '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
-            const errorResponse = new Response(data, {status: 403});
+            const errorResponse = new Response(data, {status: 403, headers: {'x-coveo-waf-action': 'block'}});
 
             let rejectedError: CoveoPlatformClientError | undefined;
             try {
-                await handleResponse(errorResponse);
+                await handleResponse(errorResponse, null, 'text');
             } catch (error) {
                 rejectedError = error;
             }
 
             expect(rejectedError?.status).toBe(403);
+            expect(rejectedError?.title).toBe('Blocked for security reason');
+            expect(rejectedError?.detail).toBe(
+                'The web application firewall deemed that request to be dangerous so it was blocked',
+            );
+            expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
+        });
+
+        it('should handle bad gateway error response with a 502 error response', async () => {
+            const data =
+                '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+            const errorResponse = new Response(data, {status: 502});
+
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(errorResponse, null, 'text');
+            } catch (error) {
+                rejectedError = error;
+            }
+
+            expect(rejectedError?.status).toBe(502);
+            expect(rejectedError?.title).toBe('The endpoint is not reachable ...');
+            expect(rejectedError?.detail).toBe('Probably because bad gateway');
+            expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
+        });
+
+        it('should handle HTML error response with a generic HTML error response', async () => {
+            const data =
+                '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+            const errorResponse = new Response(data, {status: 403, headers: {'content-type': 'text/html'}});
+
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(errorResponse, null, 'text');
+            } catch (error) {
+                rejectedError = error;
+            }
+
+            expect(rejectedError?.status).toBe(403);
+            expect(rejectedError?.title).toBe('There is some issue with the endpoint and we cant parse the error');
+            expect(rejectedError?.detail).toBe('...');
+            expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
 
         it('should include the HTTP status code in the error', async () => {
