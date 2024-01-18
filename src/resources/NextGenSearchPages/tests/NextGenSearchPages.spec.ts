@@ -1,12 +1,8 @@
 import API from '../../../APICore.js';
-import {
-    ExistingHostedInterface,
-    HostedInterfaceConditionOperator,
-    SearchPageInterfaceConfiguration,
-    SearchPageLayout,
-    SortingBy,
-} from '../../../Entry.js';
+import {SortingBy} from '../../Enums.js';
+import {ExistingHostedInterface, HostedInterfaceConditionOperator} from '../../HostedInterfacesCore/index.js';
 import NextGenSearchPages from '../NextGenSearchPages.js';
+import {SearchPageInterfaceConfiguration, SearchPageLayout} from '../NextGenSearchPages.model.js';
 jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;

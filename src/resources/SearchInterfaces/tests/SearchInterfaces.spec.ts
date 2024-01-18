@@ -1,8 +1,9 @@
 import API from '../../../APICore.js';
-import {IManifestParameters, New} from '../../../Entry.js';
+import {New} from '../../BaseInterfaces.js';
 import {SortingBy, SortingOrder} from '../../Enums.js';
+import {IAccesses, IManifestParameters} from '../../HostedInterfacesCore/index.js';
 import SearchInterfaces from '../SearchInterfaces.js';
-import {IAccesses, ISearchInterfaceConfiguration} from '../SearchInterfaces.model.js';
+import {ISearchInterfaceConfiguration} from '../SearchInterfaces.model.js';
 
 jest.mock('../../../APICore.js');
 

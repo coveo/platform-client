@@ -1,6 +1,10 @@
 import API from '../../APICore.js';
-import {ExistingHostedInterface, NewHostedInterface, PageModel} from '../BaseInterfaces.js';
-import {ListHostedInterfacesParams} from '../HostedInterfacesCore/index.js';
+import {PageModel} from '../BaseInterfaces.js';
+import {
+    ExistingHostedInterface,
+    ListHostedInterfacesParams,
+    NewHostedInterface,
+} from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
 import {IPXInterfaceConfiguration} from './IPXInterface.model.js';
 

@@ -1,12 +1,14 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
+import {PageModel} from '../BaseInterfaces.js';
 import {
     ExistingHostedInterface,
     IAccesses,
+    IManifestParameters,
+    IManifestResponse,
     ListHostedInterfacesParams,
     NewHostedInterface,
-    PageModel,
-} from '../index.js';
+} from '../HostedInterfacesCore/index.js';
 import {SearchPageInterfaceConfiguration} from './NextGenSearchPages.model.js';
 
 export default class NextGenSearchPages extends Resource {
