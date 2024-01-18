@@ -109,4 +109,11 @@ export default class NextGenSearchPages extends Resource {
     requestAccess(searchPageId: string): Promise<void> {
         return this.api.post<void>(`${NextGenSearchPages.baseUrl}/${searchPageId}/accesses/request`);
     }
+
+    manifest(
+        interfaceId: string,
+        options?: IManifestParameters,
+    ): Promise<IManifestResponse<SearchPageInterfaceConfiguration>> {
+        return this.api.post(`${NextGenSearchPages.baseUrl}/${interfaceId}/manifest`, options);
+    }
 }
