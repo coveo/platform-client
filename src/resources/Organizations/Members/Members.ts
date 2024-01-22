@@ -17,7 +17,7 @@ export default class Members extends Resource {
      * deletes the member from all groups of an organization.
      * Note: Deleted users can still be included by domain.
      *
-     * @param {string} username The username of the member to delete.
+     * @param username The username of the member to delete.
      */
     delete(username: string) {
         return this.api.delete<void>(`${Members.baseUrl}/${username}`);
@@ -25,7 +25,7 @@ export default class Members extends Resource {
     /**
      * Shows a member of an organization.
      *
-     * @param {string} username  The username of the member to show.
+     * @param username  The username of the member to show.
      */
     get(username: string) {
         return this.api.get<OrganizationMemberModel>(`${Members.baseUrl}/${username}`);
@@ -39,7 +39,7 @@ export default class Members extends Resource {
     /**
      * Updates the members of an organization.
      *
-     * @param {boolean} [sendEmailToInvitedUsers="true"] Whether to send an invitation email alongside the invite(s).
+     * @param sendEmailToInvitedUsers Whether to send an invitation email alongside the invite(s). Default to true.
      */
     updateOrganizationMembers(model: OrganizationMemberModel[], options?: UpdateGroupOptions) {
         return this.api.put<OrganizationMemberModel[]>(this.buildPath(Members.baseUrl, options), model);
@@ -47,7 +47,7 @@ export default class Members extends Resource {
     /**
      * Updates a member of an organization.
      *
-     * @param {string} username} The username of the member to update.
+     * @param username The username of the member to update.
      */
     updateMember(username: string, model: OrganizationMemberModel) {
         return this.api.put<OrganizationMemberModel>(`${Members.baseUrl}/${username}`, model);
@@ -55,7 +55,7 @@ export default class Members extends Resource {
     /**
      * Lists the groups to which an organization member belongs.
      *
-     * @param {string} username The username of the user for which to list groups.
+     * @param username The username of the user for which to list groups.
      */
     getGroups(username: string) {
         return this.api.get<GroupModel[]>(`${Members.baseUrl}/${username}/groups`);
