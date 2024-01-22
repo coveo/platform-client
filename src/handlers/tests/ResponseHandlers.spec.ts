@@ -69,9 +69,9 @@ describe('ResponseHandlers', () => {
             }
 
             expect(rejectedError?.status).toBe(403);
-            expect(rejectedError?.title).toBe('Blocked for security reason');
+            expect(rejectedError?.title).toBe('Request blocked for security reasons');
             expect(rejectedError?.detail).toBe(
-                'The web application firewall deemed that request to be dangerous so it was blocked',
+                'The web application firewall has identified the request to be potentially malicious.',
             );
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
@@ -89,8 +89,10 @@ describe('ResponseHandlers', () => {
             }
 
             expect(rejectedError?.status).toBe(502);
-            expect(rejectedError?.title).toBe('The endpoint is not reachable ...');
-            expect(rejectedError?.detail).toBe('Probably because bad gateway');
+            expect(rejectedError?.title).toBe('Endpoint unreachable');
+            expect(rejectedError?.detail).toBe(
+                'The service is currently unable to reach the necessary endpoint, likely due to a bad gateway. Please try your request again later.',
+            );
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
 
@@ -108,7 +110,7 @@ describe('ResponseHandlers', () => {
 
             expect(rejectedError?.status).toBe(403);
             expect(rejectedError?.title).toBe('There is some issue with the endpoint and we cant parse the error');
-            expect(rejectedError?.detail).toBe('...');
+            expect(rejectedError?.detail).toBe(data);
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
 

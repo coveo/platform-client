@@ -39,37 +39,38 @@ const error: ResponseHandler = {
     },
 };
 
-const blockedByWAFHandler: ResponseHandler = {
+const blockedByWAF: ResponseHandler = {
     canProcess: (response) => response.headers.get('x-coveo-waf-action') === 'block',
     process: async (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        platformError.title = 'Blocked for security reason'; // TODO: technical writer
-        platformError.detail = 'The web application firewall deemed that request to be dangerous so it was blocked'; // TODO: technical writer
+        platformError.title = 'Request blocked for security reasons';
+        platformError.detail = 'The web application firewall has identified the request to be potentially malicious.';
         platformError.status = response.status;
         throw platformError;
     },
 };
 
-const badGatewayHandler: ResponseHandler = {
+const badGateway: ResponseHandler = {
     canProcess: (response) => response.status === 502,
     process: async (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        platformError.title = 'The endpoint is not reachable ...'; // TODO: technical writer
-        platformError.detail = 'Probably because bad gateway'; // TODO: technical writer
+        platformError.title = 'Endpoint unreachable';
+        platformError.detail =
+            'The service is currently unable to reach the necessary endpoint, likely due to a bad gateway. Please try your request again later.';
         platformError.status = response.status;
         throw platformError;
     },
 };
 
-const genericHTMLErrorHandler: ResponseHandler = {
+const htmlError: ResponseHandler = {
     canProcess: (response) => response.headers.get('content-type') === 'text/html',
     process: async (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
         platformError.title = 'There is some issue with the endpoint and we cant parse the error'; // TODO: technical writer
-        platformError.detail = '...'; // TODO: technical writer
+        platformError.detail = await response.text();
         platformError.status = response.status;
         throw platformError;
     },
@@ -89,22 +90,15 @@ const getErrorPropsFromAliases = (responseJson: object, aliasList: string[]): st
     return null;
 };
 
-const defaultResponseHandlers = Object.freeze([
-    noContent,
-    success,
-    blockedByWAFHandler,
-    badGatewayHandler,
-    genericHTMLErrorHandler,
-    error,
-]);
+const defaultResponseHandlers = Object.freeze([noContent, success, blockedByWAF, badGateway, htmlError, error]);
 
 export const ResponseHandlers = Object.freeze({
     noContent,
     success,
     successBlob,
-    blockedByWAFHandler,
-    badGatewayHandler,
-    genericHTMLErrorHandler,
+    blockedByWAF,
+    badGateway,
+    htmlError,
     error,
 });
 
