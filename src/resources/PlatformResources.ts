@@ -18,6 +18,7 @@ import Index from './Indexes/Indexes.js';
 import InProductExperiences from './InProductExperiences/InProductExperiences.js';
 import InsightPanelConfig from './InsightPanelConfigs/InsightPanelConfig.js';
 import InsightPanelInterface from './InsightPanelInterfaces/InsightPanelInterface.js';
+import Invites from './Invites/Invites.js';
 import IPXInterface from './IPXInterfaces/IPXInterface.js';
 import License from './License/License.js';
 import Limits from './Limits/Limits.js';
@@ -71,6 +72,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'index', resource: Index},
     {key: 'insightPanelConfig', resource: InsightPanelConfig},
     {key: 'insightPanelInterface', resource: InsightPanelInterface},
+    {key: 'invites', resource: Invites},
     {key: 'ipx', resource: InProductExperiences},
     {key: 'ipxInterface', resource: IPXInterface},
     {key: 'license', resource: License},
@@ -130,6 +132,7 @@ class PlatformResources {
     index: Index;
     insightPanelConfig: InsightPanelConfig;
     insightPanelInterface: InsightPanelInterface;
+    invites: Invites;
     ipx: InProductExperiences;
     ipxInterface: IPXInterface;
     license: License;
