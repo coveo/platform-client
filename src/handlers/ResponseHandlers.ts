@@ -69,7 +69,8 @@ const htmlError: ResponseHandler = {
     process: async (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        platformError.title = 'There is some issue with the endpoint and we cant parse the error'; // TODO: technical writer
+        platformError.title =
+            'Unable to process the request. An issue has occurred with the endpoint, and the system is unable to parse the error.';
         platformError.detail = await response.text();
         platformError.status = response.status;
         throw platformError;

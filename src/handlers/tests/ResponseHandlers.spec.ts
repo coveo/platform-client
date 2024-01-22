@@ -109,7 +109,9 @@ describe('ResponseHandlers', () => {
             }
 
             expect(rejectedError?.status).toBe(403);
-            expect(rejectedError?.title).toBe('There is some issue with the endpoint and we cant parse the error');
+            expect(rejectedError?.title).toBe(
+                'Unable to process the request. An issue has occurred with the endpoint, and the system is unable to parse the error.',
+            );
             expect(rejectedError?.detail).toBe(data);
             expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
         });
