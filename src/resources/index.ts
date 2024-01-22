@@ -49,7 +49,6 @@ export * from './SearchPages/index.js';
 export * from './SearchUsageMetrics/index.js';
 export * from './SecurityCache/index.js';
 export * from './Sources/index.js';
-export * from './TableauService/index.js';
 export * from './UsageAnalytics/index.js';
 export * from './Users/index.js';
 export * from './Vaults/index.js';

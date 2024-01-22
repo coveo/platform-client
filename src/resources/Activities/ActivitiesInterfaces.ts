@@ -76,7 +76,7 @@ export interface ActivityFacetModel {
 
 export interface ActivitiesResourceAndOperations {
     /**
-    * Contains resources and their corresponding operations, where the key is the name of the resource.
-    */
-    [key:string]: ActivityOperation[]
+     * Contains resources and their corresponding operations, where the key is the name of the resource.
+     */
+    [key: string]: ActivityOperation[];
 }
