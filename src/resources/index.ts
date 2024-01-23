@@ -21,6 +21,7 @@ export * from './Indexes/index.js';
 export * from './InProductExperiences/index.js';
 export * from './InsightPanelConfigs/index.js';
 export * from './InsightPanelInterfaces/index.js';
+export * from './Invites/index.js';
 export * from './IPXInterfaces/index.js';
 export * from './License/index.js';
 export * from './Limits/index.js';
