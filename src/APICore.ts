@@ -64,35 +64,7 @@ export default class API {
     }
 
     async get<T = Record<string, unknown>>(url: string, args?: CoveoPlatformClientRequestInit): Promise<T> {
-        try {
-            return await this.request<T>(url, this.buildRequestInit('GET', args), args?.responseBodyFormat);
-        } catch (error) {
-            // Warning: the logic below does not do what the original author intended/mentions.
-            // It will fullfil the promise with `undefined`, instead of keeping it pending.
-            if (error.name === 'AbortError') {
-                return undefined as T; // We don't want to resolve or reject the promise
-            } else {
-                throw error;
-            }
-        }
-    }
-
-    /**
-     * @deprecated Use `get` with `{responseBodyFormat: 'blob'}` argument instead. Will be removed in version 45
-     */
-    async getFile(url: string, args?: CoveoPlatformClientRequestInit): Promise<Blob> {
-        try {
-            return await this.request(url, this.buildRequestInit('GET', args), 'blob');
-        } catch (error) {
-            // Warning: the logic below does not do what the original author intended/mentions.
-            // It will fullfil the promise with `undefined`, instead of keeping it pending.
-            if (error.name === 'AbortError') {
-                // We don't want to resolve or reject the promise
-                return undefined as unknown as Blob;
-            } else {
-                throw error;
-            }
-        }
+        return await this.request<T>(url, this.buildRequestInit('GET', args), args?.responseBodyFormat);
     }
 
     async post<T = Record<string, unknown>>(
