@@ -21,3 +21,6 @@ const cjsPath = 'dist/cjs/resources/Resource.js';
 writeFileSync(cjsPath, readFileSync(cjsPath, 'utf-8').replaceAll(/#query-string/gm, 'query-string-cjs'));
 const esmPath = 'dist/esm/resources/Resource.js';
 writeFileSync(esmPath, readFileSync(esmPath, 'utf-8').replaceAll(/#query-string/gm, 'query-string-esm'));
+const dtsPath = 'dist/types/resources/Resource.d.ts';
+writeFileSync(dtsPath, readFileSync(dtsPath, 'utf-8').replaceAll(/#query-string/gm, 'query-string'));
+
