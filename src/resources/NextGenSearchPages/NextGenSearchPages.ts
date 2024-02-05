@@ -1,12 +1,14 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
+import {PageModel} from '../BaseInterfaces.js';
 import {
     ExistingHostedInterface,
     IAccesses,
+    IManifestParameters,
+    IManifestResponse,
     ListHostedInterfacesParams,
     NewHostedInterface,
-    PageModel,
-} from '../index.js';
+} from '../HostedInterfacesCore/index.js';
 import {SearchPageInterfaceConfiguration} from './NextGenSearchPages.model.js';
 
 export default class NextGenSearchPages extends Resource {
@@ -106,5 +108,12 @@ export default class NextGenSearchPages extends Resource {
 
     requestAccess(searchPageId: string): Promise<void> {
         return this.api.post<void>(`${NextGenSearchPages.baseUrl}/${searchPageId}/accesses/request`);
+    }
+
+    manifest(
+        interfaceId: string,
+        options?: IManifestParameters,
+    ): Promise<IManifestResponse<SearchPageInterfaceConfiguration>> {
+        return this.api.post(`${NextGenSearchPages.baseUrl}/${interfaceId}/manifest`, options);
     }
 }

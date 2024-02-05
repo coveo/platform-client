@@ -5,7 +5,7 @@ import {
     HostedInterfaceResultTemplateBadge,
     IAccesses,
     ISortCriteria,
-} from '../index.js';
+} from '../HostedInterfacesCore/index.js';
 
 export enum SearchPageResultActions {
     copyToClipboard = 'copyToClipboard',

@@ -1,12 +1,12 @@
 import API from '../../../APICore.js';
+import {SortingBy} from '../../Enums.js';
 import {
     ExistingHostedInterface,
     HostedInterfaceConditionOperator,
-    SearchPageInterfaceConfiguration,
-    SearchPageLayout,
-    SortingBy,
-} from '../../../Entry.js';
+    IManifestParameters,
+} from '../../HostedInterfacesCore/index.js';
 import NextGenSearchPages from '../NextGenSearchPages.js';
+import {SearchPageInterfaceConfiguration, SearchPageLayout} from '../NextGenSearchPages.model.js';
 jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
@@ -325,6 +325,26 @@ describe('NextGenSearchPages', () => {
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/request`);
+        });
+    });
+
+    describe('manifest', () => {
+        it('makes a POST call (without a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+
+            nextGenSearchPages.manifest(id);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/manifest`, undefined);
+        });
+
+        it('makes a POST call (with a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+            const id = 'search-interface-id';
+            const options: IManifestParameters = {pagePlaceholders: {results: 'myresults'}};
+            nextGenSearchPages.manifest(id, options);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/manifest`, options);
         });
     });
 });

@@ -1,13 +1,11 @@
 import API from '../../APICore.js';
-import {New, PageModel} from '../../Entry.js';
 import Resource from '../Resource.js';
+import {New, PageModel} from '../BaseInterfaces.js';
+import {IAccesses, IManifestParameters, IManifestResponse} from '../HostedInterfacesCore/index.js';
 import {
-    IAccesses,
     IListSearchInterfacesParameters,
     ISearchInterfaceConfiguration,
     ISearchInterfaceConfigurationResponse,
-    IManifestParameters,
-    IManifestResponse,
 } from './SearchInterfaces.model.js';
 
 export default class SearchInterfaces extends Resource {
@@ -57,7 +55,10 @@ export default class SearchInterfaces extends Resource {
         );
     }
 
-    manifest(interfaceId: string, options?: IManifestParameters): Promise<IManifestResponse> {
+    manifest(
+        interfaceId: string,
+        options?: IManifestParameters,
+    ): Promise<IManifestResponse<ISearchInterfaceConfiguration>> {
         return this.api.post(`${SearchInterfaces.baseUrl}/${interfaceId}/manifest/v1`, options);
     }
 }
