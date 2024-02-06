@@ -188,37 +188,6 @@ describe('APICore', () => {
             });
         });
 
-        /**
-         * @deprecated Will be removed in version 45
-         */
-        describe('getFile', () => {
-            it('should do a GET request to the specified url and resolve with a blob', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
-                const expectedResponse = await new Response(JSON.stringify(testData.response)).blob();
-                const response = await api.getFile(testData.route);
-
-                expect(fetchMock).toHaveBeenCalledTimes(1);
-                const [url, options] = fetchMock.mock.calls[0];
-
-                expect(url).toBe(`${testConfig.host}${testData.route}`);
-                expect(options?.method).toBe('GET');
-                expect(response).toEqual(expectedResponse);
-            });
-
-            it('should make the promise fail on a failed request', async () => {
-                const error = new Error('the request has failed');
-                fetchMock.mockRejectedValue(error);
-                await expect(api.getFile(testData.route)).rejects.toThrow(error);
-            });
-
-            it('should bind GET requests to an abort signal', async () => {
-                fetchMock.mockResponseOnce(JSON.stringify(testData.response));
-                await api.getFile(testData.route);
-                const init = fetchMock.mock.calls[0][1];
-                expect(init?.signal).toBeInstanceOf(AbortSignal);
-            });
-        });
-
         describe('post', () => {
             it('should do a simple POST request', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
@@ -446,30 +415,15 @@ describe('APICore', () => {
                 expect(init?.signal?.aborted).toBe(false);
             });
 
-            // Warning: the only reason the assertions in this test pass, is because a Promise
-            // never resolves in the same stack frame as it was created. You can test this for
-            // yourself by moving the `await subject;` statement before the expect calls,
-            // which will make the test fail.
-            it('should not resolve nor reject the fetch promise', async () => {
-                jest.useFakeTimers();
-                const resolvedPromiseSpy = jest.fn().mockName('resolvedPromiseSpy');
-                const rejectedPromiseSpy = jest.fn().mockName('rejectedPromiseSpy');
-
+            it('throws an AbortError when aborting a GET request', async () => {
                 fetchMock.mockImplementationOnce(
                     delayedResponse(new Response(JSON.stringify(testData.response), {status: 200}), 1000),
                 );
 
-                const subject = api.get(testData.route);
-                subject.then(resolvedPromiseSpy, rejectedPromiseSpy);
-
-                jest.advanceTimersByTime(500);
+                const request = api.get(testData.route);
                 api.abortGetRequests();
-                jest.advanceTimersByTime(2000);
 
-                expect(resolvedPromiseSpy).not.toHaveBeenCalled();
-                expect(rejectedPromiseSpy).not.toHaveBeenCalled();
-
-                await subject;
+                await expect(request).rejects.toThrow('This operation was aborted');
             });
         });
     });

@@ -1,6 +1,6 @@
 import {OrganizationParamParts} from '../CommonParamParts.js';
 
-export interface UsersFilterModel {
+export interface UAUsersFilterModel {
     /**
      * The filter id
      */
@@ -23,14 +23,14 @@ export interface UsersFilterModel {
     value: string;
 }
 
-export interface UsersFiltersModel {
+export interface UAUsersFiltersModel {
     /**
      * The filters that are applied to the user
      */
-    filters: UsersFilterModel[];
+    filters: UAUsersFilterModel[];
 }
 
-export interface UsersReportModel {
+export interface UAUsersReportModel {
     /**
      * The report id
      */
@@ -61,14 +61,14 @@ export interface UsersReportModel {
     filters: string[];
 }
 
-export interface UsersReportsModel {
+export interface UAUsersReportsModel {
     /**
      * The reports the user can view
      */
-    reports: UsersReportModel[];
+    reports: UAUsersReportModel[];
 }
 
-export interface UserModel {
+export interface UAUserModel {
     /**
      * The user id
      */
@@ -87,14 +87,14 @@ export interface UserModel {
     reports: string[];
 }
 
-export interface ListUsersFiltersParams extends OrganizationParamParts {
+export interface ListUAUsersFiltersParams extends OrganizationParamParts {
     /**
      * Whether to include th values inherited from a user's groups in the response
      */
     includeGroups?: boolean;
 }
 
-export interface FilterParams {
+export interface UAUserFilterParams {
     /**
      * The id or value of the filter.
      */
@@ -105,7 +105,7 @@ export interface FilterParams {
     id: boolean;
 }
 
-export interface ListUsersReportsParams extends OrganizationParamParts {
+export interface ListUAUsersReportsParams extends OrganizationParamParts {
     /**
      * Whether to include the detailed configuration of the report in the response.
      */

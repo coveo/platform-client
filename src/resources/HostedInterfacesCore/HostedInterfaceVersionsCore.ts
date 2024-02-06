@@ -1,4 +1,5 @@
 import {Paginated} from '../BaseInterfaces.js';
+import {SortingBy, SortingOrder} from '../Enums.js';
 
 export interface HostedInterfaceChangeInfo {
     /**
@@ -125,4 +126,76 @@ export interface RestoreInterfaceVersionParams {
      * The optional version label.
      */
     label?: string;
+}
+
+export type NewHostedInterface<T, K extends keyof T | null = null> = Omit<
+    Partial<T> & {name: string},
+    'id' | 'created' | 'createdBy' | 'updated' | 'updatedBy' | NonNullable<K>
+>;
+export type ExistingHostedInterface<T, K extends keyof T | null = null> = Omit<
+    T,
+    'id' | 'created' | 'createdBy' | 'updated' | 'updatedBy' | NonNullable<K>
+>;
+
+export interface IAccesses {
+    /**
+     * The list of users that are allowed to access the search interface.
+     */
+    users: string[];
+
+    /**
+     * The list of domains that are allowed to access the search interface.
+     */
+    domains: string[];
+
+    /**
+     * When set to true, all users can share and see the search page.
+     */
+    sharingLinkEnabled?: boolean;
+
+    /**
+     * When set to true, the domain sharing is enabled. Otherwise, only users that have explicitly access to the search page can access it.
+     */
+    sharingDomainEnabled?: boolean;
+}
+
+export interface ISortCriteria {
+    /**
+     * Indicates the kind of sort criterion.
+     */
+    by: SortingBy;
+
+    /**
+     * Label of the sort criterion.
+     */
+    label: string;
+
+    /**
+     * Specify the sort order if applicable.
+     * Default value when sorting by date is descending.
+     * Default value when sorting by field is ascending.
+     * No sort order value is applicable when sorting by relevancy.
+     */
+    order?: SortingOrder;
+
+    /**
+     * The [field](https://docs.coveo.com/en/200) on which the sort is based on. For example: filetype.
+     * Required when sorting by field.
+     * This property is ignored unless you are sorting by field.
+     */
+    field?: string;
+}
+
+export interface IManifestParameters {
+    /**
+     * The placeholders for the page.
+     */
+    pagePlaceholders?: IPagePlaceholders;
+}
+
+export interface IPagePlaceholders {
+    /**
+     * A placeholder for the result list and result templates.
+     */
+    results?: string;
 }

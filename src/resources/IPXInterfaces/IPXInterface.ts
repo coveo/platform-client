@@ -1,6 +1,10 @@
 import API from '../../APICore.js';
-import {New, PageModel} from '../BaseInterfaces.js';
-import {ListHostedInterfacesParams} from '../HostedInterfacesCore/index.js';
+import {PageModel} from '../BaseInterfaces.js';
+import {
+    ExistingHostedInterface,
+    ListHostedInterfacesParams,
+    NewHostedInterface,
+} from '../HostedInterfacesCore/index.js';
 import Resource from '../Resource.js';
 import {IPXInterfaceConfiguration} from './IPXInterface.model.js';
 
@@ -11,7 +15,7 @@ export default class IPXInterface extends Resource {
         return this.api.get<PageModel<IPXInterfaceConfiguration>>(this.buildPath(IPXInterface.baseUrl, options));
     }
 
-    create(ipxInterfaceConfig: New<IPXInterfaceConfiguration>) {
+    create(ipxInterfaceConfig: NewHostedInterface<IPXInterfaceConfiguration>) {
         return this.api.post<IPXInterfaceConfiguration>(IPXInterface.baseUrl, ipxInterfaceConfig);
     }
 
@@ -23,19 +27,16 @@ export default class IPXInterface extends Resource {
         return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${ipxInterfaceId}`);
     }
 
-    update(ipxInterfaceConfig: IPXInterfaceConfiguration) {
-        return this.api.put<IPXInterfaceConfiguration>(
-            `${IPXInterface.baseUrl}/${ipxInterfaceConfig.id}`,
-            ipxInterfaceConfig,
-        );
+    update(ipxInterfaceId: string, ipxInterfaceConfig: NewHostedInterface<IPXInterfaceConfiguration>) {
+        return this.api.put<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${ipxInterfaceId}`, ipxInterfaceConfig);
     }
 
     getLoader(ipxInterfaceId: string) {
         return this.api.get<IPXInterfaceConfiguration>(`${IPXInterface.baseUrl}/${ipxInterfaceId}/loader`);
     }
 
-    generatePreview(ipxInterfaceConfig: IPXInterfaceConfiguration) {
-        return this.api.post<string>(`${IPXInterface.baseUrl}/${ipxInterfaceConfig.id}/preview`, ipxInterfaceConfig);
+    generatePreview(ipxId: string, ipxInterfaceConfig: ExistingHostedInterface<IPXInterfaceConfiguration>) {
+        return this.api.post<string>(`${IPXInterface.baseUrl}/${ipxId}/preview`, ipxInterfaceConfig);
     }
 
     getEditInterface(ipxInterfaceId: string) {

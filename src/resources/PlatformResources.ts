@@ -18,6 +18,7 @@ import Index from './Indexes/Indexes.js';
 import InProductExperiences from './InProductExperiences/InProductExperiences.js';
 import InsightPanelConfig from './InsightPanelConfigs/InsightPanelConfig.js';
 import InsightPanelInterface from './InsightPanelInterfaces/InsightPanelInterface.js';
+import Invites from './Invites/Invites.js';
 import IPXInterface from './IPXInterfaces/IPXInterface.js';
 import License from './License/License.js';
 import Limits from './Limits/Limits.js';
@@ -47,7 +48,6 @@ import Sources from './Sources/Sources.js';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics.js';
 import User from './Users/User.js';
 import Vaults from './Vaults/Vaults.js';
-import TableauService from './TableauService/TableauService.js';
 import HostedPages from './HostedPages/HostedPages.js';
 import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
 import Project from './Projects/Project.js';
@@ -72,6 +72,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'index', resource: Index},
     {key: 'insightPanelConfig', resource: InsightPanelConfig},
     {key: 'insightPanelInterface', resource: InsightPanelInterface},
+    {key: 'invites', resource: Invites},
     {key: 'ipx', resource: InProductExperiences},
     {key: 'ipxInterface', resource: IPXInterface},
     {key: 'license', resource: License},
@@ -104,7 +105,6 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'vault', resource: Vaults},
     {key: 'notification', resource: Notifications},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
-    {key: 'tableauService', resource: TableauService},
     {key: 'searchAnalysis', resource: SearchAnalysis},
     {key: 'project', resource: Project},
     {key: 'resources', resource: Resources},
@@ -132,6 +132,7 @@ class PlatformResources {
     index: Index;
     insightPanelConfig: InsightPanelConfig;
     insightPanelInterface: InsightPanelInterface;
+    invites: Invites;
     ipx: InProductExperiences;
     ipxInterface: IPXInterface;
     license: License;
@@ -162,7 +163,6 @@ class PlatformResources {
     ua: UsageAnalytics;
     user: User;
     vault: Vaults;
-    tableauService: TableauService;
     project: Project;
     resources: Resources;
 

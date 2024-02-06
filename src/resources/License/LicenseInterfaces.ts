@@ -202,12 +202,4 @@ export enum LicenseDataVisualizationAccessLevel {
      * Basic access
      */
     BASIC = 'BASIC',
-    /**
-     * Read access to Tableau data
-     */
-    TABLEAU_READ = 'TABLEAU_READ',
-    /**
-     * Write access to Tableau data
-     */
-    TABLEAU_WRITE = 'TABLEAU_WRITE',
 }

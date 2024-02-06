@@ -169,3 +169,59 @@ export interface HostedInterfaceConfiguration {
      */
     tabs: HostedInterfaceTab[];
 }
+
+export interface IManifestResponse<Configuration> {
+    /**
+     * The HTML markup of the search interface along with configured placeholders.
+     */
+    markup: string;
+    /**
+     * The Atomic results configuration information.
+     */
+    results: IPageManifestResults;
+    /**
+     * The Atomic related styling in CSS format.
+     */
+    style: IPageManifestStyle;
+    /**
+     * The complete search interface configuration.
+     */
+    config: Configuration;
+}
+
+export interface IPageManifestResultTemplate {
+    /**
+     * The HTML markup of the content of the result template.
+     */
+    markup: string;
+    /**
+     * The Atomic [result template component](https://docs.coveo.com/en/atomic/latest/reference/components/atomic-result-template/)'s properties.
+     */
+    attributes: Record<string, string>;
+}
+
+export interface IPageManifestResults {
+    /**
+     * The placeholder for the result list and result templates.
+     */
+    placeholder?: string;
+    /**
+     * The Atomic [result list component](https://docs.coveo.com/en/atomic/latest/reference/components/atomic-result-list/#properties)'s properties.
+     */
+    attributes: Record<string, string>;
+    /**
+     * The Atomic result template configuration information.
+     */
+    templates: IPageManifestResultTemplate[];
+}
+
+export interface IPageManifestStyle {
+    /**
+     * The CSS to set [Atomic theme variables](https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/#theme-variables).
+     */
+    theme: string;
+    /**
+     * The page layout CSS.
+     */
+    layout: string;
+}

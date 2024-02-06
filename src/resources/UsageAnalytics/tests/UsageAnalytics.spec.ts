@@ -6,6 +6,7 @@ import Filters from '../Read/Filters/Filters.js';
 import Reports from '../Read/Reports/Reports.js';
 import Snowflake from '../Read/Snowflake/Snowflake.js';
 import Statistics from '../Read/Statistics/Statistics.js';
+import UAUsers from '../Read/UAUsers/UAUsers.js';
 import UsageAnalytics from '../UsageAnalytics.js';
 
 jest.mock('../../../APICore.js');
@@ -55,5 +56,10 @@ describe('UsageAnalytics', () => {
     it('registers the filters resource', () => {
         expect(ua.filters).toBeDefined();
         expect(ua.filters).toBeInstanceOf(Filters);
+    });
+
+    it('registers the users resource', () => {
+        expect(ua.users).toBeDefined();
+        expect(ua.users).toBeInstanceOf(UAUsers);
     });
 });

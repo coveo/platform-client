@@ -3,6 +3,7 @@ import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.j
 
 /** Check whether the response status is `204 No Content`. */
 export const isNoContent: Predicate<Response> = (response) => response.status === 204;
+
 /** Check whether the response is considered to have any "ok" status code (not just 200). */
 export const isAnyOkStatus: Predicate<Response> = (response) => response.ok;
 
@@ -38,6 +39,44 @@ const error: ResponseHandler = {
     },
 };
 
+const blockedByWAF: ResponseHandler = {
+    canProcess: (response) => response.headers.get('x-coveo-waf-action') === 'block',
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title = 'Request blocked for security reasons';
+        platformError.detail = 'The web application firewall has identified the request to be potentially malicious.';
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
+const badGateway: ResponseHandler = {
+    canProcess: (response) => response.status === 502,
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title = 'Endpoint unreachable';
+        platformError.detail =
+            'The service is currently unable to reach the necessary endpoint, likely due to a bad gateway. Please try your request again later.';
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
+const htmlError: ResponseHandler = {
+    canProcess: (response) => response.headers.get('content-type') === 'text/html',
+    process: async (response) => {
+        const platformError = new CoveoPlatformClientError();
+        platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
+        platformError.title =
+            'Unable to process the request. An issue has occurred with the endpoint, and the system is unable to parse the error.';
+        platformError.detail = await response.text();
+        platformError.status = response.status;
+        throw platformError;
+    },
+};
+
 const errorTypeAliases = ['type', 'errorCode', 'code'];
 const getErrorTypeFromAliases = (responseJson: object) => getErrorPropsFromAliases(responseJson, errorTypeAliases);
 const errorDetailAliases = ['message'];
@@ -52,8 +91,17 @@ const getErrorPropsFromAliases = (responseJson: object, aliasList: string[]): st
     return null;
 };
 
-const defaultResponseHandlers = Object.freeze([noContent, success, error]);
-export const ResponseHandlers = Object.freeze({noContent, success, successBlob, error});
+const defaultResponseHandlers = Object.freeze([noContent, success, blockedByWAF, badGateway, htmlError, error]);
+
+export const ResponseHandlers = Object.freeze({
+    noContent,
+    success,
+    successBlob,
+    blockedByWAF,
+    badGateway,
+    htmlError,
+    error,
+});
 
 export default async <T>(
     response: Response,
