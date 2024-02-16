@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
 import {SinglePermissionIdentityType} from '../../Enums.js';
 import PushApi from '../PushApi.js';
-import {SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces.js';
+import {FileContainer, SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -25,6 +25,27 @@ describe('PushAPI', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         pushApi = new PushApi(api, serverlessApi);
+    });
+
+    describe('createFileContainer', () => {
+        it('should make a POST call to /push/v1/organizations/{organizationName}/files', async () => {
+            serverlessApi.post.mockImplementation(
+                async (): Promise<FileContainer> => ({
+                    fileId: 'somefileid',
+                    requiredHeaders: {a: 'b', c: 'd'},
+                    uploadUri: 'https://something',
+                }),
+            );
+
+            const fileContainer = await pushApi.createFileContainer();
+            expect(fileContainer).toEqual({
+                fileId: 'somefileid',
+                requiredHeaders: {a: 'b', c: 'd'},
+                uploadUri: 'https://something',
+            });
+            expect(serverlessApi.post).toHaveBeenCalledTimes(1);
+            expect(serverlessApi.post).toHaveBeenCalledWith('/push/v1/organizations/{organizationName}/files');
+        });
     });
 
     describe('Security Identity', () => {

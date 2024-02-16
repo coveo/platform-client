@@ -1,5 +1,11 @@
 import {SinglePermissionResult, SinglePermissionIdentityType} from '../Enums.js';
 
+export interface FileContainer {
+    uploadUri: string;
+    fileId: string;
+    requiredHeaders: Record<string, string>;
+}
+
 export interface SecurityIdentityAliasModel extends SecurityIdentityBase {
     mappings: AliasMappings;
 }
