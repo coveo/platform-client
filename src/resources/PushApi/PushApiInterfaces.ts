@@ -6,6 +6,15 @@ export interface FileContainer {
     requiredHeaders: Record<string, string>;
 }
 
+export interface FileContainerOptions {
+    /**
+     * Whether to generate the presigned URL using the virtual hosted-style URL.
+     *
+     * Example of a virtual hosted-style url: `https://coveo-nprod-customer-data.s3.us-east-1.amazonaws.com/proda/blobstore/mycoveocloudv2organizationg8tp8wu3/b5e8767e-8f0d-4a89-9095-1127915c89c7[...]`
+     */
+    useVirtualHostedStyleUrl?: boolean;
+}
+
 export interface SecurityIdentityAliasModel extends SecurityIdentityBase {
     mappings: AliasMappings;
 }

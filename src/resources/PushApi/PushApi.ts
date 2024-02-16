@@ -2,6 +2,7 @@ import API from '../../APICore.js';
 import Resource from '../Resource.js';
 import {
     FileContainer,
+    FileContainerOptions,
     SecurityIdentityAliasModel,
     SecurityIdentityBatchConfig,
     SecurityIdentityDelete,
@@ -13,8 +14,8 @@ import {
 export default class PushApi extends Resource {
     static baseUrl = `/push/v1/organizations/${API.orgPlaceholder}`;
 
-    createFileContainer() {
-        return this.serverlessApi.post<FileContainer>(`${PushApi.baseUrl}/files`);
+    createFileContainer(options?: FileContainerOptions) {
+        return this.serverlessApi.post<FileContainer>(this.buildPath(`${PushApi.baseUrl}/files`, options));
     }
 
     createOrUpdateSecurityIdentityAlias(

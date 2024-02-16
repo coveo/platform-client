@@ -28,7 +28,19 @@ describe('PushAPI', () => {
     });
 
     describe('createFileContainer', () => {
-        it('should make a POST call to /push/v1/organizations/{organizationName}/files', async () => {
+        test.each([
+            ['/push/v1/organizations/{organizationName}/files', undefined],
+            ['/push/v1/organizations/{organizationName}/files', {}],
+            [
+                '/push/v1/organizations/{organizationName}/files?useVirtualHostedStyleUrl=true',
+                {useVirtualHostedStyleUrl: true},
+            ],
+            [
+                '/push/v1/organizations/{organizationName}/files?useVirtualHostedStyleUrl=false',
+                {useVirtualHostedStyleUrl: false},
+            ],
+            ['/push/v1/organizations/{organizationName}/files', {useVirtualHostedStyleUrl: undefined}],
+        ])('should make a POST call to %s when called with %o', async (url, options) => {
             serverlessApi.post.mockImplementation(
                 async (): Promise<FileContainer> => ({
                     fileId: 'somefileid',
@@ -37,14 +49,14 @@ describe('PushAPI', () => {
                 }),
             );
 
-            const fileContainer = await pushApi.createFileContainer();
+            const fileContainer = await pushApi.createFileContainer(options);
             expect(fileContainer).toEqual({
                 fileId: 'somefileid',
                 requiredHeaders: {a: 'b', c: 'd'},
                 uploadUri: 'https://something',
             });
             expect(serverlessApi.post).toHaveBeenCalledTimes(1);
-            expect(serverlessApi.post).toHaveBeenCalledWith('/push/v1/organizations/{organizationName}/files');
+            expect(serverlessApi.post).toHaveBeenCalledWith(url);
         });
     });
 
