@@ -4,7 +4,12 @@ import {ActivityOperation} from '../../Enums.js';
 import {ScheduleModel} from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
 import SourcesFields from '../SourcesFields/SourcesFields.js';
-import {CreateSourceModel, ListSourcesParams, RawSourceConfig} from '../SourcesInterfaces.js';
+import {
+    CreateSourceModel,
+    ListOperationalStatusSourcesParams,
+    ListSourcesParams,
+    RawSourceConfig,
+} from '../SourcesInterfaces.js';
 import SourcesMappings from '../SourcesMappings/SourcesMappings.js';
 
 jest.mock('../../../APICore.js');
@@ -53,6 +58,23 @@ describe('Sources', () => {
             source.list(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/pages?stringFilterType=EXACTMATCH`);
+        });
+    });
+
+    describe('listOperationalStatusBySourceIds', () => {
+        it('should make a POST call to the specific Sources url', () => {
+            const mockParams = {
+                page: 0,
+                perPage: 50,
+            } as ListOperationalStatusSourcesParams;
+            const mockSourceIds = ['source-1', 'source-2'];
+
+            source.listOperationalStatusBySourceIds(mockParams, mockSourceIds);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${Sources.baseUrl}/sourceoperationalstatus/ids?page=0&perPage=50`,
+                mockSourceIds,
+            );
         });
     });
 

@@ -55,6 +55,22 @@ export default class Sources extends Resource {
         );
     }
 
+    /**
+     * Returns a list of sources according to an operational status and a list of source IDs
+     *
+     * @param {ListOperationalStatusSourcesParams} params
+     * @returns {Promise<PageModel<SourceModel, 'sourceModels'>>} A paginated list of IDs
+     */
+    listOperationalStatusBySourceIds(
+        params?: ListOperationalStatusSourcesParams,
+        sourceIds?: string[],
+    ): Promise<PageModel<SourceModel, 'sourceModels'>> {
+        return this.api.post<PageModel<SourceModel, 'sourceModels'>>(
+            this.buildPath(`${Sources.baseUrl}/sourceoperationalstatus/ids`, params),
+            sourceIds,
+        );
+    }
+
     createFromRaw(rawSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
         return this.api.post<{id: string}>(this.buildPath(`${Sources.baseUrl}/raw`, options), rawSourceConfig);
     }
