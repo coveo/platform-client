@@ -1,4 +1,4 @@
-import {Predicate} from '../utils/types.js';
+import {Predicate} from '../../utils/types.js';
 import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
 
 /** Check whether the response status is `204 No Content`. */
@@ -109,7 +109,12 @@ export default async <T>(
     responseBodyFormat?: ResponseBodyFormat,
 ): Promise<T> => {
     const handlers = customHandlers?.length ? customHandlers : defaultResponseHandlers;
-    const handler = handlers.find((candidate) => candidate.canProcess(response));
+    const handler = handlers.find(
+        (candidate) =>
+            candidate.hasOwnProperty('canProcess') &&
+            candidate.hasOwnProperty('process') &&
+            candidate.canProcess(response),
+    );
     if (!handler) {
         throw new Error('No suitable response handler found');
     }

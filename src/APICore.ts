@@ -1,12 +1,14 @@
 import {backOff} from 'exponential-backoff';
+
 import {PlatformClientOptions} from './ConfigurationInterfaces.js';
 import getEndpoint, {Environment, Region} from './Endpoints.js';
-import {ResponseBodyFormat} from './handlers/ResponseHandlerInterfaces.js';
-import handleResponse from './handlers/ResponseHandlers.js';
+import {ResponseBodyFormat} from './handlers/index.js';
+import handleResponse from './handlers/response/ResponseHandlers.js';
 import {UserModel} from './resources/Users/index.js';
 import {createFetcher} from './utils/createFetcher.js';
 import retrieve from './utils/Retriever.js';
 import {CoveoPlatformClientRequestInit, Predicate} from './utils/types.js';
+import {handleRequest} from './handlers/request/RequestHandlers.js';
 
 interface TokenInfo {
     authentication: UserModel;
@@ -211,7 +213,8 @@ export default class API {
     }
 
     private async request<T>(route: string, init: RequestInit, responseBodyFormat?: ResponseBodyFormat): Promise<T> {
-        const fetcher = createFetcher(this.getUrlFromRoute(route), init, isTooManyRequests);
+        const {url: enrichedRoute, ...enrichedRequestInit} = handleRequest(route, init, this.config.requestHandlers);
+        const fetcher = createFetcher(this.getUrlFromRoute(enrichedRoute), enrichedRequestInit, isTooManyRequests);
         const response = await backOff(fetcher, {retry: isTooManyRequests});
         return handleResponse<T>(response, this.config.responseHandlers, responseBodyFormat);
     }

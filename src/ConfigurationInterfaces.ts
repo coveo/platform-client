@@ -1,5 +1,5 @@
 import {Environment, Region} from './Endpoints.js';
-import {ResponseHandler} from './handlers/ResponseHandlerInterfaces.js';
+import {RequestHandler, ResponseHandler} from './handlers/index.js';
 import {Retrievable} from './utils/Retriever.js';
 export type Feature = (currentOptions: PlatformClientOptions) => PlatformClientOptions;
 
@@ -10,6 +10,10 @@ export interface PlatformClientOptions {
     serverlessHost?: Retrievable<string>;
     environment?: Environment;
     region?: Region;
+    /**
+     * @experimental
+     */
+    requestHandlers?: RequestHandler[];
     responseHandlers?: ResponseHandler[];
     globalRequestSettings?: RequestInit;
 }

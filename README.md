@@ -140,6 +140,7 @@ This project is built using TypeScript and automatically generates relevant type
 | `environment`      | optional | `'production'`                       | The target environment. If one of following: `'development'`, `'stg'` `'production'`, `'hipaa'`; automatically targets the associated host. |
 | `host`             | optional | `'https://platform.cloud.coveo.com'` | The target host. Useful to target local hosts when testing.                                                                                 |
 | `serverlessHost`   | optional | `'https://api.cloud.coveo.com'`      | The target host for serverless APIs.                                                                                                        |
+| `requestHandlers`  | optional | []                                   | Custom server request handlers. See [Request handling section](#request-handling).                                                          |
 | `responseHandlers` | optional | []                                   | Custom server response handlers. See [error handling section](#error-handling) for detailed explanation.                                    |
 | `region`           | optional | Region.US                            | The target region.                                                                                                                          |
 
@@ -166,6 +167,34 @@ const MySuccessResponseHandler: ResponseHandler = {
         console.log(data);
         return data;
     };
+}
+```
+
+### Request handling
+
+It is possible to define custom request handling for requests made by the `platform-client` if necessary. Similarly to what is described in [Error handling](#error-handling), you can define your own handlers with the help of `requestHandlers`. The order in which they are specified defines the order in which requests will be handled. In other words, only the first "processable" handler will be applied.
+
+A request handler is defined as such:
+
+```ts
+interface RequestHandler {
+    canProcess(requestInit: RequestInit): boolean; // whether the handler should be used to process the request
+    process<T>(requestInit: RequestInit): RequestInit; // defines how the handler processes the request
+}
+```
+
+Example
+
+```ts
+const RandomRequestHandler: RequestHandler = {
+    canProcess: (requestInit: EnrichedRequestInit): boolean => true,
+    process: (requestInit: EnrichedRequestInit): EnrichedRequestInit => ({
+        ...requestInit,
+        headers: {
+            ...requestInit.headers,
+            'X-Coveo-Platform-Client': 'some-value',
+        }
+    });
 }
 ```
 

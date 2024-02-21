@@ -1,7 +1,7 @@
 import API from './APICore.js';
 import {Feature, PlatformClientOptions} from './ConfigurationInterfaces.js';
 import {Environment} from './Endpoints.js';
-import {ResponseHandlers} from './handlers/ResponseHandlers.js';
+import {ResponseHandlers} from './handlers/index.js';
 import PlatformResources from './resources/PlatformResources.js';
 
 export class PlatformClient extends PlatformResources {

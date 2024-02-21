@@ -1,4 +1,4 @@
-import {ResponseBodyFormat} from '../handlers/ResponseHandlerInterfaces.js';
+import {ResponseBodyFormat} from '../handlers/index.js';
 
 export interface AsyncSupplier<T> {
     (): Promise<T>;
