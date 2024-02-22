@@ -1,6 +1,6 @@
 import {GranularResource, New} from '../BaseInterfaces.js';
 import {IntervalUnit} from '../Enums.js';
-import {FilterConditions, MLModel} from './index.js';
+import {MLModel} from './index.js';
 
 export interface QueryReplacePatterns {
     pattern: string;
@@ -21,12 +21,6 @@ export interface PageViewFiltered {
 export interface CommerceSupport {
     enabled: boolean;
     [key: string]: any;
-}
-
-export interface IndexExport {
-    query?: string;
-    sources?: string[];
-    filterConditions?: FilterConditions[];
 }
 
 export interface DocumentContentSource {
