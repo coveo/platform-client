@@ -172,14 +172,14 @@ const MySuccessResponseHandler: ResponseHandler = {
 
 ### Request handling
 
-It is possible to define custom request handling for requests made by the `platform-client` if necessary. Similarly to what is described in [Error handling](#error-handling), you can define your own handlers with the help of `requestHandlers`. The order in which they are specified defines the order in which requests will be handled. In other words, only the first "processable" handler will be applied.
+It is possible to define custom request handling for requests made by the `platform-client` if necessary. Similarly to what is described in [Error handling](#error-handling), you can define your own handlers with the help of `requestHandlers`. The order in which they are specified defines the order in which requests will be handled. However, unlike the error handling, all the provided request handlers will be applied to process requests.
 
 A request handler is defined as such:
 
 ```ts
 interface RequestHandler {
-    canProcess(requestInit: RequestInit): boolean; // whether the handler should be used to process the request
-    process<T>(requestInit: RequestInit): RequestInit; // defines how the handler processes the request
+    canProcess(enrichedRequestInit: EnrichedRequestInit): boolean; // whether the handler should be used to process the request
+    process<T>(enrichedRequestInit: EnrichedRequestInit): EnrichedRequestInit; // defines how the handler processes the request
 }
 ```
 
@@ -187,11 +187,11 @@ Example
 
 ```ts
 const RandomRequestHandler: RequestHandler = {
-    canProcess: (requestInit: EnrichedRequestInit): boolean => true,
-    process: (requestInit: EnrichedRequestInit): EnrichedRequestInit => ({
-        ...requestInit,
+    canProcess: (enrichedRequestInit: EnrichedRequestInit): boolean => true,
+    process: (enrichedRequestInit: EnrichedRequestInit): EnrichedRequestInit => ({
+        ...enrichedRequestInit,
         headers: {
-            ...requestInit.headers,
+            ...enrichedRequestInit.headers,
             'X-Coveo-Platform-Client': 'some-value',
         }
     });

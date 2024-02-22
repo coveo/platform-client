@@ -44,7 +44,7 @@ describe('RequestHandlers', () => {
         });
     });
 
-    it('returns modified init options according to the first processable handler', () => {
+    it('returns init options modified by provided handlers', () => {
         const mockHandler1 = {
             canProcess: () => true,
             process: (request: EnrichedRequestInit) => ({
@@ -77,13 +77,13 @@ describe('RequestHandlers', () => {
             method: 'POST',
             body: JSON.stringify(`This handler clears and sets a new body`),
             headers: new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/xml',
             }),
             url: '/rest/random',
         });
     });
 
-    it('throws error if there are no processable handlers', () => {
+    it('returns provided init optons error if there are no processable handlers', () => {
         const mockHandler1 = {
             canProcess: () => false,
             process: (request: EnrichedRequestInit) => ({
@@ -100,8 +100,15 @@ describe('RequestHandlers', () => {
             }),
         };
 
-        expect(() => handleRequest('rest/random', mockRequest, [mockHandler1])).toThrow(
-            /no suitable request handler found/i,
-        );
+        const requestInit = handleRequest('/rest/random', mockRequest, [mockHandler1]);
+
+        expect(requestInit).toEqual({
+            method: 'POST',
+            body: JSON.stringify('A random body'),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            }),
+            url: '/rest/random',
+        });
     });
 });
