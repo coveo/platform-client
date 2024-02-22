@@ -35,24 +35,6 @@ export interface DocumentContentSource {
 }
 
 export interface ExtraConfig {
-    recommendedContentTypeFilter?: string[];
-    eventConfigsTemplates?: string[];
-    PageViewFiltered?: PageViewFiltered;
-    automaticContextDiscovery?: boolean;
-    blacklist?: string[];
-    commerceSupport?: CommerceSupport;
-    filterFields?: string[];
-    recommendProductGroup?: boolean;
-    testConfiguration?: boolean;
-    userContextFields?: string[];
-    whitelist?: string[];
-    blackList?: string[];
-    queryReplacePatterns?: QueryReplacePatterns[];
-    recommendationStrategy?: string;
-    urlReplacePatterns?: UrlReplacePatterns[];
-    parsingMode?: string;
-    documentContentSources?: DocumentContentSource[];
-    indexExport?: IndexExport;
     [key: string]: any;
 }
 
