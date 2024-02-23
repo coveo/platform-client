@@ -1,4 +1,4 @@
-import {Predicate} from '../utils/types.js';
+import {Predicate} from '../../utils/types.js';
 
 /**
  * Each format represents one of the [Response object instance methods](https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods).
