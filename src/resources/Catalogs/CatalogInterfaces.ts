@@ -11,6 +11,14 @@ export interface CatalogsListOptions {
      * The number of catalogs to list per page.
      */
     pageSize?: number;
+    /**
+     * List of the unique identifiers of the catalog to show.
+     */
+    catalogIds?: string[];
+    /**
+     * List of the unique identifiers of the sources.
+     */
+    sourceIds?: string[];
 }
 
 export type CatalogConfigurationsListOptions = Omit<CatalogsListOptions, 'filter'>;

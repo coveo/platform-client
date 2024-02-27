@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
 import {SinglePermissionIdentityType} from '../../Enums.js';
 import PushApi from '../PushApi.js';
-import {SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces.js';
+import {FileContainer, SecurityIdentityAliasModel, SecurityIdentityOptions} from '../PushApiInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -25,6 +25,39 @@ describe('PushAPI', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         pushApi = new PushApi(api, serverlessApi);
+    });
+
+    describe('createFileContainer', () => {
+        test.each([
+            ['/push/v1/organizations/{organizationName}/files', undefined],
+            ['/push/v1/organizations/{organizationName}/files', {}],
+            [
+                '/push/v1/organizations/{organizationName}/files?useVirtualHostedStyleUrl=true',
+                {useVirtualHostedStyleUrl: true},
+            ],
+            [
+                '/push/v1/organizations/{organizationName}/files?useVirtualHostedStyleUrl=false',
+                {useVirtualHostedStyleUrl: false},
+            ],
+            ['/push/v1/organizations/{organizationName}/files', {useVirtualHostedStyleUrl: undefined}],
+        ])('should make a POST call to %s when called with %o', async (url, options) => {
+            serverlessApi.post.mockImplementation(
+                async (): Promise<FileContainer> => ({
+                    fileId: 'somefileid',
+                    requiredHeaders: {a: 'b', c: 'd'},
+                    uploadUri: 'https://something',
+                }),
+            );
+
+            const fileContainer = await pushApi.createFileContainer(options);
+            expect(fileContainer).toEqual({
+                fileId: 'somefileid',
+                requiredHeaders: {a: 'b', c: 'd'},
+                uploadUri: 'https://something',
+            });
+            expect(serverlessApi.post).toHaveBeenCalledTimes(1);
+            expect(serverlessApi.post).toHaveBeenCalledWith(url);
+        });
     });
 
     describe('Security Identity', () => {
