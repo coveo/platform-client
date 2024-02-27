@@ -1,13 +1,13 @@
 import API from '../../../../APICore.js';
-import TailgateCatalogContentMetadata from '../TailgateCatalogContent.js';
+import CatalogContent from '../CatalogContent.js';
 import queryString from '#query-string';
 
 jest.mock('../../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('TailgateCatalogContentMetadata', () => {
-    let metadata: TailgateCatalogContentMetadata;
+describe('CatalogContent', () => {
+    let metadata: CatalogContent;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
@@ -15,11 +15,11 @@ describe('TailgateCatalogContentMetadata', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        metadata = new TailgateCatalogContentMetadata(api, serverlessApi);
+        metadata = new CatalogContent(api, serverlessApi);
     });
 
     describe('getObjectTypes', () => {
-        it('should make a GET call to the specific TailgateCatalogContentMetadata url', () => {
+        it('should make a GET call to the specific CatalogContent url', () => {
             const sourceId = 'McDonald';
 
             metadata.getObjectTypes(sourceId);
@@ -29,7 +29,7 @@ describe('TailgateCatalogContentMetadata', () => {
     });
 
     describe('getMetadata', () => {
-        it('should make a GET call to the specific TailgateCatalogContentMetadata url', () => {
+        it('should make a GET call to the specific CatalogContent url', () => {
             const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'KFC';
             const objectType: any = 'Provigo';

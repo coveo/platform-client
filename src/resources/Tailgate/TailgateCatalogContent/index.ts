@@ -1,1 +1,1 @@
-export * from './TailgateCatalogContent.js';
+export * from './CatalogContent.js';
