@@ -8,6 +8,10 @@ export default class CatalogContent extends Resource {
         return this.api.get(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`);
     }
 
+    getMetadataValues(sourceId: string, objectType: string) {
+        return this.api.get(this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/metadatavalues`, objectType));
+    }
+
     getMetadata(sourceId: string, objectType: string) {
         return this.api.get(this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/metadata`, objectType));
     }

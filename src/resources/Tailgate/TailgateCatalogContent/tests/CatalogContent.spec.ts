@@ -28,6 +28,20 @@ describe('CatalogContent', () => {
         });
     });
 
+    describe('getMetadataValues', () => {
+        it('should make a GET call to the specific CatalogContent url', () => {
+            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
+            const sourceId = 'McDonald';
+            const objectType: any = 'Provigo';
+
+            metadata.getMetadataValues(sourceId, objectType);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${baseUrl}/${sourceId}/metadatavalues?${queryString.stringify(objectType, {...defaultOptions})}`,
+            );
+        });
+    });
+
     describe('getMetadata', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
