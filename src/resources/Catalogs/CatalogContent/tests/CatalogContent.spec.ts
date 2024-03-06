@@ -1,5 +1,5 @@
 import API from '../../../../APICore.js';
-import CatalogContent from '../CatalogContent.js';
+import CatalogContent, {ObjectType} from '../CatalogContent.js';
 import queryString from '#query-string';
 
 jest.mock('../../../../APICore.js');
@@ -11,7 +11,7 @@ describe('CatalogContent', () => {
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
 
-    const baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogcontent/source/`;
+    const baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogcontent/source`;
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -22,7 +22,7 @@ describe('CatalogContent', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const sourceId = 'McDonald';
 
-            metadata.getObjectTypes(sourceId);
+            metadata.getObjectTypes(sourceId, API.orgPlaceholder);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/objecttypes`);
         });
@@ -32,9 +32,9 @@ describe('CatalogContent', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'McDonald';
-            const objectType: any = 'Provigo';
+            const objectType: ObjectType = {objectType: 'Provigo'};
 
-            metadata.getMetadataValues(sourceId, objectType);
+            metadata.getMetadataValues(sourceId, API.orgPlaceholder, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${baseUrl}/${sourceId}/metadatavalues?${queryString.stringify(objectType, {...defaultOptions})}`,
@@ -46,9 +46,9 @@ describe('CatalogContent', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'KFC';
-            const objectType: any = 'Provigo';
+            const objectType: ObjectType = {objectType: 'Provigo'};
 
-            metadata.getMetadata(sourceId, objectType);
+            metadata.getMetadata(sourceId, API.orgPlaceholder, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${baseUrl}/${sourceId}/metadata?${queryString.stringify(objectType, {...defaultOptions})}`,

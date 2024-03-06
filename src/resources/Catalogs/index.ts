@@ -5,3 +5,4 @@ export * from './ProductListing.js';
 export * from './ProductListingInterfaces.js';
 export * from './ProductListingConfiguration.js';
 export * from './ProductListingConfigurationInterfaces.js';
+export * from './CatalogContent/index.js';
