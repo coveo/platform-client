@@ -52,6 +52,7 @@ import HostedPages from './HostedPages/HostedPages.js';
 import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
 import Project from './Projects/Project.js';
 import Resources from './Resources/Resources.js';
+import CatalogContent from './Catalogs/CatalogContent.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
@@ -60,6 +61,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
     {key: 'catalogConfiguration', resource: CatalogConfiguration},
+    {key: 'catalogContent', resource: CatalogContent},
     {key: 'cluster', resource: Cluster},
     {key: 'connectivity', resource: Connectivity},
     {key: 'crawlingModule', resource: CrawlingModule},
@@ -165,6 +167,7 @@ class PlatformResources {
     vault: Vaults;
     project: Project;
     resources: Resources;
+    catalogContent: CatalogContent;
 
     registerAll() {
         resourcesMap.forEach(({key, resource}) => {
