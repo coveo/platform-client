@@ -1,8 +1,8 @@
-import API from '../../../../APICore.js';
+import API from '../../../APICore.js';
 import CatalogContent, {ObjectType} from '../CatalogContent.js';
 import queryString from '#query-string';
 
-jest.mock('../../../../APICore.js');
+jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
@@ -22,7 +22,7 @@ describe('CatalogContent', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const sourceId = 'McDonald';
 
-            metadata.getObjectTypes(sourceId, API.orgPlaceholder);
+            metadata.getObjectTypes(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/objecttypes`);
         });
@@ -34,7 +34,7 @@ describe('CatalogContent', () => {
             const sourceId = 'McDonald';
             const objectType: ObjectType = {objectType: 'Provigo'};
 
-            metadata.getMetadataValues(sourceId, API.orgPlaceholder, objectType);
+            metadata.getMetadataValues(sourceId, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${baseUrl}/${sourceId}/metadatavalues?${queryString.stringify(objectType, {...defaultOptions})}`,
@@ -48,7 +48,7 @@ describe('CatalogContent', () => {
             const sourceId = 'KFC';
             const objectType: ObjectType = {objectType: 'Provigo'};
 
-            metadata.getMetadata(sourceId, API.orgPlaceholder, objectType);
+            metadata.getMetadata(sourceId, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${baseUrl}/${sourceId}/metadata?${queryString.stringify(objectType, {...defaultOptions})}`,
