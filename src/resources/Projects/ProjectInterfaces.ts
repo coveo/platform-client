@@ -19,7 +19,6 @@ export const projectResourceTypes = [
     'INSIGHT_PANEL',
     'ML_MODEL',
     'QUERY_PIPELINE',
-    'SEARCH_HUB',
     'SEARCH_PAGE',
     'SECURITY_PROVIDER',
     'SOURCE',
