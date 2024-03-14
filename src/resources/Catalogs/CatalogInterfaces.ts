@@ -426,3 +426,13 @@ export interface CatalogFieldStatsOptions {
      */
     forceRefresh?: boolean;
 }
+
+export interface CatalogMetadata {
+    metadataValuesByName: {
+        [name: string]: string[];
+    };
+}
+
+export interface CatalogMetadataName {
+    metadataNames: string[];
+}
