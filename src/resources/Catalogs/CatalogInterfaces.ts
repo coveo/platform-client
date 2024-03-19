@@ -426,3 +426,19 @@ export interface CatalogFieldStatsOptions {
      */
     forceRefresh?: boolean;
 }
+
+export interface CatalogMetadata {
+    /**
+     * Metadata seen on catalog documents with a sample of values.
+     */
+    metadataValuesByName: {
+        [name: string]: string[];
+    };
+}
+
+export interface CatalogMetadataName {
+    /**
+     * Metadata name seen on catalog documents.
+     */
+    metadataNames: string[];
+}
