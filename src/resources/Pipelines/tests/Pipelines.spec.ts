@@ -17,15 +17,30 @@ describe('Pipelines', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Pipelines v1 url', () => {
+        it('makes a GET call to the Pipelines v1 url', () => {
             pipelines.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Pipelines.searchUrlVersion1);
         });
+        it('passes the query parameters with the request', () => {
+            pipelines.list({
+                filter: 'filter',
+                page: 0,
+                perPage: 25,
+                sortby: 'position',
+                isOrderAscending: true,
+                enablePagination: true,
+                excludeAbTestTargets: true,
+            });
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Pipelines.searchUrlVersion1}?filter=filter&page=0&perPage=25&sortby=position&isOrderAscending=true&enablePagination=true&excludeAbTestTargets=true`,
+            );
+        });
     });
 
     describe('get', () => {
-        it('should make a GET call to /rest/search/v1/admin/pipelines/:id', () => {
+        it('makes a GET call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.get('🔥');
 
             expect(api.get).toHaveBeenCalledTimes(1);
@@ -34,7 +49,7 @@ describe('Pipelines', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to /rest/search/v1/admin/pipelines/:id', () => {
+        it('makes a DELETE call to /rest/search/v1/admin/pipelines/:id', () => {
             pipelines.delete('🔥');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
@@ -43,7 +58,7 @@ describe('Pipelines', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to /rest/search/v1/admin/pipelines/:id', () => {
+        it('makes a PUT call to /rest/search/v1/admin/pipelines/:id', () => {
             const pipelineToUpdate: UpdatePipelineModel = {
                 id: '🔥',
                 name: 'fire',
@@ -56,7 +71,7 @@ describe('Pipelines', () => {
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', () => {
+        it('makes a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', () => {
             pipelines.duplicate('🔥');
 
             expect(api.post).toHaveBeenCalledTimes(1);
@@ -76,7 +91,7 @@ describe('Pipelines', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to /rest/search/v1/admin/pipelines', () => {
+        it('makes a POST call to /rest/search/v1/admin/pipelines', () => {
             const newPipeline: NewPipelineModel = {
                 name: 'fire',
                 description: 'this-is-lit',
@@ -89,15 +104,15 @@ describe('Pipelines', () => {
     });
 
     describe('nested resources', () => {
-        it('should front associations', () => {
+        it('includes associations', () => {
             expect(pipelines.associations).toBeDefined();
         });
 
-        it('should front statements', () => {
+        it('includes statements', () => {
             expect(pipelines.statements).toBeDefined();
         });
 
-        it('should front resultRanking', () => {
+        it('includes resultRanking', () => {
             expect(pipelines.resultRanking).toBeDefined();
         });
     });

@@ -206,6 +206,10 @@ export interface ListPipelinesOptions extends Paginated {
      * Whether to enable pagination.
      */
     enablePagination?: boolean;
+    /**
+     * Whether to exclude the A/B test targets from the result.
+     */
+    excludeAbTestTargets?: boolean;
 }
 
 export type PaginatedListPipelinesModel = Omit<PageModel<PipelineModel>, 'totalPages'>;
