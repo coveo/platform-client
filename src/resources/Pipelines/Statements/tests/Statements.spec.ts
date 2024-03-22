@@ -180,4 +180,14 @@ describe('Statements', () => {
             expect(api.post).toHaveBeenCalledWith(`${Statements.getBaseUrl(pipelineId)}/bulkGet`, {ids});
         });
     });
+
+    describe('bulkDelete', () => {
+        it('sends a POST call to /bulkDelete with the provided ids', () => {
+            statements.bulkDelete('🆔', ['rule-one', 'rule-two']);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🆔/statements/bulkDelete', {
+                ids: ['rule-one', 'rule-two'],
+            });
+        });
+    });
 });
