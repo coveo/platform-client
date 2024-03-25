@@ -19,6 +19,10 @@ export interface CatalogsListOptions {
      * List of the unique identifiers of the sources.
      */
     sourceIds?: string[];
+    /**
+     * If true, catalog will be enriched with field suggestions. This requires a call to SearchAPI
+     */
+    enrichWithFields?: boolean;
 }
 
 export type CatalogConfigurationsListOptions = Omit<CatalogsListOptions, 'filter'>;
