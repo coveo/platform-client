@@ -45,21 +45,6 @@ export enum ProjectType {
     Other = 'OTHER',
     SupportExperience = 'SUPPORT_EXPERIENCE',
     SupportPortal = 'SUPPORT_PORTAL',
-
-    /**
-     * @deprecated Use SupportPortal instead
-     */
-    Service = 'SERVICE',
-
-    /**
-     * @deprecated Use CorporateWebsite instead
-     */
-    Website = 'WEBSITE',
-
-    /**
-     * @deprecated Use Intranet instead
-     */
-    Workplace = 'WORKPLACE',
 }
 
 export interface BaseProjectModel {
