@@ -28,11 +28,37 @@ export const projectResourceTypes = [
 
 export type ProjectResourceType = (typeof projectResourceTypes)[number];
 
+/**
+ * Enum representing the possible project types.
+ *
+ * @enum {string}
+ */
 export enum ProjectType {
+    CaseDeflection = 'CASE_DEFLECTION',
     Commerce = 'COMMERCE',
+    CommunityPortal = 'COMMUNITY_PORTAL',
+    CorporateWebsite = 'CORPORATE_WEBSITE',
+    HrEmployeePortal = 'HR_EMPLOYEE_PORTAL',
+    Intranet = 'INTRANET',
+    InProductSearch = 'IN_PRODUCT_SEARCH',
+    ItEmployeePortal = 'IT_EMPLOYEE_PORTAL',
     Other = 'OTHER',
+    SupportExperience = 'SUPPORT_EXPERIENCE',
+    SupportPortal = 'SUPPORT_PORTAL',
+
+    /**
+     * @deprecated Use SupportPortal instead
+     */
     Service = 'SERVICE',
+
+    /**
+     * @deprecated Use CorporateWebsite instead
+     */
     Website = 'WEBSITE',
+
+    /**
+     * @deprecated Use Intranet instead
+     */
     Workplace = 'WORKPLACE',
 }
 
