@@ -3,6 +3,8 @@ export type PageModel<T = any, TItemsKey extends string = 'items'> = {
 } & {
     totalEntries: number;
     totalPages: number;
+    createdAt?: number;
+    updatedAt?: number;
 };
 
 export type New<T, K extends keyof T | null = null> = Omit<T, 'id' | NonNullable<K>>;
