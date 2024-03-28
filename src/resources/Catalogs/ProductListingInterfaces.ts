@@ -45,7 +45,7 @@ export interface QueryFilterModel {
     value: FieldValueModel;
 }
 
-export interface ProductListingMetricsModel {
+interface ProductListingQueryMetricsModel {
     lastNumberOfProducts?: number;
     lastQueried: string;
 }
@@ -74,7 +74,7 @@ export interface ProductListingModel {
     /**
      * The list of usage metrics.
      */
-    metrics?: ProductListingMetricsModel;
+    metrics?: ProductListingQueryMetricsModel;
 }
 
 export interface CatalogProductListingsGroupModel {
