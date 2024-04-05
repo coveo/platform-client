@@ -64,6 +64,8 @@ export interface RawSourceConfig extends GranularResource {
     crawlingModuleId?: string;
     fromRaw?: boolean;
     id?: string;
+    lastModifiedDate?: number;
+    lastModifier?: string;
     logicalIndex?: string;
     mappings?: MappingModel[];
     name?: string;
@@ -87,6 +89,8 @@ export interface SourceModel extends GranularResource {
     formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;
     id?: string;
     information?: SourcesSubInterface.SourceInformation;
+    lastModifiedDate?: number;
+    lastModifier?: string;
     logicalIndex?: string;
     mappings?: MappingModel[];
     name?: string;
