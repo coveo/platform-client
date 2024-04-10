@@ -242,6 +242,9 @@ export enum SortingType {
     NAME = 'NAME',
     STATUS = 'STATUS',
     CONTENT = 'CONTENT',
+    LAST_MODIFIED_DATE = 'LAST_MODIFIED_DATE',
+    LAST_OPERATION = 'LAST_OPERATION',
+    CONTENT_TOTAL_DOCUMENT_SIZE = 'CONTENT_TOTAL_DOCUMENT_SIZE',
 }
 
 export enum SnapshotSortingType {

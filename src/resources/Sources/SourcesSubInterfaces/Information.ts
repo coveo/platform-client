@@ -23,6 +23,7 @@ export interface SourceLastOperation {
     operationType: OperationType;
     result?: string;
     timestamp?: number;
+    startedDate?: number;
 }
 
 export interface NextOperation {
