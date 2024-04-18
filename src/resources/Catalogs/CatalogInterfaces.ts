@@ -431,6 +431,17 @@ export interface CatalogFieldStatsOptions {
     forceRefresh?: boolean;
 }
 
+export interface CatalogObjectType {
+    /**
+     * If catalog content exist in source
+     */
+    hasCatalogContent: boolean;
+    /**
+     * Object type values seen on catalog content
+     */
+    objectTypeValues: string[];
+}
+
 export interface CatalogMetadata {
     /**
      * Metadata seen on catalog documents with a sample of values.
