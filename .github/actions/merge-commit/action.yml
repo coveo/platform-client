@@ -1,0 +1,7 @@
+name: Check merge commit
+description: Ensure that the merge commit message is conventional
+runs:
+  using: composite
+  steps:
+    - run: npx commitlint --last --verbose
+      shell: bash
