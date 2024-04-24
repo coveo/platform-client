@@ -435,7 +435,7 @@ export interface CatalogObjectType {
     /**
      * If catalog content exist in source
      */
-    hasCatalogContent: boolean;
+    hasIndexedCatalogContent: boolean;
     /**
      * Object type values seen on catalog content
      */
