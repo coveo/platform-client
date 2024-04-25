@@ -12,6 +12,11 @@
             "matchPackageNames": ["query-string-cjs"],
             "allowedVersions": "7.x",
             "description": "8.x and above are ESM only. Remove this when we stop CJS support"
+        },
+        {
+            "matchPackageNames": ["eslint"],
+            "allowedVersions": "8.x",
+            "description": "all our plugins and deps are not compatible with 9.x yet"
         }
     ],
     "rangeStrategy": "auto",
