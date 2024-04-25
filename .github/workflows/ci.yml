@@ -6,6 +6,7 @@ on:
     push:
         branches:
             - 'main'
+    merge_group:
 jobs:
     CI:
         runs-on: ubuntu-latest
@@ -17,6 +18,9 @@ jobs:
               uses: ./.github/actions/setup
             - name: Check lockfiles
               uses: ./.github/actions/lockfiles
+            - name: Check merge commit
+              if: github.event_name == 'merge_group'
+              uses: ./.github/actions/merge-commit
             - name: Tests
               run: npm test
             - name: Build
