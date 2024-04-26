@@ -8,6 +8,7 @@ import {
     ListPipelinesOptions,
     ListPipelinesReturnVariant,
     NewPipelineModel,
+    PipelineDetailedModel,
     PipelineModel,
     UpdatePipelineModel,
 } from './PipelinesInterfaces.js';
@@ -47,7 +48,7 @@ export default class Pipelines extends Resource {
     }
 
     get(pipelineId: string) {
-        return this.api.get<PipelineModel>(
+        return this.api.get<PipelineDetailedModel>(
             this.buildPath(`${Pipelines.searchUrlVersion1}/${pipelineId}`, {
                 organizationId: this.api.organizationId,
             }),
