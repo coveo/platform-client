@@ -171,6 +171,17 @@ export interface PipelineModel extends PipelineShared {
     };
 }
 
+export interface PipelineDetailedModel extends PipelineModel {
+    /**
+     * The unique identifier of query pipeline A in the A/B test.
+     *
+     * See also the splitTestName, splitTestRatio, and splitTestEnabled properties
+     *
+     * @example: '22a3860e-fa6f-4e64-a9f1-ef738af0786e'
+     */
+    splitTestOriginalPipeline?: string;
+}
+
 export interface NewPipelineModel extends PipelineShared, GranularResource {}
 export interface UpdatePipelineModel extends PipelineModel, GranularResource {}
 
