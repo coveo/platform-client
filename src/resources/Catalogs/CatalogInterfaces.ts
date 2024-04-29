@@ -433,9 +433,9 @@ export interface CatalogFieldStatsOptions {
 
 export interface CatalogObjectType {
     /**
-     * If catalog content exist in source
+     * If catalog source has indexed content
      */
-    hasCatalogContent: boolean;
+    hasIndexedCatalogContent: boolean;
     /**
      * Object type values seen on catalog content
      */
