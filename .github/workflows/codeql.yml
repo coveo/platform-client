@@ -136,6 +136,7 @@ jobs:
                   ')
                   conclusion=$(echo $response | jq -r '.data.repository.pullRequest.commits.nodes[0].commit.checkSuites.nodes[0].checkRuns.nodes[0].conclusion')
                     if [ "$conclusion" != "SUCCESS" ]; then
+                      echo "$conclusion"
                       echo "CodeQL check failed"
                       exit 1
                     fi
