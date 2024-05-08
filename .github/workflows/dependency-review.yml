@@ -13,3 +13,5 @@ jobs:
         with:
             public: true
             distributed: true
+            base-ref: 'main'
+            head-ref: ${{ github.ref }}
