@@ -14,5 +14,5 @@ jobs:
         with:
             public: true
             distributed: true
-            base-ref: 'main'
-            head-ref: ${{ github.ref_name }}
+            base-ref: ${{ github.event.pull_request.base.sha || 'main' }}
+            head-ref: ${{ github.event.pull_request.head.sha || github.ref_name }}
