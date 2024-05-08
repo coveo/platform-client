@@ -15,4 +15,4 @@ jobs:
             public: true
             distributed: true
             base-ref: 'main'
-            head-ref: ${{ github.ref }}
+            head-ref: ${{ github.ref_name }}
