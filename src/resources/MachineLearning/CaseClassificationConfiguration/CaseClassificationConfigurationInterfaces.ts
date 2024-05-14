@@ -49,7 +49,7 @@ export interface CaseClassificationConfigurationModel {
      */
     modelDisplayName: string;
     /**
-     * The names of the sources containing the cases to use for model building.
+     * The names of the sources that contain the cases that the model will use.
      */
     sources: string[];
     /**
@@ -62,8 +62,7 @@ export interface CaseClassificationConfigurationModel {
      */
     caseIdField: string;
     /**
-     * The time period for which to extract cases for model building.
-     * Must contain an export period or a start time and end time.
+     * The case creation date range for the cases the model will use.
      */
     caseExtractionPeriod?: ExtractionPeriod;
     /**
@@ -77,7 +76,7 @@ export interface CaseClassificationConfigurationModel {
      */
     fieldsToPredict: string[];
     /**
-     * The field value to use as language.
+     * The name of the field that contains the value to use as the language.
      */
     languageField?: string;
 }
@@ -93,11 +92,11 @@ export interface CaseClassificationDocumentGroupPreviewParams {
      */
     caseFilterConditions: FilterConditions[];
     /**
-     * The field value to use as language.
+     * The name of the field that contains the value to use as the language.
      */
     languageField: string;
     /**
-     * The names of the sources containing the cases to use for model building.
+     * The names of the sources that contain the cases that the model will use.
      */
     sources: string[];
 }
@@ -131,8 +130,7 @@ export interface CaseClassificationDocumentGroupPreview {
 
 export interface CaseClassificationContentFieldsParams {
     /**
-     * The time period for which to extract cases for model building.
-     * Must contain an export period or a start time and end time.
+     * The case creation date range for the cases the model will use.
      */
     caseExtractionPeriod: ExtractionPeriod;
     /**
@@ -144,7 +142,7 @@ export interface CaseClassificationContentFieldsParams {
      */
     languageField: string;
     /**
-     * The names of the sources containing the cases to use for model building.
+     * The names of the sources that contain the cases that the model will use.
      */
     sources: string[];
 }
@@ -156,4 +154,72 @@ export interface CaseClassificationContentField {
 export interface CaseClassificationContentFields {
     fields: CaseClassificationContentField[];
     query: string;
+}
+
+interface CaseClassificationFieldCountAdvancedMode {
+    /**
+     * The query to use when building the model.
+     */
+    advancedQuery: string;
+    /**
+     * The names of the sources that contain the cases that the model will use.
+     */
+    sources?: never;
+    /**
+     * An array of filtering conditions.
+     */
+    filterConditions?: never;
+    /**
+     * The name of the field that contains the value to use as the language.
+     */
+    languageField?: never;
+    /**
+     * The case creation date range for the cases the model will use.
+     */
+    caseExtractionPeriod?: never;
+}
+
+interface CaseClassificationFieldCountStandardMode {
+    /**
+     * The names of the sources that contain the cases that the model will use.
+     */
+    sources: string[];
+    /**
+     * An array of filtering conditions.
+     */
+    filterConditions?: FilterConditions[];
+    /**
+     * The name of the field that contains the value to use as the language.
+     */
+    languageField: string;
+    /**
+     * The case creation date range for the cases the model will use.
+     */
+    caseExtractionPeriod: ExtractionPeriod;
+    /**
+     * The query to use when building the model.
+     */
+    advancedQuery?: never;
+}
+
+export type CaseClassificationFieldCountParams =
+    | CaseClassificationFieldCountAdvancedMode
+    | CaseClassificationFieldCountStandardMode;
+
+export interface FieldValueCount {
+    /**
+     * The count of values matching a field.
+     */
+    valueCount: number;
+    /**
+     * Indicates the presence of more values than the one returned in the count.
+     */
+    areMoreValuesAvailable: boolean;
+}
+
+export interface FieldDocumentCount {
+    /**
+     * The count of items matching a field.
+     */
+    documentCount: number;
 }

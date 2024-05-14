@@ -165,4 +165,68 @@ describe('CaseClassificationConfiguration', () => {
             expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.previewUrl, params);
         });
     });
+
+    describe('documentCount', () => {
+        modelConfigs.forEach(() => {
+            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
+                const params = {advancedQuery: "@source='some source'"};
+
+                ccConfig.documentCount(params);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(
+                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/documentCount`,
+                    params,
+                );
+            });
+
+            it('should make a POST call to the specific Case Classification Configuration url with standard params', () => {
+                const params = {
+                    sources: ['some source'],
+                    languageField: 'language',
+                    caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
+                };
+
+                ccConfig.documentCount(params);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(
+                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/documentCount`,
+                    params,
+                );
+            });
+        });
+    });
+
+    describe('valueCount', () => {
+        modelConfigs.forEach(() => {
+            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
+                const params = {advancedQuery: "@source='some source'"};
+
+                ccConfig.valueCount(params);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(
+                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/valueCount`,
+                    params,
+                );
+            });
+
+            it('should make a POST call to the specific Case Classification Configuration url with standard params', () => {
+                const params = {
+                    sources: ['some source'],
+                    languageField: 'language',
+                    caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
+                };
+
+                ccConfig.valueCount(params);
+
+                expect(api.post).toHaveBeenCalledTimes(1);
+                expect(api.post).toHaveBeenCalledWith(
+                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/valueCount`,
+                    params,
+                );
+            });
+        });
+    });
 });
