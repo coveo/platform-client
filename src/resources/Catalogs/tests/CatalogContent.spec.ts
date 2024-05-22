@@ -20,23 +20,9 @@ describe('CatalogContent', () => {
 
     describe('getObjectTypeV2', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
-            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
-            const sourceId = 'McDonald';
-            const version = {version: 2};
-
-            metadata.getObjectTypeV2(sourceId, version);
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${baseUrl}/${sourceId}/objecttypes?${queryString.stringify(version, {...defaultOptions})}`,
-            );
-        });
-    });
-
-    describe('getObjectTypes', () => {
-        it('should make a GET call to the specific CatalogContent url', () => {
             const sourceId = 'McDonald';
 
-            metadata.getObjectTypes(sourceId);
+            metadata.getObjectTypeV2(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/objecttypes`);
         });
