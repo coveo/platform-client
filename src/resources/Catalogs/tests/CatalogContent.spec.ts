@@ -18,11 +18,11 @@ describe('CatalogContent', () => {
         metadata = new CatalogContent(api, serverlessApi);
     });
 
-    describe('getObjectTypeV2', () => {
+    describe('getObjectTypes', () => {
         it('should make a GET call to the specific CatalogContent url', () => {
             const sourceId = 'McDonald';
 
-            metadata.getObjectTypeV2(sourceId);
+            metadata.getObjectTypes(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/objecttypes`);
         });

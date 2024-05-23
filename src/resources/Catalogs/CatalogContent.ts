@@ -9,8 +9,8 @@ export type ObjectType = {
 export default class CatalogContent extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogcontent/source`;
 
-    getObjectTypeV2(sourceId: string) {
-        return this.api.get<CatalogObjectType>(this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`));
+    getObjectTypes(sourceId: string) {
+        return this.api.get<CatalogObjectType>(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`);
     }
 
     getMetadataValues(sourceId: string, objectType: ObjectType) {
