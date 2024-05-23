@@ -6,21 +6,11 @@ export type ObjectType = {
     objectType: string;
 };
 
-export type Version = {
-    version: number;
-};
-
 export default class CatalogContent extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogcontent/source`;
 
-    getObjectTypeV2(sourceId: string, version: Version) {
-        return this.api.get<CatalogObjectType>(
-            this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`, version),
-        );
-    }
-
     getObjectTypes(sourceId: string) {
-        return this.api.get<string[]>(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`);
+        return this.api.get<CatalogObjectType>(`${CatalogContent.baseUrl}/${sourceId}/objecttypes`);
     }
 
     getMetadataValues(sourceId: string, objectType: ObjectType) {
