@@ -120,4 +120,15 @@ describe('Project', () => {
             );
         });
     });
+
+    describe('listAssociatedProjects', () => {
+        it('should make a POST call to the correct Project URL', () => {
+            const randomSourceId = 'random-id';
+            project.listAssociatedProjects('SOURCE', [randomSourceId]);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Project.baseUrl}/resources/ids?resourceType=SOURCE`, [
+                randomSourceId,
+            ]);
+        });
+    });
 });

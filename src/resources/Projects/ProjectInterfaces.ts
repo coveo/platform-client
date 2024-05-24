@@ -127,3 +127,14 @@ export interface ListProjectParams extends Paginated {
      */
     order?: SortingOrder;
 }
+
+export interface ListAssociatedProjectsModel {
+    /**
+     * Resource ID
+     */
+    id: string;
+    /**
+     * Associated project IDs that are associated to the resource id
+     */
+    projectIds: string[];
+}
