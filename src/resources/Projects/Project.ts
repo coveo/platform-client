@@ -2,7 +2,13 @@ import API from '../../APICore.js';
 import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
 import {ResourceModel, ResourceParams, ResourceStatus} from '../Resources/index.js';
-import {ListProjectParams, ProjectModel, BaseProjectModel, ProjectResourceType} from './ProjectInterfaces.js';
+import {
+    ListProjectParams,
+    ProjectModel,
+    BaseProjectModel,
+    ProjectResourceType,
+    ListAssociatedProjectsModel,
+} from './ProjectInterfaces.js';
 
 export default class Project extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/projects`;
@@ -84,6 +90,23 @@ export default class Project extends Resource {
     ): Promise<PageModel<ResourceModel>> {
         return this.api.get<PageModel<ResourceModel>>(
             this.buildPath(`${Project.baseUrl}/${projectId}/resources/${resourceType}`, params),
+        );
+    }
+
+    /**
+     * Returns a list of project IDs associated to the provided resource IDs.
+     *
+     * @param {ProjectResourceType} resourceType
+     * @param {string[]} resourceIds
+     * @returns {Promise<ListAssociatedProjectsModel>} List of project IDs associated to the provided resource IDs.
+     */
+    listAssociatedProjects(
+        resourceType: ProjectResourceType,
+        resourceIds: string[],
+    ): Promise<ListAssociatedProjectsModel> {
+        return this.api.post<ListAssociatedProjectsModel>(
+            this.buildPath(`${Project.baseUrl}/resources/ids`, {resourceType}),
+            resourceIds,
         );
     }
 }
