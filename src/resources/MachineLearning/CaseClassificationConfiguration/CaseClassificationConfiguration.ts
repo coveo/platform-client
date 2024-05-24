@@ -16,8 +16,6 @@ export default class CaseClassificationConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/caseclassif`;
     static modelUrl = `${CaseClassificationConfiguration.baseUrl}/model`;
     static fieldsUrl = `${CaseClassificationConfiguration.baseUrl}/fields`;
-    static fieldDocumentCountUrl = `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/documentCount`;
-    static fieldValueCountUrl = `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/valueCount`;
 
     static previewUrl = `${CaseClassificationConfiguration.baseUrl}/preview`;
 
@@ -68,11 +66,17 @@ export default class CaseClassificationConfiguration extends Resource {
         );
     }
 
-    documentCount(params: CaseClassificationFieldCountParams) {
-        return this.api.post<FieldDocumentCount>(CaseClassificationConfiguration.fieldDocumentCountUrl, params);
+    documentCount(fieldName: string, params: CaseClassificationFieldCountParams) {
+        return this.api.post<FieldDocumentCount>(
+            `${CaseClassificationConfiguration.fieldsUrl}/${fieldName}/documentCount`,
+            params,
+        );
     }
 
-    valueCount(params: CaseClassificationFieldCountParams) {
-        return this.api.post<FieldValueCount>(CaseClassificationConfiguration.fieldValueCountUrl, params);
+    valueCount(fieldName: string, params: CaseClassificationFieldCountParams) {
+        return this.api.post<FieldValueCount>(
+            `${CaseClassificationConfiguration.fieldsUrl}/${fieldName}/valueCount`,
+            params,
+        );
     }
 }

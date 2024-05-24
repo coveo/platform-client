@@ -171,11 +171,11 @@ describe('CaseClassificationConfiguration', () => {
             it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
                 const params = {advancedQuery: "@source='some source'"};
 
-                ccConfig.documentCount(params);
+                ccConfig.documentCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
-                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/documentCount`,
+                    `${CaseClassificationConfiguration.baseUrl}/fields/fieldTest/documentCount`,
                     params,
                 );
             });
@@ -187,11 +187,11 @@ describe('CaseClassificationConfiguration', () => {
                     caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
                 };
 
-                ccConfig.documentCount(params);
+                ccConfig.documentCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
-                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/documentCount`,
+                    `${CaseClassificationConfiguration.baseUrl}/fields/fieldTest/documentCount`,
                     params,
                 );
             });
@@ -203,11 +203,11 @@ describe('CaseClassificationConfiguration', () => {
             it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
                 const params = {advancedQuery: "@source='some source'"};
 
-                ccConfig.valueCount(params);
+                ccConfig.valueCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
-                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/valueCount`,
+                    `${CaseClassificationConfiguration.baseUrl}/fields/fieldTest/valueCount`,
                     params,
                 );
             });
@@ -219,11 +219,11 @@ describe('CaseClassificationConfiguration', () => {
                     caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
                 };
 
-                ccConfig.valueCount(params);
+                ccConfig.valueCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
-                    `${CaseClassificationConfiguration.baseUrl}/fields/{fieldName}/valueCount`,
+                    `${CaseClassificationConfiguration.baseUrl}/fields/fieldTest/valueCount`,
                     params,
                 );
             });
