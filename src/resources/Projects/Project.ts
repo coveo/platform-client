@@ -98,13 +98,13 @@ export default class Project extends Resource {
      *
      * @param {ProjectResourceType} resourceType
      * @param {string[]} resourceIds
-     * @returns {Promise<ListAssociatedProjectsModel>} List of project IDs associated to the provided resource IDs.
+     * @returns {Promise<ListAssociatedProjectsModel[]>} List of project IDs associated to the provided resource IDs.
      */
     listAssociatedProjects(
         resourceType: ProjectResourceType,
         resourceIds: string[],
-    ): Promise<ListAssociatedProjectsModel> {
-        return this.api.post<ListAssociatedProjectsModel>(
+    ): Promise<ListAssociatedProjectsModel[]> {
+        return this.api.post<ListAssociatedProjectsModel[]>(
             this.buildPath(`${Project.baseUrl}/resources/ids`, {resourceType}),
             resourceIds,
         );
