@@ -128,7 +128,30 @@ export interface CaseClassificationDocumentGroupPreview {
     numberOfValidDocuments: number;
 }
 
-export interface CaseClassificationContentFieldsParams {
+export interface CaseClassificationContentFieldsAdvancedMode {
+    /**
+     * The query to use when building the model.
+     */
+    advancedQuery: string;
+    /**
+     * The case creation date range for the cases the model will use.
+     */
+    caseExtractionPeriod?: never;
+    /**
+     * An array of filtering conditions.
+     */
+    caseFilterConditions?: never;
+    /**
+     * The field value to use as language.
+     */
+    languageField?: never;
+    /**
+     * The names of the sources that contain the cases that the model will use.
+     */
+    sources?: never;
+}
+
+export interface CaseClassificationContentFieldsStandardMode {
     /**
      * The case creation date range for the cases the model will use.
      */
@@ -145,7 +168,15 @@ export interface CaseClassificationContentFieldsParams {
      * The names of the sources that contain the cases that the model will use.
      */
     sources: string[];
+    /**
+     * The query to use when building the model.
+     */
+    advancedQuery?: never;
 }
+
+export type CaseClassificationContentFieldsParams =
+    | CaseClassificationContentFieldsStandardMode
+    | CaseClassificationContentFieldsAdvancedMode;
 
 export interface CaseClassificationContentField {
     name: string;
