@@ -140,6 +140,15 @@ describe('CaseClassificationConfiguration', () => {
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
         });
+
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration with an advancedQuery', () => {
+            const params = {advancedQuery: "@source='some source'"};
+
+            ccConfig.fields(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
+        });
     });
 
     describe('preview', () => {
