@@ -138,3 +138,25 @@ export interface ListAssociatedProjectsModel {
      */
     projectIds: string[];
 }
+
+export interface UpdatedProjectAssociationsModel {
+    /**
+     * IDs of projects that are to be updated
+     */
+    projectIds: string[];
+    /**
+     * IDs of resources whose association with the precised project IDs is to be updated
+     */
+    resourceIds: string[];
+}
+
+export interface UpdatedProjectResourceAssociationsModel {
+    /**
+     * Project-resource associations to be added
+     */
+    additions: UpdatedProjectAssociationsModel[];
+    /**
+     * Project-resource associations to be removed
+     */
+    removals: UpdatedProjectAssociationsModel[];
+}
