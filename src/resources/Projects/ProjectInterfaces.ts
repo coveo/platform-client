@@ -154,9 +154,9 @@ export interface UpdatedProjectResourceAssociationsModel {
     /**
      * Project-resource associations to be added
      */
-    additions: UpdatedProjectAssociationsModel[];
+    additions: UpdatedProjectAssociationsModel;
     /**
      * Project-resource associations to be removed
      */
-    removals: UpdatedProjectAssociationsModel[];
+    removals: UpdatedProjectAssociationsModel;
 }

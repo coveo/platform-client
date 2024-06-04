@@ -4,6 +4,7 @@ import {
     BaseProjectModel,
     ProjectModel,
     ProjectType,
+    UpdatedProjectAssociationsModel,
     UpdatedProjectResourceAssociationsModel,
 } from '../ProjectInterfaces.js';
 
@@ -140,13 +141,11 @@ describe('Project', () => {
     describe('updateProjectResourceAssociation', () => {
         it('should make a PUT call to the correct Project URL', () => {
             const randomProjectResourceAssociation: UpdatedProjectResourceAssociationsModel = {
-                additions: [
-                    {
-                        projectIds: ['random-project-id'],
-                        resourceIds: ['random-source-id'],
-                    },
-                ],
-                removals: [],
+                additions: {
+                    projectIds: ['random-project-id'],
+                    resourceIds: ['random-source-id'],
+                },
+                removals: {} as UpdatedProjectAssociationsModel,
             };
             project.updateProjectResourceAssociation('SOURCE', randomProjectResourceAssociation);
             expect(api.put).toHaveBeenCalledTimes(1);
