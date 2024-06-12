@@ -95,11 +95,17 @@ describe('Search', () => {
 
     describe('getFieldValue', () => {
         it('should make a get call to searchAPI correct url with its params to fetch the values of a field', () => {
-            const params = {ignoreAccents: false};
+            const params = {
+                ignoreAccents: false,
+                commerce: {catalogId: 'test-id', filter: 'test-filter', operation: 'test-operation'},
+                organizationId: 'test-org-id',
+            };
             const fieldName = 'author';
             search.getFieldValues(fieldName, params);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/values?field=author&ignoreAccents=false`);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Search.baseUrl}/values?field=author&ignoreAccents=false&commerce=%7B%22catalogId%22%3A%22test-id%22%2C%22filter%22%3A%22test-filter%22%2C%22operation%22%3A%22test-operation%22%7D&organizationId=test-org-id`,
+            );
         });
     });
 
