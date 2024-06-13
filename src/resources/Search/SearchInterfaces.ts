@@ -204,9 +204,9 @@ export interface RestUserId {
 }
 
 export interface RestCommerceParameters {
-    catalogId: string;
-    filter: string;
-    operation: string;
+    catalogId?: string;
+    filter?: string;
+    operation?: string;
 }
 
 export interface TokenModel {
