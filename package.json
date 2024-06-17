@@ -50,7 +50,7 @@
         "jest-runner-eslint": "2.1.2",
         "lint-staged": "15.2.0",
         "prettier": "3.1.1",
-        "semantic-release": "23.0.8",
+        "semantic-release": "24.0.0",
         "ts-jest": "29.1.1",
         "tsjs": "5.0.1",
         "tslib": "2.6.2",
