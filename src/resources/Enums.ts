@@ -1159,3 +1159,7 @@ export enum ProductsSortByType {
     fields = 'fields',
     relevance = 'relevance',
 }
+
+export enum FeedbackConsumerType {
+    SOURCE_MANAGEMENT_IMPROVEMENTS = 'SOURCE_MANAGEMENT_IMPROVEMENTS',
+}
