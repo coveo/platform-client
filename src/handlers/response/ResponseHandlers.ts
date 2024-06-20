@@ -1,3 +1,5 @@
+// TODO CDX-1574: remove this polyfill when we bump the minimal supported Node.js version to 22
+import 'core-js/actual/json/parse.js';
 import {Predicate} from '../../utils/types.js';
 import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
 
@@ -14,7 +16,23 @@ const noContent: ResponseHandler = {
 
 const success: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async (response, responseBodyFormat = 'json') => response[responseBodyFormat](),
+    process: async (response, responseBodyFormat = 'json') => {
+        if (responseBodyFormat !== 'json') {
+            return response[responseBodyFormat]();
+        }
+        const content = await response.text();
+        return (
+            JSON.parse as (
+                text: string,
+                reviver?: (key: string, value: any, context: {source: any}) => any | undefined,
+            ) => any
+        )(content, (_key, value, context) => {
+            if (typeof value === 'number' && !Number.isSafeInteger(Math.floor(value))) {
+                return context.source;
+            }
+            return value;
+        });
+    },
 };
 
 /**

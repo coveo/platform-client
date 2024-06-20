@@ -10,11 +10,41 @@ describe('ResponseHandlers', () => {
     });
 
     describe.each([200, 299])('when the response status code is between 200 and 299 (success)', (status) => {
-        it(`${status} returns a promise resolved with the response body in JSON format`, async () => {
-            const data = {someData: 'thank you!'};
-            const okResponse = new Response(JSON.stringify(data), {status});
-            const result = await handleResponse(okResponse);
-            expect(result).toEqual(data);
+        describe('if responseBodyFormat = "json", or by default', () => {
+            it(`${status} returns a promise resolved with the response body in JSON format`, async () => {
+                const data = {someData: 'thank you!'};
+                const okResponse = new Response(JSON.stringify(data), {status});
+                const result = await handleResponse(okResponse);
+                expect(result).toEqual(data);
+            });
+
+            it(`${status} parses unsafe integer as a string`, async () => {
+                const data = '{"unsafeInteger": 9999999999999999}';
+                const okResponse = new Response(data, {status});
+                const result = await handleResponse(okResponse);
+                expect(result).toEqual({unsafeInteger: '9999999999999999'});
+            });
+
+            it(`${status} parses safe integer as an integer`, async () => {
+                const data = '{"safeInteger": 999999999999999}';
+                const okResponse = new Response(data, {status});
+                const result = await handleResponse(okResponse);
+                expect(result).toEqual({safeInteger: 999999999999999});
+            });
+
+            it(`${status} parses float whose integer part is unsafe as a string`, async () => {
+                const data = '{"float": 9999999999999999.9}';
+                const okResponse = new Response(data, {status});
+                const result = await handleResponse(okResponse);
+                expect(result).toEqual({float: '9999999999999999.9'});
+            });
+
+            it(`${status} parses float whose integer part is safe as a number`, async () => {
+                const data = '{"float": 999999999999999.9}';
+                const okResponse = new Response(data, {status});
+                const result = await handleResponse(okResponse);
+                expect(result).toEqual({float: 999999999999999.9});
+            });
         });
 
         it(`${status} returns a promise resolved with the response body in text format if responseBodyFormat = "text"`, async () => {
