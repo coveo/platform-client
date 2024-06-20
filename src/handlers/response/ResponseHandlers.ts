@@ -1,4 +1,4 @@
-// TODO: remove this polyfill when we bump the minimal supported Node.js version to 22
+// TODO CDX-1574: remove this polyfill when we bump the minimal supported Node.js version to 22
 import 'core-js/actual/json/parse.js';
 import {Predicate} from '../../utils/types.js';
 import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
