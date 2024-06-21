@@ -3,9 +3,12 @@ import {New} from '../../BaseInterfaces.js';
 import {ActivityOperation} from '../../Enums.js';
 import {ScheduleModel} from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
+import SourcesDatasets from '../SourcesDatasets/SourcesDatasets.js';
+import SourcesFeedback from '../SourcesFeedback/SourcesFeedback.js';
 import SourcesFields from '../SourcesFields/SourcesFields.js';
 import {CreateSourceModel, ListSourcesParams, RawSourceConfig} from '../SourcesInterfaces.js';
 import SourcesMappings from '../SourcesMappings/SourcesMappings.js';
+import SourcesMetadata from '../SourcesMetadata/SourcesMetadata.js';
 
 jest.mock('../../../APICore.js');
 
@@ -359,6 +362,18 @@ describe('Sources', () => {
 
         it('should have a mappings client', () => {
             expect(source.mappings).toBeInstanceOf(SourcesMappings);
+        });
+
+        it('should have a datasets client', () => {
+            expect(source.datasets).toBeInstanceOf(SourcesDatasets);
+        });
+
+        it('should have a metadata client', () => {
+            expect(source.metadata).toBeInstanceOf(SourcesMetadata);
+        });
+
+        it('should have a feedback client', () => {
+            expect(source.feedback).toBeInstanceOf(SourcesFeedback);
         });
     });
 });

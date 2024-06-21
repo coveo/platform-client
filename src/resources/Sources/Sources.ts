@@ -4,6 +4,7 @@ import {ActivityOperation} from '../Enums.js';
 import Resource from '../Resource.js';
 import {ScheduleModel} from '../SecurityCache/index.js';
 import SourcesDatasets from './SourcesDatasets/SourcesDatasets.js';
+import SourcesFeedback from './SourcesFeedback/SourcesFeedback.js';
 import SourcesFields from './SourcesFields/SourcesFields.js';
 import {
     CreateSourceModel,
@@ -24,6 +25,7 @@ export default class Sources extends Resource {
     mappings: SourcesMappings;
     datasets: SourcesDatasets;
     metadata: SourcesMetadata;
+    feedback: SourcesFeedback;
 
     constructor(
         protected api: API,
@@ -35,6 +37,7 @@ export default class Sources extends Resource {
         this.mappings = new SourcesMappings(api, serverlessApi);
         this.datasets = new SourcesDatasets(api, serverlessApi);
         this.metadata = new SourcesMetadata(api, serverlessApi);
+        this.feedback = new SourcesFeedback(api, serverlessApi);
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
