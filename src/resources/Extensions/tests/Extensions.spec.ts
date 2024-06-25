@@ -105,4 +105,23 @@ describe('Extension', () => {
             expect(api.post).toHaveBeenCalledWith(`${Extension.baseUrl}/test/compile`, testExtensionCode);
         });
     });
+
+    describe('listVersions', () => {
+        it('makes a GET call to the specific extension versions url', () => {
+            const extensionId = '1';
+            extension.listVersions(extensionId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/extensions/1/versions');
+        });
+    });
+
+    describe('getVersion', () => {
+        it('make a get call to the extension version url', () => {
+            const extensionId = '1';
+            const versionId = 'a';
+            extension.getVersion(extensionId, versionId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/extensions/1/versions/a');
+        });
+    });
 });
