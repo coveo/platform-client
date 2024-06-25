@@ -1,6 +1,12 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
-import {CreateExtension, ExtensionCompileCode, ExtensionCompileResult, ExtensionModel} from './ExtensionsInterfaces.js';
+import {
+    CreateExtension,
+    ExtensionCompileCode,
+    ExtensionCompileResult,
+    ExtensionContentVersionModel,
+    ExtensionModel,
+} from './ExtensionsInterfaces.js';
 
 export default class Extension extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/extensions`;
@@ -31,6 +37,20 @@ export default class Extension extends Resource {
 
     list() {
         return this.api.get<ExtensionModel[]>(Extension.baseUrl);
+    }
+
+    /**
+     * Lists all versions of an [extension](https://docs.coveo.com/en/206/) in a [Coveo Cloud organization](https://docs.coveo.com/en/185/).
+     */
+    listVersions(extensionId: string) {
+        return this.api.get<ExtensionContentVersionModel[]>(`${Extension.baseUrl}/${extensionId}/versions`);
+    }
+
+    /**
+     * Shows a specific version of an [extension](https://docs.coveo.com/en/206/) in a [Coveo Cloud organization](https://docs.coveo.com/en/185/).
+     */
+    getVersion(extensionId: string, versionId: string) {
+        return this.api.get<ExtensionModel>(`${Extension.baseUrl}/${extensionId}/versions/${versionId}`);
     }
 
     /**
