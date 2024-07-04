@@ -55,4 +55,20 @@ describe('CatalogContent', () => {
             );
         });
     });
+
+    describe('getMetadataV2', () => {
+        it('should make a GET call to the specific metadataName url', () => {
+            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
+            const sourceId = 'KFC';
+
+            metadata.getMetadataV2(sourceId, {objectType: 'provigo', filter: 'a', version: 2, page: 0, perPage: 100});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${baseUrl}/${sourceId}/metadata?${queryString.stringify(
+                    {objectType: 'provigo', filter: 'a', version: 2, page: 0, perPage: 100},
+                    {...defaultOptions},
+                )}`,
+            );
+        });
+    });
 });

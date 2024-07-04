@@ -1,6 +1,12 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
-import {CatalogMetadata, CatalogMetadataName, CatalogObjectType} from './CatalogInterfaces.js';
+import {MetadataPageModel} from '../Sources/index.js';
+import {
+    CatalogMetadata,
+    CatalogMetadataName,
+    CatalogMetadataNameParams,
+    CatalogObjectType,
+} from './CatalogInterfaces.js';
 
 export type ObjectType = {
     objectType: string;
@@ -22,6 +28,12 @@ export default class CatalogContent extends Resource {
     getMetadata(sourceId: string, objectType: ObjectType) {
         return this.api.get<CatalogMetadataName>(
             this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/metadata`, objectType),
+        );
+    }
+
+    getMetadataV2(sourceId: string, params?: CatalogMetadataNameParams) {
+        return this.api.get<MetadataPageModel>(
+            this.buildPath(`${CatalogContent.baseUrl}/${sourceId}/metadata`, params),
         );
     }
 }
