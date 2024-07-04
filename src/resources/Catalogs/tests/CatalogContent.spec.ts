@@ -1,5 +1,6 @@
 import API from '../../../APICore.js';
 import CatalogContent, {ObjectType} from '../CatalogContent.js';
+import {CatalogMetadataNameParams} from '../CatalogInterfaces.js';
 import queryString from '#query-string';
 
 jest.mock('../../../APICore.js');
@@ -61,13 +62,18 @@ describe('CatalogContent', () => {
             const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'KFC';
 
-            metadata.getMetadataV2(sourceId, {objectType: 'provigo', filter: 'a', version: 2, page: 0, perPage: 100});
+            const params: CatalogMetadataNameParams = {
+                objectType: 'provigo',
+                filter: 'a',
+                version: 2,
+                page: 0,
+                perPage: 100,
+            };
+
+            metadata.getMetadataV2(sourceId, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${baseUrl}/${sourceId}/metadata?${queryString.stringify(
-                    {objectType: 'provigo', filter: 'a', version: 2, page: 0, perPage: 100},
-                    {...defaultOptions},
-                )}`,
+                `${baseUrl}/${sourceId}/metadata?${queryString.stringify(params, {...defaultOptions})}`,
             );
         });
     });

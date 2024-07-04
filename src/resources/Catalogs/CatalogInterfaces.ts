@@ -462,7 +462,7 @@ export interface CatalogMetadataName {
 
 export interface CatalogMetadataNameParams extends Paginated {
     /**
-     * Metadata's object type.
+     * Object type parameter.
      */
     objectType: string;
     /**
