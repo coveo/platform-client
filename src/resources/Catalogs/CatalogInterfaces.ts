@@ -1,3 +1,5 @@
+import {Paginated} from '../BaseInterfaces.js';
+
 export interface CatalogsListOptions {
     /**
      * Filter that will be matched against the catalog name, description and its configuration name.
@@ -456,4 +458,20 @@ export interface CatalogMetadataName {
      * Metadata name seen on catalog documents.
      */
     metadataNames: string[];
+}
+
+export interface CatalogMetadataNameParams extends Paginated {
+    /**
+     * Object type parameter.
+     */
+    objectType: string;
+    /**
+     * Filters applied to the returned metadata. Only applies to metadata names, not values or origins.
+     */
+    filter?: string;
+
+    /**
+     * Indicate the version of MetadataName call
+     */
+    version?: number;
 }
