@@ -16,3 +16,4 @@ jobs:
             distributed: true
             base-ref: ${{ github.event.pull_request.base.sha || 'master' }}
             head-ref: ${{ github.event.pull_request.head.sha || github.ref_name }}
+            runs-on: '["ubuntu-latest"]'
