@@ -251,31 +251,22 @@ describe('Organization', () => {
     });
 
     describe('experimental status', () => {
-        it('should make a GET call to the specific Organization url', () => {
-            const organizationToGetId = 'Organization-to-be-fetched';
-            organization.getExperimentalStatus(organizationToGetId);
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/${organizationToGetId}/machinelearning/orgconfiguration/servingExperimentAllowed`,
-            );
-        });
-
-        it('should make a PUT call to update experimental status with default false', () => {
+        it('should make a PUT call to update experimental status with default true', () => {
             organization.updateExperimentalStatus();
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${false}`,
+                `${Organization.baseUrl}/{organizationName}/configuration/servingExperiment?allowed=true`,
             );
         });
 
         it('should make a PUT call to update experimental status with passed value', () => {
-            const isAllowed = true;
+            const isAllowed = false;
             organization.updateExperimentalStatus(isAllowed);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
-                `${Organization.baseUrl}/{organizationName}/machinelearning/orgconfiguration/servingExperimentAllowed?isAllowed=${true}`,
+                `${Organization.baseUrl}/{organizationName}/configuration/servingExperiment?allowed=false`,
             );
         });
     });
