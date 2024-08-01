@@ -115,6 +115,9 @@ export interface OrganizationModel {
     readOnly: boolean;
     license?: LicenseModel;
     organizationStatusModel?: OrganizationsStatusModel;
+    configuration: {
+        servingExperimentAllowed: boolean;
+    };
 }
 
 export type AdditionalOrganizationField = 'status' | 'license' | string;
