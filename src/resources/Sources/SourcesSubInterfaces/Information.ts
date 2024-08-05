@@ -32,7 +32,15 @@ export interface NextOperation {
 }
 
 export interface SourceStatus {
+    /**
+     * The unique identifier of the current activity of the source.
+     */
+    activityId?: string;
     allowedOperations?: ActivityOperation[];
+    /**
+     * The date when the activity was created.
+     */
+    createdDate?: number;
     /**
      * The status type including transition statuses.
      */
