@@ -35,8 +35,8 @@
         "@commitlint/cli": "19.3.0",
         "@commitlint/config-conventional": "19.2.2",
         "@types/jest": "29.5.11",
-        "@typescript-eslint/eslint-plugin": "7.7.1",
-        "@typescript-eslint/parser": "7.7.1",
+        "@typescript-eslint/eslint-plugin": "8.0.1",
+        "@typescript-eslint/parser": "8.0.1",
         "abortcontroller-polyfill": "1.7.5",
         "cz-conventional-changelog": "3.3.0",
         "eslint": "8.57.0",
@@ -90,7 +90,7 @@
     "dependencies": {
         "core-js": "^3.37.1",
         "exponential-backoff": "^3.1.0",
-        "query-string-cjs": "npm:query-string@^7.0.0",
+        "query-string-cjs": "npm:query-string@^9.0.0",
         "query-string-esm": "npm:query-string@^9.0.0"
     },
     "publishConfig": {
