@@ -1,4 +1,4 @@
-import {Paginated} from '../..';
+import {Paginated} from '../../BaseInterfaces';
 
 export interface PropertyModel {
     trackingId: string;
