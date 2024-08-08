@@ -53,6 +53,7 @@ import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
 import Project from './Projects/Project.js';
 import Resources from './Resources/Resources.js';
 import CatalogContent from './Catalogs/CatalogContent.js';
+import Properties from './AnalyticsAdmin/Properties/Properties.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
@@ -91,6 +92,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'productListing', resource: ProductListing},
     {key: 'productListingConfiguration', resource: ProductListingConfiguration},
     {key: 'products', resource: Products},
+    {key: 'properties', resource: Properties},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
     {key: 'saml', resource: Saml},
@@ -151,6 +153,7 @@ class PlatformResources {
     productListing: ProductListing;
     productListingConfiguration: ProductListingConfiguration;
     products: Products;
+    properties: Properties;
     pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;
     saml: Saml;

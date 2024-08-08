@@ -53,3 +53,4 @@ export * from './Sources/index.js';
 export * from './UsageAnalytics/index.js';
 export * from './Users/index.js';
 export * from './Vaults/index.js';
+export * from './AnalyticsAdmin/index.js';
