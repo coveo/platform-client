@@ -1,7 +1,7 @@
 import Resource from '../../Resource.js';
 import API from '../../../APICore.js';
-import {PageModel, Paginated} from '../../BaseInterfaces.js';
-import {PropertiesResponseMessage, PropertyModel} from './PropertiesInterfaces.js';
+import {PageModel} from '../../BaseInterfaces.js';
+import {ListPropertiesParams, PropertiesResponseMessage, PropertyModel} from './PropertiesInterfaces.js';
 
 export default class Properties extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/analyticsadmin/v1`;
@@ -22,9 +22,9 @@ export default class Properties extends Resource {
      *
      * @returns Promise<PageModel<PropertyModel>>
      */
-    listProperties(pagination?: Paginated): Promise<PageModel<PropertyModel>> {
+    list(params?: ListPropertiesParams): Promise<PageModel<PropertyModel>> {
         return this.api.get<PageModel<PropertyModel>>(
-            this.buildPathWithOrg(`${Properties.baseUrl}/properties/list`, pagination),
+            this.buildPathWithOrg(`${Properties.baseUrl}/properties/list`, params),
         );
     }
 
@@ -33,7 +33,7 @@ export default class Properties extends Resource {
      *
      * @returns Promise<PropertyModel>
      */
-    getProperty(trackingId: string): Promise<PropertyModel> {
+    get(trackingId: string): Promise<PropertyModel> {
         return this.api.get<PropertyModel>(this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`));
     }
 
@@ -42,7 +42,7 @@ export default class Properties extends Resource {
      *
      * @returns Promise<PropertiesResponseMessage>
      */
-    createProperty(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
+    create(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
         return this.api.post<PropertiesResponseMessage>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
         );
@@ -53,7 +53,7 @@ export default class Properties extends Resource {
      *
      * @returns Promise<PropertiesResponseMessage>
      */
-    updateProperty(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
+    update(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
         return this.api.put<PropertiesResponseMessage>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
         );
@@ -64,7 +64,7 @@ export default class Properties extends Resource {
      *
      * @returns Promise<PropertiesResponseMessage>
      */
-    deleteProperty(trackingId: string): Promise<PropertiesResponseMessage> {
+    delete(trackingId: string): Promise<PropertiesResponseMessage> {
         return this.api.delete<PropertiesResponseMessage>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`),
         );

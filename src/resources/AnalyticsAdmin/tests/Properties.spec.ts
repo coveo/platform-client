@@ -16,24 +16,31 @@ describe('Properties', () => {
     });
 
     describe('listProperties', () => {
-        it('should make a GET call to the Properties list path', () => {
-            properties.listProperties();
+        it('should make a GET call to the list path', () => {
+            properties.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list`);
         });
 
-        it('should make a GET call to the Properties list path with pagination', () => {
-            properties.listProperties({page: 1, perPage: 2});
+        it('should make a GET call to the list path with pagination', () => {
+            properties.list({page: 1, perPage: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list?page=1&perPage=2`);
+        });
+
+        it('should make a GET call to the list path with filter', () => {
+            properties.list({filter: 'test'});
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list?filter=test`);
         });
     });
 
     describe('getProperty', () => {
         it('should make a GET call to the properties path', () => {
-            properties.getProperty('trackingId');
+            properties.get('trackingId');
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId`);
@@ -42,7 +49,7 @@ describe('Properties', () => {
 
     describe('createProperty', () => {
         it('should make a POST call to the properties path', () => {
-            properties.createProperty('trackingId', 'displayName');
+            properties.create('trackingId', 'displayName');
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -53,7 +60,7 @@ describe('Properties', () => {
 
     describe('updateProperty', () => {
         it('should make a PUT call to the properties path', () => {
-            properties.updateProperty('trackingId', 'displayName');
+            properties.update('trackingId', 'displayName');
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId?displayName=displayName`);
@@ -62,7 +69,7 @@ describe('Properties', () => {
 
     describe('deleteProperty', () => {
         it('should make a DELETE call to the properties path', () => {
-            properties.deleteProperty('trackingId');
+            properties.delete('trackingId');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId`);
