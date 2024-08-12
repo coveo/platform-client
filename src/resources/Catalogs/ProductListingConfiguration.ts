@@ -10,6 +10,9 @@ import {
 export default class ProductListingConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
 
+    /**
+     * @deprecated
+     */
     list(catalogId: string, productListingId: string, options?: ProductListingConfigurationOptions) {
         const normalizedOptions = normalizePaginatedOptions(options);
         return this.api.get<PageModel<ProductListingConfigurationModel>>(
@@ -19,6 +22,10 @@ export default class ProductListingConfiguration extends Resource {
             ),
         );
     }
+
+    /**
+     * @deprecated
+     */
     create(catalogId: string, productListingId: string, rankingConfiguration: New<ProductListingConfigurationModel>) {
         return this.api.post(
             `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations`,
@@ -26,18 +33,27 @@ export default class ProductListingConfiguration extends Resource {
         );
     }
 
+    /**
+     * @deprecated
+     */
     delete(catalogId: string, productListingId: string, productListingConfigurationId: string) {
         return this.api.delete(
             `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`,
         );
     }
 
+    /**
+     * @deprecated
+     */
     get(catalogId: string, productListingId: string, productListingConfigurationId: string) {
         return this.api.get<ProductListingConfigurationModel>(
             `${ProductListingConfiguration.baseUrl}/${catalogId}/productlistings/${productListingId}/configurations/${productListingConfigurationId}`,
         );
     }
 
+    /**
+     * @deprecated
+     */
     update(
         catalogId: string,
         productListingId: string,
