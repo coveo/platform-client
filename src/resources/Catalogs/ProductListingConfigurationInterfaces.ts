@@ -2,8 +2,14 @@ import {Paginated} from '../BaseInterfaces.js';
 import {DeprecatedPaginated} from '../InternalBaseInterface.js';
 import {QueryFilterModel} from './ProductListingInterfaces.js';
 
+/**
+ * @deprecated
+ */
 export type ProductListingConfigurationOptions = Paginated | DeprecatedPaginated;
 
+/**
+ * @deprecated
+ */
 export interface ProductListingConfigurationModel {
     /**
      * The id of the ProductListingConfiguration.
@@ -15,6 +21,9 @@ export interface ProductListingConfigurationModel {
     rankingConfigurations: RankingConfiguration[];
 }
 
+/**
+ * @deprecated
+ */
 export interface RankingConfiguration {
     /**
      * The name of the RankingConfiguration.
@@ -38,6 +47,9 @@ export interface RankingConfiguration {
     value: number;
 }
 
+/**
+ * @deprecated
+ */
 export enum RankingTypeEnum {
     BOOST = 'BOOST',
     BURY = 'BURY',
