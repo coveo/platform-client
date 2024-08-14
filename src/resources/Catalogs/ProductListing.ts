@@ -8,6 +8,9 @@ import {
     CatalogProductListingsGroupModel,
 } from './ProductListingInterfaces.js';
 
+/**
+ * @deprecated
+ */
 export default class ProductListing extends Resource {
     static baseCatalogsUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
     static baseProductListingsUrl = `/rest/organizations/${API.orgPlaceholder}/productlistings`;

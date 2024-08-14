@@ -7,6 +7,9 @@ import {
     ProductListingConfigurationOptions,
 } from './ProductListingConfigurationInterfaces.js';
 
+/**
+ * @deprecated
+ */
 export default class ProductListingConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
 
