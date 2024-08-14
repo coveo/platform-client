@@ -761,6 +761,11 @@ export enum StatementsFeature {
     QueryParamOverride = 'queryParamOverride',
 }
 
+export enum StatementsSubFeature {
+    QueryParamOverride = 'queryParamOverride',
+    QuerySuggestParamOverride = 'querySuggestParamOverride',
+}
+
 export enum ResultRankingsKind {
     featuredResults = 'featured_result',
     rankingExpression = 'ranking_expression',

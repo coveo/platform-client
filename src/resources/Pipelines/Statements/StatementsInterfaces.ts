@@ -1,5 +1,5 @@
 import {Paginated} from '../../BaseInterfaces.js';
-import {ListStatementSortBy, StatementsFeature} from '../../Enums.js';
+import {ListStatementSortBy, StatementsFeature, StatementsSubFeature} from '../../Enums.js';
 import {ConditionModel} from '../Conditions/index.js';
 
 export interface StatementModel {
@@ -128,6 +128,10 @@ export interface ListStatementParams extends Paginated {
      * The query pipeline feature to match.
      */
     feature?: StatementsFeature;
+    /**
+     * The query pipeline sub-feature to match.
+     */
+    subFeature?: StatementsSubFeature;
     /**
      * The unique identifier of the target Coveo Cloud organization.
      */
