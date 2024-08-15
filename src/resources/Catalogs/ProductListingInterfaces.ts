@@ -2,6 +2,9 @@ import {Paginated} from '../BaseInterfaces.js';
 import {FieldOperatorType, FieldValueType} from '../Enums.js';
 import {DeprecatedPaginated} from '../InternalBaseInterface.js';
 
+/**
+ * @deprecated
+ */
 export type ProductListingsListOptions = Paginated | DeprecatedPaginated;
 
 interface FieldValueModelGeneric<T extends FieldValueType> {
@@ -30,6 +33,9 @@ type FieldValueModel =
     | FieldValueModelGeneric<FieldValueType.ARRAY>
     | FieldValueModelGeneric<FieldValueType.HIERARCHIC_MULTI_VALUE>;
 
+/**
+ * @deprecated
+ */
 export interface QueryFilterModel {
     /**
      * The field name.
@@ -45,11 +51,17 @@ export interface QueryFilterModel {
     value: FieldValueModel;
 }
 
+/**
+ * @deprecated
+ */
 export interface ProductListingMetricsModel {
     lastNumberOfProducts?: number;
     lastQueried: string;
 }
 
+/**
+ * @deprecated
+ */
 export interface ProductListingModel {
     /**
      * The list of exclusion filters.
@@ -77,6 +89,9 @@ export interface ProductListingModel {
     metrics?: ProductListingMetricsModel;
 }
 
+/**
+ * @deprecated
+ */
 export interface CatalogProductListingsGroupModel {
     /**
      * The unique identifier of the catalog.

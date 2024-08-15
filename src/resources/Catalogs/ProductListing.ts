@@ -8,10 +8,16 @@ import {
     CatalogProductListingsGroupModel,
 } from './ProductListingInterfaces.js';
 
+/**
+ * @deprecated
+ */
 export default class ProductListing extends Resource {
     static baseCatalogsUrl = `/rest/organizations/${API.orgPlaceholder}/catalogs`;
     static baseProductListingsUrl = `/rest/organizations/${API.orgPlaceholder}/productlistings`;
 
+    /**
+     * @deprecated
+     */
     list(catalogId: string, options?: ProductListingsListOptions) {
         const normalizedOptions = normalizePaginatedOptions(options);
         return this.api.get<PageModel<ProductListingModel>>(
@@ -19,6 +25,9 @@ export default class ProductListing extends Resource {
         );
     }
 
+    /**
+     * @deprecated
+     */
     create(catalogId: string, model: New<ProductListingModel>) {
         return this.api.post<ProductListingModel>(
             `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`,
@@ -26,16 +35,25 @@ export default class ProductListing extends Resource {
         );
     }
 
+    /**
+     * @deprecated
+     */
     delete(catalogId: string, productListingId: string) {
         return this.api.delete(`${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingId}`);
     }
 
+    /**
+     * @deprecated
+     */
     get(catalogId: string, productListingId: string) {
         return this.api.get<ProductListingModel>(
             `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingId}`,
         );
     }
 
+    /**
+     * @deprecated
+     */
     update(catalogId: string, model: ProductListingModel) {
         return this.api.put<ProductListingModel>(
             `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${model.id}`,
@@ -43,12 +61,18 @@ export default class ProductListing extends Resource {
         );
     }
 
+    /**
+     * @deprecated
+     */
     getByCatalog() {
         return this.api.get<PageModel<CatalogProductListingsGroupModel>>(
             `${ProductListing.baseProductListingsUrl}/catalogs`,
         );
     }
 
+    /**
+     * @deprecated
+     */
     getUrls() {
         return this.api.get<string[]>(`${ProductListing.baseProductListingsUrl}/urls`);
     }
