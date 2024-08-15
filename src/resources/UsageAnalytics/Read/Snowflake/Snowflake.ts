@@ -100,4 +100,11 @@ export default class Snowflake extends ReadServiceResource {
     createSnowflakeReaderAccount() {
         return this.api.post<void>(this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccounts`));
     }
+
+    /**
+     * Delete a reader acocunt.
+     */
+    deleteSnowflakeReaderAccount() {
+        return this.api.delete<void>(this.buildPathWithOrg(`${Snowflake.baseUrl}/readeraccount`));
+    }
 }
