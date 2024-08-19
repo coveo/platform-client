@@ -122,12 +122,21 @@ describe('Snowflake', () => {
         });
     });
 
-    describe('putSnowflakeReaderAccount', () => {
-        it('makes a PUT call to the specific Snowflake url', () => {
+    describe('createSnowflakeReaderAccount', () => {
+        it('makes a POST call to the specific Snowflake url', () => {
             snowflake.createSnowflakeReaderAccount();
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccounts`);
+        });
+    });
+
+    describe('deleteSnowflakeReaderAccount', () => {
+        it('makes a DELETE call to the specific Snowflake url', () => {
+            snowflake.deleteSnowflakeReaderAccount();
+
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
         });
     });
 });
