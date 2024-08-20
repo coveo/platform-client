@@ -9,6 +9,7 @@ export * from './Catalogs/index.js';
 export * from './Clusters/index.js';
 export * from './Connectivity/index.js';
 export * from './CrawlingModule/index.js';
+export * from './DataService/index.js';
 export * from './Enums.js';
 export * from './Extensions/index.js';
 export * from './Fields/index.js';

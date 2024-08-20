@@ -9,6 +9,7 @@ import CatalogConfiguration from './Catalogs/CatalogConfiguration.js';
 import Cluster from './Clusters/Cluster.js';
 import Connectivity from './Connectivity/Connectivity.js';
 import CrawlingModule from './CrawlingModule/CrawlingModule.js';
+import DataService from './DataService/DataService.js';
 import Extensions from './Extensions/Extensions.js';
 import Field from './Fields/Fields.js';
 import Global from './Global/Global.js';
@@ -66,6 +67,7 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'cluster', resource: Cluster},
     {key: 'connectivity', resource: Connectivity},
     {key: 'crawlingModule', resource: CrawlingModule},
+    {key: 'dataService', resource: DataService},
     {key: 'extension', resource: Extensions},
     {key: 'field', resource: Field},
     {key: 'global', resource: Global},
@@ -127,6 +129,7 @@ class PlatformResources {
     cluster: Cluster;
     crawlingModule: CrawlingModule;
     connectivity: Connectivity;
+    dataService: DataService;
     extension: Extensions;
     field: Field;
     global: Global;
