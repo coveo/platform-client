@@ -168,7 +168,7 @@ describe('ResourceSnapshots', () => {
             };
 
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
-            fetchMock.default.mockResponseOnce(JSON.stringify({test: 'hello'}));
+            fetchMock.mockResponseOnce(JSON.stringify({test: 'hello'}));
 
             await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 

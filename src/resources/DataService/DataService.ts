@@ -87,7 +87,10 @@ export default class DataService extends Resource {
         );
     }
 
-    export(body: Readonly<DataServiceExportQueryModel>, args?: RequestInit) {
+    export<CT extends readonly DataServiceColumnType[], TR extends readonly DataServiceTrend[]>(
+        body: Readonly<DataServiceExportQueryModel<CT, TR>>,
+        args?: RequestInit,
+    ) {
         return this.api.post<DataServiceExportResponseModel>(
             super.buildPath(`${DataService.baseUrl}/export`),
             body,
