@@ -25,6 +25,7 @@ export default class DataHealth extends ReadServiceResource {
     listEvents(params: DataHealthListEventsParameters, args?: RequestInit) {
         return this.api.get<DataHealthListEventsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events`, params),
+            args,
         );
     }
 
@@ -34,6 +35,7 @@ export default class DataHealth extends ReadServiceResource {
     getEventPayload(params: DataHealthGetEventPayloadParams, args?: RequestInit) {
         return this.api.get<DataHealthEventPayloadResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events/payload`, params),
+            args,
         );
     }
 
@@ -43,6 +45,7 @@ export default class DataHealth extends ReadServiceResource {
     listFacetValues(params: DataHealthListFacetValueParams, args?: RequestInit) {
         return this.api.get<DataHealthListFacetsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/facets`, params),
+            args,
         );
     }
 
@@ -52,6 +55,7 @@ export default class DataHealth extends ReadServiceResource {
     getOverview(params: DataHealthGetOverviewParams, args?: RequestInit) {
         return this.api.get<DataHealthGetOverviewResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/overview`, params),
+            args,
         );
     }
 
@@ -61,6 +65,7 @@ export default class DataHealth extends ReadServiceResource {
     getGroupListing(params: DataHealthGetGroupListingParams, args?: RequestInit) {
         return this.api.get<DataHealthGetGroupListingResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/groups`, params),
+            args,
         );
     }
 
@@ -70,6 +75,7 @@ export default class DataHealth extends ReadServiceResource {
     getGroupDetail(params: DataHealthGetGroupDetailParams, args?: RequestInit) {
         return this.api.get<DataHealthGetGroupDetailResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/groups/detail`, params),
+            args,
         );
     }
 
@@ -79,6 +85,7 @@ export default class DataHealth extends ReadServiceResource {
     getTrackingIds(params: DataHealthGetTrackingIdsParams, args?: RequestInit) {
         return this.api.get<DataHealthGetTrackingIdsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/facets`, {...params, facet: 'TRACKING_ID'}),
+            args,
         );
     }
 

@@ -35,6 +35,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/events?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z`,
+                undefined,
             );
         });
     });
@@ -49,6 +50,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/events/payload?org=someOrgId&eventId=somePotato&timestamp=1986-04-26T01%3A23%3A58.000Z`,
+                undefined,
             );
         });
     });
@@ -63,6 +65,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/facets?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&facet=potate`,
+                undefined,
             );
         });
     });
@@ -78,6 +81,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/overview?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
+                undefined,
             );
         });
     });
@@ -93,6 +97,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/groups?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
+                undefined,
             );
         });
     });
@@ -109,6 +114,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/groups/detail?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&group=horned&trackingId=PetShop`,
+                undefined,
             );
         });
     });
@@ -122,6 +128,7 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/facets?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&facet=TRACKING_ID`,
+                undefined,
             );
         });
     });
