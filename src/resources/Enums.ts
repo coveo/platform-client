@@ -1153,6 +1153,7 @@ export enum FieldValueType {
     DECIMAL = 'decimal',
     ARRAY = 'array',
     HIERARCHIC_MULTI_VALUE = 'hierarchicMultiValue',
+    SEED_RELATIVE_VALUE = 'seedRelativeValue',
 }
 
 export enum ProductsFacetRequestSortType {
