@@ -6,7 +6,7 @@ jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
-describe('ApiKeyTemplateModel', () =>{
+describe('ApiKeyTemplateModel', () => {
     let apiKeyTemplate: ApiKeyTemplate;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
