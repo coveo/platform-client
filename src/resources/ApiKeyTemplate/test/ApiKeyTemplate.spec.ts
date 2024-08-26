@@ -6,8 +6,7 @@ jest.mock('../../../APICore.js');
 
 const APIMock: jest.Mock<API> = API as any;
 
-
-describe('ApiKeyTemplateModel', ()=>{
+describe('ApiKeyTemplateModel', () =>{
     let apiKeyTemplate: ApiKeyTemplate;
     const api = new APIMock() as jest.Mocked<API>;
     const serverlessApi = new APIMock() as jest.Mocked<API>;
@@ -18,10 +17,10 @@ describe('ApiKeyTemplateModel', ()=>{
     });
 
     describe('purpose', () => {
-        it('should make a GET call to the ApiKeys at the /purpose', () => {
+        it('should make a GET call to the ApiKeys at the keyPurpose', () => {
             apiKeyTemplate.purpose();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(ApiKeyTemplate.baseUrl+'/purpose');
+            expect(api.get).toHaveBeenCalledWith(ApiKeyTemplate.baseUrl + 'keyPurpose');
         });
     });
-})
+});
