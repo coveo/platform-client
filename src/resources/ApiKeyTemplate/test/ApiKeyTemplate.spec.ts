@@ -21,7 +21,7 @@ describe('ApiKeyTemplateModel', () => {
             const apiKeyTemplateToGetId = "ApikeyTemplate-to-be-fetched"
             apiKeyTemplate.get(apiKeyTemplateToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(ApiKeyTemplate.baseUrl + 'keyPurpose');
+            expect(api.get).toHaveBeenCalledWith(`${ApiKeyTemplate.baseUrl}/${apiKeyTemplateToGetId}`);
         });
     });
 });
