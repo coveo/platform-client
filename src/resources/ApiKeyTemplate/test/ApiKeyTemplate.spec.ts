@@ -18,7 +18,8 @@ describe('ApiKeyTemplateModel', () => {
 
     describe('purpose', () => {
         it('should make a GET call to the ApiKeys at the keyPurpose', () => {
-            apiKeyTemplate.purpose();
+            const apiKeyTemplateToGetId = "ApikeyTemplate-to-be-fetched"
+            apiKeyTemplate.get(apiKeyTemplateToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ApiKeyTemplate.baseUrl + 'keyPurpose');
         });
