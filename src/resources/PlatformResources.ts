@@ -59,7 +59,7 @@ import ApiKeyTemplate from './ApiKeyTemplate/ApiKeyTemplate.js';
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
     {key: 'apiKey', resource: ApiKey},
-    {key: 'apiKeyTemplate', resource: ApiKeyTemplate}
+    {key: 'apiKeyTemplate', resource: ApiKeyTemplate},
     {key: 'aws', resource: AWS},
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
