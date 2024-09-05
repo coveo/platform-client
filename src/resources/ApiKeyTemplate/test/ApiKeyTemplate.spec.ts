@@ -16,7 +16,7 @@ describe('ApiKeyTemplateModel', () => {
         apiKeyTemplate = new ApiKeyTemplate(api, serverlessApi);
     });
 
-    describe('purpose', () => {
+    describe('get', () => {
         it('should make a GET call to the ApiKeys at the keyPurpose', () => {
             const apiKeyTemplateToGetId = 'ApikeyTemplate-to-be-fetched';
             apiKeyTemplate.get(apiKeyTemplateToGetId);
