@@ -17,9 +17,9 @@ describe('ApiKeyTemplateModel', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the ApiKeys at the keyPurpose', () => {
+        it('should make a GET call to the ApiKeys at the keyPurpose', async () => {
             const apiKeyTemplateToGetId = 'ApikeyTemplate-to-be-fetched';
-            apiKeyTemplate.get(apiKeyTemplateToGetId);
+            await apiKeyTemplate.get(apiKeyTemplateToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ApiKeyTemplate.baseUrl}/${apiKeyTemplateToGetId}`);
         });
