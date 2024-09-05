@@ -2,6 +2,7 @@ export {default as Resource} from './Resource.js';
 
 export * from './Activities/index.js';
 export * from './ApiKeys/index.js';
+export * from './ApiKeyTemplate/index.js';
 export * from './AWS/index.js';
 export * from './BaseInterfaces.js';
 export * from './CaseAssistConfigs/index.js';
