@@ -54,10 +54,12 @@ import Project from './Projects/Project.js';
 import Resources from './Resources/Resources.js';
 import CatalogContent from './Catalogs/CatalogContent.js';
 import Properties from './AnalyticsAdmin/Properties/Properties.js';
+import ApiKeyTemplate from './ApiKeyTemplate/ApiKeyTemplate.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
     {key: 'apiKey', resource: ApiKey},
+    {key: 'apiKeyTemplate', resource: ApiKeyTemplate}
     {key: 'aws', resource: AWS},
     {key: 'caseAssistConfig', resource: CaseAssistConfig},
     {key: 'catalog', resource: Catalog},
@@ -120,6 +122,7 @@ class PlatformResources {
 
     activity: Activity;
     apiKey: ApiKey;
+    apiKeyTemplate: ApiKeyTemplate;
     aws: AWS;
     caseAssistConfig: CaseAssistConfig;
     catalog: Catalog;
