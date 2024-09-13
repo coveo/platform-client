@@ -1,7 +1,7 @@
 export interface LimitModel {
     actualCount?: number;
     limit: number;
-    lastUpdate?: string
+    lastUpdate?: string;
 }
 
 export interface LimitsModel {

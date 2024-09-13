@@ -1,10 +1,10 @@
-import { PrivilegeModel } from "../BaseInterfaces.js";
+import {PrivilegeModel} from '../BaseInterfaces.js';
 
 export interface ApiKeyTemplateModel {
     /**
      * The unique identifier of the API key template.
      */
-    id?: string; 
+    id?: string;
     /**
      * The displaye name of the Api key template.
      */

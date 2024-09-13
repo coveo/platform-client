@@ -1,5 +1,4 @@
-import jestFetchMock from 'jest-fetch-mock';
-const fetchMock = jestFetchMock.default;
+import fetchMock from 'jest-fetch-mock';
 import API from '../APICore.js';
 import {PlatformClientOptions} from '../ConfigurationInterfaces.js';
 import getEndpoint, {Environment, Region} from '../Endpoints.js';
