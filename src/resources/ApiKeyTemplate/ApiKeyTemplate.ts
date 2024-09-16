@@ -5,6 +5,6 @@ export default class ApiKeyTemplate extends Resource {
     static baseUrl = '/rest/templates/apikeys';
 
     get(apiKeyTemplateId: string) {
-        return this.api.get<ApiKeyTemplateModel[]>(`${ApiKeyTemplate.baseUrl}/${apiKeyTemplateId}`);
+        return this.api.get<ApiKeyTemplateModel>(`${ApiKeyTemplate.baseUrl}/${apiKeyTemplateId}`);
     }
 }
