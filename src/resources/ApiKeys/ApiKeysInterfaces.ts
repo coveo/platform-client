@@ -84,6 +84,14 @@ export interface ApiKeyModel extends GranularResource {
      * Additional configuration to be included in an API key. [to be revised]
      */
     additionalConfiguration?: AdditionalConfigurationModel;
+    /**
+     * The expiration date of the api key
+     */
+    expirationDate?: number;
+    /**
+     * Represents the status of the api key 
+     */
+    status?: ApiKeyStatus
 }
 
 export interface CreateApiKeyOptions {
@@ -138,4 +146,13 @@ interface EnforceQueryPipelineConfigurationModel {
 
 interface ImpersonationRestrictionsModel {
     allowedUserIds: QueryAuthenticationModel[];
+}
+
+export enum ApiKeyStatus {
+    ENABLED='EXPIRED',
+    DISABLED='DISABLED',
+    DISABLED_FOR_INACTIVITY='DISABLED_FOR_INACTIVITY',
+    EXPIRED='EXPIRED',
+    SOON_TO_BE_EXPIRED='SOON_TO_BE_EXPIRED',
+    SOON_TO_BE_DISABLED='SOO_TO_BE_DISABLED'
 }
