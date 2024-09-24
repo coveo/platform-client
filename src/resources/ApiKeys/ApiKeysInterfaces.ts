@@ -95,7 +95,7 @@ export interface ApiKeyModel extends GranularResource {
     /**
      * This represents the api key template to which the api key is binded to.
      */
-     apiKeyTemplateId: string
+     apiKeyTemplateId?: string
 }
 
 export interface CreateApiKeyOptions {
