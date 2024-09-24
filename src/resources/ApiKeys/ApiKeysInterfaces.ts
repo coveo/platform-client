@@ -1,5 +1,5 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-
+import { ApiKeyStatus } from '../Enums.js';
 export interface ApiKeyModel extends GranularResource {
     /**
      * The unique identifier of the [organization](https://docs.coveo.com/en/222/) the API key was created for.
@@ -10,7 +10,7 @@ export interface ApiKeyModel extends GranularResource {
      *
      * **Example:** t4hk287bfj5sg6wskg64ckk5a
      */
-    id?: string;
+    id: string;
     /**
      * Whether the API key is enabled.
      */
@@ -91,7 +91,11 @@ export interface ApiKeyModel extends GranularResource {
     /**
      * Represents the status of the api key 
      */
-    status?: ApiKeyStatus
+    status?: ApiKeyStatus;
+    /**
+     * This represents the api key template to which the api key is binded to.
+     */
+     apiKeyTemplateId: string
 }
 
 export interface CreateApiKeyOptions {
@@ -146,13 +150,4 @@ interface EnforceQueryPipelineConfigurationModel {
 
 interface ImpersonationRestrictionsModel {
     allowedUserIds: QueryAuthenticationModel[];
-}
-
-export enum ApiKeyStatus {
-    ENABLED='EXPIRED',
-    DISABLED='DISABLED',
-    DISABLED_FOR_INACTIVITY='DISABLED_FOR_INACTIVITY',
-    EXPIRED='EXPIRED',
-    SOON_TO_BE_EXPIRED='SOON_TO_BE_EXPIRED',
-    SOON_TO_BE_DISABLED='SOO_TO_BE_DISABLED'
 }
