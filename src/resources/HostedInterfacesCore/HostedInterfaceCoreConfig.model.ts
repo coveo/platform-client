@@ -153,12 +153,14 @@ export interface HostedInterfaceResultTemplate {
      * The metadata details to display.
      */
     details: HostedInterfaceResultTemplateDetail[];
+}
+
+export interface HostedInterfaceProjectsResultTemplate extends HostedInterfaceResultTemplate {
     /**
      * The project ids associated with interface
      */
     projectIds: string[];
 }
-
 export interface HostedInterfaceConfiguration {
     /**
      * The configuration identifier.
