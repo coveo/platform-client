@@ -6,7 +6,9 @@ import {
     EstimateExportParams,
     EstimateVisitExportParams,
     GenerateExportParams,
+    GenerateExportWithBodyParams,
     GenerateVisitExportParams,
+    GenerateVisitExportWithBodyParams,
 } from '../ExportsInterfaces.js';
 
 jest.mock('../../../../../APICore.js');
@@ -42,6 +44,19 @@ describe('Exports', () => {
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}?from=123&to=456`);
+        });
+    });
+
+    describe('generateExportWithBody', () => {
+        it('makes a POST call to the Exports base url with a request body', () => {
+            const params: GenerateExportWithBodyParams = {
+                from: '123',
+                to: '456',
+            };
+            exports.generateExportWithBody(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/create`, params, undefined);
         });
     });
 
@@ -97,6 +112,19 @@ describe('Exports', () => {
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/visits?from=987&to=654`);
+        });
+    });
+
+    describe('generateVisitExportWithBody', () => {
+        it('makes a POST call to the specific Exports url with a request body', () => {
+            const params: GenerateVisitExportWithBodyParams = {
+                from: '987',
+                to: '654',
+            };
+            exports.generateVisitExportWithBody(params);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/visits/create`, params, undefined);
         });
     });
 

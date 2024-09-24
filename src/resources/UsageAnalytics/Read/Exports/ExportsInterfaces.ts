@@ -87,6 +87,37 @@ export interface GenerateExportParams extends EstimateExportParams {
     useDisplayNames?: boolean;
 }
 
+type ExportFormat = 'EXCEL' | 'NO_NEWLINE';
+export type ExportTable = 'SEARCHES' | 'CLICKS' | 'CUSTOM_EVENTS' | 'KEYWORDS' | 'GROUPS';
+
+export interface GenerateExportWithBodyParams {
+    from: string;
+    to: string;
+    commonFilters?: string[];
+    searchesFilters?: string[];
+    customEventsFilters?: string[];
+    filename?: string;
+    description?: string;
+    dimensions?: string[];
+    tables?: ExportTable[];
+    exportFormat?: ExportFormat;
+    useDisplayNames?: boolean;
+}
+
+export interface GenerateVisitExportWithBodyParams {
+    from: string;
+    to: string;
+    inclusionFilters?: string[];
+    hideEventFilters?: string[];
+    exclusionFilters?: string[];
+    filename?: string;
+    description?: string;
+    dimensions?: string[];
+    exportFormat?: ExportFormat;
+    useDisplayNames?: boolean;
+    ordered?: boolean;
+}
+
 export interface GenerateVisitExportParams extends GenerateExportParams {
     /**
      * Whether to order the rows by datetime in the export.
