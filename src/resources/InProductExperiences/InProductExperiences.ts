@@ -44,6 +44,12 @@ export default class InProductExperiences extends Resource {
         return this.api.get<InProductExperienceModel[]>(this.buildPath(`${InProductExperiences.ipxBaseUrl}s`, {name}));
     }
 
+    listByProject(projectid?: string) {
+        return this.api.get<InProductExperienceModel[]>(
+            this.buildPath(`${InProductExperiences.ipxBaseUrl}s/projectid`, {projectid}),
+        );
+    }
+
     getLoader(ipxId: string, access_token?: string) {
         return this.api.get<InProductExperienceLoader>(
             this.buildPath(`${InProductExperiences.baseUrl}/${ipxId}/inappwidget/loader`, {access_token}),

@@ -81,6 +81,11 @@ export interface InProductExperienceModel extends SharedInProductExperienceModel
      */
     orgId: string;
 
+    /**
+     * The projects to which this widget is associated to
+     */
+    projectIds: string[];
+
     token: RestTokenParams;
 }
 

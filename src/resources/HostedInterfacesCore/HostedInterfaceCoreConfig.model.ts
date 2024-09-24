@@ -126,6 +126,13 @@ export interface ListHostedInterfacesParams extends Paginated {
     perPage?: number;
 }
 
+export interface ListHostedInterfacesByProjectParams extends ListHostedInterfacesParams {
+    /**
+     * The project for which the interfaces should be fetched
+     */
+    projectId?: string;
+}
+
 export interface HostedInterfaceResultTemplate {
     /**
      * The name of the result template.
@@ -146,6 +153,10 @@ export interface HostedInterfaceResultTemplate {
      * The metadata details to display.
      */
     details: HostedInterfaceResultTemplateDetail[];
+    /**
+     * The project ids associated with interface
+     */
+    projectIds: string[];
 }
 
 export interface HostedInterfaceConfiguration {
