@@ -161,6 +161,7 @@ export interface HostedInterfaceProjectsResultTemplate extends HostedInterfaceRe
      */
     projectIds: string[];
 }
+
 export interface HostedInterfaceConfiguration {
     /**
      * The configuration identifier.
