@@ -1,6 +1,7 @@
 import ReadServiceResource from '../ReadServiceResource.js';
 import {
     GetCreditUsageParams,
+    ReactivateUserParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
     SnowflakeReaderAccountEndpointModel,
@@ -21,6 +22,8 @@ export default class Snowflake extends ReadServiceResource {
 
     /**
      * Create a new user within a Snowflake reader account.
+     *
+     * @param model The user to create.
      */
     createUser(model: SnowflakeUserModel) {
         return this.api.post<SnowflakeUserModel>(this.buildPathWithOrg(`${Snowflake.baseUrl}/users`), model);
@@ -54,6 +57,19 @@ export default class Snowflake extends ReadServiceResource {
     }
 
     /**
+     * Reactivate and set a user's expiration in a Snowflake reader account.
+     *
+     * @param snowflakeUser The login name for the Snowflake user.
+     * @param params The number of days until the user's expiration date.
+     */
+    reactivateUser(snowflakeUser: string, params: ReactivateUserParams) {
+        return this.api.put<void>(
+            this.buildPathWithOrg(`${Snowflake.baseUrl}/users/${snowflakeUser}/expiration`),
+            params,
+        );
+    }
+
+    /**
      * Get the details of the active network policy for a Snowflake reader account.
      */
     getNetworkPolicy() {
@@ -62,6 +78,8 @@ export default class Snowflake extends ReadServiceResource {
 
     /**
      * Set the details of the active network policy for a Snowflake reader account.
+     *
+     * @param model The network policy to create.
      */
     updateNetworkPolicy(model: SnowflakeNetworkPolicyModel) {
         return this.api.put<void>(this.buildPathWithOrg(`${Snowflake.baseUrl}/networkpolicy`), model);
@@ -69,6 +87,8 @@ export default class Snowflake extends ReadServiceResource {
 
     /**
      * Get the amount of compute credits used by a Snowflake reader account within a date range.
+     *
+     * @param params The time range to get the amount of compute credits.
      */
     getCreditUsage(params: GetCreditUsageParams) {
         return this.api.get<SnowflakeCreditUsageModel>(
