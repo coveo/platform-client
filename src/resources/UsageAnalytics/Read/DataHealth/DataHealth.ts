@@ -2,6 +2,8 @@ import ReadServiceResource from '../ReadServiceResource.js';
 import {
     DataHealthEventPayloadResponse,
     DataHealthGetEventPayloadParams,
+    DataHealthGetFailedInstancesParams,
+    DataHealthGetFailedInstancesResponse,
     DataHealthGetGroupDetailParams,
     DataHealthGetGroupDetailResponse,
     DataHealthGetGroupListingParams,
@@ -92,5 +94,14 @@ export default class DataHealth extends ReadServiceResource {
      */
     protected buildPathWithOrg(route: string, queryParams?: any): string {
         return super.buildPath(route, {org: this.api.organizationId, ...queryParams});
+    }
+
+    /**
+     * Get failed instances for a data health criterion
+     */
+    getFailedInstances(params: DataHealthGetFailedInstancesParams, args?: RequestInit) {
+        return this.api.get<DataHealthGetFailedInstancesResponse>(
+            this.buildPathWithOrg(`${DataHealth.baseUrl}/criteria/failedInstances`, params),
+        );
     }
 }

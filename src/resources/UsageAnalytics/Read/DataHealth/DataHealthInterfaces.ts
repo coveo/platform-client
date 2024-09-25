@@ -310,3 +310,24 @@ export interface DataHealthGetTrackingIdsResponse {
      */
     values: DataHealthFacetValue[];
 }
+
+export interface DataHealthGetFailedInstancesParams extends OrganizationParamParts, TimeRangeParamParts {
+    criterionId: string;
+    group: string;
+    scopeValue: string;
+    trackingId: string[];
+}
+
+export interface DataHealthGetFailedInstancesResponse extends PaginatedResponse {
+    failedInstances: DataHealthFailedInstanceEntry[];
+}
+
+export interface DataHealthFailedInstanceEntry {
+    timestamp: string;
+    eventId: string;
+    visitId: string;
+    clientId: string;
+    scope: DataHealthRuleScope;
+}
+
+type DataHealthRuleScope = 'EVENT' | 'VISIT';
