@@ -44,9 +44,9 @@ export default class InProductExperiences extends Resource {
         return this.api.get<InProductExperienceModel[]>(this.buildPath(`${InProductExperiences.ipxBaseUrl}s`, {name}));
     }
 
-    listByProject(projectid?: string) {
+    listByProject(projectId?: string) {
         return this.api.get<InProductExperienceModel[]>(
-            this.buildPath(`${InProductExperiences.ipxBaseUrl}s/projectid`, {projectid}),
+            this.buildPath(`${InProductExperiences.ipxBaseUrl}s/projectid`, {projectid: projectId}),
         );
     }
 
