@@ -93,7 +93,7 @@ export interface ApiKeyModel extends GranularResource {
      */
     status?: ApiKeyStatus;
     /**
-     * This represents the api key template to which the api key is binded to.
+     * The ID of the template to which the API key is bound.
      */
      apiKeyTemplateId?: string
 }
