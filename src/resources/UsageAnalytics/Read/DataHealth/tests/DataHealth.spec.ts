@@ -128,7 +128,7 @@ describe('DataHealth', () => {
     });
 
     describe('getFailedInstances', () => {
-        it('should make a GET call to the data health get tracking id url', () => {
+        it('should make a GET call to the data health get failed instances url', async () => {
             const datahealthGetFailedInstancesParams: DataHealthGetFailedInstancesParams = {
                 ...baseParams,
                 criterionId: 'criterion',
@@ -136,7 +136,7 @@ describe('DataHealth', () => {
                 scopeValue: '',
                 trackingId: [''],
             };
-            dataHealth.getFailedInstances(datahealthGetFailedInstancesParams);
+            await dataHealth.getFailedInstances(datahealthGetFailedInstancesParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/criteria/failedInstances?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&criterionId=criterion&group=group`,
