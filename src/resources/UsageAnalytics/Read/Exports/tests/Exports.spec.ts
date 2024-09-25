@@ -26,8 +26,8 @@ describe('Exports', () => {
     });
 
     describe('list', () => {
-        it('makes a GET call to the Exports base url', () => {
-            exports.list();
+        it('makes a GET call to the Exports base url', async () => {
+            await exports.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Exports.baseUrl);
@@ -35,12 +35,12 @@ describe('Exports', () => {
     });
 
     describe('generate', () => {
-        it('makes a POST call to the Exports base url', () => {
+        it('makes a POST call to the Exports base url', async () => {
             const params: GenerateExportParams = {
                 from: '123',
                 to: '456',
             };
-            exports.generate(params);
+            await exports.generate(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}?from=123&to=456`);
@@ -48,12 +48,12 @@ describe('Exports', () => {
     });
 
     describe('generateExportWithBody', () => {
-        it('makes a POST call to the Exports base url with a request body', () => {
+        it('makes a POST call to the Exports base url with a request body', async () => {
             const params: GenerateExportWithBodyParams = {
                 from: '123',
                 to: '456',
             };
-            exports.generateExportWithBody(params);
+            await exports.generateExportWithBody(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/create`, params, undefined);
@@ -61,9 +61,9 @@ describe('Exports', () => {
     });
 
     describe('get', () => {
-        it('makes a GET call to the specific Exports url', () => {
+        it('makes a GET call to the specific Exports url', async () => {
             const exportId = '🌞';
-            exports.get(exportId);
+            await exports.get(exportId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/${exportId}?redirect=false`);
@@ -71,18 +71,18 @@ describe('Exports', () => {
     });
 
     describe('getExportDownloadLink', () => {
-        it('makes a GET call to the specific Exports url', () => {
+        it('makes a GET call to the specific Exports url', async () => {
             const exportId = 'Soubame';
-            exports.getExportDownloadLink(exportId);
+            await exports.getExportDownloadLink(exportId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/${exportId}/downloadlink`);
         });
     });
 
     describe('delete', () => {
-        it('makes a DELETE call to the specific Exports url', () => {
+        it('makes a DELETE call to the specific Exports url', async () => {
             const exportId = '🌞';
-            exports.delete(exportId);
+            await exports.delete(exportId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Exports.baseUrl}/${exportId}`);
@@ -90,12 +90,12 @@ describe('Exports', () => {
     });
 
     describe('estimateRowsCount', () => {
-        it('makes a GET call to the specific Exports url', () => {
+        it('makes a GET call to the specific Exports url', async () => {
             const params: EstimateExportParams = {
                 from: '246',
                 to: '135',
             };
-            exports.estimateRowsCount(params);
+            await exports.estimateRowsCount(params);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/estimate?from=246&to=135`);
@@ -103,12 +103,12 @@ describe('Exports', () => {
     });
 
     describe('generateVisitExport', () => {
-        it('makes a POST call to the specific Exports url', () => {
+        it('makes a POST call to the specific Exports url', async () => {
             const params: GenerateVisitExportParams = {
                 from: '987',
                 to: '654',
             };
-            exports.generateVisitExport(params);
+            await exports.generateVisitExport(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/visits?from=987&to=654`);
@@ -116,12 +116,12 @@ describe('Exports', () => {
     });
 
     describe('generateVisitExportWithBody', () => {
-        it('makes a POST call to the specific Exports url with a request body', () => {
+        it('makes a POST call to the specific Exports url with a request body', async () => {
             const params: GenerateVisitExportWithBodyParams = {
                 from: '987',
                 to: '654',
             };
-            exports.generateVisitExportWithBody(params);
+            await exports.generateVisitExportWithBody(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/visits/create`, params, undefined);
@@ -129,12 +129,12 @@ describe('Exports', () => {
     });
 
     describe('estimateVisitExportRowsCount', () => {
-        it('makes a GET call to the specific Exports url', () => {
+        it('makes a GET call to the specific Exports url', async () => {
             const params: EstimateVisitExportParams = {
                 from: '741',
                 to: '369',
             };
-            exports.estimateVisitExportRowsCount(params);
+            await exports.estimateVisitExportRowsCount(params);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/visits/estimate?from=741&to=369`);
@@ -142,8 +142,8 @@ describe('Exports', () => {
     });
 
     describe('listSchedules', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.listSchedules();
+        it('makes a GET call to the specific Exports url', async () => {
+            await exports.listSchedules();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules`);
@@ -151,12 +151,12 @@ describe('Exports', () => {
     });
 
     describe('createSchedule', () => {
-        it('makes a POST call to the specific Exports url', () => {
+        it('makes a POST call to the specific Exports url', async () => {
             const model: CreateExportScheduleModel = {
                 frequency: ExportScheduleFrequency.monthly,
                 timezone: 'Area51',
             };
-            exports.createSchedule(model);
+            await exports.createSchedule(model);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules`, model);
@@ -164,9 +164,9 @@ describe('Exports', () => {
     });
 
     describe('getSchedule', () => {
-        it('makes a GET call to the specific Exports url', () => {
+        it('makes a GET call to the specific Exports url', async () => {
             const exportScheduleId = '🌞';
-            exports.getSchedule(exportScheduleId);
+            await exports.getSchedule(exportScheduleId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`);
@@ -174,13 +174,13 @@ describe('Exports', () => {
     });
 
     describe('updateSchedule', () => {
-        it('makes a PUT call to the specific Exports url', () => {
+        it('makes a PUT call to the specific Exports url', async () => {
             const exportScheduleId = '🌞';
             const model: CreateExportScheduleModel = {
                 frequency: ExportScheduleFrequency.monthly,
                 timezone: 'Area51',
             };
-            exports.updateSchedule(exportScheduleId, model);
+            await exports.updateSchedule(exportScheduleId, model);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`, model);
@@ -188,9 +188,9 @@ describe('Exports', () => {
     });
 
     describe('deleteSchedule', () => {
-        it('makes a DELETE call to the specific Exports url', () => {
+        it('makes a DELETE call to the specific Exports url', async () => {
             const exportScheduleId = '🌞';
-            exports.deleteSchedule(exportScheduleId);
+            await exports.deleteSchedule(exportScheduleId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Exports.baseUrl}/schedules/${exportScheduleId}`);
@@ -198,8 +198,8 @@ describe('Exports', () => {
     });
 
     describe('getRowLimit', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.getRowLimit();
+        it('makes a GET call to the specific Exports url', async () => {
+            await exports.getRowLimit();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/rowLimit`);
@@ -207,8 +207,8 @@ describe('Exports', () => {
     });
 
     describe('checkHealth', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.checkHealth();
+        it('makes a GET call to the specific Exports url', async () => {
+            await exports.checkHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/monitoring/health`);
@@ -216,8 +216,8 @@ describe('Exports', () => {
     });
 
     describe('checkStatus', () => {
-        it('makes a GET call to the specific Exports url', () => {
-            exports.checkStatus();
+        it('makes a GET call to the specific Exports url', async () => {
+            await exports.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Exports.baseUrl}/status`);
