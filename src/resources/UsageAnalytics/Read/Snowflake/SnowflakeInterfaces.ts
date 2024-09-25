@@ -21,6 +21,10 @@ export interface SnowflakeUserModel {
     daysToExpiry?: number;
 }
 
+export interface ReactivateUserParams {
+    daysToExpiry: number;
+}
+
 export interface SnowflakeNetworkPolicyModel {
     allowedIpAddresses: string[];
     blockedIpAddresses: string[];
