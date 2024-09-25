@@ -312,22 +312,55 @@ export interface DataHealthGetTrackingIdsResponse {
 }
 
 export interface DataHealthGetFailedInstancesParams extends OrganizationParamParts, TimeRangeParamParts {
+    /**
+     * The data health criterion for which the failed instances should be returned.
+     */
     criterionId: string;
+    /**
+     * The group for which data health information should be returned.
+     */
     group: string;
+    /**
+     * The value of the criterion scope for which failed instances should be returned.
+     */
     scopeValue: string;
+    /**
+     * The tracking IDs for which the results should be returned.
+     */
     trackingId: string[];
 }
 
 export interface DataHealthGetFailedInstancesResponse extends PaginatedResponse {
+    /**
+     * A collection of failed instances.
+     */
     failedInstances: DataHealthFailedInstanceEntry[];
 }
 
 export interface DataHealthFailedInstanceEntry {
+    /**
+     * The timestamp of the failed instance.
+     */
     timestamp: string;
+    /**
+     * The id of the event.
+     */
     eventId: string;
+    /**
+     * The id of the visit.
+     */
     visitId: string;
+    /**
+     * The client id of the event.
+     */
     clientId: string;
+    /**
+     * The scope of the datahealth rule, either event or visit.
+     */
     scope: DataHealthRuleScope;
 }
 
+/**
+ * The scope of the datahealth rule, either event or visit.
+ */
 type DataHealthRuleScope = 'EVENT' | 'VISIT';
