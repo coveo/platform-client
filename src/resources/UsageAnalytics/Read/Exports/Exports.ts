@@ -28,7 +28,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     /**
      * Generate an export.
      *
-     * @param params Parameters to generate the export with.
+     * @param params The parameters to generate the export with.
      */
     generate(params: GenerateExportParams) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(Exports.baseUrl, params));
@@ -37,7 +37,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     /**
      * Generate an export with the parameters in the request body.
      *
-     * @param params Parameters to generate the export with, passed in the request body.
+     * @param params The parameters to generate the export with, passed in the request body.
      */
     generateExportWithBody(params: GenerateExportWithBodyParams, args?: RequestInit) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/create`), params, args);
@@ -83,7 +83,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     /**
      * Generate a visit export.
      *
-     * @param params Parameters of the visit export.
+     * @param params The parameters to generate the visit export with.
      */
     generateVisitExport(params: GenerateVisitExportParams) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits`, params));
@@ -92,7 +92,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     /**
      * Generate a visit export with the parameters in the request body.
      *
-     * @param params Parameters of the visit export, passed in the request body.
+     * @param params The parameters to generate the visit export with, passed in the request body.
      */
     generateVisitExportWithBody(params: GenerateVisitExportWithBodyParams, args?: RequestInit) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits/create`), params, args);
@@ -101,7 +101,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
     /**
      * Estimate the number of rows in a visit export.
      *
-     * @param params Parameters of the visit export to estimate.
+     * @param params The parameters of the visit export to estimate.
      */
     estimateVisitExportRowsCount(params: EstimateVisitExportParams) {
         return this.api.get<ExportEstimateModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits/estimate`, params));

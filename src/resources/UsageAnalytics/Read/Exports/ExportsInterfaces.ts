@@ -87,34 +87,80 @@ export interface GenerateExportParams extends EstimateExportParams {
     useDisplayNames?: boolean;
 }
 
-type ExportFormat = 'EXCEL' | 'NO_NEWLINE';
-export type ExportTable = 'SEARCHES' | 'CLICKS' | 'CUSTOM_EVENTS' | 'KEYWORDS' | 'GROUPS';
-
-export interface GenerateExportWithBodyParams {
+interface BaseGenerateExportWithBodyParams {
+    /**
+     * The beginning date of the date range. ISO8601 format 'YYYY-MM-DDThh:mm:ss.sssZ'
+     */
     from: string;
+    /**
+     * The end date of the date range. ISO8601 format 'YYYY-MM-DDThh:mm:ss.sssZ'
+     */
     to: string;
-    commonFilters?: string[];
-    searchesFilters?: string[];
-    customEventsFilters?: string[];
+    /**
+     * A file name for the export. Can only contain US-ASCII characters. If none is supplied it will be set to the export's id.
+     */
     filename?: string;
+    /**
+     * Optional description for the export.
+     */
     description?: string;
+    /**
+     * The dimensions that will be exported. If not provided, all dimensions will be exported.
+     */
     dimensions?: string[];
-    tables?: ExportTable[];
-    exportFormat?: ExportFormat;
+    /**
+     * The format of the generated CSV files. If not provided, it will default to Excel.
+     */
+    exportFormat?: CSVFileFormat;
+    /**
+     * Whether to use the display names in the export's header. If false, the api names will be used. If not provided, it defaults to false.
+     */
     useDisplayNames?: boolean;
 }
 
-export interface GenerateVisitExportWithBodyParams {
-    from: string;
-    to: string;
+export interface GenerateExportWithBodyParams extends BaseGenerateExportWithBodyParams {
+    /**
+     * The filter that will be applied to the events common dimensions (shared by all types of events).
+     * Multiple filter parameters are joined with the AND operator.
+     */
+    commonFilters?: string[];
+    /**
+     * The filter that will be applied to the click and search events dimensions.
+     * Multiple filter parameters are joined with the AND operator.
+     */
+    searchesFilters?: string[];
+    /**
+     * The filter that will be applied to the custom events dimensions.
+     * Multiple filter parameters are joined with the AND operator.
+     */
+    customEventsFilters?: string[];
+    /**
+     * The tables that will be exported. If not provided, all tables will be exported.
+     */
+    tables?: ExportTablesType[];
+}
+
+export interface GenerateVisitExportWithBodyParams extends BaseGenerateExportWithBodyParams {
+    /**
+     * The filter that will be applied to the events dimensions.
+     * Multiple filter parameters are joined with the AND operator.
+     */
     inclusionFilters?: string[];
+    /**
+     * Each specified filter is inverted in order to hide events.
+     * Multiple filter parameters are joined with the AND operator.
+     */
     hideEventFilters?: string[];
+    /**
+     * The filter that will be applied to dimensions to exclude events from the results.
+     * Multiple filter parameters are joined with the AND operator.
+     */
     exclusionFilters?: string[];
-    filename?: string;
-    description?: string;
-    dimensions?: string[];
-    exportFormat?: ExportFormat;
-    useDisplayNames?: boolean;
+    /**
+     * Whether to order the rows by datetime in the export.
+     * If the number of rows exported is to great, this parameter will be ignored and data will be unsorted.
+     * If not provided, it defaults to true.
+     */
     ordered?: boolean;
 }
 
@@ -122,6 +168,7 @@ export interface GenerateVisitExportParams extends GenerateExportParams {
     /**
      * Whether to order the rows by datetime in the export.
      * If the number of rows exported is too large, this parameter will be ignored and data will be unsorted.
+     * If not provided, it defaults to true.
      */
     ordered?: boolean;
 }
