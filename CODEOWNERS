@@ -8,3 +8,7 @@
 
 # Prevent PRs that only modify package.json from notifying everyone
 package.json
+
+# Owned by data platform
+src/resources/AnalyticsAdmin/ @coveo/dpf-ui-owners-1
+src/resources/UsageAnalytics/ @coveo/dpf-ui-owners-1
