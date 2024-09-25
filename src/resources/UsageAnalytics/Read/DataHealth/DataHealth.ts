@@ -98,7 +98,6 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get failed instances for a data health criterion
-     * @param params Parameters to fetch data health failed instances.
      */
     getFailedInstances(params: DataHealthGetFailedInstancesParams, args?: RequestInit) {
         return this.api.get<DataHealthGetFailedInstancesResponse>(

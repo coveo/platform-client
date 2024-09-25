@@ -133,8 +133,6 @@ describe('DataHealth', () => {
                 ...baseParams,
                 criterionId: 'criterion',
                 group: 'group',
-                scopeValue: '',
-                trackingId: [''],
             };
             await dataHealth.getFailedInstances(datahealthGetFailedInstancesParams);
             expect(api.get).toHaveBeenCalledTimes(1);
