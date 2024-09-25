@@ -85,7 +85,7 @@ export interface ApiKeyModel extends GranularResource {
      */
     additionalConfiguration?: AdditionalConfigurationModel;
     /**
-     * The expiration date of the api key
+     * The expiration date of the API key.
      */
     expirationDate?: number;
     /**
