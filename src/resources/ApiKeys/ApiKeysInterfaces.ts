@@ -89,7 +89,7 @@ export interface ApiKeyModel extends GranularResource {
      */
     expirationDate?: number;
     /**
-     * Represents the status of the api key 
+     * The status of the API key. 
      */
     status?: ApiKeyStatus;
     /**
