@@ -1,3 +1,4 @@
+import {ProjectResourceModel} from '../Projects/ProjectInterfaces.js';
 import {RestTokenParams} from '../Search/index.js';
 import {CSSResourceModel, JavaScriptResourceModel} from '../SearchPages/index.js';
 
@@ -83,6 +84,8 @@ export interface InProductExperienceModel extends SharedInProductExperienceModel
 
     token: RestTokenParams;
 }
+
+export interface InProductExperienceProjectsModel extends InProductExperienceModel, ProjectResourceModel {}
 
 export interface CreateUpdateInProductExperienceModel extends SharedInProductExperienceModel {
     /**
