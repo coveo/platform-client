@@ -311,7 +311,7 @@ export interface DataHealthGetTrackingIdsResponse {
     values: DataHealthFacetValue[];
 }
 
-export interface DataHealthGetFailedInstancesParams extends OrganizationParamParts, TimeRangeParamParts {
+export interface DataHealthGetFailedInstancesParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
      * The data health criterion for which the failed instances should be returned.
      */
@@ -328,14 +328,6 @@ export interface DataHealthGetFailedInstancesParams extends OrganizationParamPar
      * Optional set of tracking IDs for which the results should be returned.
      */
     trackingId?: string[];
-    /**
-     * The response's page to access, starting at 0.
-     */
-    page?: number;
-    /**
-     * The number of results to include in a page.
-     */
-    perPage?: number;
 }
 
 export interface DataHealthGetFailedInstancesResponse extends PaginatedResponse {
