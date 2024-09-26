@@ -310,3 +310,78 @@ export interface DataHealthGetTrackingIdsResponse {
      */
     values: DataHealthFacetValue[];
 }
+
+export interface DataHealthGetEventProblemsParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
+    /**
+     * A set of event types for which the events will be returned.
+     * If not specified, events are not filtered on event types.
+     */
+    eventType?: string[];
+    /**
+     * A set of search hubs for which the events will be returned.
+     * If not specified, events are not filtered on search hub.
+     */
+    searchHub?: string[];
+    /**
+     * The tracking id to filter by when getting groups listing.
+     */
+    trackingId?: string[];
+}
+export interface EventProblemsResponse extends PaginatedResponse {
+    /**
+     * List of the event problems.
+     */
+    problems: EventProblemsResponseItem[];
+}
+
+export interface EventProblemsResponseItem {
+    /**
+     * A set of event types for which the events will be returned.
+     * If not specified, events are not filtered on event types.
+     */
+    eventType: string;
+    /**
+     * The tracking id to filter by when getting groups listing.
+     */
+    trackingId: string;
+    /**
+     * A set of search hubs for which the events will be returned.
+     * If not specified, events are not filtered on search hub.
+     */
+    searchHub: string;
+    /**
+     * Number of failed events.
+     */
+    failedEvents: number;
+    /**
+     * Number of total events.
+     */
+    totalEvents: number;
+    /**
+     * List of the validation errors.
+     */
+    validationErrors: ValidationErrors[];
+    /**
+     * Events sampled from the problematic events.
+     */
+    sampleEvents: string[];
+    /**
+     * Timestamps from the sample events.
+     */
+    sampleEventsTimestamps: string[];
+}
+
+interface ValidationErrors {
+    /**
+     * Validation error code.
+     */
+    code: string;
+    /**
+     * Validation error path.
+     */
+    path: string;
+    /**
+     * Validation error message.
+     */
+    message: string;
+}
