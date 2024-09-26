@@ -7,6 +7,7 @@ import {
     UpdateInProductExperienceModel,
     InProductExperienceLoader,
     CreateInProductExperienceResponse,
+    InProductExperienceProjectsModel,
 } from './InProductExperiencesInterfaces.js';
 
 /**
@@ -45,7 +46,7 @@ export default class InProductExperiences extends Resource {
     }
 
     listByProject(projectId?: string) {
-        return this.api.get<InProductExperienceModel[]>(
+        return this.api.get<InProductExperienceProjectsModel[]>(
             this.buildPath(`${InProductExperiences.ipxBaseUrl}s/projectid`, {projectid: projectId}),
         );
     }

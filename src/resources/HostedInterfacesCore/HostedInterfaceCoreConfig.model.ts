@@ -1,5 +1,4 @@
 import {Paginated} from '../BaseInterfaces.js';
-import {ListResourceByProjectParams, ProjectResourceModel} from '../Projects/ProjectInterfaces.js';
 
 export interface HostedInterfaceResultTemplateBadge {
     /**
@@ -127,8 +126,6 @@ export interface ListHostedInterfacesParams extends Paginated {
     perPage?: number;
 }
 
-export interface ListHostedInterfacesByProjectParams extends ListHostedInterfacesParams, ListResourceByProjectParams {}
-
 export interface HostedInterfaceResultTemplate {
     /**
      * The name of the result template.
@@ -150,8 +147,6 @@ export interface HostedInterfaceResultTemplate {
      */
     details: HostedInterfaceResultTemplateDetail[];
 }
-
-export interface HostedInterfaceProjectsResultTemplate extends HostedInterfaceResultTemplate, ProjectResourceModel {}
 
 export interface HostedInterfaceConfiguration {
     /**
