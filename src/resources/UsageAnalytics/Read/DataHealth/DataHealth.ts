@@ -87,7 +87,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      *
      */
-    getEventsProblems(params: DataHealthGetEventProblemsParams, args?: RequestInit) {
+    getEventsProblems(params: DataHealthGetEventProblemsParams) {
         return this.api.get<EventProblemsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events/problems`, params),
         );
