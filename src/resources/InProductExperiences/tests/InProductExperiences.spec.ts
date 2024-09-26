@@ -25,6 +25,14 @@ describe('InProductExperiences', () => {
         });
     });
 
+    describe('listByProject', () => {
+        it('should make a GET call to the specific Project In-Product Experiences url', () => {
+            ipxService.listByProject();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${InProductExperiences.ipxBaseUrl}s/projectid`);
+        });
+    });
+
     describe('create', () => {
         it('should make a POST call to the In-Product Experiences base url', () => {
             const ipxModel: CreateInProductExperienceModel = {
