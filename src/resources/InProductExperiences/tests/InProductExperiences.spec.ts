@@ -26,8 +26,8 @@ describe('InProductExperiences', () => {
     });
 
     describe('listByProject', () => {
-        it('should make a GET call to the specific Project In-Product Experiences url', () => {
-            ipxService.listByProject();
+        it('should make a GET call to the specific Project In-Product Experiences url', async () => {
+            await ipxService.listByProject();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InProductExperiences.ipxBaseUrl}s/projectid`);
         });
