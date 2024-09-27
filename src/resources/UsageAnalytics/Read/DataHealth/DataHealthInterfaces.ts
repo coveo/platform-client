@@ -313,8 +313,8 @@ export interface DataHealthGetTrackingIdsResponse {
 
 export interface DataHealthGetEventProblemsParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
-     * A set of event types for which the events will be returned.
-     * If not specified, events are not filtered on event types.
+     * The event types to get event problems for.
+     * By default, all event types will be considered.
      */
     eventType?: string[];
     /**
