@@ -1,6 +1,11 @@
 import API from '../../../../../APICore.js';
 import Snowflake from '../Snowflake.js';
-import {GetCreditUsageParams, SnowflakeNetworkPolicyModel, SnowflakeUserModel} from '../SnowflakeInterfaces.js';
+import {
+    GetCreditUsageParams,
+    ReactivateUserParams,
+    SnowflakeNetworkPolicyModel,
+    SnowflakeUserModel,
+} from '../SnowflakeInterfaces.js';
 
 jest.mock('../../../../../APICore.js');
 
@@ -56,6 +61,19 @@ describe('Snowflake', () => {
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}`);
+        });
+    });
+
+    describe('reactivateUser', () => {
+        it('makes a PUT call to the specific Snowflake url', () => {
+            const snowflakeUser = 'ross.blais';
+            const params: ReactivateUserParams = {
+                daysToExpiry: 66,
+            };
+            snowflake.reactivateUser(snowflakeUser, params);
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}/expiration`, params);
         });
     });
 
