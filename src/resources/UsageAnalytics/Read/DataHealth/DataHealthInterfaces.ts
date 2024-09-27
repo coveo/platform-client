@@ -330,7 +330,7 @@ export interface DataHealthGetEventProblemsParams extends OrganizationParamParts
 }
 export interface EventProblemsResponse extends PaginatedResponse {
     /**
-     * List of the event problems.
+     * The event problems that match the specified filters.
      */
     problems: EventProblemsResponseItem[];
 }
