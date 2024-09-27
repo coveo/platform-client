@@ -357,7 +357,7 @@ export interface EventProblemsResponseItem {
      */
     totalEvents: number;
     /**
-     * List of the validation errors.
+     * The validation errors.
      */
     validationErrors: ValidationErrors[];
     /**
