@@ -318,8 +318,8 @@ export interface DataHealthGetEventProblemsParams extends OrganizationParamParts
      */
     eventType?: string[];
     /**
-     * A set of search hubs for which the events will be returned.
-     * If not specified, events are not filtered on search hub.
+     * The search hubs to get event problems for.
+     * By default, all search hubs will be considered.
      */
     searchHub?: string[];
     /**
