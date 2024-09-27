@@ -337,8 +337,7 @@ export interface EventProblemsResponse extends PaginatedResponse {
 
 export interface EventProblemsResponseItem {
     /**
-     * A set of event types for which the events will be returned.
-     * If not specified, events are not filtered on event types.
+     * The type of events in this response item.
      */
     eventType: string;
     /**
