@@ -160,17 +160,3 @@ export interface UpdatedProjectResourceAssociationsModel {
      */
     removals: UpdatedProjectAssociationsModel;
 }
-
-export interface ListResourceByProjectParams {
-    /**
-     * Project identifier for which resources are to be fetched
-     */
-    projectId: string;
-}
-
-export interface ProjectResourceModel {
-    /**
-     * Ids of projects associated to this resource
-     */
-    projectIds: string[];
-}
