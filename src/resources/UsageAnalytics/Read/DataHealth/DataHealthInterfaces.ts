@@ -341,8 +341,7 @@ export interface EventProblemsResponseItem {
      */
     eventType: string;
     /**
-     * The tracking id to filter by when getting groups listing.
-     * If not specified, events are not filtered on tracking id.
+     * The tracking ID the events in this response item were logged with.
      */
     trackingId: string;
     /**
