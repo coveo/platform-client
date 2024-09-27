@@ -380,7 +380,7 @@ interface ValidationErrors {
      */
     path: string;
     /**
-     * Validation error message.
+     * The validation error message.
      */
     message: string;
 }
