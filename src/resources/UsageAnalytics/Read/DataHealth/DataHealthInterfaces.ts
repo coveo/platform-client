@@ -349,7 +349,7 @@ export interface EventProblemsResponseItem {
      */
     searchHub: string;
     /**
-     * Number of failed events.
+     * The number of failed events.
      */
     failedEvents: number;
     /**
