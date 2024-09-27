@@ -323,8 +323,8 @@ export interface DataHealthGetEventProblemsParams extends OrganizationParamParts
      */
     searchHub?: string[];
     /**
-     * The tracking id to filter by when getting groups listing.
-     * If not specified, events are not filtered on tracking id.
+     * The tracking ID to get event problems for.
+     * By default, all tracking IDs will be considered.
      */
     trackingId?: string[];
 }
