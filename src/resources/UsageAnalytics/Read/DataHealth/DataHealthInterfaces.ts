@@ -345,8 +345,7 @@ export interface EventProblemsResponseItem {
      */
     trackingId: string;
     /**
-     * A set of search hubs for which the events will be returned.
-     * If not specified, events are not filtered on search hub.
+     * The search hub the events in this response item were logged from.
      */
     searchHub: string;
     /**
