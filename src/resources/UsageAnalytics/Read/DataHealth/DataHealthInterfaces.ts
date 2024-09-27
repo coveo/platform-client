@@ -372,7 +372,7 @@ export interface EventProblemsResponseItem {
 
 interface ValidationErrors {
     /**
-     * Validation error code.
+     * The validation error code.
      */
     code: string;
     /**
