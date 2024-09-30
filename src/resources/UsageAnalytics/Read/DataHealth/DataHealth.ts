@@ -2,6 +2,8 @@ import ReadServiceResource from '../ReadServiceResource.js';
 import {
     DataHealthEventPayloadResponse,
     DataHealthGetEventPayloadParams,
+    DataHealthGetFailedInstancesParams,
+    DataHealthGetFailedInstancesResponse,
     DataHealthGetGroupDetailParams,
     DataHealthGetGroupDetailResponse,
     DataHealthGetGroupListingParams,
@@ -24,7 +26,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get health information about events.
      */
-    listEvents(params: DataHealthListEventsParameters, args?: RequestInit) {
+    listEvents(params: DataHealthListEventsParameters) {
         return this.api.get<DataHealthListEventsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events`, params),
         );
@@ -33,7 +35,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get original event payload.
      */
-    getEventPayload(params: DataHealthGetEventPayloadParams, args?: RequestInit) {
+    getEventPayload(params: DataHealthGetEventPayloadParams) {
         return this.api.get<DataHealthEventPayloadResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events/payload`, params),
         );
@@ -42,7 +44,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * List applicable facet values in the specified time range.
      */
-    listFacetValues(params: DataHealthListFacetValueParams, args?: RequestInit) {
+    listFacetValues(params: DataHealthListFacetValueParams) {
         return this.api.get<DataHealthListFacetsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/facets`, params),
         );
@@ -51,7 +53,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get general data health information.
      */
-    getOverview(params: DataHealthGetOverviewParams, args?: RequestInit) {
+    getOverview(params: DataHealthGetOverviewParams) {
         return this.api.get<DataHealthGetOverviewResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/overview`, params),
         );
@@ -60,7 +62,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get health information about groups of validation rules.
      */
-    getGroupListing(params: DataHealthGetGroupListingParams, args?: RequestInit) {
+    getGroupListing(params: DataHealthGetGroupListingParams) {
         return this.api.get<DataHealthGetGroupListingResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/groups`, params),
         );
@@ -69,7 +71,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get health information about validation rules of a specific group.
      */
-    getGroupDetail(params: DataHealthGetGroupDetailParams, args?: RequestInit) {
+    getGroupDetail(params: DataHealthGetGroupDetailParams) {
         return this.api.get<DataHealthGetGroupDetailResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/groups/detail`, params),
         );
@@ -78,7 +80,7 @@ export default class DataHealth extends ReadServiceResource {
     /**
      * Get a list of unique tracking ids.
      */
-    getTrackingIds(params: DataHealthGetTrackingIdsParams, args?: RequestInit) {
+    getTrackingIds(params: DataHealthGetTrackingIdsParams) {
         return this.api.get<DataHealthGetTrackingIdsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/facets`, {...params, facet: 'TRACKING_ID'}),
         );
@@ -90,6 +92,17 @@ export default class DataHealth extends ReadServiceResource {
     getEventsProblems(params: DataHealthGetEventProblemsParams) {
         return this.api.get<EventProblemsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/events/problems`, params),
+        );
+    }
+
+    /**
+     * Get failed instances for a data health criterion
+     *
+     * @param params Parameters to fetch data health failed instances.
+     */
+    getFailedInstances(params: DataHealthGetFailedInstancesParams) {
+        return this.api.get<DataHealthGetFailedInstancesResponse>(
+            this.buildPathWithOrg(`${DataHealth.baseUrl}/criteria/failedInstances`, params),
         );
     }
 

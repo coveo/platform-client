@@ -2,6 +2,7 @@ import API from '../../../../../APICore.js';
 import DataHealth from '../DataHealth.js';
 import {
     DataHealthGetEventPayloadParams,
+    DataHealthGetFailedInstancesParams,
     DataHealthGetGroupDetailParams,
     DataHealthGetGroupListingParams,
     DataHealthGetOverviewParams,
@@ -136,6 +137,21 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/events/problems?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z`,
+            );
+        });
+    });
+
+    describe('getFailedInstances', () => {
+        it('should make a GET call to the data health get failed instances url', async () => {
+            const datahealthGetFailedInstancesParams: DataHealthGetFailedInstancesParams = {
+                ...baseParams,
+                criterionId: 'criterion',
+                group: 'group',
+            };
+            await dataHealth.getFailedInstances(datahealthGetFailedInstancesParams);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${DataHealth.baseUrl}/criteria/failedInstances?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&criterionId=criterion&group=group`,
             );
         });
     });
