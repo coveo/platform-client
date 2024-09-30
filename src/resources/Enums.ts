@@ -1066,7 +1066,7 @@ export enum ExportStatus {
     expired = 'EXPIRED',
 }
 
-export enum ExportTablesType {
+export enum ExportTables {
     searches = 'SEARCHES',
     clicks = 'CLICKS',
     customEvents = 'CUSTOM_EVENTS',
