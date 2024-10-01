@@ -28,39 +28,37 @@
         "test:watch": "jest --watchAll",
         "release": "semantic-release",
         "commit-cli": "git-cz",
-        "lintfix": "prettier --write \"**/*.{ts,js,json,md,yml}\" && eslint -c ./.eslintrc.cjs \"src/**.*\" --fix",
+        "lint:fix": "prettier --list-different --write \"**/*.{ts,js,json,md,yml}\" && eslint . --fix --quiet",
+        "lint": "prettier --check \"**/*.{ts,js,json,md,yml}\" && eslint .",
         "prepare": "husky install"
     },
     "devDependencies": {
         "@commitlint/cli": "19.5.0",
         "@commitlint/config-conventional": "19.5.0",
         "@types/jest": "29.5.13",
-        "@typescript-eslint/eslint-plugin": "7.18.0",
-        "@typescript-eslint/parser": "7.18.0",
         "abortcontroller-polyfill": "1.7.5",
         "cz-conventional-changelog": "3.3.0",
-        "eslint": "8.57.1",
         "eslint-config-prettier": "9.1.0",
-        "eslint-config-typescript": "3.0.0",
         "eslint-plugin-jest": "28.8.3",
-        "eslint-plugin-prettier": "5.2.1",
         "husky": "9.1.6",
         "jest": "29.7.0",
         "jest-fetch-mock": "3.0.3",
-        "jest-runner-eslint": "2.2.0",
         "lint-staged": "15.2.10",
         "prettier": "3.3.3",
         "semantic-release": "24.1.2",
         "ts-jest": "29.2.5",
         "tsjs": "5.0.1",
         "tslib": "2.7.0",
-        "typescript": "5.6.2"
+        "typescript": "5.6.2",
+        "@eslint/js": "9.9.1",
+        "@types/eslint__js": "8.42.3",
+        "eslint": "9.9.1",
+        "typescript-eslint": "8.4.0"
     },
-    "prettier": "tsjs/prettier-config",
     "lint-staged": {
         "**/*.{ts,js}": [
             "prettier --write",
-            "eslint -c ./.eslintrc.cjs --fix"
+            "eslint . --fix"
         ],
         "**/*.{md,json,yml}": [
             "prettier --write"
