@@ -430,7 +430,8 @@ interface ValidationErrors {
      */
     code: string;
     /**
-     * Validation error path.
+     * The validation error path.
+     * See https://docs.coveo.com/en/nbde0312/analyze-usage-data/event-errors
      */
     path: string;
     /**
