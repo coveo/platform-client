@@ -5,7 +5,6 @@ const unmockedDependencies = ['query-string-esm', 'decode-uri-component', 'split
 //  * https://jestjs.io/docs/configuration
 //  */
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 export default {
     extensionsToTreatAsEsm: ['.ts'],
     preset: 'ts-jest/presets/default-esm',

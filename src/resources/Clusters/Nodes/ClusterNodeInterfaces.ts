@@ -10,6 +10,7 @@ export interface ClusterNodeModel {
     isCustom: boolean;
     latestVersion: string;
     name: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     params?: any;
     status: ClusterNodeStatusModel;
     version: string;

@@ -8,12 +8,10 @@ import GroupRealm from '../Realms/GroupRealm.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Group', () => {
     let group: Group;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -21,59 +19,59 @@ describe('Group', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Groups base url', () => {
-            group.list();
+        it('should make a GET call to the Groups base url', async () => {
+            await group.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Group.baseUrl);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the Groups base url', () => {
+        it('should make a POST call to the Groups base url', async () => {
             const groupModel: New<GroupModel> = {
                 displayName: 'My new group',
             };
 
-            group.create(groupModel);
+            await group.create(groupModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Group.baseUrl, groupModel);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Group url', () => {
+        it('should make a DELETE call to the specific Group url', async () => {
             const groupToDeleteId = 'Group-to-be-deleted';
-            group.delete(groupToDeleteId);
+            await group.delete(groupToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Group.baseUrl}/${groupToDeleteId}`);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Group url', () => {
+        it('should make a GET call to the specific Group url', async () => {
             const groupToGetId = 'Group-to-be-fetched';
-            group.get(groupToGetId);
+            await group.get(groupToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Group.baseUrl}/${groupToGetId}`);
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Group url', () => {
+        it('should make a PUT call to the specific Group url', async () => {
             const groupModel: GroupModel = {
                 id: 'group-to-update-id',
                 displayName: 'Group to be updated',
             };
 
-            group.update(groupModel);
+            await group.update(groupModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Group.baseUrl}/${groupModel.id}`, groupModel);
         });
     });
 
     describe('listExclusivePrivileges', () => {
-        it('should make a GET call to the /groups/{groupId}/privileges/exclusive/me', () => {
-            group.listExclusivePrivileges('💎');
+        it('should make a GET call to the /groups/{groupId}/privileges/exclusive/me', async () => {
+            await group.listExclusivePrivileges('💎');
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(

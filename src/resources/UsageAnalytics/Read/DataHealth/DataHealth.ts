@@ -23,6 +23,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get health information about events.
+     * @param params
      */
     listEvents(params: DataHealthListEventsParameters) {
         return this.api.get<DataHealthListEventsResponse>(
@@ -32,6 +33,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get original event payload.
+     * @param params
      */
     getEventPayload(params: DataHealthGetEventPayloadParams) {
         return this.api.get<DataHealthEventPayloadResponse>(
@@ -41,6 +43,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * List applicable facet values in the specified time range.
+     * @param params
      */
     listFacetValues(params: DataHealthListFacetValueParams) {
         return this.api.get<DataHealthListFacetsResponse>(
@@ -50,6 +53,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get general data health information.
+     * @param params
      */
     getOverview(params: DataHealthGetOverviewParams) {
         return this.api.get<DataHealthGetOverviewResponse>(
@@ -59,6 +63,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get health information about groups of validation rules.
+     * @param params
      */
     getGroupListing(params: DataHealthGetGroupListingParams) {
         return this.api.get<DataHealthGetGroupListingResponse>(
@@ -68,6 +73,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get health information about validation rules of a specific group.
+     * @param params
      */
     getGroupDetail(params: DataHealthGetGroupDetailParams) {
         return this.api.get<DataHealthGetGroupDetailResponse>(
@@ -77,6 +83,7 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get a list of unique tracking ids.
+     * @param params
      */
     getTrackingIds(params: DataHealthGetTrackingIdsParams) {
         return this.api.get<DataHealthGetTrackingIdsResponse>(
@@ -86,7 +93,6 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Get failed instances for a data health criterion
-     *
      * @param params Parameters to fetch data health failed instances.
      */
     getFailedInstances(params: DataHealthGetFailedInstancesParams) {
@@ -97,13 +103,12 @@ export default class DataHealth extends ReadServiceResource {
 
     /**
      * Build the request path, handling the optional `org` query parameter.
-     *
      * @param route The path part of the request.
      * @param queryParams Optional query parameters object.
      * If this object contains an `org` property, it will override the value from the configuration.
      * @returns The request path including formatted query parameters.
      */
-    protected buildPathWithOrg(route: string, queryParams?: any): string {
+    protected buildPathWithOrg(route: string, queryParams?: object): string {
         return super.buildPath(route, {org: this.api.organizationId, ...queryParams});
     }
 }

@@ -58,6 +58,7 @@ export interface ExtendedConfig {
 
 export interface RawSourceConfig extends GranularResource {
     additionalComments?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     additionalInfos?: any;
     configuration?: ExtendedConfig;
     crawlerInstanceType?: string;
@@ -131,6 +132,7 @@ export interface CreateSourceModel extends SourceModel, SourcesSubInterface.Sour
     passwordInputValue?: string;
     usernameInputName?: string;
     usernameInputValue?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

@@ -27,7 +27,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Generate an export.
-     *
      * @param params The parameters to generate the export with.
      */
     generate(params: GenerateExportParams) {
@@ -36,8 +35,8 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Generate an export with the parameters in the request body.
-     *
      * @param params The parameters to generate the export with, passed in the request body.
+     * @param args
      */
     generateExportWithBody(params: GenerateExportWithBodyParams, args?: RequestInit) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/create`), params, args);
@@ -45,7 +44,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get information on an export.
-     *
      * @param exportId The export's unique identifier.
      * @param redirect Whether to return a HTTP redirect to the actual file.
      */
@@ -55,7 +53,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get the download link of an export.
-     *
      * @param exportId The export's unique identifier.
      */
     getExportDownloadLink(exportId: string) {
@@ -64,7 +61,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Delete an export.
-     *
      * @param exportId The export's unique identifier.
      */
     delete(exportId: string) {
@@ -73,7 +69,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Estimate the number of rows in an export.
-     *
      * @param params The date range and other parameters for the export.
      */
     estimateRowsCount(params: EstimateExportParams) {
@@ -82,7 +77,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Generate a visit export.
-     *
      * @param params The parameters to generate the visit export with.
      */
     generateVisitExport(params: GenerateVisitExportParams) {
@@ -91,8 +85,8 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Generate a visit export with the parameters in the request body.
-     *
      * @param params The parameters to generate the visit export with, passed in the request body.
+     * @param args
      */
     generateVisitExportWithBody(params: GenerateVisitExportWithBodyParams, args?: RequestInit) {
         return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits/create`), params, args);
@@ -100,7 +94,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Estimate the number of rows in a visit export.
-     *
      * @param params The parameters of the visit export to estimate.
      */
     estimateVisitExportRowsCount(params: EstimateVisitExportParams) {
@@ -116,7 +109,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Create an export schedule.
-     *
      * @param model The export schedule to create.
      */
     createSchedule(model: CreateExportScheduleModel) {
@@ -125,7 +117,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get information on an export schedule.
-     *
      * @param exportScheduleId The export schedule's unique identifier.
      */
     getSchedule(exportScheduleId: string) {
@@ -136,8 +127,8 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Update an existing export schedule.
-     *
      * @param exportScheduleId The export schedule's unique identifier.
+     * @param model
      */
     updateSchedule(exportScheduleId: string, model: CreateExportScheduleModel) {
         return this.api.put<ExportScheduleModel>(
@@ -148,7 +139,6 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
 
     /**
      * Delete an export schedule.
-     *
      * @param exportScheduleId The export schedule's unique identifier.
      */
     deleteSchedule(exportScheduleId: string) {

@@ -30,8 +30,6 @@ export type ProjectResourceType = (typeof projectResourceTypes)[number];
 
 /**
  * Enum representing the possible project types.
- *
- * @enum {string}
  */
 export enum ProjectType {
     CaseDeflection = 'CASE_DEFLECTION',
@@ -62,13 +60,11 @@ export interface BaseProjectModel {
     type: ProjectType;
     /**
      * The list of usernames that will be points of contact for the project.
-     *
      * @example: ['johndoe@email.com-google', 'janedoe@email.com-office265']
      */
     pointsOfContact?: string[];
     /**
      * The resources associated to the project.
-     *
      * @example: {'SOURCE': ['sourceId1', 'sourceId2']}
      */
     resources?: Record<ProjectResourceType, string[]>;
@@ -81,27 +77,23 @@ export interface ProjectModel extends BaseProjectModel {
     id: string;
     /**
      * The email of the user that created the project.
-     *
      * @example: 'jdoe@email.com'
      */
     createdBy: string;
     /**
      * The date of the project's creation.
      * Note: ISO-8601 format
-     *
      * @example: '2023-06-21T14:59:26.850Z'
      */
     createdDate: string;
     /**
      * The email of the user that last updated the project.
-     *
      * @example: 'jdoe@email.com'
      */
     updatedBy: string;
     /**
      * The date of the project's last update.
      * Note: ISO-8601 format
-     *
      * @example: '2023-06-21T14:59:26.850Z'
      */
     updatedDate: string;
@@ -122,7 +114,6 @@ export interface ListProjectParams extends Paginated {
     sortBy?: ProjectSortBy;
     /**
      * The sorting order to apply on the results.
-     *
      * @example: 'ASC'
      */
     order?: SortingOrder;

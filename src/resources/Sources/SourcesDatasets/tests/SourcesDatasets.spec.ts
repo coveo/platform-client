@@ -4,12 +4,10 @@ import SourcesDatasets from '../SourcesDatasets.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SourcesDatasets', () => {
     let dataset: SourcesDatasets;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,16 +15,16 @@ describe('SourcesDatasets', () => {
     });
 
     describe('list', () => {
-        it('makes a GET call to the specific Dataset url', () => {
-            dataset.list();
+        it('makes a GET call to the specific Dataset url', async () => {
+            await dataset.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/sources/datasets');
         });
     });
 
     describe('import', () => {
-        it('makes a PUT call to the specific SourcesDatasets endpoint', () => {
-            dataset.import(DatasetType.web);
+        it('makes a PUT call to the specific SourcesDatasets endpoint', async () => {
+            await dataset.import(DatasetType.web);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -37,8 +35,8 @@ describe('SourcesDatasets', () => {
     });
 
     describe('progress', () => {
-        it('makes a GET call to the specific SourcesDatasets endpoint', () => {
-            dataset.progress('randomId');
+        it('makes a GET call to the specific SourcesDatasets endpoint', async () => {
+            await dataset.progress('randomId');
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(

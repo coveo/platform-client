@@ -5,12 +5,10 @@ import {AccessParams} from '../AccessInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('OrganizationAccess', () => {
     let organizationAccess: Access;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -24,16 +22,16 @@ describe('OrganizationAccess', () => {
             privilegeTargetDomain: 'SOURCE',
         };
 
-        it('should make a GET call to the specific organization access url for API keys', () => {
-            organizationAccess.getApiKeys(params);
+        it('should make a GET call to the specific organization access url for API keys', async () => {
+            await organizationAccess.getApiKeys(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Access.baseUrl}/apikeys?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`,
             );
         });
 
-        it('should make a GET call to the specific organization access url for groups data', () => {
-            organizationAccess.getGroups(params);
+        it('should make a GET call to the specific organization access url for groups data', async () => {
+            await organizationAccess.getGroups(params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Access.baseUrl}/groups?accessLevel=CUSTOM&privilegeOwner=PLATFORM&privilegeTargetDomain=SOURCE`,

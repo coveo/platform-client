@@ -19,6 +19,7 @@ export interface MetadataValue {
     /**
      * The metadata value
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     metadataValue: any;
     /**
      * The number of times the value has been seen on documents

@@ -7,7 +7,6 @@ export interface DocumentPreviewParamsAdvanced {
     filterConditions?: never;
     /**
      * The query that determines the documents to extract. Cannot be used with other document extraction parameters, e.g. sources, filter conditions, etc.
-     *
      * @Example @source==("My source") AND @permanentid AND @language="English";
      */
     advancedQuery: string;

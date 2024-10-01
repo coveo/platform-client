@@ -3,12 +3,10 @@ import ModelListing from '../ModelListing.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('ModelListing', () => {
     let modelListing: ModelListing;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,24 +14,24 @@ describe('ModelListing', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the ModelListing base url', () => {
-            modelListing.list();
+        it('should make a GET call to the ModelListing base url', async () => {
+            await modelListing.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ModelListing.baseUrl);
         });
 
-        it('should make a GET call to the ModelListing base url if empty array is passed', () => {
-            modelListing.list([]);
+        it('should make a GET call to the ModelListing base url if empty array is passed', async () => {
+            await modelListing.list([]);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ModelListing.baseUrl);
         });
 
-        it('should make a GET call to the ModelListing base url with provided list of engineIds', () => {
+        it('should make a GET call to the ModelListing base url with provided list of engineIds', async () => {
             const engines = ['first', 'second'];
             const expectedUrl = `${ModelListing.baseUrl}?engineIds=${engines[0]}&engineIds=${engines[1]}`;
-            modelListing.list(engines);
+            await modelListing.list(engines);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUrl);

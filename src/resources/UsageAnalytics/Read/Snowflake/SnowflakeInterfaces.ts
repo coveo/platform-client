@@ -30,7 +30,7 @@ export interface SnowflakeNetworkPolicyModel {
     blockedIpAddresses: string[];
 }
 
-export interface GetCreditUsageParams extends TimeRangeParamParts {}
+export type GetCreditUsageParams = TimeRangeParamParts;
 
 export interface SnowflakeCreditUsageModel {
     creditsUsed: number;

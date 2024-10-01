@@ -1,5 +1,5 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import { ApiKeyStatus } from '../Enums.js';
+import {ApiKeyStatus} from '../Enums.js';
 export interface ApiKeyModel extends GranularResource {
     /**
      * The unique identifier of the [organization](https://docs.coveo.com/en/222/) the API key was created for.
@@ -36,6 +36,7 @@ export interface ApiKeyModel extends GranularResource {
     /**
      * The username or the email address that was used to create this API key.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdBy?: any;
     /**
      * The API key creation date in Unix timestamp in milliseconds.
@@ -79,7 +80,6 @@ export interface ApiKeyModel extends GranularResource {
      * **Example:** t4hk287bfj5sg6wskg64ckk5a
      */
     resourceId?: string;
-
     /**
      * Additional configuration to be included in an API key. [to be revised]
      */
@@ -89,21 +89,21 @@ export interface ApiKeyModel extends GranularResource {
      */
     expirationDate?: number;
     /**
-     * The status of the API key. 
+     * The status of the API key.
      */
     status?: ApiKeyStatus;
     /**
      * The ID of the template to which the API key is bound.
      */
-     apiKeyTemplateId?: string;
-     /**
-      * The date of activation of the API key.
-      */
-     activationDate?: number;
-     /**
-      * The date the API key has been disabled.
-      */
-     disabledDate?: number
+    apiKeyTemplateId?: string;
+    /**
+     * The date of activation of the API key.
+     */
+    activationDate?: number;
+    /**
+     * The date the API key has been disabled.
+     */
+    disabledDate?: number;
 }
 
 export interface CreateApiKeyOptions {

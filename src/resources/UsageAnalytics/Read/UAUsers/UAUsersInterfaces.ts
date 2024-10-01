@@ -50,6 +50,7 @@ export interface UAUsersReportModel {
     /**
      * The report configuration in JSON
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     configuration: Record<string, any>;
     /**
      * Whether the report is available to all analytics viewer

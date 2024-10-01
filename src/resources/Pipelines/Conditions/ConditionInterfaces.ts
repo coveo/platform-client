@@ -20,6 +20,7 @@ export interface ConditionModel {
     /**
      * The structured object of the query pipeline language expression of this statement.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     detailed: any;
 
     /**
@@ -79,7 +80,6 @@ export interface NewConditionModel {
 export interface ListConditionsOptions extends Paginated {
     /**
      * Whether to sort the results in ascending order.
-     *
      * @default true
      */
     isOrderAscending?: boolean;
@@ -93,7 +93,6 @@ export interface ListConditionsOptions extends Paginated {
 
     /**
      * The sort criteria to apply on the results.
-     *
      * @default ListStatementSortBy.Position
      */
     sortBy?: ListStatementSortBy;

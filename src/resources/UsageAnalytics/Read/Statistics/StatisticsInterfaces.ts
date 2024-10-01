@@ -73,11 +73,13 @@ export interface IncoherentEventsOptions
 export interface IncoherentEventModel {
     errorCode: string;
     datetime: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     event: any;
 }
 
 export interface IncoherentEventsModel {
     events: IncoherentEventModel[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     uniqueCounts: any;
     totalNumberOfResults: number;
 }
@@ -106,6 +108,7 @@ export interface GlobalDataOptions
 }
 
 export interface TrendsModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     combinations: Array<Record<string, any>>;
     uniqueCounts: Record<string, number>;
     totalNumberOfResults: number;
@@ -175,7 +178,7 @@ export interface VisitsGraphDataPointsOptions
         EventDimensionsExcludeFilterParamParts,
         EventDimensionsHideEventsFilterParamParts {}
 
-export interface CancelQueryOptions extends OrganizationParamParts {}
+export type CancelQueryOptions = OrganizationParamParts;
 
 export interface DataPointModel {
     dateTime: number;
@@ -218,6 +221,7 @@ export interface CombinedDataOptions
 }
 
 export interface CombinedDataModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     combinations: Array<Record<string, any>>;
     uniqueCounts: Record<string, number>;
     totalNumberOfResults: number;
@@ -246,6 +250,7 @@ export interface VisitsStatisticsOptions
 
 export interface VisitStatisticsModel {
     visitId: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     events: any[];
     numberOfEvents: number;
 }
@@ -255,4 +260,4 @@ export interface VisitsStatisticsModel {
     totalNumberOfVisits: number;
 }
 
-export interface VisitViewOptions extends OrganizationParamParts {}
+export type VisitViewOptions = OrganizationParamParts;

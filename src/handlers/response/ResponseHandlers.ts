@@ -3,29 +3,35 @@ import 'core-js/actual/json/parse.js';
 import {Predicate} from '../../utils/types.js';
 import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
 
-/** Check whether the response status is `204 No Content`. */
+/**
+ * Check whether the response status is `204 No Content`.
+ * @param response
+ */
 export const isNoContent: Predicate<Response> = (response) => response.status === 204;
 
-/** Check whether the response is considered to have any "ok" status code (not just 200). */
+/**
+ * Check whether the response is considered to have any "ok" status code (not just 200).
+ * @param response
+ */
 export const isAnyOkStatus: Predicate<Response> = (response) => response.ok;
 
 const noContent: ResponseHandler = {
     canProcess: isNoContent,
-    process: async <T>(): Promise<T> => ({}) as T,
+    process: <T>(): Promise<T> => Promise.resolve({} as T),
 };
 
 const success: ResponseHandler = {
     canProcess: isAnyOkStatus,
-    process: async (response, responseBodyFormat = 'json') => {
+    process: async <T>(response: Response, responseBodyFormat: ResponseBodyFormat = 'json'): Promise<T> => {
         if (responseBodyFormat !== 'json') {
-            return response[responseBodyFormat]();
+            return response[responseBodyFormat]() as T;
         }
         const content = await response.text();
         return (
             JSON.parse as (
                 text: string,
-                reviver?: (key: string, value: any, context: {source: any}) => any | undefined,
-            ) => any
+                reviver?: <K>(key: string, value: K, context: {source: K}) => K | undefined,
+            ) => T
         )(content, (_key, value, context) => {
             if (typeof value === 'number' && !Number.isSafeInteger(Math.floor(value))) {
                 return context.source;
@@ -45,13 +51,13 @@ const successBlob: ResponseHandler = {
 
 const error: ResponseHandler = {
     canProcess: () => true,
-    process: async <T>(response: Response): Promise<T> => {
-        const responseJson = await response.json();
+    process: async (response: Response) => {
+        const responseJson = (await response.json()) as Record<string, unknown>;
         const platformError = new CoveoPlatformClientError();
         Object.assign(platformError, responseJson);
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
-        platformError.title = responseJson.title ?? getErrorTypeFromAliases(responseJson) ?? 'unknown';
-        platformError.detail = responseJson.detail ?? getErrorDetailFromAliases(responseJson) ?? 'unknown';
+        platformError.title = (responseJson.title as string) ?? getErrorTypeFromAliases(responseJson) ?? 'unknown';
+        platformError.detail = (responseJson.detail as string) ?? getErrorDetailFromAliases(responseJson) ?? 'unknown';
         platformError.status = response.status;
         throw platformError;
     },
@@ -59,7 +65,7 @@ const error: ResponseHandler = {
 
 const blockedByWAF: ResponseHandler = {
     canProcess: (response) => response.headers.get('x-coveo-waf-action') === 'block',
-    process: async (response) => {
+    process: (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
         platformError.title = 'Request blocked for security reasons';
@@ -71,7 +77,7 @@ const blockedByWAF: ResponseHandler = {
 
 const badGateway: ResponseHandler = {
     canProcess: (response) => response.status === 502,
-    process: async (response) => {
+    process: (response) => {
         const platformError = new CoveoPlatformClientError();
         platformError.xRequestId = response.headers.get('X-Request-ID') ?? 'unknown';
         platformError.title = 'Endpoint unreachable';
@@ -129,8 +135,8 @@ export default async <T>(
     const handlers = customHandlers?.length ? customHandlers : defaultResponseHandlers;
     const handler = handlers.find(
         (candidate) =>
-            candidate.hasOwnProperty('canProcess') &&
-            candidate.hasOwnProperty('process') &&
+            Object.prototype.hasOwnProperty.call(candidate, 'canProcess') &&
+            Object.prototype.hasOwnProperty.call(candidate, 'process') &&
             candidate.canProcess(response),
     );
     if (!handler) {

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PageModel<T = any, TItemsKey extends string = 'items'> = {
     [key in TItemsKey]: T[];
 } & {

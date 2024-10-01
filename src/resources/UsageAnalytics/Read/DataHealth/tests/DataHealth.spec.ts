@@ -28,11 +28,11 @@ describe('DataHealth', () => {
     });
 
     describe('listEvents', () => {
-        it('should make a GET call to the data health list events url', () => {
+        it('should make a GET call to the data health list events url', async () => {
             const dataHealthListEventsParams: DataHealthListEventsParameters = {
                 ...baseParams,
             };
-            dataHealth.listEvents(dataHealthListEventsParams);
+            await dataHealth.listEvents(dataHealthListEventsParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/events?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z`,
@@ -41,12 +41,12 @@ describe('DataHealth', () => {
     });
 
     describe('getEventPayload', () => {
-        it('should make a GET call to the data health get event payload url', () => {
+        it('should make a GET call to the data health get event payload url', async () => {
             const dataHealthGetEventPayloadParams: DataHealthGetEventPayloadParams = {
                 eventId: 'somePotato',
                 timestamp: baseParams.from,
             };
-            dataHealth.getEventPayload(dataHealthGetEventPayloadParams);
+            await dataHealth.getEventPayload(dataHealthGetEventPayloadParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/events/payload?org=someOrgId&eventId=somePotato&timestamp=1986-04-26T01%3A23%3A58.000Z`,
@@ -55,12 +55,12 @@ describe('DataHealth', () => {
     });
 
     describe('listFacetValues', () => {
-        it('should make a GET call to the data health list facets url', () => {
+        it('should make a GET call to the data health list facets url', async () => {
             const dataHealthListFacetValuesParams: DataHealthListFacetValueParams = {
                 ...baseParams,
                 facet: 'potate',
             };
-            dataHealth.listFacetValues(dataHealthListFacetValuesParams);
+            await dataHealth.listFacetValues(dataHealthListFacetValuesParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/facets?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&facet=potate`,
@@ -69,13 +69,13 @@ describe('DataHealth', () => {
     });
 
     describe('getOverview', () => {
-        it('should make a GET call to the data health get overview url', () => {
+        it('should make a GET call to the data health get overview url', async () => {
             const dataHealthGetOverviewParams: DataHealthGetOverviewParams = {
                 ...baseParams,
                 category: 'unicorns',
                 trackingId: ['PetShop'],
             };
-            dataHealth.getOverview(dataHealthGetOverviewParams);
+            await dataHealth.getOverview(dataHealthGetOverviewParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/overview?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
@@ -84,13 +84,13 @@ describe('DataHealth', () => {
     });
 
     describe('getGroupListing', () => {
-        it('should make a GET call to the data health get group listing url', () => {
+        it('should make a GET call to the data health get group listing url', async () => {
             const dataHealthGetGroupListingParams: DataHealthGetGroupListingParams = {
                 ...baseParams,
                 category: 'unicorns',
                 trackingId: ['PetShop'],
             };
-            dataHealth.getGroupListing(dataHealthGetGroupListingParams);
+            await dataHealth.getGroupListing(dataHealthGetGroupListingParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/groups?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&trackingId=PetShop`,
@@ -99,14 +99,14 @@ describe('DataHealth', () => {
     });
 
     describe('getGroupDetail', () => {
-        it('should make a GET call to the data health get group detail url', () => {
+        it('should make a GET call to the data health get group detail url', async () => {
             const dataHealthGetGroupDetailParams: DataHealthGetGroupDetailParams = {
                 ...baseParams,
                 category: 'unicorns',
                 group: 'horned',
                 trackingId: ['PetShop'],
             };
-            dataHealth.getGroupDetail(dataHealthGetGroupDetailParams);
+            await dataHealth.getGroupDetail(dataHealthGetGroupDetailParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/groups/detail?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&category=unicorns&group=horned&trackingId=PetShop`,
@@ -115,11 +115,11 @@ describe('DataHealth', () => {
     });
 
     describe('getTrackingIds', () => {
-        it('should make a GET call to the data health get tracking id url', () => {
+        it('should make a GET call to the data health get tracking id url', async () => {
             const dataHealthGetTrackingIdsParams: DataHealthGetTrackingIdsParams = {
                 ...baseParams,
             };
-            dataHealth.getTrackingIds(dataHealthGetTrackingIdsParams);
+            await dataHealth.getTrackingIds(dataHealthGetTrackingIdsParams);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/facets?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&facet=TRACKING_ID`,

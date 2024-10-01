@@ -22,7 +22,6 @@ export interface OrganizationsStatusModel {
      * - `ACTIVE`: The organization is healthy and fully functional.
      * - `PAUSED`: The organization is currently inactive.
      * - `DELETING`: The organization is currently in the process of being deleted.
-     *
      * @example `PAUSED`
      */
     lifeCycleState: string;
@@ -37,7 +36,6 @@ export interface OrganizationsStatusModel {
      * - `RESUMING`: The organization is transitioning to `ACTIVE`.
      * - `PAUSING_FAILED`: The organization threw an error while transitioning to `PAUSED`.
      * - `RESUMING_FAILED`: The organization threw an error while transitioning to `ACTIVE`.
-     *
      * @example `PAUSED`
      */
     pauseState: string;
@@ -51,7 +49,6 @@ export interface OrganizationsStatusModel {
     provisioningStatus: {
         /**
          * The progress, in percentage, of the ongoing provisioning.
-         *
          * @example `100`
          */
         currentProvisioningProgress: number;
@@ -61,7 +58,6 @@ export interface OrganizationsStatusModel {
         initialProvisioningDone: boolean;
         /**
          * The last time provisioning was successfully completed in number of milliseconds since UNIX epoch.
-         *
          * @example `1556722921779`
          */
         lastProvisioningCompletedDate: number;
@@ -82,7 +78,6 @@ export interface OrganizationsStatusModel {
      * Whether the organization enforces all of its resources (e.g., query pipelines, sources, etc.) to be read-only.
      *
      * **Note:** This parameter is typically only updated when an organization is inactive.
-     *
      * @default `false`
      */
     readOnly: boolean;
@@ -92,7 +87,6 @@ export interface OrganizationsStatusModel {
      * **Allowed values:**
      * - `HEALTHY`: The organization is healthy and fully functional.
      * - `ERROR`: The organization has thrown an error and is currently inactive.
-     *
      * @example `ERROR`
      */
     status: string;
@@ -120,7 +114,7 @@ export interface OrganizationModel {
     };
 }
 
-export type AdditionalOrganizationField = 'status' | 'license' | string;
+export type AdditionalOrganizationField = 'status' | 'license' | (string & {});
 
 export interface GetOrganizationOptions {
     additionalFields?: AdditionalOrganizationField | AdditionalOrganizationField[];

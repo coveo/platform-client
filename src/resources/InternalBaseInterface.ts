@@ -5,7 +5,6 @@ export interface DeprecatedPaginated {
     page?: number;
     /**
      * The number of elements to list per page.
-     *
      * @deprecated use @see {Paginated} and @see {perPage} instead.
      */
     pageSize?: number;

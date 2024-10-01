@@ -13,11 +13,11 @@ class Resource {
         protected serverlessApi: API,
     ) {}
 
-    protected buildPath(route: string, parameters?: any, options?: queryString.StringifyOptions): string {
-        return route + this.convertObjectToQueryString(parameters, options);
+    protected buildPath(route: string, parameters?: object, options?: queryString.StringifyOptions): string {
+        return parameters ? route + this.convertObjectToQueryString(parameters, options) : route;
     }
 
-    private convertObjectToQueryString(parameters: any, userOptions?: queryString.StringifyOptions): string {
+    private convertObjectToQueryString(parameters: object, userOptions?: queryString.StringifyOptions): string {
         if (!parameters) {
             return '';
         } else {

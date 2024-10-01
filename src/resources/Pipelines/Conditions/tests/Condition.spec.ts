@@ -5,12 +5,10 @@ import {NewConditionModel} from '../ConditionInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Condition', () => {
     let conditions: Condition;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,14 +16,14 @@ describe('Condition', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Condition url', () => {
-            conditions.list();
+        it('should make a GET call to the specific Condition url', async () => {
+            await conditions.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements?feature=when');
         });
 
-        it('should use the passed options in the query parameters', () => {
-            conditions.list({filter: 'cat', page: 2});
+        it('should use the passed options in the query parameters', async () => {
+            await conditions.list({filter: 'cat', page: 2});
             expect(api.get).toHaveBeenCalledWith(
                 '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2',
             );
@@ -33,19 +31,19 @@ describe('Condition', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the specific Condition url', () => {
+        it('should make a POST call to the specific Condition url', async () => {
             const model: NewConditionModel = {
                 definition: 'when $browser is "chrome"',
             };
 
-            conditions.create(model);
+            await conditions.create(model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements', model);
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Statement url', () => {
+        it('should make a PUT call to the specific Statement url', async () => {
             const conditionId = '🎯';
 
             const model: NewConditionModel = {
@@ -53,43 +51,43 @@ describe('Condition', () => {
                 definition: 'when $browser is "chrome"',
             };
 
-            conditions.update(conditionId, model);
+            await conditions.update(conditionId, model);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🎯', model);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Statement url', () => {
+        it('should make a GET call to the specific Statement url', async () => {
             const conditionId = '🏒';
 
-            conditions.get(conditionId);
+            await conditions.get(conditionId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🏒');
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Statement url', () => {
+        it('should make a DELETE call to the specific Statement url', async () => {
             const conditionId = '🎽';
 
-            conditions.delete(conditionId);
+            await conditions.delete(conditionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/🎽');
         });
     });
 
     describe('bulkGet', () => {
-        it('should make a POST call to the conditions bulkGet url', () => {
-            conditions.bulkGet([]);
+        it('should make a POST call to the conditions bulkGet url', async () => {
+            await conditions.bulkGet([]);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
                 ids: [],
             });
         });
 
-        it('should include the params on the url if passed', () => {
-            conditions.bulkGet([], {perPage: 3, sortBy: ListStatementSortBy.Definition});
+        it('should include the params on the url if passed', async () => {
+            await conditions.bulkGet([], {perPage: 3, sortBy: ListStatementSortBy.Definition});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 '/rest/search/v1/admin/pipelines/statements/bulkGet?perPage=3&sortBy=definition',
@@ -99,8 +97,8 @@ describe('Condition', () => {
             );
         });
 
-        it('should include the conditionIds on the request body', () => {
-            conditions.bulkGet(['hello', 'bonjour']);
+        it('should include the conditionIds on the request body', async () => {
+            await conditions.bulkGet(['hello', 'bonjour']);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkGet', {
                 ids: ['hello', 'bonjour'],

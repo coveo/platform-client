@@ -5,12 +5,10 @@ import {VaultEntryModel} from '../VaultsInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Vaults', () => {
     let vaults: Vaults;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,10 +16,10 @@ describe('Vaults', () => {
     });
 
     describe('findMissing', () => {
-        it('should make a GET call to the specific Vaults url', () => {
+        it('should make a GET call to the specific Vaults url', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
 
-            vaults.findMissing(snapshotToGetId);
+            await vaults.findMissing(snapshotToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Vaults.baseUrl}/missing?snapshotId=${snapshotToGetId}`);
@@ -29,11 +27,11 @@ describe('Vaults', () => {
     });
 
     describe('import', () => {
-        it('should make a PUT call to the specific Vaults url', () => {
+        it('should make a PUT call to the specific Vaults url', async () => {
             const currentSnaphostId = 'current-snapshot-id';
             const sourceOrganizationId = 'source-organization-id';
 
-            vaults.import(currentSnaphostId, sourceOrganizationId, VaultFetchStrategy.overwrite);
+            await vaults.import(currentSnaphostId, sourceOrganizationId, VaultFetchStrategy.overwrite);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -43,9 +41,9 @@ describe('Vaults', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the specific Vaults url', () => {
+        it('should make a POST call to the specific Vaults url', async () => {
             const vaultEntryModel: VaultEntryModel = {};
-            vaults.create(vaultEntryModel);
+            await vaults.create(vaultEntryModel);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Vaults.baseUrl, vaultEntryModel);
@@ -53,8 +51,8 @@ describe('Vaults', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Vaults url', () => {
-            vaults.list({page: 2, perPage: 10});
+        it('should make a GET call to the specific Vaults url', async () => {
+            await vaults.list({page: 2, perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Vaults.baseUrl}?page=2&pageSize=10`);

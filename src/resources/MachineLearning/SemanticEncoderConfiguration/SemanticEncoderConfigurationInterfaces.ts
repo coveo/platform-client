@@ -3,7 +3,6 @@ import {DocumentRequirementStatus} from '../DocumentInterfaces.js';
 export interface SemanticEncoderDocumentGroupPreview {
     /**
      * The query that was used to fetch document information.
-     *
      * @Example @source==("Salesforce Notifier")
      */
     query: string;
@@ -29,7 +28,6 @@ export interface SemanticEncoderDocumentGroupPreview {
     documentLimit: number;
     /**
      * Status for the number of required documents to build the model.
-     *
      * @Example OK
      */
     documentRequirementStatus: DocumentRequirementStatus;

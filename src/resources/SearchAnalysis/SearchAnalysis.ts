@@ -7,7 +7,6 @@ export default class SearchAnalysis extends Resource {
 
     /**
      * Replay a query that was already done and get inspection details.
-     *
      * @param id The SearchUID of the request to replay.
      * @param from The inclusive date at which to start looking for the request. Example: 2019-08-24T14:15:22Z
      * @param to The inclusive date at which to stop looking for the SearchUID. When omitted searches up until the most recent requests. Example:2019-08-24T14:15:22Z

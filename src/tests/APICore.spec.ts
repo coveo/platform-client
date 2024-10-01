@@ -1,15 +1,16 @@
-import fetchMock from 'jest-fetch-mock';
+import {enableFetchMocks} from 'jest-fetch-mock';
 import API from '../APICore.js';
 import {PlatformClientOptions} from '../ConfigurationInterfaces.js';
 import getEndpoint, {Environment, Region} from '../Endpoints.js';
 import {ResponseHandler} from '../handlers/response/ResponseHandlerInterfaces.js';
+
+enableFetchMocks();
 
 jest.mock('../Endpoints.js');
 
 /**
  * Creates a method that can be passed to `fetchMock` to handle a request.
  * It will delay completing the request, and handle abort like `fetch` would.
- *
  * @param result The value to resolve with after timeout, if the request is not aborted.
  * @param timeout The delay to resolve with.
  * @returns A functhion that can be passed to `fetchMock`.
@@ -26,6 +27,9 @@ const delayedResponse =
                 return;
             }
 
+            /**
+             *
+             */
             function abort(this: AbortSignal) {
                 if (tid !== null) {
                     clearTimeout(tid);
@@ -51,11 +55,11 @@ const delayedResponse =
         });
 
 describe('APICore', () => {
-    const testConfig: PlatformClientOptions = {
+    const testConfig = {
         host: 'https://some.url/',
         organizationId: 'some-org-id',
         accessToken: jest.fn(() => 'my-token'),
-    };
+    } satisfies PlatformClientOptions;
     const testData = {
         route: 'rest/resource',
         response: {nuggets: 12345},
@@ -233,7 +237,7 @@ describe('APICore', () => {
         });
 
         describe('postForm', () => {
-            const formMock: jest.Mocked<FormData> = jest.fn() as any;
+            const formMock = jest.fn() as unknown as jest.Mocked<FormData>;
 
             it('should do a simple POST request using form data', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
@@ -391,7 +395,7 @@ describe('APICore', () => {
                 await api.get(testData.route);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal?.aborted).toBe(false);
-                await api.abortGetRequests();
+                api.abortGetRequests();
                 expect(init?.signal?.aborted).toBe(true);
             });
 
@@ -401,14 +405,14 @@ describe('APICore', () => {
                 await api.get(testData.route, {signal: userAbort.signal});
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal?.aborted).toBe(false);
-                await api.abortGetRequests();
+                api.abortGetRequests();
                 expect(init?.signal?.aborted).toBe(true);
                 expect(userAbort.signal.aborted).toBe(false);
             });
 
             it('should not abort get requests that are being sent after the abort signal', async () => {
                 fetchMock.mockResponseOnce(JSON.stringify(testData.response));
-                await api.abortGetRequests();
+                api.abortGetRequests();
                 await api.get(testData.route);
                 const init = fetchMock.mock.calls[0][1];
                 expect(init?.signal?.aborted).toBe(false);
@@ -479,15 +483,9 @@ describe('APICore', () => {
     });
 
     describe('checkToken', () => {
-        const mockedFormData = {
-            append: jest.fn(),
-        };
-
-        beforeEach(() => {
-            (global as any).FormData = jest.fn(() => mockedFormData);
-        });
-
         it('should check if the retrieved token is valid', async () => {
+            const mockedFormData = new FormData();
+            mockedFormData.set('token', 'my-token');
             const postFormSpy = jest.spyOn(API.prototype, 'postForm').mockResolvedValue(Promise.resolve());
             const api = new API(testConfig);
 
@@ -495,8 +493,6 @@ describe('APICore', () => {
 
             expect(postFormSpy).toHaveBeenCalledTimes(1);
             expect(postFormSpy).toHaveBeenCalledWith('/oauth/check_token', mockedFormData);
-            expect(mockedFormData.append).toHaveBeenCalledTimes(1);
-            expect(mockedFormData.append).toHaveBeenCalledWith('token', 'my-token');
         });
 
         it('should throw an error if the check token call fails', async () => {

@@ -11,12 +11,10 @@ import {
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SearchPages', () => {
     let searchPageService: SearchPages;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -24,70 +22,70 @@ describe('SearchPages', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Search Pages url', () => {
-            searchPageService.list();
+        it('should make a GET call to the specific Search Pages url', async () => {
+            await searchPageService.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchPages.baseUrl}`);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the Search Pages base url', () => {
+        it('should make a POST call to the Search Pages base url', async () => {
             const searchPageModel: CreateSearchPageModel = {name: 'test-name', title: 'test-title'};
 
-            searchPageService.create(searchPageModel);
+            await searchPageService.create(searchPageModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(SearchPages.baseUrl, searchPageModel);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Search Pages url', () => {
+        it('should make a DELETE call to the specific Search Pages url', async () => {
             const searchPageId = '🐱';
 
-            searchPageService.delete(searchPageId);
+            await searchPageService.delete(searchPageId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${SearchPages.baseUrl}/${searchPageId}`);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Search Pages url', () => {
+        it('should make a GET call to the specific Search Pages url', async () => {
             const searchPageId = '😽';
 
-            searchPageService.get(searchPageId);
+            await searchPageService.get(searchPageId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchPages.baseUrl}/${searchPageId}`);
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Search Pages url', () => {
+        it('should make a PUT call to the specific Search Pages url', async () => {
             const searchPageId = '🙀';
             const searchPageModel: UpdateSearchPageModel = {name: 'test-name', title: 'test-title'};
 
-            searchPageService.update(searchPageId, searchPageModel);
+            await searchPageService.update(searchPageId, searchPageModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${SearchPages.baseUrl}/${searchPageId}`, searchPageModel);
         });
     });
 
     describe('getVersion', () => {
-        it('should make a GET call to the specific Search UI url', () => {
+        it('should make a GET call to the specific Search UI url', async () => {
             const searchPageId = '😽';
 
-            searchPageService.getVersion(searchPageId);
+            await searchPageService.getVersion(searchPageId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchPages.baseUrl}/${searchPageId}/searchui`);
         });
     });
 
     describe('updateVersion', () => {
-        it('should make a PUT call to the specific Search UI url', () => {
+        it('should make a PUT call to the specific Search UI url', async () => {
             const searchPageId = '🙀';
             const versionOptions: MajorMinorVersion = {major: 'bleep', minor: 'bloop'};
 
-            searchPageService.updateVersion(searchPageId, versionOptions);
+            await searchPageService.updateVersion(searchPageId, versionOptions);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${SearchPages.baseUrl}/${searchPageId}/searchui?major=${versionOptions.major}&minor=${versionOptions.minor}`,
@@ -99,21 +97,21 @@ describe('SearchPages', () => {
         const searchPageId = '00000000-0000-0000-0000-000000000000';
         describe('all', () => {
             describe('get', () => {
-                it('should make a GET call to the specific Search Pages headers url', () => {
-                    searchPageService.getHeaders(searchPageId);
+                it('should make a GET call to the specific Search Pages headers url', async () => {
+                    await searchPageService.getHeaders(searchPageId);
                     expect(api.get).toHaveBeenCalledTimes(1);
                     expect(api.get).toHaveBeenCalledWith(`${SearchPages.baseUrl}/${searchPageId}/header`);
                 });
             });
 
             describe('reorder', () => {
-                it('should make a PUT call to the specific Search Pages headers url', () => {
+                it('should make a PUT call to the specific Search Pages headers url', async () => {
                     const reorderHeaderModel: ReorderSearchPageHeadersModel = {
                         css: ['👾', '🧟', '🤡'],
                         javascript: ['👻', '💀', '👽'],
                     };
 
-                    searchPageService.reorderHeaders(searchPageId, reorderHeaderModel);
+                    await searchPageService.reorderHeaders(searchPageId, reorderHeaderModel);
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header`,
@@ -124,14 +122,14 @@ describe('SearchPages', () => {
         });
         describe('css', () => {
             describe('create', () => {
-                it('should make a POST call to the Search Pages CSS resource url', () => {
+                it('should make a POST call to the Search Pages CSS resource url', async () => {
                     const cssResourceModel: CSSResourceModel = {
                         inlineContent: 'body { color: #e0e0e0; background-color: #2a2aa2; }',
                         name: '👹',
                         url: 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css',
                     };
 
-                    searchPageService.createCssResource(searchPageId, cssResourceModel);
+                    await searchPageService.createCssResource(searchPageId, cssResourceModel);
                     expect(api.post).toHaveBeenCalledTimes(1);
                     expect(api.post).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/css`,
@@ -141,9 +139,9 @@ describe('SearchPages', () => {
             });
 
             describe('delete', () => {
-                it('should make a DELETE call to the specific Search Pages CSS resource url', () => {
+                it('should make a DELETE call to the specific Search Pages CSS resource url', async () => {
                     const resourceName = '👹';
-                    searchPageService.deleteCssResource(searchPageId, resourceName);
+                    await searchPageService.deleteCssResource(searchPageId, resourceName);
                     expect(api.delete).toHaveBeenCalledTimes(1);
                     expect(api.delete).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/css/${resourceName}`,
@@ -152,7 +150,7 @@ describe('SearchPages', () => {
             });
 
             describe('update', () => {
-                it('should make a PUT call to the specific Search Pages CSS resource url', () => {
+                it('should make a PUT call to the specific Search Pages CSS resource url', async () => {
                     const resourceName = '👹';
                     const cssResourceModel: CSSResourceModel = {
                         inlineContent: 'body { color: #e0e0e0; background-color: #2a2aa2; }',
@@ -160,7 +158,7 @@ describe('SearchPages', () => {
                         url: 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css',
                     };
 
-                    searchPageService.updateCssResource(searchPageId, resourceName, cssResourceModel);
+                    await searchPageService.updateCssResource(searchPageId, resourceName, cssResourceModel);
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/css/${resourceName}`,
@@ -171,14 +169,14 @@ describe('SearchPages', () => {
         });
         describe('javascript', () => {
             describe('create', () => {
-                it('should make a POST call to the Search Pages JS resource url', () => {
+                it('should make a POST call to the Search Pages JS resource url', async () => {
                     const jsResourceModel: JavaScriptResourceModel = {
                         inlineContent: "window.location = 'about:blank';",
                         name: '👺',
                         url: 'https://code.jquery.com/jquery-3.4.1.min.js',
                     };
 
-                    searchPageService.createJsResource(searchPageId, jsResourceModel);
+                    await searchPageService.createJsResource(searchPageId, jsResourceModel);
                     expect(api.post).toHaveBeenCalledTimes(1);
                     expect(api.post).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/javascript`,
@@ -188,9 +186,9 @@ describe('SearchPages', () => {
             });
 
             describe('delete', () => {
-                it('should make a DELETE call to the specific Search Pages JS resource url', () => {
+                it('should make a DELETE call to the specific Search Pages JS resource url', async () => {
                     const resourceName = '👺';
-                    searchPageService.deleteJsResource(searchPageId, resourceName);
+                    await searchPageService.deleteJsResource(searchPageId, resourceName);
                     expect(api.delete).toHaveBeenCalledTimes(1);
                     expect(api.delete).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/javascript/${resourceName}`,
@@ -199,7 +197,7 @@ describe('SearchPages', () => {
             });
 
             describe('update', () => {
-                it('should make a PUT call to the specific Search Pages JS resource url', () => {
+                it('should make a PUT call to the specific Search Pages JS resource url', async () => {
                     const resourceName = '👺';
                     const jsResourceModel: JavaScriptResourceModel = {
                         inlineContent: "window.location = 'about:blank';",
@@ -207,7 +205,7 @@ describe('SearchPages', () => {
                         url: 'https://code.jquery.com/jquery-3.4.1.min.js',
                     };
 
-                    searchPageService.updateJsResource(searchPageId, resourceName, jsResourceModel);
+                    await searchPageService.updateJsResource(searchPageId, resourceName, jsResourceModel);
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
                         `${SearchPages.baseUrl}/${searchPageId}/header/javascript/${resourceName}`,

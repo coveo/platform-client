@@ -10,12 +10,10 @@ import {
 
 jest.mock('../../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Filters', () => {
     let filters: Filters;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const testFilterId = 'reporting-filter-id';
 
     beforeEach(() => {
@@ -25,8 +23,8 @@ describe('Filters', () => {
 
     describe('Reporting filters', () => {
         describe('list', () => {
-            it('should make a GET call to the reporting filters base url', () => {
-                filters.listReportFilters();
+            it('should make a GET call to the reporting filters base url', async () => {
+                await filters.listReportFilters();
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(Filters.reportingBaseUrl);
@@ -34,8 +32,8 @@ describe('Filters', () => {
         });
 
         describe('get', () => {
-            it('should make a GET call to the reporting filters base url for the specific ID', () => {
-                filters.getReportFilter(testFilterId);
+            it('should make a GET call to the reporting filters base url for the specific ID', async () => {
+                await filters.getReportFilter(testFilterId);
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(`${Filters.reportingBaseUrl}/${testFilterId}`);
@@ -43,10 +41,10 @@ describe('Filters', () => {
         });
 
         describe('create', () => {
-            it('should make a POST call to the reporting filters base url for the specific ID', () => {
+            it('should make a POST call to the reporting filters base url for the specific ID', async () => {
                 const filter: CreateReportingFilterModel = {displayName: 'test', value: 'filter'};
 
-                filters.createReportFilter(filter);
+                await filters.createReportFilter(filter);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(`${Filters.reportingBaseUrl}`, filter);
@@ -54,10 +52,10 @@ describe('Filters', () => {
         });
 
         describe('update', () => {
-            it('should make a PUT call to the reporting filters base url for the specific ID', () => {
+            it('should make a PUT call to the reporting filters base url for the specific ID', async () => {
                 const filter: UpdateReportingFilterModel = {displayName: 'test', value: 'filter'};
 
-                filters.updateReportFilter(testFilterId, filter);
+                await filters.updateReportFilter(testFilterId, filter);
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(`${Filters.reportingBaseUrl}/${testFilterId}`, filter);
@@ -65,8 +63,8 @@ describe('Filters', () => {
         });
 
         describe('delete', () => {
-            it('should make a DELETE call to the reporting filters base url for the specific ID', () => {
-                filters.deleteReportFilter(testFilterId);
+            it('should make a DELETE call to the reporting filters base url for the specific ID', async () => {
+                await filters.deleteReportFilter(testFilterId);
 
                 expect(api.delete).toHaveBeenCalledTimes(1);
                 expect(api.delete).toHaveBeenCalledWith(`${Filters.reportingBaseUrl}/${testFilterId}`);
@@ -76,8 +74,8 @@ describe('Filters', () => {
 
     describe('Permission filters', () => {
         describe('list', () => {
-            it('should make a GET call to the permission filter base url', () => {
-                filters.listPermissionFilters();
+            it('should make a GET call to the permission filter base url', async () => {
+                await filters.listPermissionFilters();
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(Filters.permissionsBaseUrl);
@@ -85,8 +83,8 @@ describe('Filters', () => {
         });
 
         describe('get', () => {
-            it('should make a GET call to the permission filter base url for the specific ID', () => {
-                filters.getPermissionFilter(testFilterId);
+            it('should make a GET call to the permission filter base url for the specific ID', async () => {
+                await filters.getPermissionFilter(testFilterId);
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}`);
@@ -94,10 +92,10 @@ describe('Filters', () => {
         });
 
         describe('create', () => {
-            it('should make a POST call to the permission filter base url for the specific ID', () => {
+            it('should make a POST call to the permission filter base url for the specific ID', async () => {
                 const filter: CreatePermissionsFilterModel = {displayName: 'test', value: 'filter'};
 
-                filters.createPermissionFilter(filter);
+                await filters.createPermissionFilter(filter);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}`, filter);
@@ -105,10 +103,10 @@ describe('Filters', () => {
         });
 
         describe('update', () => {
-            it('should make a PUT call to the permission filter base url for the specific ID', () => {
+            it('should make a PUT call to the permission filter base url for the specific ID', async () => {
                 const filter: UpdatePermissionsFilterModel = {displayName: 'test', value: 'filter'};
 
-                filters.updatePermissionFilter(testFilterId, filter);
+                await filters.updatePermissionFilter(testFilterId, filter);
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}`, filter);
@@ -116,8 +114,8 @@ describe('Filters', () => {
         });
 
         describe('delete', () => {
-            it('should make a DELETE call to the permission filter base url for the specific ID', () => {
-                filters.deletePermissionFilter(testFilterId);
+            it('should make a DELETE call to the permission filter base url for the specific ID', async () => {
+                await filters.deletePermissionFilter(testFilterId);
 
                 expect(api.delete).toHaveBeenCalledTimes(1);
                 expect(api.delete).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}`);
@@ -126,8 +124,8 @@ describe('Filters', () => {
 
         describe('Filter users', () => {
             describe('get', () => {
-                it('should make a GET call to the permission filter users url for the specific ID', () => {
-                    filters.getPermissionFilterUsers(testFilterId);
+                it('should make a GET call to the permission filter users url for the specific ID', async () => {
+                    await filters.getPermissionFilterUsers(testFilterId);
 
                     expect(api.get).toHaveBeenCalledTimes(1);
                     expect(api.get).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}/users`);
@@ -135,10 +133,10 @@ describe('Filters', () => {
             });
 
             describe('update', () => {
-                it('should make a PUT call to the permission filter users url for the specific ID', () => {
+                it('should make a PUT call to the permission filter users url for the specific ID', async () => {
                     const users = ['user.one@example.com', 'user.two@example.com'];
 
-                    filters.updatePermissionFilterUsers(testFilterId, users);
+                    await filters.updatePermissionFilterUsers(testFilterId, users);
 
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}/users`, users);
@@ -148,8 +146,8 @@ describe('Filters', () => {
 
         describe('Filter targets', () => {
             describe('get', () => {
-                it('should make a GET call to the permission filter targets url for the specific ID', () => {
-                    filters.getPermissionFilterTargets(testFilterId);
+                it('should make a GET call to the permission filter targets url for the specific ID', async () => {
+                    await filters.getPermissionFilterTargets(testFilterId);
 
                     expect(api.get).toHaveBeenCalledTimes(1);
                     expect(api.get).toHaveBeenCalledWith(`${Filters.permissionsBaseUrl}/${testFilterId}/targets`);
@@ -157,13 +155,13 @@ describe('Filters', () => {
             });
 
             describe('update', () => {
-                it('should make a PUT call to the permission filter targets url for the specific ID', () => {
+                it('should make a PUT call to the permission filter targets url for the specific ID', async () => {
                     const filterTargets: FilterTargetsModel = {
                         targetedUsers: [],
                         targetedGroups: [],
                     };
 
-                    filters.updatePermissionFilterTargets(testFilterId, filterTargets);
+                    await filters.updatePermissionFilterTargets(testFilterId, filterTargets);
 
                     expect(api.put).toHaveBeenCalledTimes(1);
                     expect(api.put).toHaveBeenCalledWith(
@@ -176,8 +174,8 @@ describe('Filters', () => {
     });
 
     describe('checkHealth', () => {
-        it('should make a GET call to the service healthcheck url', () => {
-            filters.checkHealth();
+        it('should make a GET call to the service healthcheck url', async () => {
+            await filters.checkHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Filters.baseUrl}/monitoring/health`);
@@ -185,8 +183,8 @@ describe('Filters', () => {
     });
 
     describe('checkStatus', () => {
-        it('should make a GET call to the service status url', () => {
-            filters.checkStatus();
+        it('should make a GET call to the service status url', async () => {
+            await filters.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Filters.baseUrl}/status`);

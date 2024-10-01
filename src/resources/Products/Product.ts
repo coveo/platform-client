@@ -7,6 +7,8 @@ export default class Products extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/commerce/v1/products`;
 
     /**
+     * @param productsRequest
+     * @param refreshCache
      * @deprecated
      */
     get(productsRequest: New<ProductsRequestModel>, refreshCache = false) {

@@ -7,13 +7,12 @@ import Resource from '../../Resource.js';
 export default class ReadServiceResource extends Resource {
     /**
      * Build the request path, handling the optional `org` query parameter.
-     *
      * @param route The path part of the request.
      * @param queryParams Optional query parameters object.
      * If this object contains an `org` property, it will override the value from the configuration.
      * @returns The request path including formatted query parameters.
      */
-    protected buildPathWithOrg(route: string, queryParams?: any): string {
+    protected buildPathWithOrg(route: string, queryParams?: object): string {
         return super.buildPath(route, {org: this.api.organizationId, ...queryParams});
     }
 }

@@ -91,6 +91,7 @@ export interface LicenseModel {
     /**
      * Various properties/configurations settings that apply to the organization.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     properties: any;
     /**
      * The type of the license

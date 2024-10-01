@@ -2,6 +2,7 @@ import {Paginated} from '../BaseInterfaces.js';
 import {ActivityOperation, FacetOrSortStatus} from '../Enums.js';
 
 export interface ActivityModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     content?: any;
     createDate?: number;
     duration?: number;
@@ -21,6 +22,7 @@ export interface ActivityModel {
     errorCode?: string;
     errorDetail?: string;
     abortReason?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     abortedBy?: any;
     snapShotId?: string;
     documentsProcessed?: number;

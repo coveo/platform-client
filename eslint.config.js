@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginJest from 'eslint-plugin-jest';
+import jsdoc from 'eslint-plugin-jsdoc';
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -10,7 +11,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default tseslint.config(
     {ignores: ['dist']},
     {
-        extends: [eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked, eslintConfigPrettier],
+        extends: [
+            eslint.configs.recommended,
+            ...tseslint.configs.recommendedTypeChecked,
+            jsdoc.configs['flat/recommended-typescript'],
+            eslintConfigPrettier,
+        ],
         languageOptions: {
             parserOptions: {
                 projectService: true,

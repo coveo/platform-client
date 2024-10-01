@@ -3,12 +3,10 @@ import PrivilegeEvaluator from '../PrivilegeEvaluator.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('PrivilegeEvaluator', () => {
     let privilegeEvaluator: PrivilegeEvaluator;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -25,8 +23,8 @@ describe('PrivilegeEvaluator', () => {
             },
         };
 
-        it('should make a post call to the Privilege Evaluator correct url with its params to evaluate a privilege', () => {
-            privilegeEvaluator.evaluate(privilegeEvaluatorParams);
+        it('should make a post call to the Privilege Evaluator correct url with its params to evaluate a privilege', async () => {
+            await privilegeEvaluator.evaluate(privilegeEvaluatorParams);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${PrivilegeEvaluator.baseUrl}`, privilegeEvaluatorParams);
         });

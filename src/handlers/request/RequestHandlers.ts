@@ -11,7 +11,10 @@ export const handleRequest = (
 
     return requestHandlers.reduce(
         (enrichedOptions: EnrichedRequestInit, currentHandler: RequestHandler) => {
-            if (!currentHandler.hasOwnProperty('canProcess') || !currentHandler.hasOwnProperty('process')) {
+            if (
+                !Object.prototype.hasOwnProperty.call(currentHandler, 'canProcess') ||
+                !Object.prototype.hasOwnProperty.call(currentHandler, 'process')
+            ) {
                 return enrichedOptions;
             }
 

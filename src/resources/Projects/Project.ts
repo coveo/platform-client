@@ -16,9 +16,8 @@ export default class Project extends Resource {
 
     /**
      * Returns a paginated list of projects.
-     *
-     * @param {ListProjectParams} params
-     * @returns {Promise<PageModel<ProjectModel>>} A paginated list of projects
+     * @param params
+     * @returns A paginated list of projects
      */
     list(params?: ListProjectParams): Promise<PageModel<ProjectModel>> {
         return this.api.get<PageModel<ProjectModel>>(this.buildPath(Project.baseUrl, params));
@@ -26,9 +25,8 @@ export default class Project extends Resource {
 
     /**
      * Creates and returns a new project.
-     *
-     * @param {ProjectModel} project
-     * @returns {Promise<ProjectModel>} The newly created project
+     * @param project
+     * @returns The newly created project
      */
     create(project: BaseProjectModel): Promise<ProjectModel> {
         return this.api.post<ProjectModel>(this.buildPath(Project.baseUrl), project);
@@ -36,10 +34,9 @@ export default class Project extends Resource {
 
     /**
      * Updates a project with the model sent and returns the updated project.
-     *
-     * @param {string} projectId
-     * @param {ProjectModel} updateProjectModel
-     * @returns {Promise<ProjectModel>} The updated project
+     * @param projectId
+     * @param updateProjectModel
+     * @returns The updated project
      */
     update(projectId: string, updateProjectModel: ProjectModel): Promise<ProjectModel> {
         return this.api.put<ProjectModel>(this.buildPath(`${Project.baseUrl}/${projectId}`), updateProjectModel);
@@ -47,9 +44,8 @@ export default class Project extends Resource {
 
     /**
      * Returns a project.
-     *
-     * @param {string} projectId
-     * @returns {Promise<ProjectModel>} The project specified by the provided id
+     * @param projectId
+     * @returns The project specified by the provided id
      */
     get(projectId: string): Promise<ProjectModel> {
         return this.api.get<ProjectModel>(this.buildPath(`${Project.baseUrl}/${projectId}`));
@@ -57,8 +53,7 @@ export default class Project extends Resource {
 
     /**
      * Deletes a project.
-     *
-     * @param {string} projectId
+     * @param projectId
      */
     delete(projectId: string): Promise<void> {
         return this.api.delete(this.buildPath(`${Project.baseUrl}/${projectId}`));
@@ -66,9 +61,8 @@ export default class Project extends Resource {
 
     /**
      * Returns resource IDs grouped by resource status, for a given project.
-     *
-     * @param {string} projectId
-     * @returns {Promise<Record<ResourceStatus, Record<ProjectResourceType, string[]>>>} A series of resource IDs grouped by their status and resource type.
+     * @param projectId
+     * @returns A series of resource IDs grouped by their status and resource type.
      */
     listResourcesByStatus(projectId: string): Promise<Record<ResourceStatus, Record<ProjectResourceType, string[]>>> {
         return this.api.get<Record<ResourceStatus, Record<ProjectResourceType, string[]>>>(
@@ -78,11 +72,10 @@ export default class Project extends Resource {
 
     /**
      * Returns a paginated list of resources associated to a project.
-     *
-     * @param {string} projectId
-     * @param {ProjectResourceType} resourceType
-     * @param {ResourceParams} params
-     * @returns {Promise<PageModel<ResourceModel>>} A paginated list of resources associated to a project.
+     * @param projectId
+     * @param resourceType
+     * @param params
+     * @returns A paginated list of resources associated to a project.
      */
     listResources(
         projectId: string,
@@ -96,10 +89,9 @@ export default class Project extends Resource {
 
     /**
      * Returns a list of project IDs associated to the provided resource IDs.
-     *
-     * @param {ProjectResourceType} resourceType
-     * @param {string[]} resourceIds
-     * @returns {Promise<ListAssociatedProjectsModel[]>} List of project IDs associated to the provided resource IDs.
+     * @param resourceType
+     * @param resourceIds
+     * @returns List of project IDs associated to the provided resource IDs.
      */
     listAssociatedProjects(
         resourceType: ProjectResourceType,
@@ -113,10 +105,9 @@ export default class Project extends Resource {
 
     /**
      * Modifies project-resource associations and returns a list of updated projects.
-     *
-     * @param {ProjectResourceType} resourceType
-     * @param {UpdatedProjectResourceAssociationsModel} updatedProjectResourceAssociation
-     * @returns {Promise<ProjectModel[]>} Returns a list of updated projects.
+     * @param resourceType
+     * @param updatedProjectResourceAssociation
+     * @returns Returns a list of updated projects.
      */
     updateProjectResourceAssociation(
         resourceType: ProjectResourceType,

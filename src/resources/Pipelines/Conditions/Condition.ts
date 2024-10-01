@@ -7,8 +7,7 @@ export default class Condition extends Resource {
 
     /**
      * Returns a paginated list of condition models.
-     *
-     * @param {ListConditionsOptions} options
+     * @param options
      */
     list(options: ListConditionsOptions = {}) {
         return this.api.get<PageModel<ConditionModel, 'statements'>>(
@@ -18,8 +17,7 @@ export default class Condition extends Resource {
 
     /**
      * Creates and returns a new condition model.
-     *
-     * @param {NewConditionModel} conditionModel
+     * @param conditionModel
      */
     create(conditionModel: NewConditionModel) {
         return this.api.post<ConditionModel>(
@@ -30,8 +28,7 @@ export default class Condition extends Resource {
 
     /**
      * Delete a condition model.
-     *
-     * @param {string} conditionId The unique identifier of the condition to be deleted.
+     * @param conditionId The unique identifier of the condition to be deleted.
      */
     delete(conditionId: string) {
         return this.api.delete(
@@ -41,8 +38,7 @@ export default class Condition extends Resource {
 
     /**
      * Returns a condition model.
-     *
-     * @param {string} conditionId The unique identifier of the condition to be fetched.
+     * @param conditionId The unique identifier of the condition to be fetched.
      */
     get(conditionId: string) {
         return this.api.get<ConditionModel>(
@@ -52,9 +48,8 @@ export default class Condition extends Resource {
 
     /**
      * Update a condition model with the model sent and returns the updated condition model.
-     *
-     * @param {string} conditionId The unique identifier of the condition to be updated.
-     * @param {ConditionModel | NewConditionModel} conditionModel
+     * @param conditionId The unique identifier of the condition to be updated.
+     * @param conditionModel
      */
     update(conditionId: string, conditionModel: ConditionModel | NewConditionModel) {
         return this.api.put<ConditionModel>(
@@ -65,7 +60,6 @@ export default class Condition extends Resource {
 
     /**
      * Bulk get a list of conditions corresponding of the ids sent.
-     *
      * @param {string[]} conditionIds The list of condition's ids to be fetched. Limit of 1000 incoming ids.
      * @param {ListConditionsOptions} params
      */

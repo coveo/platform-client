@@ -3,12 +3,10 @@ import Properties from '../Properties/Properties.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Properties', () => {
     let properties: Properties;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,22 +14,22 @@ describe('Properties', () => {
     });
 
     describe('listProperties', () => {
-        it('should make a GET call to the list path', () => {
-            properties.list();
+        it('should make a GET call to the list path', async () => {
+            await properties.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list`);
         });
 
-        it('should make a GET call to the list path with pagination', () => {
-            properties.list({page: 1, perPage: 2});
+        it('should make a GET call to the list path with pagination', async () => {
+            await properties.list({page: 1, perPage: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list?page=1&perPage=2`);
         });
 
-        it('should make a GET call to the list path with filter', () => {
-            properties.list({filter: 'test'});
+        it('should make a GET call to the list path with filter', async () => {
+            await properties.list({filter: 'test'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/list?filter=test`);
@@ -39,8 +37,8 @@ describe('Properties', () => {
     });
 
     describe('getProperty', () => {
-        it('should make a GET call to the properties path', () => {
-            properties.get('trackingId');
+        it('should make a GET call to the properties path', async () => {
+            await properties.get('trackingId');
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId`);
@@ -48,8 +46,8 @@ describe('Properties', () => {
     });
 
     describe('createProperty', () => {
-        it('should make a POST call to the properties path', () => {
-            properties.create('trackingId', 'displayName');
+        it('should make a POST call to the properties path', async () => {
+            await properties.create('trackingId', 'displayName');
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -59,8 +57,8 @@ describe('Properties', () => {
     });
 
     describe('updateProperty', () => {
-        it('should make a PUT call to the properties path', () => {
-            properties.update('trackingId', 'displayName');
+        it('should make a PUT call to the properties path', async () => {
+            await properties.update('trackingId', 'displayName');
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId?displayName=displayName`);
@@ -68,8 +66,8 @@ describe('Properties', () => {
     });
 
     describe('deleteProperty', () => {
-        it('should make a DELETE call to the properties path', () => {
-            properties.delete('trackingId');
+        it('should make a DELETE call to the properties path', async () => {
+            await properties.delete('trackingId');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId`);

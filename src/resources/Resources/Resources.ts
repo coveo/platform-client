@@ -9,10 +9,9 @@ export default class Resources extends Resource {
 
     /**
      * Returns a paginated list of resources.
-     *
      * @param resourceType
-     * @param {ListProjectParams} params
-     * @returns {Promise<PageModel<ResourceModel>>} A paginated list of resources.
+     * @param params
+     * @returns A paginated list of resources.
      */
     list(resourceType: ProjectResourceType, params?: ResourceParams): Promise<PageModel<ResourceModel>> {
         return this.api.get<PageModel<ResourceModel>>(this.buildPath(`${Resources.baseUrl}/${resourceType}`, params));

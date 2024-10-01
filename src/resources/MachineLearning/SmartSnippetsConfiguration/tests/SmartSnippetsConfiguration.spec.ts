@@ -5,12 +5,10 @@ import {SmartSnippetsContentFieldsParams} from '../SmartSnippetsConfigurationInt
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SmartSnippetsConfiguration', () => {
     let smartSnippetsConfig: SmartSnippetsConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,14 +16,14 @@ describe('SmartSnippetsConfiguration', () => {
     });
 
     describe('contentFields', () => {
-        it('should make a POST call to retrieve valid content fields from the Smart Snippets Configuration contentfields url', () => {
+        it('should make a POST call to retrieve valid content fields from the Smart Snippets Configuration contentfields url', async () => {
             const params: SmartSnippetsContentFieldsParams = {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
                 filterConditions: [],
                 advancedQuery: '',
             };
-            smartSnippetsConfig.contentFields(params);
+            await smartSnippetsConfig.contentFields(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.contentFieldsUrl, params);
@@ -33,14 +31,14 @@ describe('SmartSnippetsConfiguration', () => {
     });
 
     describe('documentTypes', () => {
-        it('should make a POST call to retrieve valid document types from the Smart Snippets Configuration documenttypes url', () => {
+        it('should make a POST call to retrieve valid document types from the Smart Snippets Configuration documenttypes url', async () => {
             const params: SmartSnippetsContentFieldsParams = {
                 documentType: 'test-type',
                 sources: ['source1', 'source2'],
                 filterConditions: [],
                 advancedQuery: '',
             };
-            smartSnippetsConfig.documentTypes(params);
+            await smartSnippetsConfig.documentTypes(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.documentTypesUrl, params);
@@ -48,22 +46,22 @@ describe('SmartSnippetsConfiguration', () => {
     });
 
     describe('preview', () => {
-        it('should make a POST call with sources to retrieve Smart Snippets Configuration preview', () => {
+        it('should make a POST call with sources to retrieve Smart Snippets Configuration preview', async () => {
             const params: DocumentGroupPreviewParams = {
                 sources: ['source1', 'source2'],
                 filterConditions: [],
             };
-            smartSnippetsConfig.preview(params);
+            await smartSnippetsConfig.preview(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.previewUrl, params);
         });
 
-        it('should make a POST call with advanced query to retrieve Smart Snippets Configuration preview', () => {
+        it('should make a POST call with advanced query to retrieve Smart Snippets Configuration preview', async () => {
             const params: DocumentGroupPreviewParams = {
                 advancedQuery: 'some advanced query @ test',
             };
-            smartSnippetsConfig.preview(params);
+            await smartSnippetsConfig.preview(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(SmartSnippetsConfiguration.previewUrl, params);

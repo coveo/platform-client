@@ -5,12 +5,10 @@ import {CreateCatalogModel, CatalogModel, FieldsSuggestionsQueryModel} from '../
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Catalog', () => {
     let catalog: Catalog;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,26 +16,26 @@ describe('Catalog', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the catalogs base url', () => {
-            catalog.list({page: 2, pageSize: 10});
+        it('should make a GET call to the catalogs base url', async () => {
+            await catalog.list({page: 2, pageSize: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}?page=2&pageSize=10`);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the catalogs base url', () => {
+        it('should make a POST call to the catalogs base url', async () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
                 catalogConfigurationId: 'id',
             };
 
-            catalog.create(catalogModel);
+            await catalog.create(catalogModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Catalog.baseUrl, catalogModel);
         });
 
-        it('should be backward compatible with the legacy structure', () => {
+        it('should be backward compatible with the legacy structure', async () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
                 configuration: {
@@ -50,12 +48,12 @@ describe('Catalog', () => {
                 },
             };
 
-            catalog.create(catalogModel);
+            await catalog.create(catalogModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Catalog.baseUrl, catalogModel);
         });
 
-        it('should be backward compatible with the fields array', () => {
+        it('should be backward compatible with the fields array', async () => {
             const catalogModel: New<CreateCatalogModel> = {
                 name: 'New catalog',
                 product: {
@@ -76,41 +74,41 @@ describe('Catalog', () => {
                 },
             };
 
-            catalog.create(catalogModel);
+            await catalog.create(catalogModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Catalog.baseUrl, catalogModel);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific catalog url', () => {
+        it('should make a DELETE call to the specific catalog url', async () => {
             const catalogToDeleteId = 'catalog-to-be-deleted';
-            catalog.delete(catalogToDeleteId);
+            await catalog.delete(catalogToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogToDeleteId}`);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific catalog url', () => {
+        it('should make a GET call to the specific catalog url', async () => {
             const catalogToGetId = 'catalog-to-be-fetched';
-            catalog.get(catalogToGetId);
+            await catalog.get(catalogToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogToGetId}`);
         });
     });
 
     describe('getFields', () => {
-        it("should make a GET call to the specific catalog's fields url", () => {
+        it("should make a GET call to the specific catalog's fields url", async () => {
             const catalogOfFieldsToGetId = 'catalog-of-fields';
-            catalog.getFields(catalogOfFieldsToGetId);
+            await catalog.getFields(catalogOfFieldsToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields`);
         });
 
-        it('should allow bypassing the cache', () => {
+        it('should allow bypassing the cache', async () => {
             const catalogOfFieldsToGetId = 'catalog-of-fields';
-            catalog.getFields(catalogOfFieldsToGetId, {bypassCache: true});
+            await catalog.getFields(catalogOfFieldsToGetId, {bypassCache: true});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fields?bypassCache=true`,
@@ -119,7 +117,7 @@ describe('Catalog', () => {
     });
 
     describe('getFieldsSuggestions', () => {
-        it('should make a POST call to to retrieve fields suggestions', () => {
+        it('should make a POST call to to retrieve fields suggestions', async () => {
             const query: FieldsSuggestionsQueryModel = {
                 sourceNames: ['source1'],
                 availabilitySourceNames: ['availability_source1'],
@@ -127,14 +125,14 @@ describe('Catalog', () => {
                 variantObjectType: 'Variant',
                 availabilityObjectType: 'Availability',
             };
-            catalog.getFieldsSuggestions(query);
+            await catalog.getFieldsSuggestions(query);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Catalog.baseUrl}/fieldsSuggestions`, query);
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific catalog url', () => {
+        it('should make a PUT call to the specific catalog url', async () => {
             const catalogModel: CreateCatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'Catalog to be updated',
@@ -148,24 +146,24 @@ describe('Catalog', () => {
                 },
             };
 
-            catalog.update(catalogModel);
+            await catalog.update(catalogModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
         });
 
-        it('should allow a PUT call with a catalog configuration id', () => {
+        it('should allow a PUT call with a catalog configuration id', async () => {
             const catalogModel: CreateCatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'Catalog to be updated',
                 catalogConfigurationId: 'abc-123-def',
             };
 
-            catalog.update(catalogModel);
+            await catalog.update(catalogModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
         });
 
-        it('should be backward compatible with the legacy structure', () => {
+        it('should be backward compatible with the legacy structure', async () => {
             const catalogModel: CatalogModel = {
                 id: 'catalog-to-update-id',
                 name: 'New catalog',
@@ -187,23 +185,23 @@ describe('Catalog', () => {
                 },
             };
 
-            catalog.update(catalogModel);
+            await catalog.update(catalogModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogModel.id}`, catalogModel);
         });
     });
 
     describe('getFieldStats', () => {
-        it("should make a GET call to the specific catalog's fields stats url", () => {
+        it("should make a GET call to the specific catalog's fields stats url", async () => {
             const catalogOfFieldsToGetId = 'catalog-of-fields';
-            catalog.getFieldStats(catalogOfFieldsToGetId);
+            await catalog.getFieldStats(catalogOfFieldsToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats`);
         });
 
-        it('should allow refreshing the field statistics cache', () => {
+        it('should allow refreshing the field statistics cache', async () => {
             const catalogOfFieldsToGetId = 'catalog-of-fields';
-            catalog.getFieldStats(catalogOfFieldsToGetId, {forceRefresh: true});
+            await catalog.getFieldStats(catalogOfFieldsToGetId, {forceRefresh: true});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Catalog.baseUrl}/${catalogOfFieldsToGetId}/fieldStats?forceRefresh=true`,

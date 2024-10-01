@@ -41,6 +41,7 @@ export default class Extension extends Resource {
 
     /**
      * Lists all versions of an [extension](https://docs.coveo.com/en/206/) in a [Coveo Cloud organization](https://docs.coveo.com/en/185/).
+     * @param extensionId
      */
     listVersions(extensionId: string) {
         return this.api.get<ExtensionContentVersionModel[]>(`${Extension.baseUrl}/${extensionId}/versions`);
@@ -48,6 +49,8 @@ export default class Extension extends Resource {
 
     /**
      * Shows a specific version of an [extension](https://docs.coveo.com/en/206/) in a [Coveo Cloud organization](https://docs.coveo.com/en/185/).
+     * @param extensionId
+     * @param versionId
      */
     getVersion(extensionId: string, versionId: string) {
         return this.api.get<ExtensionModel>(`${Extension.baseUrl}/${extensionId}/versions/${versionId}`);
@@ -55,8 +58,7 @@ export default class Extension extends Resource {
 
     /**
      * Validates the extension's script
-     *
-     * @param {ExtensionCompileCode} extensionCode The code to compile
+     * @param extensionCode The code to compile
      */
     validateCode(extensionCode: ExtensionCompileCode) {
         return this.api.post<ExtensionCompileResult>(`${Extension.baseUrl}/test/compile`, extensionCode);

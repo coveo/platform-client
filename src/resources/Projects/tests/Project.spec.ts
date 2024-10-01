@@ -10,12 +10,10 @@ import {
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Project', () => {
     let project: Project;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const mockProjectId = 'randomProjectId';
     const mockRandomResourceType = 'CATALOG';
 
@@ -43,22 +41,22 @@ describe('Project', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the correct Project url', () => {
-            project.list();
+        it('should make a GET call to the correct Project url', async () => {
+            await project.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Project.baseUrl);
         });
 
-        it('should use the passed parameters as its query paramaters', () => {
-            project.list({page: 1, perPage: 50});
+        it('should use the passed parameters as its query paramaters', async () => {
+            await project.list({page: 1, perPage: 50});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Project.baseUrl}?page=1&perPage=50`);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the correct Project url', () => {
-            project.create(mockNewProject);
+        it('should make a POST call to the correct Project url', async () => {
+            await project.create(mockNewProject);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Project.baseUrl, {
                 name: 'Pokemon Project',
@@ -69,8 +67,8 @@ describe('Project', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the correct Project url', () => {
-            project.update(mockProjectId, mockProject);
+        it('should make a PUT call to the correct Project url', async () => {
+            await project.update(mockProjectId, mockProject);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Project.baseUrl}/randomProjectId`, {
                 id: mockProjectId,
@@ -86,40 +84,40 @@ describe('Project', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the correct Project URL', () => {
-            project.get(mockProjectId);
+        it('should make a GET call to the correct Project URL', async () => {
+            await project.get(mockProjectId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Project.baseUrl}/randomProjectId`);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the correct Project URL', () => {
-            project.delete(mockProjectId);
+        it('should make a DELETE call to the correct Project URL', async () => {
+            await project.delete(mockProjectId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Project.baseUrl}/randomProjectId`);
         });
     });
 
     describe('listResourcesByType', () => {
-        it('should make a GET call to the correct Project URL', () => {
-            project.listResourcesByStatus(mockProjectId);
+        it('should make a GET call to the correct Project URL', async () => {
+            await project.listResourcesByStatus(mockProjectId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Project.baseUrl}/${mockProjectId}/resources`);
         });
     });
 
     describe('listResources', () => {
-        it('should make a GET call to the correct Project URL', () => {
-            project.listResources(mockProjectId, mockRandomResourceType);
+        it('should make a GET call to the correct Project URL', async () => {
+            await project.listResources(mockProjectId, mockRandomResourceType);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Project.baseUrl}/${mockProjectId}/resources/${mockRandomResourceType}`,
             );
         });
 
-        it('should use the passed parameters as its query paramaters', () => {
-            project.listResources(mockProjectId, mockRandomResourceType, {page: 1, perPage: 50});
+        it('should use the passed parameters as its query paramaters', async () => {
+            await project.listResources(mockProjectId, mockRandomResourceType, {page: 1, perPage: 50});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Project.baseUrl}/${mockProjectId}/resources/${mockRandomResourceType}?page=1&perPage=50`,
@@ -128,9 +126,9 @@ describe('Project', () => {
     });
 
     describe('listAssociatedProjects', () => {
-        it('should make a POST call to the correct Project URL', () => {
+        it('should make a POST call to the correct Project URL', async () => {
             const randomSourceId = 'random-id';
-            project.listAssociatedProjects('SOURCE', [randomSourceId]);
+            await project.listAssociatedProjects('SOURCE', [randomSourceId]);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Project.baseUrl}/resources/ids?resourceType=SOURCE`, [
                 randomSourceId,
@@ -139,7 +137,7 @@ describe('Project', () => {
     });
 
     describe('updateProjectResourceAssociation', () => {
-        it('should make a PUT call to the correct Project URL', () => {
+        it('should make a PUT call to the correct Project URL', async () => {
             const randomProjectResourceAssociation: UpdatedProjectResourceAssociationsModel = {
                 additions: {
                     projectIds: ['random-project-id'],
@@ -147,7 +145,7 @@ describe('Project', () => {
                 },
                 removals: {} as UpdatedProjectAssociationsModel,
             };
-            project.updateProjectResourceAssociation('SOURCE', randomProjectResourceAssociation);
+            await project.updateProjectResourceAssociation('SOURCE', randomProjectResourceAssociation);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Project.baseUrl}/resources/modify/SOURCE`,

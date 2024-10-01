@@ -4,12 +4,10 @@ import ClusterAgent from '../ClusterAgent.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('clusterAgent', () => {
     let clusterAgent: ClusterAgent;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const clusterId = '🦋';
 
     beforeEach(() => {
@@ -18,8 +16,8 @@ describe('clusterAgent', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the ClusterAgent base url', () => {
-            clusterAgent.list(clusterId);
+        it('should make a GET call to the ClusterAgent base url', async () => {
+            await clusterAgent.list(clusterId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ClusterAgent.getBaseUrl(clusterId));
@@ -27,10 +25,10 @@ describe('clusterAgent', () => {
     });
 
     describe('upgrade', () => {
-        it('should make a PUT call to the upgrade cluster agent url', () => {
+        it('should make a PUT call to the upgrade cluster agent url', async () => {
             const agentId = '👐';
             const data: ClusterNodeUpgradeDataModel = {componentName: 'butterfly', version: '1.2.3'};
-            clusterAgent.upgrade(clusterId, agentId, data);
+            await clusterAgent.upgrade(clusterId, agentId, data);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${ClusterAgent.getBaseUrl(clusterId)}/${agentId}/upgrade`, data);

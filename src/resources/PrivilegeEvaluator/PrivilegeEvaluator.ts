@@ -6,8 +6,7 @@ export default class PrivilegeEvaluator extends Ressource {
 
     /**
      * Evaluates a specific privilege request
-     *
-     * @param {RestTokenParams} privilegeEvaluatorParams The privilege request to evaluate
+     * @param privilegeEvaluatorParams The privilege request to evaluate
      */
     evaluate(privilegeEvaluatorParams: PrivilegeEvaluatorModel) {
         privilegeEvaluatorParams = {

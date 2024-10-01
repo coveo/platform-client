@@ -2,7 +2,7 @@ import {AuthProvider} from '../Enums.js';
 import {RealmModel} from '../Groups/index.js';
 
 export interface UserModel {
-    additionalInformation: Record<string, any>;
+    additionalInformation: Record<string, string>;
     country: string;
     credentialsExpired: boolean;
     displayName: string;

@@ -19,6 +19,7 @@ export interface MLAssociationModel {
     modelEngine?: ModelTypes;
     condition?: string;
     conditionDefinition?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customQueryParameters?: any;
     enableWordCompletion?: boolean;
     exclusive?: boolean;
@@ -31,7 +32,7 @@ export interface MLAssociationModel {
     useAdvancedConfiguration?: boolean;
 }
 
-export interface ListAssociationsParams extends Paginated {}
+export type ListAssociationsParams = Paginated;
 
 export interface BulkGetAssociationsParams extends Paginated {
     /*
@@ -47,6 +48,7 @@ export interface CreateAssociation extends EditAssociation {
 export interface EditAssociation {
     cacheMaximumAge?: string;
     condition?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customQueryParameters?: any;
     description?: string;
     enableWordCompletion?: boolean;

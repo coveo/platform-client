@@ -9,13 +9,11 @@ import NextGenSearchPages from '../NextGenSearchPages.js';
 import {SearchPageInterfaceConfiguration, SearchPageLayout} from '../NextGenSearchPages.model.js';
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('NextGenSearchPages', () => {
     let nextGenSearchPages: NextGenSearchPages;
 
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const config: ExistingHostedInterface<SearchPageInterfaceConfiguration> = {
         name: 'some search page name',
         facets: [
@@ -111,8 +109,8 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call with all parameters', () => {
-            nextGenSearchPages.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
+        it('should make a GET call with all parameters', async () => {
+            await nextGenSearchPages.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -120,29 +118,29 @@ describe('NextGenSearchPages', () => {
             );
         });
 
-        it('should make a GET call with page', () => {
-            nextGenSearchPages.list({page: 2});
+        it('should make a GET call with page', async () => {
+            await nextGenSearchPages.list({page: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?page=2`);
         });
 
-        it('should make a GET call with perPage', () => {
-            nextGenSearchPages.list({perPage: 10});
+        it('should make a GET call with perPage', async () => {
+            await nextGenSearchPages.list({perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?perPage=10`);
         });
 
-        it('should make a GET call with filter', () => {
-            nextGenSearchPages.list({filter: 'Accounting'});
+        it('should make a GET call with filter', async () => {
+            await nextGenSearchPages.list({filter: 'Accounting'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?filter=Accounting`);
         });
 
-        it('should make a GET call with order', () => {
-            nextGenSearchPages.list({order: 'asc'});
+        it('should make a GET call with order', async () => {
+            await nextGenSearchPages.list({order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}?order=asc`);
@@ -150,8 +148,8 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the NextGenSearchPages base url', () => {
-            nextGenSearchPages.create(config);
+        it('should make a POST call to the NextGenSearchPages base url', async () => {
+            await nextGenSearchPages.create(config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(NextGenSearchPages.baseUrl, config);
@@ -159,10 +157,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the NextGenSearchPages base url', () => {
+        it('should make a DELETE call to the NextGenSearchPages base url', async () => {
             const id = 'NextGenSearchPages-id-to-delete';
 
-            nextGenSearchPages.delete(id);
+            await nextGenSearchPages.delete(id);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}`);
@@ -170,10 +168,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the NextGenSearchPages base url', () => {
+        it('should make a GET call to the NextGenSearchPages base url', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.get(id);
+            await nextGenSearchPages.get(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}`);
@@ -181,10 +179,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the NextGenSearchPages base url', () => {
+        it('should make a PUT call to the NextGenSearchPages base url', async () => {
             const id = 'NextGenSearchPages-id-to-update';
 
-            nextGenSearchPages.update(id, config);
+            await nextGenSearchPages.update(id, config);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}`, config);
@@ -192,10 +190,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('generatePreview', () => {
-        it('should make a POST call to the NextGenSearchPages base url appended with /preview', () => {
+        it('should make a POST call to the NextGenSearchPages base url appended with /preview', async () => {
             const id = 'NextGenSearchPages-id-to-preview';
 
-            nextGenSearchPages.generatePreview(id, config);
+            await nextGenSearchPages.generatePreview(id, config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/preview`, config);
@@ -203,10 +201,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getView', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /preview', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /preview', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.getView(id);
+            await nextGenSearchPages.getView(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/preview`);
@@ -214,10 +212,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getToken', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /token', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /token', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.getToken(id);
+            await nextGenSearchPages.getToken(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/token`);
@@ -225,10 +223,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getEditInterface', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /edit', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /edit', async () => {
             const id = 'NextGenSearchPages-id-to-edit';
 
-            nextGenSearchPages.getEditInterface(id);
+            await nextGenSearchPages.getEditInterface(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/edit`);
@@ -236,10 +234,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getLoader', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /loader', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /loader', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.getLoader(id);
+            await nextGenSearchPages.getLoader(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/loader`);
@@ -247,10 +245,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getLoginPage', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /login', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /login', async () => {
             const id = 'NextGenSearchPages-id-to-login';
 
-            nextGenSearchPages.getLoginPage(id);
+            await nextGenSearchPages.getLoginPage(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/login`);
@@ -258,10 +256,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getAccesses', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /accesses', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /accesses', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.getAccesses(id);
+            await nextGenSearchPages.getAccesses(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses`);
@@ -269,10 +267,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('updateAccesses', () => {
-        it('should make a PUT call to the NextGenSearchPages base url appended with /accesses', () => {
+        it('should make a PUT call to the NextGenSearchPages base url appended with /accesses', async () => {
             const id = 'NextGenSearchPages-id-to-update';
 
-            nextGenSearchPages.updateAccesses(id, config.accesses);
+            await nextGenSearchPages.updateAccesses(id, config.accesses);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses`, config.accesses);
@@ -280,10 +278,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('getAccessesUsers', () => {
-        it('should make a GET call to the NextGenSearchPages base url appended with /accesses/users', () => {
+        it('should make a GET call to the NextGenSearchPages base url appended with /accesses/users', async () => {
             const id = 'NextGenSearchPages-id-to-get';
 
-            nextGenSearchPages.getAccessesUsers(id);
+            await nextGenSearchPages.getAccessesUsers(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/users`);
@@ -291,10 +289,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('updateAccessesUsers', () => {
-        it('should make a PUT call to the NextGenSearchPages base url appended with /accesses/users', () => {
+        it('should make a PUT call to the NextGenSearchPages base url appended with /accesses/users', async () => {
             const id = 'NextGenSearchPages-id-to-update';
 
-            nextGenSearchPages.updateAccessesUsers(id, config.accesses.users);
+            await nextGenSearchPages.updateAccessesUsers(id, config.accesses.users);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -305,10 +303,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('addAccessesUsers', () => {
-        it('should make a POST call to the NextGenSearchPages base url appended with /accesses/users', () => {
+        it('should make a POST call to the NextGenSearchPages base url appended with /accesses/users', async () => {
             const id = 'NextGenSearchPages-id-to-add';
 
-            nextGenSearchPages.addAccessesUsers(id, config.accesses.users);
+            await nextGenSearchPages.addAccessesUsers(id, config.accesses.users);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/users`, {
@@ -318,10 +316,10 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('requestAccess', () => {
-        it('should make a POST call to the NextGenSearchPages base url appended with /accesses/request', () => {
+        it('should make a POST call to the NextGenSearchPages base url appended with /accesses/request', async () => {
             const id = 'NextGenSearchPages-id-to-request';
 
-            nextGenSearchPages.requestAccess(id);
+            await nextGenSearchPages.requestAccess(id);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/accesses/request`);
@@ -329,19 +327,19 @@ describe('NextGenSearchPages', () => {
     });
 
     describe('manifest', () => {
-        it('makes a POST call (without a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+        it('makes a POST call (without a body) to the searchInterfaces accesses manifest url based on the interfaceId', async () => {
             const id = 'search-interface-id';
 
-            nextGenSearchPages.manifest(id);
+            await nextGenSearchPages.manifest(id);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/manifest`, undefined);
         });
 
-        it('makes a POST call (with a body) to the searchInterfaces accesses manifest url based on the interfaceId', () => {
+        it('makes a POST call (with a body) to the searchInterfaces accesses manifest url based on the interfaceId', async () => {
             const id = 'search-interface-id';
             const options: IManifestParameters = {pagePlaceholders: {results: 'myresults'}};
-            nextGenSearchPages.manifest(id, options);
+            await nextGenSearchPages.manifest(id, options);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${NextGenSearchPages.baseUrl}/${id}/manifest`, options);
