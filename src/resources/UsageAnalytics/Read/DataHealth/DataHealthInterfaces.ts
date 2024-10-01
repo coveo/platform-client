@@ -369,6 +369,7 @@ export interface DataHealthGetEventProblemsParams extends OrganizationParamParts
     /**
      * The event types to get event problems for.
      * By default, all event types will be considered.
+     * See https://docs.coveo.com/en/2949/analyze-usage-data/events
      */
     eventType?: string[];
     /**
@@ -392,6 +393,7 @@ export interface EventProblemsResponse extends PaginatedResponse {
 export interface EventProblemsResponseItem {
     /**
      * The type of events in this response item.
+     * See https://docs.coveo.com/en/2949/analyze-usage-data/events
      */
     eventType: string;
     /**
@@ -415,7 +417,7 @@ export interface EventProblemsResponseItem {
      */
     validationErrors: ValidationErrors[];
     /**
-     * Events sampled from the problematic events.
+     * A list of sample events that have the validation problems.
      */
     sampleEvents: string[];
     /**
