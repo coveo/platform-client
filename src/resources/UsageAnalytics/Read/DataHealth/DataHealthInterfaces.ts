@@ -407,7 +407,7 @@ export interface EventProblemsResponseItem {
      */
     failedEvents: number;
     /**
-     * Number of total events.
+     * The total number of failed events.
      */
     totalEvents: number;
     /**
