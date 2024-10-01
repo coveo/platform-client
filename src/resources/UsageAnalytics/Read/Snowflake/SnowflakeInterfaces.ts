@@ -22,7 +22,13 @@ export interface SnowflakeUserModel {
 }
 
 export interface ReactivateUserParams {
-    daysToExpiry: number;
+    daysToExpiry?: number;
+}
+
+export interface ReactivateUserModel {
+    name: string;
+    email: string;
+    daysToExpiry?: number;
 }
 
 export interface SnowflakeNetworkPolicyModel {
