@@ -95,7 +95,15 @@ export interface ApiKeyModel extends GranularResource {
     /**
      * The ID of the template to which the API key is bound.
      */
-     apiKeyTemplateId?: string
+     apiKeyTemplateId?: string;
+     /**
+      * The date of activation of the API key.
+      */
+     activationDate?: number;
+     /**
+      * The date the API key has been disabled.
+      */
+     disabledDate?: number
 }
 
 export interface CreateApiKeyOptions {
