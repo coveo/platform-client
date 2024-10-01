@@ -1170,7 +1170,7 @@ export enum FeedbackConsumerType {
 }
 
 export enum ApiKeyStatus {
-    ENABLED='EXPIRED',
+    ENABLED='ENABLED',
     DISABLED='DISABLED',
     DISABLED_FOR_INACTIVITY='DISABLED_FOR_INACTIVITY',
     EXPIRED='EXPIRED',
