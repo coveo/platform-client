@@ -1066,7 +1066,7 @@ export enum ExportStatus {
     expired = 'EXPIRED',
 }
 
-export enum ExportTablesType {
+export enum ExportTables {
     searches = 'SEARCHES',
     clicks = 'CLICKS',
     customEvents = 'CUSTOM_EVENTS',
@@ -1167,4 +1167,13 @@ export enum ProductsSortByType {
 
 export enum FeedbackConsumerType {
     SOURCE_MANAGEMENT_IMPROVEMENTS = 'SOURCE_MANAGEMENT_IMPROVEMENTS',
+}
+
+export enum ApiKeyStatus {
+    ENABLED='ENABLED',
+    DISABLED='DISABLED',
+    DISABLED_FOR_INACTIVITY='DISABLED_FOR_INACTIVITY',
+    EXPIRED='EXPIRED',
+    SOON_TO_BE_EXPIRED='SOON_TO_BE_EXPIRED',
+    SOON_TO_BE_DISABLED='SOON_TO_BE_DISABLED'
 }
