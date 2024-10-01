@@ -16,6 +16,8 @@ import {
     DataHealthListEventsResponse,
     DataHealthListFacetsResponse,
     DataHealthListFacetValueParams,
+    EventProblemsResponse,
+    DataHealthGetEventProblemsParams,
 } from './DataHealthInterfaces.js';
 
 export default class DataHealth extends ReadServiceResource {
@@ -81,6 +83,15 @@ export default class DataHealth extends ReadServiceResource {
     getTrackingIds(params: DataHealthGetTrackingIdsParams) {
         return this.api.get<DataHealthGetTrackingIdsResponse>(
             this.buildPathWithOrg(`${DataHealth.baseUrl}/facets`, {...params, facet: 'TRACKING_ID'}),
+        );
+    }
+
+    /**
+     * Get problems about events.
+     */
+    getEventsProblems(params: DataHealthGetEventProblemsParams) {
+        return this.api.get<EventProblemsResponse>(
+            this.buildPathWithOrg(`${DataHealth.baseUrl}/events/problems`, params),
         );
     }
 
