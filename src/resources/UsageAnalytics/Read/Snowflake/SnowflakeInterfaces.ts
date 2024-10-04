@@ -18,16 +18,30 @@ export interface SnowflakeUserModel {
      * The number of days that the user has access to the reader account.
      * Ranging from 0 (indefinitely) to 90 days.
      */
-    daysToExpiry?: number;
+    daysToExpiry?: number | null;
 }
 
 export interface ReactivateUserParams {
-    daysToExpiry?: number;
+    /**
+     * The number of days that the user has access to the reader account.
+     * Ranging from 0 (indefinitely) to 90 days.
+     */
+    daysToExpiry?: number | null;
 }
 
 export interface ReactivateUserModel {
+    /**
+     * The username of the user.
+     */
     name: string;
+    /**
+     * The email of the user.
+     */
     email: string;
+    /**
+     * The number of days that the user has access to the reader account.
+     * Ranging from 0 (indefinitely) to 90 days.
+     */
     daysToExpiry?: number | null;
 }
 
