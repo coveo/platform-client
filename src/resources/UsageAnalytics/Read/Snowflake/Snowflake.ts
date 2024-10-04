@@ -1,6 +1,7 @@
 import ReadServiceResource from '../ReadServiceResource.js';
 import {
     GetCreditUsageParams,
+    ReactivateUserModel,
     ReactivateUserParams,
     SnowflakeCreditUsageModel,
     SnowflakeNetworkPolicyModel,
@@ -63,7 +64,7 @@ export default class Snowflake extends ReadServiceResource {
      * @param params The number of days until the user's expiration date.
      */
     reactivateUser(snowflakeUser: string, params: ReactivateUserParams) {
-        return this.api.put<void>(
+        return this.api.put<ReactivateUserModel>(
             this.buildPathWithOrg(`${Snowflake.baseUrl}/users/${snowflakeUser}/expiration`),
             params,
         );
