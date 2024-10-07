@@ -6,7 +6,7 @@ import {
     EstimateVisitExportParams,
     ExportDownloadLink,
     ExportEstimateModel,
-    ExportModel,
+    ExportModelResponse,
     ExportScheduleModel,
     GenerateExportParams,
     GenerateExportWithBodyParams,
@@ -22,7 +22,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * Lists all exports.
      */
     list() {
-        return this.api.get<ExportModel[]>(this.buildPathWithOrg(Exports.baseUrl));
+        return this.api.get<ExportModelResponse[]>(this.buildPathWithOrg(Exports.baseUrl));
     }
 
     /**
@@ -31,7 +31,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * @param params The parameters to generate the export with.
      */
     generate(params: GenerateExportParams) {
-        return this.api.post<ExportModel>(this.buildPathWithOrg(Exports.baseUrl, params));
+        return this.api.post<ExportModelResponse>(this.buildPathWithOrg(Exports.baseUrl, params));
     }
 
     /**
@@ -40,7 +40,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * @param params The parameters to generate the export with, passed in the request body.
      */
     generateExportWithBody(params: GenerateExportWithBodyParams, args?: RequestInit) {
-        return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/create`), params, args);
+        return this.api.post<ExportModelResponse>(this.buildPathWithOrg(`${Exports.baseUrl}/create`), params, args);
     }
 
     /**
@@ -50,7 +50,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * @param redirect Whether to return a HTTP redirect to the actual file.
      */
     get(exportId: string, redirect = false) {
-        return this.api.get<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/${exportId}`, {redirect}));
+        return this.api.get<ExportModelResponse>(this.buildPathWithOrg(`${Exports.baseUrl}/${exportId}`, {redirect}));
     }
 
     /**
@@ -86,7 +86,7 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * @param params The parameters to generate the visit export with.
      */
     generateVisitExport(params: GenerateVisitExportParams) {
-        return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits`, params));
+        return this.api.post<ExportModelResponse>(this.buildPathWithOrg(`${Exports.baseUrl}/visits`, params));
     }
 
     /**
@@ -95,7 +95,11 @@ export default class Exports extends ReadServiceResource implements ReadServiceH
      * @param params The parameters to generate the visit export with, passed in the request body.
      */
     generateVisitExportWithBody(params: GenerateVisitExportWithBodyParams, args?: RequestInit) {
-        return this.api.post<ExportModel>(this.buildPathWithOrg(`${Exports.baseUrl}/visits/create`), params, args);
+        return this.api.post<ExportModelResponse>(
+            this.buildPathWithOrg(`${Exports.baseUrl}/visits/create`),
+            params,
+            args,
+        );
     }
 
     /**

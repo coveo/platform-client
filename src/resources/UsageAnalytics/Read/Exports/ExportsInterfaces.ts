@@ -6,7 +6,7 @@ import {
     TimeRangeParamParts,
 } from '../CommonParamParts.js';
 
-export interface ExportModel {
+export interface ExportModelResponse {
     id: string;
     author: string;
     downloadLink?: string;
