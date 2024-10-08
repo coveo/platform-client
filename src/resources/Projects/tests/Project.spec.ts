@@ -1,12 +1,6 @@
 import API from '../../../APICore.js';
 import Project from '../Project.js';
-import {
-    BaseProjectModel,
-    ProjectModel,
-    ProjectType,
-    UpdatedProjectAssociationsModel,
-    UpdatedProjectResourceAssociationsModel,
-} from '../ProjectInterfaces.js';
+import {BaseProjectModel, ProjectModel, ProjectType} from '../ProjectInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -135,24 +129,6 @@ describe('Project', () => {
             expect(api.post).toHaveBeenCalledWith(`${Project.baseUrl}/resources/ids?resourceType=SOURCE`, [
                 randomSourceId,
             ]);
-        });
-    });
-
-    describe('updateProjectResourceAssociation', () => {
-        it('should make a PUT call to the correct Project URL', () => {
-            const randomProjectResourceAssociation: UpdatedProjectResourceAssociationsModel = {
-                additions: {
-                    projectIds: ['random-project-id'],
-                    resourceIds: ['random-source-id'],
-                },
-                removals: {} as UpdatedProjectAssociationsModel,
-            };
-            project.updateProjectResourceAssociation('SOURCE', randomProjectResourceAssociation);
-            expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(
-                `${Project.baseUrl}/resources/modify/SOURCE`,
-                randomProjectResourceAssociation,
-            );
         });
     });
 });
