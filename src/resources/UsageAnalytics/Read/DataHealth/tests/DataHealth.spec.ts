@@ -9,6 +9,7 @@ import {
     DataHealthGetTrackingIdsParams,
     DataHealthListEventsParameters,
     DataHealthListFacetValueParams,
+    DataHealthGetEventProblemsParams,
 } from '../DataHealthInterfaces.js';
 
 jest.mock('../../../../../APICore.js');
@@ -123,6 +124,19 @@ describe('DataHealth', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${DataHealth.baseUrl}/facets?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z&facet=TRACKING_ID`,
+            );
+        });
+    });
+
+    describe('getEventsProblems', () => {
+        it('should make a GET call to the data health get events problems url', async () => {
+            const datahealthGetEventsProblemsParams: DataHealthGetEventProblemsParams = {
+                ...baseParams,
+            };
+            await dataHealth.getEventsProblems(datahealthGetEventsProblemsParams);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${DataHealth.baseUrl}/events/problems?org=someOrgId&from=1986-04-26T01%3A23%3A58.000Z&to=1986-04-27T02%3A32%3A15.000Z`,
             );
         });
     });

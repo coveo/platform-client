@@ -364,3 +364,80 @@ export interface DataHealthFailedInstanceEntry {
  * The scope of a datahealth rule.
  */
 type DataHealthRuleScope = 'EVENT' | 'VISIT';
+
+export interface DataHealthGetEventProblemsParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
+    /**
+     * The event types to get event problems for.
+     * By default, all event types will be considered.
+     * See https://docs.coveo.com/en/2949/analyze-usage-data/events
+     */
+    eventType?: string[];
+    /**
+     * The search hubs to get event problems for.
+     * By default, all search hubs will be considered.
+     */
+    searchHub?: string[];
+    /**
+     * The tracking ID to get event problems for.
+     * By default, all tracking IDs will be considered.
+     */
+    trackingId?: string[];
+}
+export interface EventProblemsResponse extends PaginatedResponse {
+    /**
+     * The event problems that match the specified filters.
+     */
+    problems: EventProblemsResponseItem[];
+}
+
+export interface EventProblemsResponseItem {
+    /**
+     * The type of events in this response item.
+     * See https://docs.coveo.com/en/2949/analyze-usage-data/events
+     */
+    eventType: string;
+    /**
+     * The tracking ID the events in this response item were logged with.
+     */
+    trackingId: string;
+    /**
+     * The search hub the events in this response item were logged from.
+     */
+    searchHub: string;
+    /**
+     * The number of failed events.
+     */
+    failedEvents: number;
+    /**
+     * The total number of failed events.
+     */
+    totalEvents: number;
+    /**
+     * The validation errors.
+     */
+    validationErrors: ValidationErrors[];
+    /**
+     * A list of sample events that have the validation problems.
+     */
+    sampleEvents: string[];
+    /**
+     * Timestamps from the sample events.
+     */
+    sampleEventsTimestamps: string[];
+}
+
+interface ValidationErrors {
+    /**
+     * The validation error code.
+     */
+    code: string;
+    /**
+     * The validation error path.
+     * See https://docs.coveo.com/en/nbde0312/analyze-usage-data/event-errors
+     */
+    path: string;
+    /**
+     * The validation error message.
+     */
+    message: string;
+}

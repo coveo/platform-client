@@ -8,7 +8,6 @@ import {
     BaseProjectModel,
     ProjectResourceType,
     ListAssociatedProjectsModel,
-    UpdatedProjectResourceAssociationsModel,
 } from './ProjectInterfaces.js';
 
 export default class Project extends Resource {
@@ -100,22 +99,6 @@ export default class Project extends Resource {
         return this.api.post<ListAssociatedProjectsModel[]>(
             this.buildPath(`${Project.baseUrl}/resources/ids`, {resourceType}),
             resourceIds,
-        );
-    }
-
-    /**
-     * Modifies project-resource associations and returns a list of updated projects.
-     * @param resourceType
-     * @param updatedProjectResourceAssociation
-     * @returns Returns a list of updated projects.
-     */
-    updateProjectResourceAssociation(
-        resourceType: ProjectResourceType,
-        updatedProjectResourceAssociation: UpdatedProjectResourceAssociationsModel,
-    ): Promise<ProjectModel[]> {
-        return this.api.put<ProjectModel[]>(
-            this.buildPath(`${Project.baseUrl}/resources/modify/${resourceType}`),
-            updatedProjectResourceAssociation,
         );
     }
 }
