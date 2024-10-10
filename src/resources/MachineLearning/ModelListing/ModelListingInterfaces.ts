@@ -1,3 +1,5 @@
+import {MLModelStatus} from '../MachineLearningInterfaces.js';
+
 export interface MLListingModel {
     /**
      * The model display name in the Coveo Administration console.
@@ -51,16 +53,7 @@ export interface MLModelStatusInfo {
      * The status of the model.
      * @Example `ACTIVE`
      */
-    modelStatus:
-        | 'ARCHIVED'
-        | 'SOON_TO_BE_ARCHIVED'
-        | 'BUILD_IN_PROGRESS'
-        | 'ERROR'
-        | 'ERROR_INTERNAL'
-        | 'LIMITED'
-        | 'NOT_ASSOCIATED'
-        | 'ACTIVE'
-        | 'INACTIVE';
+    modelStatus: MLModelStatus;
     /**
      * The remaining days until the model is archived.
      * @Example `4`

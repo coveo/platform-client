@@ -103,3 +103,15 @@ export interface MLModelCreated extends New<MLModel> {
     startTime?: number;
     resourceId?: string;
 }
+
+export enum MLModelStatus {
+    ARCHIVED = 'ARCHIVED',
+    SOON_TO_BE_ARCHIVED = 'SOON_TO_BE_ARCHIVED',
+    BUILD_IN_PROGRESS = 'BUILD_IN_PROGRESS',
+    ERROR = 'ERROR',
+    ERROR_INTERNAL = 'ERROR_INTERNAL',
+    LIMITED = 'LIMITED',
+    NOT_ASSOCIATED = 'NOT_ASSOCIATED',
+    ACTIVE = 'ACTIVE',
+    INACTIVE = 'INACTIVE',
+}
