@@ -1,4 +1,4 @@
-import {ModelStatus} from '../MachineLearningInterfaces.js';
+import {MLModelStatus} from '../MachineLearningInterfaces.js';
 
 export interface MLListingModel {
     /**
@@ -61,7 +61,7 @@ export interface MLModelStatusInfo {
      *
      * @Example `ACTIVE`
      */
-    modelStatus: ModelStatus;
+    modelStatus: MLModelStatus;
     /**
      * The remaining days until the model is archived.
      *

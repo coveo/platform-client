@@ -102,7 +102,7 @@ export interface MLModelCreated extends New<MLModel> {
     resourceId?: string;
 }
 
-export enum ModelStatus {
+export enum MLModelStatus {
     ARCHIVED = 'ARCHIVED',
     SOON_TO_BE_ARCHIVED = 'SOON_TO_BE_ARCHIVED',
     BUILD_IN_PROGRESS = 'BUILD_IN_PROGRESS',
