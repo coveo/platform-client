@@ -4,12 +4,10 @@ import {} from '../ModifierTemplateInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('OrganizationDefinitions', () => {
     let modifierTemplates: ModifierTemplates;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,8 +15,8 @@ describe('OrganizationDefinitions', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Modifier Templates url listing all existing templates', () => {
-            modifierTemplates.list();
+        it('should make a GET call to the Modifier Templates url listing all existing templates', async () => {
+            await modifierTemplates.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ModifierTemplates.baseUrl);
@@ -26,8 +24,8 @@ describe('OrganizationDefinitions', () => {
     });
 
     describe('listAvailableStatements', () => {
-        it('should make a GET call to the Modifier Templates url listing all possible statements', () => {
-            modifierTemplates.listPossibleStatements();
+        it('should make a GET call to the Modifier Templates url listing all possible statements', async () => {
+            await modifierTemplates.listPossibleStatements();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ModifierTemplates.baseUrl}/statementdetails`);

@@ -13,5 +13,6 @@
         "importHelpers": true,
         "outDir": "dist",
         "strictNullChecks": true
-    }
+    },
+    "exclude": ["*.cjs"]
 }

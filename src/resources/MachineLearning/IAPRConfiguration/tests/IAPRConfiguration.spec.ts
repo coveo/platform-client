@@ -1,15 +1,13 @@
-import API from '../../../../APICore';
-import IAPRConfiguration from '../IAPRConfiguration';
-import {IAPRConfigurationModel} from '../IAPRConfigurationInterfaces';
+import API from '../../../../APICore.js';
+import IAPRConfiguration from '../IAPRConfiguration.js';
+import {IAPRConfigurationModel} from '../IAPRConfigurationInterfaces.js';
 
 jest.mock('../../../../APICore');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('IAPRConfiguration', () => {
     let iaprConfig: IAPRConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,13 +15,13 @@ describe('IAPRConfiguration', () => {
     });
 
     describe('createPQSModel', () => {
-        it('should make a POST call to the specific IAPRConfiguration url', () => {
+        it('should make a POST call to the specific IAPRConfiguration url', async () => {
             const model: IAPRConfigurationModel = {
                 modelDisplayName: 'kiki soudane',
                 catalogId: 'catalog_mock',
                 trackingIds: ['sport'],
             };
-            iaprConfig.create(model);
+            await iaprConfig.create(model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${IAPRConfiguration.baseUrl}/model`, model);
         });

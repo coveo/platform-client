@@ -11,12 +11,10 @@ import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration/Us
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('MachineLearning', () => {
     let ml: MachineLearning;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -24,7 +22,7 @@ describe('MachineLearning', () => {
     });
 
     describe('register', () => {
-        it('should make a POST call to the specific MachineLearning url', () => {
+        it('should make a POST call to the specific MachineLearning url', async () => {
             const registration: RegistrationModel = {
                 engineId: 'OvO',
                 modelName: 'super model',
@@ -33,7 +31,7 @@ describe('MachineLearning', () => {
                 intervalUnit: IntervalUnit.DAY,
             };
 
-            ml.register(registration);
+            await ml.register(registration);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${MachineLearning.baseUrl}/model`, registration);
         });

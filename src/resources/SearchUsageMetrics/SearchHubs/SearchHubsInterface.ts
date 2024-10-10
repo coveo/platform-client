@@ -36,21 +36,18 @@ export interface ListSearchHubsParams extends Paginated {
 
     /**
      * The maximum number of search hubs to list per page
-     *
      * @default `100`
      */
     perPage?: number;
 
     /**
      * The 0-based index number of page to list
-     *
      * @default `0`
      */
     page?: number;
 
     /**
      * The minimum queries a search hub must have to be listed
-     *
      * @default '1'
      */
     minimumQueries?: string;

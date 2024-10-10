@@ -3,12 +3,10 @@ import Links from '../Links.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Links', () => {
     let links: Links;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,8 +14,8 @@ describe('Links', () => {
     });
 
     describe('delete all links', () => {
-        it('should make a DELETE call to the specific links url', () => {
-            links.deleteAll();
+        it('should make a DELETE call to the specific links url', async () => {
+            await links.deleteAll();
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Links.baseUrl}`);

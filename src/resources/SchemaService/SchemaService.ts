@@ -1,20 +1,20 @@
 import API from '../../APICore.js';
-import Ressource from '../Resource.js';
 import {New} from '../BaseInterfaces.js';
+import {SourceType} from '../Enums.js';
+import Ressource from '../Resource.js';
 import {
-    SchemaEntities,
-    SchemaServiceQueryParams,
-    SchemaServiceSource,
     CreateSchemaSourceModel,
     CreateSchemaSourceOptions,
-    ObjectsToGet,
-    SchemaEntityFields,
-    SimpleSchemaEntity,
     GetEntitiesQueryParams,
     GetEntityQueryParams,
+    ObjectsToGet,
+    SchemaEntities,
+    SchemaEntityFields,
+    SchemaServiceQueryParams,
+    SchemaServiceSource,
+    SimpleSchemaEntity,
     SlackTokenValidationResult,
 } from './SchemaServiceInterfaces.js';
-import {SourceType} from '../Enums.js';
 
 export default class SchemaService extends Ressource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/schema/sources`;
@@ -29,11 +29,9 @@ export default class SchemaService extends Ressource {
     /**
      * Retrieve entities from the targeted instance
      * (can be matches of a given query)
-     *
-     * @param {SourceType} sourceType
-     * @param {GetEntitiesQueryParams} [parameters]
-     * @return {SchemaEntities} schemaEntities
-     * @memberof SchemaService
+     * @param sourceType
+     * @param [parameters]
+     * @returns schemaEntities
      */
     getEntities(sourceType: SourceType, parameters?: GetEntitiesQueryParams) {
         return this.api.get<SchemaEntities>(
@@ -43,12 +41,10 @@ export default class SchemaService extends Ressource {
 
     /**
      * Retrieve the entity of matching ID from the targeted instance
-     *
-     * @param {SourceType} sourceType
-     * @param {string} entityId
-     * @param {GetEntityQueryParams} [parameters]
-     * @return {SimpleSchemaEntity} simpleSchemaEntity
-     * @memberof SchemaService
+     * @param sourceType
+     * @param entityId
+     * @param [parameters]
+     * @returns simpleSchemaEntity
      */
     getEntity(sourceType: SourceType, entityId: string, parameters?: GetEntityQueryParams) {
         return this.api.get<SimpleSchemaEntity>(
@@ -58,12 +54,10 @@ export default class SchemaService extends Ressource {
 
     /**
      * Retrieve the fields of the given entity from the targeted instance
-     *
-     * @param {SourceType} sourceType
-     * @param {string} entityId
-     * @param {SchemaServiceQueryParams} [parameters]
-     * @return {SchemaEntityFields} schemaEntityFields
-     * @memberof SchemaService
+     * @param sourceType
+     * @param entityId
+     * @param [parameters]
+     * @returns schemaEntityFields
      */
     getFields(sourceType: SourceType, entityId: string, parameters?: SchemaServiceQueryParams) {
         return this.api.get<SchemaEntityFields>(
@@ -88,6 +82,7 @@ export default class SchemaService extends Ressource {
     }
 
     translateToSpecificObjectsToGet(sourceType: SourceType, genericObjectsToGet: ObjectsToGet) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return this.api.post<any>(`${SchemaService.baseUrl}/${sourceType}/translate/specific`, genericObjectsToGet);
     }
 
@@ -96,13 +91,14 @@ export default class SchemaService extends Ressource {
         genericObjectsToGet: ObjectsToGet,
         parameters?: SchemaServiceQueryParams,
     ) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return this.api.post<any>(
             this.buildPath(`${SchemaService.baseUrl}/${sourceType}/translate/specificWithFields`, parameters),
             genericObjectsToGet,
         );
     }
 
-    translateToGenericObjectsToGet(sourceType: SourceType, specificObjectsToGet: any) {
+    translateToGenericObjectsToGet(sourceType: SourceType, specificObjectsToGet: Record<string, unknown>) {
         return this.api.post<ObjectsToGet>(
             `${SchemaService.baseUrl}/${sourceType}/translate/generic`,
             specificObjectsToGet,
@@ -111,10 +107,8 @@ export default class SchemaService extends Ressource {
 
     /**
      * Retrieve the default objectsToGet of the given sourceType
-     *
-     * @param {string} sourceType
-     * @return {ObjectsToGet} ObjectsToGet
-     * @memberof SchemaService
+     * @param sourceType
+     * @returns ObjectsToGet
      */
     getDefaultObjectsToGet(sourceType: string) {
         return this.api.get<ObjectsToGet>(`${SchemaService.baseUrl}/${sourceType}/defaultObjectsToGet`);

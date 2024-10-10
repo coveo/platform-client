@@ -117,7 +117,6 @@ export interface CreateCustomDimensionParams extends OrganizationParamParts {
     event?: string[];
     /**
      * Whether to update the custom dimension in past events.
-     *
      * @deprecated
      */
     updatePastEvents?: boolean;

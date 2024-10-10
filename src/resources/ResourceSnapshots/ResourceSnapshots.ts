@@ -46,6 +46,8 @@ export default class ResourceSnapshots extends Resource {
 
     /**
      * Shows whether the authenticated user has the specified access level (i.e., read or write) to the content of the target snapshot.
+     * @param snapshotId
+     * @param options
      */
     validateAccess(snapshotId: string, options: ValidateAccessOptions) {
         return this.api.get<SnapshotAccessModel>(
@@ -55,10 +57,9 @@ export default class ResourceSnapshots extends Resource {
 
     /**
      * Retrieves a ZIP file holding the content of the target snapshot, in the target format.
-     *
-     * @param {string} snapshotId The unique identifier of the target snapshot.
-     * @param {ExportSnapshotContentOptions} [options]
-     * @returns {Promise<Blob>} A newly created Blob object which contains the zipped snapshot
+     * @param snapshotId The unique identifier of the target snapshot.
+     * @param [options]
+     * @returns A newly created Blob object which contains the zipped snapshot
      */
     export(snapshotId: string, options?: ExportSnapshotContentOptions): Promise<Blob> {
         return this.api.get(this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/content`, options), {
@@ -74,9 +75,8 @@ export default class ResourceSnapshots extends Resource {
 
     /**
      * Creates a snapshot from a file containing the configuration.
-     *
-     * @param {File} file The file containing the configuration.
-     * @param {CreateFromFileOptions} options
+     * @param file The file containing the configuration.
+     * @param options
      */
     createFromFile(file: File, options?: CreateFromFileOptions) {
         const computedOptions = {
@@ -185,10 +185,9 @@ export default class ResourceSnapshots extends Resource {
     /**
      * @description Shows the diff report for the target snapshot and dry-run report
      * @experimental
-     *
-     * @param {string} snapshotId - The unique identifier of the target snapshot.
-     * @param {string} relativeReportId - The unique identifier of the dry-run operation report associated with the target diff report.
-     * @param {(number|undefined)} [numberOfLinesMax=undefined] - Maximum number of lines before the diff is downloaded to a file.
+     * @param snapshotId - The unique identifier of the target snapshot.
+     * @param relativeReportId - The unique identifier of the dry-run operation report associated with the target diff report.
+     * @param [numberOfLinesMax] - Maximum number of lines before the diff is downloaded to a file.
      */
     diff(snapshotId: string, relativeReportId: string, numberOfLinesMax?: number) {
         return this.api.get<SnapshotDiffModel>(

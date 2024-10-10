@@ -6,12 +6,10 @@ import {ProductsRequestModel} from '../ProductInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Product', () => {
     let products: Products;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -19,7 +17,7 @@ describe('Product', () => {
     });
 
     describe('getProducts', () => {
-        it('should make a POST call to to retrieve filtered products', () => {
+        it('should make a POST call to to retrieve filtered products', async () => {
             const query: New<ProductsRequestModel> = {
                 additionalFields: ['brand', 'store'],
                 advancedFiltersModel: {
@@ -64,18 +62,18 @@ describe('Product', () => {
                 },
                 url: 'https://fashion.coveodemo.com/browse/men/hats',
             };
-            products.get(query);
+            await products.get(query);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing?refreshCache=false`, query);
         });
     });
 
     describe('getProducts while force refreshing the product listings cache', () => {
-        it('should make a POST call to to retrieve filtered products', () => {
+        it('should make a POST call to to retrieve filtered products', async () => {
             const query: New<ProductsRequestModel> = {
                 url: 'https://fashion.coveodemo.com/browse/men/hats',
             };
-            products.get(query, true);
+            await products.get(query, true);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Products.baseUrl}/listing?refreshCache=true`, query);
         });

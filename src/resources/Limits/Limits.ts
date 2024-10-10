@@ -32,7 +32,6 @@ export default class Limits extends Resource {
 
     /**
      * Shows the status of a specific limit in an organization
-     *
      * @param sectionName The name of the target license section
      * @param limitKey The unique identifier of the target limit status to show
      */

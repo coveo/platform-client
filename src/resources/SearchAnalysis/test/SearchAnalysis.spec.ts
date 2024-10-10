@@ -3,12 +3,10 @@ import SearchAnalysis from '../SearchAnalysis.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SearchAnalysis', () => {
     let searchAnalysis: SearchAnalysis;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,8 +14,8 @@ describe('SearchAnalysis', () => {
     });
 
     describe('replay', () => {
-        it('should make a replay call to the searchAPI with a partially defined date range', () => {
-            searchAnalysis.replay('some-search-id', '2023-01-01');
+        it('should make a replay call to the searchAPI with a partially defined date range', async () => {
+            await searchAnalysis.replay('some-search-id', '2023-01-01');
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,
@@ -25,8 +23,8 @@ describe('SearchAnalysis', () => {
             );
         });
 
-        it('should make a replay call to the searchAPI with a complete defined date range', () => {
-            searchAnalysis.replay('some-search-id', '2023-01-01', '2023-02-01');
+        it('should make a replay call to the searchAPI with a complete defined date range', async () => {
+            await searchAnalysis.replay('some-search-id', '2023-01-01', '2023-02-01');
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SearchAnalysis.baseUrl}/inspect/replay?organizationId=${API.orgPlaceholder}`,

@@ -34,13 +34,16 @@ export interface ModelInformationART {
     candidateExamples: Record<string, string[]>;
     languages: {
         [languageKey: string]: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             contextKeysToDocuments: any;
             queries: number;
             documents: number;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             filters: any;
             words: number;
             stopwords: number;
             docPerFilters: Record<string, number>;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             [otherKeys: string]: any;
         };
     };
@@ -59,6 +62,7 @@ export interface ModelInformationART {
         clicksDecayParams: Record<string, number>;
     };
     featureSelectLog: FeatureSelectLog;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 
@@ -111,8 +115,11 @@ export interface ModelInformationER {
     primaryEventType: string;
     params: {
         languages: string[];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         eventConfigs: any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         eventsToCombineMapping: any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         normalizeUrl: any;
         querySplit: {
             maxNgram: number;
@@ -124,7 +131,9 @@ export interface ModelInformationER {
     };
     contentIDKeys: string[];
     primaryEventGroupName: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     eventGroupValuesExamplesInHistory: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     indicatorsMap: any;
     metaInfo: MetaInfo;
     modelBuildingStats: {
@@ -141,20 +150,29 @@ export interface ModelInformationER {
     primaryEventName: string;
     'Recommendations per language: ': Record<string, number>;
     featureSelectLog: FeatureSelectLog;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 
 export interface ModelInformationPR {
     metaInfo: MetaInfo;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     itemBasedNamesAndNumOfRecordedItems: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     itemBasedNamesWithCandidateItems: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     numOfEventsPerEventType: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     userBasedCandidates: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     userBasedNumOfItems: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     userBasedNumOfUsers: any;
     contentIDKeys: string[];
     parentIDKeys: [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     modelBuildingStats?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     languages?: any;
 }
 
@@ -194,6 +212,7 @@ export interface ModelInformationQS {
     topCooccurrencesExamples: Record<string, string[]>;
     stopwords: Record<string, number>;
     featureSelectLog: FeatureSelectLog;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

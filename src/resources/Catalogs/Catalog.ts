@@ -33,6 +33,8 @@ export default class Catalog extends Resource {
     }
 
     /**
+     * @param catalogId
+     * @param options
      * @deprecated getFields(catalogId: string, options?: CatalogFieldsOptions) is kept for backward compatibility, you should now use `getFieldStats(catalogId: string, options?: CatalogFieldStatsOptions)`.
      */
     getFields(catalogId: string, options?: CatalogFieldsOptions) {
@@ -41,7 +43,6 @@ export default class Catalog extends Resource {
         );
     }
 
-    /* eslint-disable @typescript-eslint/unified-signatures */
     update(catalog: CreateCatalogModel);
     /**
      * @deprecated `update(catalog: CatalogModel) is kept for backward compatibility, you should now use `update(catalog: CreateCatalogModel)`.
@@ -50,7 +51,6 @@ export default class Catalog extends Resource {
     update(catalog: CreateCatalogModel | CatalogModel) {
         return this.api.put<CreateCatalogModel>(`${Catalog.baseUrl}/${catalog.id}`, catalog);
     }
-    /* eslint-enable @typescript-eslint/unified-signatures */
 
     getFieldsSuggestions(query: FieldsSuggestionsQueryModel) {
         return this.api.post<FieldsSuggestionsModel>(`${Catalog.baseUrl}/fieldsSuggestions`, query);

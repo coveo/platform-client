@@ -5,12 +5,10 @@ import {CreateCustomDimensionParams, CustomDimensionModel} from '../DimensionsIn
 
 jest.mock('../../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Dimensions', () => {
     let dimensions: Dimensions;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,8 +16,8 @@ describe('Dimensions', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Dimensions base url', () => {
-            dimensions.list();
+        it('should make a GET call to the Dimensions base url', async () => {
+            await dimensions.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Dimensions.baseUrl);
@@ -27,8 +25,8 @@ describe('Dimensions', () => {
     });
 
     describe('listExportableDimensions', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.listExportableDimensions();
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.listExportableDimensions();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/exportables`);
@@ -36,9 +34,9 @@ describe('Dimensions', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
+        it('should make a GET call to the specific Dimensions url', async () => {
             const apiName = '🌞';
-            dimensions.get(apiName);
+            await dimensions.get(apiName);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/${apiName}`);
@@ -46,9 +44,9 @@ describe('Dimensions', () => {
     });
 
     describe('getValues', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
+        it('should make a GET call to the specific Dimensions url', async () => {
             const dimension = '😎';
-            dimensions.getValues(dimension);
+            await dimensions.getValues(dimension);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/${dimension}/values`);
@@ -56,8 +54,8 @@ describe('Dimensions', () => {
     });
 
     describe('listCustomDimensions', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.listCustomDimensions(true);
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.listCustomDimensions(true);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom?includeOnlyParents=true`);
@@ -65,7 +63,7 @@ describe('Dimensions', () => {
     });
 
     describe('createCustomDimension', () => {
-        it('should make a POST call to the specific Dimensions url', () => {
+        it('should make a POST call to the specific Dimensions url', async () => {
             const model: CustomDimensionModel = {
                 displayName: '🆒',
                 type: DimensionType.TEXT,
@@ -75,7 +73,7 @@ describe('Dimensions', () => {
                 name: 'new-dimension',
             };
 
-            dimensions.createCustomDimension(model, params);
+            await dimensions.createCustomDimension(model, params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom?name=${params.name}`, model);
@@ -83,9 +81,9 @@ describe('Dimensions', () => {
     });
 
     describe('getCustomDimension', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
+        it('should make a GET call to the specific Dimensions url', async () => {
             const apiName = '🥵';
-            dimensions.getCustomDimension(apiName);
+            await dimensions.getCustomDimension(apiName);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/${apiName}`);
@@ -93,9 +91,9 @@ describe('Dimensions', () => {
     });
 
     describe('getCustomDimensionValues', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
+        it('should make a GET call to the specific Dimensions url', async () => {
             const dimension = '🕶️';
-            dimensions.getCustomDimensionValues(dimension);
+            await dimensions.getCustomDimensionValues(dimension);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/${dimension}/values`);
@@ -103,13 +101,13 @@ describe('Dimensions', () => {
     });
 
     describe('updateCustomDimension', () => {
-        it('should make a PUT call to the specific Dimensions url', () => {
+        it('should make a PUT call to the specific Dimensions url', async () => {
             const apiName = '🏖️';
             const model: CustomDimensionModel = {
                 displayName: '🦈',
                 type: DimensionType.TEXT,
             };
-            dimensions.updateCustomDimension(apiName, model);
+            await dimensions.updateCustomDimension(apiName, model);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -120,9 +118,9 @@ describe('Dimensions', () => {
     });
 
     describe('deleteCustomDimension', () => {
-        it('should make a DELETE call to the specific Dimensions url', () => {
+        it('should make a DELETE call to the specific Dimensions url', async () => {
             const apiName = '🌊';
-            dimensions.deleteCustomDimension(apiName);
+            await dimensions.deleteCustomDimension(apiName);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/${apiName}`);
@@ -130,8 +128,8 @@ describe('Dimensions', () => {
     });
 
     describe('getCustomDimensionStatus', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.getCustomDimensionStatus();
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.getCustomDimensionStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/status`);
@@ -139,8 +137,8 @@ describe('Dimensions', () => {
     });
 
     describe('checkCustomDimensionHealth', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.checkCustomDimensionHealth();
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.checkCustomDimensionHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/monitoring/health`);
@@ -148,9 +146,9 @@ describe('Dimensions', () => {
     });
 
     describe('listUncreatedDimensions', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
+        it('should make a GET call to the specific Dimensions url', async () => {
             const event: DimensionEventTypes = DimensionEventTypes.searches;
-            dimensions.listUncreatedDimensions(event);
+            await dimensions.listUncreatedDimensions(event);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/custom/${event}/suggestions`);
@@ -158,8 +156,8 @@ describe('Dimensions', () => {
     });
 
     describe('checkHealth', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.checkHealth();
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.checkHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/monitoring/health`);
@@ -167,8 +165,8 @@ describe('Dimensions', () => {
     });
 
     describe('checkStatus', () => {
-        it('should make a GET call to the specific Dimensions url', () => {
-            dimensions.checkStatus();
+        it('should make a GET call to the specific Dimensions url', async () => {
+            await dimensions.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Dimensions.baseUrl}/status`);

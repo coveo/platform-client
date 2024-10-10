@@ -18,18 +18,18 @@ export enum InsightPanelResultTemplateLayout {
     Thumbnail = 'thumbnail',
 }
 
-interface InsightPanelOption extends HostedInterfaceOption {}
+type InsightPanelOption = HostedInterfaceOption;
 
 interface InsightPanelResultTagOptions {
     enabled: boolean;
     color: string;
 }
 
-export interface InsightPanelResultTemplateBadge extends HostedInterfaceResultTemplateBadge {}
+export type InsightPanelResultTemplateBadge = HostedInterfaceResultTemplateBadge;
 
-export interface InsightPanelCondition extends HostedInterfaceCondition {}
+export type InsightPanelCondition = HostedInterfaceCondition;
 
-export interface InsightPanelResultTemplateDetail extends HostedInterfaceResultTemplateDetail {}
+export type InsightPanelResultTemplateDetail = HostedInterfaceResultTemplateDetail;
 
 export interface InsightPanelResultActions {
     /**
@@ -103,7 +103,7 @@ export interface InsightPanelResultTemplate extends HostedInterfaceResultTemplat
     tags: InsightPanelResultTags;
 }
 
-export interface InsightPanelFacet extends HostedInterfaceFacet {}
+export type InsightPanelFacet = HostedInterfaceFacet;
 
 export interface InsightPanelTab extends HostedInterfaceTab {
     /**
@@ -186,7 +186,7 @@ export interface InsightPanelInterfaceConfiguration extends HostedInterfaceConfi
     publishedVersion?: number;
 }
 
-export interface IListInsightPanelInterfacesParameters extends ListHostedInterfacesParams {}
+export type IListInsightPanelInterfacesParameters = ListHostedInterfacesParams;
 
 export interface InsightPanelInterfaceConfigurationUpdateParams
     extends Omit<InsightPanelInterfaceConfiguration, 'settings' | 'publishedVersion'>,
@@ -197,4 +197,4 @@ export interface InsightPanelInterfaceConfigurationUpdateParams
     settings: WithOptional<InsightPanelSettings, 'smartSnippets' | 'disableDynamicNavigation'>;
 }
 
-export interface InsightPanelInterfaceVersion extends HostedInterfaceVersion<InsightPanelInterfaceConfiguration> {}
+export type InsightPanelInterfaceVersion = HostedInterfaceVersion<InsightPanelInterfaceConfiguration>;

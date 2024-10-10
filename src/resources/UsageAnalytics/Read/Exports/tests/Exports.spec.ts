@@ -13,12 +13,10 @@ import {
 
 jest.mock('../../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Exports', () => {
     let exports: Exports;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();

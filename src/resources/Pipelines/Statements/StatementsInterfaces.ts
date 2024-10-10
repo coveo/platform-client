@@ -19,6 +19,7 @@ export interface StatementModel {
      * Whether the underlying Coveo Machine Learning model is ready. This property only has a meaning with recommendation, topClicks, and querySuggest statements.
      */
     ready: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     detailed: any;
     /**
      * @deprecated this property is exposed for backward compatibility reasons.

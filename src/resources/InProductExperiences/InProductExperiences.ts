@@ -53,6 +53,7 @@ export default class InProductExperiences extends Resource {
     /**
      * `delete` is a helper method based on observed behavior of the Coveo UI where deletion logic calls out to the
      * Search Pages endpoint to delete an IPX.
+     * @param ipxId
      */
     delete(ipxId: string) {
         return this.searchPages.delete(ipxId);

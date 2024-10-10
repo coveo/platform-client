@@ -5,8 +5,6 @@ import {EditSubscriptionModel} from '../SubscriptionInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 const subscriptionModelMock: EditSubscriptionModel = {
     description: '🍇 => 😠 => 💩',
     enabled: true,
@@ -24,8 +22,8 @@ const subscriptionModelMock: EditSubscriptionModel = {
 
 describe('Subscriptions', () => {
     let subscription: Subscription;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -33,40 +31,40 @@ describe('Subscriptions', () => {
     });
 
     describe('list', () => {
-        it('should make a get call to the specific subscription url', () => {
-            subscription.list();
+        it('should make a get call to the specific subscription url', async () => {
+            await subscription.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Subscription.getBaseUrl(api.organizationId));
         });
     });
 
     describe('listCurrent', () => {
-        it('should make a get call to the specific subscription url', () => {
-            subscription.listCurrent();
+        it('should make a get call to the specific subscription url', async () => {
+            await subscription.listCurrent();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Subscription.getBaseUrl(api.organizationId)}/me`);
         });
     });
 
     describe('show', () => {
-        it('should make a get call to the specific subscription url', () => {
+        it('should make a get call to the specific subscription url', async () => {
             const subscriptionId = '🦀';
-            subscription.show(subscriptionId);
+            await subscription.show(subscriptionId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}`);
         });
     });
     describe('showCurrent', () => {
-        it('should make a get call to the specific subscription url', () => {
+        it('should make a get call to the specific subscription url', async () => {
             const subscriptionId = '🍞';
-            subscription.showCurrent(subscriptionId);
+            await subscription.showCurrent(subscriptionId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`);
         });
     });
     describe('create', () => {
-        it('should make a POST call to the specific subscription url', () => {
-            subscription.create(subscriptionModelMock);
+        it('should make a POST call to the specific subscription url', async () => {
+            await subscription.create(subscriptionModelMock);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}`,
@@ -75,8 +73,8 @@ describe('Subscriptions', () => {
         });
     });
     describe('createCurrent', () => {
-        it('should make a POST call to the specific subscription url', () => {
-            subscription.createCurrent(subscriptionModelMock);
+        it('should make a POST call to the specific subscription url', async () => {
+            await subscription.createCurrent(subscriptionModelMock);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me`,
@@ -85,9 +83,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('edit', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '🥔';
-            subscription.edit(subscriptionId, subscriptionModelMock);
+            await subscription.edit(subscriptionId, subscriptionModelMock);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}`,
@@ -96,9 +94,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('editCurrent', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '🍔';
-            subscription.editCurrent(subscriptionId, subscriptionModelMock);
+            await subscription.editCurrent(subscriptionId, subscriptionModelMock);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`,
@@ -107,17 +105,17 @@ describe('Subscriptions', () => {
         });
     });
     describe('delete', () => {
-        it('should make a DELETE call to the specific subscription url', () => {
+        it('should make a DELETE call to the specific subscription url', async () => {
             const subscriptionId = '🍟';
-            subscription.delete(subscriptionId);
+            await subscription.delete(subscriptionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}`);
         });
     });
     describe('deleteCurrent', () => {
-        it('should make a DELETE call to the specific subscription url', () => {
+        it('should make a DELETE call to the specific subscription url', async () => {
             const subscriptionId = '🍟';
-            subscription.deleteCurrent(subscriptionId);
+            await subscription.deleteCurrent(subscriptionId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}`,
@@ -125,9 +123,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('enable', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.enable(subscriptionId);
+            await subscription.enable(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/enable`,
@@ -135,9 +133,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('enableCurrent', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.enableCurrent(subscriptionId);
+            await subscription.enableCurrent(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/enable`,
@@ -145,9 +143,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('disable', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.disable(subscriptionId);
+            await subscription.disable(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/disable`,
@@ -155,9 +153,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('disableCurrent', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.disableCurrent(subscriptionId);
+            await subscription.disableCurrent(subscriptionId);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/disable`,
@@ -165,9 +163,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('test', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.test(subscriptionId);
+            await subscription.test(subscriptionId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/${subscriptionId}/test`,
@@ -175,9 +173,9 @@ describe('Subscriptions', () => {
         });
     });
     describe('testCurrent', () => {
-        it('should make a PUT call to the specific subscription url', () => {
+        it('should make a PUT call to the specific subscription url', async () => {
             const subscriptionId = '';
-            subscription.testCurrent(subscriptionId);
+            await subscription.testCurrent(subscriptionId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${Subscription.getBaseUrl(api.organizationId)}/me/${subscriptionId}/test`,

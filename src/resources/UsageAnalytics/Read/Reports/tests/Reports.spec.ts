@@ -5,12 +5,10 @@ import {CreateReportModel, ReportAccessRequest, ReportAccessType, UpdateReportMo
 
 jest.mock('../../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Reports', () => {
     let reports: Reports;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const testReportId = 'test-report-id';
     const testTemplateId = 'test-template-id';
 
@@ -20,8 +18,8 @@ describe('Reports', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Reports base url', () => {
-            reports.list();
+        it('should make a GET call to the Reports base url', async () => {
+            await reports.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Reports.baseUrl);
@@ -29,8 +27,8 @@ describe('Reports', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the Reports base url for the specific ID', () => {
-            reports.get(testReportId);
+        it('should make a GET call to the Reports base url for the specific ID', async () => {
+            await reports.get(testReportId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}`);
@@ -38,7 +36,7 @@ describe('Reports', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the Reports base url for the specific ID', () => {
+        it('should make a POST call to the Reports base url for the specific ID', async () => {
             const report: CreateReportModel = {
                 allAnalyticsViewer: false,
                 configuration: {},
@@ -47,7 +45,7 @@ describe('Reports', () => {
                 type: ReportType.Dashboard,
             };
 
-            reports.create(report);
+            await reports.create(report);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Reports.baseUrl, report);
@@ -55,7 +53,7 @@ describe('Reports', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the Reports base url for the specific ID', () => {
+        it('should make a PUT call to the Reports base url for the specific ID', async () => {
             const report: UpdateReportModel = {
                 allAnalyticsViewer: false,
                 configuration: {},
@@ -64,7 +62,7 @@ describe('Reports', () => {
                 type: ReportType.Dashboard,
             };
 
-            reports.update(testReportId, report);
+            await reports.update(testReportId, report);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}`, report);
@@ -72,8 +70,8 @@ describe('Reports', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the Reports base url for the specific ID', () => {
-            reports.delete(testReportId);
+        it('should make a DELETE call to the Reports base url for the specific ID', async () => {
+            await reports.delete(testReportId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}`);
@@ -81,8 +79,8 @@ describe('Reports', () => {
     });
 
     describe('getAccess', () => {
-        it('should make a GET call to the specific report ID url for access', () => {
-            reports.getAccess(testReportId);
+        it('should make a GET call to the specific report ID url for access', async () => {
+            await reports.getAccess(testReportId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/access`);
@@ -90,14 +88,14 @@ describe('Reports', () => {
     });
 
     describe('setAccess', () => {
-        it('should make a PUT call to the specific report ID url for access', () => {
+        it('should make a PUT call to the specific report ID url for access', async () => {
             const access: ReportAccessRequest = {
                 accessType: ReportAccessType.Public,
                 allowedGroups: [],
                 allowedUsers: [],
             };
 
-            reports.setAccess(testReportId, access);
+            await reports.setAccess(testReportId, access);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/access`, access);
@@ -105,8 +103,8 @@ describe('Reports', () => {
     });
 
     describe('getUsers', () => {
-        it('should make a GET call to the specific report ID url for users', () => {
-            reports.getUsers(testReportId);
+        it('should make a GET call to the specific report ID url for users', async () => {
+            await reports.getUsers(testReportId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/users`);
@@ -114,10 +112,10 @@ describe('Reports', () => {
     });
 
     describe('setUsers', () => {
-        it('should make a PUT call to the specific report ID url for users', () => {
+        it('should make a PUT call to the specific report ID url for users', async () => {
             const users: string[] = [];
 
-            reports.setUsers(testReportId, users);
+            await reports.setUsers(testReportId, users);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Reports.baseUrl}/${testReportId}/users`, users);
@@ -125,8 +123,8 @@ describe('Reports', () => {
     });
 
     describe('getReportTemplate', () => {
-        it('should make a GET call to the Reports base url for the specific template ID', () => {
-            reports.getReportTemplate(testTemplateId);
+        it('should make a GET call to the Reports base url for the specific template ID', async () => {
+            await reports.getReportTemplate(testTemplateId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/templates/${testTemplateId}`);
@@ -134,8 +132,8 @@ describe('Reports', () => {
     });
 
     describe('listReportTemplates', () => {
-        it('should make a GET call to the Reports base url for templates', () => {
-            reports.listReportTemplates(ReportType.Dashboard);
+        it('should make a GET call to the Reports base url for templates', async () => {
+            await reports.listReportTemplates(ReportType.Dashboard);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/templates?type=${ReportType.Dashboard}`);
@@ -143,8 +141,8 @@ describe('Reports', () => {
     });
 
     describe('checkHealth', () => {
-        it('should make a GET call to the specific report endpoint for healthchecks', () => {
-            reports.checkHealth();
+        it('should make a GET call to the specific report endpoint for healthchecks', async () => {
+            await reports.checkHealth();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/monitoring/health`);
@@ -152,8 +150,8 @@ describe('Reports', () => {
     });
 
     describe('checkStatus', () => {
-        it('should make a GET call to the specific report endpoint for service status', () => {
-            reports.checkStatus();
+        it('should make a GET call to the specific report endpoint for service status', async () => {
+            await reports.checkStatus();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Reports.baseUrl}/status`);

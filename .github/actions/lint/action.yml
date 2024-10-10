@@ -3,5 +3,5 @@ description: 'Check files respect ESLint & Prettier rules'
 runs:
     using: composite
     steps:
-        - run: npm run prettier:check && npm run eslint:check
+        - run: npm run lint
           shell: bash

@@ -12,12 +12,10 @@ import {PreviewRequestBody} from '../CaseAssistPreviewInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('CaseAssistConfig', () => {
     let caseAssist: CaseAssistConfig;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     const caseAssistModels: CaseAssistConfigModel[] = [
         {
@@ -83,8 +81,8 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the CaseAssistConfig base url', () => {
-            caseAssist.list({page: 2, perPage: 10});
+        it('should make a GET call to the CaseAssistConfig base url', async () => {
+            await caseAssist.list({page: 2, perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}?page=2&perPage=10`);
@@ -92,21 +90,18 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('create', () => {
-        const newCaseAssistModels: any[] = caseAssistModels;
-        newCaseAssistModels.forEach((caseAssistModel) => {
-            it('should make a POST call to the CaseAssistConfig base url', () => {
-                caseAssist.create(caseAssistModel);
+        it('should make a POST call to the CaseAssistConfig base url', async () => {
+            await caseAssist.create(caseAssistModels[0]);
 
-                expect(api.post).toHaveBeenCalledTimes(1);
-                expect(api.post).toHaveBeenCalledWith(CaseAssistConfig.baseUrl, caseAssistModel);
-            });
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(CaseAssistConfig.baseUrl, caseAssistModels[0]);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific CaseAssistConfig url', () => {
+        it('should make a DELETE call to the specific CaseAssistConfig url', async () => {
             const caseAssistToDeleteId = 'CaseAssist-to-be-deleted';
-            caseAssist.delete(caseAssistToDeleteId);
+            await caseAssist.delete(caseAssistToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${caseAssistToDeleteId}`);
@@ -114,9 +109,9 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific CaseAssistConfig url', () => {
+        it('should make a GET call to the specific CaseAssistConfig url', async () => {
             const caseAssistToGetId = 'CaseAssist-to-be-fetched';
-            caseAssist.get(caseAssistToGetId);
+            await caseAssist.get(caseAssistToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${caseAssistToGetId}`);
@@ -125,8 +120,8 @@ describe('CaseAssistConfig', () => {
 
     describe('update', () => {
         caseAssistModels.forEach((caseAssistModel) => {
-            it('should make a PUT call to the specific CaseAssistConfig url', () => {
-                caseAssist.update(caseAssistModel);
+            it('should make a PUT call to the specific CaseAssistConfig url', async () => {
+                await caseAssist.update(caseAssistModel);
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
@@ -138,7 +133,7 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('classify', () => {
-        it('should make a POST call to get classifications', () => {
+        it('should make a POST call to get classifications', async () => {
             const testId = 'some config id';
             const testBody: SuggestionRequestBody = {
                 visitorId: testVisitorId,
@@ -146,7 +141,7 @@ describe('CaseAssistConfig', () => {
                 fields: testContextFields,
             };
 
-            caseAssist.classify(testId, testBody);
+            await caseAssist.classify(testId, testBody);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${testId}/classify`, testBody);
@@ -154,7 +149,7 @@ describe('CaseAssistConfig', () => {
     });
 
     describe('suggestDocuments', () => {
-        it('should make a POST call to get document suggestions', () => {
+        it('should make a POST call to get document suggestions', async () => {
             const testId = 'some config id';
             const testBody: SuggestionRequestBody = {
                 visitorId: testVisitorId,
@@ -162,7 +157,7 @@ describe('CaseAssistConfig', () => {
                 fields: testContextFields,
             };
 
-            caseAssist.suggestDocuments(testId, testBody);
+            await caseAssist.suggestDocuments(testId, testBody);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/${testId}/documents/suggest`, testBody);
@@ -171,14 +166,14 @@ describe('CaseAssistConfig', () => {
 
     describe('previewDocumentSuggestion', () => {
         caseAssistModels.forEach((caseAssistModel) => {
-            it('should make a POST call to get document suggestion preview for configuration', () => {
+            it('should make a POST call to get document suggestion preview for configuration', async () => {
                 const testBody: PreviewRequestBody = {
                     visitorId: testVisitorId,
                     locale: testLocale,
                     fields: testContextFields,
                     configuration: caseAssistModel,
                 };
-                caseAssist.previewDocumentSuggestion(testBody);
+                await caseAssist.previewDocumentSuggestion(testBody);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
@@ -191,14 +186,14 @@ describe('CaseAssistConfig', () => {
 
     describe('previewCaseClassication', () => {
         caseAssistModels.forEach((caseAssistModel) => {
-            it('should make a POST call to get document suggestion preview for configuration', () => {
+            it('should make a POST call to get document suggestion preview for configuration', async () => {
                 const testBody: PreviewRequestBody = {
                     visitorId: testVisitorId,
                     locale: testLocale,
                     fields: testContextFields,
                     configuration: caseAssistModel,
                 };
-                caseAssist.previewCaseClassication(testBody);
+                await caseAssist.previewCaseClassication(testBody);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(`${CaseAssistConfig.baseUrl}/preview/classify`, testBody);

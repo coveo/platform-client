@@ -4,12 +4,10 @@ import {ListSearchHubsParams} from '../SearchHubsInterface.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SearchHubs', () => {
     let searchHubs: SearchHubs;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,30 +15,30 @@ describe('SearchHubs', () => {
     });
 
     describe('list', () => {
-        it('makes a GET call to the SearchHub base url', () => {
-            searchHubs.list();
+        it('makes a GET call to the SearchHub base url', async () => {
+            await searchHubs.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(SearchHubs.baseUrl);
         });
 
-        it('makes the call with parameters if it is set', () => {
+        it('makes the call with parameters if it is set', async () => {
             const params: ListSearchHubsParams = {
                 filter: 'patate',
                 perPage: 25,
                 page: 1,
             };
-            searchHubs.list(params);
+            await searchHubs.list(params);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}?filter=patate&pageSize=25&page=1`);
         });
 
-        it('makes the call with parameters if it is partially set', () => {
+        it('makes the call with parameters if it is partially set', async () => {
             const partialParams: ListSearchHubsParams = {
                 filter: 'patate',
             };
-            searchHubs.list(partialParams);
+            await searchHubs.list(partialParams);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}?filter=patate`);
@@ -48,9 +46,9 @@ describe('SearchHubs', () => {
     });
 
     describe('create', () => {
-        it('makes a POST call to the SearchHub base url with the set hub', () => {
+        it('makes a POST call to the SearchHub base url with the set hub', async () => {
             const newSearchHub = {name: 'hello', bucket: 'bonjour', description: 'hola'};
-            searchHubs.create(newSearchHub);
+            await searchHubs.create(newSearchHub);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SearchHubs.baseUrl}`, newSearchHub);
@@ -58,9 +56,9 @@ describe('SearchHubs', () => {
     });
 
     describe('get', () => {
-        it('makes a GET call to the specific SearchHub url', () => {
+        it('makes a GET call to the specific SearchHub url', async () => {
             const getSearchHub = {hubName: 'hello'};
-            searchHubs.get(getSearchHub);
+            await searchHubs.get(getSearchHub);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${getSearchHub.hubName}`);
@@ -68,9 +66,9 @@ describe('SearchHubs', () => {
     });
 
     describe('delete', () => {
-        it('makes a DELETE call to the specific SearchHub url', () => {
+        it('makes a DELETE call to the specific SearchHub url', async () => {
             const deleteSearchHub = {hubName: 'hello'};
-            searchHubs.delete(deleteSearchHub);
+            await searchHubs.delete(deleteSearchHub);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${SearchHubs.baseUrl}${deleteSearchHub.hubName}`);
@@ -78,10 +76,10 @@ describe('SearchHubs', () => {
     });
 
     describe('update', () => {
-        it('makes a PUT call to the specific SearchHub url', () => {
+        it('makes a PUT call to the specific SearchHub url', async () => {
             const updateSearchHubParams = {name: 'hello', bucket: 'bonjour', description: 'hola'};
             const updateSearchHub = {hubName: 'hello', hub: updateSearchHubParams};
-            searchHubs.update(updateSearchHub);
+            await searchHubs.update(updateSearchHub);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -92,9 +90,9 @@ describe('SearchHubs', () => {
     });
 
     describe('updateBucket', () => {
-        it('makes a PUT call to the bucket SearchHub url', () => {
+        it('makes a PUT call to the bucket SearchHub url', async () => {
             const updateBucketSearchHub = {hubName: 'hello', bucket: 'bonjour'};
-            searchHubs.updateBucket(updateBucketSearchHub);
+            await searchHubs.updateBucket(updateBucketSearchHub);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(

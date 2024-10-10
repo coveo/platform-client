@@ -80,13 +80,11 @@ export interface HostedInterfaceVersion<T> {
 export interface ListHostedInterfaceVersionsParams extends Paginated {
     /**
      * The zero-based page to retrieve.
-     *
      * @default `0`
      */
     page?: number;
     /**
      * The number of versions to return per page.
-     *
      * @default `10`
      */
     perPage?: number;
@@ -101,7 +99,6 @@ export interface ListHostedInterfaceVersionsParams extends Paginated {
      * - `undefined`: Configurations are returned in no specific order.
      * - `asc`: Sort version by number in ascending order.
      * - `desc`: Sort version by number in descending order.
-     *
      * @default `undefined`
      */
     order?: 'asc' | 'desc';
@@ -150,14 +147,12 @@ export interface IAccesses {
 
     /**
      * When set to true, all users can share and see the search page.
-     *
      * @default false
      */
     sharingLinkEnabled?: boolean;
 
     /**
      * When set to true, the domain sharing is enabled. Otherwise, only users that have explicitly access to the search page can access it.
-     *
      * @default false
      */
     sharingDomainEnabled?: boolean;

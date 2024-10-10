@@ -42,6 +42,7 @@ export interface FacetRequestItem {
     /**
      * The values displayed by the facet in the search interface at the moment of the request.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currentValues?: any[];
     /**
      * A custom sort order for the facet values.
@@ -178,6 +179,7 @@ export interface FacetResultModel {
     indexScore: number;
     mlScore: number;
     moreValuesAvailable: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     values: any[];
 }
 
@@ -219,6 +221,7 @@ export interface ProductListingIdentityModel {
  * @deprecated
  */
 export interface ProductModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     additionalFields: Map<string, any>;
     childResults: ProductModel[];
     clickUri: string;
@@ -246,6 +249,7 @@ export interface ProductsResultModel {
     /**
      * The execution report.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     executionReport: Map<string, any>;
     /**
      * The list of facet results.

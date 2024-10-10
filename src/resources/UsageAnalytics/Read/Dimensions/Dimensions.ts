@@ -17,6 +17,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get all the dimensions.
+     * @param params
      */
     list(params?: ListDimensionsParams) {
         return this.api.get<DimensionModel[]>(this.buildPathWithOrg(Dimensions.baseUrl, params));
@@ -24,6 +25,7 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get all the exportable dimensions.
+     * @param params
      */
     listExportableDimensions(params?: ListDimensionsParams) {
         return this.api.get<DimensionModel[]>(this.buildPathWithOrg(`${Dimensions.baseUrl}/exportables`, params));
@@ -31,7 +33,6 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get a dimension.
-     *
      * @param apiName Format must be `EVENT.DIMENSION` where EVENT is the event type and DIMENSION is the name of the dimension.
      */
     get(apiName: string) {
@@ -40,8 +41,8 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get the values for a dimension.
-     *
      * @param dimension The dimension to fetch.
+     * @param params
      */
     getValues(dimension: string, params?: GetDimensionValuesParams) {
         return this.api.get<DimensionValuesModel>(
@@ -51,7 +52,6 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get all the custom dimensions.
-     *
      * @param includeOnlyParents This will filter out dimensions which are covered by others.
      * Only parent/master dimensions will be output.
      */
@@ -63,6 +63,8 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Create a custom dimension.
+     * @param model
+     * @param params
      */
     createCustomDimension(model: CustomDimensionModel, params: CreateCustomDimensionParams) {
         return this.api.post<DimensionModel>(this.buildPathWithOrg(`${Dimensions.baseUrl}/custom`, params), model);
@@ -70,7 +72,6 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get a custom dimension.
-     *
      * @param apiName Format must be `EVENT.DIMENSION` where EVENT is the event type and DIMENSION is the name of the dimension.
      */
     getCustomDimension(apiName: string) {
@@ -81,8 +82,8 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get the values for a custom dimension.
-     *
      * @param dimension The dimension to fetch.
+     * @param params
      */
     getCustomDimensionValues(dimension: string, params?: GetDimensionValuesParams) {
         return this.api.get<DimensionValuesModel>(
@@ -92,8 +93,8 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Create or edit a custom dimension.
-     *
      * @param apiName Format must be `EVENT.DIMENSION` where EVENT is the event type and DIMENSION is the name of the dimension.
+     * @param model
      * @param updatePastEvents Whether to update the custom dimension in past events (deprecated).
      */
     updateCustomDimension(apiName: string, model: CustomDimensionModel, updatePastEvents = false) {
@@ -105,7 +106,6 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Delete a custom dimension.
-     *
      * @param apiName Format must be `EVENT.DIMENSION` where EVENT is the event type and DIMENSION is the name of the dimension.
      */
     deleteCustomDimension(apiName: string) {
@@ -128,8 +128,8 @@ export default class Dimensions extends ReadServiceResource implements ReadServi
 
     /**
      * Get a list of dimensions that have data but are not created yet.
-     *
      * @param event The type of event for which to look for suggestions.
+     * @param params
      */
     listUncreatedDimensions(event: DimensionEventTypes, params?: ListUncreatedDimensionsParams) {
         return this.api.get<CustomDimensionSuggestionsModel>(

@@ -24,9 +24,8 @@ export default class Activity extends Resource {
 
     /**
      * Retrieves a list of ActivityOperation for a given organization.
-     *
-     * @param {boolean} includeInternal Whether or not to include internal operations.
-     * @returns {Promise<ActivityOperation[]>} A list of activity operations.
+     * @param includeInternal Whether or not to include internal operations.
+     * @returns A list of activity operations.
      */
     getOperationTypes(includeInternal = false) {
         const operationTypesUrl = `${Activity.getBaseUrl()}/operationtypes`;
@@ -38,7 +37,7 @@ export default class Activity extends Resource {
     }
 
     list(params?: ListActivitiesParams, activityFacet?: ActivityListingFilters) {
-        const isPublic = !Boolean(activityFacet?.sections?.includes('INTERNAL'));
+        const isPublic = !activityFacet?.sections?.includes('INTERNAL');
         return this.api.post<PageModel<ActivityModel>>(
             this.buildPath(isPublic ? `${Activity.getBaseUrl()}/public` : Activity.getBaseUrl(), params),
             activityFacet,
@@ -46,7 +45,7 @@ export default class Activity extends Resource {
     }
 
     listFacets(params?: ListActivitiesFacetsParams, activityFacet?: ActivityListingFilters) {
-        const isPublic = !Boolean(activityFacet?.sections?.includes('INTERNAL'));
+        const isPublic = !activityFacet?.sections?.includes('INTERNAL');
         return this.api.post<ActivityFacetModel>(
             this.buildPath(
                 isPublic ? `${Activity.getBaseUrl()}/facets/public` : `${Activity.getBaseUrl()}/facets`,

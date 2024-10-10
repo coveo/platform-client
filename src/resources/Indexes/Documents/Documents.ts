@@ -8,10 +8,8 @@ export default class Documents extends Resource {
 
     /**
      * Lists the [permissions](https://docs.coveo.com/en/223/glossary/permission) of an [item](https://docs.coveo.com/en/210/glossary/item) in a Coveo Cloud organization index.
-     *
-     * @param {string} indexId The unique identifier of the target index.
-     * @param {string} documentId The unique identifier of the item whose permissions to list.
-     *
+     * @param indexId The unique identifier of the target index.
+     * @param documentId The unique identifier of the item whose permissions to list.
      */
     listPermissions(indexId: string, documentId: string) {
         return this.api.get<DocumentPermissionModel>(
@@ -23,10 +21,9 @@ export default class Documents extends Resource {
 
     /**
      * Lists the [effective permissions](https://docs.coveo.com/en/194/glossary/effective-permissions) of an [item](https://docs.coveo.com/en/210/glossary/item) in a Coveo Cloud organization index.
-     *
-     * @param {string} indexId The unique identifier of the target index.
-     * @param {string} documentId The unique identifier of the item whose permissions to list.
-     * @param {ListEffectivePermissionsOptions} options
+     * @param indexId The unique identifier of the target index.
+     * @param documentId The unique identifier of the item whose permissions to list.
+     * @param options
      */
     listEffectivePermissions(indexId: string, documentId: string, options: ListEffectivePermissionsOptions = {}) {
         return this.api.get<SinglePermissionPageModel>(

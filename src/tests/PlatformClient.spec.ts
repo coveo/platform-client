@@ -6,7 +6,7 @@ import PlatformResources from '../resources/PlatformResources.js';
 
 jest.mock('../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
+const APIMock = jest.mocked(API);
 
 describe('PlatformClient', () => {
     const baseOptions: PlatformClientOptions = {
@@ -56,11 +56,11 @@ describe('PlatformClient', () => {
         expect(abortServerlessGetRequestsSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should check the validity of the access token when initializing the platform client', () => {
+    it('should check the validity of the access token when initializing the platform client', async () => {
         const checkTokenSpy = jest.spyOn(API.prototype, 'checkToken');
         const platform = new PlatformClient(baseOptions);
 
-        platform.initialize();
+        await platform.initialize();
 
         expect(checkTokenSpy).toHaveBeenCalledTimes(1);
     });
@@ -73,7 +73,7 @@ describe('PlatformClient', () => {
     });
 
     describe('withFeatures', () => {
-        it('should create a copy of the client with the new feature', async () => {
+        it('should create a copy of the client with the new feature', () => {
             const feature: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
 
@@ -83,7 +83,7 @@ describe('PlatformClient', () => {
             expect(clientWithFeature).not.toBe(client);
         });
 
-        it('should execute the feature', async () => {
+        it('should execute the feature', () => {
             const feature: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
 
@@ -92,7 +92,7 @@ describe('PlatformClient', () => {
             expect(feature).toHaveBeenCalled();
         });
 
-        it('should execute all the features', async () => {
+        it('should execute all the features', () => {
             const feature1: Feature = jest.fn((currentOptions) => currentOptions);
             const feature2: Feature = jest.fn((currentOptions) => currentOptions);
             const client = new PlatformClient(baseOptions);
@@ -113,7 +113,7 @@ describe('PlatformClient', () => {
                 }
             }
 
-            const experimentalResources: any[] = [{key: 'something', resource: Something}];
+            const experimentalResources = [{key: 'something', resource: Something}];
 
             class ExperimentalPlatformClient extends PlatformClient {
                 something: Something;

@@ -9,12 +9,10 @@ import {
 
 jest.mock('../../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Snowflake', () => {
     let snowflake: Snowflake;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -22,8 +20,8 @@ describe('Snowflake', () => {
     });
 
     describe('listUsers', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
-            snowflake.listUsers();
+        it('makes a GET call to the specific Snowflake url', async () => {
+            await snowflake.listUsers();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users`);
@@ -31,13 +29,13 @@ describe('Snowflake', () => {
     });
 
     describe('createUser', () => {
-        it('makes a POST call to the specific Snowflake url', () => {
+        it('makes a POST call to the specific Snowflake url', async () => {
             const model: SnowflakeUserModel = {
                 username: 'ross.blais',
                 email: 'ross.blais@gmail.com',
                 daysToExpiry: 66,
             };
-            snowflake.createUser(model);
+            await snowflake.createUser(model);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users`, model);
@@ -45,9 +43,9 @@ describe('Snowflake', () => {
     });
 
     describe('deleteUser', () => {
-        it('makes a DELETE call to the specific Snowflake url', () => {
+        it('makes a DELETE call to the specific Snowflake url', async () => {
             const snowflakeUser = 'ross.blais';
-            snowflake.deleteUser(snowflakeUser);
+            await snowflake.deleteUser(snowflakeUser);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}`);
@@ -55,9 +53,9 @@ describe('Snowflake', () => {
     });
 
     describe('getUser', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
+        it('makes a GET call to the specific Snowflake url', async () => {
             const snowflakeUser = 'ross.blais';
-            snowflake.getUser(snowflakeUser);
+            await snowflake.getUser(snowflakeUser);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}`);
@@ -65,12 +63,12 @@ describe('Snowflake', () => {
     });
 
     describe('reactivateUser', () => {
-        it('makes a PUT call to the specific Snowflake url', () => {
+        it('makes a PUT call to the specific Snowflake url', async () => {
             const snowflakeUser = 'ross.blais';
             const params: ReactivateUserParams = {
                 daysToExpiry: 66,
             };
-            snowflake.reactivateUser(snowflakeUser, params);
+            await snowflake.reactivateUser(snowflakeUser, params);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}/expiration`, params);
@@ -78,9 +76,9 @@ describe('Snowflake', () => {
     });
 
     describe('resetPassword', () => {
-        it('makes a POST call to the specific Snowflake url', () => {
+        it('makes a POST call to the specific Snowflake url', async () => {
             const snowflakeUser = 'ross.blais';
-            snowflake.resetPassword(snowflakeUser);
+            await snowflake.resetPassword(snowflakeUser);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Snowflake.baseUrl}/users/${snowflakeUser}/passwordreset`);
@@ -88,8 +86,8 @@ describe('Snowflake', () => {
     });
 
     describe('getNetworkPolicy', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
-            snowflake.getNetworkPolicy();
+        it('makes a GET call to the specific Snowflake url', async () => {
+            await snowflake.getNetworkPolicy();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/networkpolicy`);
@@ -97,12 +95,12 @@ describe('Snowflake', () => {
     });
 
     describe('updateNetworkPolicy', () => {
-        it('makes a PUT call to the specific Snowflake url', () => {
+        it('makes a PUT call to the specific Snowflake url', async () => {
             const model: SnowflakeNetworkPolicyModel = {
                 allowedIpAddresses: ['coulilizazou'],
                 blockedIpAddresses: ['ross'],
             };
-            snowflake.updateNetworkPolicy(model);
+            await snowflake.updateNetworkPolicy(model);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Snowflake.baseUrl}/networkpolicy`, model);
@@ -110,12 +108,12 @@ describe('Snowflake', () => {
     });
 
     describe('getCreditUsage', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
+        it('makes a GET call to the specific Snowflake url', async () => {
             const model: GetCreditUsageParams = {
                 from: 'coulilizazou',
                 to: 'ross',
             };
-            snowflake.getCreditUsage(model);
+            await snowflake.getCreditUsage(model);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/creditusage?from=coulilizazou&to=ross`);
@@ -123,8 +121,8 @@ describe('Snowflake', () => {
     });
 
     describe('getSnowflakeReaderAccount', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
-            snowflake.getSnowflakeReaderAccount();
+        it('makes a GET call to the specific Snowflake url', async () => {
+            await snowflake.getSnowflakeReaderAccount();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);
@@ -132,8 +130,8 @@ describe('Snowflake', () => {
     });
 
     describe('getSnowflakeReaderAccountEndpoint', () => {
-        it('makes a GET call to the specific Snowflake url', () => {
-            snowflake.getSnowflakeReaderAccountEndpoint();
+        it('makes a GET call to the specific Snowflake url', async () => {
+            await snowflake.getSnowflakeReaderAccountEndpoint();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount/endpoint`);
@@ -141,8 +139,8 @@ describe('Snowflake', () => {
     });
 
     describe('createSnowflakeReaderAccount', () => {
-        it('makes a POST call to the specific Snowflake url', () => {
-            snowflake.createSnowflakeReaderAccount();
+        it('makes a POST call to the specific Snowflake url', async () => {
+            await snowflake.createSnowflakeReaderAccount();
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccounts`);
@@ -150,8 +148,8 @@ describe('Snowflake', () => {
     });
 
     describe('deleteSnowflakeReaderAccount', () => {
-        it('makes a DELETE call to the specific Snowflake url', () => {
-            snowflake.deleteSnowflakeReaderAccount();
+        it('makes a DELETE call to the specific Snowflake url', async () => {
+            await snowflake.deleteSnowflakeReaderAccount();
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${Snowflake.baseUrl}/readeraccount`);

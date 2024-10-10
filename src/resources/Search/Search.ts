@@ -63,7 +63,6 @@ export default class Search extends Resource {
 
     /**
      * Exports search results to a Microsoft Excel™ spreadsheet
-     *
      * @param restQueryParameters Parameters of the query
      * @returns A .xlsx file containing the search results of the specified query
      */
@@ -81,6 +80,7 @@ export default class Search extends Resource {
     }
 
     querySuggestPost(restQuerySuggestParameters: PostSearchQuerySuggestBodyParams) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return this.api.post<any>(
             this.buildPath(`${Search.baseUrl}/querySuggest`, {
                 organizationId: this.api.organizationId,
@@ -91,6 +91,15 @@ export default class Search extends Resource {
 
     /**
      * Get an item's preview in HTML format
+     * @param root0
+     * @param root0.enableNavigation
+     * @param root0.findNext
+     * @param root0.findPrevious
+     * @param root0.organizationId
+     * @param root0.page
+     * @param root0.requestedOutputSize
+     * @param root0.uniqueId
+     * @param root0.viewAllContent
      */
     previewHTML({
         enableNavigation,
@@ -121,6 +130,7 @@ export default class Search extends Resource {
 
     /**
      * Get item in JSON format
+     * @param params
      */
     getDocument(params: SingleItemParameters) {
         return this.api.get<RestQueryResult>(
@@ -137,6 +147,7 @@ export default class Search extends Resource {
 
     /**
      * Executes a facet search request.
+     * @param params
      */
     searchFacet(params: RestFacetSearchParameters) {
         const {viewAllContent, organizationId, ...bodyParameters} = params;

@@ -4,12 +4,10 @@ import RelevanceGenerativeAnsweringConfiguration from '../RelevanceGenerativeAns
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('RGAConfiguration', () => {
     let rgaConfig: RelevanceGenerativeAnsweringConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,22 +15,22 @@ describe('RGAConfiguration', () => {
     });
 
     describe('preview', () => {
-        it('should make a POST call with sources to retrieve RGA preview', () => {
+        it('should make a POST call with sources to retrieve RGA preview', async () => {
             const params: DocumentGroupPreviewParams = {
                 sources: ['source1', 'source2'],
                 filterConditions: [],
             };
-            rgaConfig.preview(params);
+            await rgaConfig.preview(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(RelevanceGenerativeAnsweringConfiguration.previewUrl, params);
         });
 
-        it('should make a POST call with advanced query to retrieve RGA preview', () => {
+        it('should make a POST call with advanced query to retrieve RGA preview', async () => {
             const params: DocumentGroupPreviewParams = {
                 advancedQuery: 'some advanced query @ test',
             };
-            rgaConfig.preview(params);
+            await rgaConfig.preview(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(RelevanceGenerativeAnsweringConfiguration.previewUrl, params);

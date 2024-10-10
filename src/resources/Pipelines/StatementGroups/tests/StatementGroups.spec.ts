@@ -9,12 +9,10 @@ import {
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('StatementGroups', () => {
     let groups: StatementGroups;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -22,25 +20,25 @@ describe('StatementGroups', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the StatementGroups base url', () => {
+        it('should make a GET call to the StatementGroups base url', async () => {
             const pipelineId = '🍰';
 
-            groups.list(pipelineId);
+            await groups.list(pipelineId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(StatementGroups.getBaseUrl(pipelineId));
         });
 
-        it('should make a GET call with a filter', () => {
+        it('should make a GET call with a filter', async () => {
             const pipelineId = '️🍰';
             const filter = 'nameOfCondition';
-            groups.list(pipelineId, {filter});
+            await groups.list(pipelineId, {filter});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?filter=nameOfCondition',
             );
         });
 
-        it('should make a GET call with a status filter', () => {
+        it('should make a GET call with a status filter', async () => {
             const pipelineId = '️🍰';
             const status = [
                 ListStatementGroupStatusType.Active,
@@ -48,7 +46,7 @@ describe('StatementGroups', () => {
                 ListStatementGroupStatusType.Inactive,
                 ListStatementGroupStatusType.NotStarted,
             ];
-            groups.list(pipelineId, {status});
+            await groups.list(pipelineId, {status});
 
             const expectedUri = [
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?status=',
@@ -58,10 +56,10 @@ describe('StatementGroups', () => {
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
 
-        it('should make a GET call with a status type filter', () => {
+        it('should make a GET call with a status type filter', async () => {
             const pipelineId = '️🍰';
             const types = [StatementGroupType.campaign, StatementGroupType.permanent];
-            groups.list(pipelineId, {types});
+            await groups.list(pipelineId, {types});
 
             const expectedUri = [
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?types=',
@@ -71,16 +69,16 @@ describe('StatementGroups', () => {
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
 
-        it('should make a GET call with a sort', () => {
+        it('should make a GET call with a sort', async () => {
             const pipelineId = '️🍰';
-            groups.list(pipelineId, {sortBy: 'name', isOrderAscending: false});
+            await groups.list(pipelineId, {sortBy: 'name', isOrderAscending: false});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=name&isOrderAscending=false',
             );
 
-            groups.list(pipelineId, {sortBy: 'status', isOrderAscending: true});
+            await groups.list(pipelineId, {sortBy: 'status', isOrderAscending: true});
             expect(api.get).toHaveBeenCalledTimes(2);
             expect(api.get).toHaveBeenCalledWith(
                 '/rest/search/v2/admin/pipelines/️🍰/statementGroups?sortBy=status&isOrderAscending=true',
@@ -89,7 +87,7 @@ describe('StatementGroups', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the StatementGroups base url', () => {
+        it('should make a POST call to the StatementGroups base url', async () => {
             const pipelineId = '🍸';
             const model: CreateStatementGroupModel = {
                 name: '🥂',
@@ -97,18 +95,18 @@ describe('StatementGroups', () => {
                 isActive: true,
             };
 
-            groups.create(pipelineId, model);
+            await groups.create(pipelineId, model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(StatementGroups.getBaseUrl(pipelineId), model);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific StatementGroups url', () => {
+        it('should make a GET call to the specific StatementGroups url', async () => {
             const pipelineId = '️a';
             const groupId = 'b';
 
-            groups.get(pipelineId, groupId);
+            await groups.get(pipelineId, groupId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId));
         });
@@ -120,34 +118,34 @@ describe('StatementGroups', () => {
             type: StatementGroupType.permanent,
         };
 
-        it('should make a PUT call to the specific StatementGroups url', () => {
+        it('should make a PUT call to the specific StatementGroups url', async () => {
             const pipelineId = '️a';
             const groupId = 'b';
 
-            groups.update(pipelineId, groupId, group);
+            await groups.update(pipelineId, groupId, group);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), group);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific StatementGroups url', () => {
+        it('should make a DELETE call to the specific StatementGroups url', async () => {
             const pipelineId = '🍄';
             const groupId = '🌿';
 
-            groups.delete(pipelineId, groupId);
+            await groups.delete(pipelineId, groupId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId));
         });
     });
 
     describe('toggleActive', () => {
-        it('should make a PATCH call to the specific StatementGroups url', () => {
+        it('should make a PATCH call to the specific StatementGroups url', async () => {
             const pipelineId = '️=)';
             const groupId = '(=';
             const isActive = true;
 
-            groups.toggleActive(pipelineId, groupId, isActive);
+            await groups.toggleActive(pipelineId, groupId, isActive);
             expect(api.patch).toHaveBeenCalledTimes(1);
             expect(api.patch).toHaveBeenCalledWith(StatementGroups.getStatementGroupUrl(pipelineId, groupId), {
                 isActive,
@@ -156,11 +154,11 @@ describe('StatementGroups', () => {
     });
 
     describe('bulkUpdateRuleAssociations', () => {
-        it('should make a PUT call to the specific statements group url', () => {
+        it('should make a PUT call to the specific statements group url', async () => {
             const pipelineId = 'pipeline1';
             const groupId = 'group1';
 
-            groups.bulkUpdateRuleAssociations(pipelineId, groupId, {
+            await groups.bulkUpdateRuleAssociations(pipelineId, groupId, {
                 toAdd: [
                     {
                         ruleId: 'rule1',

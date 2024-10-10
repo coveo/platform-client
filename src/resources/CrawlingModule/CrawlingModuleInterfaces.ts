@@ -197,14 +197,10 @@ export interface CrawlingModuleDeployment {
     name: string;
     /**
      * The status of the Crawling Module
-     *
-     * @type {CrawlingModuleStatus}
      */
     status?: CrawlingModuleStatus;
     /**
      * The component versions of the Crawling Module
-     *
-     * @type {ComponentVersion}.
      */
     versions: ComponentVersion;
 }

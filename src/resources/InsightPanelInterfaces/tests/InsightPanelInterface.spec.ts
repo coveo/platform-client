@@ -5,13 +5,11 @@ import InsightPanelInterface from '../InsightPanelInterface.js';
 import {InsightPanelInterfaceConfiguration, InsightPanelResultTemplateLayout} from '../InsightPanelInterface.model.js';
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('InsightPanelInterface', () => {
     let insightPanelInterface: InsightPanelInterface;
 
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const config: New<InsightPanelInterfaceConfiguration> = {
         name: 'some insight panel name',
         facets: [
@@ -117,8 +115,8 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call with all parameters', () => {
-            insightPanelInterface.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
+        it('should make a GET call with all parameters', async () => {
+            await insightPanelInterface.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -126,29 +124,29 @@ describe('InsightPanelInterface', () => {
             );
         });
 
-        it('should make a GET call with page', () => {
-            insightPanelInterface.list({page: 2});
+        it('should make a GET call with page', async () => {
+            await insightPanelInterface.list({page: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}?page=2`);
         });
 
-        it('should make a GET call with perPage', () => {
-            insightPanelInterface.list({perPage: 10});
+        it('should make a GET call with perPage', async () => {
+            await insightPanelInterface.list({perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}?perPage=10`);
         });
 
-        it('should make a GET call with filter', () => {
-            insightPanelInterface.list({filter: 'Accounting'});
+        it('should make a GET call with filter', async () => {
+            await insightPanelInterface.list({filter: 'Accounting'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}?filter=Accounting`);
         });
 
-        it('should make a GET call with order', () => {
-            insightPanelInterface.list({order: 'asc'});
+        it('should make a GET call with order', async () => {
+            await insightPanelInterface.list({order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}?order=asc`);
@@ -156,8 +154,8 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the InsightPanelInterface base url', () => {
-            insightPanelInterface.create(config);
+        it('should make a POST call to the InsightPanelInterface base url', async () => {
+            await insightPanelInterface.create(config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(InsightPanelInterface.baseUrl, config);
@@ -165,10 +163,10 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the InsightPanelInterface base url', () => {
+        it('should make a GET call to the InsightPanelInterface base url', async () => {
             const id = 'IPInterface-id-to-get';
 
-            insightPanelInterface.get(id);
+            await insightPanelInterface.get(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`);
@@ -176,10 +174,10 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('update', () => {
-        it('should make an UPDATE call to the InsightPanelInterface base url', () => {
+        it('should make an UPDATE call to the InsightPanelInterface base url', async () => {
             const id = 'IPInterface-id-to-update';
 
-            insightPanelInterface.update({...config, id});
+            await insightPanelInterface.update({...config, id});
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`, config);
@@ -187,10 +185,10 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the InsightPanelInterface base url', () => {
+        it('should make a DELETE call to the InsightPanelInterface base url', async () => {
             const id = 'IPInterface-id-to-delete';
 
-            insightPanelInterface.delete(id);
+            await insightPanelInterface.delete(id);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}`);
@@ -200,8 +198,8 @@ describe('InsightPanelInterface', () => {
     describe('listVersions', () => {
         const id = 'IPInterface-id-to-get';
 
-        it('should make a GET call with all parameters', () => {
-            insightPanelInterface.listVersions(id, {page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
+        it('should make a GET call with all parameters', async () => {
+            await insightPanelInterface.listVersions(id, {page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -209,29 +207,29 @@ describe('InsightPanelInterface', () => {
             );
         });
 
-        it('should make a GET call with page', () => {
-            insightPanelInterface.listVersions(id, {page: 2});
+        it('should make a GET call with page', async () => {
+            await insightPanelInterface.listVersions(id, {page: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?page=2`);
         });
 
-        it('should make a GET call with perPage', () => {
-            insightPanelInterface.listVersions(id, {perPage: 10});
+        it('should make a GET call with perPage', async () => {
+            await insightPanelInterface.listVersions(id, {perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?perPage=10`);
         });
 
-        it('should make a GET call with filter', () => {
-            insightPanelInterface.listVersions(id, {filter: 'Accounting'});
+        it('should make a GET call with filter', async () => {
+            await insightPanelInterface.listVersions(id, {filter: 'Accounting'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?filter=Accounting`);
         });
 
-        it('should make a GET call with order', () => {
-            insightPanelInterface.listVersions(id, {order: 'asc'});
+        it('should make a GET call with order', async () => {
+            await insightPanelInterface.listVersions(id, {order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions?order=asc`);
@@ -239,11 +237,11 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('getVersion', () => {
-        it('should make a GET call to the InsightPanelInterface version url', () => {
+        it('should make a GET call to the InsightPanelInterface version url', async () => {
             const id = 'IPInterface-id-to-get';
             const versionNumber = 1;
 
-            insightPanelInterface.getVersion(id, versionNumber);
+            await insightPanelInterface.getVersion(id, versionNumber);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelInterface.baseUrl}/${id}/versions/${versionNumber}`);
@@ -251,12 +249,12 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('restoreVersion', () => {
-        it('should make a POST call to the InsightPanelInterface version restore url', () => {
+        it('should make a POST call to the InsightPanelInterface version restore url', async () => {
             const id = 'IPInterface-id-to-get';
             const versionNumber = 2;
             const label = 'Some version label';
 
-            insightPanelInterface.restoreVersion(id, versionNumber, {
+            await insightPanelInterface.restoreVersion(id, versionNumber, {
                 label,
             });
 
@@ -271,12 +269,12 @@ describe('InsightPanelInterface', () => {
     });
 
     describe('updateVersionLabel', () => {
-        it('should make a PUT call to the InsightPanelInterface version label url', () => {
+        it('should make a PUT call to the InsightPanelInterface version label url', async () => {
             const id = 'IPInterface-id-to-get';
             const versionNumber = 3;
             const label = 'some-label';
 
-            insightPanelInterface.updateVersionLabel(id, versionNumber, {
+            await insightPanelInterface.updateVersionLabel(id, versionNumber, {
                 label,
             });
 

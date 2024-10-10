@@ -3,12 +3,10 @@ import SourcesMetadata from '../SourcesMetadata.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SourcesMetadata', () => {
     let metadata: SourcesMetadata;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,20 +14,20 @@ describe('SourcesMetadata', () => {
     });
 
     describe('getReport', () => {
-        it('should make a GET call to the specific SourceMetadata url', () => {
+        it('should make a GET call to the specific SourceMetadata url', async () => {
             const sourceId = 'ben&flo';
 
-            metadata.getReport(sourceId);
+            await metadata.getReport(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/sources/${sourceId}/metadata`);
         });
     });
 
     describe('generateRepost', () => {
-        it('should make a POST call to the specific SourceMetadata url', () => {
+        it('should make a POST call to the specific SourceMetadata url', async () => {
             const sourceId = 'ben&flo';
 
-            metadata.generateReport(sourceId);
+            await metadata.generateReport(sourceId);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/${sourceId}/metadata`,
@@ -38,10 +36,10 @@ describe('SourcesMetadata', () => {
     });
 
     describe('getReportStatus', () => {
-        it('should make a GET call to the specific SourceMetadataStatus url', () => {
+        it('should make a GET call to the specific SourceMetadataStatus url', async () => {
             const sourceId = 'ben&flo';
 
-            metadata.getReportStatus(sourceId);
+            await metadata.getReportStatus(sourceId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `/rest/organizations/{organizationName}/sources/${sourceId}/metadata/status`,

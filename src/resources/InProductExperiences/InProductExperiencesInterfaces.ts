@@ -237,7 +237,6 @@ export enum ButtonPositionVerticalRequestModel {
 }
 
 export enum ButtonPositionHorizontalResponseModel {
-    // eslint-disable-next-line id-blacklist
     Undefined = 'Undefined',
     Left = 'Left',
     Center = 'Center',
@@ -245,7 +244,6 @@ export enum ButtonPositionHorizontalResponseModel {
 }
 
 export enum ButtonPositionVerticalResponseModel {
-    // eslint-disable-next-line id-blacklist
     Undefined = 'Undefined',
     Top = 'Top',
     Middle = 'Middle',
@@ -377,7 +375,6 @@ export interface IPXButtonModel {
     /**
      * The button host's CSS selector, which defines where the button is rendered.
      * If unset, it defaults to "" and renders a floating button in the `<body>`.
-     *
      * @default `""`
      */
     buttonTargetSelector: string;

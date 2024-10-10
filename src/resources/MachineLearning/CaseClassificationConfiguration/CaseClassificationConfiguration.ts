@@ -20,6 +20,7 @@ export default class CaseClassificationConfiguration extends Resource {
     static previewUrl = `${CaseClassificationConfiguration.baseUrl}/preview`;
 
     /**
+     * @param configModel
      * @deprecated create(configModel: CaseClassificationConfigurationModel) is kept for backward compatibility. You should now use MachineLearning `register(registration: RegistrationModel)` instead.
      */
     create(configModel: New<CaseClassificationConfigurationModel, 'modelId'>) {
@@ -30,6 +31,7 @@ export default class CaseClassificationConfiguration extends Resource {
     }
 
     /**
+     * @param modelId
      * @deprecated delete(modelId: string) is kept for backward compatibility. You should now use Models `delete(modelId: string)` instead.
      */
     delete(modelId: string) {
@@ -37,6 +39,7 @@ export default class CaseClassificationConfiguration extends Resource {
     }
 
     /**
+     * @param modelId
      * @deprecated get(modelId: string) is kept for backward compatibility. You should now use Models `get(modelId: string)` instead.
      */
     get(modelId: string) {
@@ -46,6 +49,7 @@ export default class CaseClassificationConfiguration extends Resource {
     }
 
     /**
+     * @param configModel
      * @deprecated update(configModel: CaseClassificationConfigurationModel) is kept for backward compatibility. You should now use Models `update(modelId: string, update: RegistrationModel)` instead.
      */
     update(configModel: CaseClassificationConfigurationModel) {

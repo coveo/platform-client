@@ -34,6 +34,7 @@ export interface IndexingPipelineLogEntry {
     datetime: string;
     guid: string;
     id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     meta: Record<string, any>;
     operation: IndexingPipelineLogOperations;
     organizationId: string;

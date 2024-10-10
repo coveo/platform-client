@@ -49,6 +49,7 @@ export default class Sources extends Resource {
     }
 
     /**
+     * @param params
      * @description New API resource for the list of sources
      * @experimental
      */

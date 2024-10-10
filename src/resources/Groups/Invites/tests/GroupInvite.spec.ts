@@ -5,12 +5,10 @@ import {InviteModel} from '../GroupInviteInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('groupInvite', () => {
     let invite: GroupInvite;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const groupId = '💎';
 
     beforeEach(() => {
@@ -19,8 +17,8 @@ describe('groupInvite', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the group invites url', () => {
-            invite.list(groupId);
+        it('should make a GET call to the group invites url', async () => {
+            await invite.list(groupId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/groups/💎/invites');
@@ -28,11 +26,11 @@ describe('groupInvite', () => {
     });
 
     describe('add', () => {
-        it('should make a POST call to the groups invites url and set the "sendEmail" parameter to true by default', () => {
+        it('should make a POST call to the groups invites url and set the "sendEmail" parameter to true by default', async () => {
             const inviteModel: New<InviteModel> = {
                 username: '🐠@coveo.com-google',
             };
-            invite.add(groupId, inviteModel);
+            await invite.add(groupId, inviteModel);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -41,11 +39,11 @@ describe('groupInvite', () => {
             );
         });
 
-        it('should make a POST call to the groups invites url and set the "sendEmail" parameter to false if specified', () => {
+        it('should make a POST call to the groups invites url and set the "sendEmail" parameter to false if specified', async () => {
             const inviteModel: New<InviteModel> = {
                 username: '🐠@coveo.com-google',
             };
-            invite.add(groupId, inviteModel, {sendEmail: false});
+            await invite.add(groupId, inviteModel, {sendEmail: false});
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -56,8 +54,8 @@ describe('groupInvite', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to /invites/:usernameOrEmail', () => {
-            invite.delete(groupId, '🐢');
+        it('should make a DELETE call to /invites/:usernameOrEmail', async () => {
+            await invite.delete(groupId, '🐢');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith('/rest/organizations/{organizationName}/groups/💎/invites/🐢');
@@ -65,8 +63,8 @@ describe('groupInvite', () => {
     });
 
     describe('accept', () => {
-        it('should make a POST call to /invites/accept', () => {
-            invite.accept(groupId);
+        it('should make a POST call to /invites/accept', async () => {
+            await invite.accept(groupId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/organizations/{organizationName}/groups/💎/invites/accept');
@@ -74,8 +72,8 @@ describe('groupInvite', () => {
     });
 
     describe('decline', () => {
-        it('should make a POST call to /invites/decline', () => {
-            invite.decline(groupId);
+        it('should make a POST call to /invites/decline', async () => {
+            await invite.decline(groupId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/organizations/{organizationName}/groups/💎/invites/decline');

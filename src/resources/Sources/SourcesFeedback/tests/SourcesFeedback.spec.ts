@@ -5,12 +5,10 @@ import {FeedbackPayload} from '../SourcesFeedbackInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('SourcesFeedback', () => {
     let sourceFeedback: SourcesFeedback;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -18,9 +16,9 @@ describe('SourcesFeedback', () => {
     });
 
     describe('sendFeedback', () => {
-        it('should make a POST call to the specific feedback url', () => {
+        it('should make a POST call to the specific feedback url', async () => {
             const feedback = {message: 'allo!'} as FeedbackPayload;
-            sourceFeedback.sendFeedback(FeedbackConsumerType.SOURCE_MANAGEMENT_IMPROVEMENTS, feedback);
+            await sourceFeedback.sendFeedback(FeedbackConsumerType.SOURCE_MANAGEMENT_IMPROVEMENTS, feedback);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${SourcesFeedback.baseUrl}?feedbackConsumerType=SOURCE_MANAGEMENT_IMPROVEMENTS`,

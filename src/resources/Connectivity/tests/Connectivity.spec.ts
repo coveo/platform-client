@@ -4,12 +4,10 @@ import {LogRequestResourceType} from '../ConnectivityInterface.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Connectivity Service', () => {
     let connectivity: Connectivity;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -21,8 +19,8 @@ describe('Connectivity Service', () => {
         const activityId = 'ACTIVITY_ID';
         const logRequestId = 'LOGREQUEST_ID';
 
-        it('should post a new new log request', () => {
-            connectivity.requestLog({resourceId, activityId});
+        it('should post a new new log request', async () => {
+            await connectivity.requestLog({resourceId, activityId});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}?resourceType=SOURCE`, {
                 resourceId,
@@ -30,14 +28,14 @@ describe('Connectivity Service', () => {
             });
         });
 
-        it('should get the state of a log request', () => {
-            connectivity.getLogRequestState(logRequestId);
+        it('should get the state of a log request', async () => {
+            await connectivity.getLogRequestState(logRequestId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Connectivity.baseUrl}/${logRequestId}`);
         });
 
-        it('should have the resource type if specified', () => {
-            connectivity.requestLog({resourceId, activityId}, LogRequestResourceType.SECURITY_PROVIDER);
+        it('should have the resource type if specified', async () => {
+            await connectivity.requestLog({resourceId, activityId}, LogRequestResourceType.SECURITY_PROVIDER);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Connectivity.baseUrl}?resourceType=SECURITY_PROVIDER`, {
                 resourceId,

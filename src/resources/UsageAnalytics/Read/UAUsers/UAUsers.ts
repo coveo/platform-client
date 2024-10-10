@@ -14,8 +14,8 @@ export default class UAUsers extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get the data level filters that apply to a user.
-     *
      * @param userId The unique identifier of a user.
+     * @param params
      */
     listUserFilters(userId: string, params?: ListUAUsersFiltersParams) {
         return this.api.get<UAUsersFiltersModel>(this.buildPathWithOrg(`${UAUsers.baseUrl}/${userId}/filters`, params));
@@ -23,8 +23,8 @@ export default class UAUsers extends ReadServiceResource implements ReadServiceH
 
     /**
      * Set the filters that will be applied to a user query.
-     *
      * @param userId The unique identifier of a user.
+     * @param filters
      */
     updateUserFilters(userId: string, filters: UAUserFilterParams[]) {
         return this.api.put<void>(this.buildPathWithOrg(`${UAUsers.baseUrl}/${userId}/filters`), filters);
@@ -32,8 +32,8 @@ export default class UAUsers extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get the reports that a user can access.
-     *
      * @param userId The unique identifier of a user.
+     * @param params
      */
     listUsersReports(userId: string, params?: ListUAUsersReportsParams) {
         return this.api.get<UAUsersReportsModel>(this.buildPathWithOrg(`${UAUsers.baseUrl}/${userId}/reports`, params));
@@ -41,8 +41,8 @@ export default class UAUsers extends ReadServiceResource implements ReadServiceH
 
     /**
      * Set which reports a user can access.
-     *
      * @param userId The unique identifier of a user.
+     * @param reportsIDs
      */
     updateUsersReports(userId: string, reportsIDs: string[]) {
         return this.api.put<void>(this.buildPathWithOrg(`${UAUsers.baseUrl}/${userId}/reports`), reportsIDs);
@@ -50,7 +50,6 @@ export default class UAUsers extends ReadServiceResource implements ReadServiceH
 
     /**
      * Get a user.
-     *
      * @param userId The unique identifier of a user.
      */
     getUser(userId: string) {
