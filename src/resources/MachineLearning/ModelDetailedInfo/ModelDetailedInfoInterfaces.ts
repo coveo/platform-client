@@ -65,7 +65,7 @@ export interface ModelWithDetails {
      */
     modelDisplayName: string;
     /**
-     * The associations related to this model
+     * The associations related to this model.
      * @example [{
      *    "parentId": "38b08160-d7d4-4626-8e03-53587c23415d",
      *    "id": "917af358-13fd-4c8e-94af-7cf649bddc48",
@@ -93,7 +93,7 @@ export interface ModelWithDetails {
      */
     modelDetails?: ModelDetails;
     /**
-     * The current status of the model
+     * The current status of the model.
      */
     modelStatusInfo: ModelStatusInfo;
 }
