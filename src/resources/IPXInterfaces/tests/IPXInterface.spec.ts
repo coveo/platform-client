@@ -4,13 +4,11 @@ import {HostedInterfaceConditionOperator} from '../../HostedInterfacesCore/index
 import IPXInterface from '../IPXInterface.js';
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('IPXInterface', () => {
     let ipxInterface: IPXInterface;
 
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const config: New<IPXInterfaceConfiguration> = {
         name: 'some ipx name',
         facets: [
@@ -109,8 +107,8 @@ describe('IPXInterface', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call with all parameters', () => {
-            ipxInterface.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
+        it('should make a GET call with all parameters', async () => {
+            await ipxInterface.list({page: 2, perPage: 10, filter: 'Accounting', order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -118,29 +116,29 @@ describe('IPXInterface', () => {
             );
         });
 
-        it('should make a GET call with page', () => {
-            ipxInterface.list({page: 2});
+        it('should make a GET call with page', async () => {
+            await ipxInterface.list({page: 2});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}?page=2`);
         });
 
-        it('should make a GET call with perPage', () => {
-            ipxInterface.list({perPage: 10});
+        it('should make a GET call with perPage', async () => {
+            await ipxInterface.list({perPage: 10});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}?perPage=10`);
         });
 
-        it('should make a GET call with filter', () => {
-            ipxInterface.list({filter: 'Accounting'});
+        it('should make a GET call with filter', async () => {
+            await ipxInterface.list({filter: 'Accounting'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}?filter=Accounting`);
         });
 
-        it('should make a GET call with order', () => {
-            ipxInterface.list({order: 'asc'});
+        it('should make a GET call with order', async () => {
+            await ipxInterface.list({order: 'asc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}?order=asc`);
@@ -148,8 +146,8 @@ describe('IPXInterface', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the IPXInterface base url', () => {
-            ipxInterface.create(config);
+        it('should make a POST call to the IPXInterface base url', async () => {
+            await ipxInterface.create(config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(IPXInterface.baseUrl, config);
@@ -157,10 +155,10 @@ describe('IPXInterface', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the IPXInterface base url', () => {
+        it('should make a GET call to the IPXInterface base url', async () => {
             const id = 'IPInterface-id-to-get';
 
-            ipxInterface.get(id);
+            await ipxInterface.get(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`);
@@ -168,10 +166,10 @@ describe('IPXInterface', () => {
     });
 
     describe('update', () => {
-        it('should make an UPDATE call to the IPXInterface base url', () => {
+        it('should make an UPDATE call to the IPXInterface base url', async () => {
             const id = 'IPInterface-id-to-update';
 
-            ipxInterface.update(id, config);
+            await ipxInterface.update(id, config);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`, config);
@@ -179,10 +177,10 @@ describe('IPXInterface', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the IPXInterface base url', () => {
+        it('should make a DELETE call to the IPXInterface base url', async () => {
             const id = 'IPInterface-id-to-delete';
 
-            ipxInterface.delete(id);
+            await ipxInterface.delete(id);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}`);
@@ -190,10 +188,10 @@ describe('IPXInterface', () => {
     });
 
     describe('loader', () => {
-        it('should make a GET call to the IPXInterface base url appended with /loader', () => {
+        it('should make a GET call to the IPXInterface base url appended with /loader', async () => {
             const id = 'IPInterface-id-to-get';
 
-            ipxInterface.getLoader(id);
+            await ipxInterface.getLoader(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/loader`);
@@ -201,10 +199,10 @@ describe('IPXInterface', () => {
     });
 
     describe('generatePreview', () => {
-        it('should make a POST call to the IPXInterface base url appended with /preview', () => {
+        it('should make a POST call to the IPXInterface base url appended with /preview', async () => {
             const id = 'IPInterface-id-to-preview';
 
-            ipxInterface.generatePreview(id, config);
+            await ipxInterface.generatePreview(id, config);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/preview`, config);
@@ -212,10 +210,10 @@ describe('IPXInterface', () => {
     });
 
     describe('getEditInterface', () => {
-        it('should make a GET call to the IPXInterface base url appended with /edit', () => {
+        it('should make a GET call to the IPXInterface base url appended with /edit', async () => {
             const id = 'IPInterface-id-to-edit';
 
-            ipxInterface.getEditInterface(id);
+            await ipxInterface.getEditInterface(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/edit`);
@@ -223,10 +221,10 @@ describe('IPXInterface', () => {
     });
 
     describe('getLoginPage', () => {
-        it('should make a GET call to the IPXInterface base url appended with /login', () => {
+        it('should make a GET call to the IPXInterface base url appended with /login', async () => {
             const id = 'IPInterface-id-to-login';
 
-            ipxInterface.getLoginPage(id);
+            await ipxInterface.getLoginPage(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/login`);
@@ -234,10 +232,10 @@ describe('IPXInterface', () => {
     });
 
     describe('getToken', () => {
-        it('should make a GET call to the IPXInterface base url appended with /token', () => {
+        it('should make a GET call to the IPXInterface base url appended with /token', async () => {
             const id = 'IPInterface-id-to-get-token';
 
-            ipxInterface.getToken(id);
+            await ipxInterface.getToken(id);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${IPXInterface.baseUrl}/${id}/token`);

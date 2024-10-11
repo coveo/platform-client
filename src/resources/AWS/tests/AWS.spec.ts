@@ -3,12 +3,10 @@ import AWS from '../AWS.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Cluster', () => {
     let aws: AWS;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,8 +14,8 @@ describe('Cluster', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the Cluster base url', () => {
-            aws.list();
+        it('should make a GET call to the Cluster base url', async () => {
+            await aws.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(AWS.baseUrl);
         });

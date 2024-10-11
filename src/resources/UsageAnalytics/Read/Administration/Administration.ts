@@ -18,7 +18,6 @@ export default class Administration extends ReadServiceResource {
 
     /**
      * Edit an account.
-     *
      * @param model The account information.
      */
     updateAccount(model: AccountInfoModelV15) {
@@ -27,6 +26,7 @@ export default class Administration extends ReadServiceResource {
 
     /**
      * Get example values that would be rejected by strict validation for the specified dimension.
+     * @param params
      */
     getStrictValidationTest(params: StrictValidationTestParams) {
         return this.api.get<StrictValidationTestResponseV15>(

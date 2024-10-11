@@ -40,6 +40,7 @@ export default class Field extends Resource {
     }
 
     /**
+     * @param params
      * @deprecated list(params?: ListFieldsParams) is kept for backward compatibility, you should now use `search(params?: FieldListingOptions)`.
      */
     list(params?: ListFieldsParams) {

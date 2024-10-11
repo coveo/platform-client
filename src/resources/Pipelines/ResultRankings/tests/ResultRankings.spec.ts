@@ -11,12 +11,10 @@ import {CopyResultRankingRequest, ResultRanking} from '../ResultRankingsInterfac
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Result Rankings', () => {
     let resultRankings: ResultRankings;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     const resultRanking: ResultRanking = {
         id: 'id',
@@ -60,33 +58,33 @@ describe('Result Rankings', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Result Rankings url', () => {
+        it('should make a DELETE call to the specific Result Rankings url', async () => {
             const pipelineId = 'id';
             const resultRankingId = '12341234';
 
-            resultRankings.delete(pipelineId, resultRankingId);
+            await resultRankings.delete(pipelineId, resultRankingId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId));
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Result Rankings url', () => {
+        it('should make a GET call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
             const resultRankingId = 'b';
 
-            resultRankings.get(pipelineId, resultRankingId);
+            await resultRankings.get(pipelineId, resultRankingId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId));
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Result Rankings url', () => {
+        it('should make a PUT call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
             const resultRankingId = 'b';
 
-            resultRankings.update(pipelineId, resultRankingId, resultRanking.resultRanking);
+            await resultRankings.update(pipelineId, resultRankingId, resultRanking.resultRanking);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
@@ -96,12 +94,12 @@ describe('Result Rankings', () => {
     });
 
     describe('updateJSON', () => {
-        it('should make a PUTJSON call to the specific Result Rankings url', () => {
+        it('should make a PUTJSON call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
             const resultRankingId = 'b';
             const json = JSON.stringify(resultRanking.resultRanking);
 
-            resultRankings.updateJSON(pipelineId, resultRankingId, json);
+            await resultRankings.updateJSON(pipelineId, resultRankingId, json);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 ResultRankings.getResultRankingsUrl(pipelineId, resultRankingId),
@@ -112,14 +110,14 @@ describe('Result Rankings', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Result Rankings url', () => {
+        it('should make a GET call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
 
-            resultRankings.list(pipelineId);
+            await resultRankings.list(pipelineId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId));
         });
-        it('should convert associated groups empty array to a JSON string', () => {
+        it('should convert associated groups empty array to a JSON string', async () => {
             const pipelineId = '️a';
             const associatedGroups = [];
             const expectedUri =
@@ -127,11 +125,11 @@ describe('Result Rankings', () => {
                 '?associatedGroups=' +
                 encodeURIComponent(JSON.stringify(associatedGroups));
 
-            resultRankings.list(pipelineId, {associatedGroups});
+            await resultRankings.list(pipelineId, {associatedGroups});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
-        it('should convert required fields to a JSON string', () => {
+        it('should convert required fields to a JSON string', async () => {
             const pipelineId = '️a';
             const associatedGroups = [null, 'g1', 'g2'];
             const ruleStatuses = [ResultRankingsStatuses.active, ResultRankingsStatuses.inactive];
@@ -146,28 +144,28 @@ describe('Result Rankings', () => {
                 encodeURIComponent(JSON.stringify(ruleTypes)),
             ].join('');
 
-            resultRankings.list(pipelineId, {associatedGroups, ruleStatuses, ruleTypes});
+            await resultRankings.list(pipelineId, {associatedGroups, ruleStatuses, ruleTypes});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
     });
 
     describe('create', () => {
-        it('should make a POST call to the specific Result Rankings url', () => {
+        it('should make a POST call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
 
-            resultRankings.create(pipelineId, resultRanking.resultRanking);
+            await resultRankings.create(pipelineId, resultRanking.resultRanking);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), resultRanking.resultRanking);
         });
     });
 
     describe('createJSON', () => {
-        it('should make a POSTJSON call to the specific Result Rankings url', () => {
+        it('should make a POSTJSON call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
             const json = JSON.stringify(resultRanking.resultRanking);
 
-            resultRankings.createJSON(pipelineId, json);
+            await resultRankings.createJSON(pipelineId, json);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(ResultRankings.getBaseUrl(pipelineId), undefined, {
                 body: json,
@@ -177,10 +175,10 @@ describe('Result Rankings', () => {
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to the specific Result Rankings duplicate url', () => {
+        it('should make a POST call to the specific Result Rankings duplicate url', async () => {
             const pipelineId = '️a';
 
-            resultRankings.duplicate(pipelineId, resultRanking.id);
+            await resultRankings.duplicate(pipelineId, resultRanking.id);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${ResultRankings.getBaseUrl(pipelineId)}/duplicate/${resultRanking.id}`,
@@ -189,14 +187,14 @@ describe('Result Rankings', () => {
     });
 
     describe('copy', () => {
-        it('should make a POST call to the specific Result Rankings copy url', () => {
+        it('should make a POST call to the specific Result Rankings copy url', async () => {
             const pipelineId = '️a';
             const params: CopyResultRankingRequest = {
                 destinationPipelineId: 'target',
                 resultRankingIds: ['rule1', 'rule2'],
             };
 
-            resultRankings.copyTo(pipelineId, params);
+            await resultRankings.copyTo(pipelineId, params);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${ResultRankings.getBaseUrl(pipelineId)}/copy`, {
                 destinationPipelineId: 'target',
@@ -206,19 +204,19 @@ describe('Result Rankings', () => {
     });
 
     describe('bulkGet', () => {
-        it('should make a GET call to the specific Result Rankings url', () => {
+        it('should make a GET call to the specific Result Rankings url', async () => {
             const pipelineId = '️a';
             const ids = ['one', 'two', 'three'];
 
-            resultRankings.bulkGet(pipelineId, {ids});
+            await resultRankings.bulkGet(pipelineId, {ids});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${ResultRankings.getBaseUrl(pipelineId)}/bulkGet`, {ids});
         });
     });
 
     describe('bulkDelete', () => {
-        it('sends a POST call to /bulkDelete with the provided ids', () => {
-            resultRankings.bulkDelete('🆔', ['rule-one', 'rule-two']);
+        it('sends a POST call to /bulkDelete with the provided ids', async () => {
+            await resultRankings.bulkDelete('🆔', ['rule-one', 'rule-two']);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🆔/resultRankings/bulkDelete', {
                 ids: ['rule-one', 'rule-two'],

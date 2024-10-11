@@ -19,6 +19,7 @@ export default class DataShare extends ReadServiceResource {
 
     /**
      * Add a Snowflake account to Secure Data Sharing.
+     * @param params
      */
     addSnowflakeAccount(params: SnowflakeAccountDataSharingParams) {
         return this.api.post<void>(this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`), params);
@@ -26,6 +27,7 @@ export default class DataShare extends ReadServiceResource {
 
     /**
      * Removes a Snowflake account from Secure Data Sharing.
+     * @param params
      */
     deleteSnowflakeAccount(params: SnowflakeAccountDataSharingParams) {
         return this.api.delete<void>(this.buildPathWithOrg(`${DataShare.baseUrl}/accounts`, params));

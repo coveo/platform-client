@@ -166,7 +166,7 @@ export interface CreateSchemaSourceModel extends CreateSourceModel {
     objectsToGetConfiguration?: string;
 }
 
-export interface CreateSchemaSourceOptions extends CreateSourceOptions {}
+export type CreateSchemaSourceOptions = CreateSourceOptions;
 
 /**
  * Wraps whether or not a Slack token can validly be used with a Slack source

@@ -3,12 +3,10 @@ import InsightPanelConfig from '../InsightPanelConfig.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('InsightPanelConfig', () => {
     let insightPanel: InsightPanelConfig;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,8 +14,8 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the InsightPanelConfig base URL', () => {
-            insightPanel.list({page: 2, perPage: 10, filter: 'anything', order: 'desc'});
+        it('should make a GET call to the InsightPanelConfig base URL', async () => {
+            await insightPanel.list({page: 2, perPage: 10, filter: 'anything', order: 'desc'});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -26,22 +24,22 @@ describe('InsightPanelConfig', () => {
         });
 
         describe('with order parameter', () => {
-            it('should not sort by default', () => {
-                insightPanel.list();
+            it('should not sort by default', async () => {
+                await insightPanel.list();
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(InsightPanelConfig.baseUrl);
             });
 
-            it('should sort in ascending order when specified', () => {
-                insightPanel.list({order: 'asc'});
+            it('should sort in ascending order when specified', async () => {
+                await insightPanel.list({order: 'asc'});
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=asc`);
             });
 
-            it('should sort in descending order when specified', () => {
-                insightPanel.list({order: 'desc'});
+            it('should sort in descending order when specified', async () => {
+                await insightPanel.list({order: 'desc'});
 
                 expect(api.get).toHaveBeenCalledTimes(1);
                 expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}?order=desc`);
@@ -50,13 +48,13 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the InsightPanelConfig base URL', () => {
+        it('should make a POST call to the InsightPanelConfig base URL', async () => {
             const newInsightPanelModel = {
                 name: 'my insight panel',
                 pipeline: 'some query pipeline',
             };
 
-            insightPanel.create(newInsightPanelModel);
+            await insightPanel.create(newInsightPanelModel);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(InsightPanelConfig.baseUrl, newInsightPanelModel);
@@ -64,9 +62,9 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific InsightPanelConfig URL', () => {
+        it('should make a DELETE call to the specific InsightPanelConfig URL', async () => {
             const insightPanelConfigId = 'some-insight-panel-config';
-            insightPanel.delete(insightPanelConfigId);
+            await insightPanel.delete(insightPanelConfigId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${insightPanelConfigId}`);
@@ -74,7 +72,7 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific InsightPanelConfig URL', () => {
+        it('should make a PUT call to the specific InsightPanelConfig URL', async () => {
             const insightPanelModel = {
                 id: 'some-insight-panel-config',
                 name: 'my insight panel',
@@ -87,7 +85,7 @@ describe('InsightPanelConfig', () => {
             };
             const {id: _, ...insightPanelModelWithoutId} = insightPanelModel;
 
-            insightPanel.update(insightPanelModel);
+            await insightPanel.update(insightPanelModel);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -98,9 +96,9 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific InsightPanelConfig URL', () => {
+        it('should make a GET call to the specific InsightPanelConfig URL', async () => {
             const insightPanelConfigId = 'some-insight-panel-config';
-            insightPanel.get(insightPanelConfigId);
+            await insightPanel.get(insightPanelConfigId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${insightPanelConfigId}`);
@@ -108,14 +106,14 @@ describe('InsightPanelConfig', () => {
     });
 
     describe('duplicate', () => {
-        it('should make a POST call to the specific InsightPanelConfig URL', () => {
+        it('should make a POST call to the specific InsightPanelConfig URL', async () => {
             const duplicateInsightPanelParams = {
                 name: 'my duplicated insight panel',
                 id: 'some-insight-panel-config',
             };
             const {id, name} = duplicateInsightPanelParams;
 
-            insightPanel.duplicate(duplicateInsightPanelParams);
+            await insightPanel.duplicate(duplicateInsightPanelParams);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${InsightPanelConfig.baseUrl}/${id}`, {name});

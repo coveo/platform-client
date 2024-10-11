@@ -79,7 +79,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse);
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError).toMatchObject(httpError);
@@ -95,7 +95,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse, null, 'text');
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.status).toBe(403);
@@ -115,7 +115,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse, null, 'text');
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.status).toBe(502);
@@ -135,7 +135,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse, null, 'text');
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.status).toBe(403);
@@ -153,7 +153,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse);
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.status).toBe(400);
@@ -170,7 +170,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse);
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.xRequestId).toBe('DidyoueverhearthetragedyofDarthPlagueisTheWise?');
@@ -184,7 +184,7 @@ describe('ResponseHandlers', () => {
                 try {
                     await handleResponse(errorResponse);
                 } catch (error) {
-                    rejectedError = error;
+                    rejectedError = error as CoveoPlatformClientError;
                 }
 
                 expect(rejectedError?.[key]).toBe('unknown');
@@ -200,7 +200,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse);
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.[key]).toBe('shouldBeThis');
@@ -215,7 +215,7 @@ describe('ResponseHandlers', () => {
             try {
                 await handleResponse(errorResponse);
             } catch (error) {
-                rejectedError = error;
+                rejectedError = error as CoveoPlatformClientError;
             }
 
             expect(rejectedError?.[key]).toBe('shouldBeAlias');

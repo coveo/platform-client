@@ -100,13 +100,11 @@ export interface ExtensionCompileError {
 export interface ExtensionContentVersionModel {
     /**
      * The date at which the extension version was created (in number of milliseconds since UNIX epoch), i.e., the date of the modification of the extension when this extension version was created.
-     *
      * @example 1556308241000
      */
     lastModified: number;
     /**
      * The unique identifier of the extension target version.
-     *
      * @example hdJSDb4hTkdnsCynNtF.d657FgLSDydcj
      */
     id: string;

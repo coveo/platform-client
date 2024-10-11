@@ -8,6 +8,7 @@ import {
 } from '../../Enums.js';
 
 export interface SinglePermissionModel {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     additionalInfo?: any;
     allowed?: boolean;
     identity?: string;
@@ -41,6 +42,7 @@ export interface DocumentPermissionModel {
 }
 
 export interface Permission {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     additionalInfo?: any;
     identity?: string;
     identityType?: PermissionIdentityType;

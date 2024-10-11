@@ -9,12 +9,11 @@ import {
 } from '../ActivitiesInterfaces.js';
 
 jest.mock('../../../APICore.ts.js');
-const APIMock: jest.Mock<API> = API as any;
 
 describe('Activity', () => {
     let activity: Activity;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -22,92 +21,92 @@ describe('Activity', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Activity url', () => {
+        it('should make a GET call to the specific Activity url', async () => {
             const activityId = 'gandalf';
-            activity.get(activityId);
+            await activity.get(activityId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/${activityId}`);
         });
     });
 
     describe('getResourceTypes', () => {
-        it('should make a GET call to the specific Activity url', () => {
-            activity.getResourceTypes();
+        it('should make a GET call to the specific Activity url', async () => {
+            await activity.getResourceTypes();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/resourcetypes`);
         });
     });
 
     describe('getOperationTypes', () => {
-        it('should make a GET call to return non internal operation types', () => {
-            activity.getOperationTypes();
+        it('should make a GET call to return non internal operation types', async () => {
+            await activity.getOperationTypes();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/operationtypes`);
         });
 
-        it('should make a GET call to return all operation types', () => {
-            activity.getOperationTypes(true);
+        it('should make a GET call to return all operation types', async () => {
+            await activity.getOperationTypes(true);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/operationtypes/all`);
         });
     });
 
     describe('getListOfResourcesAndOperations', () => {
-        it('should make a GET call to return all resources and their operation types', () => {
-            activity.getListOfResourcesAndOperations();
+        it('should make a GET call to return all resources and their operation types', async () => {
+            await activity.getListOfResourcesAndOperations();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/resourcesandoperations`);
         });
     });
 
     describe('list', () => {
-        it('should make a POST call to the specific Activity url to fetch activities of an organization', () => {
+        it('should make a POST call to the specific Activity url to fetch activities of an organization', async () => {
             const params: ListActivitiesParams = {};
             const activityFacet: ActivityListingFilters = {sections: ['INTERNAL']};
-            activity.list(params, activityFacet);
+            await activity.list(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Activity.getBaseUrl(), activityFacet);
         });
 
-        it('should make a POST call to the specific Activity url to fetch public activities of an organization', () => {
+        it('should make a POST call to the specific Activity url to fetch public activities of an organization', async () => {
             const params: ListActivitiesParams = {};
             const activityFacet: ActivityListingFilters = {};
-            activity.list(params, activityFacet);
+            await activity.list(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/public`, activityFacet);
         });
     });
 
     describe('listFacets', () => {
-        it('should make a POST call to the specific Activity url to fetch the facets', () => {
+        it('should make a POST call to the specific Activity url to fetch the facets', async () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {sections: ['INTERNAL']};
-            activity.listFacets(params, activityFacet);
+            await activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets`, activityFacet);
         });
 
-        it('should make a POST call to the specific Activity url to fetch the public facets', () => {
+        it('should make a POST call to the specific Activity url to fetch the public facets', async () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
-            activity.listFacets(params, activityFacet);
+            await activity.listFacets(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/facets/public`, activityFacet);
         });
     });
 
     describe('listAll', () => {
-        it('should make a POST call to the specific Activity url to fetch activities of all organizations', () => {
+        it('should make a POST call to the specific Activity url to fetch activities of all organizations', async () => {
             const params: ListActivitiesFacetsParams = {};
             const activityFacet: ActivityListingFilters = {};
-            activity.listAll(params, activityFacet);
+            await activity.listAll(params, activityFacet);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Activity.getBaseUrlAllOrgs(), activityFacet);
         });
     });
 
     describe('abortActivity', () => {
-        it('should make a POST call to the specific Activity url', () => {
+        it('should make a POST call to the specific Activity url', async () => {
             const activityId = 'gimli';
             const triggeredBy: TriggeredByAttributes = {
                 type: 'randomType',
@@ -122,7 +121,7 @@ describe('Activity', () => {
                 resourceType: '',
             };
 
-            activity.abortActivity(activityId, abortActivityModel);
+            await activity.abortActivity(activityId, abortActivityModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Activity.getBaseUrl()}/${activityId}/abort`, abortActivityModel);
         });

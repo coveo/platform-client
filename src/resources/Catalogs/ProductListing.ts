@@ -16,6 +16,8 @@ export default class ProductListing extends Resource {
     static baseProductListingsUrl = `/rest/organizations/${API.orgPlaceholder}/productlistings`;
 
     /**
+     * @param catalogId
+     * @param options
      * @deprecated
      */
     list(catalogId: string, options?: ProductListingsListOptions) {
@@ -26,6 +28,8 @@ export default class ProductListing extends Resource {
     }
 
     /**
+     * @param catalogId
+     * @param model
      * @deprecated
      */
     create(catalogId: string, model: New<ProductListingModel>) {
@@ -36,6 +40,8 @@ export default class ProductListing extends Resource {
     }
 
     /**
+     * @param catalogId
+     * @param productListingId
      * @deprecated
      */
     delete(catalogId: string, productListingId: string) {
@@ -43,6 +49,8 @@ export default class ProductListing extends Resource {
     }
 
     /**
+     * @param catalogId
+     * @param productListingId
      * @deprecated
      */
     get(catalogId: string, productListingId: string) {
@@ -52,6 +60,8 @@ export default class ProductListing extends Resource {
     }
 
     /**
+     * @param catalogId
+     * @param model
      * @deprecated
      */
     update(catalogId: string, model: ProductListingModel) {

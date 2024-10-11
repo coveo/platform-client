@@ -16,8 +16,10 @@ export interface CharsetDetectionHint {
 }
 
 export interface DocumentProcessorParameters {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     condition?: any;
     deleteOnError?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     values?: any;
 }
 
@@ -115,6 +117,7 @@ export interface DocumentProcessorConfig {
 export interface DocumentConfig {
     documentProcessorConfig?: DocumentProcessorConfig;
     indexUri?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     parameters?: any;
     postConversions?: DocumentProcessor[];
     preConversions?: DocumentProcessor[];

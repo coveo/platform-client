@@ -28,6 +28,7 @@ export interface FormAuthenticationConfig {
     formUrl?: string;
     inputs?: FormInput[];
     javaScriptLoadingDelayInMilliseconds?: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customLoginSequence?: any;
 }
 

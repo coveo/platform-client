@@ -11,9 +11,9 @@ export interface SearchPageModel extends GranularResource {
     lastModified?: string;
 }
 
-export interface CreateSearchPageModel extends Pick<SearchPageModel, 'name' | 'title'> {}
+export type CreateSearchPageModel = Pick<SearchPageModel, 'name' | 'title'>;
 
-export interface UpdateSearchPageModel extends Pick<SearchPageModel, 'name' | 'title' | 'html'> {}
+export type UpdateSearchPageModel = Pick<SearchPageModel, 'name' | 'title' | 'html'>;
 
 export type JavaScriptResourceModel = SearchPageResourceModel;
 

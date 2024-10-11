@@ -109,7 +109,6 @@ export default class ResultRankings extends Resource {
 
     /**
      * Delete multiple result rankings rules in batch for a specific pipeline.
-     *
      * @param pipelineId The unique identifier of the target query pipeline.
      * @param ids A list of result ranking rule identifiers to delete. A maximum of 100 can be sent.
      */

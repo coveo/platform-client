@@ -1,4 +1,4 @@
-import fetchMock from 'jest-fetch-mock';
+import fetchMock, {enableFetchMocks, FetchMock} from 'jest-fetch-mock';
 import API from '../../../APICore.js';
 import {SnapshotSortingType, SortingOrder} from '../../Enums.js';
 import ResourceSnapshots from '../ResourceSnapshots.js';
@@ -24,12 +24,10 @@ import {
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('ResourceSnapshots', () => {
     let resourceSnapshots: ResourceSnapshots;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -37,18 +35,18 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
-            resourceSnapshots.list();
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
+            await resourceSnapshots.list();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ResourceSnapshots.baseUrl);
         });
 
-        it('should make a GET call to the specific Resource Snapshots url with parameters', () => {
+        it('should make a GET call to the specific Resource Snapshots url with parameters', async () => {
             const filter = 'filter';
             const sortingOrder = SortingOrder.ASC;
             const sortingType = SnapshotSortingType.CREATED_DATE;
-            resourceSnapshots.list({filter, sortingOrder, sortingType});
+            await resourceSnapshots.list({filter, sortingOrder, sortingType});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -58,19 +56,19 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
 
-            resourceSnapshots.get(snapshotToGetId);
+            await resourceSnapshots.get(snapshotToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}`);
         });
 
-        it('should make a GET call to the specific Resource Snapshots url with the includeReports query param', () => {
+        it('should make a GET call to the specific Resource Snapshots url with the includeReports query param', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
 
-            resourceSnapshots.get(snapshotToGetId, {includeReports: true});
+            await resourceSnapshots.get(snapshotToGetId, {includeReports: true});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}?includeReports=true`);
@@ -78,20 +76,20 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('listResourceAccess', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
-            resourceSnapshots.listResourceAccess();
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
+            await resourceSnapshots.listResourceAccess();
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/access/resource`);
         });
 
-        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
             const options: ValidateAccessOptions = {
                 snapshotAccessType: SnapshotAccessType.Write,
             };
 
-            resourceSnapshots.validateAccess(snapshotToGetId, options);
+            await resourceSnapshots.validateAccess(snapshotToGetId, options);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -101,13 +99,13 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('validateAccess', () => {
-        it('should make a GET call to the specific Resource Snapshots url and proper access type when READ', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when READ', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
             const options: ValidateAccessOptions = {
                 snapshotAccessType: SnapshotAccessType.Read,
             };
 
-            resourceSnapshots.validateAccess(snapshotToGetId, options);
+            await resourceSnapshots.validateAccess(snapshotToGetId, options);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -115,13 +113,13 @@ describe('ResourceSnapshots', () => {
             );
         });
 
-        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', () => {
+        it('should make a GET call to the specific Resource Snapshots url and proper access type when WRITE', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
             const options: ValidateAccessOptions = {
                 snapshotAccessType: SnapshotAccessType.Write,
             };
 
-            resourceSnapshots.validateAccess(snapshotToGetId, options);
+            await resourceSnapshots.validateAccess(snapshotToGetId, options);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -131,10 +129,10 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('export', () => {
-        it('should make a post call to the specific Resource Snapshots url and get snapshot content with default content format', () => {
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with default content format', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
 
-            resourceSnapshots.export(snapshotToGetId);
+            await resourceSnapshots.export(snapshotToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotToGetId}/content`, {
@@ -143,13 +141,13 @@ describe('ResourceSnapshots', () => {
             });
         });
 
-        it('should make a post call to the specific Resource Snapshots url and get snapshot content with specific content format', () => {
+        it('should make a post call to the specific Resource Snapshots url and get snapshot content with specific content format', async () => {
             const snapshotToGetId = 'snapshot-to-be-fetched';
             const exportSnapshotContentOptions: ExportSnapshotContentOptions = {
                 contentFormat: SnapshotExportContentFormat.SplitPerType,
             };
 
-            resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
+            await resourceSnapshots.export(snapshotToGetId, exportSnapshotContentOptions);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -161,6 +159,7 @@ describe('ResourceSnapshots', () => {
 
     describe('getContent', () => {
         it('should make a GET call to the specific Resource Snapshots url and then make a get call to the url', async () => {
+            enableFetchMocks();
             const snapshotToGetId = 'snapshot-to-be-fetched';
             const urlReturned: ResourceSnapshotUrlModel = {
                 url: 'https://google.com',
@@ -168,7 +167,7 @@ describe('ResourceSnapshots', () => {
             };
 
             jest.spyOn(resourceSnapshots, 'generateUrl').mockResolvedValue(urlReturned);
-            fetchMock.mockResponseOnce(JSON.stringify({test: 'hello'}));
+            (fetchMock as unknown as FetchMock).mockResponseOnce(JSON.stringify({test: 'hello'}));
 
             await resourceSnapshots.getContent(snapshotToGetId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
@@ -183,22 +182,24 @@ describe('ResourceSnapshots', () => {
             append: mockedAppendToFormData,
         };
         beforeEach(() => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             (global as any).FormData = jest.fn(() => mockedFormData);
         });
 
         it.each(['application/zip', 'application/x-zip-compressed'])(
             'should make a post call to the specific Resource Snapshots url if zip file',
-            (fileType: string) => {
+            async (fileType: string) => {
                 const mockedFileZIP = {
                     type: fileType,
                 } as unknown as File;
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 (global as any).File = jest.fn(() => mockedFileZIP);
                 const createFromFileOptions: CreateFromFileOptions = {
                     developerNotes: 'Cut my life into pieces! 🎵🎵🎵',
                 };
                 const file = new File([''], 'mock.zip', {type: fileType});
 
-                resourceSnapshots.createFromFile(file, createFromFileOptions);
+                await resourceSnapshots.createFromFile(file, createFromFileOptions);
 
                 expect(api.postForm).toHaveBeenCalledTimes(1);
                 expect(api.postForm).toHaveBeenCalledWith(
@@ -208,16 +209,17 @@ describe('ResourceSnapshots', () => {
             },
         );
 
-        it('should make a post call to the specific Resource Snapshots url if json file', () => {
+        it('should make a post call to the specific Resource Snapshots url if json file', async () => {
             const mockedFileJSON = {
                 type: 'application/json',
             };
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             (global as any).File = jest.fn(() => mockedFileJSON);
 
             const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
             const file = new File([''], 'mock.zip', {type: 'application/zip'});
 
-            resourceSnapshots.createFromFile(file, createFromFileOptions);
+            await resourceSnapshots.createFromFile(file, createFromFileOptions);
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
@@ -230,6 +232,7 @@ describe('ResourceSnapshots', () => {
             const unsupportedMockedFile = {
                 type: 'image/png',
             };
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             (global as any).File = jest.fn(() => unsupportedMockedFile);
 
             const createFromFileOptions: CreateFromFileOptions = {developerNotes: 'Cut my life into pieces! 🎵🎵🎵'};
@@ -240,7 +243,7 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('createFromOrganization', () => {
-        it('should make a POST call to the specific Resource Snapshots url', () => {
+        it('should make a POST call to the specific Resource Snapshots url', async () => {
             const exportConfigurationModel: ResourceSnapshotExportConfigurationModel = {
                 resourcesToExport: {FIELD: ['*'], EXTENSION: ['🤖']},
             };
@@ -249,7 +252,7 @@ describe('ResourceSnapshots', () => {
                 includeChildrenResources: false,
             };
 
-            resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
+            await resourceSnapshots.createFromOrganization(exportConfigurationModel, createFromOrganizationOptions);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -260,10 +263,10 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('generateUrl', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
 
-            resourceSnapshots.generateUrl(snapshotId, {contentType: ResourceSnapshotContentType.PRIMARY});
+            await resourceSnapshots.generateUrl(snapshotId, {contentType: ResourceSnapshotContentType.PRIMARY});
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/url?contentType=PRIMARY`);
@@ -271,11 +274,11 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('push', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const pushSnapshotOptions: PushSnapshotOptions = {targetOrganizationId: '🎯', developerNotes: '🧘'};
 
-            resourceSnapshots.push(snapshotId, pushSnapshotOptions);
+            await resourceSnapshots.push(snapshotId, pushSnapshotOptions);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -285,11 +288,11 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('dryrun', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const dryRunOptions: DryRunOptions = {deleteMissingResources: true};
 
-            resourceSnapshots.dryRun(snapshotId, dryRunOptions);
+            await resourceSnapshots.dryRun(snapshotId, dryRunOptions);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -299,14 +302,14 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('apply', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const applyOptions: ApplyOptions = {
                 deleteMissingResources: true,
                 deletionScope: ApplyOptionsDeletionScope.OnlyTypesFromSnapshot,
             };
 
-            resourceSnapshots.apply(snapshotId, applyOptions);
+            await resourceSnapshots.apply(snapshotId, applyOptions);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -316,10 +319,10 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('delete a snapshot', () => {
-        it('should make a DELETE call to the specific Resource Snapshots url', () => {
+        it('should make a DELETE call to the specific Resource Snapshots url', async () => {
             const snapshotId = 'BossHoss';
 
-            resourceSnapshots.delete(snapshotId);
+            await resourceSnapshots.delete(snapshotId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}`);
@@ -327,11 +330,11 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('get synchronization plan', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const synchronizationPlanId = '🥱';
 
-            resourceSnapshots.getSynchronizationPlan(snapshotId, synchronizationPlanId);
+            await resourceSnapshots.getSynchronizationPlan(snapshotId, synchronizationPlanId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -341,10 +344,10 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('create synchronization plan', () => {
-        it('should make a POST call to the specific Resource Snapshots url', () => {
+        it('should make a POST call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
 
-            resourceSnapshots.createSynchronizationPlan(snapshotId);
+            await resourceSnapshots.createSynchronizationPlan(snapshotId);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${ResourceSnapshots.baseUrl}/${snapshotId}/synchronization`);
@@ -352,7 +355,7 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('update synchronization plan', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const synchronizationPlanId = '🥱';
 
@@ -362,7 +365,7 @@ describe('ResourceSnapshots', () => {
                 status: ResourceSnapshotsSynchronizationPlanStatus.Created,
             };
 
-            resourceSnapshots.updateSynchronizationPlan(snapshotId, synchronizationPlanId, synchronizationPlan);
+            await resourceSnapshots.updateSynchronizationPlan(snapshotId, synchronizationPlanId, synchronizationPlan);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -373,11 +376,11 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('apply synchronization plan', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const synchronizationPlanId = '🥱';
 
-            resourceSnapshots.applySynchronizationPlan(snapshotId, synchronizationPlanId);
+            await resourceSnapshots.applySynchronizationPlan(snapshotId, synchronizationPlanId);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
@@ -387,7 +390,7 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('update synchronization plan children', () => {
-        it('should make a PUT call to the specific Resource Snapshots url', () => {
+        it('should make a PUT call to the specific Resource Snapshots url', async () => {
             const snapshotId = '🤖';
             const synchronizationPlanId = '🥱';
             const updateChildrenOptions: UpdateChildrenOptions = {
@@ -396,7 +399,7 @@ describe('ResourceSnapshots', () => {
                 parentResourceType: ResourceSnapshotType.featuredResult,
             };
 
-            resourceSnapshots.updateSynchronizationPlanForChildren(
+            await resourceSnapshots.updateSynchronizationPlanForChildren(
                 snapshotId,
                 synchronizationPlanId,
                 updateChildrenOptions,
@@ -410,11 +413,11 @@ describe('ResourceSnapshots', () => {
     });
 
     describe('diff', () => {
-        it('should make a GET call to the specific Resource Snapshots url', () => {
+        it('should make a GET call to the specific Resource Snapshots url', async () => {
             const snapshotId = 'my-snapshot-id';
             const reportId = 'my-report-id';
 
-            resourceSnapshots.diff(snapshotId, reportId);
+            await resourceSnapshots.diff(snapshotId, reportId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
@@ -422,12 +425,12 @@ describe('ResourceSnapshots', () => {
             );
         });
 
-        it('should make a GET call to the specific Resource Snapshots url with "numberOfLinesMax" parameter', () => {
+        it('should make a GET call to the specific Resource Snapshots url with "numberOfLinesMax" parameter', async () => {
             const snapshotId = 'my-snapshot-id';
             const reportId = 'my-report-id';
             const numberOfLinesMax = 10000;
 
-            resourceSnapshots.diff(snapshotId, reportId, numberOfLinesMax);
+            await resourceSnapshots.diff(snapshotId, reportId, numberOfLinesMax);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(

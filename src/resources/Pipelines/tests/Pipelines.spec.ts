@@ -4,12 +4,10 @@ import {NewPipelineModel, UpdatePipelineModel} from '../PipelinesInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Pipelines', () => {
     let pipelines: Pipelines;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,13 +15,13 @@ describe('Pipelines', () => {
     });
 
     describe('list', () => {
-        it('makes a GET call to the Pipelines v1 url', () => {
-            pipelines.list();
+        it('makes a GET call to the Pipelines v1 url', async () => {
+            await pipelines.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Pipelines.searchUrlVersion1);
         });
-        it('passes the query parameters with the request', () => {
-            pipelines.list({
+        it('passes the query parameters with the request', async () => {
+            await pipelines.list({
                 filter: 'filter',
                 page: 0,
                 perPage: 25,
@@ -40,8 +38,8 @@ describe('Pipelines', () => {
     });
 
     describe('get', () => {
-        it('makes a GET call to /rest/search/v1/admin/pipelines/:id', () => {
-            pipelines.get('🔥');
+        it('makes a GET call to /rest/search/v1/admin/pipelines/:id', async () => {
+            await pipelines.get('🔥');
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥');
@@ -49,8 +47,8 @@ describe('Pipelines', () => {
     });
 
     describe('delete', () => {
-        it('makes a DELETE call to /rest/search/v1/admin/pipelines/:id', () => {
-            pipelines.delete('🔥');
+        it('makes a DELETE call to /rest/search/v1/admin/pipelines/:id', async () => {
+            await pipelines.delete('🔥');
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥');
@@ -58,12 +56,12 @@ describe('Pipelines', () => {
     });
 
     describe('update', () => {
-        it('makes a PUT call to /rest/search/v1/admin/pipelines/:id', () => {
+        it('makes a PUT call to /rest/search/v1/admin/pipelines/:id', async () => {
             const pipelineToUpdate: UpdatePipelineModel = {
                 id: '🔥',
                 name: 'fire',
             };
-            pipelines.update(pipelineToUpdate);
+            await pipelines.update(pipelineToUpdate);
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥', pipelineToUpdate);
@@ -71,19 +69,19 @@ describe('Pipelines', () => {
     });
 
     describe('duplicate', () => {
-        it('makes a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', () => {
-            pipelines.duplicate('🔥');
+        it('makes a POST call to /rest/search/v1/admin/pipelines/:id/duplicate', async () => {
+            await pipelines.duplicate('🔥');
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/🔥/duplicate', undefined);
         });
 
-        it('includes the granular resource if set on the POST call request body', () => {
+        it('includes the granular resource if set on the POST call request body', async () => {
             const granularResource = {
                 groupsThatCanEdit: [{id: 'hello'}, {id: 'bonjour'}],
                 apiKeysThatCanEdit: [{id: 'bonne'}, {id: 'nuit'}],
             };
-            pipelines.duplicate('yeah', granularResource);
+            await pipelines.duplicate('yeah', granularResource);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/yeah/duplicate', granularResource);
@@ -91,12 +89,12 @@ describe('Pipelines', () => {
     });
 
     describe('create', () => {
-        it('makes a POST call to /rest/search/v1/admin/pipelines', () => {
+        it('makes a POST call to /rest/search/v1/admin/pipelines', async () => {
             const newPipeline: NewPipelineModel = {
                 name: 'fire',
                 description: 'this-is-lit',
             };
-            pipelines.create(newPipeline);
+            await pipelines.create(newPipeline);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines', newPipeline);

@@ -12,7 +12,6 @@ import {
 } from './OrganizationInterfaces.js';
 import {AuthProvider} from '../Enums.js';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type NoPagination = undefined | null;
 
 export default class Organization extends Resource {
@@ -63,6 +62,7 @@ export default class Organization extends Resource {
     /**
      * Pauses an [organization](https://docs.coveo.com/en/222/).
      * Required privilege: Organization - Edit
+     * @param organizationId
      */
     pause(organizationId: string = API.orgPlaceholder) {
         return this.api.post(`${Organization.baseUrl}/${organizationId}/pause`);
@@ -71,6 +71,7 @@ export default class Organization extends Resource {
     /**
      * Resumes a paused [organization](https://docs.coveo.com/en/222/).
      * Required privilege: Organization - Edit
+     * @param organizationId
      */
     resume(organizationId: string = API.orgPlaceholder) {
         return this.api.post(`${Organization.baseUrl}/${organizationId}/resume`);
@@ -84,7 +85,7 @@ export default class Organization extends Resource {
     }
 
     getAdditionalInformation(organizationId: string = API.orgPlaceholder) {
-        return this.api.get<any>(`${Organization.baseUrl}/${organizationId}/additionalinformation`);
+        return this.api.get<Record<string, unknown>>(`${Organization.baseUrl}/${organizationId}/additionalinformation`);
     }
 
     updateExperimentalStatus(allowed: boolean = true) {

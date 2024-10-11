@@ -310,7 +310,6 @@ export interface CreateFromFileOptions {
 export interface GetSnapshotOptions {
     /**
      * Whether to include reports with the snapshot.
-     *
      * @default false
      */
     includeReports?: boolean;
@@ -321,7 +320,6 @@ export interface ExportSnapshotContentOptions {
      * The format of the snapshot content.
      * - FLAT: Content unified into a single file
      * - SPLIT_PER_TYPE: Content split into one file per resource type
-     *
      * @default SnapshotExportContentFormat.Flat
      */
     contentFormat?: SnapshotExportContentFormat;
@@ -349,16 +347,13 @@ export enum ApplyOptionsDeletionScope {
 export interface ApplyOptions {
     /**
      * Whether to delete organization resources not present in the snapshot.
-     *
      * @default false
      */
     deleteMissingResources?: boolean;
     /**
      * The scope of the resources on which to calculate deletions.
      * **Note:** only applies when `deleteMissingResources` is set to `true`.
-     *
      * @default ApplyOptionsDeletionScope.AllManagedResources
-     *
      */
     deletionScope?: ApplyOptionsDeletionScope;
 }

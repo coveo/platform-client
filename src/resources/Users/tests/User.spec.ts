@@ -4,12 +4,10 @@ import {UserModel} from '../UserInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('User', () => {
     let user: User;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,8 +15,8 @@ describe('User', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the User base url', () => {
-            user.get('💎');
+        it('should make a GET call to the User base url', async () => {
+            await user.get('💎');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/users/💎');
         });
@@ -36,18 +34,18 @@ describe('User', () => {
             });
         });
 
-        it('should make a PUT call to the specific user url and extend existing current user attributes', () => {
+        it('should make a PUT call to the specific user url and extend existing current user attributes', async () => {
             const userModel: Partial<UserModel> = {
-                additionalInformation: {happy: true},
+                additionalInformation: {happy: 'true'},
                 displayName: 'carrot',
             };
 
-            user.update(userModel);
+            await user.update(userModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 '/rest/users/🥕',
                 expect.objectContaining({
-                    additionalInformation: {happy: true},
+                    additionalInformation: {happy: 'true'},
                     displayName: 'carrot',
                     username: '🥕',
                 }),
@@ -56,8 +54,8 @@ describe('User', () => {
     });
 
     describe('listRealms', () => {
-        it('should make a GET call /rest/users/{username}/realms', () => {
-            user.listRealms('🍪');
+        it('should make a GET call /rest/users/{username}/realms', async () => {
+            await user.listRealms('🍪');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/users/🍪/realms');
         });

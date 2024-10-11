@@ -10,12 +10,10 @@ import {
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Statements', () => {
     let statements: Statements;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -23,23 +21,23 @@ describe('Statements', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the specific Statements url', () => {
+        it('should make a GET call to the specific Statements url', async () => {
             const pipelineId = '⚽️';
 
-            statements.list(pipelineId);
+            await statements.list(pipelineId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Statements.getBaseUrl(pipelineId));
         });
     });
 
     describe('exportCSV', () => {
-        it('should make a GET call to the specific Statements url', () => {
+        it('should make a GET call to the specific Statements url', async () => {
             const pipelineId = '🎱';
             const options: ExportStatementParams = {
                 feature: StatementsFeature.Ranking,
             };
 
-            statements.exportCSV(pipelineId, options);
+            await statements.exportCSV(pipelineId, options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${Statements.getBaseUrl(pipelineId)}/export?feature=${options.feature}`,
@@ -49,7 +47,7 @@ describe('Statements', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the specific Statements url', () => {
+        it('should make a POST call to the specific Statements url', async () => {
             const pipelineId = '🏀';
             const model: CreateStatementModel = {
                 feature: StatementsFeature.Thesaurus,
@@ -57,14 +55,14 @@ describe('Statements', () => {
                 position: 1,
             };
 
-            statements.create(pipelineId, model);
+            await statements.create(pipelineId, model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(Statements.getBaseUrl(pipelineId), model);
         });
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific Statement url', () => {
+        it('should make a PUT call to the specific Statement url', async () => {
             const pipelineId = '🏹';
             const statementId = '🎯';
 
@@ -74,39 +72,39 @@ describe('Statements', () => {
                 position: 2,
             };
 
-            statements.update(pipelineId, statementId, model);
+            await statements.update(pipelineId, statementId, model);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Statements.getStatementUrl(pipelineId, statementId)}`, model);
         });
     });
 
     describe('copy', () => {
-        it('should make a POST call to the specific Statements url', () => {
+        it('should make a POST call to the specific Statements url', async () => {
             const pipelineId = '🏀';
             const model: CopyStatementModel = {
                 destinationPipelineId: '🏉',
                 statementIds: ['🏓'],
             };
 
-            statements.copy(pipelineId, model);
+            await statements.copy(pipelineId, model);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Statements.getBaseUrl(pipelineId)}/copy`, model);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Statement url', () => {
+        it('should make a GET call to the specific Statement url', async () => {
             const pipelineId = '⛳️';
             const statementId = '🏒';
 
-            statements.get(pipelineId, statementId);
+            await statements.get(pipelineId, statementId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Statements.getStatementUrl(pipelineId, statementId));
         });
     });
 
     describe('move', () => {
-        it('should make a PUT call to the specific Statement url', () => {
+        it('should make a PUT call to the specific Statement url', async () => {
             const pipelineId = '🎿';
             const statementId = '⛷';
 
@@ -114,18 +112,18 @@ describe('Statements', () => {
                 after: '🏂',
             };
 
-            statements.move(pipelineId, statementId, model);
+            await statements.move(pipelineId, statementId, model);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Statements.getStatementUrl(pipelineId, statementId)}/move`, model);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Statement url', () => {
+        it('should make a DELETE call to the specific Statement url', async () => {
             const pipelineId = '🏐';
             const statementId = '🎽';
 
-            statements.delete(pipelineId, statementId);
+            await statements.delete(pipelineId, statementId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(Statements.getStatementUrl(pipelineId, statementId));
         });
@@ -137,14 +135,16 @@ describe('Statements', () => {
         };
 
         beforeEach(() => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             (global as any).FormData = jest.fn(() => mockedFormData);
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             (global as any).File = jest.fn(() => ({}));
         });
 
         it('should post the file content inside a form multi part data', async () => {
             const myCSVFile = new File(['egg'], 'egg.txt', {type: 'text/csv'});
 
-            statements.importCSV('🥚', myCSVFile, {feature: StatementsFeature.Stop});
+            await statements.importCSV('🥚', myCSVFile, {feature: StatementsFeature.Stop});
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
@@ -158,7 +158,7 @@ describe('Statements', () => {
         it('should post the string content inside a form multi part data', async () => {
             const content = `definition,condition,description,feature\n"alias ""CPU"", ""processor""",,Tech thesaurus,thesaurus\n"alias ""Television"", ""Televisions"", ""TV"", ""TVs""",,Basic thesaurus,thesaurus`;
 
-            statements.importCSV('🥚', content, {feature: StatementsFeature.Thesaurus});
+            await statements.importCSV('🥚', content, {feature: StatementsFeature.Thesaurus});
 
             expect(api.postForm).toHaveBeenCalledTimes(1);
             expect(api.postForm).toHaveBeenCalledWith(
@@ -171,19 +171,19 @@ describe('Statements', () => {
     });
 
     describe('bulkGet', () => {
-        it('should make a POST call to the specific Statement url', () => {
+        it('should make a POST call to the specific Statement url', async () => {
             const pipelineId = '🏐';
             const ids = ['one', 'two', 'three'];
 
-            statements.bulkGet(pipelineId, {ids});
+            await statements.bulkGet(pipelineId, {ids});
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Statements.getBaseUrl(pipelineId)}/bulkGet`, {ids});
         });
     });
 
     describe('bulkDelete', () => {
-        it('sends a POST call to /bulkDelete with the provided ids', () => {
-            statements.bulkDelete('🆔', ['rule-one', 'rule-two']);
+        it('sends a POST call to /bulkDelete with the provided ids', async () => {
+            await statements.bulkDelete('🆔', ['rule-one', 'rule-two']);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith('/rest/search/v2/admin/pipelines/🆔/statements/bulkDelete', {
                 ids: ['rule-one', 'rule-two'],

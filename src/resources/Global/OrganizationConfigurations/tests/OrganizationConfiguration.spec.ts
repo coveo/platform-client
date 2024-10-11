@@ -3,12 +3,10 @@ import OrganizationConfiguration from '../OrganizationConfiguration.js';
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('OrganizationConfiguration', () => {
     let organizationConfiguration: OrganizationConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,16 +14,16 @@ describe('OrganizationConfiguration', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to "/global/organizations"', () => {
-            organizationConfiguration.list();
+        it('should make a GET call to "/global/organizations"', async () => {
+            await organizationConfiguration.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/global/organizations');
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to "/global/organizations/:organizationId"', () => {
-            organizationConfiguration.get('🥵');
+        it('should make a GET call to "/global/organizations/:organizationId"', async () => {
+            await organizationConfiguration.get('🥵');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith('/rest/global/organizations/🥵');
         });

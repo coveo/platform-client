@@ -1,9 +1,8 @@
 import API from '../../APICore.js';
+import {PlatformClientOptions} from '../../ConfigurationInterfaces.js';
 import Resource from '../Resource.js';
 
 jest.mock('../../APICore.js');
-
-const APIMock: jest.Mock<API> = API as any;
 
 class ResourceFixture extends Resource {
     testBuildPath(route: string, params: Record<string, unknown>) {
@@ -15,8 +14,13 @@ class ResourceFixture extends Resource {
 }
 
 describe('Resource', () => {
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const testConfig = {
+        host: 'https://some.url/',
+        organizationId: 'some-org-id',
+        accessToken: jest.fn(() => 'my-token'),
+    } satisfies PlatformClientOptions;
+    const api = new API(testConfig);
+    const serverlessApi = new API(testConfig);
     let resource: ResourceFixture;
 
     beforeEach(() => {

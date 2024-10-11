@@ -11,7 +11,6 @@ export interface RequestHandler {
     canProcess: Predicate<EnrichedRequestInit>;
     /**
      * How to process the requests.
-     *
      * @param request The [request object](https://developer.mozilla.org/en-US/docs/Web/API/Request).
      */
     process(request: EnrichedRequestInit): EnrichedRequestInit;

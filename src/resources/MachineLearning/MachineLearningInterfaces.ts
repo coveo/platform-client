@@ -20,6 +20,7 @@ export interface PageViewFiltered {
 
 export interface CommerceSupport {
     enabled: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 
@@ -29,6 +30,7 @@ export interface DocumentContentSource {
 }
 
 export interface ExtraConfig {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

@@ -5,7 +5,6 @@ interface PipelineInterfaceUrl {
      * Url of the pages affected by this query pipeline.
      *
      * string
-     *
      * @example: 'www.acme.com'
      */
     url: string;
@@ -32,17 +31,14 @@ interface PipelineShared {
      * The name of this query pipeline.
      *
      * string
-     *
      * @example: 'Community'
      */
     name: string;
     /**
      * The intended purpose of this query pipeline.
-     * 
-     * string
      *
+     * string
      * @example: 'Provide contextually relevant query recommendations/results to Community site users.'
-     
      */
     description?: string;
     /**
@@ -54,7 +50,6 @@ interface PipelineShared {
      * (assuming, of course, that this query pipeline is not the current default query pipeline).
      *
      * boolean
-     *
      * @example: false
      */
     isDefault?: boolean;
@@ -76,7 +71,6 @@ interface PipelineShared {
      * See also the `splitTestTarget`, `splitTestRatio`, and `splitTestEnabled` properties.
      *
      * string
-     *
      * @example: 'Community VS default'
      */
     splitTestName?: string;
@@ -89,7 +83,6 @@ interface PipelineShared {
      * double
      * maximum: 1
      * minimum: 0
-     *
      * @example: 0.5
      */
     splitTestRatio?: number;
@@ -99,7 +92,6 @@ interface PipelineShared {
      * See also the `splitTestName`, `splitTestRatio`, and `splitTestEnabled` properties.
      *
      * string
-     *
      * @example: '22a3860e-fa6f-4e64-a9f1-ef738af0786e'
      */
     splitTestTarget?: string;
@@ -113,7 +105,6 @@ interface PipelineShared {
      * otherwise you risk filling up the cache with useless data.
      *
      * string
-     *
      * @example: '@source==CommunityForum OR @source==CommunityDocumentation'
      */
     filter?: string;
@@ -123,7 +114,6 @@ interface PipelineShared {
      * to provide better support and improve the tools we provide.
      *
      * string
-     *
      * @example: 'Service & Support'
      */
     useCase?: string;
@@ -136,7 +126,6 @@ export interface PipelineModel extends PipelineShared {
      * The unique identifier of this query pipeline.
      *
      * string
-     *
      * @example: '120deecf-7822-4d7b-885f-53f184a3a76c'
      */
     id: string;
@@ -145,7 +134,6 @@ export interface PipelineModel extends PipelineShared {
      * in this Coveo Cloud organization.
      *
      * integer
-     *
      * @example: 3
      */
     position?: number;
@@ -153,7 +141,6 @@ export interface PipelineModel extends PipelineShared {
      * The identifier of the Coveo Cloud platform user who originally created this query pipeline.
      *
      * string
-     *
      * @example: 'asmith@coveo.com'
      */
     created_by?: string;
@@ -161,7 +148,6 @@ export interface PipelineModel extends PipelineShared {
      * The identifier of the Coveo Cloud platform user who last modified this query pipeline.
      *
      * string
-     *
      * @example: 'bjones@coveo.com'
      */
     last_modified_by?: string;
@@ -176,7 +162,6 @@ export interface PipelineDetailedModel extends PipelineModel {
      * The unique identifier of query pipeline A in the A/B test.
      *
      * See also the splitTestName, splitTestRatio, and splitTestEnabled properties
-     *
      * @example: '22a3860e-fa6f-4e64-a9f1-ef738af0786e'
      */
     splitTestOriginalPipeline?: string;

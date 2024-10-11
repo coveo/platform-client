@@ -8,12 +8,10 @@ import {
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('CaseClassificationConfiguration', () => {
     let ccConfig: CaseClassificationConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     const modelConfigs: CaseClassificationConfigurationModel[] = [
         {
@@ -74,9 +72,9 @@ describe('CaseClassificationConfiguration', () => {
     describe('create', () => {
         const newCCConfigModel = modelConfigs;
         newCCConfigModel.forEach((config) => {
-            it('should make a POST call to the Case Classification Configuration base url', () => {
+            it('should make a POST call to the Case Classification Configuration base url', async () => {
                 const {modelId: _, ...newConfig} = config;
-                ccConfig.create(newConfig);
+                await ccConfig.create(newConfig);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.modelUrl, newConfig);
@@ -85,9 +83,9 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific Case Classification Configuration url', () => {
+        it('should make a DELETE call to the specific Case Classification Configuration url', async () => {
             const configToDeleteId = 'config-to-be-deleted';
-            ccConfig.delete(configToDeleteId);
+            await ccConfig.delete(configToDeleteId);
 
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${CaseClassificationConfiguration.modelUrl}/${configToDeleteId}`);
@@ -95,9 +93,9 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('get', () => {
-        it('should make a GET call to the specific Case Classification Configuration url', () => {
+        it('should make a GET call to the specific Case Classification Configuration url', async () => {
             const configToGetId = 'config-to-be-fetched';
-            ccConfig.get(configToGetId);
+            await ccConfig.get(configToGetId);
 
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CaseClassificationConfiguration.modelUrl}/${configToGetId}`);
@@ -106,8 +104,8 @@ describe('CaseClassificationConfiguration', () => {
 
     describe('update', () => {
         modelConfigs.forEach((config) => {
-            it('should make a PUT call to the specific Case Classification Configuration url', () => {
-                ccConfig.update(config);
+            it('should make a PUT call to the specific Case Classification Configuration url', async () => {
+                await ccConfig.update(config);
 
                 expect(api.put).toHaveBeenCalledTimes(1);
                 expect(api.put).toHaveBeenCalledWith(
@@ -119,7 +117,7 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('fields', () => {
-        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration', () => {
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration', async () => {
             const params: CaseClassificationContentFieldsParams = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
@@ -135,16 +133,16 @@ describe('CaseClassificationConfiguration', () => {
                     },
                 ],
             };
-            ccConfig.fields(params);
+            await ccConfig.fields(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
         });
 
-        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration with an advancedQuery', () => {
+        it('should make a POST call to retrieve valid content field candidates for the Case Classification model configuration with an advancedQuery', async () => {
             const params = {advancedQuery: "@source='some source'"};
 
-            ccConfig.fields(params);
+            await ccConfig.fields(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.fieldsUrl, params);
@@ -152,7 +150,7 @@ describe('CaseClassificationConfiguration', () => {
     });
 
     describe('preview', () => {
-        it('should make a POST call to retrieve document group preview info from the Case Classification model configuration preview url', () => {
+        it('should make a POST call to retrieve document group preview info from the Case Classification model configuration preview url', async () => {
             const params: CaseClassificationContentFieldsParams = {
                 sources: ['1st-source', '2nd-source'],
                 languageField: 'English',
@@ -168,7 +166,7 @@ describe('CaseClassificationConfiguration', () => {
                     },
                 ],
             };
-            ccConfig.preview(params);
+            await ccConfig.preview(params);
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(CaseClassificationConfiguration.previewUrl, params);
@@ -177,10 +175,10 @@ describe('CaseClassificationConfiguration', () => {
 
     describe('documentCount', () => {
         modelConfigs.forEach(() => {
-            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
+            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', async () => {
                 const params = {advancedQuery: "@source='some source'"};
 
-                ccConfig.documentCount('fieldTest', params);
+                await ccConfig.documentCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
@@ -189,14 +187,14 @@ describe('CaseClassificationConfiguration', () => {
                 );
             });
 
-            it('should make a POST call to the specific Case Classification Configuration url with standard params', () => {
+            it('should make a POST call to the specific Case Classification Configuration url with standard params', async () => {
                 const params = {
                     sources: ['some source'],
                     languageField: 'language',
                     caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
                 };
 
-                ccConfig.documentCount('fieldTest', params);
+                await ccConfig.documentCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
@@ -209,10 +207,10 @@ describe('CaseClassificationConfiguration', () => {
 
     describe('valueCount', () => {
         modelConfigs.forEach(() => {
-            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', () => {
+            it('should make a POST call to the specific Case Classification Configuration url with an advancedQuery', async () => {
                 const params = {advancedQuery: "@source='some source'"};
 
-                ccConfig.valueCount('fieldTest', params);
+                await ccConfig.valueCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(
@@ -221,14 +219,14 @@ describe('CaseClassificationConfiguration', () => {
                 );
             });
 
-            it('should make a POST call to the specific Case Classification Configuration url with standard params', () => {
+            it('should make a POST call to the specific Case Classification Configuration url with standard params', async () => {
                 const params = {
                     sources: ['some source'],
                     languageField: 'language',
                     caseExtractionPeriod: {exportPeriod: 'P6M', dateField: 'date'},
                 };
 
-                ccConfig.valueCount('fieldTest', params);
+                await ccConfig.valueCount('fieldTest', params);
 
                 expect(api.post).toHaveBeenCalledTimes(1);
                 expect(api.post).toHaveBeenCalledWith(

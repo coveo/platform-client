@@ -14,7 +14,7 @@ export enum CaseClassificationStrategies {
     Axon = 'Axon',
 }
 
-export interface CaseAssistConfigListOptions extends Paginated {}
+export type CaseAssistConfigListOptions = Paginated;
 
 export interface ITDConfigurationModel {
     pipeline?: string;

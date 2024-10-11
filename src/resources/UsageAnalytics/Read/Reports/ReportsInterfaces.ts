@@ -21,7 +21,7 @@ export interface ReportModel {
 export type CreateReportModel = Omit<ReportModel, 'id' | 'account'>;
 export type CreateReportResponse = Pick<ReportModel, 'id'>;
 
-export interface GetReportOptions extends TimeZoneParamParts {}
+export type GetReportOptions = TimeZoneParamParts;
 
 export type UpdateReportModel = CreateReportModel;
 export type UpdateReportResponse = CreateReportResponse;

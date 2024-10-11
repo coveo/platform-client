@@ -12,7 +12,10 @@ export const normalizePaginatedOptions = (
     }
 };
 
-const isDeprecatedPaginated = (options: any): options is DeprecatedPaginated => {
+const isDeprecatedPaginated = (options?: object): options is DeprecatedPaginated => {
+    if (!options) {
+        return false;
+    }
     const keys = Object.keys(options);
     if (!keys.includes('perPage')) {
         return true;

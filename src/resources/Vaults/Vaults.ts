@@ -10,8 +10,7 @@ export default class Vaults extends Resource {
 
     /**
      * Find error vault keys for a given snapshot.
-     *
-     * @param {string} snapshotId The unique identifier of the target snapshot.
+     * @param snapshotId The unique identifier of the target snapshot.
      */
     findMissing(snapshotId: string) {
         return this.api.get<MissingVaultModel>(this.buildPath(`${Vaults.baseUrl}/missing`, {snapshotId}));
@@ -19,10 +18,9 @@ export default class Vaults extends Resource {
 
     /**
      * Import vault entries from the starting organization into the current organization.
-     *
-     * @param {string} currentSnapshotId The unique identifier of the current snapshot.
-     * @param {string} sourceOrganizationId The unique identifier of the source organization.
-     * @param {VaultFetchStrategy} fetchStrategy Choosing the strategy to use when importing vault entries.
+     * @param currentSnapshotId The unique identifier of the current snapshot.
+     * @param sourceOrganizationId The unique identifier of the source organization.
+     * @param fetchStrategy Choosing the strategy to use when importing vault entries.
      */
     import(currentSnapshotId: string, sourceOrganizationId: string, fetchStrategy: VaultFetchStrategy) {
         return this.api.put(
@@ -36,8 +34,7 @@ export default class Vaults extends Resource {
 
     /**
      * Create a vault entry.
-     *
-     * @param {VaultEntryModel} model Vault entry model
+     * @param model Vault entry model
      */
     create(model: VaultEntryModel) {
         return this.api.post<VaultEntryModel>(Vaults.baseUrl, model);
@@ -45,8 +42,7 @@ export default class Vaults extends Resource {
 
     /**
      * Get all vault entries for an organization.
-     *
-     * @param {VaultEntryListOptions} options pagination options
+     * @param options pagination options
      */
     list(options?: VaultEntryListOptions) {
         const normalizedOptions = normalizePaginatedOptions(options);

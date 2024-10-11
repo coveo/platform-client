@@ -3,12 +3,10 @@ import UserActionHistoryConfiguration from '../UserActionHistoryConfiguration.js
 
 jest.mock('../../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('UserActionHistoryConfiguration', () => {
     let userActionHistoryConfiguration: UserActionHistoryConfiguration;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -16,24 +14,24 @@ describe('UserActionHistoryConfiguration', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the User Action History Configuration base url to enable', () => {
-            userActionHistoryConfiguration.create();
+        it('should make a POST call to the User Action History Configuration base url to enable', async () => {
+            await userActionHistoryConfiguration.create();
 
             expect(api.post).toHaveBeenCalledTimes(1);
         });
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the User Action History Configuration base url', () => {
-            userActionHistoryConfiguration.delete();
+        it('should make a DELETE call to the User Action History Configuration base url', async () => {
+            await userActionHistoryConfiguration.delete();
 
             expect(api.delete).toHaveBeenCalledTimes(1);
         });
     });
 
     describe('get', () => {
-        it('should make a GET call to the User Action History Configuration base url', () => {
-            userActionHistoryConfiguration.get();
+        it('should make a GET call to the User Action History Configuration base url', async () => {
+            await userActionHistoryConfiguration.get();
 
             expect(api.get).toHaveBeenCalledTimes(1);
         });

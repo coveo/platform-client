@@ -9,12 +9,10 @@ import {
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('Crawling Module Calls', () => {
     let crawlingModule: CrawlingModule;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const crawlingModuleId = 'https://youtu.be/UYpWYIET1uE';
 
     beforeEach(() => {
@@ -23,69 +21,69 @@ describe('Crawling Module Calls', () => {
     });
 
     describe('list', () => {
-        it('should list the crawling modules for an org', () => {
-            crawlingModule.list();
+        it('should list the crawling modules for an org', async () => {
+            await crawlingModule.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}`);
         });
     });
 
     describe('getUpdateStatus', () => {
-        it('should get the update status for a given crawling module', () => {
-            crawlingModule.getUpdateStatus(crawlingModuleId);
+        it('should get the update status for a given crawling module', async () => {
+            await crawlingModule.getUpdateStatus(crawlingModuleId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}/update`);
         });
     });
 
     describe('getMaestroVersions', () => {
-        it('should get the component versions for the release version of maestro', () => {
+        it('should get the component versions for the release version of maestro', async () => {
             const options = {
                 crawlingModuleVersion: 'v2',
             };
-            crawlingModule.getMaestroVersions(options);
+            await crawlingModule.getMaestroVersions(options);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/latest?crawlingModuleVersion=v2`);
         });
 
-        it('should get the component versions for maestro', () => {
-            crawlingModule.getMaestroVersions();
+        it('should get the component versions for maestro', async () => {
+            await crawlingModule.getMaestroVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/latest`);
         });
     });
 
     describe('listDatabaseVersions', () => {
-        it('should list the database version history', () => {
-            crawlingModule.listDatabaseVersions();
+        it('should list the database version history', async () => {
+            await crawlingModule.listDatabaseVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/database`);
         });
     });
 
     describe('listWorkerVersions', () => {
-        it('should list worker version history', () => {
-            crawlingModule.listWorkerVersions();
+        it('should list worker version history', async () => {
+            await crawlingModule.listWorkerVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/worker`);
         });
     });
 
     describe('listSecurityWorkerVersions', () => {
-        it('should list security worker version', () => {
-            crawlingModule.listSecurityWorkerVersions();
+        it('should list security worker version', async () => {
+            await crawlingModule.listSecurityWorkerVersions();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/versions/securityWorker`);
         });
     });
 
-    it('should post a new new crawling module log request', () => {
+    it('should post a new new crawling module log request', async () => {
         const createModel: CreateCrawlingModuleLogRequestModel = {
             instanceId: 'INSTANCE_ID',
             logType: CrawlingModuleLogRequestLogType.MAESTRO,
             operationId: 'OPERATION_ID',
         };
-        crawlingModule.createLogRequest(crawlingModuleId, createModel);
+        await crawlingModule.createLogRequest(crawlingModuleId, createModel);
         expect(api.post).toHaveBeenCalledTimes(1);
         expect(api.post).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests`,
@@ -93,17 +91,17 @@ describe('Crawling Module Calls', () => {
         );
     });
 
-    it('should get the state of all log requests', () => {
-        crawlingModule.getLogRequests(crawlingModuleId, CrawlingModuleLogRequestState.SUCCESSFUL);
+    it('should get the state of all log requests', async () => {
+        await crawlingModule.getLogRequests(crawlingModuleId, CrawlingModuleLogRequestState.SUCCESSFUL);
         expect(api.get).toHaveBeenCalledTimes(1);
         expect(api.get).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests?state=SUCCESSFUL`,
         );
     });
 
-    it('should get the download url', () => {
+    it('should get the download url', async () => {
         const logRequestId = 'LOGREQUEST_ID';
-        crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
+        await crawlingModule.getLogRequestDownload(crawlingModuleId, logRequestId);
         expect(api.get).toHaveBeenCalledTimes(1);
         expect(api.get).toHaveBeenCalledWith(
             `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/${logRequestId}/download`,
@@ -111,22 +109,22 @@ describe('Crawling Module Calls', () => {
     });
 
     describe('reportDeployment', () => {
-        it('should add the deployment', () => {
+        it('should add the deployment', async () => {
             const body: CrawlingModuleDeployment = {
                 name: 'test',
                 versions: {
                     maestroVersion: '1.1.1',
                 },
             };
-            crawlingModule.reportDeployment(crawlingModuleId, body);
+            await crawlingModule.reportDeployment(crawlingModuleId, body);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}`, body);
         });
     });
 
     describe('removeDeployment', () => {
-        it('should delete the deployment', () => {
-            crawlingModule.removeDeployment(crawlingModuleId);
+        it('should delete the deployment', async () => {
+            await crawlingModule.removeDeployment(crawlingModuleId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}`);
         });

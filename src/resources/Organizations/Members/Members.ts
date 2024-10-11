@@ -16,7 +16,6 @@ export default class Members extends Resource {
     /**
      * deletes the member from all groups of an organization.
      * Note: Deleted users can still be included by domain.
-     *
      * @param username The username of the member to delete.
      */
     delete(username: string) {
@@ -24,7 +23,6 @@ export default class Members extends Resource {
     }
     /**
      * Shows a member of an organization.
-     *
      * @param username  The username of the member to show.
      */
     get(username: string) {
@@ -38,23 +36,23 @@ export default class Members extends Resource {
     }
     /**
      * Updates the members of an organization.
-     *
      * @param sendEmailToInvitedUsers Whether to send an invitation email alongside the invite(s). Default to true.
+     * @param model
+     * @param options
      */
     updateOrganizationMembers(model: OrganizationMemberModel[], options?: UpdateGroupOptions) {
         return this.api.put<OrganizationMemberModel[]>(this.buildPath(Members.baseUrl, options), model);
     }
     /**
      * Updates a member of an organization.
-     *
      * @param username The username of the member to update.
+     * @param model
      */
     updateMember(username: string, model: OrganizationMemberModel) {
         return this.api.put<OrganizationMemberModel>(`${Members.baseUrl}/${username}`, model);
     }
     /**
      * Lists the groups to which an organization member belongs.
-     *
      * @param username The username of the user for which to list groups.
      */
     getGroups(username: string) {

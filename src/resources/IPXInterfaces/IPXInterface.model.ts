@@ -14,9 +14,9 @@ export enum IPXResultTemplateLayout {
     Thumbnail = 'thumbnail',
 }
 
-export interface IPXFacet extends HostedInterfaceFacet {}
+export type IPXFacet = HostedInterfaceFacet;
 
-export interface IPXCondition extends HostedInterfaceCondition {}
+export type IPXCondition = HostedInterfaceCondition;
 export interface IPXTab extends HostedInterfaceTab {
     /**
      * A constant query expression or filter that the Tab should add to any outgoing query.
@@ -28,9 +28,9 @@ export interface IPXTab extends HostedInterfaceTab {
     conditions: IPXCondition[];
 }
 
-export interface IPXResultTemplateBadge extends HostedInterfaceResultTemplateBadge {}
+export type IPXResultTemplateBadge = HostedInterfaceResultTemplateBadge;
 
-export interface IPXResultTemplateDetail extends HostedInterfaceResultTemplateDetail {}
+export type IPXResultTemplateDetail = HostedInterfaceResultTemplateDetail;
 
 export interface IPXResultTemplate extends HostedInterfaceResultTemplate {
     layout: IPXResultTemplateLayout;

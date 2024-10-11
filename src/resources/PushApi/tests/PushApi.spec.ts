@@ -5,12 +5,10 @@ import {FileContainer, SecurityIdentityAliasModel, SecurityIdentityOptions} from
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('PushAPI', () => {
     let pushApi: PushApi;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
     const securityProviderId = 'testId';
     const securityProviderOptions: SecurityIdentityOptions = {orderingId: 1506700606240};
     const securityProviderAlias: SecurityIdentityAliasModel = {
@@ -41,8 +39,8 @@ describe('PushAPI', () => {
             ],
             ['/push/v1/organizations/{organizationName}/files', {useVirtualHostedStyleUrl: undefined}],
         ])('should make a POST call to %s when called with %o', async (url, options) => {
-            serverlessApi.post.mockImplementation(
-                async (): Promise<FileContainer> => ({
+            (serverlessApi as jest.Mocked<API>).post.mockImplementation(() =>
+                Promise.resolve<FileContainer>({
                     fileId: 'somefileid',
                     requiredHeaders: {a: 'b', c: 'd'},
                     uploadUri: 'https://something',
@@ -68,8 +66,8 @@ describe('PushAPI', () => {
                     `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/mappings?orderingId=1506700606240`,
                     securityProviderOptions,
                 ],
-            ])('should make a PUT call to "%s"', (url, options) => {
-                pushApi.createOrUpdateSecurityIdentityAlias(securityProviderId, securityProviderAlias, options);
+            ])('should make a PUT call to "%s"', async (url, options) => {
+                await pushApi.createOrUpdateSecurityIdentityAlias(securityProviderId, securityProviderAlias, options);
                 expect(serverlessApi.put).toHaveBeenCalledTimes(1);
                 expect(serverlessApi.put).toHaveBeenCalledWith(url, {
                     mappings: {additionalInfo: {}, name: 'MyAlias', provider: 'Provider', type: 'GROUP'},
@@ -84,8 +82,8 @@ describe('PushAPI', () => {
                     `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions?orderingId=1506700606240`,
                     securityProviderOptions,
                 ],
-            ])('should make a DELETE call to "%s"', (url, options) => {
-                pushApi.deleteSecurityIdentity(
+            ])('should make a DELETE call to "%s"', async (url, options) => {
+                await pushApi.deleteSecurityIdentity(
                     securityProviderId,
                     {
                         identity: {
@@ -112,8 +110,8 @@ describe('PushAPI', () => {
                     `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions?orderingId=1506700606240`,
                     securityProviderOptions,
                 ],
-            ])('should make a PUT call to "%s"', (url, options) => {
-                pushApi.createOrUpdateSecurityIdentity(
+            ])('should make a PUT call to "%s"', async (url, options) => {
+                await pushApi.createOrUpdateSecurityIdentity(
                     securityProviderId,
                     {
                         identity: {
@@ -133,8 +131,8 @@ describe('PushAPI', () => {
         });
 
         describe('manageSecurityIdentities', () => {
-            it('should make a PUT call to "/push/v1/organizations/{organizationName}/providers/{securityProviderId}/permissions/batch', () => {
-                pushApi.manageSecurityIdentities(securityProviderId, {fileId: 'testId'});
+            it('should make a PUT call to "/push/v1/organizations/{organizationName}/providers/{securityProviderId}/permissions/batch', async () => {
+                await pushApi.manageSecurityIdentities(securityProviderId, {fileId: 'testId'});
                 expect(serverlessApi.put).toHaveBeenCalledTimes(1);
                 expect(serverlessApi.put).toHaveBeenCalledWith(
                     `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/batch?fileId=testId`,
@@ -143,8 +141,8 @@ describe('PushAPI', () => {
         });
 
         describe('deleteOldSecurityIdentities', () => {
-            it('should make a DELETE call to "/push/v1/organizations/{organizationName}/providers/{securityProviderId}/permissions/olderthan', () => {
-                pushApi.deleteOldSecurityIdentities(securityProviderId, {orderingId: 123456789});
+            it('should make a DELETE call to "/push/v1/organizations/{organizationName}/providers/{securityProviderId}/permissions/olderthan', async () => {
+                await pushApi.deleteOldSecurityIdentities(securityProviderId, {orderingId: 123456789});
                 expect(serverlessApi.delete).toHaveBeenCalledTimes(1);
                 expect(serverlessApi.delete).toHaveBeenCalledWith(
                     `/push/v1/organizations/{organizationName}/providers/${securityProviderId}/permissions/olderthan?orderingId=123456789`,

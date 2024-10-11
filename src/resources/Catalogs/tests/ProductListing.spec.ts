@@ -6,13 +6,11 @@ import {ProductListingModel} from '../ProductListingInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
-const APIMock: jest.Mock<API> = API as any;
-
 describe('ProductListings', () => {
     const catalogId = 'catalogId';
     let productListing: ProductListing;
-    const api = new APIMock() as jest.Mocked<API>;
-    const serverlessApi = new APIMock() as jest.Mocked<API>;
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -20,8 +18,8 @@ describe('ProductListings', () => {
     });
 
     describe('list', () => {
-        it('should make a GET call to the base product listings url of a catalog', () => {
-            productListing.list(catalogId, {page: 2, perPage: 10});
+        it('should make a GET call to the base product listings url of a catalog', async () => {
+            await productListing.list(catalogId, {page: 2, perPage: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings?page=2&pageSize=10`,
@@ -30,7 +28,7 @@ describe('ProductListings', () => {
     });
 
     describe('create', () => {
-        it('should make a POST call to the base product listing url of a catalog', () => {
+        it('should make a POST call to the base product listing url of a catalog', async () => {
             const productListingModel: New<ProductListingModel> = {
                 name: 'New product listing',
                 include: [
@@ -46,7 +44,7 @@ describe('ProductListings', () => {
                 urls: ['first-url', 'second-url'],
             };
 
-            productListing.create(catalogId, productListingModel);
+            await productListing.create(catalogId, productListingModel);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings`,
@@ -56,9 +54,9 @@ describe('ProductListings', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific product listing url of a catalog', () => {
+        it('should make a DELETE call to the specific product listing url of a catalog', async () => {
             const productListingToDeleteId = 'product-listing-to-be-deleted';
-            productListing.delete(catalogId, productListingToDeleteId);
+            await productListing.delete(catalogId, productListingToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToDeleteId}`,
@@ -67,9 +65,9 @@ describe('ProductListings', () => {
     });
 
     describe('get product listing for a catalog', () => {
-        it('should make a GET call to the specific product listing url of a catalog', () => {
+        it('should make a GET call to the specific product listing url of a catalog', async () => {
             const productListingToGetId = 'product-listing-to-be-fetched';
-            productListing.get(catalogId, productListingToGetId);
+            await productListing.get(catalogId, productListingToGetId);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingToGetId}`,
@@ -78,7 +76,7 @@ describe('ProductListings', () => {
     });
 
     describe('update', () => {
-        it('should make a PUT call to the specific product listing url of a catalog', () => {
+        it('should make a PUT call to the specific product listing url of a catalog', async () => {
             const productListingModel: ProductListingModel = {
                 id: '1234',
                 name: 'New product listing',
@@ -95,7 +93,7 @@ describe('ProductListings', () => {
                 urls: ['first-url', 'second-url'],
             };
 
-            productListing.update(catalogId, productListingModel);
+            await productListing.update(catalogId, productListingModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(
                 `${ProductListing.baseCatalogsUrl}/${catalogId}/productlistings/${productListingModel.id}`,
@@ -105,16 +103,16 @@ describe('ProductListings', () => {
     });
 
     describe('get product listings grouped by catalog', () => {
-        it('should make a GET call to a specific url on the product listing base path', () => {
-            productListing.getByCatalog();
+        it('should make a GET call to a specific url on the product listing base path', async () => {
+            await productListing.getByCatalog();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ProductListing.baseProductListingsUrl}/catalogs`);
         });
     });
 
     describe('get urls to query product listings', () => {
-        it('should make a GET call to a specific url on the product listing base path', () => {
-            productListing.getUrls();
+        it('should make a GET call to a specific url on the product listing base path', async () => {
+            await productListing.getUrls();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${ProductListing.baseProductListingsUrl}/urls`);
         });

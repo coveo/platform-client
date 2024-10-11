@@ -1,5 +1,5 @@
-import {EnrichedRequestInit} from '..';
-import {handleRequest} from '../RequestHandlers';
+import {EnrichedRequestInit} from '../RequestHandlerInterfaces.js';
+import {handleRequest} from '../RequestHandlers.js';
 
 describe('RequestHandlers', () => {
     it('returns provided init options if no handlers are provided', () => {

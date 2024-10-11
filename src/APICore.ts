@@ -12,23 +12,36 @@ import {handleRequest} from './handlers/request/RequestHandlers.js';
 
 interface TokenInfo {
     authentication: UserModel;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 const HEADERS_JSON_CONTENT_TYPE: HeadersInit = Object.freeze({'Content-Type': 'application/json'});
 
-/** Check whether the response status is `429 Too Many Requests`. */
+/**
+ * Check whether the response status is `429 Too Many Requests`.
+ * @param response
+ */
 const isTooManyRequests: Predicate<Response> = (response) => response.status === 429;
-/** Check whether the method is 'GET' (case insensitive). */
-const isGet: Predicate<string | undefined> = RegExp.prototype.test.bind(/^GET$/i);
+/**
+ * Check whether the method is 'GET' (case insensitive).
+ * @param value
+ */
+const isGet: Predicate<string | undefined> = (value) => (value ? /^GET$/i.test(value) : false);
 
-/** "Logical OR" two optional abort signals. */
+/**
+ * "Logical OR" two optional abort signals.
+ * @param signal1
+ * @param signal2
+ */
 const abortOnEither = (
     signal1: AbortSignal | null | undefined,
     signal2: AbortSignal | null | undefined,
 ): AbortSignal | null | undefined => {
     if (signal1 && signal2) {
         const joined = new AbortController();
+        /**
+         *
+         */
         function forwardAbort(this: AbortSignal) {
             joined.abort(this.reason);
         }
@@ -40,7 +53,7 @@ const abortOnEither = (
 };
 
 const withBody = (
-    body: any,
+    body: object,
     userArgs: CoveoPlatformClientRequestInit | undefined,
 ): CoveoPlatformClientRequestInit | undefined =>
     userArgs?.body ? undefined : {headers: HEADERS_JSON_CONTENT_TYPE, body: JSON.stringify(body)};
@@ -76,12 +89,12 @@ export default class API {
     ): Promise<T>;
     async post<T = Record<string, unknown>>(
         url: string,
-        body?: any,
+        body?: object,
         args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async post<T = Record<string, unknown>>(
         url: string,
-        body: any = {},
+        body: object = {},
         args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(
@@ -106,12 +119,12 @@ export default class API {
     ): Promise<T>;
     async put<T = Record<string, unknown>>(
         url: string,
-        body?: any,
+        body?: object,
         args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async put<T = Record<string, unknown>>(
         url: string,
-        body: any = {},
+        body: object = {},
         args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(
@@ -128,12 +141,12 @@ export default class API {
     ): Promise<T>;
     async patch<T = Record<string, unknown>>(
         url: string,
-        body?: any,
+        body?: object,
         args?: Omit<CoveoPlatformClientRequestInit, 'body'>,
     ): Promise<T>;
     async patch<T = Record<string, unknown>>(
         url: string,
-        body: any = {},
+        body: object = {},
         args?: CoveoPlatformClientRequestInit,
     ): Promise<T> {
         return await this.request<T>(

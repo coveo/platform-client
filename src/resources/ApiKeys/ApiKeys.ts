@@ -10,7 +10,7 @@ export default class ApiKey extends Resource {
         return this.api.get<ApiKeyModel[]>(ApiKey.baseUrl);
     }
 
-    create(apiKey: New<ApiKeyModel, 'resourceId'| 'id'>, options?: CreateApiKeyOptions) {
+    create(apiKey: New<ApiKeyModel, 'resourceId' | 'id'>, options?: CreateApiKeyOptions) {
         return this.api.post<ApiKeyModel>(this.buildPath(ApiKey.baseUrl, options), apiKey);
     }
 

@@ -6,13 +6,11 @@ import {Paginated, WithRequired} from '../BaseInterfaces.js';
 export interface InsightPanelConfigListOptions extends Paginated {
     /**
      * The zero-based page to retrieve.
-     *
      * @default `0`
      */
     page?: number;
     /**
      * The number of configurations to return per page.
-     *
      * @default `10`
      */
     perPage?: number;
@@ -27,7 +25,6 @@ export interface InsightPanelConfigListOptions extends Paginated {
      * - `undefined`: Configurations are returned in no specific order.
      * - `asc`: Sort configurations by name in ascending order.
      * - `desc`: Sort configurations by name in descending order.
-     *
      * @default `undefined`
      */
     order?: 'asc' | 'desc';
@@ -58,7 +55,6 @@ export interface InsightPanelConfigCreationParams {
      * The key is the context information such as `subject` or `description`.
      *
      * The value is a CRM reference allowing the Insight Panel integration to retrieve the context information from the CRM.
-     *
      * @example
      * ```json
      * {
@@ -162,7 +158,6 @@ export interface InsightPanelConfigModel {
      * The key is the context information such as `subject` or `description`.
      *
      * The value is a CRM reference allowing the Insight Panel integration to retrieve the context information from the CRM.
-     *
      * @example
      * ```json
      * {

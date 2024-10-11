@@ -10,7 +10,6 @@ export interface IAPRConfigurationModel {
     modelDisplayName: string;
     /**
      * The trackingIds that usage analytics events must contain for the model to use those events in its learning process. The model will use an event if it contains at least one of the specified IDs
-     *
      * @Example: [ "sport" ]
      */
     trackingIds: string[];
