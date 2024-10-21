@@ -7,13 +7,8 @@ export interface ExtensionHealthModel {
     /**
      * A qualitative health indicator.
      *
-     * **Allowed values:**
-     * - `GOOD`
-     * - `WARNING`
-     * - `PROBLEMATIC`
-     * - `UNKNOWN`
      */
-    healthIndicator: string;
+    healthIndicator: 'GOOD' | 'WARNING' | 'PROBLEMATIC' | 'UNKNOWN';
     /**
      * Additional details if healthIndicator value is `WARNING` or `PROBLEMATIC`.
      */
@@ -87,13 +82,8 @@ export interface ExtensionStatusModel {
     /**
      * A qualitative indicator of the likelihood that the extension will time out.
      *
-     * **Allowed values:**
-     * - `NONE`
-     * - `LOW`
-     * - `MEDIUM`
-     * - `HIGH`
      */
-    timeoutLikeliness: string;
+    timeoutLikeliness: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
 }
 
 export interface ExtensionUsedByModel {
