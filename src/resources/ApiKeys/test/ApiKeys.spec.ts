@@ -1,7 +1,6 @@
 import API from '../../../APICore.js';
-import {New} from '../../BaseInterfaces.js';
 import ApiKey from '../ApiKeys.js';
-import {ApiKeyModel} from '../ApiKeysInterfaces.js';
+import {ApiKeyModel, CreateApiKeyModel} from '../ApiKeysInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -25,9 +24,11 @@ describe('ApiKey', () => {
 
     describe('create', () => {
         it('should make a POST call to the ApiKeys base url', async () => {
-            const apiKeyModel: New<ApiKeyModel> = {
-                organizationId: 'a-smol-org',
-                value: '',
+            const apiKeyModel: CreateApiKeyModel = {
+                displayName: 'Cool key',
+                description: 'My super cool API key',
+                lifetimeDuration: 'P1M',
+                allowedIps: ['192.168.0.0/24'],
             };
 
             await apiKey.create(apiKeyModel);

@@ -1,14 +1,53 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
 import {ApiKeyStatus} from '../Enums.js';
-export interface ApiKeyModel extends GranularResource {
+
+export interface ApiKeyBaseModel extends GranularResource {
+    /**
+     * The display name for the API key.
+     * @example PushApiKey
+     */
+    displayName?: string;
+    /**
+     * A brief description of the API key.
+     * @example API key used for managing sources.
+     */
+    description?: string;
+    /**
+     * A set of IP addresses allowed to use the API key.
+     *
+     * Notes:
+     * - IP ranges using CIDR notation are also supported.
+     * - If an IP address is included in both the `allowedIps` and the `deniedIps`, the IP address will be denied.
+     * @example ["192.168.0.0/16", "29.186.225.13"]
+     */
+    allowedIps?: string[];
+    /**
+     * A set of IP addresses that will be denied access when attempting to use the API key.
+     *
+     * Notes:
+     * - IP ranges using CIDR notation are also supported.
+     * - If an IP address is included in both the `allowedIps` as well as the `deniedIps`, the IP address will be denied.
+     * @example [`"192.168.0.0/16"`, `"29.186.225.13"`]
+     */
+    deniedIps?: string[];
+    /**
+     * A set of privileges.
+     */
+    privileges?: PrivilegeModel[];
+    /**
+     * Additional configuration to be included in an API key. [to be revised]
+     */
+    additionalConfiguration?: AdditionalConfigurationModel;
+}
+
+export interface ApiKeyModel extends ApiKeyBaseModel {
     /**
      * The unique identifier of the [organization](https://docs.coveo.com/en/222/) the API key was created for.
      */
     organizationId?: string;
     /**
      * The unique identifier of the API key.
-     *
-     * **Example:** t4hk287bfj5sg6wskg64ckk5a
+     * @example t4hk287bfj5sg6wskg64ckk5a
      */
     id: string;
     /**
@@ -17,22 +56,9 @@ export interface ApiKeyModel extends GranularResource {
     enabled?: boolean;
     /**
      * The value of the API key.
-     *
-     * **Example:** xx65151ec3-7b30-4772-a99a-09b4c0f71343
+     * @example xx65151ec3-7b30-4772-a99a-09b4c0f71343
      */
     value?: string;
-    /**
-     * The display name for the API key.
-     *
-     * **Example:** PushApiKey
-     */
-    displayName?: string;
-    /**
-     * A brief description of the API key.
-     *
-     * **Example:** API key used for managing sources.
-     */
-    description?: string;
     /**
      * The username or the email address that was used to create this API key.
      */
@@ -40,50 +66,19 @@ export interface ApiKeyModel extends GranularResource {
     createdBy?: any;
     /**
      * The API key creation date in Unix timestamp in milliseconds.
-     *
-     * **Example:** 1614969486000
+     * @example 1614969486000
      */
     createdDate?: number;
     /**
      * The approximate API key last used date in Unix timestamp in milliseconds.
-     *
-     * **Example:** 1624575600000
+     * @example 1624575600000
      */
     lastUsedDate?: number;
     /**
-     * A set of IP addresses allowed to use the API key.
-     *
-     * **Notes:**
-     * - IP ranges using CIDR notation are also supported.
-     * - If an IP address is included in both the `allowedIps` as well as the `deniedIps`, the IP address will be denied.
-     *
-     * **Example:** [`"192.168.0.0/16"`, `"29.186.225.13"`]
-     */
-    allowedIps?: string[];
-    /**
-     * A set of IP addresses that will be denied access when attempting to use the API key.
-     *
-     * **Notes:**
-     * - IP ranges using CIDR notation are also supported.
-     * - If an IP address is included in both the `allowedIps` as well as the `deniedIps`, the IP address will be denied.
-     *
-     * **Example:** [`"192.168.0.0/16"`, `"29.186.225.13"`]
-     */
-    deniedIps?: string[];
-    /**
-     * A set of privileges.
-     */
-    privileges?: PrivilegeModel[];
-    /**
      * The unique identifier of the API key.
-     *
-     * **Example:** t4hk287bfj5sg6wskg64ckk5a
+     * @example t4hk287bfj5sg6wskg64ckk5a
      */
     resourceId?: string;
-    /**
-     * Additional configuration to be included in an API key. [to be revised]
-     */
-    additionalConfiguration?: AdditionalConfigurationModel;
     /**
      * The expiration date of the API key.
      */
@@ -104,6 +99,18 @@ export interface ApiKeyModel extends GranularResource {
      * The date the API key has been disabled.
      */
     disabledDate?: number;
+}
+
+export interface CreateApiKeyModel extends ApiKeyBaseModel {
+    /**
+     * The duration of the API key in ISO-8601 format. Once the duration is reached the key expires and cannot be used anymore.
+     * @example
+     * 'P1Y' for 1 year
+     * 'P14D' for 14 days
+     * 'P1M' for 1 month.
+     * 'P1Y3M14D' for 1 year, 3 months, and 14 days.
+     */
+    lifetimeDuration?: string;
 }
 
 export interface CreateApiKeyOptions {
