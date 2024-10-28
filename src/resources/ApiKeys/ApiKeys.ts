@@ -1,7 +1,6 @@
 import API from '../../APICore.js';
-import {New} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
-import {ApiKeyModel, CreateApiKeyOptions, DuplicateApiKeyOptions} from './ApiKeysInterfaces.js';
+import {ApiKeyModel, CreateApiKeyModel, CreateApiKeyOptions, DuplicateApiKeyOptions} from './ApiKeysInterfaces.js';
 
 export default class ApiKey extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/apikeys`;
@@ -10,7 +9,7 @@ export default class ApiKey extends Resource {
         return this.api.get<ApiKeyModel[]>(ApiKey.baseUrl);
     }
 
-    create(apiKey: New<ApiKeyModel, 'resourceId' | 'id'>, options?: CreateApiKeyOptions) {
+    create(apiKey: CreateApiKeyModel, options?: CreateApiKeyOptions) {
         return this.api.post<ApiKeyModel>(this.buildPath(ApiKey.baseUrl, options), apiKey);
     }
 
