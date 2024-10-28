@@ -113,6 +113,24 @@ export interface CreateApiKeyOptions {
     apiKeyTemplateId?: string;
 }
 
+export interface DuplicateApiKeyOptions {
+    /**
+     * The display name for the API key.
+     *
+     */
+    displayName?: string;
+    /**
+     * A brief description of the API key.
+     *
+     */
+    description?: string;
+    /**
+     * The lifetime duration of the API key (iso8601 format).
+     * @example 'P1M'
+     */
+    lifetimeDuration: string;
+}
+
 interface AdditionalConfigurationModel {
     /**
      * Configuration specific to commerce organization. [to be revised]

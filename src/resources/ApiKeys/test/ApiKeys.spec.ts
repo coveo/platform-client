@@ -92,4 +92,31 @@ describe('ApiKey', () => {
             expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/activate`, apiKeyModel);
         });
     });
+
+    describe('duplicate', () => {
+        const apiKeyModel: ApiKeyModel = {
+            organizationId: 'a-smol-org',
+            id: 'a-specific-id',
+            value: '',
+        };
+        it('should make a PUT call to the duplicate ApiKey', async () => {
+            await apiKey.duplicate(apiKeyModel.id, {lifetimeDuration: 'P1M'});
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/duplicate`, {
+                lifetimeDuration: 'P1M',
+            });
+        });
+    });
+    describe('extend', () => {
+        const apiKeyModel: ApiKeyModel = {
+            organizationId: 'a-smol-org',
+            id: 'a-specific-id',
+            value: '',
+        };
+        it('should make a PUT call to the extend ApiKey', async () => {
+            await apiKey.extend(apiKeyModel.id);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/activation/extend`);
+        });
+    });
 });

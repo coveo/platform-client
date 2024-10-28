@@ -1,7 +1,7 @@
 import API from '../../APICore.js';
 import {New} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
-import {ApiKeyModel, CreateApiKeyOptions} from './ApiKeysInterfaces.js';
+import {ApiKeyModel, CreateApiKeyOptions, DuplicateApiKeyOptions} from './ApiKeysInterfaces.js';
 
 export default class ApiKey extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/apikeys`;
@@ -30,5 +30,13 @@ export default class ApiKey extends Resource {
 
     delete(apiKeyId: string) {
         return this.api.delete(`${ApiKey.baseUrl}/${apiKeyId}`);
+    }
+
+    extend(apiKeyId: string) {
+        return this.api.put<void>(`${ApiKey.baseUrl}/${apiKeyId}/activation/extend`);
+    }
+
+    duplicate(apiKeyId: string, options: DuplicateApiKeyOptions) {
+        return this.api.put<ApiKeyModel>(this.buildPath(`${ApiKey.baseUrl}/${apiKeyId}/duplicate`), options);
     }
 }
