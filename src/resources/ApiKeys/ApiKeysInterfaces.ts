@@ -117,17 +117,16 @@ export interface DuplicateApiKeyOptions {
     /**
      * The display name for the API key.
      *
-     * **Example:** PushApiKey
      */
     displayName?: string;
     /**
      * A brief description of the API key.
      *
-     * **Example:** API key used for managing sources.
      */
     description?: string;
     /**
      * The lifetime duration of the API key (iso8601 format).
+     * @example 'P1M'
      */
     lifetimeDuration: string;
 }
