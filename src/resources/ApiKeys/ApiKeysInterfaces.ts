@@ -113,6 +113,12 @@ export interface CreateApiKeyOptions {
     apiKeyTemplateId?: string;
 }
 
+export interface DuplicateApiKeyOptions {
+    displayName?: string;
+    description?: string;
+    lifetimeDuration: string;
+}
+
 interface AdditionalConfigurationModel {
     /**
      * Configuration specific to commerce organization. [to be revised]

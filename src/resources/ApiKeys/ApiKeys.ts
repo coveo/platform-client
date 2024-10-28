@@ -31,4 +31,12 @@ export default class ApiKey extends Resource {
     delete(apiKeyId: string) {
         return this.api.delete(`${ApiKey.baseUrl}/${apiKeyId}`);
     }
+
+    extend(apiKeyId: string) {
+        return this.api.put(`${ApiKey.baseUrl}/${apiKeyId}/activation/extend`);
+    }
+
+    duplicate(apiKeyId: string) {
+        return this.api.post(`${ApiKey.baseUrl}/${apiKeyId}/duplicate`);
+    }
 }
