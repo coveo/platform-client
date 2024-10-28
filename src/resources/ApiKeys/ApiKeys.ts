@@ -37,6 +37,6 @@ export default class ApiKey extends Resource {
     }
 
     duplicate(apiKeyId: string, options: DuplicateApiKeyOptions) {
-        return this.api.put<ApiKeyModel>(this.buildPath(`${ApiKey.baseUrl}/${apiKeyId}/duplicate`, options));
+        return this.api.put<ApiKeyModel>(this.buildPath(`${ApiKey.baseUrl}/${apiKeyId}/duplicate`), options);
     }
 }

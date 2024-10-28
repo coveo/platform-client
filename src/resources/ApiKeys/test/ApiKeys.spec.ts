@@ -102,7 +102,9 @@ describe('ApiKey', () => {
         it('should make a PUT call to the duplicate ApiKey', async () => {
             await apiKey.duplicate(apiKeyModel.id, {lifetimeDuration: 'P1M'});
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/duplicate?lifetimeDuration=P1M`);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/duplicate`, {
+                lifetimeDuration: 'P1M',
+            });
         });
     });
     describe('extend', () => {
