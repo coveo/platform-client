@@ -1,11 +1,11 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "enabled": true,
     "extends": [
         "github>coveo/renovate-presets",
         ":semanticPrefixFixDepsChoreOthers",
         "helpers:pinGitHubActionDigests",
-        "schedule:earlyMondays"
+        "schedule:earlyMondays",
+        "github>coveo/renovate-presets//auto-merge.json"
     ],
     "packageRules": [
         {
@@ -24,9 +24,7 @@
             "description": "all our plugins and deps are not compatible with 9.x yet"
         }
     ],
-    "rangeStrategy": "auto",
     "lockFileMaintenance": {
         "enabled": true
-    },
-    "automerge": true
+    }
 }
