@@ -27,8 +27,11 @@ export default class ApiKey extends Resource {
         return this.api.put(path, apiKey);
     }
 
-    delete(apiKeyId: string) {
-        return this.api.delete(`${ApiKey.baseUrl}/${apiKeyId}`);
+    delete(apiKeyIds: string | string[]) {
+        if (Array.isArray(apiKeyIds) && apiKeyIds.length > 1) {
+            return this.api.post<void>(`${ApiKey.baseUrl}/delete/bulk`, apiKeyIds);
+        }
+        return this.api.delete<void>(`${ApiKey.baseUrl}/${Array.isArray(apiKeyIds) ? apiKeyIds[0] : apiKeyIds}`);
     }
 
     extend(apiKeyId: string) {
@@ -37,5 +40,19 @@ export default class ApiKey extends Resource {
 
     duplicate(apiKeyId: string, options: DuplicateApiKeyOptions) {
         return this.api.put<ApiKeyModel>(this.buildPath(`${ApiKey.baseUrl}/${apiKeyId}/duplicate`), options);
+    }
+
+    activate(apiKeyIds: string | string[]) {
+        if (Array.isArray(apiKeyIds) && apiKeyIds.length > 1) {
+            return this.api.put<void>(`${ApiKey.baseUrl}/activate/bulk`, apiKeyIds);
+        }
+        return this.api.put<void>(`${ApiKey.baseUrl}/${Array.isArray(apiKeyIds) ? apiKeyIds[0] : apiKeyIds}/activate`);
+    }
+
+    disable(apiKeyIds: string | string[]) {
+        if (Array.isArray(apiKeyIds) && apiKeyIds.length > 1) {
+            return this.api.put<void>(`${ApiKey.baseUrl}/disable/bulk`, apiKeyIds);
+        }
+        return this.api.put<void>(`${ApiKey.baseUrl}/${Array.isArray(apiKeyIds) ? apiKeyIds[0] : apiKeyIds}/disable`);
     }
 }

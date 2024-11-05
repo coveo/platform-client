@@ -62,12 +62,26 @@ describe('ApiKey', () => {
     });
 
     describe('delete', () => {
-        it('should make a DELETE call to the specific ApiKey url', async () => {
+        it('makes a DELETE call to DELETE call to /rest/organizations/:orgId/apikeys/:id when only one id is specified', async () => {
             const apiKeyToDeleteId = 'ApiKey-to-be-deleted';
 
             await apiKey.delete(apiKeyToDeleteId);
             expect(api.delete).toHaveBeenCalledTimes(1);
             expect(api.delete).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyToDeleteId}`);
+        });
+
+        it('makes a DELETE call to /rest/organizations/:orgId/apikeys/:id when an array of one id is provided', async () => {
+            const apiKeyToDeleteId = 'ApiKey-to-be-deleted';
+            await apiKey.delete([apiKeyToDeleteId]);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyToDeleteId}`);
+        });
+
+        it('makes a POST call to /rest/organizations/:orgId/apikeys/delete/bulk when multiple ids are provided', async () => {
+            const apiKeysToDelete = ['api-key-id-one', 'api-key-id-two'];
+            await apiKey.delete(apiKeysToDelete);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(`${ApiKey.baseUrl}/delete/bulk`, apiKeysToDelete);
         });
     });
 
@@ -118,6 +132,52 @@ describe('ApiKey', () => {
             await apiKey.extend(apiKeyModel.id);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/${apiKeyModel.id}/activation/extend`);
+        });
+    });
+
+    describe('activate', () => {
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/:id/activate when only one id is provided', async () => {
+            await apiKey.activate('api-key-id');
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/api-key-id/activate`);
+        });
+
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/:id/activate when an array of one id is provided', async () => {
+            await apiKey.activate(['api-key-id']);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/api-key-id/activate`);
+        });
+
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/activate/bulk when multiple ids are provided', async () => {
+            await apiKey.activate(['api-key-id-one', 'api-key-id-two']);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/activate/bulk`, [
+                'api-key-id-one',
+                'api-key-id-two',
+            ]);
+        });
+    });
+
+    describe('disable', () => {
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/:id/disable when only one id is provided', async () => {
+            await apiKey.disable('api-key-id');
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/api-key-id/disable`);
+        });
+
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/:id/disable when an array of one id is provided', async () => {
+            await apiKey.disable(['api-key-id']);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/api-key-id/disable`);
+        });
+
+        it('makes a PUT call to /rest/organizations/:orgId/apikeys/disable/bulk when multiple ids are provided', async () => {
+            await apiKey.disable(['api-key-id-one', 'api-key-id-two']);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${ApiKey.baseUrl}/disable/bulk`, [
+                'api-key-id-one',
+                'api-key-id-two',
+            ]);
         });
     });
 });
