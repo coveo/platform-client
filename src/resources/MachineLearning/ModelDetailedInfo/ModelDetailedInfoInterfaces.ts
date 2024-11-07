@@ -96,4 +96,8 @@ export interface ModelWithDetails {
      * The current status of the model.
      */
     modelStatusInfo: ModelStatusInfo;
+    /**
+     * Specifies whether the model must be associated with a query pipeline to be effective.
+     */
+    requiresAssociation: boolean;
 }
