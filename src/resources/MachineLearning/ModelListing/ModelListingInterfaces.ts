@@ -36,6 +36,11 @@ export interface MLListingModel {
      * @Example `5`
      */
     modelSizeStatistic: number;
+
+    /**
+     * @deprecated
+     * This property is exposed for backward compatibility reasons.
+     */
     readyForAssociation: boolean;
     /**
      * The current status of the model
@@ -46,6 +51,10 @@ export interface MLListingModel {
      *
      */
     modelAssociations: MLModelAssociation[];
+    /**
+     * Specifies whether the model must be associated with a query pipeline to be effective.
+     */
+    requiresAssociation: boolean;
 }
 
 export interface MLModelStatusInfo {
