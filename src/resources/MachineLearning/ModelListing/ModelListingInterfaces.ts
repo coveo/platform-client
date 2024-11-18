@@ -38,11 +38,6 @@ export interface MLListingModel {
     modelSizeStatistic: number;
 
     /**
-     * @deprecated
-     * This property is exposed for backward compatibility reasons.
-     */
-    readyForAssociation: boolean;
-    /**
      * The current status of the model
      */
     modelStatusInfo: MLModelStatusInfo;
