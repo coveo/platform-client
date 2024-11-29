@@ -100,21 +100,70 @@ export interface LicenseModel {
 }
 
 export interface EntitlementModel {
+    /**
+     * Limit of items
+     */
     itemLimit: number;
+    /**
+     * Limit of Queries Per Month for product listing
+     */
     lrpmLimit: number;
+    /**
+     * The unique identifier of the entitlement
+     */
     id: string;
+    /**
+     * The unique identifier of the product on Salesforce
+     */
     productId: string;
+    /**
+     * Name of the product on Salesforce
+     */
     productName: string;
+    /**
+     * Unit on which the price is based on
+     */
     pricingUnit: string;
+    /**
+     * Name of the product on Coveo
+     */
     displayName: string;
+    /**
+     * Queries per month limit
+     */
     qpmLimit: number;
+    /**
+     * Reommendation Limit
+     */
     recommendationLimit: number;
+    /**
+     * Status of the entitlement
+     */
     status: string;
+    /**
+     * Flag that informs if entitlement allow unlimited Queries Per Month
+     */
     unlimitedQPM: boolean;
+    /**
+     * Flag that informs if entitlement allow unlimited recommendations
+     */
     unlimitedRecommendations: boolean;
+    /**
+     * Flag that informs if entitlement allow unlimited users
+     */
     unlimitedUsers: boolean;
-    useCase: string;
+    /**
+     * Use case of the entitlement
+     */
+    useCase: string;    
+    /**
+     * Limit of users for the entitlement
+     */
     userLimit: number;
+    /**
+     * Flag to control if the entitlement should be shown in the consumption dashboard
+     */
+    shouldShowInConsumptionDashboard: boolean;
 }
 
 /**
