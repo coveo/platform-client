@@ -22,4 +22,12 @@ describe('ApiKeyTemplateModel', () => {
             expect(api.get).toHaveBeenCalledWith(`${ApiKeyTemplate.baseUrl}/${apiKeyTemplateToGetId}`);
         });
     });
+
+    describe('listAPIKeysEligibility', () => {
+        it('should make a GET call to the listAPIKeysEligibility endpoint', async () => {
+            await apiKeyTemplate.listAPIKeysEligibility();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${ApiKeyTemplate.baseUrl}/privileges/eligibility`);
+        });
+    });
 });

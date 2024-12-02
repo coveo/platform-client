@@ -26,3 +26,18 @@ export interface ApiKeyTemplateModel {
      */
     privileges?: PrivilegeModel[];
 }
+
+export interface ApiKeyTemplateEligibilityResponseModel {
+    /**
+     * The id of the template
+     */
+    id: string;
+    /**
+     * The list of privileges missing to access the template
+     */
+    missingPrivileges: PrivilegeModel[];
+    /**
+     * If the user can generate an API key from this template
+     */
+    canGenerate: boolean;
+}
