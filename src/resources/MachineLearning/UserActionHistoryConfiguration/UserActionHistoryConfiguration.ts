@@ -7,14 +7,23 @@ import Resource from '../../Resource.js';
 export default class UserActionHistoryConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/useractionhistory`;
 
+    /**
+     * @deprecated
+     */
     create() {
         return this.api.post<void>(UserActionHistoryConfiguration.baseUrl);
     }
 
+    /**
+     * @deprecated
+     */
     delete() {
         return this.api.delete<void>(UserActionHistoryConfiguration.baseUrl);
     }
 
+    /**
+     * @deprecated
+     */
     get() {
         return this.api.get<boolean>(UserActionHistoryConfiguration.baseUrl);
     }
