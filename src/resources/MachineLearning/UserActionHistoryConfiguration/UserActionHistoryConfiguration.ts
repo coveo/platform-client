@@ -1,6 +1,9 @@
 import API from '../../../APICore.js';
 import Resource from '../../Resource.js';
 
+/**
+ * @deprecated
+ */
 export default class UserActionHistoryConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/useractionhistory`;
 
