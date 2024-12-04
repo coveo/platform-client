@@ -4,4 +4,12 @@ export interface ModelDetailsStatsPerSource {
     invalidHtmlDocumentCount: number;
     documentWithoutIdCount: number;
     documentWithDuplicatedIdCount: number;
+    documentsWithChunksCount?: number;
+    documentsWithChunksRatio?: number;
+    chunkCount?: number;
+    chunksPerDocument?: {
+        min?: number;
+        max?: number;
+        mean?: number;
+    };
 }
