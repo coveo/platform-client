@@ -44,7 +44,11 @@ interface StatementGroupModelBase {
      * The definition of the condition that must be satisfied for a request to be processed by the statement group.
      */
     conditionDefinition?: string;
-
+    /**
+     * A structured representation of the condition
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    conditionDetailed?: any;
     /**
      * Date of creation
      * Format: ISO-8601
