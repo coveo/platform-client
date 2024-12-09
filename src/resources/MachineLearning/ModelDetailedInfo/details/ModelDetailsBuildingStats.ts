@@ -26,6 +26,15 @@ export interface ModelDetailsBuildingStats {
     invalidHtmlDocumentCount?: number;
     documentWithoutIdCount?: number;
     documentWithDuplicatedIdCount?: number;
+    documentsWithChunksCount?: number;
+    documentsWithChunksRatio?: number;
+    chunkCount?: number;
+    meanChunkLength?: number;
+    chunksPerDocument?: {
+        min?: number;
+        max?: number;
+        mean?: number;
+    };
     commerceEventCounts?: ModelDetailsCommerceEvents;
     modelDetailedStatsPerSource?: ModelDetailsStatsPerSource[];
 }
