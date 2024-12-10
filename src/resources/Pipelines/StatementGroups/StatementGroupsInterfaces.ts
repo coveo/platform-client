@@ -47,8 +47,7 @@ interface StatementGroupModelBase {
     /**
      * A structured representation of the condition
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    conditionDetailed?: any;
+    conditionDetailed?: unknown;
     /**
      * Date of creation
      * Format: ISO-8601
