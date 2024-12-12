@@ -44,7 +44,10 @@ interface StatementGroupModelBase {
      * The definition of the condition that must be satisfied for a request to be processed by the statement group.
      */
     conditionDefinition?: string;
-
+    /**
+     * A structured representation of the condition
+     */
+    conditionDetailed?: unknown;
     /**
      * Date of creation
      * Format: ISO-8601
