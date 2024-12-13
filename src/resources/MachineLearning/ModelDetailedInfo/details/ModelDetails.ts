@@ -13,7 +13,7 @@ export interface ModelDetails {
     languages?: Map<string, ModelDetailsLanguages>;
     candidateExamples?: Map<string, string[]>;
     candidatesPerLanguages?: Map<string, number>;
-    minClickCountPerLang?: Map<string, number>;
+    minClickCountByLang?: Map<string, number>;
     subModels?: {[key: string]: ModelDetailsSubModels};
     candidates?: number;
     modelDetailedBuildingStats?: ModelDetailsBuildingStats;
