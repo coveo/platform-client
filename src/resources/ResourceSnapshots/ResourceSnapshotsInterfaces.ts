@@ -68,6 +68,8 @@ export enum ResourceSnapshotType {
     subscription = 'SUBSCRIPTION',
     thesaurus = 'THESAURUS',
     trigger = 'TRIGGER',
+    resultRanking = 'RESULT_RANKING',
+    statementGroup = 'STATEMENT_GROUP',
 }
 
 export enum SnapshotAccessType {
