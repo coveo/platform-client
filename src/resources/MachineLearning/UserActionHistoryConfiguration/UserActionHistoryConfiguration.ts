@@ -2,7 +2,7 @@ import API from '../../../APICore.js';
 import Resource from '../../Resource.js';
 
 /**
- * @deprecated
+ * @deprecated Will be removed from the API in January 2025
  */
 export default class UserActionHistoryConfiguration extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning/configuration/useractionhistory`;
