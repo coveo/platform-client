@@ -29,7 +29,7 @@
         "release": "semantic-release",
         "commit-cli": "git-cz",
         "lint:fix": "prettier --list-different --write \"**/*.{ts,js,json,md,yml}\" && eslint . --fix --quiet",
-        "lint": "prettier --check \"**/*.{ts,js,json,md,yml}\" && eslint .",
+        "lint": "prettier --check \"**/*.{ts,js,json,md,yml}\" && eslint . && echo 'Code looks good ✅'",
         "prepare": "husky install"
     },
     "devDependencies": {

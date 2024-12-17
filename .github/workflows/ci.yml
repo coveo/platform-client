@@ -21,6 +21,8 @@ jobs:
             - name: Check merge commit
               if: github.event_name == 'merge_group'
               uses: ./.github/actions/merge-commit
+            - name: Statical analysis
+              uses: ./.github/actions/lint
             - name: Tests
               run: npm test
             - name: Build
