@@ -1176,19 +1176,18 @@ export enum ApiKeyStatus {
     EXPIRED = 'EXPIRED',
     SOON_TO_BE_EXPIRED = 'SOON_TO_BE_EXPIRED',
     SOON_TO_BE_DISABLED = 'SOON_TO_BE_DISABLED',
-    DISABLED_EXPOSED = 'DISABLED_EXPOSED'
+    DISABLED_EXPOSED = 'DISABLED_EXPOSED',
 }
 
 export enum ApiKeyReportCreationType {
     MANUAL = 'MANUAL',
-    AUTOMATED = 'AUTOMATED'
+    AUTOMATED = 'AUTOMATED',
 }
-
 
 export enum ApiKeyExposureReportSeverity {
     CRITICAL = 'CRITICAL',
     HIGH = 'HIGH',
     MEDIUM = 'MEDIUM',
     LOW = 'LOW',
-    WARN = 'WARN'
+    WARN = 'WARN',
 }
