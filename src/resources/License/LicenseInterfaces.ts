@@ -155,7 +155,7 @@ export interface EntitlementModel {
     /**
      * Use case of the entitlement
      */
-    useCase: string;    
+    useCase: string;
     /**
      * Limit of users for the entitlement
      */
