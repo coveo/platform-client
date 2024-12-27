@@ -3,6 +3,6 @@ export interface ModelDetailsLanguages {
     words?: number;
     stopwords?: number;
     topfacets?: string[];
-    contextKeysToDocuments?: Map<string, number>;
-    docPerFilters?: Map<string, number>;
+    contextKeysToDocuments?: Record<string, number>;
+    docPerFilters?: Record<string, number>;
 }
