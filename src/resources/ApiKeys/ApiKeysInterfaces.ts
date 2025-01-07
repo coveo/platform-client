@@ -1,6 +1,5 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import {ApiKeyExposureReportSeverity, ApiKeyReportCreationType, ApiKeyStatus} from '../Enums.js';
-import {UserModel} from '../Users/UserInterfaces.js';
+import {ApiKeyStatus,ApiKeyExposureReportSeverity,ApiKeyReportCreationType} from '../Enums.js';
 
 export interface ApiKeyBaseModel extends GranularResource {
     /**
@@ -216,32 +215,3 @@ interface ImpersonationRestrictionsModel {
     allowedUserIds: QueryAuthenticationModel[];
 }
 
-<<<<<<< Updated upstream
-interface ExposureReport {
-    /**
-     * API Key logger id associated to the Exposure Report
-     */
-    apiKeyLoggerId: string;
-    /**
-     * The severity of the exposure
-     */
-    severity: ApiKeyExposureReportSeverity;
-    /**
-     * The reason behind the exposure report for a given API key
-     */
-    reason: string;
-    /**
-     * The date the key should be deactivated
-     */
-    deactivationDate: number;
-    /**
-     * The way the API key report has been created
-     */
-    creationType: ApiKeyReportCreationType;
-    /**
-     * Represents the user that has created the report
-     */
-    createdBy: UserModel;
-}
-=======
->>>>>>> Stashed changes
