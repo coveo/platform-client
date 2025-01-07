@@ -1,5 +1,5 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import {ApiKeyStatus,ApiKeyExposureReportSeverity,ApiKeyReportCreationType} from '../Enums.js';
+import {ApiKeyStatus, ApiKeyExposureReportSeverity, ApiKeyReportCreationType} from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
 export interface ApiKeyBaseModel extends GranularResource {
@@ -108,29 +108,29 @@ export interface ApiKeyModel extends ApiKeyBaseModel {
 
 export interface ExposureReport {
     /**
-     * API Key logger id associated to the Exposure Report 
+     * API Key logger id associated to the Exposure Report
      */
-    apiKeyLoggerId: string,
+    apiKeyLoggerId: string;
     /**
-     * The severity of the exposure 
+     * The severity of the exposure
      */
-    severity: ApiKeyExposureReportSeverity,
+    severity: ApiKeyExposureReportSeverity;
     /**
-     * The reason behind the exposure report for a given API key 
+     * The reason behind the exposure report for a given API key
      */
-    reason: string,
+    reason: string;
     /**
      * The date the key should be deactivated
      */
-     deactivationDate: number,
-     /**
-      * The way the API key report has been created
-      */
-      creationType: ApiKeyReportCreationType,
-      /**
-       * Represents the user that has created the report
-       */
-      createdBy: UserModel   
+    deactivationDate: number;
+    /**
+     * The way the API key report has been created
+     */
+    creationType: ApiKeyReportCreationType;
+    /**
+     * Represents the user that has created the report
+     */
+    createdBy: UserModel;
 }
 export interface CreateApiKeyModel extends ApiKeyBaseModel {
     /**
@@ -215,4 +215,3 @@ interface EnforceQueryPipelineConfigurationModel {
 interface ImpersonationRestrictionsModel {
     allowedUserIds: QueryAuthenticationModel[];
 }
-
