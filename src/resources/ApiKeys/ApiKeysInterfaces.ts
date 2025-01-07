@@ -106,6 +106,32 @@ export interface ApiKeyModel extends ApiKeyBaseModel {
     exposureReport?: ExposureReport;
 }
 
+export interface ExposureReport {
+    /**
+     * API Key logger id associated to the Exposure Report 
+     */
+    apiKeyLoggerId: string,
+    /**
+     * The severity of the exposure 
+     */
+    severity: ApiKeyExposureReportSeverity,
+    /**
+     * The reason behind the exposure report for a given API key 
+     */
+    reason: string,
+    /**
+     * The date the key should be deactivated
+     */
+     deactivationDate: number,
+     /**
+      * The way the API key report has been created
+      */
+      creationType: ApiKeyReportCreationType,
+      /**
+       * Represents the user that has created the report
+       */
+      createdBy: any   
+}
 export interface CreateApiKeyModel extends ApiKeyBaseModel {
     /**
      * The duration of the API key in ISO-8601 format. Once the duration is reached the key expires and cannot be used anymore.
@@ -190,6 +216,7 @@ interface ImpersonationRestrictionsModel {
     allowedUserIds: QueryAuthenticationModel[];
 }
 
+<<<<<<< Updated upstream
 interface ExposureReport {
     /**
      * API Key logger id associated to the Exposure Report
@@ -216,3 +243,5 @@ interface ExposureReport {
      */
     createdBy: UserModel;
 }
+=======
+>>>>>>> Stashed changes
