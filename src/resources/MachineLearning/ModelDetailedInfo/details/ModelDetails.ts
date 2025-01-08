@@ -1,6 +1,8 @@
 import {ModelDetailsBuildingStats} from './ModelDetailsBuildingStats.js';
 import {ModelDetailsLanguages} from './ModelDetailsLanguages.js';
 import {ModelDetailsSubModels} from './ModelDetailsSubModels.js';
+import {ModelDetailsPreparationDetails} from './ModelDetailsPreparationDetails.js';
+import {ModelDetailsTrainingDetails} from './ModelDetailsTrainingDetails.js';
 
 export interface ModelDetails {
     possibleRecommendations?: number;
@@ -17,4 +19,6 @@ export interface ModelDetails {
     subModels?: {[key: string]: ModelDetailsSubModels};
     candidates?: number;
     modelDetailedBuildingStats?: ModelDetailsBuildingStats;
+    modelDetailedTrainingDetails: ModelDetailsTrainingDetails;
+    modelDetailedPreparationDetails: ModelDetailsPreparationDetails;
 }
