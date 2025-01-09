@@ -3,7 +3,7 @@ interface DatasetFieldDetails {
     labelsDistribution: Record<string, number>;
 }
 
-interface FacetDetails {
+interface FacetsDetails {
     facetLabels: Record<string, string[]>;
 }
 
@@ -15,5 +15,5 @@ interface DatasetDetails {
 export interface ModelDetailsPreparationDetails {
     trainDatasetsDetails: DatasetDetails;
     testDatasetsDetails: DatasetDetails;
-    facetDetails: FacetDetails;
+    facetsDetails: FacetsDetails;
 }
