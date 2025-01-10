@@ -5,6 +5,7 @@ export * from './FilterConditions.js';
 export * from './IAPRConfiguration/index.js';
 export * from './MachineLearning.js';
 export * from './MachineLearningInterfaces.js';
+export * from './ModelAssociations/index.js';
 export * from './ModelDetailedInfo/index.js';
 export * from './ModelInformation/index.js';
 export * from './ModelListing/index.js';

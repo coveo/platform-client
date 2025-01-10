@@ -4,6 +4,7 @@ import CaseClassificationConfiguration from './CaseClassificationConfiguration/C
 import DNEConfiguration from './DNEConfiguration/DNEConfiguration.js';
 import IAPRConfiguration from './IAPRConfiguration/IAPRConfiguration.js';
 import {MLModelCreated, RegistrationModel} from './MachineLearningInterfaces.js';
+import ModelAssociations from './ModelAssociations/ModelAssociations.js';
 import ModelDetailedInfo from './ModelDetailedInfo/ModelDetailedInfo.js';
 import ModelListing from './ModelListing/ModelListing.js';
 import Models from './Models/Models.js';
@@ -27,6 +28,7 @@ export default class MachineLearning extends Resource {
     relevanceGenerativeAnsweringConfig: RelevanceGenerativeAnsweringConfiguration;
     semanticEncoderConfig: SemanticEncoderConfiguration;
     modelDetailedInfo: ModelDetailedInfo;
+    modelAssociations: ModelAssociations;
 
     constructor(
         protected api: API,
@@ -45,6 +47,7 @@ export default class MachineLearning extends Resource {
         this.relevanceGenerativeAnsweringConfig = new RelevanceGenerativeAnsweringConfiguration(api, serverlessApi);
         this.semanticEncoderConfig = new SemanticEncoderConfiguration(api, serverlessApi);
         this.modelDetailedInfo = new ModelDetailedInfo(api, serverlessApi);
+        this.modelAssociations = new ModelAssociations(api, serverlessApi);
     }
 
     register(registration: RegistrationModel) {
