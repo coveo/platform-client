@@ -4,6 +4,7 @@ import DNEConfiguration from '../DNEConfiguration/DNEConfiguration.js';
 import IAPRConfiguration from '../IAPRConfiguration/IAPRConfiguration.js';
 import MachineLearning from '../MachineLearning.js';
 import {RegistrationModel} from '../MachineLearningInterfaces.js';
+import ModelAssociations from '../ModelAssociations/ModelAssociations.js';
 import ModelDetailedInfo from '../ModelDetailedInfo/ModelDetailedInfo.js';
 import Models from '../Models/Models.js';
 import PQSConfiguration from '../PQSConfiguration/PQSConfiguration.js';
@@ -71,5 +72,10 @@ describe('MachineLearning', () => {
     it('should register the modelDetailedInfo resource', () => {
         expect(ml.modelDetailedInfo).toBeDefined();
         expect(ml.modelDetailedInfo).toBeInstanceOf(ModelDetailedInfo);
+    });
+
+    it('should register the modelAssociations resource', () => {
+        expect(ml.modelAssociations).toBeDefined();
+        expect(ml.modelAssociations).toBeInstanceOf(ModelAssociations);
     });
 });
