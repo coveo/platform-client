@@ -914,7 +914,6 @@ export enum ModelTypes {
     ECommerce = 'ecommerce',
     CaseClassification = 'caseclassification',
     SmartSnippets = 'mlquestionanswering',
-    UserActionHistory = 'useractionhistory',
     IntentAwareProductRanking = 'intentranking',
     RelevanceGenerativeAnswering = 'genqa',
     SemanticEncoder = 'embeddings',
