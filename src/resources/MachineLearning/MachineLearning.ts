@@ -12,7 +12,6 @@ import PQSConfiguration from './PQSConfiguration/PQSConfiguration.js';
 import RelevanceGenerativeAnsweringConfiguration from './RGAConfiguration/RelevanceGenerativeAnsweringConfiguration.js';
 import SemanticEncoderConfiguration from './SemanticEncoderConfiguration/SemanticEncoderConfiguration.js';
 import SmartSnippetsConfiguration from './SmartSnippetsConfiguration/SmartSnippetsConfiguration.js';
-import UserActionHistoryConfiguration from './UserActionHistoryConfiguration/UserActionHistoryConfiguration.js';
 
 export default class MachineLearning extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/machinelearning`;
@@ -21,7 +20,6 @@ export default class MachineLearning extends Resource {
     dneConfig: DNEConfiguration;
     caseClassificationConfig: CaseClassificationConfiguration;
     smartSnippetsConfig: SmartSnippetsConfiguration;
-    userActionHistoryConfig: UserActionHistoryConfiguration;
     pqsConfig: PQSConfiguration;
     iaprConfig: IAPRConfiguration;
     modelListing: ModelListing;
@@ -42,7 +40,6 @@ export default class MachineLearning extends Resource {
         this.smartSnippetsConfig = new SmartSnippetsConfiguration(api, serverlessApi);
         this.pqsConfig = new PQSConfiguration(api, serverlessApi);
         this.iaprConfig = new IAPRConfiguration(api, serverlessApi);
-        this.userActionHistoryConfig = new UserActionHistoryConfiguration(api, serverlessApi);
         this.modelListing = new ModelListing(api, serverlessApi);
         this.relevanceGenerativeAnsweringConfig = new RelevanceGenerativeAnsweringConfiguration(api, serverlessApi);
         this.semanticEncoderConfig = new SemanticEncoderConfiguration(api, serverlessApi);
