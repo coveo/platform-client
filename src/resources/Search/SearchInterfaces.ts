@@ -2967,3 +2967,107 @@ export interface RestFacetSearchResponse {
      */
     moreValuesAvailable: boolean;
 }
+
+export interface RetrievePassagesParameters {
+    /**
+     * The unique identifier of the target Coveo Cloud organization.
+     * Specifying a value for this parameter is only necessary when you are authenticating the API call with an OAuth2 token.
+     */
+    organizationId?: string;
+
+    /**
+     * The query for which to retrieve the passage(s).
+     */
+    query: string;
+
+    /**
+     * A filter expression that will be applied during the first stage retrieval.
+     * The expression must comply with the Coveo Query Language (CQL) syntax.
+     */
+    filter?: string;
+
+    /**
+     * The fields to include in the response.
+     * When omitted, only the identifier of the document will be returned.
+     */
+    additionalFields?: string[];
+
+    /**
+     * The maximum number of passage(s) to retrieve.
+     */
+    maxPassages?: number;
+
+    /**
+     * The first level of origin of the request, typically the identifier of the graphical search interface from which the request originates.
+     * Coveo Machine Learning models use this information to provide contextually relevant output.
+     *
+     * Notes:
+     *
+     * - This parameter will be overridden if the search request is authenticated by a search token that enforces a specific pipeline, or a searchHub that routes queries to a specific pipeline via a query pipeline condition.
+     *
+     * - When logging a Search usage analytics event for a query, the originLevel1 field of that event should be set to the value of the searchHub search request parameter.
+     */
+    searchHub?: string;
+
+    /**
+     * Localization parameter.
+     */
+    localization: {
+        /**
+         * The locale of the current user. Must comply with IETF's BCP 47 definition.
+         * Coveo Machine Learning models use this information to provide contextually relevant output. Moreover, this information can be referred to in query expressions and QPL statements by using the $locale object.
+         * Note: When logging a Search usage analytics event, the language field of that event should match the language part of the locale value of the query (e.g., en-US in locale becomes en in language).
+         */
+        locale: string;
+
+        /**
+         * The [tz database identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the user's time zone. Used for interpreting dates in query expressions and retrieving passages.
+         */
+        timezone?: string;
+    };
+    context?: Record<string, string | string[]>;
+}
+
+export interface RetrievePassagesResponse {
+    /**
+     * The list of passages retrieved.
+     */
+    items: Passage[];
+
+    /**
+     * A unique identifier for the response. It can be used to track the response in logs or for debugging purposes.
+     */
+    responseId: string;
+}
+
+export interface Passage {
+    /**
+     * The text associated to this passage.
+     */
+    text: string;
+
+    /**
+     * A measure of how relevant a passage is to the query based on semantic similarity, as determined by the CPR model. The higher the value, the higher the relevance.
+     */
+    relevanceScore: number;
+
+    /**
+     * The document that contains this passage. By default, it includes only the title and primary ID of the document. If you specified additional fields in the request payload, they will be included here as well.
+     */
+    document: {
+        /**
+         * The title of the document associated to this passage.
+         */
+        title: string;
+
+        /**
+         * The primary ID of the document associated to this passage.
+         */
+        primaryid: string;
+
+        /**
+         * Fields that were requested in the additionalFields parameter of the request.
+         */
+        [key: string]: any;
+    };
+}

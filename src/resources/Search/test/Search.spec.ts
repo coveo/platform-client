@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
 import {RestUserIdType} from '../../Enums.js';
 import Search from '../Search.js';
-import {RestFacetSearchParameters} from '../SearchInterfaces.js';
+import {RestFacetSearchParameters, RetrievePassagesParameters} from '../SearchInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -55,7 +55,7 @@ describe('Search', () => {
             search.createToken(tokenParams);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                `${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`,
+                `${Search.baseUrlV2}/token?organizationId=${API.orgPlaceholder}`,
                 tokenParams,
             );
         });
@@ -66,7 +66,7 @@ describe('Search', () => {
             search.listFields({viewAllContent: true, organizationId: 'my-org', pipeline: 'pipeline'});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org&pipeline=pipeline`,
+                `${Search.baseUrlV2}/fields?viewAllContent=true&organizationId=my-org&pipeline=pipeline`,
             );
         });
 
@@ -74,7 +74,7 @@ describe('Search', () => {
             search.listFields({viewAllContent: true, organizationId: 'my-org', pipeline: ''});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Search.baseUrl}/fields?viewAllContent=true&organizationId=my-org&pipeline=`,
+                `${Search.baseUrlV2}/fields?viewAllContent=true&organizationId=my-org&pipeline=`,
             );
         });
 
@@ -86,7 +86,7 @@ describe('Search', () => {
             search.listFields({});
 
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrl}/fields?organizationId=my-org`);
+            expect(api.get).toHaveBeenCalledWith(`${Search.baseUrlV2}/fields?organizationId=my-org`);
 
             // reset organizationId to old value
             Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});
@@ -104,7 +104,7 @@ describe('Search', () => {
             search.getFieldValues(fieldName, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${Search.baseUrl}/values?field=author&ignoreAccents=false&commerce=%7B%22catalogId%22%3A%22test-id%22%2C%22filter%22%3A%22test-filter%22%2C%22operation%22%3A%22test-operation%22%7D&organizationId=test-org-id`,
+                `${Search.baseUrlV2}/values?field=author&ignoreAccents=false&commerce=%7B%22catalogId%22%3A%22test-id%22%2C%22filter%22%3A%22test-filter%22%2C%22operation%22%3A%22test-operation%22%7D&organizationId=test-org-id`,
             );
         });
     });
@@ -114,42 +114,42 @@ describe('Search', () => {
             const queryParams = {q: ''};
             search.query(queryParams);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, queryParams);
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrlV2, queryParams);
         });
 
         it('should not add #viewAllContent query string parameter when not specified', () => {
             const queryParams = {q: ''};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrlV2, {q: ''});
         });
 
         it('should add #viewAllContent=1 to the query string when set to true', () => {
             const queryParams = {q: '', viewAllContent: true};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}?viewAllContent=1`, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrlV2}?viewAllContent=1`, {q: ''});
         });
 
         it('should add #viewAllContent=1 to the query string when set to 1', () => {
             const queryParams = {q: '', viewAllContent: 1};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}?viewAllContent=1`, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrlV2}?viewAllContent=1`, {q: ''});
         });
 
         it('should not add #viewAllContent query string parameter when set to false', () => {
             const queryParams = {q: '', viewAllContent: false};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrlV2, {q: ''});
         });
 
         it('should not add #viewAllContent query string parameter when set to 0', () => {
             const queryParams = {q: '', viewAllContent: 0};
             search.query(queryParams);
 
-            expect(api.post).toHaveBeenCalledWith(Search.baseUrl, {q: ''});
+            expect(api.post).toHaveBeenCalledWith(Search.baseUrlV2, {q: ''});
         });
     });
 
@@ -159,7 +159,7 @@ describe('Search', () => {
             search.exportQuery(queryParams);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
-                Search.baseUrl,
+                Search.baseUrlV2,
                 {q: '', format: 'xlsx'},
                 {responseBodyFormat: 'blob'},
             );
@@ -171,7 +171,7 @@ describe('Search', () => {
             const queryParams = {q: ''};
             search.querySuggestPost(queryParams);
             expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrl}/querySuggest`, queryParams);
+            expect(api.post).toHaveBeenCalledWith(`${Search.baseUrlV2}/querySuggest`, queryParams);
         });
     });
 
@@ -237,6 +237,45 @@ describe('Search', () => {
                 `/rest/search/v2/facet?organizationId=my-org`,
                 searchFacetRequest,
             );
+
+            // reset organizationId to old value
+            Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});
+        });
+    });
+
+    describe('retrievePassages', () => {
+        const retrievePassageRequest: RetrievePassagesParameters = {
+            query: 'What are the benefits of using solar energy?',
+            filter: '@source=="acme"',
+            additionalFields: ['clickableuri'],
+            maxPassages: 5,
+            searchHub: 'Main',
+            localization: {
+                locale: 'en-CA',
+                timezone: 'America/Montreal',
+            },
+            context: {
+                userAgeRange: '25-35',
+                userRoles: ['PremiumCustomer', 'ProductReviewer'],
+            },
+        };
+        it('makes a post call to the search facet endpoint', () => {
+            search.retrievePassages({...retrievePassageRequest, organizationId: 'specific-org-id'});
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenLastCalledWith(
+                `/rest/search/v3/passages/retrieve?organizationId=specific-org-id`,
+                retrievePassageRequest,
+            );
+        });
+        it('not adds the organizationId query param from the config if missing in the arguments', () => {
+            const tempOrganizationId = api.organizationId;
+            // change the value of organizationId on the mock
+            Object.defineProperty(api, 'organizationId', {value: 'my-org', writable: true});
+
+            search.retrievePassages(retrievePassageRequest);
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenLastCalledWith(`/rest/search/v3/passages/retrieve`, retrievePassageRequest);
 
             // reset organizationId to old value
             Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});

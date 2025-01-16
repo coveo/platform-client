@@ -8,6 +8,8 @@ import {
     RestQueryParams,
     RestQueryResult,
     RestTokenParams,
+    RetrievePassagesParameters,
+    RetrievePassagesResponse,
     SearchListFieldsParams,
     SearchListFieldsResponse,
     SearchResponse,
@@ -17,16 +19,17 @@ import {
 import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from './index.js';
 
 export default class Search extends Resource {
-    static baseUrl = `/rest/search/v2`;
+    static baseUrlV2 = `/rest/search/v2`;
+    static baseUrlV3 = `/rest/search/v3`;
 
     createToken(tokenParams: RestTokenParams) {
-        return this.api.post<TokenModel>(`${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`, tokenParams);
+        return this.api.post<TokenModel>(`${Search.baseUrlV2}/token?organizationId=${API.orgPlaceholder}`, tokenParams);
     }
 
     listFields(params?: SearchListFieldsParams) {
         return this.api.get<SearchListFieldsResponse>(
             this.buildPath(
-                `${Search.baseUrl}/fields`,
+                `${Search.baseUrlV2}/fields`,
                 {
                     ...params,
                     organizationId: params?.organizationId ?? this.api.organizationId,
@@ -38,7 +41,7 @@ export default class Search extends Resource {
 
     getFieldValues(fieldName: string, params?: ListFieldValuesBodyQueryParams) {
         return this.api.get<ListFieldValuesResponse>(
-            this.buildPath(`${Search.baseUrl}/values`, {
+            this.buildPath(`${Search.baseUrlV2}/values`, {
                 field: encodeURI(`${fieldName}`),
                 ...params,
                 organizationId: params?.organizationId ?? this.api.organizationId,
@@ -53,7 +56,7 @@ export default class Search extends Resource {
         const {viewAllContent, ...bodyParameters} = restQueryParameters;
 
         return this.api.post<SearchResponse>(
-            this.buildPath(Search.baseUrl, {
+            this.buildPath(Search.baseUrlV2, {
                 organizationId: this.api.organizationId,
                 viewAllContent: viewAllContent ? 1 : undefined,
             }),
@@ -71,7 +74,7 @@ export default class Search extends Resource {
         const {viewAllContent, ...bodyParameters} = restQueryParameters;
 
         return this.api.post<Blob>(
-            this.buildPath(Search.baseUrl, {
+            this.buildPath(Search.baseUrlV2, {
                 organizationId: this.api.organizationId,
                 viewAllContent: viewAllContent ? 1 : undefined,
             }),
@@ -82,7 +85,7 @@ export default class Search extends Resource {
 
     querySuggestPost(restQuerySuggestParameters: PostSearchQuerySuggestBodyParams) {
         return this.api.post<any>(
-            this.buildPath(`${Search.baseUrl}/querySuggest`, {
+            this.buildPath(`${Search.baseUrlV2}/querySuggest`, {
                 organizationId: this.api.organizationId,
             }),
             restQuerySuggestParameters,
@@ -104,7 +107,7 @@ export default class Search extends Resource {
         ...body
     }: ItemPreviewHtmlParameters) {
         return this.api.post<string>(
-            this.buildPath(`${Search.baseUrl}/html`, {
+            this.buildPath(`${Search.baseUrlV2}/html`, {
                 enableNavigation,
                 findNext,
                 findPrevious,
@@ -125,7 +128,7 @@ export default class Search extends Resource {
     getDocument(params: SingleItemParameters) {
         return this.api.get<RestQueryResult>(
             this.buildPath(
-                `${Search.baseUrl}/document`,
+                `${Search.baseUrlV2}/document`,
                 {
                     ...params,
                     organizationId: params.organizationId ?? this.api.organizationId,
@@ -142,9 +145,23 @@ export default class Search extends Resource {
         const {viewAllContent, organizationId, ...bodyParameters} = params;
 
         return this.api.post<RestFacetSearchResponse>(
-            this.buildPath(`${Search.baseUrl}/facet`, {
+            this.buildPath(`${Search.baseUrlV2}/facet`, {
                 organizationId: organizationId ?? this.api.organizationId,
                 viewAllContent,
+            }),
+            bodyParameters,
+        );
+    }
+
+    /**
+     * Retrieves the passage(s) for a particular query.
+     */
+    retrievePassages(params: RetrievePassagesParameters) {
+        const {organizationId, ...bodyParameters} = params;
+
+        return this.api.post<RetrievePassagesResponse>(
+            this.buildPath(`${Search.baseUrlV3}/passages/retrieve`, {
+                organizationId,
             }),
             bodyParameters,
         );
