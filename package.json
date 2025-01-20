@@ -41,7 +41,7 @@
         "abortcontroller-polyfill": "1.7.5",
         "cz-conventional-changelog": "3.3.0",
         "eslint": "9.9.1",
-        "eslint-config-prettier": "9.1.0",
+        "eslint-config-prettier": "10.0.1",
         "eslint-plugin-jest": "28.8.3",
         "eslint-plugin-jsdoc": "50.3.1",
         "husky": "9.1.6",
@@ -84,7 +84,7 @@
     "dependencies": {
         "core-js": "^3.37.1",
         "exponential-backoff": "^3.1.0",
-        "query-string-cjs": "npm:query-string@^7.0.0",
+        "query-string-cjs": "npm:query-string@^9.0.0",
         "query-string-esm": "npm:query-string@^9.0.0"
     },
     "publishConfig": {
