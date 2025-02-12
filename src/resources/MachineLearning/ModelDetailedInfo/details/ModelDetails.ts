@@ -1,12 +1,15 @@
 import {ModelDetailsBuildingStats} from './ModelDetailsBuildingStats.js';
 import {ModelDetailsLanguages} from './ModelDetailsLanguages.js';
-import {ModelDetailsSubModels} from './ModelDetailsSubModels.js';
 import {ModelDetailsPreparationDetails} from './ModelDetailsPreparationDetails.js';
+import {ModelDetailsSubModels} from './ModelDetailsSubModels.js';
 import {ModelDetailsTrainingDetails} from './ModelDetailsTrainingDetails.js';
 
 export interface ModelDetails {
     possibleRecommendations?: number;
     totalQueries?: number;
+    /**
+     * @deprecated Recommendations language support is disabled
+     */
     recommendationsPerLanguage?: Record<string, number>;
     userContextFields?: string[];
     contentIDKeys?: string[];
