@@ -87,6 +87,7 @@ export interface SourceModel extends GranularResource {
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
     customParameters?: Record<string, string>;
+    documentConfig?: SourcesSubInterface.DocumentConfig;
     formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;
     id?: string;
     information?: SourcesSubInterface.SourceInformation;
