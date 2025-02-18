@@ -53,6 +53,8 @@ export enum ResourceSnapshotType {
     filter = 'FILTER',
     insightPanelConfiguration = 'INSIGHT_PANEL_CONFIGURATION',
     insightPanelInterface = 'INSIGHT_PANEL_INTERFACE',
+    catalog = 'CATALOG',
+    catalogConfig = 'CATALOG_CONFIG',
     mapping = 'MAPPING',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
