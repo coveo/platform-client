@@ -1,5 +1,5 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import {ApiKeyStatus, ApiKeyExposureReportSeverity, ApiKeyReportCreationType} from '../Enums.js';
+import {ApiKeyExposureReportSeverity, ApiKeyReportCreationType, ApiKeyStatus, ApiKeyStatusFilter} from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
 export interface ApiKeyBaseModel extends GranularResource {
@@ -132,6 +132,7 @@ export interface ExposureReport {
      */
     createdBy: UserModel;
 }
+
 export interface CreateApiKeyModel extends ApiKeyBaseModel {
     /**
      * The duration of the API key in ISO-8601 format. Once the duration is reached the key expires and cannot be used anymore.
@@ -167,6 +168,14 @@ export interface DuplicateApiKeyOptions {
      * @example 'P1M'
      */
     lifetimeDuration: string;
+}
+
+export interface ApiKeyListOptions {
+    /**
+     * Filter API keys based on their status.
+     * @see {@link ApiKeyStatusFilter} for possible values
+     */
+    status?: ApiKeyStatusFilter;
 }
 
 interface AdditionalConfigurationModel {

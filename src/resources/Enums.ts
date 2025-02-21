@@ -1174,6 +1174,23 @@ export enum ApiKeyStatus {
     DISABLED_EXPOSED = 'DISABLED_EXPOSED',
 }
 
+/**
+ * Represents the different statuses an API key can be filtered by.
+ * @enum {string}
+ */
+export enum ApiKeyStatusFilter {
+    /** Keys that are currently active and usable */
+    ACTIVE = 'ACTIVE',
+    /** Keys that will be disabled in the near future */
+    SOON_TO_BE_DISABLED = 'SOON_TO_BE_DISABLED',
+    /** Keys that will expire in the near future */
+    SOON_TO_BE_EXPIRED = 'SOON_TO_BE_EXPIRED',
+    /** Keys that are active but have been flagged as exposed */
+    ACTIVE_AND_EXPOSED = 'ACTIVE_AND_EXPOSED',
+    /** Keys that have been deactivated */
+    DEACTIVATED = 'DEACTIVATED',
+}
+
 export enum ApiKeyReportCreationType {
     MANUAL = 'MANUAL',
     AUTOMATED = 'AUTOMATED',
