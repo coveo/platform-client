@@ -1,6 +1,7 @@
 import API from '../../../APICore.js';
 import ApiKey from '../ApiKeys.js';
 import {ApiKeyModel, CreateApiKeyModel} from '../ApiKeysInterfaces.js';
+import {ApiKeyStatusFilter} from '../../Enums.js';
 
 jest.mock('../../../APICore.js');
 
@@ -19,6 +20,11 @@ describe('ApiKey', () => {
             await apiKey.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ApiKey.baseUrl);
+        });
+        it('should make a GET call to the ApiKeys base url and options', async () => {
+            await apiKey.list({status: ApiKeyStatusFilter.ACTIVE});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(ApiKey.baseUrl + '?status=ACTIVE');
         });
     });
 
