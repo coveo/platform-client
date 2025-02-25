@@ -66,6 +66,7 @@ export interface RawSourceConfig extends GranularResource {
     fromRaw?: boolean;
     id?: string;
     lastModifiedDate?: number;
+    createdDate?: number;
     lastModifier?: string;
     logicalIndex?: string;
     mappings?: MappingModel[];
@@ -92,6 +93,7 @@ export interface SourceModel extends GranularResource {
     id?: string;
     information?: SourcesSubInterface.SourceInformation;
     lastModifiedDate?: number;
+    createdDate?: number;
     lastModifier?: string;
     logicalIndex?: string;
     mappings?: MappingModel[];
