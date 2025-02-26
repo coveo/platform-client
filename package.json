@@ -22,7 +22,7 @@
     ],
     "scripts": {
         "start": "tsc -p tsconfig.build.esm.json --watch",
-        "build": "rm -f src/package.json && eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.esm.json && node scripts/prepareCJSOutput.js && tsc -p tsconfig.build.cjs.json && node scripts/dualOutputCompat.js",
+        "build": "rimraf src/package.json && eslint \"src/**.*\" --ignore-pattern '**/*.spec.*' --color && tsc -p tsconfig.build.esm.json && node scripts/prepareCJSOutput.js && tsc -p tsconfig.build.cjs.json && node scripts/dualOutputCompat.js",
         "test": "jest --clearCache && jest",
         "test:changed": "jest --watch",
         "test:watch": "jest --watchAll",
@@ -49,6 +49,7 @@
         "jest-fetch-mock": "3.0.3",
         "lint-staged": "15.2.10",
         "prettier": "3.3.3",
+        "rimraf": "^5.0.10",
         "semantic-release": "24.1.2",
         "ts-jest": "29.2.5",
         "tslib": "2.7.0",
