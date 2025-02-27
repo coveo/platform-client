@@ -63,6 +63,7 @@ export interface RawSourceConfig extends GranularResource {
     configuration?: ExtendedConfig;
     crawlerInstanceType?: string;
     crawlingModuleId?: string;
+    createdDate?: number;
     fromRaw?: boolean;
     id?: string;
     lastModifiedDate?: number;
@@ -86,6 +87,7 @@ export interface SourceModel extends GranularResource {
     alwaysTrustCertificates?: boolean;
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
+    createdDate?: number;
     customParameters?: Record<string, string>;
     documentConfig?: SourcesSubInterface.DocumentConfig;
     formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;
