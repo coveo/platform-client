@@ -6,7 +6,12 @@ import Sources from '../Sources.js';
 import SourcesDatasets from '../SourcesDatasets/SourcesDatasets.js';
 import SourcesFeedback from '../SourcesFeedback/SourcesFeedback.js';
 import SourcesFields from '../SourcesFields/SourcesFields.js';
-import {CreateSourceModel, ListSourcesParams, RawSourceConfig} from '../SourcesInterfaces.js';
+import {
+    CreateSourceModel,
+    GetDefaultDocumentConfigurationParams,
+    ListSourcesParams,
+    RawSourceConfig,
+} from '../SourcesInterfaces.js';
 import SourcesMappings from '../SourcesMappings/SourcesMappings.js';
 import SourcesMetadata from '../SourcesMetadata/SourcesMetadata.js';
 
@@ -64,6 +69,26 @@ describe('Sources', () => {
             await source.createFromRaw(rawSource);
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${Sources.baseUrl}/raw`, rawSource);
+        });
+    });
+
+    describe('getDefaultDocumentConfiguration', () => {
+        it('should make a GET call to the default document configuration url', async () => {
+            await source.getDefaultDocumentConfiguration();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/document/configuration/default`);
+        });
+
+        it('should make a GET call to the default document configuration url for a PUSH document', async () => {
+            const params: GetDefaultDocumentConfigurationParams = {
+                defaultDocumentConfigurationType: 'PUSH',
+            };
+
+            await source.getDefaultDocumentConfiguration(params);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${Sources.baseUrl}/document/configuration/default?defaultDocumentConfigurationType=PUSH`,
+            );
         });
     });
 

@@ -28,6 +28,10 @@ export interface ListOperationalStatusSourcesParams extends ListParams {
     sourceOperationalStatus: SourceOperationalStatus;
 }
 
+export interface GetDefaultDocumentConfigurationParams {
+    defaultDocumentConfigurationType?: 'DEFAULT' | 'PUSH';
+}
+
 export interface ListSourcesParams extends ListParams {
     filterHostType?: FilterHostType;
     filterLastOperationResultType?: FilterLastOperationResultType;
