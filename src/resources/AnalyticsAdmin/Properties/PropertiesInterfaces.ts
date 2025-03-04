@@ -11,4 +11,5 @@ export interface PropertiesResponseMessage {
 
 export interface ListPropertiesParams extends Paginated {
     filter?: string;
+    includeDefault?: boolean;
 }
