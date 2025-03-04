@@ -363,6 +363,11 @@ export enum DocumentPermissionState {
     WARNING = 'WARNING',
 }
 
+export enum DocumentConfigurationType {
+    DEFAULT = 'DEFAULT',
+    PUSH = 'PUSH',
+}
+
 export enum SourceExtensionActionOnError {
     REJECT_DOCUMENT = 'REJECT_DOCUMENT',
     SKIP_EXTENSION = 'SKIP_EXTENSION',
