@@ -29,7 +29,7 @@ export interface ListOperationalStatusSourcesParams extends ListParams {
     sourceOperationalStatus: SourceOperationalStatus;
 }
 
-export interface GetDefaultDocumentConfigurationParams {
+export interface DefaultDocumentConfigurationParams {
     defaultDocumentConfigurationType?: DocumentConfigurationType;
 }
 
