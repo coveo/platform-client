@@ -1,5 +1,6 @@
 import {GranularResource, Paginated} from '../BaseInterfaces.js';
 import {
+    DocumentConfigurationType,
     FilterHostType,
     FilterLastOperationResultType,
     FilterLastOperationType,
@@ -29,7 +30,7 @@ export interface ListOperationalStatusSourcesParams extends ListParams {
 }
 
 export interface GetDefaultDocumentConfigurationParams {
-    defaultDocumentConfigurationType?: 'DEFAULT' | 'PUSH';
+    defaultDocumentConfigurationType?: DocumentConfigurationType;
 }
 
 export interface ListSourcesParams extends ListParams {

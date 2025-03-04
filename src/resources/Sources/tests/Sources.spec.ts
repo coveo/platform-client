@@ -1,6 +1,6 @@
 import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
-import {ActivityOperation} from '../../Enums.js';
+import {ActivityOperation, DocumentConfigurationType} from '../../Enums.js';
 import {ScheduleModel} from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
 import SourcesDatasets from '../SourcesDatasets/SourcesDatasets.js';
@@ -81,7 +81,7 @@ describe('Sources', () => {
 
         it('should make a GET call to the default document configuration url for a PUSH document', async () => {
             const params: GetDefaultDocumentConfigurationParams = {
-                defaultDocumentConfigurationType: 'PUSH',
+                defaultDocumentConfigurationType: DocumentConfigurationType.PUSH,
             };
 
             await source.getDefaultDocumentConfiguration(params);
