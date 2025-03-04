@@ -8,7 +8,7 @@ import SourcesFeedback from '../SourcesFeedback/SourcesFeedback.js';
 import SourcesFields from '../SourcesFields/SourcesFields.js';
 import {
     CreateSourceModel,
-    GetDefaultDocumentConfigurationParams,
+    DefaultDocumentConfigurationParams,
     ListSourcesParams,
     RawSourceConfig,
 } from '../SourcesInterfaces.js';
@@ -80,7 +80,7 @@ describe('Sources', () => {
         });
 
         it('should make a GET call to the default document configuration url for a PUSH document', async () => {
-            const params: GetDefaultDocumentConfigurationParams = {
+            const params: DefaultDocumentConfigurationParams = {
                 defaultDocumentConfigurationType: DocumentConfigurationType.PUSH,
             };
 

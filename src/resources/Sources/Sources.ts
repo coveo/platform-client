@@ -9,8 +9,8 @@ import SourcesFields from './SourcesFields/SourcesFields.js';
 import {
     CreateSourceModel,
     CreateSourceOptions,
+    DefaultDocumentConfigurationParams,
     DocumentConfig,
-    GetDefaultDocumentConfigurationParams,
     LightSourceModel,
     ListOperationalStatusSourcesParams,
     ListSourcesParams,
@@ -65,7 +65,7 @@ export default class Sources extends Resource {
         return this.api.post<{id: string}>(this.buildPath(`${Sources.baseUrl}/raw`, options), rawSourceConfig);
     }
 
-    getDefaultDocumentConfiguration(params?: GetDefaultDocumentConfigurationParams) {
+    getDefaultDocumentConfiguration(params?: DefaultDocumentConfigurationParams) {
         return this.api.get<DocumentConfig>(
             this.buildPath(`${Sources.baseUrl}/document/configuration/default`, params),
         );
