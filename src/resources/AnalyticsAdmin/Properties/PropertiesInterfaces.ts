@@ -1,7 +1,7 @@
 import {Paginated} from '../../BaseInterfaces.js';
 
 export interface PropertyModel {
-    trackingId: string;
+    trackingId: string | null;
     displayName: string;
 }
 
