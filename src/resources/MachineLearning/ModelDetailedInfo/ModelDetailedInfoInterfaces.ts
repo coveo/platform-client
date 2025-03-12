@@ -100,4 +100,8 @@ export interface ModelWithDetails {
      * Specifies whether the model must be associated with a query pipeline to be effective.
      */
     requiresAssociation: boolean;
+    /**
+     * Indicates if a license is required to create the model.
+     */
+    isLicensed: boolean;
 }
