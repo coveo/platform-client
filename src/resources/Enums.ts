@@ -310,11 +310,17 @@ export enum ActivityOperation {
 }
 
 export enum SecurityProviderType {
+    /**
+     * @deprecated
+     */
     ACTIVE_DIRECTORY = 'ACTIVE_DIRECTORY',
     ACTIVE_DIRECTORY2 = 'ACTIVE_DIRECTORY2',
     BOX = 'BOX',
     CLAIMS = 'CLAIMS',
     CLAIMS_TO_EMAIL = 'CLAIMS_TO_EMAIL',
+    /**
+     * @deprecated
+     */
     CONFLUENCE = 'CONFLUENCE',
     CONFLUENCE2 = 'CONFLUENCE2',
     CUSTOM = 'CUSTOM',
@@ -325,8 +331,10 @@ export enum SecurityProviderType {
     FILE = 'file',
     GOOGLE_DRIVE_DOMAIN_WIDE = 'GOOGLE_DRIVE_DOMAIN_WIDE',
     GENERIC_REST = 'GENERIC_REST',
+    GRAPHQL = 'GRAPHQL',
     JIRA2 = 'JIRA2',
     JIVE = 'JIVE',
+    KHOROS_COMMUNITY = 'KHOROS_COMMUNITY',
     MICROSOFT_DYNAMICS = 'MICROSOFT_DYNAMICS',
     OFFICE365 = 'OFFICE365',
     SALESFORCE = 'SALESFORCE',
@@ -334,6 +342,7 @@ export enum SecurityProviderType {
     SHAREPOINT = 'SHAREPOINT',
     SHAREPOINT_ONLINE = 'SHAREPOINT_ONLINE',
     SITECORE = 'SITECORE',
+    SLACK = 'SLACK',
     ZENDESK = 'ZENDESK',
 }
 
@@ -1181,7 +1190,6 @@ export enum ApiKeyStatus {
 
 /**
  * Represents the different statuses an API key can be filtered by.
- * @enum {string}
  */
 export enum ApiKeyStatusFilter {
     /** Keys that are currently active and usable */
