@@ -35,13 +35,8 @@ export interface ModelIssues {
     troubleshoot: string;
 }
 
-export interface ModelStatusInfo extends Omit<MLModelStatusInfo, 'daysUntilArchival'> {
-    /**
-     * The remaining days until the model is archived.
-     * @example 2
-     */
-    daysUntilArchival: number;
-}
+export type ModelStatusInfo = Required<Pick<MLModelStatusInfo, 'modelStatus' | 'daysUntilArchival'>> &
+    MLModelStatusInfo;
 
 export interface ModelWithDetails {
     /**

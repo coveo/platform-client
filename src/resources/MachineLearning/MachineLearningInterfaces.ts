@@ -118,12 +118,12 @@ export enum MLModelStatus {
 export interface MLModelStatusInfo {
     /**
      * The status of the model.
-     * @Example `ACTIVE`
+     * @example `ACTIVE`
      */
     modelStatus: MLModelStatus;
     /**
      * The remaining days until the model is archived.
-     * @Example `4`
+     * @example `4`
      */
     daysUntilArchival?: number;
     /**
