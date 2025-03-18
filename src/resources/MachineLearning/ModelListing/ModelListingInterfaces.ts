@@ -1,4 +1,4 @@
-import {MLModelStatus} from '../MachineLearningInterfaces.js';
+import {MLModelStatusInfo} from '../MachineLearningInterfaces.js';
 
 export interface MLListingModel {
     /**
@@ -50,19 +50,6 @@ export interface MLListingModel {
      * Specifies whether the model must be associated with a query pipeline to be effective.
      */
     requiresAssociation: boolean;
-}
-
-export interface MLModelStatusInfo {
-    /**
-     * The status of the model.
-     * @Example `ACTIVE`
-     */
-    modelStatus: MLModelStatus;
-    /**
-     * The remaining days until the model is archived.
-     * @Example `4`
-     */
-    daysUntilArchival?: number;
 }
 
 export interface MLModelAssociation {
