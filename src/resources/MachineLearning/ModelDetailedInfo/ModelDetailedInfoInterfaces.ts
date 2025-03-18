@@ -35,8 +35,7 @@ export interface ModelIssues {
     troubleshoot: string;
 }
 
-export type ModelStatusInfo = Required<Pick<MLModelStatusInfo, 'modelStatus' | 'daysUntilArchival'>> &
-    MLModelStatusInfo;
+export type ModelStatusInfo = MLModelStatusInfo & Required<Pick<MLModelStatusInfo, 'activeModelBuildDate'>>;
 
 export interface ModelWithDetails {
     /**
