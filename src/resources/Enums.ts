@@ -1216,3 +1216,8 @@ export enum ApiKeyExposureReportSeverity {
     LOW = 'LOW',
     WARN = 'WARN',
 }
+
+export enum ApiKeyPrivacyLevel {
+    PUBLIC = 'PUBLIC',
+    PRIVATE = 'PRIVATE',
+}
