@@ -38,4 +38,34 @@ describe('OrganizationAccess', () => {
             );
         });
     });
+
+    describe('list', () => {
+        it('makes a GET call to the specific organization access url for temporary access', async () => {
+            await organizationAccess.list();
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`/rest/organizations/{organizationName}/access/temporary`);
+        });
+    });
+
+    describe('get', () => {
+        it('makes a GET call to the specific organization access url for temporary access with id', async () => {
+            const temporaryAccessId = '12345';
+            await organizationAccess.get(temporaryAccessId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/access/temporary/${temporaryAccessId}`,
+            );
+        });
+    });
+
+    describe('delete', () => {
+        it('makes a DELETE call to the specific organization access url for temporary access with id', async () => {
+            const temporaryAccessId = '12345';
+            await organizationAccess.delete(temporaryAccessId);
+            expect(api.delete).toHaveBeenCalledTimes(1);
+            expect(api.delete).toHaveBeenCalledWith(
+                `/rest/organizations/{organizationName}/access/temporary/${temporaryAccessId}`,
+            );
+        });
+    });
 });
