@@ -1,5 +1,11 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import {ApiKeyExposureReportSeverity, ApiKeyPrivacyLevel, ApiKeyReportCreationType, ApiKeyStatus, ApiKeyStatusFilter} from '../Enums.js';
+import {
+    ApiKeyExposureReportSeverity,
+    ApiKeyPrivacyLevel,
+    ApiKeyReportCreationType,
+    ApiKeyStatus,
+    ApiKeyStatusFilter,
+} from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
 export interface ApiKeyBaseModel extends GranularResource {
