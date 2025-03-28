@@ -1,4 +1,6 @@
 import {AccessLevel, PrivilegeHolderType} from '../Enums.js';
+import {GlobalPrivilegeModel} from '../GlobalGroups/GlobalGroupInterfaces.js';
+import {UserModel} from '../Users/UserInterfaces.js';
 export interface AccessParams {
     /*
      * The access level an API key must have to be included in the response.
@@ -76,3 +78,42 @@ export type ApiKeyAccessModel = {
 };
 
 export type AccessModel = GroupAccessModel | ApiKeyAccessModel;
+
+/**
+ * 	Information pertaining to a temporary access in an organization.
+ */
+export interface TemporaryAccessModel {
+    /**
+     * The unique identifier of the temporary access.
+     */
+    id: string;
+    /**
+     * A brief description of the temporary access.
+     */
+    description: string;
+    justificationNotes: string;
+    /**
+     * The unique identifier of the organization for which the temporary access was created.
+     */
+    organizationId: string;
+    /**
+     * The user that created the temporary access request.
+     */
+    user: UserModel;
+    /**
+     * The set of privileges granted to the temporary access.
+     */
+    privileges: GlobalPrivilegeModel[];
+    /**
+     * The expiration date of the temporary access in number of milliseconds since UNIX epoch.
+     */
+    expirationDate: number;
+    /**
+     * The date at which the temporary access was granted in number of milliseconds since UNIX epoch.
+     */
+    dateGranted: number;
+    /**
+     * The date at which the temporary access was revoked in number of milliseconds since UNIX epoch.
+     */
+    revocationDate: number;
+}
