@@ -91,6 +91,9 @@ export interface TemporaryAccessModel {
      * A brief description of the temporary access.
      */
     description: string;
+    /**
+     * Justification for the temporary access request.
+     */
     justificationNotes: string;
     /**
      * The unique identifier of the organization for which the temporary access was created.
