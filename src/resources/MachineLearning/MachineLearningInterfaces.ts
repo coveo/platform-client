@@ -131,4 +131,9 @@ export interface MLModelStatusInfo {
      * @example 1741726807000
      */
     activeModelBuildDate?: number;
+    /**
+     * The last status of the model.
+     * @example `ACTIVE`
+     */
+    lastBuildStatus?: MLModelStatus;
 }
