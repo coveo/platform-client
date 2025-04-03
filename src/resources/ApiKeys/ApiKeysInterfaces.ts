@@ -130,6 +130,10 @@ export interface ExposureReport {
      */
     reason: string;
     /**
+     * A list of reasons behind the exposure report for a given API key
+     */
+    reasons: string[];
+    /**
      * The date the key should be deactivated
      */
     deactivationDate: number;
