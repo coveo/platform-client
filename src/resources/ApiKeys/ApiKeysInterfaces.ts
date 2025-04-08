@@ -160,19 +160,18 @@ export interface ApiKeyExposureReportReasonModel {
      */
     reason: string;
     /**
-     * The source of which the exposure comes from 
+     * The source of which the exposure comes from
      */
     source: ApiKeyExposureReportReasonSource;
     /**
-     * The url where the api key could be found 
+     * The url where the api key could be found
      */
     url: string;
     /**
-     * The date the exposure report was created 
+     * The date the exposure report was created
      */
     createdDate: number;
 }
-
 
 export interface CreateApiKeyModel extends ApiKeyBaseModel {
     /**
