@@ -1221,3 +1221,8 @@ export enum ApiKeyPrivacyLevel {
     PUBLIC = 'PUBLIC',
     PRIVATE = 'PRIVATE',
 }
+
+export enum ApiKeyExposureReportReasonSource{
+    GITHUB = 'GITHUB',
+    MANUAL = 'MANUAL',
+}
