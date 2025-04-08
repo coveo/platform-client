@@ -128,8 +128,13 @@ export interface ExposureReport {
     severity: ApiKeyExposureReportSeverity;
     /**
      * The reason behind the exposure report for a given API key
+     * @deprecated This field is deprecated and will be removed in a future version. Use the reasons field instead.
      */
     reason: string;
+    /**
+     * The reasons behind the exposure report for a given API key
+     */
+    reasons: ApiKeyExposureReportReasonModel[];
     /**
      * The date the key should be deactivated
      */
