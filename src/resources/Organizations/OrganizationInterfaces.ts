@@ -239,3 +239,15 @@ export enum OrganizationCreationOrigin {
      */
     UNKNOWN = 'UNKNOWN',
 }
+
+export interface listApiKeysPrivilegesOptions {
+    filter: PrivilegeFilterType;
+}
+
+export enum PrivilegeFilterType {
+    ALL = 'ALL',
+    /**
+     * Only the privileges that are allowed for the creation of a custom API key
+     */
+    CUSTOM = 'CUSTOM',
+}

@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
 import Members from '../Members/Members.js';
 import Organization from '../Organization.js';
-import {DefinitionModel, OrganizationCreationOrigin} from '../OrganizationInterfaces.js';
+import {DefinitionModel, OrganizationCreationOrigin, PrivilegeFilterType} from '../OrganizationInterfaces.js';
 
 jest.mock('../../../APICore.js');
 
@@ -167,10 +167,20 @@ describe('Organization', () => {
     });
 
     describe('listApiKeysPrivileges', () => {
-        it('should make a GET call /rest/organizations/{organizationName}/privileges/apikeys', async () => {
+        it('should make a GET call /rest/organizations/{organizationName}/privileges/apikeys with ALL filter', async () => {
             await organization.listApiKeysPrivileges();
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/privileges/apikeys');
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/organizations/{organizationName}/privileges/apikeys?filter=ALL',
+            );
+        });
+
+        it('should make a GET call /rest/organizations/{organizationName}/privileges/apikeys with CUSTOM filter', async () => {
+            await organization.listApiKeysPrivileges({filter: PrivilegeFilterType.CUSTOM});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/organizations/{organizationName}/privileges/apikeys?filter=CUSTOM',
+            );
         });
     });
 
