@@ -37,4 +37,6 @@ export interface ModelDetailsBuildingStats {
     };
     commerceEventCounts?: ModelDetailsCommerceEvents;
     modelDetailedStatsPerSource?: ModelDetailsStatsPerSource[];
+    addToCart?: number;
+    addPurchase?: number;
 }
