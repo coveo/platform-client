@@ -240,7 +240,7 @@ export enum OrganizationCreationOrigin {
     UNKNOWN = 'UNKNOWN',
 }
 
-export interface listApiKeysPrivilegesOptions {
+export interface ListApiKeysPrivilegesOptions {
     filter: PrivilegeFilterType;
 }
 

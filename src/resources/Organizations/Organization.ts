@@ -6,7 +6,7 @@ import {
     CreateOrganizationOptions,
     DefinitionModel,
     GetOrganizationOptions,
-    listApiKeysPrivilegesOptions,
+    ListApiKeysPrivilegesOptions,
     ListOrganizationOptions,
     OrganizationModel,
     OrganizationsStatusModel,
@@ -104,7 +104,7 @@ export default class Organization extends Resource {
         return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/me`);
     }
 
-    listApiKeysPrivileges(options: listApiKeysPrivilegesOptions = {filter: PrivilegeFilterType.ALL}) {
+    listApiKeysPrivileges(options: ListApiKeysPrivilegesOptions = {filter: PrivilegeFilterType.ALL}) {
         return this.api.get<PrivilegeModel[]>(
             this.buildPath(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/apikeys`, options),
         );
