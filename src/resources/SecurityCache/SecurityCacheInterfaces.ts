@@ -1,5 +1,6 @@
 import {Paginated} from '../BaseInterfaces.js';
 import {
+    ExpansionScore,
     PermissionIdentityType,
     ScheduleType,
     SecurityCacheFilteringMode,
@@ -7,7 +8,7 @@ import {
     SecurityProviderReferenceType,
     SecurityProviderType,
 } from '../Enums.js';
-import {ParameterModel, UserIdentityModel} from '../Sources/index.js';
+import {DataFile, ParameterModel, UserIdentityModel} from '../Sources/index.js';
 
 export interface ScheduleModel {
     enabled: boolean;
@@ -52,6 +53,30 @@ export interface SecurityProviderModelWithStatus extends Required<SecurityProvid
     currentStatus: CurrentStatusModel;
     lastRefreshOperation: LastRefreshOperation;
     statistics: SecurityProviderStatisticsModel;
+}
+
+export interface RawSecurityProviderConfig {
+    /**
+     * @deprecated
+     */
+    name: string;
+    userIdentities?: UserIdentityModel;
+    parameters?: ParameterModel;
+    dataFiles?: Record<string, DataFile>;
+    securityProviders?: Record<string, CascadingSecurityProvider>;
+    indexIdentifier?: string;
+    dbConnectionString?: string;
+    organizationId?: string;
+    operationId?: string;
+    expansionScore?: ExpansionScore;
+    type?: SecurityProviderType;
+    nodeTypeName?: string;
+    sourceTypeName?: string;
+    displayName?: string;
+    nodeRequired?: boolean;
+    onPremisesEnabled?: boolean;
+    crawlingModuleId?: string;
+    caseSensitive?: boolean;
 }
 
 export interface CascadingSecurityProvider {
@@ -174,4 +199,8 @@ export interface SecurityCacheMemberInfoModel {
 export interface SecurityProvider {
     name?: string;
     typeName?: string;
+}
+
+export interface SecurityCacheUpdateRawOption {
+    forceUpdate: boolean;
 }

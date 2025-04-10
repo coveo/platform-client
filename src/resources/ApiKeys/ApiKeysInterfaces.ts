@@ -5,6 +5,7 @@ import {
     ApiKeyReportCreationType,
     ApiKeyStatus,
     ApiKeyStatusFilter,
+    ApiKeyExposureReportReasonSource,
 } from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
@@ -127,8 +128,13 @@ export interface ExposureReport {
     severity: ApiKeyExposureReportSeverity;
     /**
      * The reason behind the exposure report for a given API key
+     * @deprecated This field is deprecated and will be removed in a future version. Use the reasons field instead.
      */
     reason: string;
+    /**
+     * The reasons behind the exposure report for a given API key
+     */
+    reasons: ApiKeyExposureReportReasonModel[];
     /**
      * The date the key should be deactivated
      */
@@ -141,6 +147,30 @@ export interface ExposureReport {
      * Represents the user that has created the report
      */
     createdBy: UserModel;
+}
+
+export interface ApiKeyExposureReportReasonModel {
+    /**
+     * The unique identifier of the exposure report.
+     * @example 1234567890
+     */
+    id: string;
+    /**
+     * The reason behind the exposure report for a given API key
+     */
+    reason: string;
+    /**
+     * The source of which the exposure comes from
+     */
+    source: ApiKeyExposureReportReasonSource;
+    /**
+     * The url where the api key could be found
+     */
+    url: string;
+    /**
+     * The date the exposure report was created
+     */
+    createdDate: number;
 }
 
 export interface CreateApiKeyModel extends ApiKeyBaseModel {

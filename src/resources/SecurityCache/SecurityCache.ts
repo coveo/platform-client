@@ -3,15 +3,17 @@ import {PageModel} from '../BaseInterfaces.js';
 import Ressource from '../Resource.js';
 import {
     DetailedSecurityCacheMemberModel,
+    RawSecurityProviderConfig,
     ScheduleModel,
     SecurityCacheIdentityModel,
     SecurityCacheListOptions,
-    SecurityCacheStatus,
-    SecurityProviderModelWithStatus,
     SecurityCacheListRelationshipsOptions,
     SecurityCacheMemberModel,
-    SecurityProviderModel,
+    SecurityCacheStatus,
+    SecurityCacheUpdateRawOption,
     SecurityProviderIdentitiesFilters,
+    SecurityProviderModel,
+    SecurityProviderModelWithStatus,
 } from './SecurityCacheInterfaces.js';
 
 export default class SecurityCache extends Ressource {
@@ -103,6 +105,33 @@ export default class SecurityCache extends Ressource {
 
     getProvider(securityProviderId: string) {
         return this.api.get<SecurityProviderModelWithStatus>(`${SecurityCache.providersUrl}/${securityProviderId}`);
+    }
+
+    /**
+     * Get the raw configuration of a security provider for an organization.
+     * @param securityProviderId
+     * @returns Promise<RawSecurityProviderConfig>
+     */
+    getProviderRaw(securityProviderId: string) {
+        return this.api.get<RawSecurityProviderConfig>(`${SecurityCache.providersUrl}/${securityProviderId}/raw`);
+    }
+
+    /**
+     * Update the raw configuration of a security provider for an organization.
+     * @param securityProviderId
+     * @param rawProviderConfig
+     * @param options
+     * @returns Promise<RawSecurityProviderConfig>
+     */
+    updateProviderRaw(
+        securityProviderId: string,
+        rawProviderConfig: RawSecurityProviderConfig,
+        options?: SecurityCacheUpdateRawOption,
+    ) {
+        return this.api.put<RawSecurityProviderConfig>(
+            this.buildPath(`${SecurityCache.providersUrl}/${securityProviderId}/raw`, options),
+            rawProviderConfig,
+        );
     }
 
     createOrUpdateProvider(securityProvider: SecurityProviderModel) {
