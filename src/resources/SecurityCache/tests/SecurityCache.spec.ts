@@ -1,11 +1,11 @@
-import {
-    ScheduleModel,
-    SecurityProviderIdentitiesFilters,
-    SecurityCacheMemberModel,
-    SecurityProviderModel,
-} from '../index.js';
 import API from '../../../APICore.js';
 import {PermissionIdentityType, SecurityCacheFilteringMode} from '../../Enums.js';
+import {
+    ScheduleModel,
+    SecurityCacheMemberModel,
+    SecurityProviderIdentitiesFilters,
+    SecurityProviderModel,
+} from '../index.js';
 import SecurityCache from '../SecurityCache.js';
 
 jest.mock('../../../APICore.js');
@@ -251,6 +251,22 @@ describe('securityCache', () => {
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(`${SecurityCache.cacheUrl}/entities/🏀/entity`, member);
+        });
+    });
+
+    describe('providers raw', () => {
+        const providerId = 'PROVIDER_ID';
+        it('make a GET call to the specific securityCache url to fetch a provider in raw format', async () => {
+            await securityCache.getProviderRaw(providerId);
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${providerId}/raw`);
+        });
+
+        it('make a PUT call to the specific securityCache url to update a provider with raw data', async () => {
+            const providerUpdate: SecurityProviderModel = {id: providerId, name: 'Test Security Provider'};
+            await securityCache.updateProviderRaw(providerId, providerUpdate);
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(`${SecurityCache.providersUrl}/${providerId}/raw`, providerUpdate);
         });
     });
 });
