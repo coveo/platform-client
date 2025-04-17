@@ -3,4 +3,8 @@ export interface OrganizationConfigurationModel {
     mainRegions: string[];
     organizationId: string;
     satelliteRegions: string[];
+    primaryMainRegion: string;
+    distributedDns: string;
+    adminDns: string;
+    analyticsDns: string;
 }
