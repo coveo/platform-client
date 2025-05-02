@@ -1,5 +1,12 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
-import {ApiKeyStatus, ApiKeyExposureReportSeverity, ApiKeyReportCreationType} from '../Enums.js';
+import {
+    ApiKeyExposureReportSeverity,
+    ApiKeyPrivacyLevel,
+    ApiKeyReportCreationType,
+    ApiKeyStatus,
+    ApiKeyStatusFilter,
+    ApiKeyExposureReportReasonSource,
+} from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
 export interface ApiKeyBaseModel extends GranularResource {
@@ -104,6 +111,10 @@ export interface ApiKeyModel extends ApiKeyBaseModel {
      * The exposure report associated with the API key
      */
     exposureReport?: ExposureReport;
+    /**
+     * Privacy level of the API key.
+     */
+    privacyLevel?: ApiKeyPrivacyLevel;
 }
 
 export interface ExposureReport {
@@ -117,8 +128,13 @@ export interface ExposureReport {
     severity: ApiKeyExposureReportSeverity;
     /**
      * The reason behind the exposure report for a given API key
+     * @deprecated This field is deprecated and will be removed in a future version. Use the reasons field instead.
      */
     reason: string;
+    /**
+     * The reasons behind the exposure report for a given API key
+     */
+    reasons: ApiKeyExposureReportReasonModel[];
     /**
      * The date the key should be deactivated
      */
@@ -132,6 +148,31 @@ export interface ExposureReport {
      */
     createdBy: UserModel;
 }
+
+export interface ApiKeyExposureReportReasonModel {
+    /**
+     * The unique identifier of the exposure report.
+     * @example 1234567890
+     */
+    id: string;
+    /**
+     * The reason behind the exposure report for a given API key
+     */
+    reason: string;
+    /**
+     * The source of which the exposure comes from
+     */
+    source: ApiKeyExposureReportReasonSource;
+    /**
+     * The url where the api key could be found
+     */
+    url: string;
+    /**
+     * The date the exposure report was created
+     */
+    createdDate: number;
+}
+
 export interface CreateApiKeyModel extends ApiKeyBaseModel {
     /**
      * The duration of the API key in ISO-8601 format. Once the duration is reached the key expires and cannot be used anymore.
@@ -167,6 +208,14 @@ export interface DuplicateApiKeyOptions {
      * @example 'P1M'
      */
     lifetimeDuration: string;
+}
+
+export interface ApiKeyListOptions {
+    /**
+     * Filter API keys based on their status.
+     * @see {@link ApiKeyStatusFilter} for possible values
+     */
+    status?: ApiKeyStatusFilter;
 }
 
 interface AdditionalConfigurationModel {

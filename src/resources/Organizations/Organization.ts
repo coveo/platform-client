@@ -6,9 +6,11 @@ import {
     CreateOrganizationOptions,
     DefinitionModel,
     GetOrganizationOptions,
+    ListApiKeysPrivilegesOptions,
     ListOrganizationOptions,
     OrganizationModel,
     OrganizationsStatusModel,
+    PrivilegeFilterType,
 } from './OrganizationInterfaces.js';
 import {AuthProvider} from '../Enums.js';
 
@@ -102,8 +104,10 @@ export default class Organization extends Resource {
         return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/me`);
     }
 
-    listApiKeysPrivileges() {
-        return this.api.get<PrivilegeModel[]>(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/apikeys`);
+    listApiKeysPrivileges(options: ListApiKeysPrivilegesOptions = {filter: PrivilegeFilterType.ALL}) {
+        return this.api.get<PrivilegeModel[]>(
+            this.buildPath(`${Organization.baseUrl}/${API.orgPlaceholder}/privileges/apikeys`, options),
+        );
     }
 
     getDefinition() {

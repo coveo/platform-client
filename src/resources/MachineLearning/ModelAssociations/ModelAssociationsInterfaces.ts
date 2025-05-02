@@ -1,5 +1,5 @@
 import {ConditionModel} from '../../Pipelines/index.js';
-import {MLModelStatus} from '../MachineLearningInterfaces.js';
+import {MLModelStatusInfo} from '../MachineLearningInterfaces.js';
 
 export interface ModelAssociationsListParams {
     /*
@@ -32,17 +32,7 @@ export interface AssociationItem {
      * The current status of the model.
      * @example { modelStatus: "BUILDING", daysUntilArchival : 3 }
      */
-    modelStatusInfo?: {
-        /**
-         * The status of the model.
-         * @example "ACTIVE"
-         */
-        modelStatus: MLModelStatus;
-        /**
-         * The remaining days until the model is archived.
-         */
-        daysUntilArchival?: number;
-    };
+    modelStatusInfo?: MLModelStatusInfo;
     /**
      * The condition that must be met to trigger the model association.
      */

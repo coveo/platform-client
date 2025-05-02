@@ -114,3 +114,26 @@ export enum MLModelStatus {
     ACTIVE = 'ACTIVE',
     INACTIVE = 'INACTIVE',
 }
+
+export interface MLModelStatusInfo {
+    /**
+     * The status of the model.
+     * @example `ACTIVE`
+     */
+    modelStatus: MLModelStatus;
+    /**
+     * The remaining days until the model is archived.
+     * @example `4`
+     */
+    daysUntilArchival?: number;
+    /**
+     * The epoch timestamp, in milliseconds, of when the active model was built.
+     * @example 1741726807000
+     */
+    activeModelBuildDate?: number;
+    /**
+     * The last status of the model.
+     * @example `ACTIVE`
+     */
+    lastBuildStatus?: MLModelStatus;
+}

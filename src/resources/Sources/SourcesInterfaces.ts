@@ -1,5 +1,6 @@
 import {GranularResource, Paginated} from '../BaseInterfaces.js';
 import {
+    DocumentConfigurationType,
     FilterHostType,
     FilterLastOperationResultType,
     FilterLastOperationType,
@@ -26,6 +27,10 @@ interface ListParams extends Paginated {
 
 export interface ListOperationalStatusSourcesParams extends ListParams {
     sourceOperationalStatus: SourceOperationalStatus;
+}
+
+export interface DefaultDocumentConfigurationParams {
+    defaultDocumentConfigurationType?: DocumentConfigurationType;
 }
 
 export interface ListSourcesParams extends ListParams {
@@ -63,6 +68,7 @@ export interface RawSourceConfig extends GranularResource {
     configuration?: ExtendedConfig;
     crawlerInstanceType?: string;
     crawlingModuleId?: string;
+    createdDate?: number;
     fromRaw?: boolean;
     id?: string;
     lastModifiedDate?: number;
@@ -86,6 +92,7 @@ export interface SourceModel extends GranularResource {
     alwaysTrustCertificates?: boolean;
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
+    createdDate?: number;
     customParameters?: Record<string, string>;
     documentConfig?: SourcesSubInterface.DocumentConfig;
     formAuthenticationConfig?: SourcesSubInterface.FormAuthenticationConfig;

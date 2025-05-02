@@ -1,7 +1,7 @@
 import {Paginated} from '../../BaseInterfaces.js';
 
 export interface PropertyModel {
-    trackingId: string;
+    trackingId: string | null;
     displayName: string;
 }
 
@@ -11,4 +11,5 @@ export interface PropertiesResponseMessage {
 
 export interface ListPropertiesParams extends Paginated {
     filter?: string;
+    includeDefault?: boolean;
 }

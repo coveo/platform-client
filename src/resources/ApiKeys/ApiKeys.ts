@@ -1,12 +1,18 @@
 import API from '../../APICore.js';
 import Resource from '../Resource.js';
-import {ApiKeyModel, CreateApiKeyModel, CreateApiKeyOptions, DuplicateApiKeyOptions} from './ApiKeysInterfaces.js';
+import {
+    ApiKeyListOptions,
+    ApiKeyModel,
+    CreateApiKeyModel,
+    CreateApiKeyOptions,
+    DuplicateApiKeyOptions,
+} from './ApiKeysInterfaces.js';
 
 export default class ApiKey extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/apikeys`;
 
-    list() {
-        return this.api.get<ApiKeyModel[]>(ApiKey.baseUrl);
+    list(options?: ApiKeyListOptions) {
+        return this.api.get<ApiKeyModel[]>(this.buildPath(ApiKey.baseUrl, options));
     }
 
     create(apiKey: CreateApiKeyModel, options?: CreateApiKeyOptions) {
