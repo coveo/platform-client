@@ -1201,7 +1201,7 @@ export enum ApiKeyStatusFilter {
     /** Keys that are active but have been flagged as exposed */
     ACTIVE_AND_EXPOSED = 'ACTIVE_AND_EXPOSED',
     /** All key that are exposed */
-    ALL_EXPOSED = 'EXPOSED',
+    ALL_EXPOSED = 'ALL_EXPOSED',
     /** Keys that have been deactivated */
     DEACTIVATED = 'DEACTIVATED',
 }
