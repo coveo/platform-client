@@ -45,12 +45,6 @@ export interface ListSearchHubsParams extends Paginated {
      * @default `0`
      */
     page?: number;
-
-    /**
-     * The minimum queries a search hub must have to be listed
-     * @default '1'
-     */
-    minimumQueries?: string;
 }
 
 export interface SearchHubNameParams {
