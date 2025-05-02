@@ -15,4 +15,4 @@ If a new Resource class was created in this PR, have you done the following?
 -   [ ] The proposed changes are covered by unit tests
 -   [ ] Commits containing breaking changes a properly identified as such
 -   [ ] [README.md](https://github.com/coveo/platform-client/blob/master/README.md) is adjusted to reflect the proposed changes (if relevant)
--   [ ] My merge commit message will be conventional (See [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/))
+-   [ ] My merge commit message will follow the commit guidelines (See [Commit Guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines))

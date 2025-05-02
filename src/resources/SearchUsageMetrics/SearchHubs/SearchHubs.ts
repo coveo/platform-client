@@ -18,7 +18,6 @@ export default class SearchHubs extends Resource {
                 filter: params?.filter,
                 pageSize: params?.perPage,
                 page: params?.page,
-                minimumQueries: params?.minimumQueries,
             }),
         );
     }
