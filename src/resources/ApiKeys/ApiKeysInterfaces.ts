@@ -1,11 +1,11 @@
 import {GranularResource, PrivilegeModel} from '../BaseInterfaces.js';
 import {
+    ApiKeyExposureReportReasonSource,
     ApiKeyExposureReportSeverity,
     ApiKeyPrivacyLevel,
     ApiKeyReportCreationType,
     ApiKeyStatus,
     ApiKeyStatusFilter,
-    ApiKeyExposureReportReasonSource,
 } from '../Enums.js';
 import {UserModel} from '../Users/UserInterfaces.js';
 
@@ -127,11 +127,6 @@ export interface ExposureReport {
      */
     severity: ApiKeyExposureReportSeverity;
     /**
-     * The reason behind the exposure report for a given API key
-     * @deprecated This field is deprecated and will be removed in a future version. Use the reasons field instead.
-     */
-    reason: string;
-    /**
      * The reasons behind the exposure report for a given API key
      */
     reasons: ApiKeyExposureReportReasonModel[];
@@ -158,7 +153,7 @@ export interface ApiKeyExposureReportReasonModel {
     /**
      * The reason behind the exposure report for a given API key
      */
-    reason: string;
+    reason?: string;
     /**
      * The source of which the exposure comes from
      */
@@ -166,7 +161,7 @@ export interface ApiKeyExposureReportReasonModel {
     /**
      * The url where the api key could be found
      */
-    url: string;
+    url?: string;
     /**
      * The date the exposure report was created
      */
