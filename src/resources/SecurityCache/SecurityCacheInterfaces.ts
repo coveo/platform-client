@@ -6,6 +6,7 @@ import {
     SecurityCacheFilteringMode,
     SecurityCacheStateOptions,
     SecurityProviderReferenceType,
+    SecurityProviderStatusType,
     SecurityProviderType,
 } from '../Enums.js';
 import {DataFile, ParameterModel, UserIdentityModel} from '../Sources/index.js';
@@ -120,7 +121,7 @@ export interface CurrentStatusModel {
     numberOfEntitiesProcessed?: number;
     refreshType?: string;
     totalNumberOfEntities?: number;
-    type?: string;
+    type?: SecurityProviderStatusType;
 }
 
 export interface SecurityProviderStatisticsModel {
