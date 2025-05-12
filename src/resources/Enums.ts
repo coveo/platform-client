@@ -346,6 +346,13 @@ export enum SecurityProviderType {
     ZENDESK = 'ZENDESK',
 }
 
+export enum SecurityProviderStatusType {
+    PENDING_REFRESH = 'PENDING_REFRESH',
+    REFRESHING = 'REFRESHING',
+    IDLE = 'IDLE',
+    ERROR = 'ERROR',
+}
+
 export enum RestUserIdType {
     User = 'User',
     Group = 'Group',
