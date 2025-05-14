@@ -25,6 +25,10 @@ export interface OrganizationMemberModel {
      * The username of the member
      */
     username: string;
+    /**
+     * The last used date of the member as a Unix timestamp (milliseconds)
+     */
+    lastUsedDate?: number;
 }
 
 export interface OrganizationMemberGroupModel {
