@@ -7,10 +7,6 @@ import {ModelDetailsTrainingDetails} from './ModelDetailsTrainingDetails.js';
 export interface ModelDetails {
     possibleRecommendations?: number;
     totalQueries?: number;
-    /**
-     * @deprecated Recommendations language support is disabled
-     */
-    recommendationsPerLanguage?: Record<string, number>;
     userContextFields?: string[];
     contentIDKeys?: string[];
     candidatesPerFilters?: Record<string, number>;
