@@ -55,7 +55,7 @@ export default class SecurityCache extends Ressource {
             identityTypes: rest.identityTypes,
             providerIds: [providerId],
         };
-        return this.api.post<PageModel<SecurityCacheIdentityModel>>(
+        return this.api.post<PageModel<DetailedSecurityCacheMemberModel>>(
             this.buildPath(`${SecurityCache.cacheUrl}/entities/list`, {page, perPage}),
             filterModel,
         );
