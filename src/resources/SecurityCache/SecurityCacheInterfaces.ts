@@ -8,6 +8,8 @@ import {
     SecurityProviderReferenceType,
     SecurityProviderStatusType,
     SecurityProviderType,
+    SinglePermissionResult,
+    SinglePermissionState,
 } from '../Enums.js';
 import {DataFile, ParameterModel, UserIdentityModel} from '../Sources/index.js';
 
@@ -188,8 +190,8 @@ export interface SecurityCacheMemberModel {
 export interface DetailedSecurityCacheMemberModel extends SecurityCacheMemberModel {
     lastUpdateDate?: number;
     lastUpdateErrorDetail?: string;
-    lastUpdateResult?: string;
-    state?: string;
+    lastUpdateResult?: SinglePermissionResult;
+    state?: SinglePermissionState;
 }
 
 export interface SecurityCacheMemberInfoModel {
