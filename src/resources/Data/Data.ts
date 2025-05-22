@@ -205,10 +205,7 @@ export default class Data extends Resource {
      * @returns A promise resolving to the query response
      */
     async query<T = Record<string, Scalar>>(query: Query) {
-        return await this.api.post<QueryResponse<T>>(
-            `/rest/organizations/${this.api.organizationId}/data/v1/query`,
-            query,
-        );
+        return await this.api.post<QueryResponse<T>>(`/rest/organizations/${API.orgPlaceholder}/data/v1/query`, query);
     }
 
     /**
@@ -217,9 +214,6 @@ export default class Data extends Resource {
      * @returns A promise resolving to the batch query response
      */
     async queries(queries: Query[]) {
-        return await this.api.post<QueryResponse>(
-            `/rest/organizations/${this.api.organizationId}/data/v1/queries`,
-            queries,
-        );
+        return await this.api.post<QueryResponse>(`/rest/organizations/${API.orgPlaceholder}/data/v1/queries`, queries);
     }
 }
