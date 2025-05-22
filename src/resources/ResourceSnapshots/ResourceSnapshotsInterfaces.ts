@@ -60,7 +60,6 @@ export enum ResourceSnapshotType {
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
     queryParameter = 'QUERY_PARAMETER',
     queryPipeline = 'QUERY_PIPELINE',
-    queryPipelineSettings = 'SETTING',
     queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
     rankingExpression = 'RANKING_EXPRESSION',
     rankingWeight = 'RANKING_WEIGHT',
