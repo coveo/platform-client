@@ -442,7 +442,7 @@ export class QueryBuilder<T = object> {
      */
     constructor(
         private readonly data: Data,
-        private readonly query: Query,
+        public readonly query: Query,
     ) {}
 
     /**
