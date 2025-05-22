@@ -143,12 +143,11 @@ export type Query = {
  * @template T - The type of records in the rows array
  */
 export type QueryResponse<T = Record<string, Scalar>> = {
-    fields: [
-        {
-            name: string;
-            type: 'STRING' | 'BOOLEAN' | 'INTEGER' | 'FLOAT' | 'TIMESTAMP' | 'DATE';
-        },
-    ];
+    fields: Array<{
+        name: string;
+        type: 'STRING' | 'BOOLEAN' | 'INTEGER' | 'FLOAT' | 'TIMESTAMP' | 'DATE';
+    }>;
+
     rows: T[];
 
     pagination?: {
@@ -214,6 +213,9 @@ export default class Data extends Resource {
      * @returns A promise resolving to the batch query response
      */
     async queries(queries: Query[]) {
-        return await this.api.post<QueryResponse>(`/rest/organizations/${API.orgPlaceholder}/data/v1/queries`, queries);
+        return await this.api.post<BatchQueryResponse>(
+            `/rest/organizations/${API.orgPlaceholder}/data/v1/queries`,
+            queries,
+        );
     }
 }
