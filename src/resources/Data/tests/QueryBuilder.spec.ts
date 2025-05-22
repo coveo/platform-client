@@ -1,5 +1,5 @@
 import API from '../../../APICore.js';
-import Data, {AliasField, ColumnField, Field, Query, QueryResponse, Scalar, ScalarField} from '../Data.js';
+import Data, {ColumnField, Query, QueryResponse, ScalarField} from '../Data.js';
 import {
     QueryBuilder,
     and,
