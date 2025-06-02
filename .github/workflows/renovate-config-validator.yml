@@ -10,6 +10,9 @@ on:
         paths:
             - 'renovate.json'
 
+permissions:
+  contents: read
+
 jobs:
     renovate-config:
         runs-on: ubuntu-latest
