@@ -11,7 +11,7 @@ on:
             - 'renovate.json'
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
     renovate-config:
