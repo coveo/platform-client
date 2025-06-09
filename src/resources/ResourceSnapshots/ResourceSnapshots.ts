@@ -1,4 +1,5 @@
 import API from '../../APICore.js';
+import {PrivilegeModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
 import {
     ApplyOptions,
@@ -42,6 +43,17 @@ export default class ResourceSnapshots extends Resource {
      */
     listResourceAccess() {
         return this.api.get<ResourceSnapshotType[]>(`${ResourceSnapshots.baseUrl}/access/resource`);
+    }
+
+    /**
+     * Lists the resources that the authenticated user has the specified access level (i.e., read or write) to the content of the snapshot and returns a list of missing privileges.
+     * @param snapshotId
+     * @param options
+     */
+    listMissingPrivileges(snapshotId: string, options: ValidateAccessOptions) {
+        return this.api.get<PrivilegeModel[]>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access/resources`, options),
+        );
     }
 
     /**
