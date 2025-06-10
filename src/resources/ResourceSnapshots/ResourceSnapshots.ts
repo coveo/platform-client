@@ -46,8 +46,8 @@ export default class ResourceSnapshots extends Resource {
     }
 
     /**
-     * Lists the resources that the authenticated user has the specified access level (i.e., read or write) to the content of the snapshot and returns a list of missing privileges.
-     * @param snapshotId
+     * Verifies that the authenticated user has the correct access level to the content of a specific snapshot and returns a list of missing privileges.
+     * @param snapshotId The identifier of the target snapshot.
      * @param options
      */
     listMissingPrivileges(snapshotId: string, options: ValidateAccessOptions) {
