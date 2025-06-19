@@ -26,6 +26,11 @@ describe('ApiKey', () => {
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(ApiKey.baseUrl + '?status=ACTIVE');
         });
+        it('should make a GET call to the ApiKeys base url with the to watch filter', async () => {
+            await apiKey.list({status: ApiKeyStatusFilter.WITH_WARNING});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(ApiKey.baseUrl + '?status=WITH_WARNING');
+        });
     });
 
     describe('create', () => {
