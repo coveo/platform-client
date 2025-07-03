@@ -15,6 +15,7 @@ export const projectResourceTypes = [
     'CASE_ASSIST',
     'CRAWLING_MODULE',
     'EXTENSION',
+    'FIELD',
     'IN_PRODUCT_EXPERIENCE',
     'INSIGHT_PANEL',
     'ML_MODEL',
@@ -23,6 +24,8 @@ export const projectResourceTypes = [
     'SEARCH_PAGE',
     'SECURITY_PROVIDER',
     'SOURCE',
+    'STOREFRONT_ASSOCIATION',
+    'TRACKING_ID',
     'UA_REPORT',
 ];
 
