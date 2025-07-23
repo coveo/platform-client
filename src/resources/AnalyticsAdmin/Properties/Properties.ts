@@ -1,7 +1,7 @@
 import Resource from '../../Resource.js';
 import API from '../../../APICore.js';
 import {PageModel} from '../../BaseInterfaces.js';
-import {ListPropertiesParams, PropertiesResponseMessage, PropertyModel} from './PropertiesInterfaces.js';
+import {ListPropertiesRequest, PropertyActionResponse, PropertyModel} from './PropertiesInterfaces.js';
 
 export default class Properties extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/analyticsadmin/v1`;
@@ -17,18 +17,35 @@ export default class Properties extends Resource {
     }
 
     /**
-     * List all properties
-     * @param params
+     * List all properties, optionally using filters.
+     * Note that `list` and `query` are equivalent, with the only difference being that `list` uses GET and `query` uses POST.
+     *
+     * @param params Optional parameters to filter the listing by.
      * @returns Promise<PageModel<PropertyModel>>
      */
-    list(params?: ListPropertiesParams): Promise<PageModel<PropertyModel>> {
+    list(params?: ListPropertiesRequest): Promise<PageModel<PropertyModel>> {
         return this.api.get<PageModel<PropertyModel>>(
-            this.buildPathWithOrg(`${Properties.baseUrl}/properties/list`, params),
+            this.buildPathWithOrg(`${Properties.baseUrl}/properties`, params),
         );
     }
 
     /**
-     * Get a property
+     * Query all properties, optionally using filters.
+     * Note that `list` and `query` are equivalent, with the only difference being that `list` uses GET and `query` uses POST.
+     *
+     * @param params Optional parameters to filter the listing by.
+     * @returns Promise<PageModel<PropertyModel>>
+     */
+    query(params?: ListPropertiesRequest): Promise<PageModel<PropertyModel>> {
+        return this.api.post<PageModel<PropertyModel>>(
+            this.buildPathWithOrg(`${Properties.baseUrl}/properties`),
+            params,
+        );
+    }
+
+    /**
+     * Get a property.
+     *
      * @param trackingId
      * @returns Promise<PropertyModel>
      */
@@ -37,36 +54,38 @@ export default class Properties extends Resource {
     }
 
     /**
-     * Create a property
+     * Create a property.
+     *
      * @param trackingId
      * @param displayName
-     * @returns Promise<PropertiesResponseMessage>
+     * @returns Promise<PropertyActionResponse>
      */
-    create(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
-        return this.api.post<PropertiesResponseMessage>(
+    create(trackingId: string, displayName: string): Promise<PropertyActionResponse> {
+        return this.api.post<PropertyActionResponse>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
         );
     }
 
     /**
-     * Edit a property
+     * Edit a property.
+     *
      * @param trackingId
      * @param displayName
-     * @returns Promise<PropertiesResponseMessage>
+     * @returns Promise<PropertyActionResponse>
      */
-    update(trackingId: string, displayName: string): Promise<PropertiesResponseMessage> {
-        return this.api.put<PropertiesResponseMessage>(
+    update(trackingId: string, displayName: string): Promise<PropertyActionResponse> {
+        return this.api.put<PropertyActionResponse>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
         );
     }
 
     /**
-     * Delete a property
+     * Delete a property.
      * @param trackingId
-     * @returns Promise<PropertiesResponseMessage>
+     * @returns Promise<PropertyActionResponse>
      */
-    delete(trackingId: string): Promise<PropertiesResponseMessage> {
-        return this.api.delete<PropertiesResponseMessage>(
+    delete(trackingId: string): Promise<PropertyActionResponse> {
+        return this.api.delete<PropertyActionResponse>(
             this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`),
         );
     }
