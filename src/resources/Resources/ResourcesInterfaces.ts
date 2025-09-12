@@ -19,6 +19,11 @@ export interface ResourceModel {
      * The version of the resource
      */
     version?: string;
+    /**
+     * Any additional information related to the resource
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    additionalInfo?: Record<string, any>;
 }
 
 export interface ResourceParams extends Paginated {
