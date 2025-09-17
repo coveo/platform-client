@@ -17,6 +17,11 @@ jobs:
     renovate-config:
         runs-on: ubuntu-latest
         steps:
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+              with:
+                  egress-policy: audit
+
             - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
             - uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4
               with:

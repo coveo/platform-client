@@ -59,6 +59,11 @@ jobs:
                 # If you are analyzing a compiled language, you can modify the 'build-mode' for that language to customize how
                 # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
         steps:
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+              with:
+                  egress-policy: audit
+
             - name: Checkout repository
               uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
@@ -107,6 +112,11 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'pull_request' }}
         steps:
+            - name: Harden the runner (Audit all outbound calls)
+              uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+              with:
+                  egress-policy: audit
+
             - name: Authenticate gh CLI
               run: |
                   gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
