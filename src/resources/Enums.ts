@@ -89,6 +89,7 @@ export enum DataStreamType {
     BODY_HTML = 'BODY_HTML',
     THUMBNAIL = 'THUMBNAIL',
     DOCUMENT_DATA = 'DOCUMENT_DATA',
+    MARKDOWN = 'MARKDOWN',
 }
 
 export enum ExtensionLanguageType {
