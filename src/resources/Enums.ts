@@ -87,6 +87,7 @@ export enum OperationType {
 export enum DataStreamType {
     BODY_TEXT = 'BODY_TEXT',
     BODY_HTML = 'BODY_HTML',
+    BODY_MARKDOWN = 'BODY_MARKDOWN',
     THUMBNAIL = 'THUMBNAIL',
     DOCUMENT_DATA = 'DOCUMENT_DATA',
 }
