@@ -19,19 +19,22 @@ const HEADERS_JSON_CONTENT_TYPE: HeadersInit = Object.freeze({'Content-Type': 'a
 
 /**
  * Check whether the response status is `429 Too Many Requests`.
- * @param response
+ * @param response - The response to check.
+ * @returns `true` if the response status is 429, `false` otherwise.
  */
 const isTooManyRequests: Predicate<Response> = (response) => response.status === 429;
 /**
  * Check whether the method is 'GET' (case insensitive).
- * @param value
+ * @param value - The method to check.
+ * @returns `true` if the method is 'GET', `false` otherwise.
  */
 const isGet: Predicate<string | undefined> = (value) => (value ? /^GET$/i.test(value) : false);
 
 /**
  * "Logical OR" two optional abort signals.
- * @param signal1
- * @param signal2
+ * @param signal1 - An abort signal.
+ * @param signal2 - Another abort signal.
+ * @returns A signal that aborts when either `signal1` or `signal2` aborts, or `signal1` or `signal2` if only one is defined.
  */
 const abortOnEither = (
     signal1: AbortSignal | null | undefined,
