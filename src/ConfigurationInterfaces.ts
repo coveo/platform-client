@@ -10,9 +10,6 @@ export interface PlatformClientOptions {
     serverlessHost?: Retrievable<string>;
     environment?: Environment;
     region?: Region;
-    /**
-     * @experimental
-     */
     requestHandlers?: RequestHandler[];
     responseHandlers?: ResponseHandler[];
     globalRequestSettings?: RequestInit;
