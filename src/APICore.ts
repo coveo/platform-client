@@ -34,7 +34,7 @@ const isGet: Predicate<string | undefined> = (value) => (value ? /^GET$/i.test(v
  * "Logical OR" two optional abort signals.
  * @param signal1 - An abort signal.
  * @param signal2 - Another abort signal.
- * @returns A signal that aborts when either `signal1` or `signal2` aborts, or `signal1` or `signal2` if only one is defined.
+ * @returns An `AbortSignal` that will be aborted if either `signal1` or `signal2` is aborted. If only one signal is provided, returns that signal. If neither is provided, returns `undefined`.
  */
 const abortOnEither = (
     signal1: AbortSignal | null | undefined,
