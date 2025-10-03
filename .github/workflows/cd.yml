@@ -4,7 +4,7 @@ on:
         branches: [master]
 
 permissions:
-    contents: write # Required to push to the repository
+    contents: read # Required to read the repository
     id-token: write # Required for OIDC
 
 jobs:
