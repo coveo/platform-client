@@ -170,6 +170,7 @@ export enum SourceType {
     SHAREPOINT_ONLINE2 = 'SHAREPOINT_ONLINE2',
     SITECORE = 'SITECORE',
     SITEMAP = 'SITEMAP',
+    SHOPIFY = 'SHOPIFY',
     SLACK = 'SLACK',
     WEB2 = 'WEB2',
     YOUTUBE = 'YOUTUBE',
