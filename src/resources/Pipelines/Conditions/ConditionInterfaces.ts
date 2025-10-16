@@ -24,6 +24,16 @@ export interface ConditionModel {
     detailed: any;
 
     /**
+     * The identifier of the Coveo Cloud platform user who last modified this.
+     */
+    modifiedBy?: string;
+
+    /**
+     * The last time this was modified. (ISO 8601)
+     */
+    modifiedAt?: string;
+
+    /**
      * @deprecated
      * This property is exposed for backward compatibility reasons.
      */

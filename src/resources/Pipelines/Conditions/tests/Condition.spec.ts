@@ -105,4 +105,21 @@ describe('Condition', () => {
             });
         });
     });
+    describe('bulkDelete', () => {
+        it('make a POST call to the conditions bulkDelete url', async () => {
+            await conditions.bulkDelete([]);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkDelete', {
+                ids: [],
+            });
+        });
+
+        it('include the conditionIds on the request body', async () => {
+            await conditions.bulkDelete(['hello', 'bonjour']);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkDelete', {
+                ids: ['hello', 'bonjour'],
+            });
+        });
+    });
 });
