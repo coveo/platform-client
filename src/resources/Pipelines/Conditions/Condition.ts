@@ -75,4 +75,19 @@ export default class Condition extends Resource {
             },
         );
     }
+
+    /**
+     * Bulk delete of condition statements
+     * @param conditionIds A list of resource identifiers to delete. A maximum of 100 can be sent.
+     */
+    bulkDelete(conditionIds: string[]) {
+        return this.api.post(
+            this.buildPath(`${Condition.baseUrl}/bulkDelete`, {
+                organizationId: this.api.organizationId,
+            }),
+            {
+                ids: conditionIds,
+            },
+        );
+    }
 }
