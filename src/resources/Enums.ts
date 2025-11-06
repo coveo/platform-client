@@ -133,10 +133,6 @@ export enum SourceStatusTypeWithTransition {
 }
 
 export enum SourceType {
-    /**
-     * @deprecated
-     */
-    ADOBE_EXPERIENCE_MANAGER = 'ADOBE_EXPERIENCE_MANAGER',
     AMAZONS3 = 'AMAZONS3',
     BOX_ENTERPRISE2 = 'BOX_ENTERPRISE2',
     CATALOG = 'CATALOG',
@@ -1003,7 +999,6 @@ export enum SearchHubLicenseMetrics {
     coveoForSelfService = 'coveoForSelfService',
     coveoForZendeskPortals = 'coveoForZendeskPortals',
     coveoForSalesforceServiceCloud = 'coveoForSalesforceServiceCloud',
-    coveoForAdobe = 'coveoForAdobe',
     coveoForSitecore = 'coveoForSitecore',
     coveoForSitecoreStandard = 'coveoForSitecoreStandard',
     coveoForWebsites = 'coveoForWebsites',
