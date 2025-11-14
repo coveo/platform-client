@@ -7,7 +7,7 @@ import {
     StatementsFeature,
 } from '../../Enums.js';
 
-interface ConditionAssociations {
+interface AssociationCondition {
     /**
      * The number of resources associated to this condition.
      */
@@ -49,7 +49,7 @@ export interface ConditionModel {
     /*
      * Information about the resources associated to this condition.
      */
-    associations?: ConditionAssociations;
+    associations?: AssociationCondition;
 
     /**
      * @deprecated
