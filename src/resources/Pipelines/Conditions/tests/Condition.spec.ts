@@ -1,5 +1,5 @@
 import API from '../../../../APICore.js';
-import {ListStatementSortBy} from '../../../Enums.js';
+import {ListStatementAssocationFilter, ListStatementSortBy} from '../../../Enums.js';
 import Condition from '../Condition.js';
 import {NewConditionModel} from '../ConditionInterfaces.js';
 
@@ -23,9 +23,14 @@ describe('Condition', () => {
         });
 
         it('should use the passed options in the query parameters', async () => {
-            await conditions.list({filter: 'cat', page: 2});
+            await conditions.list({
+                filter: 'cat',
+                page: 2,
+                expand: true,
+                associationFilter: ListStatementAssocationFilter.IsAssociated,
+            });
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2',
+                '/rest/search/v1/admin/pipelines/statements?feature=when&filter=cat&page=2&expand=true&associationFilter=isAssociated',
             );
         });
     });
