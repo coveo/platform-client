@@ -1,5 +1,12 @@
 import {Paginated} from '../../BaseInterfaces.js';
-import {ListStatementSortBy} from '../../Enums.js';
+import {ListStatementAssocationFilter, ListStatementSortBy} from '../../Enums.js';
+
+interface AssociationCondition {
+    /**
+     * The number of resources associated to this condition.
+     */
+    total: number;
+}
 
 export interface ConditionModel {
     /**
@@ -32,6 +39,11 @@ export interface ConditionModel {
      * The last time this was modified. (ISO 8601)
      */
     modifiedAt?: string;
+
+    /*
+     * Information about the resources associated to this condition.
+     */
+    associations?: AssociationCondition;
 
     /**
      * @deprecated
@@ -103,7 +115,6 @@ export interface ListConditionsOptions extends Paginated {
 
     /**
      * The sort criteria to apply on the results.
-     * @default ListStatementSortBy.Position
      */
     sortBy?: ListStatementSortBy;
 
@@ -112,4 +123,16 @@ export interface ListConditionsOptions extends Paginated {
      * The value set by default is provided by the API resource
      */
     organizationId?: string;
+
+    /**
+     * Whether to include additional information such as the number of resources associated to the condition.
+     * @default false
+     */
+    expand?: boolean;
+
+    /**
+     * Only includes conditions with a certain number of associated resources.
+     * @default ListStatementAssocationFilter.All
+     */
+    associationFilter?: ListStatementAssocationFilter;
 }

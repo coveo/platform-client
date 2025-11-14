@@ -845,9 +845,16 @@ export enum ResultRankingLocalizedContentLocales {
 }
 
 export enum ListStatementSortBy {
-    Position = 'position',
     Definition = 'definition',
     Description = 'description',
+    LastModification = 'lastModification',
+    TotalAssociationCount = 'totalAssociationCount',
+}
+
+export enum ListStatementAssocationFilter {
+    All = 'all',
+    NotAssociated = 'notAssociated',
+    IsAssociated = 'isAssociated',
 }
 
 export enum StatementGroupType {
