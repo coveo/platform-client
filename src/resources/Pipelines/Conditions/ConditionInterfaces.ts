@@ -1,7 +1,7 @@
 import {Paginated} from '../../BaseInterfaces.js';
 import {ListStatementAssocationFilter, ListStatementSortBy} from '../../Enums.js';
 
-interface AssociationCondition {
+interface ConditionAssociation {
     /**
      * The number of resources associated to this condition.
      */
@@ -43,7 +43,7 @@ export interface ConditionModel {
     /*
      * Information about the resources associated to this condition.
      */
-    associations?: AssociationCondition;
+    associations?: ConditionAssociation;
 
     /**
      * @deprecated
