@@ -438,4 +438,17 @@ describe('ResourceSnapshots', () => {
             );
         });
     });
+
+    describe('listMissingPrivileges', () => {
+        it('calls the /snapshots/access/resources endpoint with the provided parameters', async () => {
+            await resourceSnapshots.listMissingPrivileges('snapshot-id', {
+                snapshotAccessType: SnapshotAccessType.Write,
+            });
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${ResourceSnapshots.baseUrl}/snapshot-id/access/resources?snapshotAccessType=WRITE`,
+            );
+        });
+    });
 });
