@@ -1,11 +1,13 @@
-import Access from './OrganizationAccess/Access.js';
-import Activity from './Activities/Activities.js';
 import API from '../APICore.js';
+import Activity from './Activities/Activities.js';
+import Properties from './AnalyticsAdmin/Properties/Properties.js';
 import ApiKey from './ApiKeys/ApiKeys.js';
+import ApiKeyTemplate from './ApiKeyTemplate/ApiKeyTemplate.js';
 import AWS from './AWS/AWS.js';
 import CaseAssistConfig from './CaseAssistConfigs/CaseAssistConfig.js';
 import Catalog from './Catalogs/Catalog.js';
 import CatalogConfiguration from './Catalogs/CatalogConfiguration.js';
+import CatalogContent from './Catalogs/CatalogContent.js';
 import Cluster from './Clusters/Cluster.js';
 import Connectivity from './Connectivity/Connectivity.js';
 import CrawlingModule from './CrawlingModule/CrawlingModule.js';
@@ -14,6 +16,7 @@ import Field from './Fields/Fields.js';
 import Global from './Global/Global.js';
 import GlobalGroup from './GlobalGroups/GlobalGroup.js';
 import Group from './Groups/Groups.js';
+import HostedPages from './HostedPages/HostedPages.js';
 import Index from './Indexes/Indexes.js';
 import InProductExperiences from './InProductExperiences/InProductExperiences.js';
 import InsightPanelConfig from './InsightPanelConfigs/InsightPanelConfig.js';
@@ -26,35 +29,29 @@ import Links from './Links/Links.js';
 import Logs from './Logs/Logs.js';
 import MachineLearning from './MachineLearning/MachineLearning.js';
 import ModifierTemplates from './ModifierTemplates/ModifierTemplates.js';
+import NextGenSearchPages from './NextGenSearchPages/NextGenSearchPages.js';
 import Notifications from './Notification/notification.js';
+import Access from './OrganizationAccess/Access.js';
 import Organization from './Organizations/Organization.js';
 import Pipelines from './Pipelines/Pipelines.js';
 import PrivilegeEvaluator from './PrivilegeEvaluator/PrivilegeEvaluator.js';
-import ProductListing from './Catalogs/ProductListing.js';
-import ProductListingConfiguration from './Catalogs/ProductListingConfiguration.js';
-import Products from './Products/Product.js';
+import Project from './Projects/Project.js';
 import PushApi from './PushApi/PushApi.js';
 import Resource from './Resource.js';
+import Resources from './Resources/Resources.js';
 import ResourceSnapshots from './ResourceSnapshots/ResourceSnapshots.js';
 import Saml from './Saml/Saml.js';
 import SchemaService from './SchemaService/SchemaService.js';
 import Search from './Search/Search.js';
+import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
 import SearchInterfaces from './SearchInterfaces/SearchInterfaces.js';
 import SearchPages from './SearchPages/SearchPages.js';
-import NextGenSearchPages from './NextGenSearchPages/NextGenSearchPages.js';
 import SearchUsageMetrics from './SearchUsageMetrics/SearchUsageMetrics.js';
 import SecurityCache from './SecurityCache/SecurityCache.js';
 import Sources from './Sources/Sources.js';
 import UsageAnalytics from './UsageAnalytics/UsageAnalytics.js';
 import User from './Users/User.js';
 import Vaults from './Vaults/Vaults.js';
-import HostedPages from './HostedPages/HostedPages.js';
-import SearchAnalysis from './SearchAnalysis/SearchAnalysis.js';
-import Project from './Projects/Project.js';
-import Resources from './Resources/Resources.js';
-import CatalogContent from './Catalogs/CatalogContent.js';
-import Properties from './AnalyticsAdmin/Properties/Properties.js';
-import ApiKeyTemplate from './ApiKeyTemplate/ApiKeyTemplate.js';
 
 const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'activity', resource: Activity},
@@ -91,9 +88,6 @@ const resourcesMap: Array<{key: string; resource: typeof Resource}> = [
     {key: 'organizationAccess', resource: Access},
     {key: 'pipeline', resource: Pipelines},
     {key: 'privilegeEvaluator', resource: PrivilegeEvaluator},
-    {key: 'productListing', resource: ProductListing},
-    {key: 'productListingConfiguration', resource: ProductListingConfiguration},
-    {key: 'products', resource: Products},
     {key: 'properties', resource: Properties},
     {key: 'pushApi', resource: PushApi},
     {key: 'resourceSnapshot', resource: ResourceSnapshots},
@@ -153,9 +147,6 @@ class PlatformResources {
     organizationAccess: Access;
     pipeline: Pipelines;
     privilegeEvaluator: PrivilegeEvaluator;
-    productListing: ProductListing;
-    productListingConfiguration: ProductListingConfiguration;
-    products: Products;
     properties: Properties;
     pushApi: PushApi;
     resourceSnapshot: ResourceSnapshots;

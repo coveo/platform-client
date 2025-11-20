@@ -4,34 +4,33 @@ import CaseAssistConfig from '../CaseAssistConfigs/CaseAssistConfig.js';
 import Catalog from '../Catalogs/Catalog.js';
 import CatalogConfiguration from '../Catalogs/CatalogConfiguration.js';
 import Cluster from '../Clusters/Cluster.js';
+import Connectivity from '../Connectivity/Connectivity.js';
 import CrawlingModule from '../CrawlingModule/CrawlingModule.js';
 import Extension from '../Extensions/Extensions.js';
 import Field from '../Fields/Fields.js';
 import Global from '../Global/Global.js';
 import GlobalGroup from '../GlobalGroups/GlobalGroup.js';
 import Group from '../Groups/Groups.js';
-import Limits from '../Limits/Limits.js';
-import MachineLearning from '../MachineLearning/MachineLearning.js';
+import HostedPages from '../HostedPages/HostedPages.js';
+import InProductExperiences from '../InProductExperiences/InProductExperiences.js';
 import License from '../License/License.js';
+import Limits from '../Limits/Limits.js';
+import Logs from '../Logs/Logs.js';
+import MachineLearning from '../MachineLearning/MachineLearning.js';
+import Notifications from '../Notification/notification.js';
 import Organization from '../Organizations/Organization.js';
 import Pipelines from '../Pipelines/Pipelines.js';
 import PlatformResources from '../PlatformResources.js';
 import ResourceSnapshots from '../ResourceSnapshots/ResourceSnapshots.js';
 import Saml from '../Saml/Saml.js';
+import SchemaService from '../SchemaService/SchemaService.js';
 import Search from '../Search/Search.js';
+import SearchInterfaces from '../SearchInterfaces/SearchInterfaces.js';
+import SearchPages from '../SearchPages/SearchPages.js';
 import SecurityCache from '../SecurityCache/SecurityCache.js';
 import Sources from '../Sources/Sources.js';
 import UsageAnalytics from '../UsageAnalytics/UsageAnalytics.js';
 import User from '../Users/User.js';
-import SchemaService from '../SchemaService/SchemaService.js';
-import SearchPages from '../SearchPages/SearchPages.js';
-import Notifications from '../Notification/notification.js';
-import Logs from '../Logs/Logs.js';
-import Connectivity from '../Connectivity/Connectivity.js';
-import SearchInterfaces from '../SearchInterfaces/SearchInterfaces.js';
-import InProductExperiences from '../InProductExperiences/InProductExperiences.js';
-import ProductListing from '../Catalogs/ProductListing.js';
-import HostedPages from '../HostedPages/HostedPages.js';
 
 describe('PlatformResources', () => {
     describe('registerAll', () => {
@@ -65,14 +64,6 @@ describe('PlatformResources', () => {
 
             expect(platformResources.catalogConfiguration).toBeDefined();
             expect(platformResources.catalogConfiguration).toBeInstanceOf(CatalogConfiguration);
-        });
-
-        it('should register the productListing resource on the platform instance', () => {
-            const platformResources = new PlatformResources();
-            platformResources.registerAll();
-
-            expect(platformResources.productListing).toBeDefined();
-            expect(platformResources.productListing).toBeInstanceOf(ProductListing);
         });
 
         it('should register the cluster resource on the platform instance', () => {
