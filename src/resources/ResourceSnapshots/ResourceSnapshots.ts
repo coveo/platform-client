@@ -10,6 +10,7 @@ import {
     GetSnapshotOptions,
     PushSnapshotOptions,
     ResourceSnapshotExportConfigurationModel,
+    ResourceSnapshotMissingPrivileges,
     ResourceSnapshotsModel,
     ResourceSnapshotsReportModel,
     ResourceSnapshotsSynchronizationPlanModel,
@@ -195,6 +196,23 @@ export default class ResourceSnapshots extends Resource {
                 relativeReportId,
                 numberOfLinesMax,
             }),
+        );
+    }
+
+    /**
+     * Verifies that the authenticated user has the correct access level to the content of a specific snapshot
+     * and returns a list of missing privileges.
+     *
+     * @param {string} snapshotId The identifier of the target snapshot.
+     * @param {ValidateAccessOptions} options The resource access level to verify.
+     * @returns {Promise<ResourceSnapshotMissingPrivileges>} Object containing missing privileges categorized by resource type.
+     */
+    listMissingPrivileges(
+        snapshotId: string,
+        options: ValidateAccessOptions,
+    ): Promise<ResourceSnapshotMissingPrivileges> {
+        return this.api.get<ResourceSnapshotMissingPrivileges>(
+            this.buildPath(`${ResourceSnapshots.baseUrl}/${snapshotId}/access/resources`, options),
         );
     }
 }
