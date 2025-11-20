@@ -1,4 +1,5 @@
 import {SortingOrder, SnapshotSortingType} from '../Enums.js';
+import {GlobalPrivilegeModel} from '../index.js';
 
 export interface ResourceSnapshotsModel {
     /**
@@ -135,25 +136,57 @@ export interface ResourceSnapshotsReportOperationModel {
      */
     resourcesCreated: number;
     /**
+     * The `resourceName`s of the resources created by the operation.
+     */
+    resourcesCreatedNames: string[];
+    /**
      * The number of resources deleted by the operation.
      */
     resourcesDeleted: number;
+    /**
+     * The `resourceName`s of the resources deleted by the operation.
+     */
+    resourcesDeletedNames: string[];
     /**
      * The number of resources for which an error occurred during the operation.
      */
     resourcesInError: number;
     /**
+     * The `resourceName`s of the resources for which an error occurred during the operation.
+     */
+    resourcesInErrorNames: string[];
+    /**
      * The number of pre-existing resources recreated by the operation. This happens when a resource cannot be updated. For example, it is not possible to rename a query pipeline, so in such a case the pipeline would be deleted and created again with the desired name. This operation counts as one recreation.
      */
     resourcesRecreated: number;
+    /**
+     * The `resourceName`s of the resources recreated by the operation.
+     */
+    resourcesRecreatedNames: string[];
+    /**
+     * The number of resources synchronized by the operation.
+     */
+    resourcesSynchronized: number;
+    /**
+     * The `resourceName`s of the resources synchronized by the operation.
+     */
+    resourcesSynchronizedNames: string[];
     /**
      * The number of resources unchanged by the operation.
      */
     resourcesUnchanged: number;
     /**
+     * The `resourceName`s of the resources unchanged by the operation.
+     */
+    resourcesUnchangedNames: string[];
+    /**
      * The number of resources updated by the operation.
      */
     resourcesUpdated: number;
+    /**
+     * The `resourceName`s of the resources updated by the operation.
+     */
+    resourcesUpdatedNames: string[];
 }
 
 export interface ResourceSnapshotsReportOperationResult {
@@ -385,3 +418,22 @@ export interface SnapshotDiffModel {
     status: ResourceSnapshotsReportStatus;
     files: Partial<Record<ResourceSnapshotType, SnapshotDiffFileModel>>;
 }
+
+export type ResourceSnapshotRequiredPrivilege = GlobalPrivilegeModel;
+
+export interface ResourceSnapshotAccessRule {
+    /**
+     * Indicates whether access to the resource snapshot is granted or not.
+     */
+    accessGranted: boolean;
+    /**
+     * List of privileges required to access the resource snapshot.
+     */
+    requiredPrivileges: ResourceSnapshotRequiredPrivilege[];
+    /**
+     * The `resourceName`s of the resources associated with this access rule.
+     */
+    resourceNames: string[];
+}
+
+export type ResourceSnapshotMissingPrivileges = Record<ResourceSnapshotType, ResourceSnapshotAccessRule[]>;
