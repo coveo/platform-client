@@ -1,6 +1,7 @@
 export {default as Resource} from './Resource.js';
 
 export * from './Activities/index.js';
+export * from './AnalyticsAdmin/index.js';
 export * from './ApiKeys/index.js';
 export * from './ApiKeyTemplate/index.js';
 export * from './AWS/index.js';
@@ -37,7 +38,6 @@ export * from './Organizations/index.js';
 export * from './Pipelines/index.js';
 export * from './PlatformResources.js';
 export * from './PrivilegeEvaluator/index.js';
-export * from './Products/index.js';
 export * from './Projects/index.js';
 export * from './PushApi/index.js';
 export * from './Resources/index.js';
@@ -54,4 +54,3 @@ export * from './Sources/index.js';
 export * from './UsageAnalytics/index.js';
 export * from './Users/index.js';
 export * from './Vaults/index.js';
-export * from './AnalyticsAdmin/index.js';
