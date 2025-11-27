@@ -30,6 +30,8 @@ export interface FormAuthenticationConfig {
     javaScriptLoadingDelayInMilliseconds?: number;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     customLoginSequence?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    postLoginSequence?: any;
 }
 
 export interface FormAuthenticationInput {
