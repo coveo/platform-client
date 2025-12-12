@@ -943,6 +943,7 @@ export enum ModelTypes {
     IntentAwareProductRanking = 'intentranking',
     RelevanceGenerativeAnswering = 'genqa',
     SemanticEncoder = 'embeddings',
+    ProductRecommendations = 'productrecommendations',
 }
 
 export enum LicenseSection {
