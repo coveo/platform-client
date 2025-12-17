@@ -97,6 +97,10 @@ export interface LicenseModel {
      * The type of the license
      */
     type: string;
+    /**
+     * The license of every machine learning model.
+     */
+    LicenseMachineLearningModel: LicenseMachineLearningModel;
 }
 
 export interface EntitlementModel {
@@ -252,4 +256,39 @@ export enum LicenseDataVisualizationAccessLevel {
      * Basic access
      */
     BASIC = 'BASIC',
+}
+
+/**
+ * A machine learning models configuration that includes all available ML features.
+ * Each feature has a model limit, enabled state, and optional build frequency.
+ */
+export interface LicenseMachineLearningModel {
+    automaticRelevanceTuning: LicenseMachineLearningConfigurationModel;
+    caseClassification: LicenseMachineLearningConfigurationModel;
+    catalogSemanticEncoder: LicenseMachineLearningConfigurationModel;
+    dynamicNavigationExperience: LicenseMachineLearningConfigurationModel;
+    eventRecommendations: LicenseMachineLearningConfigurationModel;
+    intentAwareProductRanking: LicenseMachineLearningConfigurationModel;
+    ipxRecommendations: LicenseMachineLearningConfigurationModel;
+    learningtoretrieve: LicenseMachineLearningConfigurationModel;
+    passageRetrieval: LicenseMachineLearningConfigurationModel;
+    predictiveQuerySuggestions: LicenseMachineLearningConfigurationModel;
+    productRecommendations: LicenseMachineLearningConfigurationModel;
+    querySuggestions: LicenseMachineLearningConfigurationModel;
+    relevanceGenerativeAnswering: LicenseMachineLearningConfigurationModel;
+    semanticEncoder: LicenseMachineLearningConfigurationModel;
+    smartSnippets: LicenseMachineLearningConfigurationModel;
+    testDeli: LicenseMachineLearningConfigurationModel;
+}
+
+/**
+ * A machine learning feature configuration model.
+ * @property numberOfModelsLimit - The maximum number of models allowed for this feature
+ * @property enabled - Whether the feature is enabled for the organization
+ * @property buildFrequency - Optional ISO 8601 duration string for model build frequency (e.g., "P7D" for 7 days)
+ */
+export interface LicenseMachineLearningConfigurationModel {
+    numberOfModelsLimit: number;
+    enabled: boolean;
+    buildFrequency?: string;
 }
