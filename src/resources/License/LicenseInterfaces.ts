@@ -100,7 +100,7 @@ export interface LicenseModel {
     /**
      * The license of every machine learning model.
      */
-    LicenseMachineLearningModel: LicenseMachineLearningModel;
+    machineLearningModels: LicenseMachineLearningModel;
 }
 
 export interface EntitlementModel {
