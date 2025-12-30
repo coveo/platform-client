@@ -9,7 +9,7 @@
     ],
     "packageRules": [
         {
-            "matchPackagePatterns": ["*"],
+            "matchPackageNames": ["*"],
             "groupName": "all dependencies",
             "groupSlug": "all"
         },
