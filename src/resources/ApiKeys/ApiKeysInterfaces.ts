@@ -133,7 +133,7 @@ export interface ExposureReport {
     /**
      * The date the key should be deactivated
      */
-    deactivationDate: number;
+    deactivationDate?: number;
     /**
      * The way the API key report has been created
      */
