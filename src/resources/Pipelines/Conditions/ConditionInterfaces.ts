@@ -7,7 +7,7 @@ import {
     StatementsFeature,
 } from '../../Enums.js';
 
-interface AssociationCondition {
+interface ConditionAssociations {
     /**
      * The number of resources associated to this condition.
      */
@@ -49,7 +49,7 @@ export interface ConditionModel {
     /*
      * Information about the resources associated to this condition.
      */
-    associations?: AssociationCondition;
+    associations?: ConditionAssociations;
 
     /**
      * @deprecated
@@ -156,7 +156,6 @@ export interface ListAssociationsOptions extends Paginated {
 
     /**
      * The sort criteria to apply on the results.
-     * @default "associationType", "associationId"
      */
     sortBy?: ConditionAssociationSortByType;
 
