@@ -1,5 +1,10 @@
 import API from '../../../../APICore.js';
-import {ListStatementAssocationFilter, ListStatementSortBy} from '../../../Enums.js';
+import {
+    ConditionAssociationSortByType,
+    ConditionAssociationType,
+    ListStatementAssocationFilter,
+    ListStatementSortBy,
+} from '../../../Enums.js';
 import Condition from '../Condition.js';
 import {NewConditionModel} from '../ConditionInterfaces.js';
 
@@ -125,6 +130,30 @@ describe('Condition', () => {
             expect(api.post).toHaveBeenCalledWith('/rest/search/v1/admin/pipelines/statements/bulkDelete', {
                 ids: ['hello', 'bonjour'],
             });
+        });
+    });
+    describe('listAssociations', () => {
+        it('make a GET call to the list associations url without params', async () => {
+            await conditions.listAssociations('conditionIdTest');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations',
+            );
+        });
+
+        it('make a GET call to the list associations url with params', async () => {
+            await conditions.listAssociations('conditionIdTest', {
+                page: 2,
+                perPage: 10,
+                pipelineName: 'testName',
+                isOrderAscending: true,
+                sortBy: ConditionAssociationSortByType.pipelineName,
+                associationTypes: [ConditionAssociationType.pipelines, ConditionAssociationType.featuredResults],
+            });
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations?page=2&perPage=10&pipelineName=testName&isOrderAscending=true&sortBy=pipelineName&associationTypes=pipelines&associationTypes=featuredResults',
+            );
         });
     });
 });

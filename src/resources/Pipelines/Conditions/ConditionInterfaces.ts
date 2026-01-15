@@ -1,7 +1,13 @@
-import {Paginated} from '../../BaseInterfaces.js';
-import {ListStatementAssocationFilter, ListStatementSortBy} from '../../Enums.js';
+import {PageModel, Paginated} from '../../BaseInterfaces.js';
+import {
+    ConditionAssociationSortByType,
+    ConditionAssociationType,
+    ListStatementAssocationFilter,
+    ListStatementSortBy,
+    StatementsFeature,
+} from '../../Enums.js';
 
-interface ConditionAssociations {
+interface AssociationCondition {
     /**
      * The number of resources associated to this condition.
      */
@@ -43,7 +49,7 @@ export interface ConditionModel {
     /*
      * Information about the resources associated to this condition.
      */
-    associations?: ConditionAssociations;
+    associations?: AssociationCondition;
 
     /**
      * @deprecated
@@ -135,4 +141,84 @@ export interface ListConditionsOptions extends Paginated {
      * @default ListStatementAssocationFilter.All
      */
     associationFilter?: ListStatementAssocationFilter;
+}
+
+export interface ListAssociationsOptions extends Paginated {
+    /**
+     * Optional filter of association types to include. If you leave this parameter undefined or empty, all association types are included.
+     */
+    associationTypes?: ConditionAssociationType[];
+
+    /**
+     * Optional filter to match the pipeline name of the object associated with this condition.
+     */
+    pipelineName?: string;
+
+    /**
+     * The sort criteria to apply on the results.
+     * @default "associationType", "associationId"
+     */
+    sortBy?: ConditionAssociationSortByType;
+
+    /**
+     * Whether to sort the results in ascending order.
+     */
+    isOrderAscending?: boolean;
+}
+
+export interface ConditionPipelineAssociation {
+    /**
+     * The type of the association.
+     */
+    associationType: ConditionAssociationType;
+    /**
+     * Primary key of the associated entity.
+     */
+    id: string;
+    /**
+     *Pipeline ID the row belongs to.
+     */
+    pipelineId: string;
+    /**
+     *Human-readable name of the pipeline.
+     */
+    pipelineName: string;
+    /**
+     * QPL feature (only present for pipelineStatements).
+     *
+     */
+    feature: never;
+}
+
+export interface ConditionPipelineStatementAssociation {
+    /**
+     * The type of the association.
+     */
+    associationType: ConditionAssociationType;
+    /**
+     * Primary key of the associated entity.
+     */
+    id: string;
+    /**
+     *Pipeline ID the row belongs to.
+     */
+    pipelineId: string;
+    /**
+     *Human-readable name of the pipeline.
+     */
+    pipelineName: string;
+    /**
+     * QPL feature (only present for pipelineStatements).
+     *
+     */
+    feature: StatementsFeature;
+}
+
+export type ConditionAssociationItemUnion = ConditionPipelineAssociation | ConditionPipelineStatementAssociation;
+
+export interface ConditionAssociationListResponse extends PageModel<ConditionAssociationItemUnion> {
+    /**
+     * The condition ID used for the lookup.
+     */
+    conditionId?: string;
 }
