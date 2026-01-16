@@ -182,11 +182,6 @@ export interface ConditionPipelineAssociation {
      *Human-readable name of the pipeline.
      */
     pipelineName: string;
-    /**
-     * QPL feature (only present for pipelineStatements).
-     *
-     */
-    feature: never;
 }
 
 export interface ConditionPipelineStatementAssociation {
