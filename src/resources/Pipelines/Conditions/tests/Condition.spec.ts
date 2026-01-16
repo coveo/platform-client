@@ -133,7 +133,7 @@ describe('Condition', () => {
         });
     });
     describe('listAssociations', () => {
-        it('make a GET call to the list associations url without params', async () => {
+        it('makes a GET call to the list associations url without params', async () => {
             await conditions.listAssociations('conditionIdTest');
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
