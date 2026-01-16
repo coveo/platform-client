@@ -106,6 +106,7 @@ export default class Condition extends Resource {
         return this.api.get<ConditionAssociationListResponse>(
             this.buildPath(`${Condition.baseUrl}/${conditionId}/associations`, {
                 ...params,
+                ...(params?.associationTypes ? {associationTypes: JSON.stringify(params.associationTypes)} : {}),
                 organizationId: this.api.organizationId,
             }),
         );

@@ -152,7 +152,7 @@ describe('Condition', () => {
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations?page=2&perPage=10&pipelineName=testName&isOrderAscending=true&sortBy=pipelineName&associationTypes=pipelines&associationTypes=featuredResults',
+                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations?page=2&perPage=10&pipelineName=testName&isOrderAscending=true&sortBy=pipelineName&associationTypes=%5B%22pipelines%22%2C%22featuredResults%22%5D',
             );
         });
     });
