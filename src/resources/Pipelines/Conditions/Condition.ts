@@ -1,6 +1,12 @@
 import {PageModel} from '../../BaseInterfaces.js';
 import Resource from '../../Resource.js';
-import {ConditionModel, ListConditionsOptions, NewConditionModel} from './ConditionInterfaces.js';
+import {
+    ConditionAssociationListResponse,
+    ConditionModel,
+    ListAssociationsOptions,
+    ListConditionsOptions,
+    NewConditionModel,
+} from './ConditionInterfaces.js';
 
 export default class Condition extends Resource {
     static baseUrl = `/rest/search/v1/admin/pipelines/statements`;
@@ -88,6 +94,21 @@ export default class Condition extends Resource {
             {
                 ids: conditionIds,
             },
+        );
+    }
+
+    /**
+     * Gets the list of all objects associated with a condition.
+     * @param conditionId The unique identifier of the condition to be fetched.
+     * @param params
+     */
+    listAssociations(conditionId: string, params?: ListAssociationsOptions) {
+        return this.api.get<ConditionAssociationListResponse>(
+            this.buildPath(`${Condition.baseUrl}/${conditionId}/associations`, {
+                ...params,
+                ...(params?.associationTypes ? {associationTypes: JSON.stringify(params.associationTypes)} : {}),
+                organizationId: this.api.organizationId,
+            }),
         );
     }
 }

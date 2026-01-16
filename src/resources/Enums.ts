@@ -1249,3 +1249,15 @@ export enum ApiKeyExposureReportReasonSource {
     GITHUB = 'GITHUB',
     MANUAL = 'MANUAL',
 }
+
+export enum ConditionAssociationType {
+    pipelines = 'pipelines',
+    pipelineStatements = 'pipelineStatements',
+    pipelineStatementGroups = 'pipelineStatementGroups',
+    featuredResults = 'featuredResults',
+    unmanagedMlStatements = 'unmanagedMlStatements',
+}
+
+export enum ConditionAssociationSortByType {
+    pipelineName = 'pipelineName',
+}
