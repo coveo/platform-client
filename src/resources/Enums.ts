@@ -229,6 +229,7 @@ export enum UpdateStatusCategory {
     MINOR = 'MINOR',
     CRITICAL = 'CRITICAL',
     BREAKING = 'BREAKING',
+    ROLLBACK = 'ROLLBACK',
 }
 
 export enum SortingType {
