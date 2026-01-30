@@ -9,6 +9,16 @@ import {
     SourceVisibility,
 } from '../Enums.js';
 
+export enum ExpirationStatus {
+    OK = 'OK',
+    SOON_TO_EXPIRE = 'SOON_TO_EXPIRE',
+    EXPIRED = 'EXPIRED',
+}
+
+export interface LicenseMetadata {
+    expirationStatus: ExpirationStatus;
+}
+
 export interface LicenseConnectorScheduleModel {
     /**
      * The refresh type of use for a given connector.
@@ -97,6 +107,10 @@ export interface LicenseModel {
      * The type of the license
      */
     type: string;
+    /**
+     * Computed metadata about the license.
+     */
+    metadata?: LicenseMetadata;
 }
 
 export interface EntitlementModel {
