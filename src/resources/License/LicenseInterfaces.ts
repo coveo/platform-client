@@ -10,13 +10,9 @@ import {
 } from '../Enums.js';
 
 export enum ExpirationStatus {
-    OK = 'OK',
-    SOON_TO_EXPIRE = 'SOON_TO_EXPIRE',
+    ACTIVE = 'ACTIVE',
+    SOON_TO_BE_EXPIRED = 'SOON_TO_BE_EXPIRED',
     EXPIRED = 'EXPIRED',
-}
-
-export interface LicenseMetadata {
-    expirationStatus: ExpirationStatus;
 }
 
 export interface LicenseConnectorScheduleModel {
@@ -75,6 +71,10 @@ export interface LicenseModel {
      */
     expirationDate: number;
     /**
+     * The expiration status indicating whether the license is active, about to expire, or expired.
+     */
+    expirationStatus: ExpirationStatus;
+    /**
      * The index backup type in Coveo Cloud V2.
      */
     indexBackupType: IndexBackupTypes;
@@ -107,10 +107,6 @@ export interface LicenseModel {
      * The type of the license
      */
     type: string;
-    /**
-     * Computed metadata about the license.
-     */
-    metadata?: LicenseMetadata;
 }
 
 export interface EntitlementModel {
