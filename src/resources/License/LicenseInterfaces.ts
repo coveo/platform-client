@@ -9,6 +9,12 @@ import {
     SourceVisibility,
 } from '../Enums.js';
 
+export enum ExpirationStatus {
+    ACTIVE = 'ACTIVE',
+    SOON_TO_BE_EXPIRED = 'SOON_TO_BE_EXPIRED',
+    EXPIRED = 'EXPIRED',
+}
+
 export interface LicenseConnectorScheduleModel {
     /**
      * The refresh type of use for a given connector.
@@ -64,6 +70,10 @@ export interface LicenseModel {
      * The date at which the license will expire in number of milliseconds since UNIX epoch.
      */
     expirationDate: number;
+    /**
+     * The expiration status indicating whether the license is active, about to expire, or expired.
+     */
+    expirationStatus: ExpirationStatus;
     /**
      * The index backup type in Coveo Cloud V2.
      */
