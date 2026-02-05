@@ -48,5 +48,5 @@ export interface AssociationItem {
     /**
      * The additional parameters to send to Coveo ML.
      */
-    customQueryParameters?: {submodel: string};
+    customQueryParameters?: {submodel?: string, strategy?: string};
 }
