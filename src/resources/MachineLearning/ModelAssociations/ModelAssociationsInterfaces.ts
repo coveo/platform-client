@@ -1,6 +1,18 @@
 import {ConditionModel} from '../../Pipelines/index.js';
 import {MLModelStatusInfo} from '../MachineLearningInterfaces.js';
 
+interface CustomQueryParametersWithSubmodel {
+    submodel: string;
+    strategy?: never;
+}
+
+interface CustomQueryParametersWithStrategy {
+    submodel?: never;
+    strategy: string;
+}
+
+type CustomQueryParameters = CustomQueryParametersWithSubmodel | CustomQueryParametersWithStrategy;
+
 export interface ModelAssociationsListParams {
     /*
      * The 0-based number of the page of results to list. Default: 0
@@ -48,5 +60,5 @@ export interface AssociationItem {
     /**
      * The additional parameters to send to Coveo ML.
      */
-    customQueryParameters?: {submodel?: string; strategy?: string};
+    customQueryParameters?: CustomQueryParameters;
 }
