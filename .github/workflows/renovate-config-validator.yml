@@ -18,12 +18,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Harden the runner (Audit all outbound calls)
-              uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+              uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
               with:
                   egress-policy: audit
 
-            - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-            - uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4
+            - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
               with:
                   cache: 'npm'
                   node-version-file: '.nvmrc'

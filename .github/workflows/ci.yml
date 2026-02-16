@@ -13,12 +13,12 @@ jobs:
         name: CI
         steps:
             - name: Harden the runner (Audit all outbound calls)
-              uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+              uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
               with:
                   egress-policy: audit
 
             - name: Checkout
-              uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
             - name: Setup
               uses: ./.github/actions/setup
             - name: Check lockfiles
