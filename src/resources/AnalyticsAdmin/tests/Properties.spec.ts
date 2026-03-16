@@ -91,7 +91,22 @@ describe('Properties', () => {
 
     describe('createProperty', () => {
         it('should make a POST call to the properties path', async () => {
-            await properties.create('trackingId', 'displayName');
+            await properties.create('trackingId', {
+                displayName: 'displayName',
+                defaultTimeZone: 'America/New_York',
+                defaultCurrency: 'USD',
+            });
+
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${Properties.baseUrl}/properties/trackingId?displayName=displayName&defaultTimeZone=America%2FNew_York&defaultCurrency=USD`,
+            );
+        });
+
+        it('should allow passing undefined for optional fields', async () => {
+            await properties.create('trackingId', {
+                displayName: 'displayName',
+            });
 
             expect(api.post).toHaveBeenCalledTimes(1);
             expect(api.post).toHaveBeenCalledWith(
@@ -102,13 +117,27 @@ describe('Properties', () => {
 
     describe('updateProperty', () => {
         it('should make a PUT call to the properties path', async () => {
-            await properties.update('trackingId', 'displayName');
+            await properties.update('trackingId', {
+                displayName: 'displayName',
+                defaultTimeZone: 'America/New_York',
+                defaultCurrency: 'USD',
+            });
+
+            expect(api.put).toHaveBeenCalledTimes(1);
+            expect(api.put).toHaveBeenCalledWith(
+                `${Properties.baseUrl}/properties/trackingId?displayName=displayName&defaultTimeZone=America%2FNew_York&defaultCurrency=USD`,
+            );
+        });
+
+        it('should allow passing undefined for optional fields', async () => {
+            await properties.update('trackingId', {
+                displayName: 'displayName',
+            });
 
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Properties.baseUrl}/properties/trackingId?displayName=displayName`);
         });
     });
-
     describe('deleteProperty', () => {
         it('should make a DELETE call to the properties path', async () => {
             await properties.delete('trackingId');
