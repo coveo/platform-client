@@ -18,6 +18,33 @@ export interface PropertyModel {
      * Project IDs are only included on request.
      */
     projectIds?: string[] | null;
+    /**
+     * Optional: The default time zone associated with the property.
+     * Leaving this empty will set the value to 'null'.
+     */
+    defaultTimeZone?: string;
+    /**
+     * Optional: The default currency associated with the property.
+     * Leaving this empty will set the value to 'null'.
+     */
+    defaultCurrency?: string;
+}
+
+export interface MutatePropertyModel {
+    /**
+     * The name used for the property in the UI.
+     */
+    displayName: string;
+    /**
+     * Optional: The default time zone associated with the property.
+     * Leaving this empty will set the value to 'null'.
+     */
+    defaultTimeZone?: string;
+    /**
+     * Optional: The default currency associated with the property.
+     * Leaving this empty will set the value to 'null'.
+     */
+    defaultCurrency?: string;
 }
 
 export interface PropertyActionResponse {

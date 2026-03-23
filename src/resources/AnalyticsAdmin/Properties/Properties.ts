@@ -1,7 +1,12 @@
 import Resource from '../../Resource.js';
 import API from '../../../APICore.js';
 import {PageModel} from '../../BaseInterfaces.js';
-import {ListPropertiesRequest, PropertyActionResponse, PropertyModel} from './PropertiesInterfaces.js';
+import {
+    ListPropertiesRequest,
+    MutatePropertyModel,
+    PropertyActionResponse,
+    PropertyModel,
+} from './PropertiesInterfaces.js';
 
 export default class Properties extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/analyticsadmin/v1`;
@@ -57,12 +62,12 @@ export default class Properties extends Resource {
      * Create a property.
      *
      * @param trackingId
-     * @param displayName
+     * @param params
      * @returns Promise<PropertyActionResponse>
      */
-    create(trackingId: string, displayName: string): Promise<PropertyActionResponse> {
+    create(trackingId: string, params: MutatePropertyModel): Promise<PropertyActionResponse> {
         return this.api.post<PropertyActionResponse>(
-            this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
+            this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, params),
         );
     }
 
@@ -70,12 +75,12 @@ export default class Properties extends Resource {
      * Edit a property.
      *
      * @param trackingId
-     * @param displayName
+     * @param params
      * @returns Promise<PropertyActionResponse>
      */
-    update(trackingId: string, displayName: string): Promise<PropertyActionResponse> {
+    update(trackingId: string, params: MutatePropertyModel): Promise<PropertyActionResponse> {
         return this.api.put<PropertyActionResponse>(
-            this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, {displayName}),
+            this.buildPathWithOrg(`${Properties.baseUrl}/properties/${trackingId}`, params),
         );
     }
 
