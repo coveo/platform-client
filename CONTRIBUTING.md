@@ -27,7 +27,7 @@ In case your changes don't fall within the scope **yet**, but you still want to 
 
 ## Commit messages
 
-**Every commit message must comply with the [Angular Commit Message Conventions](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format) specification. We use the commit messages to automatically bump the package version according to the semantic versioning notation. Moreover, we generate changelogs for each version using those commit messages.**
+**Every commit message must comply with the [Angular Commit Message Conventions](https://github.com/angular/angular/blob/main/contributing-docs/commit-message-guidelines.md#commit-message-footer) specification. We use the commit messages to automatically bump the package version according to the semantic versioning notation. Moreover, we generate changelogs for each version using those commit messages.**
 
 -   You can either manually write a commit message that follows the convention using your favorite method.
 -   Or you can run `npm run commit-cli`. It will prompt you some questions about the nature of your changes, then it will commit your staged changes along with a generated message that follows our convention.

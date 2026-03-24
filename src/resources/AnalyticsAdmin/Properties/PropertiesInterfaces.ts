@@ -20,6 +20,7 @@ export interface PropertyModel {
     projectIds?: string[] | null;
     /**
      * Optional: The default time zone associated with the property.
+     * Only valid IANA time zones are accepted (UTC, America/Montreal, ...).
      * Leaving this empty will set the value to 'null'.
      */
     defaultTimeZone?: string;
@@ -37,6 +38,7 @@ export interface MutatePropertyModel {
     displayName: string;
     /**
      * Optional: The default time zone associated with the property.
+     * Only valid IANA time zones are accepted (UTC, America/Montreal, ...).
      * Leaving this empty will set the value to 'null'.
      */
     defaultTimeZone?: string;
