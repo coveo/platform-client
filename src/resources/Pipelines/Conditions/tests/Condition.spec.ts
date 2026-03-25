@@ -2,6 +2,7 @@ import API from '../../../../APICore.js';
 import {
     ConditionAssociationSortByType,
     ConditionAssociationType,
+    ConditionPipelineStatementType,
     ListStatementAssocationFilter,
     ListStatementSortBy,
 } from '../../../Enums.js';
@@ -148,11 +149,12 @@ describe('Condition', () => {
                 pipelineName: 'testName',
                 isOrderAscending: true,
                 sortBy: ConditionAssociationSortByType.pipelineName,
-                associationTypes: [ConditionAssociationType.pipelines, ConditionAssociationType.featuredResults],
+                associationTypes: [ConditionAssociationType.pipelineStatements],
+                pipelineStatementType: ConditionPipelineStatementType.rankingExpression,
             });
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations?page=2&perPage=10&pipelineName=testName&isOrderAscending=true&sortBy=pipelineName&associationTypes=%5B%22pipelines%22%2C%22featuredResults%22%5D',
+                '/rest/search/v1/admin/pipelines/statements/conditionIdTest/associations?page=2&perPage=10&pipelineName=testName&isOrderAscending=true&sortBy=pipelineName&associationTypes=%5B%22pipelineStatements%22%5D&pipelineStatementType=rankingExpression',
             );
         });
     });

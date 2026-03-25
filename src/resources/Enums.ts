@@ -1255,8 +1255,18 @@ export enum ConditionAssociationType {
     pipelines = 'pipelines',
     pipelineStatements = 'pipelineStatements',
     pipelineStatementGroups = 'pipelineStatementGroups',
-    featuredResults = 'featuredResults',
-    unmanagedMlStatements = 'unmanagedMlStatements',
+}
+
+export enum ConditionPipelineStatementType {
+    filter = 'filter',
+    queryParamOverride = 'queryParamOverride',
+    rankingWeight = 'rankingweight',
+    stopWord = 'stopWord',
+    thesaurus = 'thesaurus',
+    trigger = 'trigger',
+    featuredResult = 'featuredResult',
+    rankingExpression = 'rankingExpression',
+    unmanagedMlStatement = 'unmanagedMlStatement',
 }
 
 export enum ConditionAssociationSortByType {
