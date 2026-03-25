@@ -2,9 +2,9 @@ import {PageModel, Paginated} from '../../BaseInterfaces.js';
 import {
     ConditionAssociationSortByType,
     ConditionAssociationType,
+    ConditionPipelineStatementType,
     ListStatementAssocationFilter,
     ListStatementSortBy,
-    StatementsFeature,
 } from '../../Enums.js';
 
 interface ConditionAssociations {
@@ -150,6 +150,12 @@ export interface ListAssociationsOptions extends Paginated {
     associationTypes?: ConditionAssociationType[];
 
     /**
+     * Optional filter to include only associations whose associationType is pipelineStatements and whose pipelineStatementType matches the specified value.
+     * Must be used in conjunction with associationTypes=["pipelineStatements"].
+     */
+    pipelineStatementType?: ConditionPipelineStatementType;
+
+    /**
      * Optional filter to match the pipeline name of the object associated with this condition.
      */
     pipelineName?: string;
@@ -170,6 +176,10 @@ export interface ConditionPipelineAssociation {
      * The type of the association.
      */
     associationType: ConditionAssociationType;
+    /**
+     * Pipeline statement type of the association.
+     */
+    pipelineStatementType?: ConditionPipelineStatementType;
     /**
      * Primary key of the associated entity.
      */
@@ -202,10 +212,9 @@ export interface ConditionPipelineStatementAssociation {
      */
     pipelineName: string;
     /**
-     * QPL feature (only present for pipelineStatements).
-     *
+     * Pipeline statement type of the association (only present for pipelineStatements).
      */
-    feature: StatementsFeature;
+    pipelineStatementType?: ConditionPipelineStatementType;
 }
 
 export type ConditionAssociationItemUnion = ConditionPipelineAssociation | ConditionPipelineStatementAssociation;
