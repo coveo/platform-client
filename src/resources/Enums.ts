@@ -136,10 +136,6 @@ export enum SourceType {
     AMAZONS3 = 'AMAZONS3',
     BOX_ENTERPRISE2 = 'BOX_ENTERPRISE2',
     CATALOG = 'CATALOG',
-    /**
-     * @deprecated
-     */
-    CONFLUENCE = 'CONFLUENCE',
     CONFLUENCE2 = 'CONFLUENCE2',
     CONFLUENCE2_HOSTED = 'CONFLUENCE2_HOSTED',
     CUSTOM = 'CUSTOM',
