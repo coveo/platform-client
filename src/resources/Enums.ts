@@ -147,8 +147,6 @@ export enum SourceType {
     GRAPHQL = 'GRAPHQL',
     JIRA2 = 'JIRA2',
     JIRA2_HOSTED = 'JIRA2_HOSTED',
-    JIVE = 'JIVE',
-    JIVE_HOSTED = 'JIVE_HOSTED',
     LITHIUM = 'LITHIUM',
     MICROSOFT_DYNAMICS = 'MICROSOFT_DYNAMICS',
     PUSH = 'PUSH',
@@ -304,18 +302,10 @@ export enum ActivityOperation {
 }
 
 export enum SecurityProviderType {
-    /**
-     * @deprecated
-     */
-    ACTIVE_DIRECTORY = 'ACTIVE_DIRECTORY',
     ACTIVE_DIRECTORY2 = 'ACTIVE_DIRECTORY2',
     BOX = 'BOX',
     CLAIMS = 'CLAIMS',
     CLAIMS_TO_EMAIL = 'CLAIMS_TO_EMAIL',
-    /**
-     * @deprecated
-     */
-    CONFLUENCE = 'CONFLUENCE',
     CONFLUENCE2 = 'CONFLUENCE2',
     CUSTOM = 'CUSTOM',
     DATABASE = 'DATABASE',
@@ -327,7 +317,6 @@ export enum SecurityProviderType {
     GENERIC_REST = 'GENERIC_REST',
     GRAPHQL = 'GRAPHQL',
     JIRA2 = 'JIRA2',
-    JIVE = 'JIVE',
     KHOROS_COMMUNITY = 'KHOROS_COMMUNITY',
     MICROSOFT_DYNAMICS = 'MICROSOFT_DYNAMICS',
     OFFICE365 = 'OFFICE365',
