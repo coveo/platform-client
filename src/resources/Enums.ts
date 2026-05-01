@@ -152,7 +152,6 @@ export enum SourceType {
     PUSH = 'PUSH',
     RSS = 'RSS',
     SALESFORCE = 'SALESFORCE',
-    SALESFORCE_SITES = 'SALESFORCE_SITES',
     SAP = 'SAP',
     SERVICENOW = 'SERVICENOW',
     SHAREPOINT = 'SHAREPOINT',
