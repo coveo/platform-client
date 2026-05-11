@@ -7,6 +7,26 @@ import {
     ListStatementSortBy,
 } from '../../Enums.js';
 
+export interface DetailedObject {
+    object: string;
+    key?: string;
+    words?: string[];
+}
+
+export interface DetailedCondition {
+    left?: DetailedCondition | DetailedObject;
+    operator?: string;
+    right?: DetailedCondition | DetailedObject | string | boolean;
+    object?: string;
+    key?: string;
+    joinOperator?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    values?: any;
+    isSub?: boolean;
+    from?: string;
+    to?: string;
+}
+
 interface ConditionAssociations {
     /**
      * The number of resources associated to this condition.
@@ -33,8 +53,7 @@ export interface ConditionModel {
     /**
      * The structured object of the query pipeline language expression of this statement.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    detailed: any;
+    detailed: {condition: DetailedCondition};
 
     /**
      * The identifier of the Coveo Cloud platform user who last modified this.
