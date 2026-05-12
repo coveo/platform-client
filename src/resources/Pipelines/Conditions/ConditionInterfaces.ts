@@ -19,52 +19,41 @@ export interface DetailedCondition {
      * When present, this is either another nested condition or an object reference.
      */
     left?: DetailedCondition | DetailedObject;
-
     /**
      * The operator applied between the left-hand and right-hand operands.
      */
     operator?: string;
-
     /**
      * The right-hand operand of this condition node.
      * When present, this is either another nested condition, an object reference,
      * or a literal value.
      */
     right?: DetailedCondition | DetailedObject | string | boolean;
-
     /**
-     * The object targeted by this condition when the node directly represents
-     * an object/key expression instead of a binary expression.
+     * The object targeted by this condition
      */
     object?: string;
-
     /**
-     * The key targeted on {@link object} for this condition node.
+     * The key for this condition node.
      */
     key?: string;
-
     /**
      * The logical join operator used to combine this condition with another
-     * condition at the same level (for example, `AND` or `OR`).
+     * condition at the same level
      */
     joinOperator?: string;
-
     /**
-     * The collection of values associated to this condition node for operators
-     * that accept multiple operands.
+     * The collection of values associated to this condition node.
      */
     values?: unknown;
-
     /**
      * Whether this node represents a sub-condition/grouping in the condition tree.
      */
     isSub?: boolean;
-
     /**
      * The start value of a range-based condition.
      */
     from?: string;
-
     /**
      * The end value of a range-based condition.
      */
