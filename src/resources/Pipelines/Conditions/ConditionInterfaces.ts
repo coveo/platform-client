@@ -53,8 +53,7 @@ export interface DetailedCondition {
      * The collection of values associated to this condition node for operators
      * that accept multiple operands.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    values?: any;
+    values?: unknown;
 
     /**
      * Whether this node represents a sub-condition/grouping in the condition tree.
