@@ -7,6 +7,59 @@ import {
     ListStatementSortBy,
 } from '../../Enums.js';
 
+export interface DetailedObject {
+    object: string;
+    key?: string;
+    words?: string[];
+}
+
+export interface DetailedCondition {
+    /**
+     * The left-hand operand of this condition node.
+     * When present, this is either another nested condition or an object reference.
+     */
+    left?: DetailedCondition | DetailedObject;
+    /**
+     * The operator applied between the left-hand and right-hand operands.
+     */
+    operator?: string;
+    /**
+     * The right-hand operand of this condition node.
+     * When present, this is either another nested condition, an object reference,
+     * or a literal value.
+     */
+    right?: DetailedCondition | DetailedObject | string | boolean;
+    /**
+     * The object targeted by this condition
+     */
+    object?: string;
+    /**
+     * The key for this condition node.
+     */
+    key?: string;
+    /**
+     * The logical join operator used to combine this condition with another
+     * condition at the same level
+     */
+    joinOperator?: string;
+    /**
+     * The collection of values associated to this condition node.
+     */
+    values?: unknown;
+    /**
+     * Whether this node represents a sub-condition/grouping in the condition tree.
+     */
+    isSub?: boolean;
+    /**
+     * The start value of a range-based condition.
+     */
+    from?: string;
+    /**
+     * The end value of a range-based condition.
+     */
+    to?: string;
+}
+
 interface ConditionAssociations {
     /**
      * The number of resources associated to this condition.
@@ -33,8 +86,7 @@ export interface ConditionModel {
     /**
      * The structured object of the query pipeline language expression of this statement.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    detailed: any;
+    detailed: {condition: DetailedCondition};
 
     /**
      * The identifier of the Coveo Cloud platform user who last modified this.
