@@ -19,6 +19,10 @@ export interface ResourceModel {
      * The version of the resource
      */
     version?: string;
+    /**
+     * Any additional information related to the resource
+     */
+    additionalInfo?: Record<string, unknown>;
 }
 
 export interface ResourceParams extends Paginated {
