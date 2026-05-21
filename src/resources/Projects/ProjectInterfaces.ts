@@ -100,6 +100,14 @@ export interface ProjectModel extends BaseProjectModel {
      * @example: '2023-06-21T14:59:26.850Z'
      */
     updatedDate: string;
+    /**
+     * Controls whether Project-specific edit confirmation prompts are shown for resources associated with this Project
+     */
+    editNotificationsEnabled?: boolean;
+    /**
+     * Captures the source or origin of where a Project was created from (e.g., an integration name or system identifier)
+     */
+    createdFrom?: string;
 }
 
 export interface ListProjectParams extends Paginated {
