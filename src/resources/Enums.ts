@@ -130,6 +130,7 @@ export enum SourceStatusTypeWithTransition {
     REFRESHING = 'REFRESHING',
     RESUMING = 'RESUMING',
     STARTING_REFRESH = 'STARTING_REFRESH',
+    PREPARING_REFRESH = 'PREPARING_REFRESH',
 }
 
 export enum SourceType {
