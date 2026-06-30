@@ -33,6 +33,10 @@ export interface ModelIssues {
      * The recommended action to perform to resolve the error or limitation.
      */
     troubleshoot: string;
+    /**
+     * The severity of the issue. ERROR indicates a critical failure, and WARNING indicates a non-critical issue (e.g., degraded/limited state).
+     */
+    severity: 'ERROR' | 'WARNING';
 }
 
 export type ModelStatusInfo = MLModelStatusInfo & Required<Pick<MLModelStatusInfo, 'daysUntilArchival'>>;
@@ -73,6 +77,14 @@ export interface ModelWithDetails {
      * @example 1691762520000
      */
     nextModelUpdateTime: number;
+    /**
+     * The timestamp of the last query received by the model, in epoch milliseconds
+     */
+    lastQueryDate?: number;
+    /**
+     * The completion timestamp of the last model build, in epoch milliseconds.
+     */
+    lastBuildCompletedDate?: number;
     /**
      * The description and troubleshooting messages for a model error or limitation.
      */
