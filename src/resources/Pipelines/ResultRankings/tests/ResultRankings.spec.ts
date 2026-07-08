@@ -134,6 +134,7 @@ describe('Result Rankings', () => {
             const associatedGroups = [null, 'g1', 'g2'];
             const ruleStatuses = [ResultRankingsStatuses.active, ResultRankingsStatuses.inactive];
             const ruleTypes = [ResultRankingsRuleTypes.featuredResults, ResultRankingsRuleTypes.rankingExpressions];
+            const expand: Array<'condition.detailed'> = ['condition.detailed'];
             const expectedUri = [
                 ResultRankings.getBaseUrl(pipelineId),
                 '?associatedGroups=',
@@ -142,9 +143,10 @@ describe('Result Rankings', () => {
                 encodeURIComponent(JSON.stringify(ruleStatuses)),
                 '&ruleTypes=',
                 encodeURIComponent(JSON.stringify(ruleTypes)),
+                '&expand=condition.detailed',
             ].join('');
 
-            await resultRankings.list(pipelineId, {associatedGroups, ruleStatuses, ruleTypes});
+            await resultRankings.list(pipelineId, {associatedGroups, ruleStatuses, ruleTypes, expand});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(expectedUri);
         });
