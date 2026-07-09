@@ -262,6 +262,8 @@ interface CoreGetResultRankingParams extends Paginated {
     kind?: ResultRankingsKind;
 }
 
+export type ListResultRankingExpandOptions = 'condition.detailed';
+
 export interface ListResultRankingParams extends CoreGetResultRankingParams {
     sortBy?: ListStatementSortBy;
 
@@ -285,7 +287,7 @@ export interface ListResultRankingParams extends CoreGetResultRankingParams {
      *
      * Set to `condition.detailed` to include the detailed version of the condition alongside `condition.reference` in each result ranking condition.
      */
-    expand?: Array<'condition.detailed'>;
+    expand?: ListResultRankingExpandOptions[];
 }
 
 export interface CopyResultRankingRequest {
