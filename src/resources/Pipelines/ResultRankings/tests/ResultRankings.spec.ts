@@ -7,7 +7,7 @@ import {
     ResultRankingsStatuses,
 } from '../../../Enums.js';
 import ResultRankings from '../ResultRankings.js';
-import {CopyResultRankingRequest, ResultRanking} from '../ResultRankingsInterfaces.js';
+import {CopyResultRankingRequest, ListResultRankingExpandOptions, ResultRanking} from '../ResultRankingsInterfaces.js';
 
 jest.mock('../../../../APICore.js');
 
@@ -134,7 +134,7 @@ describe('Result Rankings', () => {
             const associatedGroups = [null, 'g1', 'g2'];
             const ruleStatuses = [ResultRankingsStatuses.active, ResultRankingsStatuses.inactive];
             const ruleTypes = [ResultRankingsRuleTypes.featuredResults, ResultRankingsRuleTypes.rankingExpressions];
-            const expand: Array<'condition.detailed'> = ['condition.detailed'];
+            const expand: ListResultRankingExpandOptions[] = ['condition.detailed'];
             const expectedUri = [
                 ResultRankings.getBaseUrl(pipelineId),
                 '?associatedGroups=',
