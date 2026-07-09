@@ -9,6 +9,7 @@ import {
     ResultRankingsRuleTypes,
     ResultRankingsStatuses,
 } from '../../Enums.js';
+import {DetailedCondition} from '../Conditions/ConditionInterfaces.js';
 
 export interface ResultRanking {
     /**
@@ -95,6 +96,10 @@ export interface ResultRankingProps {
          * The ID of a mandatory condition to satisfy.
          */
         reference: string;
+        /**
+         * The detailed version of the condition.
+         */
+        detailed?: {condition: DetailedCondition};
     };
     statementGroupId?: string;
     associatedGroup?: ResultRankingAssociatedGroup;
@@ -257,6 +262,8 @@ interface CoreGetResultRankingParams extends Paginated {
     kind?: ResultRankingsKind;
 }
 
+export type ListResultRankingExpandOptions = 'condition.detailed';
+
 export interface ListResultRankingParams extends CoreGetResultRankingParams {
     sortBy?: ListStatementSortBy;
 
@@ -275,6 +282,12 @@ export interface ListResultRankingParams extends CoreGetResultRankingParams {
      * The rule status to allow in the results.
      */
     ruleStatuses?: ResultRankingsStatuses[];
+    /**
+     * The related resources to expand in the response.
+     *
+     * Set to `condition.detailed` to include the detailed version of the condition alongside `condition.reference` in each result ranking condition.
+     */
+    expand?: ListResultRankingExpandOptions[];
 }
 
 export interface CopyResultRankingRequest {
