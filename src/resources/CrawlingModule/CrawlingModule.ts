@@ -1,9 +1,10 @@
 import API from '../../APICore.js';
+import {PageModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
 import {
     ComponentVersion,
-    CrawlingModuleEntity,
     CrawlingModuleDeployment,
+    CrawlingModuleEntity,
     CrawlingModuleLogRequestDownloadModel,
     CrawlingModuleLogRequestModel,
     CrawlingModuleLogRequestState,
@@ -11,7 +12,6 @@ import {
     MaestroVersionOptions,
     UpdateStatus,
 } from './CrawlingModuleInterfaces.js';
-import {PageModel} from '../BaseInterfaces.js';
 
 export default class CrawlingModule extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/crawlingmodule`;
@@ -68,5 +68,30 @@ export default class CrawlingModule extends Resource {
 
     removeDeployment(crawlingModuleId: string) {
         return this.api.delete(`${CrawlingModule.baseUrl}/${crawlingModuleId}`);
+    }
+
+    /**
+     * Create a new log request for the specified crawling module, requesting all logs. Warning: the resulting archive might be large. If the log archive is more than 5GB the request will fail.
+     * @param crawlingModuleId The ID of the crawling module
+     * @returns The crawling module log request
+     */
+    createAllAvailableLogsRequest(crawlingModuleId: string) {
+        return this.api.post<CrawlingModuleLogRequestModel>(
+            `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/all`,
+        );
+    }
+
+    /**
+     * Create a new log request for the specified crawling module, requesting all logs associated with an instance id (source id or provider id). Warning: the resulting archive might be large. If the log archive is more than 5GB the request will fail.
+     * @param crawlingModuleId The ID of the crawling module
+     * @param instanceId The instance ID (source ID or provider ID) for which to retrieve logs.
+     * @returns The crawling module log request
+     */
+    createAllAvailableLogsRequestForInstance(crawlingModuleId: string, instanceId: string) {
+        return this.api.post<CrawlingModuleLogRequestModel>(
+            this.buildPath(`${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/instance`, {
+                instanceId,
+            }),
+        );
     }
 }

@@ -129,4 +129,25 @@ describe('Crawling Module Calls', () => {
             expect(api.delete).toHaveBeenCalledWith(`${CrawlingModule.baseUrl}/${crawlingModuleId}`);
         });
     });
+
+    describe('createAllAvailableLogsRequest', () => {
+        it('should post a new log request for all available logs', async () => {
+            await crawlingModule.createAllAvailableLogsRequest(crawlingModuleId);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/all`,
+            );
+        });
+    });
+
+    describe('createAllAvailableLogsRequestForInstance', () => {
+        it('should post a new log request for all available logs of an instance', async () => {
+            const instanceId = 'INSTANCE_ID';
+            await crawlingModule.createAllAvailableLogsRequestForInstance(crawlingModuleId, instanceId);
+            expect(api.post).toHaveBeenCalledTimes(1);
+            expect(api.post).toHaveBeenCalledWith(
+                `${CrawlingModule.connectivityBaseUrl}/${crawlingModuleId}/logrequests/instance?instanceId=${instanceId}`,
+            );
+        });
+    });
 });
