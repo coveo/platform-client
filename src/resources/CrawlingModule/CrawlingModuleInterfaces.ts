@@ -122,6 +122,7 @@ export interface UpdateStatus {
 export enum CrawlingModuleLogRequestLogType {
     MAESTRO = 'MAESTRO',
     WORKER = 'WORKER',
+    ALL = 'ALL',
 }
 
 export enum CrawlingModuleLogRequestState {
