@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
-import {New} from '../../BaseInterfaces.js';
-import {ActivityOperation, DocumentConfigurationType} from '../../Enums.js';
-import {ScheduleModel} from '../../SecurityCache/index.js';
+import { New } from '../../BaseInterfaces.js';
+import { ActivityOperation, DocumentConfigurationType } from '../../Enums.js';
+import { ScheduleModel } from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
 import SourcesDatasets from '../SourcesDatasets/SourcesDatasets.js';
 import SourcesFeedback from '../SourcesFeedback/SourcesFeedback.js';
@@ -19,8 +19,8 @@ jest.mock('../../../APICore.js');
 
 describe('Sources', () => {
     let source: Sources;
-    const api = new API({accessToken: 'some-token'});
-    const serverlessApi = new API({accessToken: 'some-token'});
+    const api = new API({ accessToken: 'some-token' });
+    const serverlessApi = new API({ accessToken: 'some-token' });
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -120,16 +120,6 @@ describe('Sources', () => {
             await source.update(sourceId, sourceModel);
             expect(api.put).toHaveBeenCalledTimes(1);
             expect(api.put).toHaveBeenCalledWith(`${Sources.baseUrl}/${sourceId}`, sourceModel);
-        });
-    });
-
-    describe('applyChanges', () => {
-        it('should make a POST call to the specific Sources url', async () => {
-            const sourceId = '😾';
-
-            await source.applyChanges(sourceId);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Sources.baseUrl}/${sourceId}/applyChanges`);
         });
     });
 

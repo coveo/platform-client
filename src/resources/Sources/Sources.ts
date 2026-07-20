@@ -1,8 +1,8 @@
 import API from '../../APICore.js';
-import {New, PageModel} from '../BaseInterfaces.js';
-import {ActivityOperation} from '../Enums.js';
+import { New, PageModel } from '../BaseInterfaces.js';
+import { ActivityOperation } from '../Enums.js';
 import Resource from '../Resource.js';
-import {ScheduleModel} from '../SecurityCache/index.js';
+import { ScheduleModel } from '../SecurityCache/index.js';
 import SourcesDatasets from './SourcesDatasets/SourcesDatasets.js';
 import SourcesFeedback from './SourcesFeedback/SourcesFeedback.js';
 import SourcesFields from './SourcesFields/SourcesFields.js';
@@ -43,7 +43,7 @@ export default class Sources extends Resource {
     }
 
     create(source: New<CreateSourceModel, 'resourceId'>, options?: CreateSourceOptions) {
-        return this.api.post<{id: string}>(this.buildPath(Sources.baseUrl, options), source);
+        return this.api.post<{ id: string }>(this.buildPath(Sources.baseUrl, options), source);
     }
 
     list(params?: ListSourcesParams) {
@@ -62,7 +62,7 @@ export default class Sources extends Resource {
     }
 
     createFromRaw(rawSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
-        return this.api.post<{id: string}>(this.buildPath(`${Sources.baseUrl}/raw`, options), rawSourceConfig);
+        return this.api.post<{ id: string }>(this.buildPath(`${Sources.baseUrl}/raw`, options), rawSourceConfig);
     }
 
     getDefaultDocumentConfiguration(params?: DefaultDocumentConfigurationParams) {
@@ -80,28 +80,24 @@ export default class Sources extends Resource {
     }
 
     update(sourceId: string, source: CreateSourceModel, options?: CreateSourceOptions) {
-        return this.api.put<{id: string}>(this.buildPath(`${Sources.baseUrl}/${sourceId}`, options), source);
-    }
-
-    applyChanges(sourceId: string) {
-        return this.api.post(`${Sources.baseUrl}/${sourceId}/applyChanges`);
+        return this.api.put<{ id: string }>(this.buildPath(`${Sources.baseUrl}/${sourceId}`, options), source);
     }
 
     isDedicated(sourceId: string) {
-        return this.api.get<{value: boolean}>(`${Sources.baseUrl}/${sourceId}/dedicated`);
+        return this.api.get<{ value: boolean }>(`${Sources.baseUrl}/${sourceId}/dedicated`);
     }
 
     setDedicated(sourceId: string, enabled?: boolean) {
-        return this.api.put(this.buildPath(`${Sources.baseUrl}/${sourceId}/dedicated`, {enabled}), {});
+        return this.api.put(this.buildPath(`${Sources.baseUrl}/${sourceId}/dedicated`, { enabled }), {});
     }
 
     dumpRefresh(sourceId: string) {
-        return this.api.post<{value: boolean}>(`${Sources.baseUrl}/${sourceId}/dump`);
+        return this.api.post<{ value: boolean }>(`${Sources.baseUrl}/${sourceId}/dump`);
     }
 
     duplicate(sourceId: string, newSourceName: string, logicalIndexId?: string) {
         return this.api.post<SourceModel>(
-            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, {newSourceName, logicalIndexId}),
+            this.buildPath(`${Sources.baseUrl}/${sourceId}/duplicate`, { newSourceName, logicalIndexId }),
         );
     }
 
@@ -130,7 +126,7 @@ export default class Sources extends Resource {
     }
 
     setPushRefreshStatus(sourceId: string, activityOperation: ActivityOperation) {
-        return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/pushRefresh`, {activityOperation}));
+        return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/pushRefresh`, { activityOperation }));
     }
 
     getRawSource(sourceId: string) {
@@ -138,7 +134,7 @@ export default class Sources extends Resource {
     }
 
     updateRawSource(sourceId: string, platformSourceConfig: RawSourceConfig, options?: CreateSourceOptions) {
-        return this.api.put<{id: string}>(
+        return this.api.put<{ id: string }>(
             this.buildPath(`${Sources.baseUrl}/${sourceId}/raw`, options),
             platformSourceConfig,
         );
@@ -181,6 +177,6 @@ export default class Sources extends Resource {
     }
 
     abortTaskForActivity(sourceId: string, activityId: string) {
-        return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/tasks/abort`, {activityId}));
+        return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/tasks/abort`, { activityId }));
     }
 }
