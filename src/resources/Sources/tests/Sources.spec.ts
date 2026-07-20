@@ -1,7 +1,7 @@
 import API from '../../../APICore.js';
-import { New } from '../../BaseInterfaces.js';
-import { ActivityOperation, DocumentConfigurationType } from '../../Enums.js';
-import { ScheduleModel } from '../../SecurityCache/index.js';
+import {New} from '../../BaseInterfaces.js';
+import {ActivityOperation, DocumentConfigurationType} from '../../Enums.js';
+import {ScheduleModel} from '../../SecurityCache/index.js';
 import Sources from '../Sources.js';
 import SourcesDatasets from '../SourcesDatasets/SourcesDatasets.js';
 import SourcesFeedback from '../SourcesFeedback/SourcesFeedback.js';
@@ -19,8 +19,8 @@ jest.mock('../../../APICore.js');
 
 describe('Sources', () => {
     let source: Sources;
-    const api = new API({ accessToken: 'some-token' });
-    const serverlessApi = new API({ accessToken: 'some-token' });
+    const api = new API({accessToken: 'some-token'});
+    const serverlessApi = new API({accessToken: 'some-token'});
 
     beforeEach(() => {
         jest.clearAllMocks();
