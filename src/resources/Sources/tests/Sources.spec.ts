@@ -123,16 +123,6 @@ describe('Sources', () => {
         });
     });
 
-    describe('applyChanges', () => {
-        it('should make a POST call to the specific Sources url', async () => {
-            const sourceId = '😾';
-
-            await source.applyChanges(sourceId);
-            expect(api.post).toHaveBeenCalledTimes(1);
-            expect(api.post).toHaveBeenCalledWith(`${Sources.baseUrl}/${sourceId}/applyChanges`);
-        });
-    });
-
     describe('isDedicated', () => {
         it('should make a GET call to the specific Sources url', async () => {
             const sourceId = '😼';

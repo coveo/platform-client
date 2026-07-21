@@ -83,10 +83,6 @@ export default class Sources extends Resource {
         return this.api.put<{id: string}>(this.buildPath(`${Sources.baseUrl}/${sourceId}`, options), source);
     }
 
-    applyChanges(sourceId: string) {
-        return this.api.post(`${Sources.baseUrl}/${sourceId}/applyChanges`);
-    }
-
     isDedicated(sourceId: string) {
         return this.api.get<{value: boolean}>(`${Sources.baseUrl}/${sourceId}/dedicated`);
     }
