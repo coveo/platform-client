@@ -58,6 +58,7 @@ export enum ResourceSnapshotType {
     insightPanelInterface = 'INSIGHT_PANEL_INTERFACE',
     listingPage = 'LISTING_PAGE',
     mapping = 'MAPPING',
+    mcpConfiguration = 'MCP_CONFIGURATION',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
     queryParameter = 'QUERY_PARAMETER',
