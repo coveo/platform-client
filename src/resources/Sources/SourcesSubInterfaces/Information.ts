@@ -57,6 +57,11 @@ export interface SourceStatus {
     type?: SourceStatusType;
 }
 
+export interface SourceUpdateEventModel {
+    reason: string;
+    datetime: number;
+}
+
 export interface SourceInformation {
     id?: string;
     collectionId?: number;
@@ -70,4 +75,5 @@ export interface SourceInformation {
     sourceId?: number;
     sourceName?: string;
     sourceStatus?: SourceStatus;
+    updateEventsSinceLastRebuild?: SourceUpdateEventModel[];
 }
