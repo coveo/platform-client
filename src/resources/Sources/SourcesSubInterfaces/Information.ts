@@ -57,6 +57,17 @@ export interface SourceStatus {
     type?: SourceStatusType;
 }
 
+export interface SourceUpdateEventModel {
+    /**
+     * The reason of why the source needs to be rebuilt
+     */
+    reason: string;
+    /**
+     * The date on which the triggering change occurred.
+     */
+    datetime: number;
+}
+
 export interface SourceInformation {
     id?: string;
     collectionId?: number;
@@ -70,4 +81,8 @@ export interface SourceInformation {
     sourceId?: number;
     sourceName?: string;
     sourceStatus?: SourceStatus;
+    /**
+     * The update events that have occurred since the last rebuild of the source.
+     */
+    updateEventsSinceLastRebuild?: SourceUpdateEventModel[];
 }
