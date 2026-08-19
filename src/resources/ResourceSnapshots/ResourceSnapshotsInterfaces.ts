@@ -61,6 +61,7 @@ export enum ResourceSnapshotType {
     mcpConfiguration = 'MCP_CONFIGURATION',
     mlModel = 'ML_MODEL',
     mlModelAssociation = 'ML_MODEL_ASSOCIATION',
+    queryConfiguration = 'QUERY_CONFIGURATION',
     queryParameter = 'QUERY_PARAMETER',
     queryPipeline = 'QUERY_PIPELINE',
     queryPipelineCondition = 'QUERY_PIPELINE_CONDITION',
