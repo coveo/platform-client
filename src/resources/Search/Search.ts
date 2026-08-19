@@ -8,6 +8,7 @@ import {
     RestQueryParams,
     RestQueryResult,
     RestTokenParams,
+    SearchApiSamlIdentityProvider,
     SearchListFieldsParams,
     SearchListFieldsResponse,
     SearchResponse,
@@ -18,9 +19,14 @@ import {ListFieldValuesBodyQueryParams, PostSearchQuerySuggestBodyParams} from '
 
 export default class Search extends Resource {
     static baseUrl = `/rest/search/v2`;
+    static authenticationBaseUrl = `/rest/organizations/${API.orgPlaceholder}/authentication`;
 
     createToken(tokenParams: RestTokenParams) {
         return this.api.post<TokenModel>(`${Search.baseUrl}/token?organizationId=${API.orgPlaceholder}`, tokenParams);
+    }
+
+    listSamlIdentityProviders(): Promise<SearchApiSamlIdentityProvider[]> {
+        return this.api.get<SearchApiSamlIdentityProvider[]>(`${Search.authenticationBaseUrl}/saml`);
     }
 
     listFields(params?: SearchListFieldsParams) {
