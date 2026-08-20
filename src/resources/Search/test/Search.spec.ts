@@ -240,4 +240,13 @@ describe('Search', () => {
             Object.defineProperty(api, 'organizationId', {value: tempOrganizationId, writable: true});
         });
     });
+
+    describe('listSamlIdentityProviders', () => {
+        it('should make a GET call to the Search API SAML providers endpoint', async () => {
+            await search.listSamlIdentityProviders();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/authentication/saml');
+        });
+    });
 });

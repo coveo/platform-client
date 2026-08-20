@@ -81,6 +81,7 @@ describe('NextGenSearchPages', () => {
             domains: ['domain1', 'domain2'],
             sharingDomainEnabled: true,
             sharingLinkEnabled: true,
+            samlProvider: 'oktaIntegratorDev',
         },
         layout: SearchPageLayout.List,
         style: {

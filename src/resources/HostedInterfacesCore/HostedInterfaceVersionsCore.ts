@@ -156,6 +156,11 @@ export interface IAccesses {
      * @default false
      */
     sharingDomainEnabled?: boolean;
+
+    /**
+     * The name of the Search API SAML identity provider used to authenticate Search Page viewers.
+     */
+    samlProvider?: string;
 }
 
 export interface ISortCriteria {
