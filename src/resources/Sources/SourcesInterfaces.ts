@@ -93,6 +93,7 @@ export interface SourceModel extends GranularResource {
     alwaysTrustCertificates?: boolean;
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
+    crawlingModuleInfo?: CrawlingModuleInfo;
     createdDate?: number;
     customParameters?: Record<string, string>;
     documentConfig?: SourcesSubInterface.DocumentConfig;
@@ -109,7 +110,6 @@ export interface SourceModel extends GranularResource {
     owner?: string;
     password?: string;
     pendingCrawlingModuleId?: string;
-    crawlingModuleInfo?: CrawlingModuleInfo;
     permissions?: SourcesSubInterface.DocumentPermissionModel;
     postConversionExtensions?: SourcesSubInterface.SourceExtensionModel[];
     preConversionExtensions?: SourcesSubInterface.SourceExtensionModel[];

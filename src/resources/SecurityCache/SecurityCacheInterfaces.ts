@@ -54,10 +54,10 @@ export interface SecurityProviderModel {
 }
 
 export interface SecurityProviderModelWithStatus extends Required<SecurityProviderModel> {
+    crawlingModuleInfo?: CrawlingModuleInfo;
     currentStatus: CurrentStatusModel;
     lastRefreshOperation: LastRefreshOperation;
     statistics: SecurityProviderStatisticsModel;
-    crawlingModuleInfo?: CrawlingModuleInfo;
 }
 
 export interface RawSecurityProviderConfig {
