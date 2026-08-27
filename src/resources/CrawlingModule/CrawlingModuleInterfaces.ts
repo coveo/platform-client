@@ -216,7 +216,7 @@ export interface CrawlingModuleInfo {
      */
     isDisabled: boolean;
     /**
-     * Whether the Crawling Module has log request enabled.
+     * Whether the Crawling Module has log requests enabled.
      */
-    logRequestEnabled: boolean;
+    logRequestsEnabled: boolean;
 }
