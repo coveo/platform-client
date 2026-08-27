@@ -1,4 +1,5 @@
 import {Paginated} from '../BaseInterfaces.js';
+import {CrawlingModuleInfo} from '../CrawlingModule/CrawlingModuleInterfaces.js';
 import {
     ExpansionScore,
     PermissionIdentityType,
@@ -53,6 +54,7 @@ export interface SecurityProviderModel {
 }
 
 export interface SecurityProviderModelWithStatus extends Required<SecurityProviderModel> {
+    crawlingModuleInfo?: CrawlingModuleInfo;
     currentStatus: CurrentStatusModel;
     lastRefreshOperation: LastRefreshOperation;
     statistics: SecurityProviderStatisticsModel;

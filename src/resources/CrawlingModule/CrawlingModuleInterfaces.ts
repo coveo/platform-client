@@ -205,3 +205,18 @@ export interface CrawlingModuleDeployment {
      */
     versions: ComponentVersion;
 }
+
+export interface CrawlingModuleInfo {
+    /**
+     * The id of the Crawling Module.
+     */
+    id: string;
+    /**
+     * Whether the Crawling Module is disabled or not.
+     */
+    isDisabled: boolean;
+    /**
+     * Whether the Crawling Module has log requests enabled.
+     */
+    logRequestsEnabled: boolean;
+}

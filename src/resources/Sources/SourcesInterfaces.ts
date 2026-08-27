@@ -1,4 +1,5 @@
 import {GranularResource, Paginated} from '../BaseInterfaces.js';
+import {CrawlingModuleInfo} from '../CrawlingModule/CrawlingModuleInterfaces.js';
 import {
     DocumentConfigurationType,
     FilterHostType,
@@ -92,6 +93,7 @@ export interface SourceModel extends GranularResource {
     alwaysTrustCertificates?: boolean;
     configurationError?: SourcesSubInterface.ConfigurationError;
     crawlingModuleId?: string;
+    crawlingModuleInfo?: CrawlingModuleInfo;
     createdDate?: number;
     customParameters?: Record<string, string>;
     documentConfig?: SourcesSubInterface.DocumentConfig;
