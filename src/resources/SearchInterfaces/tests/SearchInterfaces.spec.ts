@@ -92,6 +92,15 @@ describe('SearchInterfaces', () => {
         });
     });
 
+    describe('listSamlIdentityProviders', () => {
+        it('should make a GET call to the Search API SAML providers endpoint', async () => {
+            await searchInterfaces.listSamlIdentityProviders();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${SearchInterfaces.baseUrl}/authentication/saml`);
+        });
+    });
+
     describe('create', () => {
         it('should make a POST call to the SearchInterfaces base url', async () => {
             await searchInterfaces.create(config);

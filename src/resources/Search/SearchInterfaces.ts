@@ -2781,14 +2781,3 @@ export interface RestFacetSearchResponse {
      */
     moreValuesAvailable: boolean;
 }
-
-export interface SearchApiSamlIdentityProvider {
-    /**
-     * Unique identifier of the SAML provider.
-     */
-    id: string;
-    /**
-     * Unique name of the SAML proivder used to connect via the Search API.
-     */
-    name: string;
-}

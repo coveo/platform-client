@@ -88,3 +88,15 @@ export interface IListSearchInterfacesParameters extends Paginated {
      */
     perPage?: number;
 }
+
+export interface SearchApiSamlIdentityProvider {
+    /**
+     * Unique identifier of the SAML provider.
+     */
+    id: string;
+
+    /**
+     * Unique name of the SAML provider used to connect via the Search API.
+     */
+    name: string;
+}
