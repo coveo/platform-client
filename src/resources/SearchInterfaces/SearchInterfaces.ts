@@ -6,6 +6,7 @@ import {
     IListSearchInterfacesParameters,
     ISearchInterfaceConfiguration,
     ISearchInterfaceConfigurationResponse,
+    SearchApiSamlIdentityProvider,
 } from './SearchInterfaces.model.js';
 
 export default class SearchInterfaces extends Resource {
@@ -13,6 +14,10 @@ export default class SearchInterfaces extends Resource {
 
     list(options: IListSearchInterfacesParameters): Promise<PageModel<ISearchInterfaceConfigurationResponse>> {
         return this.api.get(this.buildPath(SearchInterfaces.baseUrl, options));
+    }
+
+    listSamlIdentityProviders(): Promise<SearchApiSamlIdentityProvider[]> {
+        return this.api.get<SearchApiSamlIdentityProvider[]>(`${SearchInterfaces.baseUrl}/authentication/saml`);
     }
 
     create(searchInterfaceConfig: New<ISearchInterfaceConfiguration>): Promise<ISearchInterfaceConfigurationResponse> {
