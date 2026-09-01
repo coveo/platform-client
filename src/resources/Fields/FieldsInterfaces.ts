@@ -147,6 +147,10 @@ export interface FieldListingFilters {
      * The origin of the fields to list.
      */
     type?: FieldTypes;
+    /**
+     *  The names of the fields to list.
+     */
+    fieldNames?: string[];
 }
 
 export interface FieldListingOptions extends Paginated {
