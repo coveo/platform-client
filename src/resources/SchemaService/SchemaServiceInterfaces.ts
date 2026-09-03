@@ -146,6 +146,10 @@ export interface GenericObject {
      * The filter applied to the records of the object
      */
     filter?: string;
+    /**
+     * Whether to index all attachments linked to this object
+     */
+    indexAttachments?: boolean;
 }
 
 export interface ObjectsToGet {
