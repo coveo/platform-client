@@ -49,7 +49,7 @@ export interface LicenseMachineLearningModelInformationModel {
     /**
      * The frequency at which the model is built.
      */
-    buildFrequency: string;
+    buildFrequency?: string;
     /**
      * The maximum number of models allowed.
      */
