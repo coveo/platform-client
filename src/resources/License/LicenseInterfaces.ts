@@ -45,6 +45,21 @@ export interface LicenseConnectorModel {
     type: SourceType;
 }
 
+export interface LicenseMachineLearningModelInformationModel {
+    /**
+     * The frequency at which the model is built.
+     */
+    buildFrequency?: string;
+    /**
+     * The maximum number of models allowed.
+     */
+    numberOfModelsLimit: number;
+    /**
+     * Whether the model is enabled.
+     */
+    enabled: boolean;
+}
+
 export interface LicenseModel {
     /**
      * The unique identifier of the account that created the organization.
@@ -82,6 +97,10 @@ export interface LicenseModel {
      * The type of index that is used for all sources in an organization.
      */
     indexType: IndexType;
+    /**
+     * The Machine Learning Models configurations.
+     */
+    machineLearningModels: Record<string, LicenseMachineLearningModelInformationModel>;
     /**
      * The level of monitoring to apply to the license
      */
