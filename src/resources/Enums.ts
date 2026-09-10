@@ -754,10 +754,10 @@ export enum StatementsFeature {
     Thesaurus = 'thesaurus',
     Top = 'top',
     ResultRankings = 'resultRankings',
-    TopClicks = 'topClicks',
-    QuerySuggest = 'querySuggest',
+    TopClicks = 'mlTopClicks',
+    QuerySuggest = 'mlQuerySuggest',
     RankingWeight = 'rankingweight',
-    Recommendation = 'recommendation',
+    Recommendation = 'mlRecommendation',
     QueryParamOverride = 'queryParamOverride',
 }
 
