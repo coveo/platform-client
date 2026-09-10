@@ -94,7 +94,7 @@ interface PipelineShared {
      * string
      * @example: '22a3860e-fa6f-4e64-a9f1-ef738af0786e'
      */
-    splitTestTarget?: string; 
+    splitTestTarget?: string;
     /**
      * The date and time when the A/B test was first started.
      *
