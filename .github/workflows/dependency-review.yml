@@ -10,7 +10,7 @@ permissions:
 
 jobs:
     dependency-review:
-        uses: coveo/public-actions/.github/workflows/dependency-review.yml@main
+        uses: coveo/public-actions/.github/workflows/dependency-review.yml@8ce6eca365702b0ad9f463a01135ba88ae6c43a8 # main
         with:
             public: true
             distributed: true
