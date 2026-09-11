@@ -96,6 +96,13 @@ interface PipelineShared {
      */
     splitTestTarget?: string;
     /**
+     * The date and time when the A/B test was first started.
+     *
+     * string
+     * @example: '2024-06-01T00:00:00Z'
+     */
+    splitTestStartTime?: string;
+    /**
      * A constant query expression to add to all queries routed through this query pipeline.
      *
      * **Notes**:
