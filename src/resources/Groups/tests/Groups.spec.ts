@@ -26,6 +26,15 @@ describe('Group', () => {
         });
     });
 
+    describe('listDefaultGroups', () => {
+        it('should make a GET call to the default groups URL', async () => {
+            await group.listDefaultGroups();
+
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/defaultgroups');
+        });
+    });
+
     describe('create', () => {
         it('should make a POST call to the Groups base url', async () => {
             const groupModel: New<GroupModel> = {

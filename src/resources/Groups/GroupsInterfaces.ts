@@ -14,6 +14,13 @@ export interface GroupModel extends GranularResource {
     resourceId?: string;
 }
 
+export interface DefaultGroupModel {
+    id: string;
+    deletable: boolean;
+    displayName: string;
+    privileges: PrivilegeModel[];
+}
+
 export interface CreateGroupOptions {
     canEditItself?: boolean;
     sendEmailToInviteUsers?: boolean;
