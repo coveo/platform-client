@@ -20,6 +20,7 @@ describe('Group.listDefaultGroups', () => {
                         level: 'VIEW_ALL',
                     },
                 ],
+                groupType: 'CUSTOM',
             },
         ];
 

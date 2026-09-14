@@ -14,11 +14,32 @@ export interface GroupModel extends GranularResource {
     resourceId?: string;
 }
 
+export type DefaultGroupType = 'CUSTOM' | 'ADMINISTRATOR' | 'MCP_SEARCH_USERS';
+
+/**
+ * A built-in group.
+ */
 export interface DefaultGroupModel {
+    /**
+     * The unique identifier of the built-in group.
+     */
     id: string;
-    deletable: boolean;
+    /**
+     * The display name of the built-in group.
+     */
     displayName: string;
+    /**
+     * Whether the built-in group can be deleted.
+     */
+    deletable: boolean;
+    /**
+     * The privileges of the built-in group.
+     */
     privileges: PrivilegeModel[];
+    /**
+     * The group type for the given group.
+     */
+    groupType: DefaultGroupType;
 }
 
 export interface CreateGroupOptions {
