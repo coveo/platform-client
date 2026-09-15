@@ -1,15 +1,16 @@
 import API from '../../APICore.js';
 import {New, PrivilegeModel} from '../BaseInterfaces.js';
 import Resource from '../Resource.js';
-import {CreateGroupOptions, DefaultGroupModel, GroupModel, UpdateGroupOptions} from './GroupsInterfaces.js';
+import {CreateGroupOptions, GroupModel, UpdateGroupOptions} from './GroupsInterfaces.js';
+import BuiltInGroups from './BuiltIn/BuiltInGroups.js';
 import GroupInvite from './Invites/GroupInvite.js';
 import GroupMember from './Members/GroupMember.js';
 import GroupRealm from './Realms/GroupRealm.js';
 
 export default class Group extends Resource {
     static baseUrl = `/rest/organizations/${API.orgPlaceholder}/groups`;
-    static defaultGroupsUrl = `/rest/organizations/${API.orgPlaceholder}/defaultgroups`;
 
+    builtIn: BuiltInGroups;
     realm: GroupRealm;
     member: GroupMember;
     invite: GroupInvite;
@@ -20,6 +21,7 @@ export default class Group extends Resource {
     ) {
         super(api, serverlessApi);
 
+        this.builtIn = new BuiltInGroups(api, serverlessApi);
         this.realm = new GroupRealm(api, serverlessApi);
         this.member = new GroupMember(api, serverlessApi);
         this.invite = new GroupInvite(api, serverlessApi);
@@ -27,10 +29,6 @@ export default class Group extends Resource {
 
     list() {
         return this.api.get<GroupModel[]>(Group.baseUrl);
-    }
-
-    listDefaultGroups(): Promise<DefaultGroupModel[]> {
-        return this.api.get<DefaultGroupModel[]>(Group.defaultGroupsUrl);
     }
 
     create(group: New<GroupModel, 'resourceId'>, options?: CreateGroupOptions) {

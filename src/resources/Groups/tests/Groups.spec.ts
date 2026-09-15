@@ -2,6 +2,7 @@ import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
 import Group from '../Groups.js';
 import {GroupModel} from '../GroupsInterfaces.js';
+import BuiltInGroups from '../BuiltIn/BuiltInGroups.js';
 import GroupInvite from '../Invites/GroupInvite.js';
 import GroupMember from '../Members/GroupMember.js';
 import GroupRealm from '../Realms/GroupRealm.js';
@@ -23,15 +24,6 @@ describe('Group', () => {
             await group.list();
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(Group.baseUrl);
-        });
-    });
-
-    describe('listDefaultGroups', () => {
-        it('should make a GET call to the default groups URL', async () => {
-            await group.listDefaultGroups();
-
-            expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith('/rest/organizations/{organizationName}/defaultgroups');
         });
     });
 
@@ -87,6 +79,11 @@ describe('Group', () => {
                 '/rest/organizations/{organizationName}/groups/💎/privileges/exclusive/me',
             );
         });
+    });
+
+    it('should register the built-in groups resource', () => {
+        expect(group.builtIn).toBeDefined();
+        expect(group.builtIn).toBeInstanceOf(BuiltInGroups);
     });
 
     it('should register the realm resource', () => {
