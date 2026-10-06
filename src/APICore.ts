@@ -61,6 +61,20 @@ const withBody = (
 ): CoveoPlatformClientRequestInit | undefined =>
     userArgs?.body ? undefined : {headers: HEADERS_JSON_CONTENT_TYPE, body: JSON.stringify(body)};
 
+/**
+ * Guards against path traversal in a request route. A resource id interpolated into a route
+ * without encoding (e.g. `/apikeys/${id}`) can contain `..` segments that, once the browser
+ * resolves them, climb out of the intended `/rest/organizations/{org}/...` path and reach
+ * another organization. No legitimate route contains a `..` (or `.`) path segment, so we reject
+ * any route whose path does, before it is turned into a URL.
+ */
+const assertNoPathTraversal = (route: string): void => {
+    const path = route.split('?')[0].split('#')[0];
+    if (path.split('/').some((segment) => segment === '..' || segment === '.')) {
+        throw new Error(`Invalid request path: path traversal segment detected in "${route}".`);
+    }
+};
+
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
@@ -198,6 +212,7 @@ export default class API {
     }
 
     private getUrlFromRoute(route: string): string {
+        assertNoPathTraversal(route);
         return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
