@@ -45,7 +45,7 @@ export interface ModifierStatementDetailModel {
     /**
      * The type of value that should be used in the license when recomputing the properties
      */
-    valueType: StatementOperation;
+    valueType: string;
     /**
      * The strategy that will be used to resolve conflicts for statements on the same key
      */
