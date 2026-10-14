@@ -194,21 +194,25 @@ export interface DataHealthGetOverviewResponse {
 
 export interface DataHealthGetGroupListingParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
     /**
-     * The category to filter by when getting groups listing.
+     * The categories of rules for which data health should be displayed.
      */
-    category: string;
+    category?: string[];
+    /**
+     * The feature for which data health should be computed.
+     */
+    feature?: string[];
     /**
      * The tracking id to filter by when getting groups listing.
      */
     trackingId?: string[];
     /**
-     * Whether to show groups with no validated entity or not.
-     */
-    showEmptyGroups?: boolean;
-    /**
      * Whether to show groups with only beta rules.
      */
     showBetaRules?: boolean;
+    /**
+     * Whether to show groups with no validated entity or not.
+     */
+    showEmptyGroups?: boolean;
 }
 
 export interface DataHealthGetGroupListingResponse extends PaginatedResponse {
@@ -241,11 +245,15 @@ export interface DataHealthGroupListingEntry {
     failedValidations: number;
 }
 
-export interface DataHealthGetGroupDetailParams extends OrganizationParamParts, TimeRangeParamParts, Paginated {
+export interface DataHealthGetGroupDetailParams extends OrganizationParamParts, TimeRangeParamParts {
     /**
-     * The category to filter by when getting details on a group.
+     * The categories of rules for which data health should be displayed.
      */
-    category: string;
+    category?: string[];
+    /**
+     * The feature for which data health should be computed.
+     */
+    feature?: string[];
     /**
      * The tracking id to filter by when getting groups listing.
      */
