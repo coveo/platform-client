@@ -35,6 +35,12 @@ export interface ModelDetailsBuildingStats {
         max?: number;
         mean?: number;
     };
+    /**
+     * The number of documents per content stream used when building the model.
+     * The values sum up to `documentsWithChunksCount`.
+     * @example {"markdown": 10, "content": 5}
+     */
+    documentStreams?: Record<string, number>;
     commerceEventCounts?: ModelDetailsCommerceEvents;
     modelDetailedStatsPerSource?: ModelDetailsStatsPerSource[];
     addToCart?: number;

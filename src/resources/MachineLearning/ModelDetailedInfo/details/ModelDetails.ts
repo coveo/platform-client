@@ -17,6 +17,16 @@ export interface ModelDetails {
     minClickCountByLang?: Record<string, number>;
     subModels?: {[key: string]: ModelDetailsSubModels};
     candidates?: number;
+    /**
+     * The name of the encoder used to build the model. Indicates whether the model supports multilingual content.
+     * @example MULTILINGUAL_E5_SMALL
+     */
+    encoderName?: string;
+    /**
+     * The name of the strategy used to split documents into chunks when building the model.
+     * @example STRUCTURE_AWARE
+     */
+    chunkerStrategyName?: string;
     modelDetailedBuildingStats?: ModelDetailsBuildingStats;
     modelDetailedTrainingDetails: ModelDetailsTrainingDetails;
     modelDetailedPreparationDetails: ModelDetailsPreparationDetails;
