@@ -2,6 +2,7 @@ import API from '../../../../../APICore.js';
 import DataHealth from '../DataHealth.js';
 import {
     DataHealthGetEventPayloadParams,
+    DataHealthGetEventProblemsParams,
     DataHealthGetFailedInstancesParams,
     DataHealthGetGroupDetailParams,
     DataHealthGetGroupListingParams,
@@ -9,7 +10,6 @@ import {
     DataHealthGetTrackingIdsParams,
     DataHealthListEventsParameters,
     DataHealthListFacetValueParams,
-    DataHealthGetEventProblemsParams,
 } from '../DataHealthInterfaces.js';
 
 jest.mock('../../../../../APICore.js');
@@ -88,7 +88,7 @@ describe('DataHealth', () => {
         it('should make a GET call to the data health get group listing url', async () => {
             const dataHealthGetGroupListingParams: DataHealthGetGroupListingParams = {
                 ...baseParams,
-                category: 'unicorns',
+                category: ['unicorns'],
                 trackingId: ['PetShop'],
             };
             await dataHealth.getGroupListing(dataHealthGetGroupListingParams);
@@ -103,7 +103,7 @@ describe('DataHealth', () => {
         it('should make a GET call to the data health get group detail url', async () => {
             const dataHealthGetGroupDetailParams: DataHealthGetGroupDetailParams = {
                 ...baseParams,
-                category: 'unicorns',
+                category: ['unicorns'],
                 group: 'horned',
                 trackingId: ['PetShop'],
             };
