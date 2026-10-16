@@ -1,4 +1,5 @@
 import handleResponse, {CoveoPlatformClientError, ResponseHandlers} from '../ResponseHandlers.js';
+import {PlatformErrorResponse} from '../ResponseHandlerInterfaces.js';
 
 describe('ResponseHandlers', () => {
     describe('no content', () => {
@@ -219,6 +220,74 @@ describe('ResponseHandlers', () => {
             }
 
             expect(rejectedError?.[key]).toBe('shouldBeAlias');
+        });
+
+        it('should include the Coveo Platform API error body fields in the error', async () => {
+            const body: PlatformErrorResponse = {
+                message: 'The organization already exists.',
+                errorCode: 'ORGANIZATION_ALREADY_EXISTS',
+                requestID: 'some-request-id',
+                errorMessages: {EXTENSION: ['some extension error']},
+                details: [{errorCode: 'INVALID_PARAMETER', message: 'some parameter is invalid'}],
+            };
+            const {errorResponse} = buildResponseAndError(body);
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(errorResponse);
+            } catch (error) {
+                rejectedError = error as CoveoPlatformClientError;
+            }
+
+            expect(rejectedError?.message).toBe(body.message);
+            expect(rejectedError?.errorCode).toBe(body.errorCode);
+            expect(rejectedError?.requestID).toBe(body.requestID);
+            expect(rejectedError?.errorMessages).toEqual(body.errorMessages);
+            expect(rejectedError?.details).toEqual(body.details);
+        });
+    });
+
+    describe('error url', () => {
+        const url = 'https://platform.cloud.coveo.com/rest/organizations';
+        const html =
+            '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>test</title></head><body>test</body></html>';
+        const withUrl = (response: Response) => {
+            Object.defineProperty(response, 'url', {value: url});
+            return response;
+        };
+
+        it.each([
+            ['JSON', () => new Response(JSON.stringify({errorCode: 'SOME_ERROR'}), {status: 400})],
+            ['WAF', () => new Response(html, {status: 403, headers: {'x-coveo-waf-action': 'block'}})],
+            ['bad gateway', () => new Response(html, {status: 502})],
+            ['HTML', () => new Response(html, {status: 403, headers: {'content-type': 'text/html'}})],
+        ])('should include the request url in the %s error', async (_name, buildResponse) => {
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(withUrl(buildResponse()));
+            } catch (error) {
+                rejectedError = error as CoveoPlatformClientError;
+            }
+
+            expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
+            expect(rejectedError?.url).toBe(url);
+        });
+
+        it.each([
+            ['WAF', () => new Response(html, {status: 403, headers: {'x-coveo-waf-action': 'block'}})],
+            ['bad gateway', () => new Response(html, {status: 502})],
+            ['HTML', () => new Response(html, {status: 403, headers: {'content-type': 'text/html'}})],
+        ])('should not set the Coveo Platform API error body fields in the %s error', async (_name, buildResponse) => {
+            let rejectedError: CoveoPlatformClientError | undefined;
+            try {
+                await handleResponse(buildResponse());
+            } catch (error) {
+                rejectedError = error as CoveoPlatformClientError;
+            }
+
+            expect(rejectedError).toBeInstanceOf(CoveoPlatformClientError);
+            for (const key of ['errorCode', 'requestID', 'errorMessages', 'details']) {
+                expect(rejectedError).not.toHaveProperty(key);
+            }
         });
     });
 

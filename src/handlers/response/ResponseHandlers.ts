@@ -1,7 +1,12 @@
 // TODO CDX-1574: remove this polyfill when we bump the minimal supported Node.js version to 22
 import 'core-js/actual/json/parse.js';
 import {Predicate} from '../../utils/types.js';
-import {ResponseBodyFormat, ResponseHandler} from './ResponseHandlerInterfaces.js';
+import {
+    PlatformErrorDetail,
+    PlatformErrorResponse,
+    ResponseBodyFormat,
+    ResponseHandler,
+} from './ResponseHandlerInterfaces.js';
 
 /**
  * Check whether the response status is `204 No Content`.
@@ -59,6 +64,7 @@ const error: ResponseHandler = {
         platformError.title = (responseJson.title as string) ?? getErrorTypeFromAliases(responseJson) ?? 'unknown';
         platformError.detail = (responseJson.detail as string) ?? getErrorDetailFromAliases(responseJson) ?? 'unknown';
         platformError.status = response.status;
+        platformError.url = response.url;
         throw platformError;
     },
 };
@@ -71,6 +77,7 @@ const blockedByWAF: ResponseHandler = {
         platformError.title = 'Request blocked for security reasons';
         platformError.detail = 'The web application firewall has identified the request to be potentially malicious.';
         platformError.status = response.status;
+        platformError.url = response.url;
         throw platformError;
     },
 };
@@ -84,6 +91,7 @@ const badGateway: ResponseHandler = {
         platformError.detail =
             'The service is currently unable to reach the necessary endpoint, likely due to a bad gateway. Please try your request again later.';
         platformError.status = response.status;
+        platformError.url = response.url;
         throw platformError;
     },
 };
@@ -97,6 +105,7 @@ const htmlError: ResponseHandler = {
             'Unable to process the request. An issue has occurred with the endpoint, and the system is unable to parse the error.';
         platformError.detail = await response.text();
         platformError.status = response.status;
+        platformError.url = response.url;
         throw platformError;
     },
 };
@@ -149,7 +158,7 @@ export default async <T>(
  * Represent errors coming from Coveo's API.
  * Follow loosely [RFC-7807](https://www.ietf.org/rfc/rfc7807.html)
  */
-export class CoveoPlatformClientError extends Error {
+export class CoveoPlatformClientError extends Error implements Partial<PlatformErrorResponse> {
     /**
      * The HTTP X-Request-ID request header is an optional and unofficial HTTP header, used to trace individual HTTP requests from the client to the server and back again.
      * It allows the client and server to correlate each HTTP request.
@@ -168,4 +177,28 @@ export class CoveoPlatformClientError extends Error {
      * A human-readable explanation specific to this occurrence of the problem.
      */
     detail: string;
+    /**
+     * The URL of the request that failed.
+     */
+    declare url?: string;
+    /**
+     * A code identifying the type of error, as returned by the Coveo Platform API.
+     * Only set when the error response body is JSON.
+     */
+    declare errorCode?: string;
+    /**
+     * The unique identifier of the request that failed, as returned by the Coveo Platform API.
+     * Only set when the error response body is JSON.
+     */
+    declare requestID?: string;
+    /**
+     * Error messages grouped by key, as returned by the Coveo Platform API.
+     * Only set when the error response body is JSON and contains them.
+     */
+    declare errorMessages?: Record<string, string[]>;
+    /**
+     * Additional errors that caused the request to fail, as returned by the Coveo Platform API.
+     * Only set when the error response body is JSON and contains them.
+     */
+    declare details?: PlatformErrorDetail[];
 }

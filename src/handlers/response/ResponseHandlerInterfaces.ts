@@ -17,3 +17,43 @@ export interface ResponseHandler {
      */
     process<T>(response: Response, responseBodyFormat?: ResponseBodyFormat): Promise<T>;
 }
+
+/**
+ * A single error entry returned in the `details` array of a Coveo Platform API error response.
+ */
+export interface PlatformErrorDetail {
+    /**
+     * A code identifying the type of this error entry, for example `INVALID_PARAMETER`.
+     */
+    errorCode: string;
+    /**
+     * A human-readable explanation of this error entry.
+     */
+    message: string;
+}
+
+/**
+ * The JSON body returned by the Coveo Platform API when a request fails.
+ */
+export interface PlatformErrorResponse {
+    /**
+     * A human-readable explanation of the error.
+     */
+    message: string;
+    /**
+     * A code identifying the type of error, for example `ORGANIZATION_ALREADY_EXISTS`.
+     */
+    errorCode: string;
+    /**
+     * The unique identifier of the request that failed, useful when contacting Coveo support.
+     */
+    requestID: string;
+    /**
+     * Error messages grouped by key, for example by resource type.
+     */
+    errorMessages?: Record<string, string[]>;
+    /**
+     * Additional errors that caused the request to fail, for example one per invalid parameter.
+     */
+    details?: PlatformErrorDetail[];
+}
