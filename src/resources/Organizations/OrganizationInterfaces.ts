@@ -114,6 +114,9 @@ export interface OrganizationModel {
     };
 }
 
+export type UpdateOrganizationModel = Pick<OrganizationModel, 'id'> &
+    Partial<Pick<OrganizationModel, 'displayName' | 'owner'>>;
+
 export type AdditionalOrganizationField = 'status' | 'license' | (string & {});
 
 export interface GetOrganizationOptions {

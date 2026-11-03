@@ -109,11 +109,15 @@ describe('Organization', () => {
             const organizationModel = {
                 id: 'organization-to-update-id',
                 displayName: 'new name',
+                owner: {email: 'owner@example.com'},
             };
 
             await organization.update(organizationModel);
             expect(api.put).toHaveBeenCalledTimes(1);
-            expect(api.put).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationModel.id}`, organizationModel);
+            expect(api.put).toHaveBeenCalledWith(`${Organization.baseUrl}/${organizationModel.id}`, {
+                displayName: 'new name',
+                owner: {email: 'owner@example.com'},
+            });
         });
     });
 
