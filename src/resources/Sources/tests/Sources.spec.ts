@@ -389,4 +389,12 @@ describe('Sources', () => {
             expect(source.feedback).toBeInstanceOf(SourcesFeedback);
         });
     });
+
+    describe('validateName', () => {
+        it('should make a GET call to the validate name url with the name as a query parameter', async () => {
+            await source.validateName('my source');
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${Sources.baseUrl}/validate/name?name=my%20source`);
+        });
+    });
 });

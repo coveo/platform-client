@@ -150,3 +150,7 @@ export interface CreateSourceOptions {
     rebuild?: boolean;
     updateSecurityProviders?: boolean;
 }
+
+export interface SourceNameValidationModel {
+    unique: boolean;
+}

@@ -16,6 +16,7 @@ import {
     ListSourcesParams,
     RawSourceConfig,
     SourceModel,
+    SourceNameValidationModel,
 } from './SourcesInterfaces.js';
 import SourcesMappings from './SourcesMappings/SourcesMappings.js';
 import SourcesMetadata from './SourcesMetadata/SourcesMetadata.js';
@@ -178,5 +179,9 @@ export default class Sources extends Resource {
 
     abortTaskForActivity(sourceId: string, activityId: string) {
         return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/tasks/abort`, {activityId}));
+    }
+
+    validateName(name: string) {
+        return this.api.get<SourceNameValidationModel>(this.buildPath(`${Sources.baseUrl}/validate/name`, {name}));
     }
 }
