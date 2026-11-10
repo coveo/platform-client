@@ -23,10 +23,14 @@ describe('CatalogConfiguration', () => {
             expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}?page=2&pageSize=10`);
         });
 
-        it('should pass the object type filter as a query parameter', async () => {
-            await catalogConfiguration.list({objectType: CatalogConfigurationObjectType.WITH_VARIANT});
+        it('should pass each object type as a repeated query parameter', async () => {
+            await catalogConfiguration.list({
+                objectTypes: [CatalogConfigurationObjectType.PRODUCT, CatalogConfigurationObjectType.VARIANT],
+            });
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}?objectType=WITH_VARIANT`);
+            expect(api.get).toHaveBeenCalledWith(
+                `${CatalogConfiguration.baseUrl}?objectTypes=PRODUCT&objectTypes=VARIANT`,
+            );
         });
     });
 

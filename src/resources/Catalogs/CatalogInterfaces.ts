@@ -30,9 +30,9 @@ export interface CatalogsListOptions {
 
 export interface CatalogConfigurationsListOptions extends Omit<CatalogsListOptions, 'filter'> {
     /**
-     * Only lists the catalog configurations that support exactly these object types. When omitted, all catalog configurations are listed.
+     * Only lists the catalog configurations that support exactly these object types. Must include `PRODUCT`. When omitted, all catalog configurations are listed.
      */
-    objectType?: CatalogConfigurationObjectType;
+    objectTypes?: CatalogConfigurationObjectType[];
 }
 
 export interface CatalogFieldsOptions {
