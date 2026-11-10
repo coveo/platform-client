@@ -1,4 +1,5 @@
 import {Paginated} from '../BaseInterfaces.js';
+import {CatalogConfigurationObjectType} from '../Enums.js';
 
 export interface CatalogsListOptions {
     /**
@@ -27,7 +28,12 @@ export interface CatalogsListOptions {
     enrichWithFields?: boolean;
 }
 
-export type CatalogConfigurationsListOptions = Omit<CatalogsListOptions, 'filter'>;
+export interface CatalogConfigurationsListOptions extends Omit<CatalogsListOptions, 'filter'> {
+    /**
+     * Only lists the catalog configurations that support exactly these object types. When omitted, all catalog configurations are listed.
+     */
+    objectType?: CatalogConfigurationObjectType;
+}
 
 export interface CatalogFieldsOptions {
     /**

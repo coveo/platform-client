@@ -1256,3 +1256,10 @@ export enum ConditionPipelineStatementType {
 export enum ConditionAssociationSortByType {
     pipelineName = 'pipelineName',
 }
+
+export enum CatalogConfigurationObjectType {
+    PRODUCT_ONLY = 'PRODUCT_ONLY',
+    WITH_VARIANT = 'WITH_VARIANT',
+    WITH_AVAILABILITY = 'WITH_AVAILABILITY',
+    WITH_AVAILABILITY_AND_VARIANT = 'WITH_AVAILABILITY_AND_VARIANT',
+}
