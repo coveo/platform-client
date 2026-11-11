@@ -41,12 +41,41 @@ describe('APICore path traversal guard', () => {
         expect(fetchMock).not.toHaveBeenCalled();
     });
 
+    // Every id below is resolved by the WHATWG URL parser (what `fetch` uses) into
+    // `/rest/organizations/victim-org/apikeys/stolen-key`.
+    it.each([
+        ['percent-encoded dots', '%2e%2e/%2e%2e/victim-org/apikeys/stolen-key'],
+        ['upper-case percent-encoded dots', '%2E%2E/%2E%2E/victim-org/apikeys/stolen-key'],
+        ['mixed literal and encoded dots', '.%2e/%2E./victim-org/apikeys/stolen-key'],
+        ['backslash separators', '..\\..\\victim-org\\apikeys\\stolen-key'],
+        ['dots split by a tab or newline', '.\t./.\n./victim-org/apikeys/stolen-key'],
+        ['an encoded single-dot segment', '%2e/../../victim-org/apikeys/stolen-key'],
+    ])('rejects traversal written with %s', async (_label, maliciousId) => {
+        const api = makeApi();
+        const route = `/rest/organizations/${API.orgPlaceholder}/apikeys/${maliciousId}`;
+
+        await expect(api.get(route)).rejects.toThrow(/path traversal/);
+        expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('rejects a trailing dot segment hidden behind trailing whitespace', async () => {
+        const api = makeApi();
+        const route = `/rest/organizations/${API.orgPlaceholder}/apikeys/.. `;
+
+        await expect(api.get(route)).rejects.toThrow(/path traversal/);
+        expect(fetchMock).not.toHaveBeenCalled();
+    });
+
     it('allows a normal route and ids that merely contain dots', async () => {
         const api = makeApi();
 
         await expect(api.get(`/rest/organizations/${API.orgPlaceholder}/apikeys/abc-123`)).resolves.toBeDefined();
         // "a..b" is a single segment, not a traversal, and must not be blocked.
         await expect(api.get(`/rest/organizations/${API.orgPlaceholder}/apikeys/a..b`)).resolves.toBeDefined();
-        expect(fetchMock).toHaveBeenCalledTimes(2);
+        // An encoded slash is not a separator, so "%2e%2e%2fx" stays one segment.
+        await expect(api.get(`/rest/organizations/${API.orgPlaceholder}/apikeys/%2e%2e%2fx`)).resolves.toBeDefined();
+        // Dot segments in the query string are not part of the path.
+        await expect(api.get(`/rest/organizations/${API.orgPlaceholder}/apikeys?filter=../..`)).resolves.toBeDefined();
+        expect(fetchMock).toHaveBeenCalledTimes(4);
     });
 });

@@ -67,10 +67,20 @@ const withBody = (
  * resolves them, climb out of the intended `/rest/organizations/{org}/...` path and reach
  * another organization. No legitimate route contains a `..` (or `.`) path segment, so we reject
  * any route whose path does, before it is turned into a URL.
+ *
+ * The check follows the WHATWG URL parser that `fetch` uses, not just literal dots: the parser drops
+ * trailing C0 controls/spaces and every tab or newline, treats `\` as a path separator for http(s),
+ * and recognizes `%2e` (any case) as a dot. So `%2e%2e`, `.%2E`, `..\` and `.\t.` all count as `..`.
  */
+const DOT_SEGMENT = /^(?:\.|%2e){1,2}$/i;
+const TRAILING_C0_CONTROL_OR_SPACE = /[\p{Cc} ]+$/u;
+
 const assertNoPathTraversal = (route: string): void => {
-    const path = route.split('?')[0].split('#')[0];
-    if (path.split('/').some((segment) => segment === '..' || segment === '.')) {
+    const path = route
+        .replace(TRAILING_C0_CONTROL_OR_SPACE, '')
+        .replace(/[\t\n\r]/g, '')
+        .split(/[?#]/)[0];
+    if (path.split(/[/\\]/).some((segment) => DOT_SEGMENT.test(segment))) {
         throw new Error(`Invalid request path: path traversal segment detected in "${route}".`);
     }
 };
