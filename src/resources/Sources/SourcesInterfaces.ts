@@ -152,5 +152,9 @@ export interface CreateSourceOptions {
 }
 
 export interface SourceNameValidationModel {
+    /**
+     * Whether the source name is unique in the organization.
+     * `true` if no other source uses this name (case-insensitive), `false` otherwise.
+     */
     unique: boolean;
 }

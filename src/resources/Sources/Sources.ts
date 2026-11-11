@@ -181,6 +181,11 @@ export default class Sources extends Resource {
         return this.api.post(this.buildPath(`${Sources.baseUrl}/${sourceId}/tasks/abort`, {activityId}));
     }
 
+    /**
+     * Validates that a source name is not already used in the organization. The comparison is case-insensitive.
+     * @param name The source name to validate.
+     * @returns An object whose `unique` property indicates whether the name is available.
+     */
     validateName(name: string) {
         return this.api.get<SourceNameValidationModel>(this.buildPath(`${Sources.baseUrl}/validate/name`, {name}));
     }
