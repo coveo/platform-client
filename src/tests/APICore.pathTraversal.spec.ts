@@ -58,12 +58,25 @@ describe('APICore path traversal guard', () => {
         expect(fetchMock).not.toHaveBeenCalled();
     });
 
-    it('rejects a trailing dot segment hidden behind trailing whitespace', async () => {
+    it.each([
+        ['a trailing space', '.. '],
+        ['a trailing control character', '..\u0000'],
+    ])('rejects a trailing dot segment hidden behind %s', async (_label, maliciousId) => {
         const api = makeApi();
-        const route = `/rest/organizations/${API.orgPlaceholder}/apikeys/.. `;
+        const route = `/rest/organizations/${API.orgPlaceholder}/apikeys/${maliciousId}`;
 
         await expect(api.get(route)).rejects.toThrow(/path traversal/);
         expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('checks a route with a long run of spaces in linear time', async () => {
+        // A `/[...]+$/` regex took ~3.6s on 80k spaces followed by a non-space character (CodeQL ReDoS).
+        const api = makeApi();
+        const route = `/rest/organizations/${API.orgPlaceholder}/apikeys/${' '.repeat(200_000)}x`;
+
+        const start = performance.now();
+        await expect(api.get(route)).resolves.toBeDefined();
+        expect(performance.now() - start).toBeLessThan(1000);
     });
 
     it('allows a normal route and ids that merely contain dots', async () => {

@@ -73,11 +73,23 @@ const withBody = (
  * and recognizes `%2e` (any case) as a dot. So `%2e%2e`, `.%2E`, `..\` and `.\t.` all count as `..`.
  */
 const DOT_SEGMENT = /^(?:\.|%2e){1,2}$/i;
-const TRAILING_C0_CONTROL_OR_SPACE = /[\p{Cc} ]+$/u;
+
+/**
+ * Drops trailing C0 controls and spaces (U+0000–U+0020), like the URL parser does. A plain loop
+ * rather than a `/[...]+$/` regex, which backtracks quadratically on long runs of those characters.
+ * @param value The string to trim.
+ * @returns `value` without its trailing C0 controls and spaces.
+ */
+const trimTrailingC0ControlOrSpace = (value: string): string => {
+    let end = value.length;
+    while (end > 0 && value.charCodeAt(end - 1) <= 0x20) {
+        end--;
+    }
+    return value.slice(0, end);
+};
 
 const assertNoPathTraversal = (route: string): void => {
-    const path = route
-        .replace(TRAILING_C0_CONTROL_OR_SPACE, '')
+    const path = trimTrailingC0ControlOrSpace(route)
         .replace(/[\t\n\r]/g, '')
         .split(/[?#]/)[0];
     if (path.split(/[/\\]/).some((segment) => DOT_SEGMENT.test(segment))) {
