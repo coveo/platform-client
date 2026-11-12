@@ -11,6 +11,7 @@ import {
     OrganizationModel,
     OrganizationsStatusModel,
     PrivilegeFilterType,
+    UpdateOrganizationModel,
 } from './OrganizationInterfaces.js';
 import {AuthProvider} from '../Enums.js';
 
@@ -49,8 +50,8 @@ export default class Organization extends Resource {
         return this.api.get<OrganizationModel>(this.buildPath(`${Organization.baseUrl}/${organizationId}`, options));
     }
 
-    update(organization: Partial<OrganizationModel>) {
-        return this.api.put<OrganizationModel>(`${Organization.baseUrl}/${organization.id}`, organization);
+    update({id: organizationId, ...organization}: UpdateOrganizationModel) {
+        return this.api.put<void>(`${Organization.baseUrl}/${organizationId}`, organization);
     }
 
     updateSupportActivated(organizationId: string, supportActivated: boolean) {
@@ -91,7 +92,7 @@ export default class Organization extends Resource {
     }
 
     updateExperimentalStatus(allowed: boolean = true) {
-        return this.api.put<boolean>(
+        return this.api.put<void>(
             `${Organization.baseUrl}/${API.orgPlaceholder}/configuration/servingExperiment?allowed=${allowed}`,
         );
     }
