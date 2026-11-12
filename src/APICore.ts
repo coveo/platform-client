@@ -61,6 +61,42 @@ const withBody = (
 ): CoveoPlatformClientRequestInit | undefined =>
     userArgs?.body ? undefined : {headers: HEADERS_JSON_CONTENT_TYPE, body: JSON.stringify(body)};
 
+/**
+ * Guards against path traversal in a request route. A resource id interpolated into a route
+ * without encoding (e.g. `/apikeys/${id}`) can contain `..` segments that, once the browser
+ * resolves them, climb out of the intended `/rest/organizations/{org}/...` path and reach
+ * another organization. No legitimate route contains a `..` (or `.`) path segment, so we reject
+ * any route whose path does, before it is turned into a URL.
+ *
+ * The check follows the WHATWG URL parser that `fetch` uses, not just literal dots: the parser drops
+ * trailing C0 controls/spaces and every tab or newline, treats `\` as a path separator for http(s),
+ * and recognizes `%2e` (any case) as a dot. So `%2e%2e`, `.%2E`, `..\` and `.\t.` all count as `..`.
+ */
+const DOT_SEGMENT = /^(?:\.|%2e){1,2}$/i;
+
+/**
+ * Drops trailing C0 controls and spaces (U+0000–U+0020), like the URL parser does. A plain loop
+ * rather than a `/[...]+$/` regex, which backtracks quadratically on long runs of those characters.
+ * @param value The string to trim.
+ * @returns `value` without its trailing C0 controls and spaces.
+ */
+const trimTrailingC0ControlOrSpace = (value: string): string => {
+    let end = value.length;
+    while (end > 0 && value.charCodeAt(end - 1) <= 0x20) {
+        end--;
+    }
+    return value.slice(0, end);
+};
+
+const assertNoPathTraversal = (route: string): void => {
+    const path = trimTrailingC0ControlOrSpace(route)
+        .replace(/[\t\n\r]/g, '')
+        .split(/[?#]/)[0];
+    if (path.split(/[/\\]/).some((segment) => DOT_SEGMENT.test(segment))) {
+        throw new Error(`Invalid request path: path traversal segment detected in "${route}".`);
+    }
+};
+
 export default class API {
     static orgPlaceholder = '{organizationName}';
 
@@ -198,6 +234,7 @@ export default class API {
     }
 
     private getUrlFromRoute(route: string): string {
+        assertNoPathTraversal(route);
         return `${this.endpoint}${route}`.replace(API.orgPlaceholder, this.organizationId);
     }
 
