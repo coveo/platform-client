@@ -1,5 +1,6 @@
 import API from '../../../APICore.js';
 import {New} from '../../BaseInterfaces.js';
+import {CatalogConfigurationObjectType} from '../../Enums.js';
 import CatalogConfiguration from '../CatalogConfiguration.js';
 import {CreateCatalogConfigurationModel} from '../CatalogInterfaces.js';
 
@@ -20,6 +21,16 @@ describe('CatalogConfiguration', () => {
             await catalogConfiguration.list({page: 2, pageSize: 10});
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}?page=2&pageSize=10`);
+        });
+
+        it('should pass each object type as a repeated query parameter', async () => {
+            await catalogConfiguration.list({
+                objectTypes: [CatalogConfigurationObjectType.PRODUCT, CatalogConfigurationObjectType.VARIANT],
+            });
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(
+                `${CatalogConfiguration.baseUrl}?objectTypes=PRODUCT&objectTypes=VARIANT`,
+            );
         });
     });
 
