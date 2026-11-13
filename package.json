@@ -76,17 +76,9 @@
             "path": "./node_modules/cz-conventional-changelog"
         }
     },
-    "imports": {
-        "#query-string": {
-            "import": "query-string-esm",
-            "require": "query-string-cjs"
-        }
-    },
     "dependencies": {
         "core-js": "^3.37.1",
-        "exponential-backoff": "^3.1.0",
-        "query-string-cjs": "npm:query-string@^7.0.0",
-        "query-string-esm": "npm:query-string@^9.0.0"
+        "exponential-backoff": "^3.1.0"
     },
     "publishConfig": {
         "access": "public"
