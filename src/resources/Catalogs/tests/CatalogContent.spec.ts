@@ -1,7 +1,6 @@
 import API from '../../../APICore.js';
 import CatalogContent, {ObjectType} from '../CatalogContent.js';
 import {CatalogMetadataNameParams} from '../CatalogInterfaces.js';
-import queryString from '#query-string';
 
 jest.mock('../../../APICore.js');
 
@@ -29,35 +28,28 @@ describe('CatalogContent', () => {
 
     describe('getMetadataValues', () => {
         it('should make a GET call to the specific CatalogContent url', async () => {
-            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'McDonald';
             const objectType: ObjectType = {objectType: 'Provigo'};
 
             await metadata.getMetadataValues(sourceId, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${baseUrl}/${sourceId}/metadatavalues?${queryString.stringify(objectType, {...defaultOptions})}`,
-            );
+            expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/metadatavalues?objectType=Provigo`);
         });
     });
 
     describe('getMetadata', () => {
         it('should make a GET call to the specific CatalogContent url', async () => {
-            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'KFC';
             const objectType: ObjectType = {objectType: 'Provigo'};
 
             await metadata.getMetadata(sourceId, objectType);
             expect(api.get).toHaveBeenCalledTimes(1);
-            expect(api.get).toHaveBeenCalledWith(
-                `${baseUrl}/${sourceId}/metadata?${queryString.stringify(objectType, {...defaultOptions})}`,
-            );
+            expect(api.get).toHaveBeenCalledWith(`${baseUrl}/${sourceId}/metadata?objectType=Provigo`);
         });
     });
 
     describe('getMetadataV2', () => {
         it('should make a GET call to the specific metadataName url', async () => {
-            const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
             const sourceId = 'KFC';
 
             const params: CatalogMetadataNameParams = {
@@ -71,7 +63,7 @@ describe('CatalogContent', () => {
             await metadata.getMetadataV2(sourceId, params);
             expect(api.get).toHaveBeenCalledTimes(1);
             expect(api.get).toHaveBeenCalledWith(
-                `${baseUrl}/${sourceId}/metadata?${queryString.stringify(params, {...defaultOptions})}`,
+                `${baseUrl}/${sourceId}/metadata?objectType=provigo&filter=a&version=2&page=0&perPage=100`,
             );
         });
     });
