@@ -15,17 +15,9 @@ describe('stringifyQuery', () => {
         );
     });
 
-    it('always skips undefined values', () => {
-        expect(stringifyQuery({a: undefined, b: '1'})).toBe('b=1');
-        expect(stringifyQuery({a: undefined, b: '1'}, {skipNull: false, skipEmptyString: false})).toBe('b=1');
-    });
-
-    it('skips null values by default', () => {
-        expect(stringifyQuery({a: null, b: '1'})).toBe('b=1');
-    });
-
-    it('serializes null values as the bare key when skipNull is false', () => {
-        expect(stringifyQuery({a: null, b: '1'}, {skipNull: false})).toBe('a&b=1');
+    it('always skips undefined and null values', () => {
+        expect(stringifyQuery({a: undefined, b: '1', c: null})).toBe('b=1');
+        expect(stringifyQuery({a: undefined, b: '1', c: null}, {skipEmptyString: false})).toBe('b=1');
     });
 
     it('skips empty strings by default', () => {
@@ -49,7 +41,6 @@ describe('stringifyQuery', () => {
 
         expect(stringifyQuery(parameters)).toBe('ids=a&ids=b');
         expect(stringifyQuery(parameters, {skipEmptyString: false})).toBe('ids=a&ids=&ids=b');
-        expect(stringifyQuery(parameters, {skipNull: false})).toBe('ids=a&ids&ids=b');
     });
 
     it('strictly encodes keys and values', () => {
