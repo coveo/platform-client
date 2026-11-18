@@ -1,9 +1,6 @@
 import API from '../APICore.js';
 import {stringifyNestedObjects} from '../utils/stringifyNestedObjects.js';
-
-import queryString from '#query-string';
-
-const defaultOptions: queryString.StringifyOptions = {skipEmptyString: true, skipNull: true, sort: false};
+import {stringifyQuery, StringifyQueryOptions} from '../utils/stringifyQuery.js';
 
 class Resource {
     static baseUrl: string;
@@ -13,18 +10,18 @@ class Resource {
         protected serverlessApi: API,
     ) {}
 
-    protected buildPath(route: string, parameters?: object, options?: queryString.StringifyOptions): string {
+    protected buildPath(route: string, parameters?: object, options?: StringifyQueryOptions): string {
         return parameters ? route + this.convertObjectToQueryString(parameters, options) : route;
     }
 
-    private convertObjectToQueryString(parameters: object, userOptions?: queryString.StringifyOptions): string {
+    private convertObjectToQueryString(parameters: object, options?: StringifyQueryOptions): string {
         if (!parameters) {
             return '';
         } else {
             if (typeof parameters === 'object' && !Array.isArray(parameters)) {
                 parameters = stringifyNestedObjects(parameters);
             }
-            const requestURL = queryString.stringify(parameters, {...defaultOptions, ...userOptions});
+            const requestURL = stringifyQuery(parameters, options);
             return requestURL.length ? `?${requestURL}` : '';
         }
     }
