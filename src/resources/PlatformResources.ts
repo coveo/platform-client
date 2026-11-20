@@ -154,6 +154,7 @@ class PlatformResources {
     schemaService: SchemaService;
     search: Search;
     searchInterfaces: SearchInterfaces;
+    searchAnalysis: SearchAnalysis;
     searchPages: SearchPages;
     nextGenSearchPages: NextGenSearchPages;
     searchUsageMetrics: SearchUsageMetrics;
