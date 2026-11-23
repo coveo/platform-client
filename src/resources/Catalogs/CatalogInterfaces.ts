@@ -30,6 +30,10 @@ export interface CatalogsListOptions {
 
 export interface CatalogConfigurationsListOptions extends Omit<CatalogsListOptions, 'filter'> {
     /**
+     * Filter that will be matched against the catalog configuration id (exact match) and name (case-insensitive partial match). When omitted or blank, the catalog configurations are not filtered by id or name.
+     */
+    filter?: string;
+    /**
      * Only lists the catalog configurations that support exactly these object types. Must include `PRODUCT`. When omitted, all catalog configurations are listed.
      */
     objectTypes?: CatalogConfigurationObjectType[];
