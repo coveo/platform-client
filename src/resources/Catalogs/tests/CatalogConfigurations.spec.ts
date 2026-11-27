@@ -23,6 +23,12 @@ describe('CatalogConfiguration', () => {
             expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}?page=2&pageSize=10`);
         });
 
+        it('should pass the filter as a query parameter', async () => {
+            await catalogConfiguration.list({filter: 'ACME Configuration'});
+            expect(api.get).toHaveBeenCalledTimes(1);
+            expect(api.get).toHaveBeenCalledWith(`${CatalogConfiguration.baseUrl}?filter=ACME%20Configuration`);
+        });
+
         it('should pass each object type as a repeated query parameter', async () => {
             await catalogConfiguration.list({
                 objectTypes: [CatalogConfigurationObjectType.PRODUCT, CatalogConfigurationObjectType.VARIANT],
